@@ -2,13 +2,16 @@ import UIKit
 
 protocol LoginInteractorInput {
     func login(with email: String, password: String)
+    func loginWithFacebook()
+    func logoutWithFacebook()
 }
 
 protocol LoginInteractorOutput {
     func loginSuccess()
+    func viewControllerToPresent() -> UIViewController
 }
 
-class LoginInteractor: LoginInteractorInput {
+class LoginInteractor: NSObject, LoginInteractorInput {
     var output: LoginInteractorOutput!
     
     // MARK: - Business logic
@@ -18,5 +21,16 @@ class LoginInteractor: LoginInteractorInput {
         worker.login(with: email, password: password, completion: {
             self.output.loginSuccess()
         })
+    }
+    
+    func loginWithFacebook() {
+        let worker = FacebookLoginWorker()
+        worker.viewController = self.output.viewControllerToPresent()
+        worker.login()
+    }
+
+    func logoutWithFacebook(){
+        let worker = FacebookLoginWorker()
+        worker.logout()
     }
 }
