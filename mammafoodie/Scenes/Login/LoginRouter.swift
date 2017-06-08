@@ -1,37 +1,51 @@
 import UIKit
+import SafariServices
 
 protocol LoginRouterInput {
-    func navigateToSomewhere()
+    func openSegue(_ segue: UIStoryboardSegue)
 }
 
+
 class LoginRouter: LoginRouterInput {
+    
     weak var viewController: LoginViewController!
     
     // MARK: - Navigation
     
-    func navigateToSomewhere() {
-        // NOTE: Teach the router how to navigate to another scene. Some examples follow:
+    func openSegue(_ segue: UIStoryboardSegue) {
         
-        // 1. Trigger a storyboard segue
-        // viewController.performSegueWithIdentifier("ShowSomewhereScene", sender: nil)
+        guard let identifier = segue.identifier else {
+            assertionFailure("Segue had no identifier")
+            return
+        }
         
-        // 2. Present another view controller programmatically
-        // viewController.presentViewController(someWhereViewController, animated: true, completion: nil)
+        guard let identifierCase = LoginViewController.ViewControllerSegue(rawValue: identifier) else {
+            assertionFailure("identifier case not found")
+            return
+        }
         
-        // 3. Ask the navigation controller to push another view controller onto the stack
-        // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
+        switch identifierCase  {
+        case .privacyPolicy:
+            self.openPrivacyPolicy()
+        case .terms:
+            self.openTermsAndConditions()
+        default :
+            print("identifier case not found")
+        }
         
-        // 4. Present a view controller from a different storyboard
-        // let storyboard = UIStoryboard(name: "OtherThanMain", bundle: nil)
-        // let someWhereViewController = storyboard.instantiateInitialViewController() as! SomeWhereViewController
-        // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
+    }
+
+    // Mark: - Privacy Policy
+    
+    func openPrivacyPolicy(){
+        let safariVC = SFSafariViewController(url: NSURL(string: "https://www.google.co.in/?gfe_rd=cr&ei=0UU5Wfj6GsGL8QfN1aaoDQ")! as URL)
+        viewController.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = viewController
     }
     
-    // MARK: - Communication
-    
-    func passDataToNextScene(segue: UIStoryboardSegue) {
-        // NOTE: Teach the router which scenes it can communicate with
-        
-        
+    func openTermsAndConditions(){
+        let safariVC = SFSafariViewController(url: NSURL(string: "https://www.yahoo.com")! as URL)
+        viewController.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = viewController
     }
 }

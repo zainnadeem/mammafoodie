@@ -1,4 +1,6 @@
 import UIKit
+import SafariServices
+
 
 protocol LoginViewControllerInput {
     func showLoginSuccessMessage(_ message: String)
@@ -8,7 +10,7 @@ protocol LoginViewControllerOutput {
     func login(with email: String, password: String)
 }
 
-class LoginViewController: UIViewController, LoginViewControllerInput {
+class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate {
     var output: LoginViewControllerOutput!
     var router: LoginRouter!
     
@@ -38,11 +40,34 @@ class LoginViewController: UIViewController, LoginViewControllerInput {
             return
         }
         self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
+  
+    }
+    @IBAction func btnPrivacyTapped(_ sender: Any) {
+        router.openPrivacyPolicy()
+        
+        
     }
     
+    @IBAction func btnTermsTapped(_ sender: Any) {
+        router.openTermsAndConditions()
+        
+    }
     // MARK: - Inputs
     
     func showLoginSuccessMessage(_ message: String) {
         print(message)
     }
+    
 }
+
+extension LoginViewController {
+    
+    enum ViewControllerSegue: String {
+        case privacyPolicy = "OpenPrivacyPolicy"
+        case terms = "OpenTerms"
+        case unnamed = ""
+    }
+    
+}
+
+
