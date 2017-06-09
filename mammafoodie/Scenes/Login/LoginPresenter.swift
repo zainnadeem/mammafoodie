@@ -4,6 +4,8 @@ protocol LoginPresenterInput {
     func loginSuccess()
     func logoutSuccess()
     func present(_ viewController: UIViewController)
+    func forgotPasswordSuccess()
+    func forgotpasswordWorker(success:String)
 }
 
 protocol LoginPresenterOutput: class {
@@ -11,6 +13,8 @@ protocol LoginPresenterOutput: class {
     func showLogoutSuccessMessage(_ message: String)
     func present(_ viewController: UIViewController)
     func dismiss(_ viewController: UIViewController)
+    func forgotpasswordWorker(success:String)
+
 }
 
 class LoginPresenter: LoginPresenterInput {
@@ -24,6 +28,15 @@ class LoginPresenter: LoginPresenterInput {
     func logoutSuccess() {
         let message = "Logout was successful"
         self.output.showLogoutSuccessMessage(message)
+    }
+    
+    func forgotPasswordSuccess() {
+        
+    }
+    func forgotpasswordWorker(success:String)
+    {
+        //self.output.present(viewController)
+        print(success)
     }
     
     func present(_ viewController: UIViewController) {

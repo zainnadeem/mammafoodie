@@ -21,6 +21,7 @@
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
 		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
+		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
+		F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				2CB528E61EE9164D00218609 /* LoginViewController.swift */,
 				2CB528E71EE9164D00218609 /* LoginWorker.swift */,
 				F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */,
+				F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
 				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
+				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 			);

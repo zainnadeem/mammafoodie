@@ -5,12 +5,14 @@ protocol LoginViewControllerInput {
     func showLogoutSuccessMessage(_ message: String)
     func present(_ viewController: UIViewController)
     func dismiss(_ viewController: UIViewController)
+    func forgotpasswordWorker(success:String)
 }
 
 protocol LoginViewControllerOutput {
     func login(with email: String, password: String)
     func loginWithGoogle()
     func logoutWithGoogle()
+    func forgotpasswordWorker(email: String)
 }
 
 class LoginViewController: UIViewController, LoginViewControllerInput {
@@ -19,6 +21,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput {
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    
+    
     
     // MARK: - Object lifecycle
     override func awakeFromNib() {
@@ -30,6 +34,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         logoutGmailButn()
+        forgotPasswordButn()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,6 +61,12 @@ class LoginViewController: UIViewController, LoginViewControllerInput {
        // print(message)
     }
 
+    func forgotpasswordWorker(success:String) {
+        let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     func logoutGmailButn() {
         let logoutGmail = UIButton(type: .custom) as UIButton
@@ -64,8 +75,22 @@ class LoginViewController: UIViewController, LoginViewControllerInput {
         logoutGmail.frame = CGRect(x: 30, y: 120, width: 100, height: 40)
         logoutGmail.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         self.view.addSubview(logoutGmail)
-
     }
+    
+    func forgotPasswordButn() {
+       
+        let forgotPassword = UIButton(type: .custom) as UIButton
+        forgotPassword.backgroundColor = .blue
+        forgotPassword.setTitle("ForgotPassword", for: .normal)
+        forgotPassword.frame = CGRect(x: 100, y: 180, width: 150, height: 35)
+        forgotPassword.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        self.view.addSubview(forgotPassword)
+    }
+    
+    func buttonTapped(sender: UIButton){
+        self.output.forgotpasswordWorker(email: self.txtEmail.text!)
+    }
+    
     func buttonAction(sender: UIButton!) {
         self.output.logoutWithGoogle()
     }
