@@ -43,13 +43,13 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
   
     }
     @IBAction func btnPrivacyTapped(_ sender: Any) {
-        router.openPrivacyPolicy()
+        router.openSafariVC(with: .privacyPolicy)
         
         
     }
     
     @IBAction func btnTermsTapped(_ sender: Any) {
-        router.openTermsAndConditions()
+        router.openSafariVC(with: .terms)
         
     }
     // MARK: - Inputs
@@ -62,10 +62,13 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
 
 extension LoginViewController {
     
-    enum ViewControllerSegue: String {
-        case privacyPolicy = "OpenPrivacyPolicy"
-        case terms = "OpenTerms"
-        case unnamed = ""
+    enum ViewControllerSegue : String {
+       case unnamed = ""
+    }
+
+    enum SafariAddresses: String {
+        case privacyPolicy = "https://www.google.co.in/?gfe_rd=cr&ei=qjc6WdiRFrTv8we-zoTIDg"
+        case terms = "https://swifting.io/blog/2016/09/07/architecture-wars-a-new-hope/"
     }
     
 }
