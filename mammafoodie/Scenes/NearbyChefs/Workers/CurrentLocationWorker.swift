@@ -21,6 +21,7 @@ class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
         self.foundLocation = completion
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
         self.locationManager.startUpdatingLocation()
     }
     
@@ -30,9 +31,9 @@ class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
             self.locationManager.startUpdatingLocation()
             break
         case .denied, .notDetermined, .restricted:
+            self.locationManager.stopUpdatingLocation()
             print("Access Denied")
             break
-            
         }
     }
     
