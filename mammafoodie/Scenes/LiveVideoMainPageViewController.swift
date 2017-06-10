@@ -6,17 +6,18 @@ protocol LiveVideoMainPageViewControllerInput {
 
 protocol LiveVideoMainPageViewControllerOutput {
     func loadLiveVideos()
- 
+    
 }
 
-class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewControllerInput {
+class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewControllerInput{
     
     var output: LiveVideoMainPageViewControllerOutput!
     var router: LiveVideoMainPageRouter!
+    var liveVideos: LiveVideoMainPage.Response!
     
-    @IBAction func btnFetchVideos(_ sender: Any) {
-        self.output.loadLiveVideos()
-    }
+    //Create outlet to collectionview here. For now use dummy property.
+    var liveVideoCollectionView = UICollectionView()
+    //
     
     // MARK: - Object lifecycle
     
@@ -29,16 +30,34 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.liveVideoCollectionView.delegate = self
+        self.liveVideoCollectionView.dataSource = self
+        self.output.loadLiveVideos()
+        
     }
-    
     
     // Mark: - Fetch Live Vids
     
     func displayLiveVideos(_ response: LiveVideoMainPage.Response) {
-        print("got the live videos in the view controller")
+        liveVideos = response
+        liveVideoCollectionView.reloadData()
     }
-    // MARK: - Event handling
     
-    // MARK: - Display logic
+}
+
+// Mark: - CollectionView
+
+extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveVideoCollectionViewCell", for: indexPath) as! LiveVideoCollectionViewCell
+        cell.title.text = liveVideos.arrayOfLiveVideos[indexPath.row].name
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return liveVideos.arrayOfLiveVideos.count
+    }
 }

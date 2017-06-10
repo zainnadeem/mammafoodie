@@ -1,7 +1,7 @@
 import UIKit
 
 protocol LiveVideoMainPagePresenterInput {
-    func showLiveVideos(_ response: LiveVideoMainPage.Response)
+    func presentLiveVideos(_ response: LiveVideoMainPage.Response)
 }
 
 protocol LiveVideoMainPagePresenterOutput: class {
@@ -14,8 +14,7 @@ class LiveVideoMainPagePresenter: LiveVideoMainPagePresenterInput {
     
     // MARK: - Presentation logic
     
-    func showLiveVideos(_ response: LiveVideoMainPage.Response) {
-        print("showing live videos function in the presenter")
+    func presentLiveVideos(_ response: LiveVideoMainPage.Response) {
         self.output.displayLiveVideos(response)
     }
     
