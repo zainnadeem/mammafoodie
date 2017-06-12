@@ -1,12 +1,12 @@
 import UIKit
 
 protocol SlotSelectionInteractorInput {
-    func handleSlotSelection(_ sender:UIPanGestureRecognizer)
-    func setUpCollectionView(_ collectionView:UICollectionView)
+    func handleSlotSelection(withPanGesture sender:UIPanGestureRecognizer, adapter:SlotCollectionViewAdapter)
+    
 }
 
 protocol SlotSelectionInteractorOutput {
-    func selectedSlots(_ slots: Dictionary<String, Any>)
+    
 }
 
 class SlotSelectionInteractor: SlotSelectionInteractorInput {
@@ -16,13 +16,8 @@ class SlotSelectionInteractor: SlotSelectionInteractorInput {
     
     // MARK: - Business logic
     
-    func handleSlotSelection(_ sender:UIPanGestureRecognizer){
-        worker.handleSlotSelection(sender)
+    func handleSlotSelection(withPanGesture sender:UIPanGestureRecognizer, adapter:SlotCollectionViewAdapter){
+        worker.handleSlotSelection(withPanGesture: sender, adapter: adapter)
     }
     
-    func setUpCollectionView(_ collectionView:UICollectionView){
-        
-        worker.setUpCollectionView(collectionView)
-        
-    }
 }

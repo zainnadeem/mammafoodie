@@ -102,5 +102,30 @@ class FirebaseLoginWorker {
         
     }
     
+    func updateEmailAddressTo(email:String, completion: @escaping (_ success:Bool, _ errorMessage:String?)->()){
+        
+        Auth.auth().currentUser?.updateEmail(to: email, completion: { (error) in
+            
+            if error != nil {
+                completion(false, error!.localizedDescription)
+            } else {
+                completion(true, nil)
+            }
+            
+        })
+    }
+    
+    func signOut(_ completion: @escaping (_ success:Bool, _ errorMessage:String?)->()){
+        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            completion(true, nil)
+            
+        } catch let signOutError as NSError {
+            completion(false,signOutError.localizedDescription)
+        }
+        
+    }
 
 }

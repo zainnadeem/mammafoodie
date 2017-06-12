@@ -1,20 +1,20 @@
 import UIKit
 
 protocol SlotSelectionViewControllerInput {
-    func selectedSlots(_ slots: Dictionary<String, Any>)
+    
 }
 
 protocol SlotSelectionViewControllerOutput {
     
-    func handleSlotSelection(_ sender:UIPanGestureRecognizer)
-    func setUpCollectionView(_ collectionView:UICollectionView)
-    
+    func handleSlotSelection(withPanGesture sender:UIPanGestureRecognizer, adapter:SlotCollectionViewAdapter)
 }
 
 class SlotSelectionViewController: UIViewController, SlotSelectionViewControllerInput {
     
     var output: SlotSelectionViewControllerOutput!
     var router: SlotSelectionRouter!
+    
+    var collectionViewAdapter : SlotCollectionViewAdapter!
     
     var selectedSlots : Dictionary<String, Any>?
     //MARK: - Outlets
@@ -35,23 +35,23 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.view.addGestureRecognizer(pan)
         
-        output.setUpCollectionView(self.collectionView)
+        collectionViewAdapter = SlotCollectionViewAdapter()
+        collectionViewAdapter.collectionView = self.collectionView
+        
+//       let selectedCells = collectionViewAdapter.selectedCells
+        
     }
     
     // MARK: - Event handling
     
     func handlePan(_ sender:UIPanGestureRecognizer){
-        
-        output.handleSlotSelection(sender)
-        
+        output.handleSlotSelection(withPanGesture: sender, adapter: collectionViewAdapter)
     }
     
     
     //MARK: - Input 
     
-    func selectedSlots(_ slots: Dictionary<String, Any>){
-        self.selectedSlots = slots
-    }
+    
     
     // MARK: - Display logic
     
