@@ -4,6 +4,7 @@ import GoogleMaps
 let kClusterItemCount = 100
 
 class NearbyChefsWorker : NSObject {
+    
     // MARK: - Business Logic
     func prepareMarkers() -> [Marker] {
         var markers = [Marker]()
@@ -12,7 +13,6 @@ class NearbyChefsWorker : NSObject {
             let lat = kCameraLatitude + extent * randomScale()
             let lng = kCameraLongitude + extent * randomScale()
             let location = CLLocationCoordinate2D.init(latitude:lat, longitude: lng)
-//            markers.append(Marker.init(with: "Marker + \(index)", at: location))
             markers.append(Marker.marker(with: "Marker + \(index)", at: location))
             
         }
@@ -28,7 +28,6 @@ class NearbyChefsWorker : NSObject {
             let lat = location.latitude + extent * randomScale()
             let lng = location.longitude + extent * randomScale()
             let location = CLLocationCoordinate2D.init(latitude:lat, longitude: lng)
-            //            markers.append(Marker.init(with: "Marker + \(index)", at: location))
             markers.append(Marker.marker(with: "Marker + \(index)", at: location))
         }
         

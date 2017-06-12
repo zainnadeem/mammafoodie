@@ -8,7 +8,7 @@ protocol NearbyChefsInteractorInput {
 
 protocol NearbyChefsInteractorOutput {
     func showMarkers(_ markers:[Marker])
-    func setCurrentLocation(_ location: CLLocation?)
+    func setCurrentLocation(_ location: CLLocation?, error: Error?)
 }
 
 class NearbyChefsInteractor: NearbyChefsInteractorInput {
@@ -29,8 +29,8 @@ class NearbyChefsInteractor: NearbyChefsInteractorInput {
     }
     
     func getCurrentLocation() {
-        self.currentLocationWroker.getCurrentLocation { (currentLocation) in
-            self.output.setCurrentLocation(currentLocation)
+        self.currentLocationWroker.getCurrentLocation { (currentLocation, error) in
+            self.output.setCurrentLocation(currentLocation, error: error)
         }
     }
 }

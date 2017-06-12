@@ -89,8 +89,8 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     // MARK: - Event handling
-    func adapterCompleted(with result: CuisineLocation) {
-        print("Display Cuisine: \(result.cuisine)")
+    func didSelect(cusine: CuisineLocation) {
+        print("Selected Cuisine: \(cusine.name)")
     }
     
     
@@ -104,6 +104,16 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
             print("Location not found")
         }
     }
+    
+    func showError(error:Error) {
+        let alert = UIAlertController(title: "Error!", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true) { 
+            
+        }
+    }
 }
 
 extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDelegate, GMUClusterRendererDelegate {
@@ -113,27 +123,15 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         } else {
             NSLog("Did tap a normal marker")
         }
-        return false
+        return true
     }
-    
-    func renderer(_ renderer: GMUClusterRenderer, didRenderMarker marker: GMSMarker) {
-        
-    }
-    
-    //    func renderer(_ renderer: GMUClusterRenderer, markerFor object: Any) -> GMSMarker {
-    //
-    //    }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-        
+        print("Beautify your marker here!")
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.output.loadMarkers(at: position.target)
         print("idle At: \(position.target)")
-    }
-    
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        //        print("Didchange position: \(position)")
     }
 }

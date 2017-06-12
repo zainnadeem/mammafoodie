@@ -11,7 +11,7 @@ import UIKit
 import GoogleMaps
 
 protocol NearbyChefsSearchAdapterResult {
-    func adapterCompleted(with result: CuisineLocation)
+    func didSelect(cusine: CuisineLocation)
 }
 
 class NearbyChefsSearchAdapter : NSObject, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
@@ -45,9 +45,11 @@ class NearbyChefsSearchAdapter : NSObject, UISearchControllerDelegate, UISearchR
         
         self.viewContainer.addSubview(self.searchConrtoller.searchBar)
         
-        results.append(CuisineLocation.init(cuisine: "Indian", coordinate: CLLocationCoordinate2D.init(latitude: 122.1, longitude: 21212.1)))
-        results.append(CuisineLocation.init(cuisine: "Italian", coordinate: CLLocationCoordinate2D.init(latitude: 122.13, longitude: 21212.1)))
-        results.append(CuisineLocation.init(cuisine: "Chinese", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
+        results.append(CuisineLocation.init(name: "Indian", coordinate: CLLocationCoordinate2D.init(latitude: 122.1, longitude: 21212.1)))
+        results.append(CuisineLocation.init(name: "Italian", coordinate: CLLocationCoordinate2D.init(latitude: 122.13, longitude: 21212.1)))
+        results.append(CuisineLocation.init(name: "Chinese", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
+        results.append(CuisineLocation.init(name: "Arabic", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
+        results.append(CuisineLocation.init(name: "Afghani", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -57,14 +59,13 @@ class NearbyChefsSearchAdapter : NSObject, UISearchControllerDelegate, UISearchR
     func updateSearchResults(for searchController: UISearchController) {
         if let searchString = searchController.searchBar.text {
             if !searchString.isEmpty {
-                print("searching \(String(describing: searchString))")
-                self.searchFor(cuisineText: searchString)
+                self.searchFor(cuisineName: searchString)
             }
         }
     }
     
-    func searchFor(cuisineText: String) {
-        
+    func searchFor(cuisineName: String) {
+        print("searching \(String(describing: cuisineName))")
     }
 }
 
@@ -80,25 +81,25 @@ extension NearbyChefsSearchAdapter : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "CuisineLocationResultCell")
-        let location = self.results[indexPath.row]
-        cell.textLabel?.text = location.cuisine
+        let cuisine = self.results[indexPath.row]
+        cell.textLabel?.text = cuisine.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchConrtoller.searchBar.resignFirstResponder()
-        let location = self.results[indexPath.row]
+        let cuisine = self.results[indexPath.row]
         self.searchConrtoller.searchBar.text = ""
-        self.adapterResult.adapterCompleted(with: location)
+        self.adapterResult.didSelect(cusine: cuisine)
         self.searchConrtoller.dismiss(animated: true) {
-            print("selected cuisine is : \(location.cuisine)")
+            print("selected cuisine is : \(cuisine.name)")
         }
     }
 }
 
 struct CuisineLocation {
-    let cuisine: String
+    let name: String
     let coordinate : CLLocationCoordinate2D
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-typealias FoundLoation = (CLLocation?) -> Void
+typealias FoundLoation = (CLLocation?, Error?) -> Void
 
 class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
     
@@ -31,21 +31,20 @@ class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
             self.locationManager.startUpdatingLocation()
             break
         case .denied, .notDetermined, .restricted:
-            self.locationManager.stopUpdatingLocation()
             print("Access Denied")
             break
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.foundLocation(nil)
+        self.foundLocation(nil, error)
         print("Failed to determine location: \(error)")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
             self.locationManager.stopUpdatingLocation()
-            self.foundLocation(locations.first)
+            self.foundLocation(locations.first, nil)
         }
     }
     

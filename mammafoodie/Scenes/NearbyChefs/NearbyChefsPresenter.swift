@@ -2,12 +2,13 @@ import UIKit
 
 protocol NearbyChefsPresenterInput {
     func showMarkers(_ markers: [Marker])
-    func setCurrentLocation(_ location: CLLocation?)
+    func setCurrentLocation(_ location: CLLocation?, error: Error?)
 }
 
 protocol NearbyChefsPresenterOutput: class {
     func showMarkers(markers: [Marker])
     func showCurrentLocation(_ location: CLLocation?)
+    func showError(error:Error)
 }
 
 class NearbyChefsPresenter: NearbyChefsPresenterInput {
@@ -18,7 +19,11 @@ class NearbyChefsPresenter: NearbyChefsPresenterInput {
         self.output.showMarkers(markers: markers)
     }
     
-    func setCurrentLocation(_ location: CLLocation?) {
-        self.output.showCurrentLocation(location)
+    func setCurrentLocation(_ location: CLLocation?, error: Error?) {
+        if let er = error {
+            self.output.showError(error: er)
+        } else {
+            self.output.showCurrentLocation(location)
+        }
     }
 }
