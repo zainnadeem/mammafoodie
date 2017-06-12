@@ -20,6 +20,16 @@
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
+		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
+		F03B6EC41EED29D300985F62 /* CommentsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */; };
+		F03B6EDC1EEE88FF00985F62 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */; };
+		F03B6EDD1EEE88FF00985F62 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */; };
+		F03B6EDE1EEE88FF00985F62 /* CommentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */; };
+		F03B6EDF1EEE88FF00985F62 /* CommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */; };
+		F03B6EE01EEE88FF00985F62 /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */; };
+		F03B6EE11EEE88FF00985F62 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */; };
+		F03B6EE21EEE88FF00985F62 /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */; };
+		F03B6EE41EEEB99C00985F62 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */; };
 		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
 		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +52,16 @@
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
+		F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsListTableViewCell.swift; sourceTree = "<group>"; };
+		F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
+		F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
+		F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsModels.swift; sourceTree = "<group>"; };
+		F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsPresenter.swift; sourceTree = "<group>"; };
+		F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
+		F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
+		F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
 		F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +98,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F03B6EBE1EED27D100985F62 /* Comments */,
 				2CB528E01EE9164D00218609 /* Login */,
 			);
 			path = Scenes;
@@ -126,9 +147,26 @@
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 			);
 			path = mammafoodie;
+			sourceTree = "<group>";
+		};
+		F03B6EBE1EED27D100985F62 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */,
+				F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */,
+				F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */,
+				F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */,
+				F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */,
+				F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */,
+				F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */,
+				F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */,
+				F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */,
+			);
+			name = Comments;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -202,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
+				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
@@ -267,12 +306,21 @@
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
+				F03B6EE01EEE88FF00985F62 /* CommentsRouter.swift in Sources */,
+				F03B6EDD1EEE88FF00985F62 /* CommentsInteractor.swift in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
+				F03B6EE21EEE88FF00985F62 /* CommentsWorker.swift in Sources */,
+				F03B6EE11EEE88FF00985F62 /* CommentsViewController.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
+				F03B6EE41EEEB99C00985F62 /* CommentsAdapter.swift in Sources */,
+				F03B6EDC1EEE88FF00985F62 /* CommentsConfigurator.swift in Sources */,
+				F03B6EDE1EEE88FF00985F62 /* CommentsModels.swift in Sources */,
 				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
+				F03B6EDF1EEE88FF00985F62 /* CommentsPresenter.swift in Sources */,
 				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
+				F03B6EC41EED29D300985F62 /* CommentsListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +341,15 @@
 				BF5060E21EE81B9E00DB646F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F03B6EBB1EED276000985F62 /* Siri.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F03B6EBC1EED276000985F62 /* Base */,
+			);
+			name = Siri.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

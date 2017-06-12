@@ -35,8 +35,8 @@ class LoginPresenter: LoginPresenterInput {
     }
     func forgotpasswordWorker(success:String)
     {
-        //self.output.present(viewController)
-        print(success)
+        self.output.forgotpasswordWorker(success: success)
+        //print(success)
     }
     
     func present(_ viewController: UIViewController) {
