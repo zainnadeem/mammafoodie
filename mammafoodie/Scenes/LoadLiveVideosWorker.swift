@@ -3,8 +3,9 @@ import UIKit
 class LoadLiveVideosWorker {
     // MARK: - Business Logic
     
+   
     func callAPI(completion: ([LiveVideo]) -> Void){
-        print("API Called Got The Videos From Firebase")
+        print("Place firebase logic for obtaining live video links")
         
         let video = LiveVideo(name: "1")
         let video2 = LiveVideo(name: "2")

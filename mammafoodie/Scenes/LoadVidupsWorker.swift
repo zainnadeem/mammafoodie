@@ -1,10 +1,9 @@
 import UIKit
 
 class LoadVidupsWorker {
-    // MARK: - Business Logic
-    
+
     func callAPI(completion: ([Vidup]) -> Void){
-        print("API Called Got The Videos From Firebase")
+        print("Place firebase logic for obtaining vidups")
         
         let video = Vidup(name: "4")
         let video2 = Vidup(name: "5")
