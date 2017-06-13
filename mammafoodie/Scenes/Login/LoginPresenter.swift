@@ -6,6 +6,7 @@ protocol LoginPresenterInput {
     func present(_ viewController: UIViewController)
     func forgotPasswordSuccess()
     func forgotpasswordWorker(success:String)
+    func viewControllerToPresent() -> UIViewController
 }
 
 protocol LoginPresenterOutput: class {
@@ -15,6 +16,7 @@ protocol LoginPresenterOutput: class {
     func dismiss(_ viewController: UIViewController)
     func forgotpasswordWorker(success:String)
 
+    func viewControllerToPresent() -> UIViewController
 }
 
 class LoginPresenter: LoginPresenterInput {
@@ -32,6 +34,10 @@ class LoginPresenter: LoginPresenterInput {
     
     func forgotPasswordSuccess() {
         
+    }
+    
+    func viewControllerToPresent() -> UIViewController {
+        return self.output.viewControllerToPresent()
     }
     func forgotpasswordWorker(success:String)
     {

@@ -8,6 +8,7 @@ protocol LoginViewControllerInput {
     func present(_ viewController: UIViewController)
     func dismiss(_ viewController: UIViewController)
     func forgotpasswordWorker(success:String)
+    func viewControllerToPresent() -> UIViewController
 }
 
 protocol LoginViewControllerOutput {
@@ -15,6 +16,8 @@ protocol LoginViewControllerOutput {
     func loginWithGoogle()
     func logoutWithGoogle()
     func forgotpasswordWorker(email: String)
+    func loginWithFacebook()
+    func logoutWithFacebook()
 }
 
 class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate {
@@ -37,13 +40,41 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         super.viewDidLoad()
         logoutGmailButn()
         forgotPasswordButn()
+        
+        /*
+ 
+ // Add a custom login button to your app
+ let myLoginButton = UIButton(type: .custom)
+ myLoginButton.backgroundColor = UIColor.darkGray
+ myLoginButton.frame = CGRect(x: 0, y: 200, width: 180, height: 40)
+ myLoginButton.setTitle("My Login Button", for: .normal)
+ 
+ // Handle clicks on the button
+ myLoginButton.addTarget(self, action: #selector(self.loginButtonClicked), for: .touchUpInside)
+ 
+ 
+ // Add a custom logout button to your app
+ let myLogoutButton = UIButton(type: .custom)
+ myLogoutButton.backgroundColor = UIColor.darkGray
+ myLogoutButton.frame = CGRect(x: 0, y: 300, width: 180, height: 40)
+ myLogoutButton.center = view.center
+ myLogoutButton.setTitle("Logout", for: .normal)
+ 
+ // Handle clicks on the button
+ myLogoutButton.addTarget(self, action: #selector(self.logoutButtonClicked), for: .touchUpInside)
+ 
+ 
+ // Add the button to the view
+ view.addSubview(myLoginButton)
+ view.addSubview(myLogoutButton)
+ */
     }
-    
+ 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
-    // MARK: - Event handling 
+ 
+    // MARK: - Event handling
     @IBAction func btnLoginTapped(_ sender: UIButton) {
         self.output.loginWithGoogle()
 //        if self.txtEmail.text?.isEmpty == true {
@@ -103,6 +134,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func buttonTapped(sender: UIButton){
         self.output.forgotpasswordWorker(email: self.txtEmail.text!)
     }
+
     
     func buttonAction(sender: UIButton!) {
         self.output.logoutWithGoogle()
@@ -116,6 +148,19 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.dismiss(animated: true, completion: nil)
     }
 
+
+    func loginButtonClicked() {
+        self.output.loginWithFacebook()
+    }
+    
+    func logoutButtonClicked() {
+        self.output.logoutWithFacebook()
+    }
+    
+    
+    func viewControllerToPresent() -> UIViewController {
+        return self
+    }
 
 
 

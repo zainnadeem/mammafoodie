@@ -6,6 +6,8 @@ protocol LoginInteractorInput {
     func loginWithGoogle()
     func logoutWithGoogle()
     func forgotpasswordWorker(email: String)
+    func loginWithFacebook()
+    func logoutWithFacebook()
 }
 
 protocol LoginInteractorOutput {
@@ -14,6 +16,7 @@ protocol LoginInteractorOutput {
     func present(_ viewController: UIViewController)
     func dismiss(_ viewController:UIViewController)
     func forgotpasswordWorker(success:String)
+    func viewControllerToPresent() -> UIViewController
 }
 
 class LoginInteractor: NSObject, LoginInteractorInput {
@@ -43,6 +46,12 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         }
     }
 
+    func loginWithFacebook() {
+        let worker = FacebookLoginWorker()
+        worker.viewController = self.output.viewControllerToPresent()
+        worker.login()
+    }
+
     
     func logout(with email: String, password: String) {
         let worker: LoginWorker! = LoginWorker()
@@ -50,6 +59,11 @@ class LoginInteractor: NSObject, LoginInteractorInput {
             self.output.logoutSuccess()
         })
     }
+    func logoutWithFacebook(){
+        let worker = FacebookLoginWorker()
+        worker.logout()
+    }
+
     
     
     func loginWithGoogle() {
