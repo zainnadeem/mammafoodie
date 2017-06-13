@@ -20,6 +20,34 @@
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
+		BFA35E611EEA84F100239A48 /* LiveVideoMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5A1EEA84F100239A48 /* LiveVideoMainPageConfigurator.swift */; };
+		BFA35E621EEA84F100239A48 /* LiveVideoMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5B1EEA84F100239A48 /* LiveVideoMainPageInteractor.swift */; };
+		BFA35E631EEA84F100239A48 /* LiveVideoMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5C1EEA84F100239A48 /* LiveVideoMainPageModels.swift */; };
+		BFA35E641EEA84F100239A48 /* LiveVideoMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5D1EEA84F100239A48 /* LiveVideoMainPagePresenter.swift */; };
+		BFA35E651EEA84F100239A48 /* LiveVideoMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5E1EEA84F100239A48 /* LiveVideoMainPageRouter.swift */; };
+		BFA35E661EEA84F100239A48 /* LiveVideoMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E5F1EEA84F100239A48 /* LiveVideoMainPageViewController.swift */; };
+		BFA35E671EEA84F100239A48 /* LoadLiveVideosWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E601EEA84F100239A48 /* LoadLiveVideosWorker.swift */; };
+		BFA35E6B1EEAAEA100239A48 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E6A1EEAAEA100239A48 /* LiveVideo.swift */; };
+		BFA35E6D1EEC07C800239A48 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E6C1EEC07C800239A48 /* LiveVideoCollectionViewCell.swift */; };
+		BFA35E6F1EEC0C2700239A48 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E6E1EEC0C2700239A48 /* Vidup.swift */; };
+		BFA35E771EEC0C6700239A48 /* VidupMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E701EEC0C6700239A48 /* VidupMainPageConfigurator.swift */; };
+		BFA35E781EEC0C6700239A48 /* VidupMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E711EEC0C6700239A48 /* VidupMainPageInteractor.swift */; };
+		BFA35E791EEC0C6700239A48 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E721EEC0C6700239A48 /* VidupMainPageModels.swift */; };
+		BFA35E7A1EEC0C6700239A48 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E731EEC0C6700239A48 /* VidupMainPagePresenter.swift */; };
+		BFA35E7B1EEC0C6700239A48 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E741EEC0C6700239A48 /* VidupMainPageRouter.swift */; };
+		BFA35E7C1EEC0C6700239A48 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E751EEC0C6700239A48 /* VidupMainPageViewController.swift */; };
+		BFA35E7D1EEC0C6700239A48 /* LoadVidupsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E761EEC0C6700239A48 /* LoadVidupsWorker.swift */; };
+		BFA35E811EEC15C200239A48 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA35E801EEC15C200239A48 /* VidupCollectionViewCell.swift */; };
+		BFC926E91EEFC6DF00602153 /* EnableCameraWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E01EEFC6DF00602153 /* EnableCameraWorker.swift */; };
+		BFC926EA1EEFC6DF00602153 /* EnableLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E11EEFC6DF00602153 /* EnableLocationWorker.swift */; };
+		BFC926EB1EEFC6DF00602153 /* EnableMicrophoneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E21EEFC6DF00602153 /* EnableMicrophoneWorker.swift */; };
+		BFC926EC1EEFC6DF00602153 /* PermissionsAlertConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E31EEFC6DF00602153 /* PermissionsAlertConfigurator.swift */; };
+		BFC926ED1EEFC6DF00602153 /* PermissionsAlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E41EEFC6DF00602153 /* PermissionsAlertInteractor.swift */; };
+		BFC926EE1EEFC6DF00602153 /* PermissionsAlertModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E51EEFC6DF00602153 /* PermissionsAlertModels.swift */; };
+		BFC926EF1EEFC6DF00602153 /* PermissionsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E61EEFC6DF00602153 /* PermissionsAlertPresenter.swift */; };
+		BFC926F01EEFC6DF00602153 /* PermissionsAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E71EEFC6DF00602153 /* PermissionsAlertRouter.swift */; };
+		BFC926F11EEFC6DF00602153 /* PermissionsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926E81EEFC6DF00602153 /* PermissionsAlertViewController.swift */; };
+		BFC926F51EEFC7BD00602153 /* EnablePhotoLibraryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC926F41EEFC7BD00602153 /* EnablePhotoLibraryWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +67,34 @@
 		BF5060DF1EE81B9E00DB646F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFA35E5A1EEA84F100239A48 /* LiveVideoMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFA35E5B1EEA84F100239A48 /* LiveVideoMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFA35E5C1EEA84F100239A48 /* LiveVideoMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageModels.swift; sourceTree = "<group>"; };
+		BFA35E5D1EEA84F100239A48 /* LiveVideoMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFA35E5E1EEA84F100239A48 /* LiveVideoMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageRouter.swift; sourceTree = "<group>"; };
+		BFA35E5F1EEA84F100239A48 /* LiveVideoMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageViewController.swift; sourceTree = "<group>"; };
+		BFA35E601EEA84F100239A48 /* LoadLiveVideosWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadLiveVideosWorker.swift; sourceTree = "<group>"; };
+		BFA35E6A1EEAAEA100239A48 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
+		BFA35E6C1EEC07C800239A48 /* LiveVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveVideoCollectionViewCell.swift; path = ../LiveVideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFA35E6E1EEC0C2700239A48 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
+		BFA35E701EEC0C6700239A48 /* VidupMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFA35E711EEC0C6700239A48 /* VidupMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFA35E721EEC0C6700239A48 /* VidupMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageModels.swift; sourceTree = "<group>"; };
+		BFA35E731EEC0C6700239A48 /* VidupMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFA35E741EEC0C6700239A48 /* VidupMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageRouter.swift; sourceTree = "<group>"; };
+		BFA35E751EEC0C6700239A48 /* VidupMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageViewController.swift; sourceTree = "<group>"; };
+		BFA35E761EEC0C6700239A48 /* LoadVidupsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadVidupsWorker.swift; sourceTree = "<group>"; };
+		BFA35E801EEC15C200239A48 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC926E01EEFC6DF00602153 /* EnableCameraWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableCameraWorker.swift; sourceTree = "<group>"; };
+		BFC926E11EEFC6DF00602153 /* EnableLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableLocationWorker.swift; sourceTree = "<group>"; };
+		BFC926E21EEFC6DF00602153 /* EnableMicrophoneWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableMicrophoneWorker.swift; sourceTree = "<group>"; };
+		BFC926E31EEFC6DF00602153 /* PermissionsAlertConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertConfigurator.swift; sourceTree = "<group>"; };
+		BFC926E41EEFC6DF00602153 /* PermissionsAlertInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertInteractor.swift; sourceTree = "<group>"; };
+		BFC926E51EEFC6DF00602153 /* PermissionsAlertModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertModels.swift; sourceTree = "<group>"; };
+		BFC926E61EEFC6DF00602153 /* PermissionsAlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertPresenter.swift; sourceTree = "<group>"; };
+		BFC926E71EEFC6DF00602153 /* PermissionsAlertRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertRouter.swift; sourceTree = "<group>"; };
+		BFC926E81EEFC6DF00602153 /* PermissionsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertViewController.swift; sourceTree = "<group>"; };
+		BFC926F41EEFC7BD00602153 /* EnablePhotoLibraryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnablePhotoLibraryWorker.swift; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -74,7 +130,10 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BFA35E7E1EEC0C6F00239A48 /* VidupMainPage */,
+				BFA35E681EEA8BC900239A48 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
+				BFC926F21EEFC6EE00602153 /* PermissionsAlert */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -120,9 +179,85 @@
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BFA35E7F1EEC156200239A48 /* Cells */,
+				BFA35E691EEA8C0500239A48 /* Entities */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 			);
 			path = mammafoodie;
+			sourceTree = "<group>";
+		};
+		BFA35E681EEA8BC900239A48 /* LiveVideoMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFA35E5A1EEA84F100239A48 /* LiveVideoMainPageConfigurator.swift */,
+				BFA35E5B1EEA84F100239A48 /* LiveVideoMainPageInteractor.swift */,
+				BFA35E5C1EEA84F100239A48 /* LiveVideoMainPageModels.swift */,
+				BFA35E5D1EEA84F100239A48 /* LiveVideoMainPagePresenter.swift */,
+				BFA35E5E1EEA84F100239A48 /* LiveVideoMainPageRouter.swift */,
+				BFA35E5F1EEA84F100239A48 /* LiveVideoMainPageViewController.swift */,
+				BFA35E601EEA84F100239A48 /* LoadLiveVideosWorker.swift */,
+			);
+			name = LiveVideoMainPage;
+			sourceTree = "<group>";
+		};
+		BFA35E691EEA8C0500239A48 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BFA35E6A1EEAAEA100239A48 /* LiveVideo.swift */,
+				BFA35E6E1EEC0C2700239A48 /* Vidup.swift */,
+			);
+			name = Entities;
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		BFA35E7E1EEC0C6F00239A48 /* VidupMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFA35E701EEC0C6700239A48 /* VidupMainPageConfigurator.swift */,
+				BFA35E711EEC0C6700239A48 /* VidupMainPageInteractor.swift */,
+				BFA35E721EEC0C6700239A48 /* VidupMainPageModels.swift */,
+				BFA35E731EEC0C6700239A48 /* VidupMainPagePresenter.swift */,
+				BFA35E741EEC0C6700239A48 /* VidupMainPageRouter.swift */,
+				BFA35E751EEC0C6700239A48 /* VidupMainPageViewController.swift */,
+				BFA35E761EEC0C6700239A48 /* LoadVidupsWorker.swift */,
+			);
+			name = VidupMainPage;
+			sourceTree = "<group>";
+		};
+		BFA35E7F1EEC156200239A48 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BFA35E6C1EEC07C800239A48 /* LiveVideoCollectionViewCell.swift */,
+				BFA35E801EEC15C200239A48 /* VidupCollectionViewCell.swift */,
+			);
+			name = Cells;
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		BFC926F21EEFC6EE00602153 /* PermissionsAlert */ = {
+			isa = PBXGroup;
+			children = (
+				BFC926E31EEFC6DF00602153 /* PermissionsAlertConfigurator.swift */,
+				BFC926E41EEFC6DF00602153 /* PermissionsAlertInteractor.swift */,
+				BFC926E51EEFC6DF00602153 /* PermissionsAlertModels.swift */,
+				BFC926E61EEFC6DF00602153 /* PermissionsAlertPresenter.swift */,
+				BFC926E71EEFC6DF00602153 /* PermissionsAlertRouter.swift */,
+				BFC926E81EEFC6DF00602153 /* PermissionsAlertViewController.swift */,
+				BFC926F31EEFC6FD00602153 /* workers */,
+			);
+			name = PermissionsAlert;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		BFC926F31EEFC6FD00602153 /* workers */ = {
+			isa = PBXGroup;
+			children = (
+				BFC926E01EEFC6DF00602153 /* EnableCameraWorker.swift */,
+				BFC926E11EEFC6DF00602153 /* EnableLocationWorker.swift */,
+				BFC926E21EEFC6DF00602153 /* EnableMicrophoneWorker.swift */,
+				BFC926F41EEFC7BD00602153 /* EnablePhotoLibraryWorker.swift */,
+			);
+			name = workers;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -257,13 +392,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA35E661EEA84F100239A48 /* LiveVideoMainPageViewController.swift in Sources */,
+				BFA35E771EEC0C6700239A48 /* VidupMainPageConfigurator.swift in Sources */,
+				BFA35E6B1EEAAEA100239A48 /* LiveVideo.swift in Sources */,
+				BFA35E7D1EEC0C6700239A48 /* LoadVidupsWorker.swift in Sources */,
+				BFA35E7A1EEC0C6700239A48 /* VidupMainPagePresenter.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
+				BFA35E811EEC15C200239A48 /* VidupCollectionViewCell.swift in Sources */,
+				BFA35E671EEA84F100239A48 /* LoadLiveVideosWorker.swift in Sources */,
+				BFC926ED1EEFC6DF00602153 /* PermissionsAlertInteractor.swift in Sources */,
+				BFA35E791EEC0C6700239A48 /* VidupMainPageModels.swift in Sources */,
+				BFA35E6D1EEC07C800239A48 /* LiveVideoCollectionViewCell.swift in Sources */,
+				BFA35E611EEA84F100239A48 /* LiveVideoMainPageConfigurator.swift in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
+				BFA35E641EEA84F100239A48 /* LiveVideoMainPagePresenter.swift in Sources */,
+				BFC926EE1EEFC6DF00602153 /* PermissionsAlertModels.swift in Sources */,
+				BFC926EF1EEFC6DF00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
+				BFC926EA1EEFC6DF00602153 /* EnableLocationWorker.swift in Sources */,
+				BFA35E631EEA84F100239A48 /* LiveVideoMainPageModels.swift in Sources */,
+				BFA35E651EEA84F100239A48 /* LiveVideoMainPageRouter.swift in Sources */,
+				BFC926F51EEFC7BD00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
+				BFC926F11EEFC6DF00602153 /* PermissionsAlertViewController.swift in Sources */,
+				BFC926EC1EEFC6DF00602153 /* PermissionsAlertConfigurator.swift in Sources */,
+				BFA35E7C1EEC0C6700239A48 /* VidupMainPageViewController.swift in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
+				BFC926F01EEFC6DF00602153 /* PermissionsAlertRouter.swift in Sources */,
+				BFC926EB1EEFC6DF00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
+				BFA35E6F1EEC0C2700239A48 /* Vidup.swift in Sources */,
+				BFA35E7B1EEC0C6700239A48 /* VidupMainPageRouter.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
+				BFA35E781EEC0C6700239A48 /* VidupMainPageInteractor.swift in Sources */,
+				BFA35E621EEA84F100239A48 /* LiveVideoMainPageInteractor.swift in Sources */,
+				BFC926E91EEFC6DF00602153 /* EnableCameraWorker.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
