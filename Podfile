@@ -10,6 +10,9 @@ target 'mammafoodie' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   
+  pod 'GoogleSignIn'
+
+  
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
 

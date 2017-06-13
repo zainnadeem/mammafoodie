@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */; };
+		110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */; };
+		110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */; };
+		110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */; };
+		110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4F1EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift */; };
+		110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE501EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift */; };
+		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
+		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
+		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */; };
+		1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */; };
+		1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */; };
+		1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */; };
+		1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */; };
+		1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */; };
+		1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */; };
+		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
+		118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */; };
+		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
+		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
+		118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */; };
+		118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B21EEACA1200E5E6E5 /* SlotSelectionPresenter.swift */; };
+		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
+		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
+		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
 		2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */; };
 		2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E11EE9164D00218609 /* LoginConfigurator.swift */; };
 		2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E21EE9164D00218609 /* LoginInteractor.swift */; };
@@ -15,46 +40,78 @@
 		2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E51EE9164D00218609 /* LoginRouter.swift */; };
 		2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E61EE9164D00218609 /* LoginViewController.swift */; };
 		2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
-		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
-		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
-		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
-		5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */; };
-		5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */; };
-		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
-		5732C0D71EE92D3200E2A61E /* NearbyChefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */; };
-		5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */; };
-		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
-		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
-		5743C4051EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */; };
-		5743C4061EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
-		5743C4071EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */; };
-		5743C4081EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */; };
-		5743C4091EEA6A3F006E6BE2 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */; };
-		5743C40A1EEA6A3F006E6BE2 /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */; };
-		5743C40B1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */; };
-		5743C40C1EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */; };
-		5743C40D1EEA6A3F006E6BE2 /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */; };
-		5743C40E1EEA6A3F006E6BE2 /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */; };
-		5743C40F1EEA6A3F006E6BE2 /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */; };
-		5743C4101EEA6A3F006E6BE2 /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */; };
-		5743C4111EEA6A3F006E6BE2 /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */; };
-		5743C4121EEA6A3F006E6BE2 /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */; };
-		5743C4131EEA6A3F006E6BE2 /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */; };
-		5743C4141EEA6A3F006E6BE2 /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */; };
-		5743C4151EEA6A3F006E6BE2 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */; };
-		5743C4161EEA6A3F006E6BE2 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */; };
-		5743C4171EEA6A3F006E6BE2 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */; };
-		5743C4181EEA6A3F006E6BE2 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */; };
-		5743C4191EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */; };
-		5743C4201EEA9646006E6BE2 /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 5743C41F1EEA9646006E6BE2 /* MapStyle.json */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
+		B69A27181EE949CD00D1E0C5 /* FacebookLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
+		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
+		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
+		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
+		BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */; };
+		BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927051EF00A7E00602153 /* CommentsModels.swift */; };
+		BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927061EF00A7E00602153 /* CommentsPresenter.swift */; };
+		BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927071EF00A7E00602153 /* CommentsRouter.swift */; };
+		BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927081EF00A7E00602153 /* CommentsViewController.swift */; };
+		BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927091EF00A7E00602153 /* CommentsWorker.swift */; };
+		BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270B1EF00A7E00602153 /* LiveVideo.swift */; };
+		BFC927321EF00A7E00602153 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270C1EF00A7E00602153 /* Vidup.swift */; };
+		BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */; };
+		BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */; };
+		BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */; };
+		BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */; };
+		BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */; };
+		BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */; };
+		BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */; };
+		BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */; };
+		BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */; };
+		BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */; };
+		BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */; };
+		BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */; };
+		BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */; };
+		BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */; };
+		BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */; };
+		BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */; };
+		BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */; };
+		BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */; };
+		BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */; };
+		BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */; };
+		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
+		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
+		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
+		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
+		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
+		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
+		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
+		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileConfigurator.swift; sourceTree = "<group>"; };
+		110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileInteractor.swift; sourceTree = "<group>"; };
+		110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileModels.swift; sourceTree = "<group>"; };
+		110FCE4F1EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfilePresenter.swift; sourceTree = "<group>"; };
+		110FCE501EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileRouter.swift; sourceTree = "<group>"; };
+		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
+		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
+		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageConfigurator.swift; sourceTree = "<group>"; };
+		1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageInteractor.swift; sourceTree = "<group>"; };
+		1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageModels.swift; sourceTree = "<group>"; };
+		1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePagePresenter.swift; sourceTree = "<group>"; };
+		1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageRouter.swift; sourceTree = "<group>"; };
+		1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageViewController.swift; sourceTree = "<group>"; };
+		1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageWorker.swift; sourceTree = "<group>"; };
+		118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLoginWorker.swift; sourceTree = "<group>"; };
+		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
+		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
+		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
+		118FB2B21EEACA1200E5E6E5 /* SlotSelectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionPresenter.swift; sourceTree = "<group>"; };
+		118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionRouter.swift; sourceTree = "<group>"; };
+		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
+		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -65,81 +122,54 @@
 		2CB528E51EE9164D00218609 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB528E61EE9164D00218609 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB528E71EE9164D00218609 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
-		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
-		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
-		5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsPresenter.swift; sourceTree = "<group>"; };
-		5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsRouter.swift; sourceTree = "<group>"; };
-		5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsViewController.swift; sourceTree = "<group>"; };
-		5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NearbyChefs.storyboard; sourceTree = "<group>"; };
-		5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
-		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
-		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
-		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
-		5743C3C91EEA6A3F006E6BE2 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CA1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
-		5743C3CC1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUNonHierarchicalDistanceBasedAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
-		5743C3CE1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
-		5743C3D01EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
-		5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUWrappingDictionaryKey.m; sourceTree = "<group>"; };
-		5743C3D21EEA6A3F006E6BE2 /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUCluster.h; sourceTree = "<group>"; };
-		5743C3D31EEA6A3F006E6BE2 /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterItem.h; sourceTree = "<group>"; };
-		5743C3D41EEA6A3F006E6BE2 /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
-		5743C3D51EEA6A3F006E6BE2 /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterManager.h; sourceTree = "<group>"; };
-		5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
-		5743C3D71EEA6A3F006E6BE2 /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUMarkerClustering.h; sourceTree = "<group>"; };
-		5743C3D81EEA6A3F006E6BE2 /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
-		5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStaticCluster.m; sourceTree = "<group>"; };
-		5743C3DB1EEA6A3F006E6BE2 /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterIconGenerator.h; sourceTree = "<group>"; };
-		5743C3DC1EEA6A3F006E6BE2 /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterRenderer.h; sourceTree = "<group>"; };
-		5743C3DD1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
-		5743C3DE1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterIconGenerator.h; sourceTree = "<group>"; };
-		5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
-		5743C3E01EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
-		5743C3E11EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
-		5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
-		5743C3E41EEA6A3F006E6BE2 /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeoJSONParser.h; sourceTree = "<group>"; };
-		5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeoJSONParser.m; sourceTree = "<group>"; };
-		5743C3E61EEA6A3F006E6BE2 /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryRenderer.h; sourceTree = "<group>"; };
-		5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryRenderer.m; sourceTree = "<group>"; };
-		5743C3E81EEA6A3F006E6BE2 /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUKMLParser.h; sourceTree = "<group>"; };
-		5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUKMLParser.m; sourceTree = "<group>"; };
-		5743C3EB1EEA6A3F006E6BE2 /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
-		5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
-		5743C3ED1EEA6A3F006E6BE2 /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
-		5743C3EE1EEA6A3F006E6BE2 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
-		5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
-		5743C3F01EEA6A3F006E6BE2 /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
-		5743C3F11EEA6A3F006E6BE2 /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
-		5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
-		5743C3F31EEA6A3F006E6BE2 /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
-		5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
-		5743C3F51EEA6A3F006E6BE2 /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
-		5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
-		5743C3F71EEA6A3F006E6BE2 /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
-		5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
-		5743C3F91EEA6A3F006E6BE2 /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
-		5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
-		5743C3FB1EEA6A3F006E6BE2 /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
-		5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
-		5743C3FE1EEA6A3F006E6BE2 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
-		5743C3FF1EEA6A3F006E6BE2 /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPoint.h; sourceTree = "<group>"; };
-		5743C4001EEA6A3F006E6BE2 /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTree.h; sourceTree = "<group>"; };
-		5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTree.m; sourceTree = "<group>"; };
-		5743C4021EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
-		5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
-		5743C4041EEA6A3F006E6BE2 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
-		5743C41F1EEA9646006E6BE2 /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
+		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF5060DF1EE81B9E00DB646F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
+		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
+		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
+		BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsListTableViewCell.swift; sourceTree = "<group>"; };
+		BFC927051EF00A7E00602153 /* CommentsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsModels.swift; sourceTree = "<group>"; };
+		BFC927061EF00A7E00602153 /* CommentsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsPresenter.swift; sourceTree = "<group>"; };
+		BFC927071EF00A7E00602153 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
+		BFC927081EF00A7E00602153 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		BFC927091EF00A7E00602153 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
+		BFC9270B1EF00A7E00602153 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
+		BFC9270C1EF00A7E00602153 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
+		BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageModels.swift; sourceTree = "<group>"; };
+		BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageRouter.swift; sourceTree = "<group>"; };
+		BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageViewController.swift; sourceTree = "<group>"; };
+		BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadLiveVideosWorker.swift; sourceTree = "<group>"; };
+		BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableCameraWorker.swift; sourceTree = "<group>"; };
+		BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableLocationWorker.swift; sourceTree = "<group>"; };
+		BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableMicrophoneWorker.swift; sourceTree = "<group>"; };
+		BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnablePhotoLibraryWorker.swift; sourceTree = "<group>"; };
+		BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertConfigurator.swift; sourceTree = "<group>"; };
+		BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertInteractor.swift; sourceTree = "<group>"; };
+		BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertModels.swift; sourceTree = "<group>"; };
+		BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertPresenter.swift; sourceTree = "<group>"; };
+		BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertRouter.swift; sourceTree = "<group>"; };
+		BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertViewController.swift; sourceTree = "<group>"; };
+		BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadVidupsWorker.swift; sourceTree = "<group>"; };
+		BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageModels.swift; sourceTree = "<group>"; };
+		BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageRouter.swift; sourceTree = "<group>"; };
+		BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageViewController.swift; sourceTree = "<group>"; };
+		BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
+		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
+		F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +184,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */,
+				110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */,
+				110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */,
+				110FCE4F1EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift */,
+				110FCE501EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift */,
+				110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */,
+				110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */,
+				110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */,
+			);
+			path = OtherUsersProfilePage;
+			sourceTree = "<group>";
+		};
+		1144D9171EEFE31E006213A4 /* OwnProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */,
+				1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */,
+				1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */,
+				1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */,
+				1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */,
+				1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */,
+				1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */,
+			);
+			path = OwnProfilePage;
+			sourceTree = "<group>";
+		};
+		118FB2AE1EEAC93300E5E6E5 /* SlotSelection */ = {
+			isa = PBXGroup;
+			children = (
+				118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */,
+				118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */,
+				118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */,
+				118FB2B21EEACA1200E5E6E5 /* SlotSelectionPresenter.swift */,
+				118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */,
+				118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */,
+				118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */,
+				110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */,
+			);
+			path = SlotSelection;
+			sourceTree = "<group>";
+		};
 		2399BC92A1B9B588BDDCF277 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,10 +240,7 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				5743C41F1EEA9646006E6BE2 /* MapStyle.json */,
-				5743C3C61EEA6A3F006E6BE2 /* Google-Maps-iOS-Utils */,
 				2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */,
-				5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -177,8 +248,15 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BFC927001EF00A7E00602153 /* Comments */,
+				BFC9270A1EF00A7E00602153 /* Entities */,
+				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
+				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				BFC927201EF00A7E00602153 /* VidupMainPage */,
+				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
+				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
+				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				2CB528E01EE9164D00218609 /* Login */,
-				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -193,151 +271,12 @@
 				2CB528E51EE9164D00218609 /* LoginRouter.swift */,
 				2CB528E61EE9164D00218609 /* LoginViewController.swift */,
 				2CB528E71EE9164D00218609 /* LoginWorker.swift */,
+				F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */,
+				F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */,
+				B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */,
+				118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
-			isa = PBXGroup;
-			children = (
-				5743C30E1EEA5DF5006E6BE2 /* Workers */,
-				5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */,
-				5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */,
-				5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */,
-				5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */,
-				5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */,
-				5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */,
-				5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */,
-			);
-			path = NearbyChefs;
-			sourceTree = "<group>";
-		};
-		5732C0D31EE92BC900E2A61E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5743C30E1EEA5DF5006E6BE2 /* Workers */ = {
-			isa = PBXGroup;
-			children = (
-				5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */,
-				5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */,
-			);
-			path = Workers;
-			sourceTree = "<group>";
-		};
-		5743C3C61EEA6A3F006E6BE2 /* Google-Maps-iOS-Utils */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C71EEA6A3F006E6BE2 /* Clustering */,
-				5743C3E31EEA6A3F006E6BE2 /* Geometry */,
-				5743C3FD1EEA6A3F006E6BE2 /* QuadTree */,
-			);
-			path = "Google-Maps-iOS-Utils";
-			sourceTree = "<group>";
-		};
-		5743C3C71EEA6A3F006E6BE2 /* Clustering */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C81EEA6A3F006E6BE2 /* Algo */,
-				5743C3D21EEA6A3F006E6BE2 /* GMUCluster.h */,
-				5743C3D31EEA6A3F006E6BE2 /* GMUClusterItem.h */,
-				5743C3D41EEA6A3F006E6BE2 /* GMUClusterManager+Testing.h */,
-				5743C3D51EEA6A3F006E6BE2 /* GMUClusterManager.h */,
-				5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */,
-				5743C3D71EEA6A3F006E6BE2 /* GMUMarkerClustering.h */,
-				5743C3D81EEA6A3F006E6BE2 /* GMUStaticCluster.h */,
-				5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */,
-				5743C3DA1EEA6A3F006E6BE2 /* View */,
-			);
-			path = Clustering;
-			sourceTree = "<group>";
-		};
-		5743C3C81EEA6A3F006E6BE2 /* Algo */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C91EEA6A3F006E6BE2 /* GMUClusterAlgorithm.h */,
-				5743C3CA1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.h */,
-				5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */,
-				5743C3CC1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
-				5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
-				5743C3CE1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.h */,
-				5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */,
-				5743C3D01EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.h */,
-				5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */,
-			);
-			path = Algo;
-			sourceTree = "<group>";
-		};
-		5743C3DA1EEA6A3F006E6BE2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3DB1EEA6A3F006E6BE2 /* GMUClusterIconGenerator.h */,
-				5743C3DC1EEA6A3F006E6BE2 /* GMUClusterRenderer.h */,
-				5743C3DD1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator+Testing.h */,
-				5743C3DE1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.h */,
-				5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */,
-				5743C3E01EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer+Testing.h */,
-				5743C3E11EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.h */,
-				5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5743C3E31EEA6A3F006E6BE2 /* Geometry */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3E41EEA6A3F006E6BE2 /* GMUGeoJSONParser.h */,
-				5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */,
-				5743C3E61EEA6A3F006E6BE2 /* GMUGeometryRenderer.h */,
-				5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */,
-				5743C3E81EEA6A3F006E6BE2 /* GMUKMLParser.h */,
-				5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */,
-				5743C3EA1EEA6A3F006E6BE2 /* Model */,
-			);
-			path = Geometry;
-			sourceTree = "<group>";
-		};
-		5743C3EA1EEA6A3F006E6BE2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3EB1EEA6A3F006E6BE2 /* GMUFeature.h */,
-				5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */,
-				5743C3ED1EEA6A3F006E6BE2 /* GMUGeometry.h */,
-				5743C3EE1EEA6A3F006E6BE2 /* GMUGeometryCollection.h */,
-				5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */,
-				5743C3F01EEA6A3F006E6BE2 /* GMUGeometryContainer.h */,
-				5743C3F11EEA6A3F006E6BE2 /* GMUGroundOverlay.h */,
-				5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */,
-				5743C3F31EEA6A3F006E6BE2 /* GMULineString.h */,
-				5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */,
-				5743C3F51EEA6A3F006E6BE2 /* GMUPlacemark.h */,
-				5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */,
-				5743C3F71EEA6A3F006E6BE2 /* GMUPoint.h */,
-				5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */,
-				5743C3F91EEA6A3F006E6BE2 /* GMUPolygon.h */,
-				5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */,
-				5743C3FB1EEA6A3F006E6BE2 /* GMUStyle.h */,
-				5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5743C3FD1EEA6A3F006E6BE2 /* QuadTree */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3FE1EEA6A3F006E6BE2 /* GQTBounds.h */,
-				5743C3FF1EEA6A3F006E6BE2 /* GQTPoint.h */,
-				5743C4001EEA6A3F006E6BE2 /* GQTPointQuadTree.h */,
-				5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */,
-				5743C4021EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.h */,
-				5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */,
-				5743C4041EEA6A3F006E6BE2 /* GQTPointQuadTreeItem.h */,
-			);
-			path = QuadTree;
 			sourceTree = "<group>";
 		};
 		BF5060CC1EE81B9E00DB646F = {
@@ -367,10 +306,90 @@
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
-				5732C0D31EE92BC900E2A61E /* Views */,
 			);
 			path = mammafoodie;
+			sourceTree = "<group>";
+		};
+		BFC927001EF00A7E00602153 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				BFC927011EF00A7E00602153 /* CommentsAdapter.swift */,
+				BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */,
+				BFC927031EF00A7E00602153 /* CommentsInteractor.swift */,
+				BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */,
+				BFC927051EF00A7E00602153 /* CommentsModels.swift */,
+				BFC927061EF00A7E00602153 /* CommentsPresenter.swift */,
+				BFC927071EF00A7E00602153 /* CommentsRouter.swift */,
+				BFC927081EF00A7E00602153 /* CommentsViewController.swift */,
+				BFC927091EF00A7E00602153 /* CommentsWorker.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		BFC9270A1EF00A7E00602153 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9270B1EF00A7E00602153 /* LiveVideo.swift */,
+				BFC9270C1EF00A7E00602153 /* Vidup.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */,
+				BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */,
+				BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */,
+				BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */,
+				BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */,
+				BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */,
+				BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */,
+			);
+			path = LiveVideoMainPage;
+			sourceTree = "<group>";
+		};
+		BFC927151EF00A7E00602153 /* PermissionsAlert */ = {
+			isa = PBXGroup;
+			children = (
+				BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */,
+				BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */,
+				BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */,
+				BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */,
+				BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */,
+				BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */,
+				BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */,
+				BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */,
+				BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */,
+				BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */,
+			);
+			path = PermissionsAlert;
+			sourceTree = "<group>";
+		};
+		BFC927201EF00A7E00602153 /* VidupMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */,
+				BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */,
+				BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */,
+				BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */,
+				BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */,
+				BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */,
+				BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */,
+			);
+			path = VidupMainPage;
+			sourceTree = "<group>";
+		};
+		BFC9274B1EF00B0700602153 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */,
+				BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -416,8 +435,7 @@
 				TargetAttributes = {
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = R4UP7L985F;
-						LastSwiftMigration = 0830;
+						DevelopmentTeam = SH3B2D92BY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -446,11 +464,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
+				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */,
-				5743C4201EEA9646006E6BE2 /* MapStyle.json in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
-				5732C0D71EE92D3200E2A61E /* NearbyChefs.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +486,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -509,44 +526,78 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
+				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
+				BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */,
+				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
+				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
+				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
+				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
-				5743C4061EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
-				5743C4071EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m in Sources */,
-				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
-				5743C40C1EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m in Sources */,
-				5743C40A1EEA6A3F006E6BE2 /* GMUStaticCluster.m in Sources */,
-				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
-				5743C40F1EEA6A3F006E6BE2 /* GMUKMLParser.m in Sources */,
-				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
-				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
+				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
-				5743C40D1EEA6A3F006E6BE2 /* GMUGeoJSONParser.m in Sources */,
+				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
+				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
+				BFC927321EF00A7E00602153 /* Vidup.swift in Sources */,
+				B69A27181EE949CD00D1E0C5 /* FacebookLoginWorker.swift in Sources */,
+				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
+				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
+				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
+				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
+				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
+				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
+				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
+				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
+				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
+				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
+				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
+				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
+				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
+				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
+				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
+				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
-				5743C4091EEA6A3F006E6BE2 /* GMUClusterManager.m in Sources */,
-				5743C4121EEA6A3F006E6BE2 /* GMUGroundOverlay.m in Sources */,
-				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
-				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
-				5743C4141EEA6A3F006E6BE2 /* GMUPlacemark.m in Sources */,
-				5743C4131EEA6A3F006E6BE2 /* GMULineString.m in Sources */,
-				5743C4151EEA6A3F006E6BE2 /* GMUPoint.m in Sources */,
-				5743C40B1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m in Sources */,
-				5743C4181EEA6A3F006E6BE2 /* GQTPointQuadTree.m in Sources */,
-				5743C4081EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m in Sources */,
-				5743C4171EEA6A3F006E6BE2 /* GMUStyle.m in Sources */,
-				5743C4101EEA6A3F006E6BE2 /* GMUFeature.m in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
-				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
+				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
+				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
+				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
-				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
+				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
+				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
+				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
+				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
+				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
+				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
+				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
+				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
+				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
+				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
+				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
+				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
+				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
+				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
+				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
-				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
-				5743C4051EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m in Sources */,
-				5743C4191EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m in Sources */,
+				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
+				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
+				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
+				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
+				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
+				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
+				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
+				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
+				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
+				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
+				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
+				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
+				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
+				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
+				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
+				118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
-				5743C4161EEA6A3F006E6BE2 /* GMUPolygon.m in Sources */,
-				5743C40E1EEA6A3F006E6BE2 /* GMUGeometryRenderer.m in Sources */,
-				5743C4111EEA6A3F006E6BE2 /* GMUGeometryCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +618,15 @@
 				BF5060E21EE81B9E00DB646F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F03B6EBB1EED276000985F62 /* Siri.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F03B6EBC1EED276000985F62 /* Base */,
+			);
+			name = Siri.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -613,7 +673,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -657,7 +717,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -670,14 +730,11 @@
 			baseConfigurationReference = 18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = SH3B2D92BY;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.arjav;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -687,13 +744,11 @@
 			baseConfigurationReference = 17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = SH3B2D92BY;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.arjav;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -4,7 +4,7 @@ import UIKit
 
 extension LoginViewController: LoginPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(segue: segue)
+        router.openSegue(segue)
     }
 }
 
@@ -35,3 +35,5 @@ class LoginConfigurator {
         presenter.output = viewController
     }
 }
+
+
