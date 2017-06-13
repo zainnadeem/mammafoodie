@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SlotSelectionViewControllerInput {
-    
+    func selectedSlots(_ slots: Dictionary<String, Any>)
 }
 
 protocol SlotSelectionViewControllerOutput {
@@ -50,7 +50,9 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
     
     
     //MARK: - Input 
-    
+    func selectedSlots(_ slots: Dictionary<String, Any>){
+        
+    }
     
     
     // MARK: - Display logic
