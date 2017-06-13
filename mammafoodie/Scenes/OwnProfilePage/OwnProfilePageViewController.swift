@@ -1,20 +1,19 @@
 import UIKit
 
-protocol OtherUsersProfileViewControllerInput {
-    func openDishPageWith(dishID:Int)
+protocol OwnProfilePageViewControllerInput {
+     func openDishPageWith(dishID:Int)
 }
 
-protocol OtherUsersProfileViewControllerOutput {
-    
+protocol OwnProfilePageViewControllerOutput {
     func setUpDishCollectionView(_ collectionView:UICollectionView)
     func loadDishCollectionViewForIndex(_ index:Int)
 }
 
-class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewControllerInput {
+class OwnProfilePageViewController: UIViewController, OwnProfilePageViewControllerInput {
     
-    var output: OtherUsersProfileViewControllerOutput!
-    var router: OtherUsersProfileRouter!
-    var collectionViewAdapter: DishesCollectionViewAdapter!
+    var output: OwnProfilePageViewControllerOutput!
+    var router: OwnProfilePageRouter!
+    
     
     //MARK: - IBOutlets
     @IBOutlet weak var lblUserName:UILabel!
@@ -34,7 +33,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        OtherUsersProfileConfigurator.sharedInstance.configure(viewController: self)
+        OwnProfilePageConfigurator.sharedInstance.configure(viewController: self)
     }
     
     // MARK: - View lifecycle
@@ -47,26 +46,21 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    //MARK: - Input
-    
     func openDishPageWith(dishID:Int){
         
         //Initiate segue and pass it to router in prepare for segue
         
     }
-    
-    
+
     
     // MARK: - Event handling
     
     @IBAction func segmentedControlDidChangeSelection(sender:UISegmentedControl){
         
-       let index = sender.selectedSegmentIndex
-       output.loadDishCollectionViewForIndex(index)
+        let index = sender.selectedSegmentIndex
+        output.loadDishCollectionViewForIndex(index)
         
     }
-    
-    
     
     // MARK: - Display logic
     

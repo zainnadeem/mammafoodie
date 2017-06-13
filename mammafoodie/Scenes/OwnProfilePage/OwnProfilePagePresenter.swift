@@ -1,17 +1,18 @@
 import UIKit
 
-protocol OtherUsersProfilePresenterInput {
+protocol OwnProfilePagePresenterInput {
     func openDishPageWith(dishID:Int)
 }
 
-protocol OtherUsersProfilePresenterOutput: class {
+protocol OwnProfilePagePresenterOutput: class {
     func openDishPageWith(dishID:Int)
 }
 
-class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
-    weak var output: OtherUsersProfilePresenterOutput!
+class OwnProfilePagePresenter: OwnProfilePagePresenterInput {
+    weak var output: OwnProfilePagePresenterOutput!
     
     // MARK: - Presentation logic
+    
     
     
     //MARK: - Input

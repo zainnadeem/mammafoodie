@@ -1,18 +1,18 @@
 import UIKit
 
-protocol OtherUsersProfileInteractorInput {
+protocol OwnProfilePageInteractorInput {
     func setUpDishCollectionView(_ collectionView:UICollectionView)
     func loadDishCollectionViewForIndex(_ index:Int)
 }
 
-protocol OtherUsersProfileInteractorOutput {
+protocol OwnProfilePageInteractorOutput {
     func openDishPageWith(dishID:Int)
 }
 
-class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesCollectionViewAdapterDelegate {
+class OwnProfilePageInteractor: OwnProfilePageInteractorInput,DishesCollectionViewAdapterDelegate {
     
-    var output: OtherUsersProfileInteractorOutput!
-    var worker: OtherUsersProfileWorker! = OtherUsersProfileWorker()
+    var output: OwnProfilePageInteractorOutput!
+    var worker: OwnProfilePageWorker!
     
     var dishCollectionViewAdapter:DishesCollectionViewAdapter!
     
@@ -32,17 +32,14 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         worker.getDishes(boughtOrCooked: index, forUserID: 0) { dishes in
             dishCollectionViewAdapter.dataSource = dishes
         }
-          
     }
     
-    
-    
-    //MARK: - DishesCollectionViewAdapterDelegate 
+    //MARK: - DishesCollectionViewAdapterDelegate
     
     func openDishPageWith(dishID:Int){
         
-       output.openDishPageWith(dishID: dishID)
-    
+        output.openDishPageWith(dishID: dishID)
+        
     }
     
 }

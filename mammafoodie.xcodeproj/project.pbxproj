@@ -16,6 +16,13 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */; };
+		1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */; };
+		1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */; };
+		1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */; };
+		1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */; };
+		1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */; };
+		1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */; };
 		118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -49,6 +56,13 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageConfigurator.swift; sourceTree = "<group>"; };
+		1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageInteractor.swift; sourceTree = "<group>"; };
+		1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageModels.swift; sourceTree = "<group>"; };
+		1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePagePresenter.swift; sourceTree = "<group>"; };
+		1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageRouter.swift; sourceTree = "<group>"; };
+		1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageViewController.swift; sourceTree = "<group>"; };
+		1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageWorker.swift; sourceTree = "<group>"; };
 		118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLoginWorker.swift; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
@@ -103,6 +117,20 @@
 			path = OtherUsersProfilePage;
 			sourceTree = "<group>";
 		};
+		1144D9171EEFE31E006213A4 /* OwnProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */,
+				1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */,
+				1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */,
+				1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */,
+				1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */,
+				1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */,
+				1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */,
+			);
+			path = OwnProfilePage;
+			sourceTree = "<group>";
+		};
 		118FB2AE1EEAC93300E5E6E5 /* SlotSelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +166,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				2CB528E01EE9164D00218609 /* Login */,
@@ -327,19 +356,26 @@
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
+				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
+				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
+				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
+				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
+				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
+				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
+				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,

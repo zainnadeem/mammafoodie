@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol DishesCollectionViewAdapterDelegate{
+    
+    func openDishPageWith(dishID:Int)
+    
+}
+
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate {
     
     var collectionView:UICollectionView? {
@@ -18,8 +24,14 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     private let reuseIdentifier = "Cell"
     
+    var delegate:DishesCollectionViewAdapterDelegate?
     
     
+    var dataSource : [NSDictionary]? {
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
     
     
     // MARK: UICollectionViewDataSource
@@ -32,7 +44,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return dataSource?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -46,9 +58,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        
-        
+        delegate?.openDishPageWith(dishID: indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
