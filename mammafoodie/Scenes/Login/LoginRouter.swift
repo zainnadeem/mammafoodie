@@ -1,37 +1,42 @@
 import UIKit
+import SafariServices
 
 protocol LoginRouterInput {
-    func navigateToSomewhere()
+    func openSegue(_ segue: UIStoryboardSegue)
 }
 
+
 class LoginRouter: LoginRouterInput {
-    weak var viewController: LoginViewController!
     
+    weak var viewController: LoginViewController!
+
     // MARK: - Navigation
     
-    func navigateToSomewhere() {
-        // NOTE: Teach the router how to navigate to another scene. Some examples follow:
+    func openSegue(_ segue: UIStoryboardSegue) {
         
-        // 1. Trigger a storyboard segue
-        // viewController.performSegueWithIdentifier("ShowSomewhereScene", sender: nil)
+        guard let identifier = segue.identifier else {
+            assertionFailure("Segue had no identifier")
+            return
+        }
         
-        // 2. Present another view controller programmatically
-        // viewController.presentViewController(someWhereViewController, animated: true, completion: nil)
+        guard let identifierCase = LoginViewController.ViewControllerSegue(rawValue: identifier) else {
+            assertionFailure("identifier case not found")
+            return
+        }
         
-        // 3. Ask the navigation controller to push another view controller onto the stack
-        // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
-        
-        // 4. Present a view controller from a different storyboard
-        // let storyboard = UIStoryboard(name: "OtherThanMain", bundle: nil)
-        // let someWhereViewController = storyboard.instantiateInitialViewController() as! SomeWhereViewController
-        // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
-    }
-    
-    // MARK: - Communication
-    
-    func passDataToNextScene(segue: UIStoryboardSegue) {
-        // NOTE: Teach the router which scenes it can communicate with
-        
+        switch identifierCase  {
+        case .unnamed:
+            print("unnamed segue")
+        }
         
     }
+    
+    // Mark: - Privacy Policy
+
+    func openSafariVC(with address: LoginViewController.SafariAddresses){
+        let safariVC = SFSafariViewController(url: NSURL(string: address.rawValue)! as URL)
+        viewController.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = viewController
+    }
+    
 }

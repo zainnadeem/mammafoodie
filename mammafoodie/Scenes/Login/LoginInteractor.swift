@@ -1,4 +1,5 @@
 import UIKit
+import SafariServices
 
 protocol LoginInteractorInput {
     func login(with email: String, password: String)
@@ -66,5 +67,5 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         self.gmailWorker.signout()
     }
     
-    
+
 }

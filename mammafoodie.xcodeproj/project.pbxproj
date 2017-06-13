@@ -20,16 +20,44 @@
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
+		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
+		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
+		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
+		BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */; };
+		BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927051EF00A7E00602153 /* CommentsModels.swift */; };
+		BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927061EF00A7E00602153 /* CommentsPresenter.swift */; };
+		BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927071EF00A7E00602153 /* CommentsRouter.swift */; };
+		BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927081EF00A7E00602153 /* CommentsViewController.swift */; };
+		BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927091EF00A7E00602153 /* CommentsWorker.swift */; };
+		BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270B1EF00A7E00602153 /* LiveVideo.swift */; };
+		BFC927321EF00A7E00602153 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270C1EF00A7E00602153 /* Vidup.swift */; };
+		BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */; };
+		BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */; };
+		BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */; };
+		BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */; };
+		BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */; };
+		BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */; };
+		BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */; };
+		BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */; };
+		BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */; };
+		BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */; };
+		BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */; };
+		BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */; };
+		BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */; };
+		BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */; };
+		BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */; };
+		BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */; };
+		BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */; };
+		BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */; };
+		BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */; };
+		BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */; };
+		BFC927471EF00A7E00602153 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
+		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
+		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
+		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
+		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
+		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
 		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
-		F03B6EC41EED29D300985F62 /* CommentsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */; };
-		F03B6EDC1EEE88FF00985F62 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */; };
-		F03B6EDD1EEE88FF00985F62 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */; };
-		F03B6EDE1EEE88FF00985F62 /* CommentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */; };
-		F03B6EDF1EEE88FF00985F62 /* CommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */; };
-		F03B6EE01EEE88FF00985F62 /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */; };
-		F03B6EE11EEE88FF00985F62 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */; };
-		F03B6EE21EEE88FF00985F62 /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */; };
-		F03B6EE41EEEB99C00985F62 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */; };
 		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
 		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
@@ -51,17 +79,45 @@
 		BF5060DF1EE81B9E00DB646F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
+		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
+		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
+		BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsListTableViewCell.swift; sourceTree = "<group>"; };
+		BFC927051EF00A7E00602153 /* CommentsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsModels.swift; sourceTree = "<group>"; };
+		BFC927061EF00A7E00602153 /* CommentsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsPresenter.swift; sourceTree = "<group>"; };
+		BFC927071EF00A7E00602153 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
+		BFC927081EF00A7E00602153 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		BFC927091EF00A7E00602153 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
+		BFC9270B1EF00A7E00602153 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
+		BFC9270C1EF00A7E00602153 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
+		BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageModels.swift; sourceTree = "<group>"; };
+		BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageRouter.swift; sourceTree = "<group>"; };
+		BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageViewController.swift; sourceTree = "<group>"; };
+		BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadLiveVideosWorker.swift; sourceTree = "<group>"; };
+		BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableCameraWorker.swift; sourceTree = "<group>"; };
+		BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableLocationWorker.swift; sourceTree = "<group>"; };
+		BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableMicrophoneWorker.swift; sourceTree = "<group>"; };
+		BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnablePhotoLibraryWorker.swift; sourceTree = "<group>"; };
+		BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertConfigurator.swift; sourceTree = "<group>"; };
+		BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertInteractor.swift; sourceTree = "<group>"; };
+		BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertModels.swift; sourceTree = "<group>"; };
+		BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertPresenter.swift; sourceTree = "<group>"; };
+		BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertRouter.swift; sourceTree = "<group>"; };
+		BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsAlertViewController.swift; sourceTree = "<group>"; };
+		BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadVidupsWorker.swift; sourceTree = "<group>"; };
+		BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageConfigurator.swift; sourceTree = "<group>"; };
+		BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageInteractor.swift; sourceTree = "<group>"; };
+		BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageModels.swift; sourceTree = "<group>"; };
+		BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPagePresenter.swift; sourceTree = "<group>"; };
+		BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageRouter.swift; sourceTree = "<group>"; };
+		BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageViewController.swift; sourceTree = "<group>"; };
+		BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
-		F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsListTableViewCell.swift; sourceTree = "<group>"; };
-		F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
-		F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
-		F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsModels.swift; sourceTree = "<group>"; };
-		F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsPresenter.swift; sourceTree = "<group>"; };
-		F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
-		F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
-		F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
-		F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
 		F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +154,11 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				F03B6EBE1EED27D100985F62 /* Comments */,
+				BFC927001EF00A7E00602153 /* Comments */,
+				BFC9270A1EF00A7E00602153 /* Entities */,
+				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
+				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				BFC927201EF00A7E00602153 /* VidupMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 			);
 			path = Scenes;
@@ -148,25 +208,89 @@
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 			);
 			path = mammafoodie;
 			sourceTree = "<group>";
 		};
-		F03B6EBE1EED27D100985F62 /* Comments */ = {
+		BFC927001EF00A7E00602153 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
-				F03B6EC31EED29D300985F62 /* CommentsListTableViewCell.swift */,
-				F03B6ED51EEE88FF00985F62 /* CommentsConfigurator.swift */,
-				F03B6ED61EEE88FF00985F62 /* CommentsInteractor.swift */,
-				F03B6ED71EEE88FF00985F62 /* CommentsModels.swift */,
-				F03B6ED81EEE88FF00985F62 /* CommentsPresenter.swift */,
-				F03B6ED91EEE88FF00985F62 /* CommentsRouter.swift */,
-				F03B6EDA1EEE88FF00985F62 /* CommentsViewController.swift */,
-				F03B6EDB1EEE88FF00985F62 /* CommentsWorker.swift */,
-				F03B6EE31EEEB99C00985F62 /* CommentsAdapter.swift */,
+				BFC927011EF00A7E00602153 /* CommentsAdapter.swift */,
+				BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */,
+				BFC927031EF00A7E00602153 /* CommentsInteractor.swift */,
+				BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */,
+				BFC927051EF00A7E00602153 /* CommentsModels.swift */,
+				BFC927061EF00A7E00602153 /* CommentsPresenter.swift */,
+				BFC927071EF00A7E00602153 /* CommentsRouter.swift */,
+				BFC927081EF00A7E00602153 /* CommentsViewController.swift */,
+				BFC927091EF00A7E00602153 /* CommentsWorker.swift */,
 			);
-			name = Comments;
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		BFC9270A1EF00A7E00602153 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9270B1EF00A7E00602153 /* LiveVideo.swift */,
+				BFC9270C1EF00A7E00602153 /* Vidup.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */,
+				BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */,
+				BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */,
+				BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */,
+				BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */,
+				BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */,
+				BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */,
+			);
+			path = LiveVideoMainPage;
+			sourceTree = "<group>";
+		};
+		BFC927151EF00A7E00602153 /* PermissionsAlert */ = {
+			isa = PBXGroup;
+			children = (
+				BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */,
+				BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */,
+				BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */,
+				BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */,
+				BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */,
+				BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */,
+				BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */,
+				BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */,
+				BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */,
+				BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */,
+			);
+			path = PermissionsAlert;
+			sourceTree = "<group>";
+		};
+		BFC927201EF00A7E00602153 /* VidupMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */,
+				BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */,
+				BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */,
+				BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */,
+				BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */,
+				BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */,
+				BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */,
+			);
+			path = VidupMainPage;
+			sourceTree = "<group>";
+		};
+		BFC9274B1EF00B0700602153 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */,
+				BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -302,25 +426,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
+				BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
+				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
+				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
+				BFC927471EF00A7E00602153 /* VidupMainPageModels.swift in Sources */,
+				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
+				BFC927321EF00A7E00602153 /* Vidup.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
-				F03B6EE01EEE88FF00985F62 /* CommentsRouter.swift in Sources */,
-				F03B6EDD1EEE88FF00985F62 /* CommentsInteractor.swift in Sources */,
+				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
-				F03B6EE21EEE88FF00985F62 /* CommentsWorker.swift in Sources */,
-				F03B6EE11EEE88FF00985F62 /* CommentsViewController.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
-				F03B6EE41EEEB99C00985F62 /* CommentsAdapter.swift in Sources */,
-				F03B6EDC1EEE88FF00985F62 /* CommentsConfigurator.swift in Sources */,
-				F03B6EDE1EEE88FF00985F62 /* CommentsModels.swift in Sources */,
+				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
+				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
+				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
 				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
-				F03B6EDF1EEE88FF00985F62 /* CommentsPresenter.swift in Sources */,
+				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
+				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
+				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
+				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
+				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
+				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
+				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
+				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
+				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
+				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
+				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
+				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
+				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
+				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
+				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
+				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
+				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
+				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
+				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
+				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
+				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
+				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
+				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
+				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
+				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
-				F03B6EC41EED29D300985F62 /* CommentsListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
