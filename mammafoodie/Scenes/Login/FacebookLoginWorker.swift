@@ -6,7 +6,7 @@ import Firebase
 class FacebookLoginWorker {
     var dict : [String : AnyObject]!
     weak var viewController: UIViewController!
-    let loginManager = FBSDKLoginManager()
+    lazy var loginManager = FBSDKLoginManager()
     
     class func setup(application: UIApplication, with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -18,46 +18,62 @@ class FacebookLoginWorker {
     }
     
     
-    func login(){
-        if  (Auth.auth().currentUser != nil) && (FBSDKAccessToken.current() != nil){
-            if FBSDKAccessToken.current().expirationDate > Date(){
-                FBSDKAccessToken.refreshCurrentAccessToken({ (request, result, error) in
-                    print(error!)
-                    print(result!)
-                    print(request!)
-                    
-                })
-                return
-            }else{
-                FBandFirebaselogin()
-            }
-        }else
-        {
-            FBandFirebaselogin()
-        }
+    func login(completion:@escaping (_ errorMessage:String?, _ authCredential:AuthCredential?)->()){
         
-    }
-    
-    func FBandFirebaselogin() {
-        loginManager.logIn(withReadPermissions:["email"] , from: self.viewController) { (loginResult, error) in
+        loginManager.logOut()
+        
+        loginManager.logIn(withReadPermissions:["email", "public_profile"] , from: self.viewController) { (loginResult, error) in
+            
+            if let error = error {
+                completion(error.localizedDescription, nil)
+                return
+            }
+            
             
             if loginResult?.isCancelled == true {
-                print("cancelled.")
+                completion("The login has been cancelled by you. Please login to proceed.", nil)
+                return
             }
-            else {
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            
+            
+            if let loginResult = loginResult , !loginResult.grantedPermissions.contains("email"){
+                completion("Please allow the app to access your email and try again", nil)
+                return
+            } else {
                 
-                Auth.auth().signIn(with: credential, completion: { (user, error) in
-                    if error != nil {
-                        print(error!)
-                        return
-                    }
-                    self.UpdateMailId()
-                    print("Login Sucessfully.")
-                })
+                    //Check if email is empty in facebook user profile
+                    let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
+                    
+                    request!.start(completionHandler: { (connection, result, error) in
+                        if(error == nil)
+                        {
+                            guard let email = (result as? NSDictionary)?.value(forKey: "email") as? String, email != ""  else {
+                                
+                                completion("We are unable to retreive your email from facebook. Please provide your email to continue", nil)
+                                return
+                            }
+                            
+                        } else {
+                            completion(error?.localizedDescription, nil)
+                        }
+
+                    })
+                
             }
+            
+            guard let accessToken = FBSDKAccessToken.current() else {
+                completion("Failed to get access token. Please try again.", nil)
+                return
+            }
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            
+            completion(nil, credential)
         }
     }
+    
+    
+    
     
     func logout() {
         loginManager.logOut()

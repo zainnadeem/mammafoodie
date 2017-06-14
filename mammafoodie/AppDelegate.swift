@@ -23,13 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            
+            //Gmail
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-            return GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
-            /*
+           
+            //Facebook
             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-            return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
- */
+            
+            
+             return (GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication) || FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation))
+            
+ 
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,20 +1,28 @@
 import UIKit
 
 protocol LoginPresenterInput {
-    func loginSuccess()
-    func logoutSuccess()
-    func present(_ viewController: UIViewController)
-    func forgotPasswordSuccess()
-    func forgotpasswordWorker(success:String)
+    func signUpCompletion(errorMessage:String?)
+    func loginCompletion(errorMessage:String?)
+    
+    //    func loginSuccess()
+    //    func logoutSuccess()
+    //    func present(_ viewController: UIViewController)
+    //    func dismiss(_ viewController:UIViewController)
+    func forgotpasswordCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
 }
 
 protocol LoginPresenterOutput: class {
-    func showLoginSuccessMessage(_ message: String)
-    func showLogoutSuccessMessage(_ message: String)
-    func present(_ viewController: UIViewController)
-    func dismiss(_ viewController: UIViewController)
-    func forgotpasswordWorker(success:String)
+//    func showLoginSuccessMessage(_ message: String)
+//    func showLogoutSuccessMessage(_ message: String)
+//    func present(_ viewController: UIViewController)
+//    func dismiss(_ viewController: UIViewController)
+//    func forgotpasswordWorker(success:String)
+    
+    
+    func showHomeScreen()
+    func showAlert(alertController:UIAlertController)
+    
 
     func viewControllerToPresent() -> UIViewController
 }
@@ -23,32 +31,50 @@ class LoginPresenter: LoginPresenterInput {
     weak var output: LoginPresenterOutput!
     
     // MARK: - Presentation logic
-    func loginSuccess() {
-        let message = "Login was successful."
-        self.output.showLoginSuccessMessage(message)
-    }
-    func logoutSuccess() {
-        let message = "Logout was successful"
-        self.output.showLogoutSuccessMessage(message)
+
+    
+    func signUpCompletion(errorMessage:String?){
+        
+        if let errorMessage = errorMessage{
+            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            
+            self.output.showAlert(alertController: alertController)
+        } else {
+            self.output.showHomeScreen()
+        }
+        
     }
     
-    func forgotPasswordSuccess() {
+    func loginCompletion(errorMessage:String?){
         
+        if let errorMessage = errorMessage{
+            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            
+            self.output.showAlert(alertController: alertController)
+        } else {
+            self.output.showHomeScreen()
+        }
+    }
+    
+    func forgotpasswordCompletion(errorMessage:String?){
+        
+        if let errorMessage = errorMessage{
+            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            
+            self.output.showAlert(alertController: alertController)
+        } else {
+            self.output.showHomeScreen()
+        }
     }
     
     func viewControllerToPresent() -> UIViewController {
         return self.output.viewControllerToPresent()
     }
-    func forgotpasswordWorker(success:String)
-    {
-        self.output.forgotpasswordWorker(success: success)
-        //print(success)
-    }
     
-    func present(_ viewController: UIViewController) {
-        self.output.present(viewController)
-    }
-    func dismiss(_ viewController: UIViewController) {
-        self.output.dismiss(viewController)
-    }
 }
