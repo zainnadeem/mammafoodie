@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         FacebookLoginWorker.setup(application: application, with: launchOptions)
-        
+        LocationSearchWorker.setup()
         return true
     }
     

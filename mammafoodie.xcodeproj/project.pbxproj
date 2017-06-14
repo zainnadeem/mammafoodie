@@ -41,6 +41,14 @@
 		2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E61EE9164D00218609 /* LoginViewController.swift */; };
 		2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
+		B655D3C01EF1460600B00C3B /* LocationSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3B81EF1460600B00C3B /* LocationSearchAdapter.swift */; };
+		B655D3C11EF1460600B00C3B /* LocationSearchConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3B91EF1460600B00C3B /* LocationSearchConfigurator.swift */; };
+		B655D3C21EF1460600B00C3B /* LocationSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BA1EF1460600B00C3B /* LocationSearchInteractor.swift */; };
+		B655D3C31EF1460600B00C3B /* LocationSearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BB1EF1460600B00C3B /* LocationSearchModels.swift */; };
+		B655D3C41EF1460600B00C3B /* LocationSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BC1EF1460600B00C3B /* LocationSearchPresenter.swift */; };
+		B655D3C51EF1460600B00C3B /* LocationSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BD1EF1460600B00C3B /* LocationSearchRouter.swift */; };
+		B655D3C61EF1460600B00C3B /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BE1EF1460600B00C3B /* LocationSearchViewController.swift */; };
+		B655D3C71EF1460600B00C3B /* LocationSearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655D3BF1EF1460600B00C3B /* LocationSearchWorker.swift */; };
 		B69A27181EE949CD00D1E0C5 /* FacebookLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
@@ -122,6 +130,14 @@
 		2CB528E51EE9164D00218609 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB528E61EE9164D00218609 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB528E71EE9164D00218609 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		B655D3B81EF1460600B00C3B /* LocationSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchAdapter.swift; sourceTree = "<group>"; };
+		B655D3B91EF1460600B00C3B /* LocationSearchConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchConfigurator.swift; sourceTree = "<group>"; };
+		B655D3BA1EF1460600B00C3B /* LocationSearchInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchInteractor.swift; sourceTree = "<group>"; };
+		B655D3BB1EF1460600B00C3B /* LocationSearchModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchModels.swift; sourceTree = "<group>"; };
+		B655D3BC1EF1460600B00C3B /* LocationSearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchPresenter.swift; sourceTree = "<group>"; };
+		B655D3BD1EF1460600B00C3B /* LocationSearchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchRouter.swift; sourceTree = "<group>"; };
+		B655D3BE1EF1460600B00C3B /* LocationSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
+		B655D3BF1EF1460600B00C3B /* LocationSearchWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchWorker.swift; sourceTree = "<group>"; };
 		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +264,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B655D3B71EF1460600B00C3B /* LocationSearch */,
 				BFC927001EF00A7E00602153 /* Comments */,
 				BFC9270A1EF00A7E00602153 /* Entities */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
@@ -277,6 +294,21 @@
 				118FB2AC1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		B655D3B71EF1460600B00C3B /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B655D3B81EF1460600B00C3B /* LocationSearchAdapter.swift */,
+				B655D3B91EF1460600B00C3B /* LocationSearchConfigurator.swift */,
+				B655D3BA1EF1460600B00C3B /* LocationSearchInteractor.swift */,
+				B655D3BB1EF1460600B00C3B /* LocationSearchModels.swift */,
+				B655D3BC1EF1460600B00C3B /* LocationSearchPresenter.swift */,
+				B655D3BD1EF1460600B00C3B /* LocationSearchRouter.swift */,
+				B655D3BE1EF1460600B00C3B /* LocationSearchViewController.swift */,
+				B655D3BF1EF1460600B00C3B /* LocationSearchWorker.swift */,
+			);
+			path = LocationSearch;
 			sourceTree = "<group>";
 		};
 		BF5060CC1EE81B9E00DB646F = {
@@ -549,9 +581,12 @@
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
+				B655D3C01EF1460600B00C3B /* LocationSearchAdapter.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
+				B655D3C51EF1460600B00C3B /* LocationSearchRouter.swift in Sources */,
+				B655D3C41EF1460600B00C3B /* LocationSearchPresenter.swift in Sources */,
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
@@ -569,6 +604,7 @@
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
 				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
+				B655D3C71EF1460600B00C3B /* LocationSearchWorker.swift in Sources */,
 				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
@@ -584,13 +620,17 @@
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
+				B655D3C21EF1460600B00C3B /* LocationSearchInteractor.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
+				B655D3C11EF1460600B00C3B /* LocationSearchConfigurator.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
+				B655D3C61EF1460600B00C3B /* LocationSearchViewController.swift in Sources */,
+				B655D3C31EF1460600B00C3B /* LocationSearchModels.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
