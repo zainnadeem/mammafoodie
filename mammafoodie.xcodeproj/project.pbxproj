@@ -83,6 +83,16 @@
 		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
 		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
 		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
+		F04690E11EF11E6100A55560 /* ChatConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DA1EF11E6100A55560 /* ChatConfigurator.swift */; };
+		F04690E21EF11E6100A55560 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DB1EF11E6100A55560 /* ChatInteractor.swift */; };
+		F04690E31EF11E6100A55560 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DC1EF11E6100A55560 /* ChatModels.swift */; };
+		F04690E41EF11E6100A55560 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DD1EF11E6100A55560 /* ChatPresenter.swift */; };
+		F04690E51EF11E6100A55560 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DE1EF11E6100A55560 /* ChatRouter.swift */; };
+		F04690E61EF11E6100A55560 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690DF1EF11E6100A55560 /* ChatViewController.swift */; };
+		F04690E71EF11E6100A55560 /* ChatWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690E01EF11E6100A55560 /* ChatWorker.swift */; };
+		F04690ED1EF1216C00A55560 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690EC1EF1216C00A55560 /* MFMessageModel.swift */; };
+		F04690EF1EF1219F00A55560 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690EE1EF1219F00A55560 /* MFConversationsModel.swift */; };
+		F04690F31EF14E4700A55560 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04690F21EF14E4700A55560 /* ChatTableViewCell.swift */; };
 		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
 		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
@@ -168,6 +178,16 @@
 		BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
+		F04690DA1EF11E6100A55560 /* ChatConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfigurator.swift; sourceTree = "<group>"; };
+		F04690DB1EF11E6100A55560 /* ChatInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
+		F04690DC1EF11E6100A55560 /* ChatModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
+		F04690DD1EF11E6100A55560 /* ChatPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
+		F04690DE1EF11E6100A55560 /* ChatRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
+		F04690DF1EF11E6100A55560 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		F04690E01EF11E6100A55560 /* ChatWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatWorker.swift; sourceTree = "<group>"; };
+		F04690EC1EF1216C00A55560 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
+		F04690EE1EF1219F00A55560 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
+		F04690F21EF14E4700A55560 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
 		F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,6 +268,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F04690D91EF11E6100A55560 /* Chat */,
 				BFC927001EF00A7E00602153 /* Comments */,
 				BFC9270A1EF00A7E00602153 /* Entities */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
@@ -392,6 +413,23 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F04690D91EF11E6100A55560 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F04690DA1EF11E6100A55560 /* ChatConfigurator.swift */,
+				F04690DB1EF11E6100A55560 /* ChatInteractor.swift */,
+				F04690DC1EF11E6100A55560 /* ChatModels.swift */,
+				F04690DD1EF11E6100A55560 /* ChatPresenter.swift */,
+				F04690DE1EF11E6100A55560 /* ChatRouter.swift */,
+				F04690DF1EF11E6100A55560 /* ChatViewController.swift */,
+				F04690E01EF11E6100A55560 /* ChatWorker.swift */,
+				F04690EC1EF1216C00A55560 /* MFMessageModel.swift */,
+				F04690EE1EF1219F00A55560 /* MFConversationsModel.swift */,
+				F04690F21EF14E4700A55560 /* ChatTableViewCell.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,7 +568,11 @@
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
 				BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
+				F04690E11EF11E6100A55560 /* ChatConfigurator.swift in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
+				F04690E41EF11E6100A55560 /* ChatPresenter.swift in Sources */,
+				F04690F31EF14E4700A55560 /* ChatTableViewCell.swift in Sources */,
+				F04690E31EF11E6100A55560 /* ChatModels.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
@@ -545,6 +587,7 @@
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
+				F04690E61EF11E6100A55560 /* ChatViewController.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
@@ -563,6 +606,7 @@
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
+				F04690EF1EF1219F00A55560 /* MFConversationsModel.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
@@ -575,6 +619,7 @@
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
+				F04690E21EF11E6100A55560 /* ChatInteractor.swift in Sources */,
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
@@ -585,18 +630,21 @@
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
+				F04690ED1EF1216C00A55560 /* MFMessageModel.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
+				F04690E51EF11E6100A55560 /* ChatRouter.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */,
+				F04690E71EF11E6100A55560 /* ChatWorker.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

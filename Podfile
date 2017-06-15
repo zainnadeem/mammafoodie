@@ -9,6 +9,10 @@ target 'mammafoodie' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Firebase/Invites'
+  pod 'Firebase/RemoteConfig'
+  pod 'Firebase/AdMob'
+
   
   pod 'GoogleSignIn'
 

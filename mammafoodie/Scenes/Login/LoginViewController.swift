@@ -40,6 +40,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         super.viewDidLoad()
         logoutGmailButn()
         forgotPasswordButn()
+        chatButn()
         
         /*
  
@@ -120,9 +121,18 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.view.addSubview(logoutGmail)
     }
     
+    func chatButn() {
+        let chat = UIButton(type: .custom) as UIButton
+        chat.backgroundColor = .blue
+        chat.setTitle("Chat", for: .normal)
+        chat.frame = CGRect(x: 100, y: 250, width: 100, height: 40)
+        chat.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(chat)
+    }
+
+    
 
     func forgotPasswordButn() {
-       
         let forgotPassword = UIButton(type: .custom) as UIButton
         forgotPassword.backgroundColor = .blue
         forgotPassword.setTitle("ForgotPassword", for: .normal)
