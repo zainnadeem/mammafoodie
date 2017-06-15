@@ -32,7 +32,6 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
-		2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */; };
 		2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E11EE9164D00218609 /* LoginConfigurator.swift */; };
 		2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E21EE9164D00218609 /* LoginInteractor.swift */; };
 		2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E31EE9164D00218609 /* LoginModels.swift */; };
@@ -40,38 +39,47 @@
 		2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E51EE9164D00218609 /* LoginRouter.swift */; };
 		2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E61EE9164D00218609 /* LoginViewController.swift */; };
 		2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
+		2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */; };
+		2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
+		2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */; };
+		2CB8BEA61EF246F800DA78B3 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */; };
+		2CB8BEA71EF246F800DA78B3 /* MFLiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */; };
+		2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */; };
+		2CB8BEA91EF246F800DA78B3 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA51EF246F800DA78B3 /* Vidup.swift */; };
+		2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */; };
+		2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
+		2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */; };
+		2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */; };
+		2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */; };
+		2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */; };
+		2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */; };
+		2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */; };
+		2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */; };
+		2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */; };
+		2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */; };
+		2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */; };
+		2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */; };
+		2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */; };
+		2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED91EF2475F00DA78B3 /* GMULineString.m */; };
+		2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */; };
+		2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */; };
+		2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */; };
+		2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */; };
+		2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */; };
+		2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */; };
+		2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
+		2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */; };
+		2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF091EF247A900DA78B3 /* mammafoodieTests.swift */; };
+		2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
 		5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */; };
 		5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */; };
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
-		5732C0D71EE92D3200E2A61E /* NearbyChefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */; };
 		5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
-		5743C4051EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */; };
-		5743C4061EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
-		5743C4071EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */; };
-		5743C4081EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */; };
-		5743C4091EEA6A3F006E6BE2 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */; };
-		5743C40A1EEA6A3F006E6BE2 /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */; };
-		5743C40B1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */; };
-		5743C40C1EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */; };
-		5743C40D1EEA6A3F006E6BE2 /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */; };
-		5743C40E1EEA6A3F006E6BE2 /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */; };
-		5743C40F1EEA6A3F006E6BE2 /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */; };
-		5743C4101EEA6A3F006E6BE2 /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */; };
-		5743C4111EEA6A3F006E6BE2 /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */; };
-		5743C4121EEA6A3F006E6BE2 /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */; };
-		5743C4131EEA6A3F006E6BE2 /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */; };
-		5743C4141EEA6A3F006E6BE2 /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */; };
-		5743C4151EEA6A3F006E6BE2 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */; };
-		5743C4161EEA6A3F006E6BE2 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */; };
-		5743C4171EEA6A3F006E6BE2 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */; };
-		5743C4181EEA6A3F006E6BE2 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */; };
-		5743C4191EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */; };
-		5743C4201EEA9646006E6BE2 /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 5743C41F1EEA9646006E6BE2 /* MapStyle.json */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		B69A27181EE949CD00D1E0C5 /* FacebookLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
@@ -87,8 +95,6 @@
 		BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927071EF00A7E00602153 /* CommentsRouter.swift */; };
 		BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927081EF00A7E00602153 /* CommentsViewController.swift */; };
 		BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927091EF00A7E00602153 /* CommentsWorker.swift */; };
-		BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270B1EF00A7E00602153 /* LiveVideo.swift */; };
-		BFC927321EF00A7E00602153 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270C1EF00A7E00602153 /* Vidup.swift */; };
 		BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */; };
 		BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */; };
 		BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */; };
@@ -119,6 +125,16 @@
 		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2CB8BF0C1EF247A900DA78B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF5060CD1EE81B9E00DB646F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF5060D41EE81B9E00DB646F;
+			remoteInfo = mammafoodie;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileConfigurator.swift; sourceTree = "<group>"; };
@@ -146,7 +162,6 @@
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
-		2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CB528E11EE9164D00218609 /* LoginConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		2CB528E21EE9164D00218609 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		2CB528E31EE9164D00218609 /* LoginModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
@@ -154,81 +169,92 @@
 		2CB528E51EE9164D00218609 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB528E61EE9164D00218609 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB528E71EE9164D00218609 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
+		2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseGateway.swift; sourceTree = "<group>"; };
+		2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFModelsToFirebaseDictionaryConverter.swift; sourceTree = "<group>"; };
+		2CB8BE9E1EF246DB00DA78B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NearbyChefs.storyboard; sourceTree = "<group>"; };
+		2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
+		2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveStream.swift; sourceTree = "<group>"; };
+		2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveVideoGatewayAccountDetails.swift; sourceTree = "<group>"; };
+		2CB8BEA51EF246F800DA78B3 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
+		2CB8BEAE1EF2475F00DA78B3 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
+		2CB8BEAF1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
+		2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
+		2CB8BEB11EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUNonHierarchicalDistanceBasedAlgorithm.h; sourceTree = "<group>"; };
+		2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
+		2CB8BEB31EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
+		2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
+		2CB8BEB51EF2475F00DA78B3 /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
+		2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUWrappingDictionaryKey.m; sourceTree = "<group>"; };
+		2CB8BEB71EF2475F00DA78B3 /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUCluster.h; sourceTree = "<group>"; };
+		2CB8BEB81EF2475F00DA78B3 /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterItem.h; sourceTree = "<group>"; };
+		2CB8BEB91EF2475F00DA78B3 /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
+		2CB8BEBA1EF2475F00DA78B3 /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterManager.h; sourceTree = "<group>"; };
+		2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
+		2CB8BEBC1EF2475F00DA78B3 /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUMarkerClustering.h; sourceTree = "<group>"; };
+		2CB8BEBD1EF2475F00DA78B3 /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
+		2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStaticCluster.m; sourceTree = "<group>"; };
+		2CB8BEC01EF2475F00DA78B3 /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterIconGenerator.h; sourceTree = "<group>"; };
+		2CB8BEC11EF2475F00DA78B3 /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterRenderer.h; sourceTree = "<group>"; };
+		2CB8BEC21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
+		2CB8BEC31EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterIconGenerator.h; sourceTree = "<group>"; };
+		2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
+		2CB8BEC51EF2475F00DA78B3 /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
+		2CB8BEC61EF2475F00DA78B3 /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
+		2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
+		2CB8BEC91EF2475F00DA78B3 /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeoJSONParser.h; sourceTree = "<group>"; };
+		2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeoJSONParser.m; sourceTree = "<group>"; };
+		2CB8BECB1EF2475F00DA78B3 /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryRenderer.h; sourceTree = "<group>"; };
+		2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryRenderer.m; sourceTree = "<group>"; };
+		2CB8BECD1EF2475F00DA78B3 /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUKMLParser.h; sourceTree = "<group>"; };
+		2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUKMLParser.m; sourceTree = "<group>"; };
+		2CB8BED01EF2475F00DA78B3 /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
+		2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
+		2CB8BED21EF2475F00DA78B3 /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
+		2CB8BED31EF2475F00DA78B3 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
+		2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
+		2CB8BED51EF2475F00DA78B3 /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
+		2CB8BED61EF2475F00DA78B3 /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
+		2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
+		2CB8BED81EF2475F00DA78B3 /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
+		2CB8BED91EF2475F00DA78B3 /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
+		2CB8BEDA1EF2475F00DA78B3 /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
+		2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
+		2CB8BEDC1EF2475F00DA78B3 /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
+		2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
+		2CB8BEDE1EF2475F00DA78B3 /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
+		2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
+		2CB8BEE01EF2475F00DA78B3 /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
+		2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
+		2CB8BEE31EF2475F00DA78B3 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
+		2CB8BEE41EF2475F00DA78B3 /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPoint.h; sourceTree = "<group>"; };
+		2CB8BEE51EF2475F00DA78B3 /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTree.h; sourceTree = "<group>"; };
+		2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTree.m; sourceTree = "<group>"; };
+		2CB8BEE71EF2475F00DA78B3 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
+		2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
+		2CB8BEE91EF2475F00DA78B3 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
+		2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
+		2CB8BF071EF247A800DA78B3 /* mammafoodieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mammafoodieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CB8BF091EF247A900DA78B3 /* mammafoodieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mammafoodieTests.swift; sourceTree = "<group>"; };
+		2CB8BF0B1EF247A900DA78B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseGatewayTests.swift; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
 		5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsPresenter.swift; sourceTree = "<group>"; };
 		5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsRouter.swift; sourceTree = "<group>"; };
 		5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsViewController.swift; sourceTree = "<group>"; };
-		5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NearbyChefs.storyboard; sourceTree = "<group>"; };
 		5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
-		5743C3C91EEA6A3F006E6BE2 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CA1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
-		5743C3CC1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUNonHierarchicalDistanceBasedAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
-		5743C3CE1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
-		5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
-		5743C3D01EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
-		5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUWrappingDictionaryKey.m; sourceTree = "<group>"; };
-		5743C3D21EEA6A3F006E6BE2 /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUCluster.h; sourceTree = "<group>"; };
-		5743C3D31EEA6A3F006E6BE2 /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterItem.h; sourceTree = "<group>"; };
-		5743C3D41EEA6A3F006E6BE2 /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
-		5743C3D51EEA6A3F006E6BE2 /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterManager.h; sourceTree = "<group>"; };
-		5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
-		5743C3D71EEA6A3F006E6BE2 /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUMarkerClustering.h; sourceTree = "<group>"; };
-		5743C3D81EEA6A3F006E6BE2 /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
-		5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStaticCluster.m; sourceTree = "<group>"; };
-		5743C3DB1EEA6A3F006E6BE2 /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterIconGenerator.h; sourceTree = "<group>"; };
-		5743C3DC1EEA6A3F006E6BE2 /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterRenderer.h; sourceTree = "<group>"; };
-		5743C3DD1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
-		5743C3DE1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterIconGenerator.h; sourceTree = "<group>"; };
-		5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
-		5743C3E01EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
-		5743C3E11EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
-		5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
-		5743C3E41EEA6A3F006E6BE2 /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeoJSONParser.h; sourceTree = "<group>"; };
-		5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeoJSONParser.m; sourceTree = "<group>"; };
-		5743C3E61EEA6A3F006E6BE2 /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryRenderer.h; sourceTree = "<group>"; };
-		5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryRenderer.m; sourceTree = "<group>"; };
-		5743C3E81EEA6A3F006E6BE2 /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUKMLParser.h; sourceTree = "<group>"; };
-		5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUKMLParser.m; sourceTree = "<group>"; };
-		5743C3EB1EEA6A3F006E6BE2 /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
-		5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
-		5743C3ED1EEA6A3F006E6BE2 /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
-		5743C3EE1EEA6A3F006E6BE2 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
-		5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
-		5743C3F01EEA6A3F006E6BE2 /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
-		5743C3F11EEA6A3F006E6BE2 /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
-		5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
-		5743C3F31EEA6A3F006E6BE2 /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
-		5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
-		5743C3F51EEA6A3F006E6BE2 /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
-		5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
-		5743C3F71EEA6A3F006E6BE2 /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
-		5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
-		5743C3F91EEA6A3F006E6BE2 /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
-		5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
-		5743C3FB1EEA6A3F006E6BE2 /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
-		5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
-		5743C3FE1EEA6A3F006E6BE2 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
-		5743C3FF1EEA6A3F006E6BE2 /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPoint.h; sourceTree = "<group>"; };
-		5743C4001EEA6A3F006E6BE2 /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTree.h; sourceTree = "<group>"; };
-		5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTree.m; sourceTree = "<group>"; };
-		5743C4021EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
-		5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
-		5743C4041EEA6A3F006E6BE2 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
-		5743C41F1EEA9646006E6BE2 /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
+		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF5060DF1EE81B9E00DB646F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../mammafoodie/Info.plist; sourceTree = "<group>"; };
 		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
 		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
@@ -238,8 +264,6 @@
 		BFC927071EF00A7E00602153 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
 		BFC927081EF00A7E00602153 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		BFC927091EF00A7E00602153 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
-		BFC9270B1EF00A7E00602153 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
-		BFC9270C1EF00A7E00602153 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
 		BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageConfigurator.swift; sourceTree = "<group>"; };
 		BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageInteractor.swift; sourceTree = "<group>"; };
 		BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageModels.swift; sourceTree = "<group>"; };
@@ -273,6 +297,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2CB8BF041EF247A800DA78B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF5060D21EE81B9E00DB646F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,9 +371,8 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				5743C41F1EEA9646006E6BE2 /* MapStyle.json */,
-				5743C3C61EEA6A3F006E6BE2 /* Google-Maps-iOS-Utils */,
-				2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */,
+				2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */,
+				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */,
 			);
 			path = Support;
@@ -352,15 +382,14 @@
 			isa = PBXGroup;
 			children = (
 				BFC927001EF00A7E00602153 /* Comments */,
-				BFC9270A1EF00A7E00602153 /* Entities */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
-				BFC927151EF00A7E00602153 /* PermissionsAlert */,
-				BFC927201EF00A7E00602153 /* VidupMainPage */,
-				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
-				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
-				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
+				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
+				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
+				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
+				BFC927201EF00A7E00602153 /* VidupMainPage */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -383,6 +412,192 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		2CB8BE981EF2467500DA78B3 /* DatabaseGateway */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */,
+				2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */,
+			);
+			path = DatabaseGateway;
+			sourceTree = "<group>";
+		};
+		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
+				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		2CB8BEA11EF246F800DA78B3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */,
+				2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */,
+				2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */,
+				2CB8BEA51EF246F800DA78B3 /* Vidup.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEAB1EF2475F00DA78B3 /* Google-Maps-iOS-Utils */,
+				2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */,
+				2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */,
+			);
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		2CB8BEAB1EF2475F00DA78B3 /* Google-Maps-iOS-Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEAC1EF2475F00DA78B3 /* Clustering */,
+				2CB8BEC81EF2475F00DA78B3 /* Geometry */,
+				2CB8BEE21EF2475F00DA78B3 /* QuadTree */,
+			);
+			path = "Google-Maps-iOS-Utils";
+			sourceTree = "<group>";
+		};
+		2CB8BEAC1EF2475F00DA78B3 /* Clustering */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEAD1EF2475F00DA78B3 /* Algo */,
+				2CB8BEB71EF2475F00DA78B3 /* GMUCluster.h */,
+				2CB8BEB81EF2475F00DA78B3 /* GMUClusterItem.h */,
+				2CB8BEB91EF2475F00DA78B3 /* GMUClusterManager+Testing.h */,
+				2CB8BEBA1EF2475F00DA78B3 /* GMUClusterManager.h */,
+				2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */,
+				2CB8BEBC1EF2475F00DA78B3 /* GMUMarkerClustering.h */,
+				2CB8BEBD1EF2475F00DA78B3 /* GMUStaticCluster.h */,
+				2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */,
+				2CB8BEBF1EF2475F00DA78B3 /* View */,
+			);
+			path = Clustering;
+			sourceTree = "<group>";
+		};
+		2CB8BEAD1EF2475F00DA78B3 /* Algo */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEAE1EF2475F00DA78B3 /* GMUClusterAlgorithm.h */,
+				2CB8BEAF1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.h */,
+				2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */,
+				2CB8BEB11EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
+				2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
+				2CB8BEB31EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.h */,
+				2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */,
+				2CB8BEB51EF2475F00DA78B3 /* GMUWrappingDictionaryKey.h */,
+				2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */,
+			);
+			path = Algo;
+			sourceTree = "<group>";
+		};
+		2CB8BEBF1EF2475F00DA78B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEC01EF2475F00DA78B3 /* GMUClusterIconGenerator.h */,
+				2CB8BEC11EF2475F00DA78B3 /* GMUClusterRenderer.h */,
+				2CB8BEC21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator+Testing.h */,
+				2CB8BEC31EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.h */,
+				2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */,
+				2CB8BEC51EF2475F00DA78B3 /* GMUDefaultClusterRenderer+Testing.h */,
+				2CB8BEC61EF2475F00DA78B3 /* GMUDefaultClusterRenderer.h */,
+				2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2CB8BEC81EF2475F00DA78B3 /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEC91EF2475F00DA78B3 /* GMUGeoJSONParser.h */,
+				2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */,
+				2CB8BECB1EF2475F00DA78B3 /* GMUGeometryRenderer.h */,
+				2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */,
+				2CB8BECD1EF2475F00DA78B3 /* GMUKMLParser.h */,
+				2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */,
+				2CB8BECF1EF2475F00DA78B3 /* Model */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		2CB8BECF1EF2475F00DA78B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BED01EF2475F00DA78B3 /* GMUFeature.h */,
+				2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */,
+				2CB8BED21EF2475F00DA78B3 /* GMUGeometry.h */,
+				2CB8BED31EF2475F00DA78B3 /* GMUGeometryCollection.h */,
+				2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */,
+				2CB8BED51EF2475F00DA78B3 /* GMUGeometryContainer.h */,
+				2CB8BED61EF2475F00DA78B3 /* GMUGroundOverlay.h */,
+				2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */,
+				2CB8BED81EF2475F00DA78B3 /* GMULineString.h */,
+				2CB8BED91EF2475F00DA78B3 /* GMULineString.m */,
+				2CB8BEDA1EF2475F00DA78B3 /* GMUPlacemark.h */,
+				2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */,
+				2CB8BEDC1EF2475F00DA78B3 /* GMUPoint.h */,
+				2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */,
+				2CB8BEDE1EF2475F00DA78B3 /* GMUPolygon.h */,
+				2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */,
+				2CB8BEE01EF2475F00DA78B3 /* GMUStyle.h */,
+				2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2CB8BEE21EF2475F00DA78B3 /* QuadTree */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BEE31EF2475F00DA78B3 /* GQTBounds.h */,
+				2CB8BEE41EF2475F00DA78B3 /* GQTPoint.h */,
+				2CB8BEE51EF2475F00DA78B3 /* GQTPointQuadTree.h */,
+				2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */,
+				2CB8BEE71EF2475F00DA78B3 /* GQTPointQuadTreeChild.h */,
+				2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */,
+				2CB8BEE91EF2475F00DA78B3 /* GQTPointQuadTreeItem.h */,
+			);
+			path = QuadTree;
+			sourceTree = "<group>";
+		};
+		2CB8BF081EF247A800DA78B3 /* mammafoodieTests */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BF131EF2486D00DA78B3 /* DatabaseGateway */,
+				2CB8BF151EF2486D00DA78B3 /* Entities */,
+				2CB8BF0B1EF247A900DA78B3 /* Info.plist */,
+				2CB8BF091EF247A900DA78B3 /* mammafoodieTests.swift */,
+				2CB8BF161EF2486D00DA78B3 /* Scenes */,
+			);
+			path = mammafoodieTests;
+			sourceTree = "<group>";
+		};
+		2CB8BF131EF2486D00DA78B3 /* DatabaseGateway */ = {
+			isa = PBXGroup;
+			children = (
+				2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */,
+			);
+			path = DatabaseGateway;
+			sourceTree = "<group>";
+		};
+		2CB8BF151EF2486D00DA78B3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2CB8BF161EF2486D00DA78B3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,14 +613,6 @@
 			path = NearbyChefs;
 			sourceTree = "<group>";
 		};
-		5732C0D31EE92BC900E2A61E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5732C0D61EE92D3200E2A61E /* NearbyChefs.storyboard */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		5743C30E1EEA5DF5006E6BE2 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,125 +622,15 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
-		5743C3C61EEA6A3F006E6BE2 /* Google-Maps-iOS-Utils */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C71EEA6A3F006E6BE2 /* Clustering */,
-				5743C3E31EEA6A3F006E6BE2 /* Geometry */,
-				5743C3FD1EEA6A3F006E6BE2 /* QuadTree */,
-			);
-			path = "Google-Maps-iOS-Utils";
-			sourceTree = "<group>";
-		};
-		5743C3C71EEA6A3F006E6BE2 /* Clustering */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C81EEA6A3F006E6BE2 /* Algo */,
-				5743C3D21EEA6A3F006E6BE2 /* GMUCluster.h */,
-				5743C3D31EEA6A3F006E6BE2 /* GMUClusterItem.h */,
-				5743C3D41EEA6A3F006E6BE2 /* GMUClusterManager+Testing.h */,
-				5743C3D51EEA6A3F006E6BE2 /* GMUClusterManager.h */,
-				5743C3D61EEA6A3F006E6BE2 /* GMUClusterManager.m */,
-				5743C3D71EEA6A3F006E6BE2 /* GMUMarkerClustering.h */,
-				5743C3D81EEA6A3F006E6BE2 /* GMUStaticCluster.h */,
-				5743C3D91EEA6A3F006E6BE2 /* GMUStaticCluster.m */,
-				5743C3DA1EEA6A3F006E6BE2 /* View */,
-			);
-			path = Clustering;
-			sourceTree = "<group>";
-		};
-		5743C3C81EEA6A3F006E6BE2 /* Algo */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3C91EEA6A3F006E6BE2 /* GMUClusterAlgorithm.h */,
-				5743C3CA1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.h */,
-				5743C3CB1EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m */,
-				5743C3CC1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
-				5743C3CD1EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
-				5743C3CE1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.h */,
-				5743C3CF1EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m */,
-				5743C3D01EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.h */,
-				5743C3D11EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m */,
-			);
-			path = Algo;
-			sourceTree = "<group>";
-		};
-		5743C3DA1EEA6A3F006E6BE2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3DB1EEA6A3F006E6BE2 /* GMUClusterIconGenerator.h */,
-				5743C3DC1EEA6A3F006E6BE2 /* GMUClusterRenderer.h */,
-				5743C3DD1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator+Testing.h */,
-				5743C3DE1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.h */,
-				5743C3DF1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m */,
-				5743C3E01EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer+Testing.h */,
-				5743C3E11EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.h */,
-				5743C3E21EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5743C3E31EEA6A3F006E6BE2 /* Geometry */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3E41EEA6A3F006E6BE2 /* GMUGeoJSONParser.h */,
-				5743C3E51EEA6A3F006E6BE2 /* GMUGeoJSONParser.m */,
-				5743C3E61EEA6A3F006E6BE2 /* GMUGeometryRenderer.h */,
-				5743C3E71EEA6A3F006E6BE2 /* GMUGeometryRenderer.m */,
-				5743C3E81EEA6A3F006E6BE2 /* GMUKMLParser.h */,
-				5743C3E91EEA6A3F006E6BE2 /* GMUKMLParser.m */,
-				5743C3EA1EEA6A3F006E6BE2 /* Model */,
-			);
-			path = Geometry;
-			sourceTree = "<group>";
-		};
-		5743C3EA1EEA6A3F006E6BE2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3EB1EEA6A3F006E6BE2 /* GMUFeature.h */,
-				5743C3EC1EEA6A3F006E6BE2 /* GMUFeature.m */,
-				5743C3ED1EEA6A3F006E6BE2 /* GMUGeometry.h */,
-				5743C3EE1EEA6A3F006E6BE2 /* GMUGeometryCollection.h */,
-				5743C3EF1EEA6A3F006E6BE2 /* GMUGeometryCollection.m */,
-				5743C3F01EEA6A3F006E6BE2 /* GMUGeometryContainer.h */,
-				5743C3F11EEA6A3F006E6BE2 /* GMUGroundOverlay.h */,
-				5743C3F21EEA6A3F006E6BE2 /* GMUGroundOverlay.m */,
-				5743C3F31EEA6A3F006E6BE2 /* GMULineString.h */,
-				5743C3F41EEA6A3F006E6BE2 /* GMULineString.m */,
-				5743C3F51EEA6A3F006E6BE2 /* GMUPlacemark.h */,
-				5743C3F61EEA6A3F006E6BE2 /* GMUPlacemark.m */,
-				5743C3F71EEA6A3F006E6BE2 /* GMUPoint.h */,
-				5743C3F81EEA6A3F006E6BE2 /* GMUPoint.m */,
-				5743C3F91EEA6A3F006E6BE2 /* GMUPolygon.h */,
-				5743C3FA1EEA6A3F006E6BE2 /* GMUPolygon.m */,
-				5743C3FB1EEA6A3F006E6BE2 /* GMUStyle.h */,
-				5743C3FC1EEA6A3F006E6BE2 /* GMUStyle.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5743C3FD1EEA6A3F006E6BE2 /* QuadTree */ = {
-			isa = PBXGroup;
-			children = (
-				5743C3FE1EEA6A3F006E6BE2 /* GQTBounds.h */,
-				5743C3FF1EEA6A3F006E6BE2 /* GQTPoint.h */,
-				5743C4001EEA6A3F006E6BE2 /* GQTPointQuadTree.h */,
-				5743C4011EEA6A3F006E6BE2 /* GQTPointQuadTree.m */,
-				5743C4021EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.h */,
-				5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */,
-				5743C4041EEA6A3F006E6BE2 /* GQTPointQuadTreeItem.h */,
-			);
-			path = QuadTree;
-			sourceTree = "<group>";
-		};
 		BF5060CC1EE81B9E00DB646F = {
 			isa = PBXGroup;
 			children = (
+				FA0FFFE83E7371F529687F8A /* Frameworks */,
 				BF5060D71EE81B9E00DB646F /* mammafoodie */,
+				2CB8BF081EF247A800DA78B3 /* mammafoodieTests */,
+				2399BC92A1B9B588BDDCF277 /* Pods */,
 				BF5060D61EE81B9E00DB646F /* Products */,
 				2CA886C01EE91CA80012405D /* Support */,
-				2399BC92A1B9B588BDDCF277 /* Pods */,
-				FA0FFFE83E7371F529687F8A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -541,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				BF5060D51EE81B9E00DB646F /* mammafoodie.app */,
+				2CB8BF071EF247A800DA78B3 /* mammafoodieTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -550,13 +648,11 @@
 			children = (
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
 				BF5060DF1EE81B9E00DB646F /* Assets.xcassets */,
-				BF5060E41EE81B9E00DB646F /* Info.plist */,
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				BFC9274B1EF00B0700602153 /* Cells */,
+				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
+				2CB8BEA11EF246F800DA78B3 /* Entities */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
-				5732C0D31EE92BC900E2A61E /* Views */,
+				2CB8BEA01EF246EA00DA78B3 /* Storyboards */,
 			);
 			path = mammafoodie;
 			sourceTree = "<group>";
@@ -575,15 +671,6 @@
 				BFC927091EF00A7E00602153 /* CommentsWorker.swift */,
 			);
 			path = Comments;
-			sourceTree = "<group>";
-		};
-		BFC9270A1EF00A7E00602153 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				BFC9270B1EF00A7E00602153 /* LiveVideo.swift */,
-				BFC9270C1EF00A7E00602153 /* Vidup.swift */,
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 		BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */ = {
@@ -651,6 +738,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2CB8BF061EF247A800DA78B3 /* mammafoodieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CB8BF0E1EF247A900DA78B3 /* Build configuration list for PBXNativeTarget "mammafoodieTests" */;
+			buildPhases = (
+				2CB8BF031EF247A800DA78B3 /* Sources */,
+				2CB8BF041EF247A800DA78B3 /* Frameworks */,
+				2CB8BF051EF247A800DA78B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CB8BF0D1EF247A900DA78B3 /* PBXTargetDependency */,
+			);
+			name = mammafoodieTests;
+			productName = mammafoodieTests;
+			productReference = 2CB8BF071EF247A800DA78B3 /* mammafoodieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BF5060D41EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF5060E71EE81B9E00DB646F /* Build configuration list for PBXNativeTarget "mammafoodie" */;
@@ -681,6 +786,11 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Zain Nadeem";
 				TargetAttributes = {
+					2CB8BF061EF247A800DA78B3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BF5060D41EE81B9E00DB646F;
+					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = R4UP7L985F;
@@ -703,22 +813,30 @@
 			projectRoot = "";
 			targets = (
 				BF5060D41EE81B9E00DB646F /* mammafoodie */,
+				2CB8BF061EF247A800DA78B3 /* mammafoodieTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2CB8BF051EF247A800DA78B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF5060D31EE81B9E00DB646F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
+				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
-				2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */,
-				5743C4201EEA9646006E6BE2 /* MapStyle.json in Resources */,
+				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
-				5732C0D71EE92D3200E2A61E /* NearbyChefs.storyboard in Resources */,
+				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,7 +855,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -773,14 +891,25 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2CB8BF031EF247A800DA78B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
+				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BF5060D11EE81B9E00DB646F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
+				2CB8BEA61EF246F800DA78B3 /* LiveVideo.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
-				BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */,
+				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
+				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
@@ -788,51 +917,44 @@
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
-				5743C4061EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
-				5743C4071EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m in Sources */,
+				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
-				5743C40C1EEA6A3F006E6BE2 /* GMUDefaultClusterRenderer.m in Sources */,
-				5743C40A1EEA6A3F006E6BE2 /* GMUStaticCluster.m in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
-				5743C40F1EEA6A3F006E6BE2 /* GMUKMLParser.m in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
-				5743C40D1EEA6A3F006E6BE2 /* GMUGeoJSONParser.m in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
 				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
-				BFC927321EF00A7E00602153 /* Vidup.swift in Sources */,
+				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				B69A27181EE949CD00D1E0C5 /* FacebookLoginWorker.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
+				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
+				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
+				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
+				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
+				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */,
-				5743C4091EEA6A3F006E6BE2 /* GMUClusterManager.m in Sources */,
-				5743C4121EEA6A3F006E6BE2 /* GMUGroundOverlay.m in Sources */,
+				2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
+				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
-				5743C4141EEA6A3F006E6BE2 /* GMUPlacemark.m in Sources */,
-				5743C4131EEA6A3F006E6BE2 /* GMULineString.m in Sources */,
-				5743C4151EEA6A3F006E6BE2 /* GMUPoint.m in Sources */,
-				5743C40B1EEA6A3F006E6BE2 /* GMUDefaultClusterIconGenerator.m in Sources */,
-				5743C4181EEA6A3F006E6BE2 /* GQTPointQuadTree.m in Sources */,
-				5743C4081EEA6A3F006E6BE2 /* GMUWrappingDictionaryKey.m in Sources */,
-				5743C4171EEA6A3F006E6BE2 /* GMUStyle.m in Sources */,
-				5743C4101EEA6A3F006E6BE2 /* GMUFeature.m in Sources */,
 				2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
@@ -841,11 +963,14 @@
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
+				2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */,
 				F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
+				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
+				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
@@ -856,8 +981,11 @@
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
+				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
+				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
@@ -868,26 +996,45 @@
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
+				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
+				2CB8BEA71EF246F800DA78B3 /* MFLiveStream.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */,
+				2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */,
+				2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
+				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
-				5743C4051EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m in Sources */,
-				5743C4191EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m in Sources */,
+				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
+				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
-				5743C4161EEA6A3F006E6BE2 /* GMUPolygon.m in Sources */,
-				5743C40E1EEA6A3F006E6BE2 /* GMUGeometryRenderer.m in Sources */,
-				5743C4111EEA6A3F006E6BE2 /* GMUGeometryCollection.m in Sources */,
+				2CB8BEA91EF246F800DA78B3 /* Vidup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2CB8BF0D1EF247A900DA78B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF5060D41EE81B9E00DB646F /* mammafoodie */;
+			targetProxy = 2CB8BF0C1EF247A900DA78B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CB8BE9E1EF246DB00DA78B3 /* Base */,
+			);
+			name = NearbyChefs.storyboard;
+			sourceTree = "<group>";
+		};
 		BF5060DC1EE81B9E00DB646F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -916,6 +1063,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2CB8BF0F1EF247A900DA78B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = mammafoodieTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.mammafoodieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mammafoodie.app/mammafoodie";
+			};
+			name = Debug;
+		};
+		2CB8BF101EF247A900DA78B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = mammafoodieTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.mammafoodieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mammafoodie.app/mammafoodie";
+			};
+			name = Release;
+		};
 		BF5060E51EE81B9E00DB646F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1045,6 +1220,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2CB8BF0E1EF247A900DA78B3 /* Build configuration list for PBXNativeTarget "mammafoodieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CB8BF0F1EF247A900DA78B3 /* Debug */,
+				2CB8BF101EF247A900DA78B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BF5060D01EE81B9E00DB646F /* Build configuration list for PBXProject "mammafoodie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
