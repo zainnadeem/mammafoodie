@@ -13,9 +13,9 @@ protocol LoginViewControllerOutput {
     func signUpWith(credentials:Login.Credentials)
     func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-   
     func forgotpasswordWorker(email: String)
     func loginWithFacebook()
+    func logout()
 }
 
 class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate {
@@ -87,12 +87,24 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         // Handle clicks on the button
         firebaseLoginButton.addTarget(self, action: #selector(self.loginWithFireBase(sender:)), for: .touchUpInside)
+        
+        
+        // Add a custom logout button to your app
+        let firebaseLogoutButton = UIButton(type: .custom)
+        firebaseLogoutButton.backgroundColor = UIColor.darkGray
+        firebaseLogoutButton.frame = CGRect(x: 30, y: 600, width: 180, height: 40)
+        //firebaseLoginButton.center = view.center
+        firebaseLogoutButton.setTitle("Firebase Logout", for: .normal)
+        
+        // Handle clicks on the button
+        firebaseLogoutButton.addTarget(self, action: #selector(self.logout(sender:)), for: .touchUpInside)
          
          // Add the button to the view
          view.addSubview(facebookLoginButton)
          view.addSubview(googleLoginButton)
          view.addSubview(fireBaseSignUpButton)
          view.addSubview(firebaseLoginButton)
+        view.addSubview(firebaseLogoutButton)
  
     }
  
@@ -161,6 +173,13 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         guard self.txtEmail.text != nil else {return}
         
         output.forgotpasswordWorker(email: self.txtEmail.text!)
+    }
+    
+    @IBAction func logout(sender:UIButton){
+        
+        //guard self.txtEmail.text != nil else {return}
+        
+        output.logout()
     }
     
     

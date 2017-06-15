@@ -9,6 +9,7 @@ protocol LoginInteractorInput {
     func forgotpasswordWorker(email: String)
     func loginWithFacebook()
 //    func logoutWithFacebook()
+    func logout()
 }
 
 protocol LoginInteractorOutput {
@@ -21,6 +22,7 @@ protocol LoginInteractorOutput {
 //    func present(_ viewController: UIViewController)
 //    func dismiss(_ viewController:UIViewController)
     func forgotpasswordCompletion(errorMessage:String?)
+    func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
 }
 
@@ -128,7 +130,14 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         }
     }
 
-    
+    //logout
+    func logout() {
+        let fireBaseLoginWorker = FirebaseLoginWorker()
+        fireBaseLoginWorker.signOut { (errorMessage) in
+            self.output.logoutCompletion(errorMessage: errorMessage)
+        }
+        
+    }
 
     
 //    func logout(with email: String, password: String) {

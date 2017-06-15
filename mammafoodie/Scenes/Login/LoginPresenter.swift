@@ -9,6 +9,7 @@ protocol LoginPresenterInput {
     //    func present(_ viewController: UIViewController)
     //    func dismiss(_ viewController:UIViewController)
     func forgotpasswordCompletion(errorMessage:String?)
+    func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
 }
 
@@ -72,6 +73,26 @@ class LoginPresenter: LoginPresenterInput {
             self.output.showHomeScreen()
         }
     }
+    
+    func logoutCompletion(errorMessage:String?){
+        
+        var title = ""
+        var msg = ""
+        
+        if let errorMessage = errorMessage{
+            title = "Error"
+            msg = errorMessage
+        } else {
+            title = "Success"
+            msg = "Logged out successfully"
+        }
+        
+        let alertController = UIAlertController(title: title , message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.output.showAlert(alertController: alertController)
+    }
+    
     
     func viewControllerToPresent() -> UIViewController {
         return self.output.viewControllerToPresent()
