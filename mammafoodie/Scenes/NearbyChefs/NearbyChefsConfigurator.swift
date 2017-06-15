@@ -2,34 +2,35 @@ import UIKit
 
 // MARK: - Connect View, Interactor, and Presenter
 
-extension LoginViewController: LoginPresenterOutput {
+extension NearbyChefsViewController: NearbyChefsPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
 }
 
-extension LoginInteractor: LoginViewControllerOutput {
+extension NearbyChefsInteractor: NearbyChefsViewControllerOutput {
 }
 
-extension LoginPresenter: LoginInteractorOutput {
+extension NearbyChefsPresenter: NearbyChefsInteractorOutput {
 }
 
-class LoginConfigurator {
+class NearbyChefsConfigurator {
+
     // MARK: - Object lifecycle
     
-    static let sharedInstance = LoginConfigurator()
+    static let sharedInstance = NearbyChefsConfigurator()
     
     private init() {}
     
     // MARK: - Configuration
     
-    func configure(viewController: LoginViewController) {
-        let router = LoginRouter()
+    func configure(viewController: NearbyChefsViewController) {
+        let router = NearbyChefsRouter()
         router.viewController = viewController
         viewController.router = router
         
-        let interactor = LoginInteractor()
-        let presenter = LoginPresenter()
+        let interactor = NearbyChefsInteractor()
+        let presenter = NearbyChefsPresenter()
         viewController.output = interactor
         interactor.output = presenter
         presenter.output = viewController
