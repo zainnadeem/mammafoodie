@@ -203,7 +203,11 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     func showHomeScreen() {
-        print("Login successful. Navigate to home screen")
+        
+        let alertController = UIAlertController(title: "Success" , message: "Login successful. Navigate to home screen", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.showAlert(alertController: alertController)
     }
     
     func showAlert(alertController: UIAlertController) {

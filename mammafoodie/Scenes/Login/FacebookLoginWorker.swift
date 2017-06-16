@@ -86,11 +86,11 @@ class FacebookLoginWorker {
         }
     }
     
-    func UpdateMailId (){
-        Auth.auth().currentUser?.updateEmail(to: "sreeram888@gmail.com", completion: { (error) in
-            if error != nil {
-                print(error!)
-            }
-        })
-    }
+//    func UpdateMailId (){
+//        Auth.auth().currentUser?.updateEmail(to: "sreeram888@gmail.com", completion: { (error) in
+//            if error != nil {
+//                print(error!)
+//            }
+//        })
+//    }
 }

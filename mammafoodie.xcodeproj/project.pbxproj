@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110437121EF2B16B009AE0DF /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437111EF2B16B009AE0DF /* UberRushDeliveryWorker.swift */; };
+		110437131EF2B16B009AE0DF /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437111EF2B16B009AE0DF /* UberRushDeliveryWorker.swift */; };
+		110437151EF2B775009AE0DF /* MFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437141EF2B775009AE0DF /* MFUser.swift */; };
+		110437161EF2B775009AE0DF /* MFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437141EF2B775009AE0DF /* MFUser.swift */; };
+		110437181EF2C2E2009AE0DF /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437171EF2C2E2009AE0DF /* MFUserAddress.swift */; };
+		110437191EF2C2E2009AE0DF /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437171EF2C2E2009AE0DF /* MFUserAddress.swift */; };
+		1104371B1EF2C3AB009AE0DF /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104371A1EF2C3AB009AE0DF /* MFDish.swift */; };
+		1104371C1EF2C3AB009AE0DF /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104371A1EF2C3AB009AE0DF /* MFDish.swift */; };
 		110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */; };
 		110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */; };
 		110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */; };
@@ -136,6 +144,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		110437111EF2B16B009AE0DF /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
+		110437141EF2B775009AE0DF /* MFUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUser.swift; sourceTree = "<group>"; };
+		110437171EF2C2E2009AE0DF /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
+		1104371A1EF2C3AB009AE0DF /* MFDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDish.swift; sourceTree = "<group>"; };
 		110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileConfigurator.swift; sourceTree = "<group>"; };
 		110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileInteractor.swift; sourceTree = "<group>"; };
@@ -315,6 +327,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		110437101EF2B143009AE0DF /* UberRushDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				110437111EF2B16B009AE0DF /* UberRushDeliveryWorker.swift */,
+			);
+			path = UberRushDelivery;
+			sourceTree = "<group>";
+		};
 		110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +401,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				110437101EF2B143009AE0DF /* UberRushDelivery */,
 				BFC927001EF00A7E00602153 /* Comments */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
@@ -439,6 +460,9 @@
 				2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */,
 				2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */,
 				2CB8BEA51EF246F800DA78B3 /* Vidup.swift */,
+				110437141EF2B775009AE0DF /* MFUser.swift */,
+				110437171EF2C2E2009AE0DF /* MFUserAddress.swift */,
+				1104371A1EF2C3AB009AE0DF /* MFDish.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -894,8 +918,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1104371C1EF2C3AB009AE0DF /* MFDish.swift in Sources */,
 				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
+				110437161EF2B775009AE0DF /* MFUser.swift in Sources */,
+				110437131EF2B16B009AE0DF /* UberRushDeliveryWorker.swift in Sources */,
 				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
+				110437191EF2C2E2009AE0DF /* MFUserAddress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +947,8 @@
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
+				110437181EF2C2E2009AE0DF /* MFUserAddress.swift in Sources */,
+				110437121EF2B16B009AE0DF /* UberRushDeliveryWorker.swift in Sources */,
 				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
@@ -935,6 +965,7 @@
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				110437151EF2B775009AE0DF /* MFUser.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
@@ -950,6 +981,7 @@
 				2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
+				1104371B1EF2C3AB009AE0DF /* MFDish.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
