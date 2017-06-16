@@ -34,12 +34,9 @@
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
 		2CA886C21EE91CAD0012405D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CA886C11EE91CAD0012405D /* GoogleService-Info.plist */; };
 		2CB528E81EE9164D00218609 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E11EE9164D00218609 /* LoginConfigurator.swift */; };
-		2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E21EE9164D00218609 /* LoginInteractor.swift */; };
 		2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E31EE9164D00218609 /* LoginModels.swift */; };
 		2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E41EE9164D00218609 /* LoginPresenter.swift */; };
-		2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E51EE9164D00218609 /* LoginRouter.swift */; };
 		2CB528ED1EE9164D00218609 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E61EE9164D00218609 /* LoginViewController.swift */; };
-		2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -114,6 +111,9 @@
 		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
 		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
 		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
+		BFEA4A051EF1590600A26DE5 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E21EE9164D00218609 /* LoginInteractor.swift */; };
+		BFEA4A061EF1591600A26DE5 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
+		BFEA4A071EF1591D00A26DE5 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E51EE9164D00218609 /* LoginRouter.swift */; };
 		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
 		F09ED02F1EE936FB00DBCF78 /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */; };
 		F0E04DA21EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E04DA11EE9BAA100DCBAA0 /* ForgotPasswordWorker.swift */; };
@@ -154,7 +154,6 @@
 		2CB528E51EE9164D00218609 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB528E61EE9164D00218609 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB528E71EE9164D00218609 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -223,6 +222,7 @@
 		5743C4031EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
 		5743C4041EEA6A3F006E6BE2 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
 		5743C41F1EEA9646006E6BE2 /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
+		B69A27171EE949CD00D1E0C5 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -737,7 +737,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -777,6 +777,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEA4A071EF1591D00A26DE5 /* LoginRouter.swift in Sources */,
+				BFEA4A061EF1591600A26DE5 /* LoginWorker.swift in Sources */,
+				BFEA4A051EF1590600A26DE5 /* LoginInteractor.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
 				BFC927311EF00A7E00602153 /* LiveVideo.swift in Sources */,
@@ -786,7 +789,6 @@
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CB528EB1EE9164D00218609 /* LoginPresenter.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
-				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				5743C4061EEA6A3F006E6BE2 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5743C4071EEA6A3F006E6BE2 /* GMUSimpleClusterAlgorithm.m in Sources */,
@@ -797,7 +799,6 @@
 				5743C40F1EEA6A3F006E6BE2 /* GMUKMLParser.m in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
-				2CB528E91EE9164D00218609 /* LoginInteractor.swift in Sources */,
 				5743C40D1EEA6A3F006E6BE2 /* GMUGeoJSONParser.m in Sources */,
 				2CB528EA1EE9164D00218609 /* LoginModels.swift in Sources */,
 				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
@@ -837,7 +838,6 @@
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
-				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
@@ -853,7 +853,6 @@
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
-				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
@@ -872,9 +871,7 @@
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				118FB2AD1EEA6C2700E5E6E5 /* FirebaseLoginWorker.swift in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
-				2CB528EE1EE9164D00218609 /* LoginWorker.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
-				2CB528EC1EE9164D00218609 /* LoginRouter.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				5743C4051EEA6A3F006E6BE2 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5743C4191EEA6A3F006E6BE2 /* GQTPointQuadTreeChild.m in Sources */,

@@ -1,4 +1,5 @@
 import UIKit
+import TRMosaicLayout
 
 protocol LiveVideoMainPageViewControllerInput {
     func displayLiveVideos(_ response: LiveVideoMainPage.Response)
@@ -34,6 +35,10 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
         self.liveVideoCollectionView.dataSource = self
         self.output.loadLiveVideos()
         
+        let mosaicLayout = TRMosaicLayout()
+        self.liveVideoCollectionView.collectionViewLayout = mosaicLayout
+        mosaicLayout.delegate = self
+        
     }
     
     // Mark: - Fetch Live Vids
@@ -45,7 +50,7 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
 }
 
-// Mark: - CollectionView
+// Mark: - CollectionView Delegate & Datasource
 
 extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -61,3 +66,23 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
         return liveVideos.arrayOfLiveVideos.count
     }
 }
+
+// Mark: - Mosaic CollectionView Flow Layout
+extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {
+    
+    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
+        
+        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
+    }
+    
+    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+    }
+    
+    func heightForSmallMosaicCell() -> CGFloat {
+        return 200
+    }
+    
+}
+
+
