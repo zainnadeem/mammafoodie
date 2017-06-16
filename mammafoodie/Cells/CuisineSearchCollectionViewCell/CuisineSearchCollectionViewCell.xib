@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="CuisineSearchCollectionViewCell" id="gTV-IL-0wX" customClass="CuisineSearchCollectionViewCell" customModule="mammafoodie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MH-Hj-gQm" customClass="GradientView" customModule="mammafoodie" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" red="1" green="0.5490196078431373" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" red="1" green="0.38823529411764707" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b88-Oq-wCw">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="b88-Oq-wCw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5tz-5N-y8g"/>
+                <constraint firstAttribute="bottom" secondItem="2MH-Hj-gQm" secondAttribute="bottom" id="AGE-Fp-yDh"/>
+                <constraint firstItem="2MH-Hj-gQm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Dfp-dd-K2B"/>
+                <constraint firstAttribute="trailing" secondItem="2MH-Hj-gQm" secondAttribute="trailing" id="cgZ-oO-TEW"/>
+                <constraint firstItem="2MH-Hj-gQm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fya-21-Rzk"/>
+                <constraint firstItem="b88-Oq-wCw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jbM-De-1oT"/>
+                <constraint firstAttribute="trailing" secondItem="b88-Oq-wCw" secondAttribute="trailing" id="qhr-HB-Okb"/>
+                <constraint firstAttribute="bottom" secondItem="b88-Oq-wCw" secondAttribute="bottom" id="uVe-Pb-0Ca"/>
+            </constraints>
+            <connections>
+                <outlet property="gradientView" destination="2MH-Hj-gQm" id="CAT-mH-J9P"/>
+                <outlet property="lblMenuTitle" destination="b88-Oq-wCw" id="hBx-RC-efy"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

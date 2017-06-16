@@ -10,6 +10,7 @@ class Marker : GMSMarker, GMUClusterItem {
         marker.position = location
         marker.title = title
         marker.isTappable = true
+        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
         marker.appearAnimation = .pop
         return marker
     }

@@ -19,4 +19,6 @@ target 'mammafoodie' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+
 end

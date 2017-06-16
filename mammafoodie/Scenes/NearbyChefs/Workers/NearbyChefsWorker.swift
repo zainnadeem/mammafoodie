@@ -6,7 +6,7 @@ let kClusterItemCount = 100
 class NearbyChefsWorker : NSObject {
     
     // MARK: - Business Logic
-    func prepareMarkers() -> [Marker] {
+    private func prepareMarkers() -> [Marker] {
         var markers = [Marker]()
         let extent = 10.9
         for index in 1...kClusterItemCount {
