@@ -56,7 +56,7 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveVideoCollectionViewCell", for: indexPath) as! LiveVideoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
         cell.title.text = liveVideos.arrayOfLiveVideos[indexPath.row].name
         return cell
     }

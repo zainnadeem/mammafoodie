@@ -15,6 +15,9 @@ class VidupMainPageViewController: UIViewController, VidupMainPageViewController
     var router: VidupMainPageRouter!
     var vidups: VidupMainPage.Response!
     
+    lazy var smallCellSize: CGFloat = 242
+    
+    
     @IBOutlet weak var vidupCollectionView: UICollectionView!
     // MARK: - Object lifecycle
     
@@ -44,29 +47,32 @@ class VidupMainPageViewController: UIViewController, VidupMainPageViewController
 }
 
 // MARK: - Collection View
-
 extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VidupCollectionViewCell", for: indexPath) as! VidupCollectionViewCell
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
         
         //Move to cell once object is established
         cell.setViewProperties()
         cell.title.text = "You Gotta See This!"
-        cell.screenShotImageView.image = #imageLiteral(resourceName: "chefScreenShot")
+        cell.screenShotImageView.image = #imageLiteral(resourceName: "cook")
         cell.screenShotImageView.contentMode = .scaleAspectFill
         cell.btnProfileImage.setImage(#imageLiteral(resourceName: "ProfileImageShot"), for: .normal)
-        cell.btnProfileImage.setTitle("Johnny Patel", for: .normal)
+        
+        cell.btnUsername.setTitle("Johnny Patel", for: .normal)
+        
+        
         cell.btnNumberOfViews.setTitle("1234", for: .normal)
         cell.btnTimeLeft.setTitle("21 min", for: .normal)
 
         //Arrange views depending on specific cells
         if indexPath.item % 3 != 0 {
                 cell.setSmallCellConstraints()
+                cell.btnNumberOfViews.isHidden = true
         }else{
                 cell.setLargeCellContraints()
+                
         }
        
         return cell
@@ -91,7 +97,7 @@ extension VidupMainPageViewController: TRMosaicLayoutDelegate {
     }
     
     func heightForSmallMosaicCell() -> CGFloat {
-        return 235
+        return smallCellSize
         
     }
     
