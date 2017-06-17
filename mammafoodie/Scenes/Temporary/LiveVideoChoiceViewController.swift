@@ -27,7 +27,7 @@ class LiveVideoChoiceViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "seguePublish" {
-            var liveVideo = MFMedia()
+            let liveVideo = MFMedia()
             liveVideo.id = FirebaseReference.media.generateAutoID()
             liveVideo.accessMode = .owner
             (segue.destination as! LiveVideoViewController).liveVideo = liveVideo

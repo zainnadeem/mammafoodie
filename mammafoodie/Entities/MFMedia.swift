@@ -10,19 +10,19 @@ enum MediaAccessUserType {
     case viewer
 }
 
-struct MFMedia {
+class MFMedia {
     var id: String!
-    var comments: [Date:MFComment] = [:] // date:commentId
+    var comments: [Date:MFComment] = [:]
     var contentId: String!
     var cover_large: String?
     var cover_small: String?
     var createdAt: Date!
     var endedAt: Date?
     var dish: MFDish!
-    var likes: [Date:MFUser] = [:] // date:userId
+    var likes: [Date:MFUser] = [:]
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
-    var user: MFUser?
+    var user: MFUser!
     
     var accessMode: MediaAccessUserType = .viewer
     
