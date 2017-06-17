@@ -185,7 +185,7 @@ extension DatabaseGateway {
         guard let hostIPAddress: String = rawData["hostIPAddress"] as? String else {
             return nil
         }
-        guard let port: Int = rawData["port"] as? Int else {
+        guard let port: Int32 = rawData["port"] as? Int32 else {
             return nil
         }
         guard let sdkKey: String = rawData["sdkKey"] as? String else {
