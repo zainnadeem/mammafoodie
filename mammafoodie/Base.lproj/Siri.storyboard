@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M20-7N-sAU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lOY-7g-u3c">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -74,6 +74,150 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccC-RY-Dtp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-290" y="33"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="JUC-aD-Z9p">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="P5Z-xc-mWl" customClass="ChatViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N11-l4-jcW"/>
+                        <viewControllerLayoutGuide type="bottom" id="tvy-My-YkO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9De-C6-Yv1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU2-TK-Feu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1145" y="33"/>
+        </scene>
+        <!--Request Dish View Controller-->
+        <scene sceneID="Fdn-sv-7Hy">
+            <objects>
+                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zie-Xh-td4"/>
+                        <viewControllerLayoutGuide type="bottom" id="sq6-sc-34F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bRF-xa-Qzk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYN-Rn-gCr">
+                                <rect key="frame" x="16" y="51" width="343" height="196"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DishName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jDK-pj-eKF">
+                                        <rect key="frame" x="5" y="48" width="333" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Dishes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yAh-7b-3Fh">
+                                        <rect key="frame" x="5" y="102" width="333" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="jDK-pj-eKF" firstAttribute="leading" secondItem="gYN-Rn-gCr" secondAttribute="leading" constant="5" id="7gR-pe-0Hc"/>
+                                    <constraint firstItem="jDK-pj-eKF" firstAttribute="top" secondItem="gYN-Rn-gCr" secondAttribute="top" constant="48" id="CL8-Rv-eam"/>
+                                    <constraint firstItem="yAh-7b-3Fh" firstAttribute="top" secondItem="jDK-pj-eKF" secondAttribute="bottom" constant="24" id="Oqq-i3-foi"/>
+                                    <constraint firstItem="yAh-7b-3Fh" firstAttribute="trailing" secondItem="jDK-pj-eKF" secondAttribute="trailing" id="c1j-Pf-qwA"/>
+                                    <constraint firstItem="yAh-7b-3Fh" firstAttribute="leading" secondItem="jDK-pj-eKF" secondAttribute="leading" id="kav-iK-sqg"/>
+                                    <constraint firstAttribute="trailing" secondItem="jDK-pj-eKF" secondAttribute="trailing" constant="5" id="lHJ-xe-YPI"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tll-gZ-EUG">
+                                <rect key="frame" x="16" y="254" width="108" height="30"/>
+                                <state key="normal" title="Cancel Request"/>
+                                <connections>
+                                    <action selector="cancelRequest:" destination="lOY-7g-u3c" eventType="touchUpInside" id="9wl-PR-xGq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-7J-bwE">
+                                <rect key="frame" x="263" y="252" width="96" height="30"/>
+                                <state key="normal" title="Send Request"/>
+                                <connections>
+                                    <action selector="sendRequestBtn:" destination="lOY-7g-u3c" eventType="touchUpInside" id="4mi-2I-IYE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39b-36-gUi">
+                                <rect key="frame" x="170.5" y="318.5" width="33" height="30"/>
+                                <state key="normal" title="Chat"/>
+                                <connections>
+                                    <action selector="chatBtn:" destination="lOY-7g-u3c" eventType="touchUpInside" id="J6d-Ix-O9W"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TVQ-7J-bwE" firstAttribute="trailing" secondItem="gYN-Rn-gCr" secondAttribute="trailing" id="1B8-Pu-zfb"/>
+                            <constraint firstItem="39b-36-gUi" firstAttribute="centerX" secondItem="bRF-xa-Qzk" secondAttribute="centerX" id="7Nm-GI-Jnq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYN-Rn-gCr" secondAttribute="trailing" id="WhW-rB-qBq"/>
+                            <constraint firstItem="gYN-Rn-gCr" firstAttribute="top" secondItem="Zie-Xh-td4" secondAttribute="bottom" constant="31" id="Zgt-k9-Wv6"/>
+                            <constraint firstItem="Tll-gZ-EUG" firstAttribute="top" secondItem="gYN-Rn-gCr" secondAttribute="bottom" constant="7" id="gzA-h8-Y6g"/>
+                            <constraint firstItem="TVQ-7J-bwE" firstAttribute="top" secondItem="gYN-Rn-gCr" secondAttribute="bottom" constant="5" id="pak-2P-YVN"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="gYN-Rn-gCr" secondAttribute="leading" id="q77-hl-FCt"/>
+                            <constraint firstItem="sq6-sc-34F" firstAttribute="top" secondItem="Tll-gZ-EUG" secondAttribute="bottom" constant="383" id="qZJ-tb-BPH"/>
+                            <constraint firstItem="Tll-gZ-EUG" firstAttribute="leading" secondItem="gYN-Rn-gCr" secondAttribute="leading" id="x2F-Ju-rTZ"/>
+                            <constraint firstItem="39b-36-gUi" firstAttribute="centerY" secondItem="bRF-xa-Qzk" secondAttribute="centerY" id="y0f-KB-fgR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dishNameTxt" destination="jDK-pj-eKF" id="5DY-PF-5FD"/>
+                        <outlet property="dishNumberTxt" destination="yAh-7b-3Fh" id="e7b-A0-uNS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gV-kx-rwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="382" y="33"/>
+        </scene>
+        <!--Chat List View Controller-->
+        <scene sceneID="SyY-3L-zW0">
+            <objects>
+                <viewController storyboardIdentifier="ChatListViewController" id="VYD-Kc-FPe" customClass="ChatListViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r2Q-HK-MMv"/>
+                        <viewControllerLayoutGuide type="bottom" id="HqL-re-du8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gM0-ie-5nc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BoJ-5G-1Xe">
+                                <rect key="frame" x="1" y="20" width="373" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatlist" id="8JS-zR-jjV">
+                                        <rect key="frame" x="0.0" y="28" width="373" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8JS-zR-jjV" id="pBa-S9-Etw">
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BoJ-5G-1Xe" firstAttribute="leading" secondItem="gM0-ie-5nc" secondAttribute="leadingMargin" constant="-15" id="DTD-vU-JLb"/>
+                            <constraint firstItem="HqL-re-du8" firstAttribute="top" secondItem="BoJ-5G-1Xe" secondAttribute="bottom" id="Wjd-6h-G7s"/>
+                            <constraint firstItem="BoJ-5G-1Xe" firstAttribute="top" secondItem="r2Q-HK-MMv" secondAttribute="bottom" id="ZgX-FP-LEt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BoJ-5G-1Xe" secondAttribute="trailing" constant="-15" id="aRk-Wt-Ugq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chatListTableview" destination="BoJ-5G-1Xe" id="FSk-Fp-TNU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VLK-qo-OLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="711" y="697"/>
         </scene>
     </scenes>
 </document>

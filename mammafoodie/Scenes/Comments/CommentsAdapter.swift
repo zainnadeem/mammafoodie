@@ -1,10 +1,3 @@
-//
-//  CommentsAdapter.swift
-//  mammafoodie
-//
-//  Created by Sireesha V on 6/12/17.
-//  Copyright © 2017 Zain Nadeem. All rights reserved.
-//
 
 import Foundation
 import UIKit

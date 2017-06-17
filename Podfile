@@ -18,5 +18,25 @@ target 'mammafoodie' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'JSQMessagesViewController'
+
+
+  target 'mammafoodieTests' do
+      
+      pod 'Firebase/Core'
+      pod 'Firebase/Database'
+      pod 'Firebase/Auth'
+      pod 'Firebase/Storage'
+      
+      pod 'GoogleSignIn'
+      
+      
+      pod 'FBSDKCoreKit'
+      pod 'FBSDKLoginKit'
+      
+      pod 'GoogleMaps'
+      pod 'GooglePlaces'
+      
+  end
   
 end

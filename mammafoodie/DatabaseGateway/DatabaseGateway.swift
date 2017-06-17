@@ -7,6 +7,7 @@ enum FirebaseReference: String {
     case dishRequests = "DishRequests"
     case dishes = "Dishes"
     case conversations = "Conversations"
+    case messages = "Messages"
     case orders = "Orders"
     case paymentDetails = "PaymentDetails"
     case comments = "Comments"
@@ -28,6 +29,14 @@ enum FirebaseReference: String {
     func get(with id: String) -> DatabaseReference {
         return self.classReference.child(id) // root/className/id
     }
+    
+    func dateConvertion(with date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateString = dateFormatter.string(from:date)
+        return dateString
+    }
+    
 }
 
 struct DatabaseConnectionObserver {
@@ -203,3 +212,41 @@ extension DatabaseGateway {
         return accountDetails
     }
 }
+
+// MARK: - Conversation
+extension DatabaseGateway {
+    
+    func createConversation(with model: MFConversation, _ completion: @escaping ((_ chatData:MFConversation)->Void)) {
+        var newModel = model
+        newModel.id = FirebaseReference.conversations.generateAutoID()
+        
+        let currentDate = Date()
+        let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
+        newModel.createdAt = dateString
+
+        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
+            completion(newModel)
+        }
+    }
+}
+
+// MARK: - Messages
+extension DatabaseGateway {
+    
+    func createMessage(with model: MFMessage, _ completion: @escaping (()->Void)) {
+        
+        var newModel = model
+        newModel.messageid = FirebaseReference.messages.generateAutoID()
+        
+        let currentDate = Date()
+        let dateString = FirebaseReference.messages.dateConvertion(with: currentDate)
+        newModel.datetime = dateString
+        
+        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
+            completion()
+        }
+    }
+}
+
