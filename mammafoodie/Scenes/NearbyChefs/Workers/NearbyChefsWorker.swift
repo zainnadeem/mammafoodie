@@ -1,9 +1,20 @@
 import UIKit
 import GoogleMaps
+import GeoFire
+import Firebase
 
 let kClusterItemCount = 100
 
 class NearbyChefsWorker : NSObject {
+    
+    var geoFire : GeoFire!
+    
+    
+    override init() {
+        super.init()
+        let firebaseRef = Database.database().reference().child("NearbyChefs").ref
+        self.geoFire = GeoFire.init(firebaseRef: firebaseRef)
+    }
     
     // MARK: - Business Logic
     private func prepareMarkers() -> [Marker] {
