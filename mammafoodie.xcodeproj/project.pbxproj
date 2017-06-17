@@ -128,6 +128,7 @@
 		BFD80F5D1EF539E100223D21 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F4B1EF539E100223D21 /* Montserrat-Thin.ttf */; };
 		BFD80F5E1EF539E100223D21 /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F4C1EF539E100223D21 /* Montserrat-ThinItalic.ttf */; };
 		BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F5F1EF542BB00223D21 /* Assets.xcassets */; };
+		BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F611EF54ECD00223D21 /* Zain.storyboard */; };
 		BFEA4A051EF1590600A26DE5 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E21EE9164D00218609 /* LoginInteractor.swift */; };
 		BFEA4A061EF1591600A26DE5 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E71EE9164D00218609 /* LoginWorker.swift */; };
 		BFEA4A071EF1591D00A26DE5 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB528E51EE9164D00218609 /* LoginRouter.swift */; };
@@ -300,6 +301,7 @@
 		BFD80F4B1EF539E100223D21 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
 		BFD80F4C1EF539E100223D21 /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		BFD80F5F1EF542BB00223D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD80F621EF54ECD00223D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Zain.storyboard; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 		F09ED02E1EE936FB00DBCF78 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
@@ -389,8 +391,8 @@
 				BFC927001EF00A7E00602153 /* Comments */,
 				BFC9270A1EF00A7E00602153 /* Entities */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
-				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
+				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
@@ -588,6 +590,7 @@
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
@@ -771,6 +774,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
 				BFD80F4F1EF539E100223D21 /* Montserrat-Bold.ttf in Resources */,
 				BFD80F511EF539E100223D21 /* Montserrat-ExtraBold.ttf in Resources */,
 				BFD80F561EF539E100223D21 /* Montserrat-Light.ttf in Resources */,
@@ -975,6 +979,14 @@
 				BF5060E21EE81B9E00DB646F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BFD80F611EF54ECD00223D21 /* Zain.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFD80F621EF54ECD00223D21 /* Base */,
+			);
+			name = Zain.storyboard;
 			sourceTree = "<group>";
 		};
 		F03B6EBB1EED276000985F62 /* Siri.storyboard */ = {
