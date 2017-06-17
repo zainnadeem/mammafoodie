@@ -12,9 +12,10 @@ class MFModelsToFirebaseDictionaryConverter {
     
     typealias FirebaseDictionary = [String:AnyObject]
     
-    class func dictionary(from liveStream: MFLiveStream) -> FirebaseDictionary {
+    // Need to update this
+    class func dictionary(from liveStream: MFMedia) -> FirebaseDictionary {
         return [
-            liveStream.id: liveStream.name as AnyObject
+            liveStream.id: liveStream.id as AnyObject
         ]
     }
     

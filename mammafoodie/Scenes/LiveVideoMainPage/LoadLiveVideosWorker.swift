@@ -4,12 +4,12 @@ class LoadLiveVideosWorker {
     // MARK: - Business Logic
     
    
-    func callAPI(completion: ([LiveVideo]) -> Void){
+    func callAPI(completion: ([MFMedia]) -> Void){
         print("Place firebase logic for obtaining live video links")
         
-        let video = LiveVideo(name: "1")
-        let video2 = LiveVideo(name: "2")
-        let video3 = LiveVideo(name: "3")
+        let video = MFMedia()
+        let video2 = MFMedia()
+        let video3 = MFMedia()
 
         completion([video, video2, video3])
     }

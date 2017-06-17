@@ -2,12 +2,12 @@ import UIKit
 
 class LoadVidupsWorker {
 
-    func callAPI(completion: ([Vidup]) -> Void){
+    func callAPI(completion: ([MFMedia]) -> Void){
         print("Place firebase logic for obtaining vidups")
         
-        let video = Vidup(name: "4")
-        let video2 = Vidup(name: "5")
-        let video3 = Vidup(name: "6")
+        let video = MFMedia()
+        let video2 = MFMedia()
+        let video3 = MFMedia()
         
         completion([video, video2, video3])
     }

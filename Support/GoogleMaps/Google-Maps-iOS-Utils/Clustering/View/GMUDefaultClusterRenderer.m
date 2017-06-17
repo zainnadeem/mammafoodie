@@ -62,7 +62,7 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     // Lookup map from cluster item to a new cluster.
     NSMutableDictionary<GMUWrappingDictionaryKey *, id<GMUCluster>> *_itemToNewClusterMap;
 }
-    
+
 - (instancetype)initWithMapView:(GMSMapView *)mapView
            clusterIconGenerator:(id<GMUClusterIconGenerator>)iconGenerator {
     if ((self = [super init])) {
@@ -76,17 +76,17 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     return self;
 }
-    
+
 - (void)dealloc {
     [self clear];
 }
-    
+
 - (BOOL)shouldRenderAsCluster:(id<GMUCluster>)cluster atZoom:(float)zoom {
     return cluster.count >= kGMUMinClusterSize && zoom <= kGMUMaxClusterZoom;
 }
-    
+
 #pragma mark GMUClusterRenderer
-    
+
 - (void)renderClusters:(NSArray<id<GMUCluster>> *)clusters {
     [_renderedClusters removeAllObjects];
     [_renderedClusterItems removeAllObjects];
@@ -101,7 +101,7 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
         [self addOrUpdateClusters:clusters animated:NO];
     }
 }
-    
+
 - (void)renderAnimatedClusters:(NSArray<id<GMUCluster>> *)clusters {
     float zoom = _mapView.camera.zoom;
     BOOL isZoomingIn = zoom > _previousZoom;
@@ -122,7 +122,7 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
         [self clearMarkersAnimated:existingMarkers];
     }
 }
-    
+
 - (void)clearMarkersAnimated:(NSArray<GMSMarker *> *)markers {
     // Remove existing markers: animate to nearest new cluster.
     GMSCoordinateBounds *visibleBounds =
@@ -171,22 +171,22 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
                        [self clearMarkers:markers];
                    });
 }
-    
-    // Called when camera is changed to reevaluate if new clusters need to be displayed because
-    // they become visible.
+
+// Called when camera is changed to reevaluate if new clusters need to be displayed because
+// they become visible.
 - (void)update {
     [self addOrUpdateClusters:_clusters animated:NO];
 }
-    
+
 #pragma mark Testing
-    
+
 - (NSArray<GMSMarker *> *)markers {
     return _markers;
 }
-    
+
 #pragma mark Private
-    
-    // Builds lookup map for item to old clusters, new clusters.
+
+// Builds lookup map for item to old clusters, new clusters.
 - (void)prepareClustersForAnimation:(NSArray<id<GMUCluster>> *)newClusters
                         isZoomingIn:(BOOL)isZoomingIn {
     float zoom = _mapView.camera.zoom;
@@ -217,10 +217,10 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
         }
     }
 }
-    
-    // Goes through each cluster |clusters| and add a marker for it if it is:
-    // - inside the visible region of the camera.
-    // - not yet already added.
+
+// Goes through each cluster |clusters| and add a marker for it if it is:
+// - inside the visible region of the camera.
+// - not yet already added.
 - (void)addOrUpdateClusters:(NSArray<id<GMUCluster>> *)clusters animated:(BOOL)animated {
     GMSCoordinateBounds *visibleBounds =
     [[GMSCoordinateBounds alloc] initWithRegion:[_mapView.projection visibleRegion]];
@@ -244,7 +244,7 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
         }
     }
 }
-    
+
 - (void)renderCluster:(id<GMUCluster>)cluster animated:(BOOL)animated {
     float zoom = _mapView.camera.zoom;
     if ([self shouldRenderAsCluster:cluster atZoom:zoom]) {
@@ -285,7 +285,7 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     [_renderedClusters addObject:cluster];
 }
-    
+
 - (GMSMarker *)markerForObject:(id)object {
     GMSMarker *marker;
     if ([_delegate respondsToSelector:@selector(renderer:markerForObject:)]) {
@@ -293,16 +293,16 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     return marker ?: [[GMSMarker alloc] init];
 }
-    
-    // Returns a marker at final position of |position| with attached |userData|.
-    // If animated is YES, animates from the closest point from |points|.
+
+// Returns a marker at final position of |position| with attached |userData|.
+// If animated is YES, animates from the closest point from |points|.
 - (GMSMarker *)markerWithPosition:(CLLocationCoordinate2D)position
                              from:(CLLocationCoordinate2D)from
                          userData:(id)userData
                       clusterIcon:(UIImage *)clusterIcon
                          animated:(BOOL)animated {
     GMSMarker *marker = [self markerForObject:userData];
-    CLLocationCoordinate2D initialPosition = animated ? from : position;
+    //    CLLocationCoordinate2D initialPosition = animated ? from : position;
     //  marker.position = initialPosition;
     marker.position = position;
     marker.userData = userData;
@@ -332,8 +332,8 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     return marker;
 }
-    
-    // Returns clusters which should be rendered and is inside the camera visible region.
+
+// Returns clusters which should be rendered and is inside the camera visible region.
 - (NSArray<id<GMUCluster>> *)visibleClustersFromClusters:(NSArray<id<GMUCluster>> *)clusters {
     NSMutableArray *visibleClusters = [[NSMutableArray alloc] init];
     float zoom = _mapView.camera.zoom;
@@ -346,9 +346,9 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     return visibleClusters;
 }
-    
-    // Returns the first cluster in |itemMap| that shares a common item with the input |cluster|.
-    // Used for heuristically finding candidate cluster to animate to/from.
+
+// Returns the first cluster in |itemMap| that shares a common item with the input |cluster|.
+// Used for heuristically finding candidate cluster to animate to/from.
 - (id<GMUCluster>)overlappingClusterForCluster:
 (id<GMUCluster>)cluster
                                        itemMap:(NSDictionary<GMUWrappingDictionaryKey *, id<GMUCluster>> *)itemMap {
@@ -363,8 +363,8 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     }
     return found;
 }
-    
-    // Removes all existing markers from the attached map.
+
+// Removes all existing markers from the attached map.
 - (void)clear {
     [self clearMarkers:_markers];
     [_markers removeAllObjects];
@@ -374,12 +374,12 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
     [_itemToOldClusterMap removeAllObjects];
     _clusters = nil;
 }
-    
+
 - (void)clearMarkers:(NSArray<GMSMarker *> *)markers {
     for (GMSMarker *marker in markers) {
         marker.userData = nil;
         marker.map = nil;
     }
 }
-    
-    @end
+
+@end

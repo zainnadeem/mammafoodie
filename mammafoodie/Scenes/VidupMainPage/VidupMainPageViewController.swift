@@ -45,7 +45,7 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VidupCollectionViewCell", for: indexPath) as! VidupCollectionViewCell
         
-        cell.title.text = vidups.arrayOfVidups[indexPath.row].name
+        cell.title.text = self.vidups.arrayOfVidups[indexPath.row].contentId
         return cell
     }
     
