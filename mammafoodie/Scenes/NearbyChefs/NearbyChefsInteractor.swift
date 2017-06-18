@@ -21,8 +21,13 @@ class NearbyChefsInteractor: NearbyChefsInteractorInput {
     // MARK: - Business logic
     
     func loadMarkers(at location: CLLocationCoordinate2D) {
-        let worker = NearbyChefsWorker()
-        self.output.showMarkers(worker.prepareMarkers(for: location))
+        if self.worker == nil {
+            self.worker = NearbyChefsWorker()
+        }
+//        print("Asking worker For location: \(location)")
+        self.worker.prepareMarkers(for: location) { (markersFound) in
+            self.output.showMarkers(markersFound)
+        }
     }
     
     func getCurrentLocation() {

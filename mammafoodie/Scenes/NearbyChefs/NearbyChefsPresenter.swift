@@ -18,6 +18,7 @@ class NearbyChefsPresenter: NearbyChefsPresenterInput {
     
     // MARK: - Presentation logic
     func showMarkers(_ markers: [Marker]) {
+        print("Asking VC to show marker at location: \(String(describing: markers.first?.position))")
         self.output.showMarkers(markers: markers)
     }
     

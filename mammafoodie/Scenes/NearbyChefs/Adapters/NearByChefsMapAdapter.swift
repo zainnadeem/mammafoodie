@@ -15,6 +15,8 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         self.mapView.isMyLocationEnabled = true
         self.mapView.settings.myLocationButton = true
         
+        searchRadius = 1000
+        
         let iconGenerator = GMUDefaultClusterIconGenerator()
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: self.mapView, clusterIconGenerator: iconGenerator)
@@ -33,17 +35,19 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     }
     
     func showMarkers(markers: [Marker]) {
-        for marker in markers {
-            if !self.allMarks.contains(marker) {
-                self.clusterManager.add(marker)
-                self.allMarks.append(marker)
-            } else {
-                print("Found Duplicate")
+        print("showing marker at location: \(String(describing: markers.first?.position))")
+        if markers != nil {
+            for marker in markers {
+                if !self.allMarks.contains(marker) {
+                    self.allMarks.append(marker)
+                    self.clusterManager.add(marker)
+                }
             }
+            self.clusterManager.cluster()
         }
         print("Total Pins: \(self.clusterManager.algorithm.allItems().count)")
-        self.clusterManager.cluster()
     }
+    
     func showCurrentLocation(_ location: CLLocation?) {
         if let currentLocation = location {
             kCameraLatitude = currentLocation.coordinate.latitude
@@ -55,7 +59,6 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             print("Location not found")
         }
     }
-
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let _ = marker.userData as? Marker {
