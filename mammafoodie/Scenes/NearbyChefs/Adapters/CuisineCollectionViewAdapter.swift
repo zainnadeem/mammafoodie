@@ -13,7 +13,7 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     func prepareCuisineCollectionView() {
         self.cuisineCollectionView.delegate = self
         self.cuisineCollectionView.dataSource = self
-        self.cuisineCollectionView.clipsToBounds = false
+//        self.cuisineCollectionView.clipsToBounds = false
         self.cuisineCollectionView.register(UINib.init(nibName: "CuisineSearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CuisineSearchCollectionViewCell")
         self.cuisineCollectionView.reloadData()
         
@@ -46,11 +46,11 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuisineSearchCollectionViewCell", for: indexPath) as! CuisineSearchCollectionViewCell
         let filter = self.cuisineFilters[indexPath.item]
-        cell.prepareCell(for: filter)
         if let selfilter = self.selectedFilter {
-            cell.showGradient((selfilter == filter))
+            cell.prepareCell(for: filter, is : (selfilter == filter))
+//            cell.showGradient((selfilter == filter))
         } else {
-            cell.showGradient(false)
+//            cell.showGradient(false)
         }
         return cell
     }
@@ -61,17 +61,17 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let filter = self.cuisineFilters[indexPath.item]
-        let height = collectionView.frame.size.height
+        let height = collectionView.frame.size.height * 0.9
         var width = filter.name.calculateWidth(withConstrainedHeight: 21, font: CuisineFilterCellFont)
         if width < 90 {
             width = 90
         }
         width += 8
-        return CGSize.init(width: width, height: height)
+        return CGSize.init(width: height, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -79,7 +79,7 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 5, 0, 0)
+        return UIEdgeInsetsMake(0, 10, 0, 0)
     }
 
 }
@@ -87,6 +87,8 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
 struct CuisineFilter : Equatable {
     let name : String!
     let id : String!
+    let selectedImage : UIImage?
+    let unselectedImage : UIImage?
     
     static func ==(lhs: CuisineFilter, rhs : CuisineFilter) -> Bool {
         return lhs.id == rhs.id

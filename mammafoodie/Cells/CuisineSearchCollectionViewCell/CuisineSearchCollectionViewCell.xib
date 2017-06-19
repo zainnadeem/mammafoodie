@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MH-Hj-gQm" customClass="GradientView" customModule="mammafoodie" customModuleProvider="target">
+                    <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2MH-Hj-gQm" customClass="GradientView" customModule="mammafoodie" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <userDefinedRuntimeAttributes>
@@ -30,28 +31,38 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b88-Oq-wCw">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b88-Oq-wCw">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iZb-Uc-AqR">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="iZb-Uc-AqR" secondAttribute="height" multiplier="1:1" id="pUI-6V-DfQ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.027450980392156862" green="0.12156862745098039" blue="0.21176470588235294" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="iZb-Uc-AqR" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="2ln-2G-ZEP"/>
+                <constraint firstAttribute="trailing" secondItem="iZb-Uc-AqR" secondAttribute="trailing" id="3TA-cA-IVU"/>
                 <constraint firstItem="b88-Oq-wCw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5tz-5N-y8g"/>
                 <constraint firstAttribute="bottom" secondItem="2MH-Hj-gQm" secondAttribute="bottom" id="AGE-Fp-yDh"/>
                 <constraint firstItem="2MH-Hj-gQm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Dfp-dd-K2B"/>
                 <constraint firstAttribute="trailing" secondItem="2MH-Hj-gQm" secondAttribute="trailing" id="cgZ-oO-TEW"/>
                 <constraint firstItem="2MH-Hj-gQm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fya-21-Rzk"/>
                 <constraint firstItem="b88-Oq-wCw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jbM-De-1oT"/>
+                <constraint firstItem="iZb-Uc-AqR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oH2-XA-34h"/>
                 <constraint firstAttribute="trailing" secondItem="b88-Oq-wCw" secondAttribute="trailing" id="qhr-HB-Okb"/>
                 <constraint firstAttribute="bottom" secondItem="b88-Oq-wCw" secondAttribute="bottom" id="uVe-Pb-0Ca"/>
             </constraints>
             <connections>
                 <outlet property="gradientView" destination="2MH-Hj-gQm" id="CAT-mH-J9P"/>
+                <outlet property="imgViewEmoji" destination="iZb-Uc-AqR" id="8U1-ze-O9U"/>
                 <outlet property="lblMenuTitle" destination="b88-Oq-wCw" id="hBx-RC-efy"/>
             </connections>
         </collectionViewCell>

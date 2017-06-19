@@ -82,6 +82,9 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		57801F5D1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F5B1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.swift */; };
+		57801F5E1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F5C1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.xib */; };
+		57801F601EF7F78D002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F5F1EF7F78D002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
 		57B0118D1EF3AD3B00872DF9 /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0118B1EF3AD3B00872DF9 /* NearByChefsMapAdapter.swift */; };
 		57B0118E1EF3AD3B00872DF9 /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0118C1EF3AD3B00872DF9 /* NearbyChefsSearchAdapter.swift */; };
 		57B011901EF3AD5500872DF9 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0118F1EF3AD5500872DF9 /* CuisineCollectionViewAdapter.swift */; };
@@ -259,6 +262,9 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		57801F5B1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
+		57801F5C1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
+		57801F5F1EF7F78D002E18EF /* FeaturedMenuCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		57B0118B1EF3AD3B00872DF9 /* NearByChefsMapAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByChefsMapAdapter.swift; sourceTree = "<group>"; };
 		57B0118C1EF3AD3B00872DF9 /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
 		57B0118F1EF3AD5500872DF9 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
@@ -641,12 +647,22 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		57801F5A1EF7F3E0002E18EF /* FeaturedMenuCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				57801F5B1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.swift */,
+				57801F5C1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.xib */,
+			);
+			path = FeaturedMenuCollectionCell;
+			sourceTree = "<group>";
+		};
 		57B0118A1EF3AD3B00872DF9 /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
 				57B0118B1EF3AD3B00872DF9 /* NearByChefsMapAdapter.swift */,
 				57B0118F1EF3AD5500872DF9 /* CuisineCollectionViewAdapter.swift */,
 				57B0118C1EF3AD3B00872DF9 /* NearbyChefsSearchAdapter.swift */,
+				57801F5F1EF7F78D002E18EF /* FeaturedMenuCollectionViewAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -779,6 +795,7 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				57801F5A1EF7F3E0002E18EF /* FeaturedMenuCollectionCell */,
 				57B0119B1EF3BB2F00872DF9 /* CuisineSearchCollectionViewCell */,
 				BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */,
 				BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */,
@@ -891,6 +908,7 @@
 			files = (
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
 				57B0119F1EF3BB3A00872DF9 /* CuisineSearchCollectionViewCell.xib in Resources */,
+				57801F5E1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
@@ -1045,6 +1063,7 @@
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
+				57801F5D1EF7F3EB002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
@@ -1054,6 +1073,7 @@
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
+				57801F601EF7F78D002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,

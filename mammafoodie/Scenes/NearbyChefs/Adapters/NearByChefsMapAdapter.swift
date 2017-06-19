@@ -73,7 +73,8 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
+//        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
+        marker.icon = #imageLiteral(resourceName: "chinese_pin")
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
