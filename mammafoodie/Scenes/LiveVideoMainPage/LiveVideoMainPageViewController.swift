@@ -1,4 +1,5 @@
 import UIKit
+import TRMosaicLayout
 
 protocol LiveVideoMainPageViewControllerInput {
     func displayLiveVideos(_ response: LiveVideoMainPage.Response)
@@ -16,10 +17,11 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     var liveVideos: LiveVideoMainPage.Response!
     
     //Create outlet to collectionview here. For now use dummy property.
-    var liveVideoCollectionView = UICollectionView()
     //
     
     // MARK: - Object lifecycle
+    
+    @IBOutlet weak var liveVideoCollectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,11 +30,28 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
     // MARK: - View lifecycle
     
+    @IBAction func populateNewsfeed(_ sender: Any) {
+        
+        let dData = DummyData.sharedInstance
+        
+        dData.populateNewsfeed { (newsfeed) in
+            
+            
+        }
+        
+        let user = dData.getUserForProfilePage()
+        
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.liveVideoCollectionView.delegate = self
         self.liveVideoCollectionView.dataSource = self
         self.output.loadLiveVideos()
+        
+        let mosaicLayout = TRMosaicLayout()
+        self.liveVideoCollectionView.collectionViewLayout = mosaicLayout
+        mosaicLayout.delegate = self
         
     }
     
@@ -45,14 +64,26 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
 }
 
-// Mark: - CollectionView
+// Mark: - CollectionView Delegate & Datasource
 
 extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveVideoCollectionViewCell", for: indexPath) as! LiveVideoCollectionViewCell
-        cell.title.text = liveVideos.arrayOfLiveVideos[indexPath.row].name
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
+        
+        cell.setViewProperties()
+        cell.media = liveVideos.arrayOfLiveVideos[indexPath.row]
+        
+        //Arrange views depending on specific cells
+        if indexPath.item % 3 != 0 {
+            cell.setSmallCellConstraints()
+
+        }else{
+            cell.setLargeCellContraints()
+            
+        }
+        
         return cell
     }
     
@@ -61,3 +92,23 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
         return liveVideos.arrayOfLiveVideos.count
     }
 }
+
+// Mark: - Mosaic CollectionView Flow Layout
+extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {
+    
+    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
+        
+        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
+    }
+    
+    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+    }
+    
+    func heightForSmallMosaicCell() -> CGFloat {
+        return 200
+    }
+    
+}
+
+
