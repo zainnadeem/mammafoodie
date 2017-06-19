@@ -16,6 +16,15 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
+		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
+		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
+		113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C41EF7BA2D000050D6 /* Montserrat-ExtraLight.otf */; };
+		113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C51EF7BA2D000050D6 /* Montserrat-Light.otf */; };
+		113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C61EF7BA2D000050D6 /* Montserrat-Medium.otf */; };
+		113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C71EF7BA2D000050D6 /* Montserrat-Regular.otf */; };
+		113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C81EF7BA2D000050D6 /* Montserrat-SemiBold.otf */; };
+		113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */; };
 		1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */; };
 		1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */; };
 		1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */; };
@@ -31,13 +40,39 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
+		2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
+		2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
+		2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
+		2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4971EF542D30076598C /* MFComment.swift */; };
+		2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4971EF542D30076598C /* MFComment.swift */; };
+		2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4981EF542D30076598C /* MFConversation.swift */; };
+		2CA2B4AB1EF542D30076598C /* MFConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4981EF542D30076598C /* MFConversation.swift */; };
+		2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4991EF542D30076598C /* MFDish.swift */; };
+		2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4991EF542D30076598C /* MFDish.swift */; };
+		2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49A1EF542D30076598C /* MFDishRequest.swift */; };
+		2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49A1EF542D30076598C /* MFDishRequest.swift */; };
+		2CA2B4B01EF542D30076598C /* MFLiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49B1EF542D30076598C /* MFLiveStream.swift */; };
+		2CA2B4B11EF542D30076598C /* MFLiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49B1EF542D30076598C /* MFLiveStream.swift */; };
+		2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */; };
+		2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */; };
+		2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49D1EF542D30076598C /* MFMedia.swift */; };
+		2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49D1EF542D30076598C /* MFMedia.swift */; };
+		2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49E1EF542D30076598C /* MFMessage.swift */; };
+		2CA2B4B71EF542D30076598C /* MFMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49E1EF542D30076598C /* MFMessage.swift */; };
+		2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */; };
+		2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */; };
+		2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A01EF542D30076598C /* MFOrder.swift */; };
+		2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A01EF542D30076598C /* MFOrder.swift */; };
+		2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */; };
+		2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */; };
+		2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A21EF542D30076598C /* MFUser.swift */; };
+		2CA2B4BF1EF542D30076598C /* MFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A21EF542D30076598C /* MFUser.swift */; };
+		2CA2B4C01EF542D30076598C /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A31EF542D30076598C /* Vidup.swift */; };
+		2CA2B4C11EF542D30076598C /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4A31EF542D30076598C /* Vidup.swift */; };
 		2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */; };
 		2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
 		2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */; };
-		2CB8BEA61EF246F800DA78B3 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */; };
-		2CB8BEA71EF246F800DA78B3 /* MFLiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */; };
-		2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */; };
-		2CB8BEA91EF246F800DA78B3 /* Vidup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA51EF246F800DA78B3 /* Vidup.swift */; };
 		2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */; };
 		2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
 		2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */; };
@@ -74,15 +109,6 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
-		5722FEC91EF7A43A00B32883 /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */; };
-		5722FECA1EF7A43A00B32883 /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */; };
-		5722FECB1EF7A43A00B32883 /* GoCookModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC41EF7A43A00B32883 /* GoCookModels.swift */; };
-		5722FECC1EF7A43A00B32883 /* GoCookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */; };
-		5722FECD1EF7A43A00B32883 /* GoCookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */; };
-		5722FECE1EF7A43A00B32883 /* GoCookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */; };
-		5722FECF1EF7A43A00B32883 /* GoCookWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */; };
-		5722FED11EF7A48A00B32883 /* GoCook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5722FED01EF7A48A00B32883 /* GoCook.storyboard */; };
-		5722FED51EF7B31A00B32883 /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FED41EF7B31A00B32883 /* MediaPicker.swift */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -95,8 +121,13 @@
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
-		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
+		BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */; };
+		BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */; };
+		BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */; };
+		BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */; };
+		BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
+		BFB611591EF556D600601626 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB611581EF556D600601626 /* Assets.xcassets */; };
 		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
 		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
 		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
@@ -129,8 +160,9 @@
 		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
 		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
 		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
-		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
-		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
+		BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F5F1EF542BB00223D21 /* Assets.xcassets */; };
+		BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F611EF54ECD00223D21 /* Zain.storyboard */; };
 		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +186,15 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
+		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
+		113139C41EF7BA2D000050D6 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
+		113139C51EF7BA2D000050D6 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
+		113139C61EF7BA2D000050D6 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		113139C71EF7BA2D000050D6 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		113139C81EF7BA2D000050D6 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
+		113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
 		1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageConfigurator.swift; sourceTree = "<group>"; };
 		1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageInteractor.swift; sourceTree = "<group>"; };
 		1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageModels.swift; sourceTree = "<group>"; };
@@ -170,13 +211,24 @@
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
+		2CA2B4951EF542D30076598C /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
+		2CA2B4961EF542D30076598C /* MFActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFActivity.swift; sourceTree = "<group>"; };
+		2CA2B4971EF542D30076598C /* MFComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFComment.swift; sourceTree = "<group>"; };
+		2CA2B4981EF542D30076598C /* MFConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversation.swift; sourceTree = "<group>"; };
+		2CA2B4991EF542D30076598C /* MFDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDish.swift; sourceTree = "<group>"; };
+		2CA2B49A1EF542D30076598C /* MFDishRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDishRequest.swift; sourceTree = "<group>"; };
+		2CA2B49B1EF542D30076598C /* MFLiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveStream.swift; sourceTree = "<group>"; };
+		2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveVideoGatewayAccountDetails.swift; sourceTree = "<group>"; };
+		2CA2B49D1EF542D30076598C /* MFMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMedia.swift; sourceTree = "<group>"; };
+		2CA2B49E1EF542D30076598C /* MFMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessage.swift; sourceTree = "<group>"; };
+		2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNewsFeed.swift; sourceTree = "<group>"; };
+		2CA2B4A01EF542D30076598C /* MFOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFOrder.swift; sourceTree = "<group>"; };
+		2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFPaymentDetails.swift; sourceTree = "<group>"; };
+		2CA2B4A21EF542D30076598C /* MFUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUser.swift; sourceTree = "<group>"; };
+		2CA2B4A31EF542D30076598C /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
 		2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseGateway.swift; sourceTree = "<group>"; };
 		2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFModelsToFirebaseDictionaryConverter.swift; sourceTree = "<group>"; };
 		2CB8BE9E1EF246DB00DA78B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NearbyChefs.storyboard; sourceTree = "<group>"; };
-		2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
-		2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveStream.swift; sourceTree = "<group>"; };
-		2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveVideoGatewayAccountDetails.swift; sourceTree = "<group>"; };
-		2CB8BEA51EF246F800DA78B3 /* Vidup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vidup.swift; sourceTree = "<group>"; };
 		2CB8BEAE1EF2475F00DA78B3 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
 		2CB8BEAF1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
 		2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
@@ -250,15 +302,6 @@
 		2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookConfigurator.swift; sourceTree = "<group>"; };
-		5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookInteractor.swift; sourceTree = "<group>"; };
-		5722FEC41EF7A43A00B32883 /* GoCookModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookModels.swift; sourceTree = "<group>"; };
-		5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPresenter.swift; sourceTree = "<group>"; };
-		5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookRouter.swift; sourceTree = "<group>"; };
-		5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookViewController.swift; sourceTree = "<group>"; };
-		5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookWorker.swift; sourceTree = "<group>"; };
-		5722FED01EF7A48A00B32883 /* GoCook.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoCook.storyboard; sourceTree = "<group>"; };
-		5722FED41EF7B31A00B32883 /* MediaPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -269,12 +312,15 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BF5060DF1EE81B9E00DB646F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../mammafoodie/Info.plist; sourceTree = "<group>"; };
+		BFB611581EF556D600601626 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = mammafoodieTests/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
 		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
@@ -308,8 +354,10 @@
 		BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPagePresenter.swift; sourceTree = "<group>"; };
 		BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageRouter.swift; sourceTree = "<group>"; };
 		BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageViewController.swift; sourceTree = "<group>"; };
-		BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoCollectionViewCell.swift; sourceTree = "<group>"; };
-		BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyData.swift; path = Scenes/LiveVideoMainPage/DummyData.swift; sourceTree = "<group>"; };
+		BFD80F5F1EF542BB00223D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD80F621EF54ECD00223D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Zain.storyboard; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -346,6 +394,25 @@
 				110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */,
 			);
 			path = OtherUsersProfilePage;
+			sourceTree = "<group>";
+		};
+		113139C01EF7BA1C000050D6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */,
+				113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */,
+				113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */,
+				BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */,
+				113139C41EF7BA2D000050D6 /* Montserrat-ExtraLight.otf */,
+				BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */,
+				BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */,
+				113139C51EF7BA2D000050D6 /* Montserrat-Light.otf */,
+				113139C61EF7BA2D000050D6 /* Montserrat-Medium.otf */,
+				113139C71EF7BA2D000050D6 /* Montserrat-Regular.otf */,
+				113139C81EF7BA2D000050D6 /* Montserrat-SemiBold.otf */,
+				113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		1144D9171EEFE31E006213A4 /* OwnProfilePage */ = {
@@ -389,6 +456,7 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				113139C01EF7BA1C000050D6 /* Fonts */,
 				2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */,
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */,
@@ -400,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				BFC927001EF00A7E00602153 /* Comments */,
-				5722FEC11EF7A3FC00B32883 /* GoCook */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
@@ -443,11 +510,7 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
-				5722FED01EF7A48A00B32883 /* GoCook.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -455,10 +518,21 @@
 		2CB8BEA11EF246F800DA78B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */,
-				2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */,
-				2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */,
-				2CB8BEA51EF246F800DA78B3 /* Vidup.swift */,
+				2CA2B4951EF542D30076598C /* LiveVideo.swift */,
+				2CA2B4961EF542D30076598C /* MFActivity.swift */,
+				2CA2B4971EF542D30076598C /* MFComment.swift */,
+				2CA2B4981EF542D30076598C /* MFConversation.swift */,
+				2CA2B4991EF542D30076598C /* MFDish.swift */,
+				2CA2B49A1EF542D30076598C /* MFDishRequest.swift */,
+				2CA2B49B1EF542D30076598C /* MFLiveStream.swift */,
+				2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */,
+				2CA2B49D1EF542D30076598C /* MFMedia.swift */,
+				2CA2B49E1EF542D30076598C /* MFMessage.swift */,
+				2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */,
+				2CA2B4A01EF542D30076598C /* MFOrder.swift */,
+				2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */,
+				2CA2B4A21EF542D30076598C /* MFUser.swift */,
+				2CA2B4A31EF542D30076598C /* Vidup.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -618,21 +692,6 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		5722FEC11EF7A3FC00B32883 /* GoCook */ = {
-			isa = PBXGroup;
-			children = (
-				5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */,
-				5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */,
-				5722FEC41EF7A43A00B32883 /* GoCookModels.swift */,
-				5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */,
-				5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */,
-				5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */,
-				5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */,
-				5722FED41EF7B31A00B32883 /* MediaPicker.swift */,
-			);
-			path = GoCook;
-			sourceTree = "<group>";
-		};
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,8 +740,13 @@
 		BF5060D71EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXGroup;
 			children = (
+				BFB611581EF556D600601626 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
-				BF5060DF1EE81B9E00DB646F /* Assets.xcassets */,
+				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
+				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
@@ -756,8 +820,7 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */,
-				BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */,
+				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -828,7 +891,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = R4UP7L985F;
+						DevelopmentTeam = VC999G43T3;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -865,14 +928,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
+				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
+				BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */,
+				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
+				BFB611591EF556D600601626 /* Assets.xcassets in Resources */,
+				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
+				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
-				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
-				5722FED11EF7A48A00B32883 /* GoCook.storyboard in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
+				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
+				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
+				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
+				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
+				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
-				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
+				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
+				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
+				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
+				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
+				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
+				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,7 +969,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -931,8 +1009,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
+				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
+				2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */,
+				2CA2B4B11EF542D30076598C /* MFLiveStream.swift in Sources */,
+				2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
+				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
+				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
+				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
+				2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
+				2CA2B4BF1EF542D30076598C /* MFUser.swift in Sources */,
+				2CA2B4B71EF542D30076598C /* MFMessage.swift in Sources */,
+				2CA2B4AB1EF542D30076598C /* MFConversation.swift in Sources */,
 				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
 				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
+				2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */,
+				2CA2B4C11EF542D30076598C /* Vidup.swift in Sources */,
+				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,8 +1033,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */,
+				BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */,
+				2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
-				2CB8BEA61EF246F800DA78B3 /* LiveVideo.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
 				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
@@ -951,19 +1046,20 @@
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
-				5722FEC91EF7A43A00B32883 /* GoCookConfigurator.swift in Sources */,
 				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
+				2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
+				BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
-				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
+				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
-				5722FED51EF7B31A00B32883 /* MediaPicker.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
+				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
@@ -972,6 +1068,7 @@
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
+				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
@@ -980,15 +1077,12 @@
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
-				5722FECB1EF7A43A00B32883 /* GoCookModels.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
-				5722FECF1EF7A43A00B32883 /* GoCookWorker.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
-				2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -996,18 +1090,18 @@
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
-				5722FECE1EF7A43A00B32883 /* GoCookViewController.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
+				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
 				2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
+				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
+				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
+				2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
-				5722FECD1EF7A43A00B32883 /* GoCookRouter.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
-				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
-				5722FECA1EF7A43A00B32883 /* GoCookInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
@@ -1016,19 +1110,23 @@
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
+				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
+				2CA2B4C01EF542D30076598C /* Vidup.swift in Sources */,
+				2CA2B4B01EF542D30076598C /* MFLiveStream.swift in Sources */,
+				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
+				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
 				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
-				5722FECC1EF7A43A00B32883 /* GoCookPresenter.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
@@ -1040,8 +1138,8 @@
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
-				2CB8BEA71EF246F800DA78B3 /* MFLiveStream.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
+				2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
 				2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
@@ -1053,7 +1151,6 @@
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
-				2CB8BEA91EF246F800DA78B3 /* Vidup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,6 +1187,14 @@
 				BF5060E21EE81B9E00DB646F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BFD80F611EF54ECD00223D21 /* Zain.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BFD80F621EF54ECD00223D21 /* Base */,
+			);
+			name = Zain.storyboard;
 			sourceTree = "<group>";
 		};
 		F03B6EBB1EED276000985F62 /* Siri.storyboard */ = {
@@ -1233,13 +1338,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = VC999G43T3;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -1252,13 +1357,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = VC999G43T3;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
