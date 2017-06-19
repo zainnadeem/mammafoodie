@@ -115,9 +115,22 @@
 		5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */; };
 		5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */; };
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
-		5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		57801F661EF823F9002E18EF /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */; };
+		57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
+		57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */; };
+		57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */; };
+		57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6B1EF82FE2002E18EF /* GradientView.swift */; };
+		57801F711EF8300F002E18EF /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6E1EF8300F002E18EF /* StringExtention.swift */; };
+		57801F721EF8300F002E18EF /* UItextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */; };
+		57801F731EF8300F002E18EF /* UIViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F701EF8300F002E18EF /* UIViewExtention.swift */; };
+		57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */; };
+		57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */; };
+		57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */; };
+		57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */; };
+		57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */; };
+		57801F821EF83466002E18EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57801F811EF83466002E18EF /* Assets.xcassets */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
@@ -127,7 +140,6 @@
 		BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */; };
 		BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */; };
 		BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
-		BFB611591EF556D600601626 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB611581EF556D600601626 /* Assets.xcassets */; };
 		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
 		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
 		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
@@ -308,10 +320,23 @@
 		5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsPresenter.swift; sourceTree = "<group>"; };
 		5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsRouter.swift; sourceTree = "<group>"; };
 		5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsViewController.swift; sourceTree = "<group>"; };
-		5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByChefsMapAdapter.swift; sourceTree = "<group>"; };
+		57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
+		57801F6B1EF82FE2002E18EF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		57801F6E1EF8300F002E18EF /* StringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UItextFieldExtention.swift; sourceTree = "<group>"; };
+		57801F701EF8300F002E18EF /* UIViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtention.swift; sourceTree = "<group>"; };
+		57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineFiltreWorker.swift; sourceTree = "<group>"; };
+		57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CuisineSearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
+		57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
+		57801F811EF83466002E18EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -320,7 +345,6 @@
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../mammafoodie/Info.plist; sourceTree = "<group>"; };
-		BFB611581EF556D600601626 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = mammafoodieTests/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
 		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
@@ -510,6 +534,10 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
+				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 			);
 			name = Storyboards;
@@ -695,14 +723,14 @@
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
 			isa = PBXGroup;
 			children = (
-				5743C30E1EEA5DF5006E6BE2 /* Workers */,
+				57801F611EF823F9002E18EF /* Adapters */,
 				5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */,
 				5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */,
 				5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */,
 				5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */,
 				5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */,
-				5732C0D81EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift */,
 				5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */,
+				5743C30E1EEA5DF5006E6BE2 /* Workers */,
 			);
 			path = NearbyChefs;
 			sourceTree = "<group>";
@@ -711,9 +739,57 @@
 			isa = PBXGroup;
 			children = (
 				5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */,
+				57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */,
 				5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		57801F611EF823F9002E18EF /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */,
+				57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */,
+				57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */,
+				57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		57801F6A1EF82FE2002E18EF /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				57801F6B1EF82FE2002E18EF /* GradientView.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		57801F6D1EF8300F002E18EF /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				57801F6E1EF8300F002E18EF /* StringExtention.swift */,
+				57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */,
+				57801F701EF8300F002E18EF /* UIViewExtention.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */,
+				57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */,
+			);
+			path = CuisineSearchCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */,
+				57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */,
+			);
+			path = FeaturedMenuCollectionCell;
 			sourceTree = "<group>";
 		};
 		BF5060CC1EE81B9E00DB646F = {
@@ -740,18 +816,16 @@
 		BF5060D71EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXGroup;
 			children = (
-				BFB611581EF556D600601626 /* Assets.xcassets */,
+				57801F811EF83466002E18EF /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
-				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
-				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
+				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
+				57801F6D1EF8300F002E18EF /* Extention */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 				2CB8BEA01EF246EA00DA78B3 /* Storyboards */,
+				57801F6A1EF82FE2002E18EF /* UIView */,
 			);
 			path = mammafoodie;
 			sourceTree = "<group>";
@@ -820,6 +894,8 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */,
+				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
 				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
 			);
 			path = Cells;
@@ -891,7 +967,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = VC999G43T3;
+						DevelopmentTeam = R4UP7L985F;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -929,10 +1005,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
+				57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */,
 				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
 				BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */,
 				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
-				BFB611591EF556D600601626 /* Assets.xcassets in Resources */,
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
 				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
@@ -947,10 +1023,12 @@
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
+				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
+				57801F821EF83466002E18EF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,7 +1047,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -1051,13 +1129,17 @@
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
+				57801F721EF8300F002E18EF /* UItextFieldExtention.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
+				57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */,
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
+				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
+				57801F731EF8300F002E18EF /* UIViewExtention.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
@@ -1082,11 +1164,11 @@
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
+				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
-				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
@@ -1104,6 +1186,8 @@
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
+				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
+				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
@@ -1125,6 +1209,7 @@
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
 				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
+				57801F711EF8300F002E18EF /* StringExtention.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
@@ -1132,9 +1217,11 @@
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
+				57801F661EF823F9002E18EF /* CuisineCollectionViewAdapter.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
+				57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
@@ -1150,6 +1237,7 @@
 				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
+				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1340,11 +1428,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -1359,11 +1447,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
