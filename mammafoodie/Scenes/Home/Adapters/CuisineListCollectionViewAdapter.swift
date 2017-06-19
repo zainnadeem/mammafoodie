@@ -42,6 +42,15 @@ class CuisineListCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICo
         let theAttributes:UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
         let cellFrameInSuperview:CGPoint = collectionView.convert(theAttributes.center, to: collectionView.superview)
         self.conLeadingViewSelectionIndicator.constant = cellFrameInSuperview.x
+        
+        for (index, var cuisine) in self.cuisines.enumerated() {
+            if cuisine.isSelected {
+                cuisine.isSelected = false
+            }
+            self.cuisines[index] = cuisine
+        }
+        self.cuisines[indexPath.item].isSelected = !self.cuisines[indexPath.item].isSelected
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

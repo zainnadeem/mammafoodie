@@ -35,7 +35,7 @@ class HomePageCollectionViewAdapter: NSObject {
         let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: isExpanded)
         self.collectionView.setCollectionViewLayout(layout, animated: animated)
         self.collectionView.reloadData()
-        self.collectionView.setContentOffset(.zero, animated: false)
+//        self.collectionView.setContentOffset(.zero, animated: false)
     }
     
     func getCollectionViewLayout(isExpanded: Bool) -> UICollectionViewFlowLayout {

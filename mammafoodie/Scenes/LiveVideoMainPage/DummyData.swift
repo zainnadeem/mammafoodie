@@ -18,7 +18,11 @@ class DummyData {
     
     var profileUser: MFUser!
     
-    func createusers() {
+    private init() {
+        self.createUserData()
+    }
+    
+    func createUserData() {
         
         user1 = MFUser(id: "u1", name: "Johnny Jones", picture: "JohnnyJones", profileDescription: "")
         user2 = MFUser(id: "u2", name: "Alexa Grimes", picture: "AlexaGrimes", profileDescription: "")
@@ -37,7 +41,6 @@ class DummyData {
     
     
     func populateNewsfeed(completion: ([MFNewsFeed]) -> Void){
-        createusers()
         let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.user1.name + " liked "), right: self.bold(text: user2.name + "'s " + " dish"))
         let newsText2  = combineAttributedStrings(left: self.addUnderline(text: self.user3.name + " started following "), right: self.bold(text: user4.name))
         let newsText3  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " is "), right: self.bold(text: " Live "))
@@ -87,6 +90,7 @@ class DummyData {
     
     
     func populateMenu(completion: ([MFMedia]) -> Void){
+        
         let dish1 = MFDish(id: "d1", user: user1, description: "", name: "The Beef Tower🍖")
         let media1 = MFMedia(id: "m1", cover_large: "BeefTower", cover_small: "BeefTower", createdAt: Date.init(), dish: dish1, user: user1, type: .picture, numberOfViewers: 236)
         
@@ -99,7 +103,7 @@ class DummyData {
         
         
         let dish4 = MFDish(id: "d4", user: user4, description: "", name: "Goatcheese Canape🐐🧀!!")
-        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShukarLive", createdAt: Date.init(), dish: dish4, user: user4, type: .picture, numberOfViewers: 533)
+        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShakurLive", createdAt: Date.init(), dish: dish4, user: user4, type: .picture, numberOfViewers: 533)
         
         
         let dish5 = MFDish(id: "d5", user: user5, description: "", name: "Go To Guac & Chips🥑")
@@ -127,7 +131,6 @@ class DummyData {
     
     
     func populateLiveVideos(completion: ([MFMedia]) -> Void) {
-        createusers()
         let dish1 = MFDish(id: "d1", user: user1, description: "", name: "The Beef Tower🍖")
         let media1 = MFMedia(id: "m1", cover_large: "JohnnyJonesLive", cover_small: "JohnnyJonesLive", createdAt: Date.init(), dish: dish1, user: user1, type: .liveVideo, numberOfViewers: 236)
         
@@ -138,7 +141,7 @@ class DummyData {
         let media3 = MFMedia(id: "m3", cover_large: "BobbyLoveLive", cover_small: "BobbyLoveLive", createdAt: Date.init(), dish: dish3, user: user3, type: .liveVideo, numberOfViewers: 966)
         
         let dish4 = MFDish(id: "d4", user: user4, description: "", name: "Goatcheese Canape🐐🧀!!")
-        let media4 = MFMedia(id: "m4", cover_large: "HadidShakurLive", cover_small: "HadidShukarLive", createdAt: Date.init(), dish: dish4, user: user4, type: .liveVideo, numberOfViewers: 533)
+        let media4 = MFMedia(id: "m4", cover_large: "HadidShakurLive", cover_small: "HadidShakurLive", createdAt: Date.init(), dish: dish4, user: user4, type: .liveVideo, numberOfViewers: 533)
         
         let dish5 = MFDish(id: "d5", user: user5, description: "", name: "Go To Guac & Chips🥑")
         let media5 = MFMedia(id: "m5", cover_large: "SheenaJohnsonLive", cover_small: "SheenaJohnsonLive", createdAt: Date.init(), dish: dish5, user: user5, type: .liveVideo, numberOfViewers: 128)
@@ -160,7 +163,7 @@ class DummyData {
     
     
     func populateVidupPage(completion: ([MFMedia]) -> Void) {
-        createusers()
+        
         let dish1 = MFDish(id: "d1", user: user1, description: "", name: "The Beef Tower🍖")
         let media1 = MFMedia(id: "m1", cover_large: "BeefTower", cover_small: "BeefTower", createdAt: Date.init(), dish: dish1, user: user1, type: .vidup, numberOfViewers: 236)
         
@@ -173,7 +176,7 @@ class DummyData {
         
         
         let dish4 = MFDish(id: "d4", user: user4, description: "", name: "Goatcheese Canape🐐🧀!!")
-        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShukarLive", createdAt: Date.init(), dish: dish4, user: user4, type: .vidup, numberOfViewers: 533)
+        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShakurLive", createdAt: Date.init(), dish: dish4, user: user4, type: .vidup, numberOfViewers: 533)
         
         
         let dish5 = MFDish(id: "d5", user: user5, description: "", name: "Go To Guac & Chips🥑")
@@ -212,7 +215,7 @@ class DummyData {
         let media3 = MFMedia(id: "m3", cover_large: "Crabcakes", cover_small: "Crabcakes", createdAt: Date.init(), dish: dish3, user: profileUser, type: .vidup, numberOfViewers: 966)
         
         let dish4 = MFDish(id: "d4", user: profileUser, description: "", name: "Goatcheese Canape🐐🧀!!")
-        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShukarLive", createdAt: Date.init(), dish: dish4, user: profileUser, type: .vidup, numberOfViewers: 533)
+        let media4 = MFMedia(id: "m4", cover_large: "GoatCheeseCanape", cover_small: "HadidShakurLive", createdAt: Date.init(), dish: dish4, user: profileUser, type: .vidup, numberOfViewers: 533)
         
         let dish5 = MFDish(id: "d5", user: profileUser, description: "", name: "Go To Guac & Chips🥑")
         let media5 = MFMedia(id: "m5", cover_large: "guac&chips", cover_small: "guac&chips", createdAt: Date.init(), dish: dish5, user: profileUser, type: .vidup, numberOfViewers: 128)
@@ -252,7 +255,7 @@ class DummyData {
         ]
         
         
-        createusers()
+        
         let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " liked "), right: self.bold(text: user2.name + "'s " + "dish"))
         let newsText2  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " started following "), right: self.bold(text: user4.name))
         let newsText3  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " is "), right: self.bold(text: " Live "))

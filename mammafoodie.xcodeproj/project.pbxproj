@@ -84,6 +84,11 @@
 		2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */; };
 		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
+		2C12BCDE1EF8348F007AF994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCDD1EF8348F007AF994 /* Assets.xcassets */; };
+		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		2C12BCE01EF83512007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		2C12BCE31EF8401B007AF994 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCE21EF8401B007AF994 /* UIView.swift */; };
+		2C12BCE41EF8401B007AF994 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCE21EF8401B007AF994 /* UIView.swift */; };
 		2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
@@ -171,7 +176,6 @@
 		BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */; };
 		BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */; };
 		BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
-		BFB611591EF556D600601626 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB611581EF556D600601626 /* Assets.xcassets */; };
 		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
 		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
 		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
@@ -204,7 +208,6 @@
 		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
 		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
 		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
-		BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F5F1EF542BB00223D21 /* Assets.xcassets */; };
 		BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F611EF54ECD00223D21 /* Zain.storyboard */; };
 		F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
@@ -277,6 +280,8 @@
 		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
+		2C12BCDD1EF8348F007AF994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C12BCE21EF8401B007AF994 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		2CA2B4951EF542D30076598C /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
 		2CA2B4961EF542D30076598C /* MFActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFActivity.swift; sourceTree = "<group>"; };
 		2CA2B4971EF542D30076598C /* MFComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFComment.swift; sourceTree = "<group>"; };
@@ -386,7 +391,6 @@
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF5060E41EE81B9E00DB646F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../mammafoodie/Info.plist; sourceTree = "<group>"; };
-		BFB611581EF556D600601626 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = mammafoodieTests/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
 		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
 		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
@@ -617,9 +621,18 @@
 			path = MenuItemTblCell;
 			sourceTree = "<group>";
 		};
+		2C12BCE11EF84015007AF994 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCE21EF8401B007AF994 /* UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				2C12BCE11EF84015007AF994 /* Extensions */,
 				113139C01EF7BA1C000050D6 /* Fonts */,
 				2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */,
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
@@ -676,9 +689,11 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
+				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 			);
 			name = Storyboards;
@@ -910,12 +925,8 @@
 		BF5060D71EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXGroup;
 			children = (
-				BFB611581EF556D600601626 /* Assets.xcassets */,
+				2C12BCDD1EF8348F007AF994 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
-				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
@@ -1107,7 +1118,6 @@
 				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
 				BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */,
 				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
-				BFB611591EF556D600601626 /* Assets.xcassets in Resources */,
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
 				2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
@@ -1122,11 +1132,11 @@
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
+				2C12BCDE1EF8348F007AF994 /* Assets.xcassets in Resources */,
 				2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
-				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
@@ -1193,6 +1203,7 @@
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
 				2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2C12BCAC1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
+				2C12BCE01EF83512007AF994 /* DummyData.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCB81EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
 				2C12BCCE1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
@@ -1205,6 +1216,7 @@
 				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
+				2C12BCE41EF8401B007AF994 /* UIView.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
@@ -1252,13 +1264,11 @@
 				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
-				BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
-				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
@@ -1281,6 +1291,7 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
+				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
@@ -1296,6 +1307,7 @@
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
+				2C12BCE31EF8401B007AF994 /* UIView.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
@@ -1583,11 +1595,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				DEVELOPMENT_TEAM = 6G977HV28A;
-=======
 				DEVELOPMENT_TEAM = VC999G43T3;
->>>>>>> Staging
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

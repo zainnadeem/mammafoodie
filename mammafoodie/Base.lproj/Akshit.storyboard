@@ -10,12 +10,20 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="CbE-W3-Qwr">
             <objects>
                 <navigationController id="gGm-3j-9iY" customClass="MFNavigationController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2dt-hl-n0W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2dt-hl-n0W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +40,7 @@
         <!--Home View Controller-->
         <scene sceneID="nYz-st-Mn2">
             <objects>
-                <viewController id="9hs-Dd-I1h" customClass="HomeViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9hs-Dd-I1h" customClass="HomeViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gSx-vL-HjO"/>
                         <viewControllerLayoutGuide type="bottom" id="Zwc-wG-mEW"/>
@@ -48,27 +56,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gsS-WV-TJX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gsS-WV-TJX">
                                 <rect key="frame" x="0.0" y="94" width="375" height="573"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.94901960784313721" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="BUy-Po-Iht">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgg-7C-UzP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P1o-WI-x50">
-                                                    <rect key="frame" x="0.0" y="87" width="375" height="118"/>
+                                                    <rect key="frame" x="0.0" y="90.5" width="375" height="121.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vidups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvx-jO-6ea">
-                                                            <rect key="frame" x="168.5" y="32" width="39.5" height="15"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <rect key="frame" x="165" y="32" width="45" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="ZhU-YT-7f8"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AeD-Xb-qRX">
-                                                            <rect key="frame" x="0.0" y="52.5" width="375" height="51"/>
+                                                            <rect key="frame" x="0.0" y="55.5" width="375" height="51"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="51" identifier="heightClnVidups" id="IZc-Nj-qN0"/>
@@ -82,7 +93,7 @@
                                                             <cells/>
                                                         </collectionView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIe-mR-mKy">
-                                                            <rect key="frame" x="162" y="103.5" width="50" height="30"/>
+                                                            <rect key="frame" x="162" y="106.5" width="50" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="8Ny-Zr-M9F"/>
@@ -106,16 +117,19 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hp4-G3-LhF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="98.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGb-mF-fl2">
-                                                            <rect key="frame" x="155.5" y="8" width="65" height="14.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <rect key="frame" x="151.5" y="8" width="72" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="GFu-dD-UTF"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kAc-f4-SH5">
-                                                            <rect key="frame" x="0.0" y="28.5" width="375" height="51.5"/>
+                                                            <rect key="frame" x="0.0" y="32" width="375" height="51.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="51.5" identifier="heightClnLiveVideos" id="FgG-oV-zaz"/>
@@ -129,7 +143,7 @@
                                                             <cells/>
                                                         </collectionView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uM1-6F-bbZ">
-                                                            <rect key="frame" x="162" y="79.5" width="50" height="30"/>
+                                                            <rect key="frame" x="162" y="83" width="50" height="30"/>
                                                             <color key="backgroundColor" red="0.94509803920000002" green="0.98039215690000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="ATL-hF-tk6"/>
@@ -153,7 +167,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bO6-py-Irf">
-                                                    <rect key="frame" x="162" y="190.5" width="50" height="30"/>
+                                                    <rect key="frame" x="162" y="196.5" width="50" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <inset key="imageEdgeInsets" minX="17" minY="11" maxX="17" maxY="11"/>
                                                     <state key="normal" image="Dropdown"/>
@@ -162,7 +176,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-eF-5k8">
-                                                    <rect key="frame" x="142" y="190.5" width="90" height="35"/>
+                                                    <rect key="frame" x="142" y="196.5" width="90" height="35"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <inset key="imageEdgeInsets" minX="17" minY="11" maxX="17" maxY="11"/>
                                                     <connections>
@@ -170,7 +184,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhw-Zr-hpg">
-                                                    <rect key="frame" x="142" y="79.5" width="90" height="40"/>
+                                                    <rect key="frame" x="142" y="83" width="90" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <inset key="imageEdgeInsets" minX="17" minY="11" maxX="17" maxY="11"/>
                                                     <connections>
@@ -178,7 +192,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ko0-8s-dHs">
-                                                    <rect key="frame" x="162" y="79.5" width="50" height="30"/>
+                                                    <rect key="frame" x="162" y="83" width="50" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <inset key="imageEdgeInsets" minX="17" minY="11" maxX="17" maxY="11"/>
                                                     <state key="normal" image="Dropdown"/>
@@ -235,29 +249,37 @@
                     </view>
                     <navigationItem key="navigationItem" prompt=" " id="KUp-FD-Hs7">
                         <nil key="title"/>
+                        <leftBarButtonItems>
+                            <barButtonItem image="IconUserProfile" style="plain" id="4eX-9g-iPD">
+                                <color key="tintColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </barButtonItem>
+                            <barButtonItem image="IconNotifications" id="Zd5-Ja-wTH">
+                                <color key="tintColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <view key="titleView" contentMode="scaleToFill" id="RaJ-sK-AQY">
                             <rect key="frame" x="112.5" y="30" width="150" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoMammaFoodie" translatesAutoresizingMaskIntoConstraints="NO" id="TLC-WJ-M4u">
-                                    <rect key="frame" x="0.0" y="-25" width="150" height="69"/>
+                                    <rect key="frame" x="0.0" y="-30" width="150" height="66"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="TLC-WJ-M4u" firstAttribute="top" secondItem="RaJ-sK-AQY" secondAttribute="top" constant="-25" id="5H9-EO-RKm"/>
+                                <constraint firstItem="TLC-WJ-M4u" firstAttribute="top" secondItem="RaJ-sK-AQY" secondAttribute="top" constant="-30" id="5H9-EO-RKm"/>
                                 <constraint firstAttribute="trailing" secondItem="TLC-WJ-M4u" secondAttribute="trailing" id="IMX-QX-8i2"/>
                                 <constraint firstItem="TLC-WJ-M4u" firstAttribute="leading" secondItem="RaJ-sK-AQY" secondAttribute="leading" id="LzX-4e-NhH"/>
-                                <constraint firstAttribute="bottom" secondItem="TLC-WJ-M4u" secondAttribute="bottom" id="Qmh-pG-4EN"/>
+                                <constraint firstAttribute="bottom" secondItem="TLC-WJ-M4u" secondAttribute="bottom" constant="8" id="Qmh-pG-4EN"/>
                             </constraints>
                         </view>
                         <rightBarButtonItems>
                             <barButtonItem image="IconMagnifier" style="plain" id="yOd-xT-Bhh">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </barButtonItem>
                             <barButtonItem image="IconAddMenu" id="tdY-ef-j0w">
-                                <color key="tintColor" red="0.1647058824" green="0.91764705879999997" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.38431372549019605" green="0.38431372549019605" blue="0.38431372549019605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -288,17 +310,18 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uks-nx-OdK">
-                            <rect key="frame" x="149" y="8" width="76" height="33"/>
+                            <rect key="frame" x="143" y="8" width="90" height="33"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconMenuSelected" translatesAutoresizingMaskIntoConstraints="NO" id="utb-cn-ggo">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconMenu" translatesAutoresizingMaskIntoConstraints="NO" id="utb-cn-ggo">
                                     <rect key="frame" x="0.0" y="4" width="25" height="25"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="utb-cn-ggo" secondAttribute="height" multiplier="1:1" id="lmz-rm-MpO"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFi-no-q6n">
-                                    <rect key="frame" x="33" y="0.0" width="43" height="33"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="33" y="0.0" width="57" height="33"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -368,7 +391,9 @@
         <image name="IconActivitySelected" width="16" height="16"/>
         <image name="IconAddMenu" width="21" height="18"/>
         <image name="IconMagnifier" width="16" height="16"/>
-        <image name="IconMenuSelected" width="38" height="38"/>
+        <image name="IconMenu" width="38" height="44"/>
+        <image name="IconNotifications" width="16" height="21"/>
+        <image name="IconUserProfile" width="16" height="21"/>
         <image name="LogoMammaFoodie" width="85" height="74"/>
     </resources>
 </document>

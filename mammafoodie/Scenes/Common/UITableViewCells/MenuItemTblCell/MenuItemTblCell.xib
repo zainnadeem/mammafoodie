@@ -8,29 +8,37 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="263" id="KGk-i7-Jjw" customClass="MenuItemTblCell" customModule="mammafoodie" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="261"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="268" id="KGk-i7-Jjw" customClass="MenuItemTblCell" customModule="mammafoodie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="265"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="260.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="264.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-i0-STL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="260.5"/>
+                        <rect key="frame" x="16" y="8" width="288" height="248.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="ilb-QI-exv">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="ilb-QI-exv">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="144"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ilb-QI-exv" secondAttribute="height" multiplier="2:1" id="lIY-Ei-VYS"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpW-qJ-GWx">
-                                <rect key="frame" x="0.0" y="160" width="320" height="100.5"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpW-qJ-GWx">
+                                <rect key="frame" x="0.0" y="144" width="288" height="104.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ogw-rM-xHS" userLabel="Image View - Profile picture">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ogw-rM-xHS" userLabel="Image View - Profile picture">
                                         <rect key="frame" x="16" y="8" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ogw-rM-xHS" secondAttribute="height" id="HcM-Ns-fzN"/>
@@ -38,22 +46,26 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulv-jp-id1" userLabel="Label - Name">
-                                        <rect key="frame" x="49" y="8" width="26.5" height="25"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <rect key="frame" x="49" y="8" width="29" height="25"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frt-4v-5cZ" userLabel="Button - More">
-                                        <rect key="frame" x="270" y="8" width="46" height="25"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frt-4v-5cZ" userLabel="Button - More">
+                                        <rect key="frame" x="238" y="8" width="46" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="jNx-o5-vel"/>
                                             <constraint firstAttribute="width" constant="46" id="nrl-6h-896"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="12" minY="9" maxX="12" maxY="9"/>
+                                        <color key="tintColor" red="0.43137254901960786" green="0.42745098039215684" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="13" minY="10" maxX="13" maxY="10"/>
                                         <state key="normal" title="Button" image="IconMore"/>
+                                        <connections>
+                                            <action selector="btnOptionsTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Wif-Gi-XMH"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-CB-PM1" userLabel="View - Separator">
-                                        <rect key="frame" x="16" y="41" width="288" height="1"/>
+                                        <rect key="frame" x="16" y="41" width="256" height="1"/>
                                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="aoP-1V-gC2"/>
@@ -62,16 +74,16 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HEALTHY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34f-Xq-yQG" userLabel="Label - Diet type">
                                         <rect key="frame" x="20" y="50" width="38" height="10"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fruit Salad" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4C-rg-xHF" userLabel="Label - Diet type">
-                                        <rect key="frame" x="20" y="70" width="65" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="20" y="70" width="75.5" height="18.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                        <color key="textColor" red="0.13333333333333333" green="0.14509803921568626" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDietVeg" translatesAutoresizingMaskIntoConstraints="NO" id="sXp-35-j1j">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDietVeg" translatesAutoresizingMaskIntoConstraints="NO" id="sXp-35-j1j">
                                         <rect key="frame" x="61" y="50" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sXp-35-j1j" secondAttribute="height" id="VaU-Kb-p5T"/>
@@ -79,9 +91,9 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQq-jL-r7A" userLabel="View - Time">
-                                        <rect key="frame" x="254" y="42" width="50" height="50"/>
+                                        <rect key="frame" x="222" y="42" width="50" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDuration" translatesAutoresizingMaskIntoConstraints="NO" id="qhe-ZD-UGO" userLabel="Image View - Profile picture">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDuration" translatesAutoresizingMaskIntoConstraints="NO" id="qhe-ZD-UGO" userLabel="Image View - Profile picture">
                                                 <rect key="frame" x="18.5" y="8" width="14" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="qhe-ZD-UGO" secondAttribute="height" id="iEF-xy-DwH"/>
@@ -93,7 +105,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Q6b-90-epU"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="9"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                                                 <color key="textColor" red="0.3529411764705882" green="0.34901960784313724" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -110,9 +122,9 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtb-mv-2PZ" userLabel="View - Time">
-                                        <rect key="frame" x="204" y="42" width="50" height="50"/>
+                                        <rect key="frame" x="172" y="42" width="50" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconOrders" translatesAutoresizingMaskIntoConstraints="NO" id="mY6-KT-XdF" userLabel="Image View - Profile picture">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconOrders" translatesAutoresizingMaskIntoConstraints="NO" id="mY6-KT-XdF" userLabel="Image View - Profile picture">
                                                 <rect key="frame" x="18.5" y="8" width="14" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="14" id="2AB-vR-GE9"/>
@@ -124,7 +136,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="kQZ-aO-MkJ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="9"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.34901960780000002" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -140,9 +152,9 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-es-7qk" userLabel="View - Time">
-                                        <rect key="frame" x="154" y="42" width="50" height="50"/>
+                                        <rect key="frame" x="122" y="42" width="50" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLocation" translatesAutoresizingMaskIntoConstraints="NO" id="46r-mU-zC6" userLabel="Image View - Profile picture">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLocation" translatesAutoresizingMaskIntoConstraints="NO" id="46r-mU-zC6" userLabel="Image View - Profile picture">
                                                 <rect key="frame" x="18.5" y="8" width="14" height="14"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="46r-mU-zC6" secondAttribute="height" id="QZ9-Ia-gOK"/>
@@ -154,7 +166,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="SPy-fI-8wk"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="9"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.34901960780000002" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -213,17 +225,47 @@
                             <constraint firstItem="QpW-qJ-GWx" firstAttribute="leading" secondItem="SDJ-i0-STL" secondAttribute="leading" id="pZf-7W-tdK"/>
                             <constraint firstItem="ilb-QI-exv" firstAttribute="top" secondItem="SDJ-i0-STL" secondAttribute="top" id="umY-t0-LL5"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" red="0.015686274509803921" green="0.043137254901960784" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                <real key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.10000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.94509803920000002" green="0.94901960780000005" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="SDJ-i0-STL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1yz-LF-eBj"/>
-                    <constraint firstAttribute="bottom" secondItem="SDJ-i0-STL" secondAttribute="bottom" id="VPu-dr-7yh"/>
-                    <constraint firstAttribute="trailing" secondItem="SDJ-i0-STL" secondAttribute="trailing" id="d9g-ZC-TyK"/>
-                    <constraint firstItem="SDJ-i0-STL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lmp-bh-efx"/>
+                    <constraint firstItem="SDJ-i0-STL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1yz-LF-eBj"/>
+                    <constraint firstAttribute="bottom" secondItem="SDJ-i0-STL" secondAttribute="bottom" constant="8" id="VPu-dr-7yh"/>
+                    <constraint firstAttribute="trailing" secondItem="SDJ-i0-STL" secondAttribute="trailing" constant="16" id="d9g-ZC-TyK"/>
+                    <constraint firstItem="SDJ-i0-STL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="lmp-bh-efx"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-48" y="-5.5"/>
+            <connections>
+                <outlet property="imgDietIcon" destination="sXp-35-j1j" id="L6J-av-N5S"/>
+                <outlet property="imgView" destination="ilb-QI-exv" id="tPA-jK-Z7t"/>
+                <outlet property="imgViewProfilePicture" destination="ogw-rM-xHS" id="OkP-8U-Mh8"/>
+                <outlet property="lblDietType" destination="34f-Xq-yQG" id="EeX-q2-rJv"/>
+                <outlet property="lblDishName" destination="b4C-rg-xHF" id="kHd-IR-3vS"/>
+                <outlet property="lblDistance" destination="sbN-O5-9LR" id="GfY-9X-VCX"/>
+                <outlet property="lblOrderCounts" destination="gpj-j6-y4K" id="qcV-v9-GLc"/>
+                <outlet property="lblTimeToPrepare" destination="cvD-FN-Afw" id="hZp-2i-seo"/>
+                <outlet property="lblUsername" destination="Ulv-jp-id1" id="gGI-KY-N7s"/>
+                <outlet property="viewContainer" destination="SDJ-i0-STL" id="zwK-D6-5Ut"/>
+            </connections>
+            <point key="canvasLocation" x="-187" y="-30"/>
         </tableViewCell>
     </objects>
     <resources>

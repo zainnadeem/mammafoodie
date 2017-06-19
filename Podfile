@@ -22,4 +22,5 @@ target 'mammafoodie' do
   pod 'UIColor_Hex_Swift', '~> 3.0.2'
 
   pod 'TRMosaicLayout'
+
 end
