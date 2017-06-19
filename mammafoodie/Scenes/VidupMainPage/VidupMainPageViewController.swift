@@ -54,17 +54,9 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
         
         //Move to cell once object is established
+        cell.media = self.vidups.arrayOfVidups[indexPath.row]
         cell.setViewProperties()
-        cell.title.text = "You Gotta See This!"
-        cell.screenShotImageView.image = #imageLiteral(resourceName: "cook")
-        cell.screenShotImageView.contentMode = .scaleAspectFill
-        cell.btnProfileImage.setImage(#imageLiteral(resourceName: "ProfileImageShot"), for: .normal)
         
-        cell.btnUsername.setTitle("Johnny Patel", for: .normal)
-        
-        
-        cell.btnNumberOfViews.setTitle("1234", for: .normal)
-        cell.btnTimeLeft.setTitle("21 min", for: .normal)
 
         //Arrange views depending on specific cells
         if indexPath.item % 3 != 0 {

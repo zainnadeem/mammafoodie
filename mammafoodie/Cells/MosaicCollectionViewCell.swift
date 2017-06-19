@@ -12,28 +12,62 @@ class MosaicCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var smallCellConstraints: [NSLayoutConstraint]!
     @IBOutlet var largeCellConstraints: [NSLayoutConstraint]!
+    
+    var media: MFMedia! {
+        didSet {
+            self.updateUI()
+        }
+    }
+    
+    func updateUI(){
 
+        screenShotImageView.image = UIImage(named: self.media.cover_large!)
+
+        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
+        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
+        
+        //need to figure out date
+//        btnTimeLeft.titleLabel?.text = String(self.media.e)
+        btnUsername.setTitle(self.media.user.name!, for: .normal)
+        self.title.text = self.media.dish.name!
+        
+        if self.media.type == .liveVideo {
+            btnTimeLeft.isHidden = true
+            
+        }else{
+            btnTimeLeft.isHidden = false
+        }
+ 
+    }
+    
+    
+    
     func setViewProperties(){
-        
-        
         //sets properties for buttons inside cell
-        let buttons : [UIButton] = [btnProfileImage, btnNumberOfViews, btnTimeLeft, btnUsername]
+        let buttons : [UIButton] = [btnNumberOfViews, btnTimeLeft, btnUsername]
+        screenShotImageView.contentMode = .scaleAspectFill
+        
         
         for button in buttons {
             button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.layer.shadowRadius = 3
+            button.layer.shadowRadius = 5
             button.layer.shadowColor = UIColor.black.cgColor
             button.layer.shadowOffset = CGSize(width: 0, height: 2)
-            button.layer.shadowOpacity = 0.5
+            button.layer.shadowOpacity = 1
             button.layer.masksToBounds = false
             button.imageView?.contentMode = .scaleAspectFit
         }
+        
+        btnUsername.titleLabel?.numberOfLines = 2
+        btnUsername.titleLabel?.adjustsFontSizeToFitWidth = false
 
-        btnProfileImage.contentMode = .scaleAspectFit
-        btnProfileImage.imageView?.layer.borderWidth = 0
-        btnProfileImage.imageView?.layer.masksToBounds = false
-        btnProfileImage.imageView?.layer.borderColor = UIColor.white.cgColor
-        btnProfileImage.imageView?.layer.cornerRadius = btnProfileImage.frame.height/2
+        btnUsername.titleLabel?.lineBreakMode = .byWordWrapping
+        
+        btnProfileImage.imageView?.contentMode = .scaleAspectFill
+        btnProfileImage.layer.shadowRadius = 3
+        btnProfileImage.layer.shadowColor = UIColor.blue.cgColor
+        btnProfileImage.layer.masksToBounds = false
+        btnProfileImage.imageView?.layer.cornerRadius = btnProfileImage.frame.height / 2
         btnProfileImage.imageView?.clipsToBounds = true
 
         title.layer.shadowRadius = 3

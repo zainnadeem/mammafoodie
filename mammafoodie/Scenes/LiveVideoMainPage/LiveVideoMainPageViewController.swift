@@ -17,10 +17,11 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     var liveVideos: LiveVideoMainPage.Response!
     
     //Create outlet to collectionview here. For now use dummy property.
-    var liveVideoCollectionView = UICollectionView()
     //
     
     // MARK: - Object lifecycle
+    
+    @IBOutlet weak var liveVideoCollectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +30,19 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
     // MARK: - View lifecycle
     
+    @IBAction func populateNewsfeed(_ sender: Any) {
+        
+        let dData = DummyData.sharedInstance
+        
+        dData.populateNewsfeed { (newsfeed) in
+            
+            
+        }
+        
+        let user = dData.getUserForProfilePage()
+        
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.liveVideoCollectionView.delegate = self
@@ -57,7 +71,19 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
-        cell.title.text = liveVideos.arrayOfLiveVideos[indexPath.row].name
+        
+        cell.setViewProperties()
+        cell.media = liveVideos.arrayOfLiveVideos[indexPath.row]
+        
+        //Arrange views depending on specific cells
+        if indexPath.item % 3 != 0 {
+            cell.setSmallCellConstraints()
+
+        }else{
+            cell.setLargeCellContraints()
+            
+        }
+        
         return cell
     }
     
