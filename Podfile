@@ -18,5 +18,6 @@ target 'mammafoodie' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Alamofire'
   
 end

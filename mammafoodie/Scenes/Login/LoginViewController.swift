@@ -1,7 +1,7 @@
 import UIKit
 import SafariServices
 import FirebaseAuth
-
+import Alamofire
 
 protocol LoginViewControllerInput {
     func showHomeScreen()
@@ -178,6 +178,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBAction func logout(sender:UIButton){
         
         //guard self.txtEmail.text != nil else {return}
+        
         
         output.logout()
     }

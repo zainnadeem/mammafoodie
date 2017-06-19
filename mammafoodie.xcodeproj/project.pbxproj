@@ -15,6 +15,7 @@
 		110437191EF2C2E2009AE0DF /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110437171EF2C2E2009AE0DF /* MFUserAddress.swift */; };
 		1104371B1EF2C3AB009AE0DF /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104371A1EF2C3AB009AE0DF /* MFDish.swift */; };
 		1104371C1EF2C3AB009AE0DF /* MFDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104371A1EF2C3AB009AE0DF /* MFDish.swift */; };
+		1104371E1EF3B4A1009AE0DF /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1104371D1EF3B4A1009AE0DF /* Alamofire.framework */; };
 		110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */; };
 		110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */; };
 		110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */; };
@@ -148,6 +149,7 @@
 		110437141EF2B775009AE0DF /* MFUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUser.swift; sourceTree = "<group>"; };
 		110437171EF2C2E2009AE0DF /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
 		1104371A1EF2C3AB009AE0DF /* MFDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDish.swift; sourceTree = "<group>"; };
+		1104371D1EF3B4A1009AE0DF /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/mammafoodie-ehnhuwpctqmfhscluorugemlmycx/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileConfigurator.swift; sourceTree = "<group>"; };
 		110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileInteractor.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1104371E1EF3B4A1009AE0DF /* Alamofire.framework in Frameworks */,
 				6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,6 +757,7 @@
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1104371D1EF3B4A1009AE0DF /* Alamofire.framework */,
 				CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */,
 			);
 			name = Frameworks;

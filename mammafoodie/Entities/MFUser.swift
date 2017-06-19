@@ -11,7 +11,9 @@ import Foundation
 struct MFUser {
     
     var id:String
-    var name:String
+    var firstName:String
+    var lastName:String
+    var displayName:String 
     var email:String
     var phone:String
     var address: MFUserAddress
@@ -19,6 +21,5 @@ struct MFUser {
     var following: [MFUser]
     var cookedDishes:[MFDish]
     var boughtDishes:[MFDish]
-    
     
 }

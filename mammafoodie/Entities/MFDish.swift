@@ -12,5 +12,6 @@ struct MFDish{
     var name:String
     var id : String
     var picURL:String
+    var price:Int
     
 }

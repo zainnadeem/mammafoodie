@@ -14,6 +14,8 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
+    var uberAccessTokenHandler : ((_ token:String) -> ())?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -24,6 +26,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            
+            //Handle the callback from uber and extract auth code
+            if url.scheme == "mammafoodie-uber" {
+                let urlString = url.relativeString
+                
+                
+                if let codeRange = urlString.range(of: "code="){
+                    let authCode = urlString.substring(from: (codeRange.upperBound))
+                    UberRushDeliveryWorker.getAccessToken(authorizationCode: authCode, completion: { (json) in
+                        let accessToken = json!["access_token"] as! String
+                        self.uberAccessTokenHandler?(accessToken)
+                    })
+                    
+                } else {
+                    print("We could not get your authorization code from Uber. Please try again.")
+                }
+            }
+
             
             //Gmail
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String

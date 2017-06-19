@@ -16,6 +16,7 @@ struct MFUserAddress{
     var country:String
     var state:String
     var postalCode:String
-    var latLong:String
+    var latitude:String
+    var longitude:String
     
 }
