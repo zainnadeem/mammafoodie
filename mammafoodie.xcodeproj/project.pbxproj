@@ -369,6 +369,22 @@
 			path = OtherUsersProfilePage;
 			sourceTree = "<group>";
 		};
+		113139C01EF7BA1C000050D6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */,
+				113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */,
+				113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */,
+				113139C41EF7BA2D000050D6 /* Montserrat-ExtraLight.otf */,
+				113139C51EF7BA2D000050D6 /* Montserrat-Light.otf */,
+				113139C61EF7BA2D000050D6 /* Montserrat-Medium.otf */,
+				113139C71EF7BA2D000050D6 /* Montserrat-Regular.otf */,
+				113139C81EF7BA2D000050D6 /* Montserrat-SemiBold.otf */,
+				113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		1144D9171EEFE31E006213A4 /* OwnProfilePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +426,7 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				113139C01EF7BA1C000050D6 /* Fonts */,
 				2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */,
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */,
@@ -880,14 +897,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
+				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
+				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
+				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
+				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
+				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
+				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
 				113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
+				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
+				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
