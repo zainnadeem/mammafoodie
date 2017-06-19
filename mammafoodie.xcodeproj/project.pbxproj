@@ -74,6 +74,15 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
+		5722FEC91EF7A43A00B32883 /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */; };
+		5722FECA1EF7A43A00B32883 /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */; };
+		5722FECB1EF7A43A00B32883 /* GoCookModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC41EF7A43A00B32883 /* GoCookModels.swift */; };
+		5722FECC1EF7A43A00B32883 /* GoCookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */; };
+		5722FECD1EF7A43A00B32883 /* GoCookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */; };
+		5722FECE1EF7A43A00B32883 /* GoCookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */; };
+		5722FECF1EF7A43A00B32883 /* GoCookWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */; };
+		5722FED11EF7A48A00B32883 /* GoCook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5722FED01EF7A48A00B32883 /* GoCook.storyboard */; };
+		5722FED51EF7B31A00B32883 /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5722FED41EF7B31A00B32883 /* MediaPicker.swift */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -241,6 +250,15 @@
 		2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookConfigurator.swift; sourceTree = "<group>"; };
+		5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookInteractor.swift; sourceTree = "<group>"; };
+		5722FEC41EF7A43A00B32883 /* GoCookModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookModels.swift; sourceTree = "<group>"; };
+		5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPresenter.swift; sourceTree = "<group>"; };
+		5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookRouter.swift; sourceTree = "<group>"; };
+		5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookViewController.swift; sourceTree = "<group>"; };
+		5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookWorker.swift; sourceTree = "<group>"; };
+		5722FED01EF7A48A00B32883 /* GoCook.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoCook.storyboard; sourceTree = "<group>"; };
+		5722FED41EF7B31A00B32883 /* MediaPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -382,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				BFC927001EF00A7E00602153 /* Comments */,
+				5722FEC11EF7A3FC00B32883 /* GoCook */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
@@ -428,6 +447,7 @@
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				5722FED01EF7A48A00B32883 /* GoCook.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -596,6 +616,21 @@
 			children = (
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		5722FEC11EF7A3FC00B32883 /* GoCook */ = {
+			isa = PBXGroup;
+			children = (
+				5722FEC21EF7A43A00B32883 /* GoCookConfigurator.swift */,
+				5722FEC31EF7A43A00B32883 /* GoCookInteractor.swift */,
+				5722FEC41EF7A43A00B32883 /* GoCookModels.swift */,
+				5722FEC51EF7A43A00B32883 /* GoCookPresenter.swift */,
+				5722FEC61EF7A43A00B32883 /* GoCookRouter.swift */,
+				5722FEC71EF7A43A00B32883 /* GoCookViewController.swift */,
+				5722FEC81EF7A43A00B32883 /* GoCookWorker.swift */,
+				5722FED41EF7B31A00B32883 /* MediaPicker.swift */,
+			);
+			path = GoCook;
 			sourceTree = "<group>";
 		};
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
@@ -793,8 +828,9 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = R4UP7L985F;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -831,6 +867,7 @@
 			files = (
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
+				5722FED11EF7A48A00B32883 /* GoCook.storyboard in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
@@ -854,7 +891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -914,6 +951,7 @@
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
+				5722FEC91EF7A43A00B32883 /* GoCookConfigurator.swift in Sources */,
 				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
@@ -924,6 +962,7 @@
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
+				5722FED51EF7B31A00B32883 /* MediaPicker.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
@@ -941,11 +980,13 @@
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
+				5722FECB1EF7A43A00B32883 /* GoCookModels.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
+				5722FECF1EF7A43A00B32883 /* GoCookWorker.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
@@ -955,15 +996,18 @@
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
+				5722FECE1EF7A43A00B32883 /* GoCookViewController.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
 				2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
+				5722FECD1EF7A43A00B32883 /* GoCookRouter.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
+				5722FECA1EF7A43A00B32883 /* GoCookInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
@@ -984,6 +1028,7 @@
 				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
+				5722FECC1EF7A43A00B32883 /* GoCookPresenter.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
@@ -1190,10 +1235,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -1208,10 +1254,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
