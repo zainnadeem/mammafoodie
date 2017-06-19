@@ -21,7 +21,7 @@ struct MFMessage {
     init(with senderDisplayName: String,  messagetext: String, senderId: String) {
 //        self.name = name
         self.messageText = messagetext
-//        self.senderId = userID
+        self.senderId = senderId
     }
     
 }

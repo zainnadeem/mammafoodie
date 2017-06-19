@@ -3,43 +3,32 @@ import Firebase
 import JSQMessagesViewController
 
 
-protocol ChatViewControllerInput {
-    
-}
-
-protocol ChatViewControllerOutput {
-   func chatWorkerInfo()
-}
 
 struct User {
      var id :String
      var name :String
 }
 
-class ChatViewController: JSQMessagesViewController, ChatViewControllerInput {
+class ChatViewController: JSQMessagesViewController {
+    
+    
+    var model = MFConversation()
+    var modelMsg = MFMessage(with: "", messagetext: "", senderId: "")
+
     
     var currentUser: User {
         return user1
     }
 
-    var output: ChatViewControllerOutput!
-    var router: ChatRouter!
     
     // MARK: - Object lifecycle
-//    var messages = [JSQMessage]()
     var messages = [MFMessage]()
     var avatarDict = [String: JSQMessagesAvatarImage]()
     
     //ChatUsers
     let user1 = User(id: "1", name: "Steve")
     let user2 = User(id: "2", name: "siri")
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        ChatConfigurator.sharedInstance.configure(viewController: self)
-    }
-    
+       
 }
 
 
@@ -50,16 +39,14 @@ extension ChatViewController {
         print(senderId)
         let message = MFMessage(with: senderDisplayName, messagetext: text, senderId: senderId)
         messages.append(message)
-         print(messages)
+        // print(messages)
         finishSendingMessage()
-        self.output.chatWorkerInfo()
-
+        ChatAPI()
     }
-    
-    
     
     //senderbabbletable
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+       // print(messages)
         let message = messages[indexPath.row]
         let messageUsername = message.senderDisplayName
         return NSAttributedString(string: messageUsername)
@@ -76,11 +63,6 @@ extension ChatViewController {
         return nil
     }
     
-    override func didPressAccessoryButton(_ sender: UIButton!) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true, completion: nil)
-    }
     
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -91,7 +73,7 @@ extension ChatViewController {
         if currentUser.id == message.senderId {
             return bubbleFactory?.outgoingMessagesBubbleImage(with: .green)
         } else {
-            return bubbleFactory?.incomingMessagesBubbleImage(with: .blue)
+            return bubbleFactory?.incomingMessagesBubbleImage(with: .lightGray)
         }
     }
     
@@ -109,50 +91,57 @@ extension ChatViewController {
 extension ChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // tell JSQMessagesViewController
         // who is the current user
         self.senderId = currentUser.id
-        print(senderId)
-        print(currentUser.id)
+       // print(senderId)
+        //print(currentUser.id)
         self.senderDisplayName = currentUser.name
         self.messages = getMessages()
-
+       
+        //Hiding attach Image
+        self.inputToolbar.contentView.leftBarButtonItem = nil
     }
+    
+    func ChatAPI() {
+        
+        callAPI { message in
+            let response = Chat.Response(arrayOfLiveChat: message)
+            print(response)
+        }
+    }
+    
+    func callAPI(completion: @escaping ([MFMessage]) -> Void) {
+        
+        //        let video = Message(name: "1")
+        DatabaseGateway.sharedInstance.createConversation(with:model) {newModel in
+            print(self.model)
+        }
+        DatabaseGateway.sharedInstance.createMessage(with: modelMsg) {_ in
+            //print(self.modelMsg)
+            completion([self.modelMsg])
+            
+        }
+    }
+
 }
 
+
 extension ChatViewController {
-//    func getMessages() -> [JSQMessage] {
-//        var messages = [JSQMessage]()
-//        
-//        let message2 = JSQMessage(senderId: "2", displayName: "siri", text: "Helo.")
-//        messages.append(message2!)
-//        
-//        return messages
-//    }
     
     func getMessages() -> [MFMessage] {
         var messages = [MFMessage]()
         
-        let message1 = MFMessage(with: "Steve", messagetext: "Hey Tim how are you?", senderId: "1")
-        let message2 = MFMessage(with: "siri", messagetext: "Helo.", senderId: "2")
+        let message1 = MFMessage(with: "Steve", messagetext: "Hey how are you?", senderId: "1")
+        let message2 = MFMessage(with: "siri", messagetext: "Iam Fine.", senderId: "2")
        
         messages.append(message1)
         messages.append(message2)
-        
+//        print(messages)
         return messages
     }
 }
 
-extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let picture = info[UIImagePickerControllerOriginalImage] as? UIImage
-        _ = JSQPhotoMediaItem(image: picture)
-//        messages.append(MFMessage(senderId:senderId, displayName:"steve", text:photo))
-        self.dismiss(animated: true, completion: nil)
-        self.collectionView.reloadData()
-    }
-}
 
 
 

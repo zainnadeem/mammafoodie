@@ -123,15 +123,10 @@
 		BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */; };
 		BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */; };
 		CDBB0125C606D24BD89F355C /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
-		F00F52651EF2729D009DDAB1 /* ChatConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525C1EF2729D009DDAB1 /* ChatConfigurator.swift */; };
-		F00F52661EF2729D009DDAB1 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525D1EF2729D009DDAB1 /* ChatInteractor.swift */; };
 		F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525E1EF2729D009DDAB1 /* ChatModels.swift */; };
-		F00F52681EF2729D009DDAB1 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525F1EF2729D009DDAB1 /* ChatPresenter.swift */; };
-		F00F52691EF2729D009DDAB1 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52601EF2729D009DDAB1 /* ChatRouter.swift */; };
 		F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52621EF2729D009DDAB1 /* ChatViewController.swift */; };
 		F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
 		F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */; };
-		F00F526F1EF27316009DDAB1 /* ChatWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F526E1EF27316009DDAB1 /* ChatWorker.swift */; };
 		F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */; };
 		F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
 		F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
@@ -153,6 +148,8 @@
 		F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */; };
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
+		F0B161AE1EF7CDC500D76FD8 /* MFDishRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161AD1EF7CDC500D76FD8 /* MFDishRequest.swift */; };
+		F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */; };
 		F0BBF3A01EF27ACA00D55615 /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA21EF246F800DA78B3 /* LiveVideo.swift */; };
 		F0BBF3A11EF27ACA00D55615 /* MFLiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA31EF246F800DA78B3 /* MFLiveStream.swift */; };
 		F0BBF3A21EF27ACA00D55615 /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEA41EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift */; };
@@ -330,15 +327,10 @@
 		BFC9274C1EF00B0700602153 /* LiveVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		BFC9274D1EF00B0700602153 /* VidupCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F00F525C1EF2729D009DDAB1 /* ChatConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfigurator.swift; sourceTree = "<group>"; };
-		F00F525D1EF2729D009DDAB1 /* ChatInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		F00F525E1EF2729D009DDAB1 /* ChatModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModels.swift; sourceTree = "<group>"; };
-		F00F525F1EF2729D009DDAB1 /* ChatPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
-		F00F52601EF2729D009DDAB1 /* ChatRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
 		F00F52621EF2729D009DDAB1 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
-		F00F526E1EF27316009DDAB1 /* ChatWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatWorker.swift; sourceTree = "<group>"; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 		F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishConfigurator.swift; path = RequestDish/RequestDishConfigurator.swift; sourceTree = "<group>"; };
 		F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishInteractor.swift; path = RequestDish/RequestDishInteractor.swift; sourceTree = "<group>"; };
@@ -356,6 +348,8 @@
 		F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListWorker.swift; sourceTree = "<group>"; };
 		F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListAdapter.swift; sourceTree = "<group>"; };
+		F0B161AD1EF7CDC500D76FD8 /* MFDishRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MFDishRequest.swift; path = RequestDish/MFDishRequest.swift; sourceTree = "<group>"; };
+		F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewPlaceHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,6 +731,7 @@
 				BFC927071EF00A7E00602153 /* CommentsRouter.swift */,
 				BFC927081EF00A7E00602153 /* CommentsViewController.swift */,
 				BFC927091EF00A7E00602153 /* CommentsWorker.swift */,
+				F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -798,15 +793,10 @@
 		F00F525B1EF2729D009DDAB1 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				F00F525C1EF2729D009DDAB1 /* ChatConfigurator.swift */,
-				F00F525D1EF2729D009DDAB1 /* ChatInteractor.swift */,
 				F00F525E1EF2729D009DDAB1 /* ChatModels.swift */,
-				F00F525F1EF2729D009DDAB1 /* ChatPresenter.swift */,
-				F00F52601EF2729D009DDAB1 /* ChatRouter.swift */,
 				F00F52621EF2729D009DDAB1 /* ChatViewController.swift */,
 				F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */,
 				F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */,
-				F00F526E1EF27316009DDAB1 /* ChatWorker.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -821,6 +811,7 @@
 				F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */,
 				F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */,
 				F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */,
+				F0B161AD1EF7CDC500D76FD8 /* MFDishRequest.swift */,
 			);
 			name = RequestDish;
 			sourceTree = "<group>";
@@ -1084,7 +1075,7 @@
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
-				F00F52691EF2729D009DDAB1 /* ChatRouter.swift in Sources */,
+				F0B161AE1EF7CDC500D76FD8 /* MFDishRequest.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
@@ -1098,7 +1089,6 @@
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				F097D8CF1EF3D8BA00FCF967 /* ChatListTableViewCell.swift in Sources */,
 				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
-				F00F52681EF2729D009DDAB1 /* ChatPresenter.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
@@ -1133,19 +1123,16 @@
 				2CB8BEA81EF246F800DA78B3 /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
-				F00F52651EF2729D009DDAB1 /* ChatConfigurator.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
-				F00F52661EF2729D009DDAB1 /* ChatInteractor.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
 				2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
-				F00F526F1EF27316009DDAB1 /* ChatWorker.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
@@ -1197,6 +1184,7 @@
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
+				F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
 				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */,

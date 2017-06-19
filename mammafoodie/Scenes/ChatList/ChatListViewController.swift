@@ -23,7 +23,6 @@ class ChatListViewController: UIViewController, ChatListViewControllerInput,Chat
     }
     
     // MARK: - View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chatListTableAdapter.chatTableView = self.chatListTableview
@@ -33,13 +32,7 @@ class ChatListViewController: UIViewController, ChatListViewControllerInput,Chat
     
     func chatListPage(View:UIViewController)
     {
-        self.present(View, animated: true, completion: nil)
+        self.navigationController?.pushViewController(View, animated: true)
     }
-
-
-    
-    // MARK: - Event handling
-    
-    // MARK: - Display logic
     
 }

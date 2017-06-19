@@ -40,8 +40,8 @@ class RequestDishViewController: UIViewController, RequestDishViewControllerInpu
     }
     // MARK: - Display logic
     @IBAction func chatBtn(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatListViewController") as! ChatListViewController
-        present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatListViewController") as! ChatListViewController
+//        present(vc, animated: true, completion: nil)
     }
     
 }

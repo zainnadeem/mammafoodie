@@ -1,6 +1,5 @@
 import UIKit
 import Foundation
-import JSQMessagesViewController
 
 struct Chat {
         struct Request {
