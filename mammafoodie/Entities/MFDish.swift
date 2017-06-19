@@ -1,5 +1,6 @@
 class MFDish {
     var id: String!
+    var name: String!
     var user: MFUser!
     var media: MFMedia?
     var description: String?
@@ -7,6 +8,13 @@ class MFDish {
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
     var boughtBy: [MFOrder:Date] = [:]
+    
+    init(id: String, user: MFUser, description: String, name: String) {
+        self.id = id
+        self.user = user
+        self.description = description
+        self.name = name
+    }
 }
 
 extension MFDish: Hashable {

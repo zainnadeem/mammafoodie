@@ -1,8 +1,8 @@
-enum MFMediaType {
-    case liveVideo
-    case vidup
-    case picture
-    case unknown
+enum MFMediaType : String {
+    case liveVideo = "liveVideo"
+    case vidup = "vidup"
+    case picture = "picture"
+    case unknown = "unknown"
 }
 
 enum MediaAccessUserType {
@@ -24,9 +24,18 @@ class MFMedia {
     var type: MFMediaType = .unknown
     var user: MFUser!
     
+    
     var accessMode: MediaAccessUserType = .viewer
     
-    init() {
+    init(id: String, cover_large: String, cover_small: String, createdAt: Date, dish: MFDish, user: MFUser, type: MFMediaType, numberOfViewers: UInt) {
+        self.id = id
+        self.cover_large = cover_large
+        self.cover_small = cover_small
+        self.createdAt = createdAt
+        self.dish = dish
+        self.user = user
+        self.type = type
+        self.numberOfViewers = numberOfViewers
     }
 }
 
