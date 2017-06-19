@@ -6,9 +6,27 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
     
     func createStaticData() {
         self.liveVideos.append(self.liveVideo(with: String(describing: -1)))
-        for index in 0...20 {
-            self.liveVideos.append(self.liveVideo(with: String(describing: index)))
-        }
+        self.liveVideos.append(self.liveVideo(with: String(describing: 17)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 8)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 13)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 6)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 5)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 9)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 0)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 10)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 11)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 12)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 2)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 3)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 14)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 15)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 16)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 1)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 18)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 19)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 4)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 20)))
+        self.liveVideos.append(self.liveVideo(with: String(describing: 30)))
     }
     
     func liveVideo(with id: String) -> MFMedia {
@@ -39,6 +57,10 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.didSelect?(self.liveVideos[indexPath.item])
+        if self.liveVideos[indexPath.item] == self.liveVideos.last {
+            self.didSelectViewAll?()
+        } else {
+            self.didSelect?(self.liveVideos[indexPath.item])
+        }
     }
 }

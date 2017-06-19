@@ -8,6 +8,7 @@ class HomePageCollectionViewAdapter: NSObject {
     var didExpand: (()->Void)?
     var didCollapse: (()->Void)?
     var didSelect: ((MFMedia)->Void)?
+    var didSelectViewAll: (()->Void)?
     
     func expand(animated: Bool) {
         let duration: Double = animated ? 0.27 : 0

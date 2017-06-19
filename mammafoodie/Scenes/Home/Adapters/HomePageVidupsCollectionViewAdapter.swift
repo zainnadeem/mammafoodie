@@ -6,9 +6,27 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     
     func createStaticData() {
         self.vidups.append(self.vidup(with: String(describing: "-1")))
-        for index in 1...20 {
-            self.vidups.append(self.vidup(with: String(describing: index)))
-        }
+        self.vidups.append(self.vidup(with: String(describing: 0)))
+        self.vidups.append(self.vidup(with: String(describing: 1)))
+        self.vidups.append(self.vidup(with: String(describing: 2)))
+        self.vidups.append(self.vidup(with: String(describing: 3)))
+        self.vidups.append(self.vidup(with: String(describing: 4)))
+        self.vidups.append(self.vidup(with: String(describing: 5)))
+        self.vidups.append(self.vidup(with: String(describing: 6)))
+        self.vidups.append(self.vidup(with: String(describing: 7)))
+        self.vidups.append(self.vidup(with: String(describing: 8)))
+        self.vidups.append(self.vidup(with: String(describing: 9)))
+        self.vidups.append(self.vidup(with: String(describing: 10)))
+        self.vidups.append(self.vidup(with: String(describing: 11)))
+        self.vidups.append(self.vidup(with: String(describing: 12)))
+        self.vidups.append(self.vidup(with: String(describing: 13)))
+        self.vidups.append(self.vidup(with: String(describing: 14)))
+        self.vidups.append(self.vidup(with: String(describing: 15)))
+        self.vidups.append(self.vidup(with: String(describing: 16)))
+        self.vidups.append(self.vidup(with: String(describing: 17)))
+        self.vidups.append(self.vidup(with: String(describing: 18)))
+        self.vidups.append(self.vidup(with: String(describing: 19)))
+        self.vidups.append(self.vidup(with: String(describing: 30)))
     }
     
     func vidup(with id: String) -> MFMedia {
@@ -40,6 +58,10 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.didSelect?(self.vidups[indexPath.item])
+        if self.vidups[indexPath.item] == self.vidups.last {
+            self.didSelectViewAll?()
+        } else {
+            self.didSelect?(self.vidups[indexPath.item])
+        }
     }
 }

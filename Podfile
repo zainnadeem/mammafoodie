@@ -18,5 +18,7 @@ target 'mammafoodie' do
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+
+  pod 'UIColor_Hex_Swift', '~> 3.0.2'
   
 end

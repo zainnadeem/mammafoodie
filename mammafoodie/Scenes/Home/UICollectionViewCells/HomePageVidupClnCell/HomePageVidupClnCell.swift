@@ -12,25 +12,37 @@ class HomePageVidupClnCell: UICollectionViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgAddIcon: UIImageView!
+    @IBOutlet weak var viewForViewAll: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imgView.layer.cornerRadius = 25
         self.imgAddIcon.layer.cornerRadius = 8
-        self.imgView.layer.borderColor = UIColor(css: "FF7927").cgColor
+        
+        self.imgView.layer.borderColor = UIColor("#FF7927").cgColor
+        self.imgView.layer.borderWidth = 2
+        
+        self.viewForViewAll.layer.borderColor = UIColor("#FF7927").cgColor
+        self.viewForViewAll.layer.borderWidth = 2
     }
     
-    func setup(with liveVideo: MFMedia) {
-        if liveVideo.id == "-1" {
-            // Option to create new live video
+    func setup(with vidup: MFMedia) {
+        self.viewForViewAll.isHidden = true
+        if vidup.id == "-1" {
+            // Option to create new vidup
             self.imgView.layer.borderWidth = 2
             self.imgAddIcon.isHidden = false
+            self.imgView.image = UIImage(named: "ProfilePicture21")!
+        } else if vidup.id == "30" {
+            self.viewForViewAll.isHidden = false
         } else {
-            // Show existing live video details
+            // Show existing vidup details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
+            self.imgView.image = UIImage(named: "ProfilePicture\(vidup.id!)")!
         }
-        self.imgView.layer.cornerRadius = self.contentView.frame.width/2
+        self.imgView.layer.cornerRadius = self.frame.width/2
+        self.viewForViewAll.layer.cornerRadius = self.frame.width/2
     }
     
 }

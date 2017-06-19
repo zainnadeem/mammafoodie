@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMaps
+import UIColor_Hex_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {

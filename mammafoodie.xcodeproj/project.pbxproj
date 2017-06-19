@@ -40,6 +40,50 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
+		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
+		2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */; };
+		2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */; };
+		2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC941EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift */; };
+		2C12BCA81EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC941EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift */; };
+		2C12BCA91EF7D237007AF994 /* HomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */; };
+		2C12BCAA1EF7D237007AF994 /* HomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */; };
+		2C12BCAB1EF7D237007AF994 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC961EF7D237007AF994 /* HomeInteractor.swift */; };
+		2C12BCAC1EF7D237007AF994 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC961EF7D237007AF994 /* HomeInteractor.swift */; };
+		2C12BCAD1EF7D237007AF994 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC971EF7D237007AF994 /* HomeModels.swift */; };
+		2C12BCAE1EF7D237007AF994 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC971EF7D237007AF994 /* HomeModels.swift */; };
+		2C12BCAF1EF7D237007AF994 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC981EF7D237007AF994 /* HomePresenter.swift */; };
+		2C12BCB01EF7D237007AF994 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC981EF7D237007AF994 /* HomePresenter.swift */; };
+		2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC991EF7D237007AF994 /* HomeRouter.swift */; };
+		2C12BCB21EF7D237007AF994 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC991EF7D237007AF994 /* HomeRouter.swift */; };
+		2C12BCB31EF7D237007AF994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9A1EF7D237007AF994 /* HomeViewController.swift */; };
+		2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9A1EF7D237007AF994 /* HomeViewController.swift */; };
+		2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9B1EF7D237007AF994 /* HomeWorker.swift */; };
+		2C12BCB61EF7D237007AF994 /* HomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9B1EF7D237007AF994 /* HomeWorker.swift */; };
+		2C12BCB71EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9E1EF7D237007AF994 /* HomePageLiveVideoClnCell.swift */; };
+		2C12BCB81EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC9E1EF7D237007AF994 /* HomePageLiveVideoClnCell.swift */; };
+		2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BC9F1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib */; };
+		2C12BCBA1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BC9F1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib */; };
+		2C12BCBB1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCA11EF7D237007AF994 /* HomePageVidupClnCell.swift */; };
+		2C12BCBC1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCA11EF7D237007AF994 /* HomePageVidupClnCell.swift */; };
+		2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCA21EF7D237007AF994 /* HomePageVidupClnCell.xib */; };
+		2C12BCBE1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCA21EF7D237007AF994 /* HomePageVidupClnCell.xib */; };
+		2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */; };
+		2C12BCC21EF7D338007AF994 /* Akshit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */; };
+		2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCC31EF7EF99007AF994 /* HomePageTableViewAdapter.swift */; };
+		2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCC31EF7EF99007AF994 /* HomePageTableViewAdapter.swift */; };
+		2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCCB1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift */; };
+		2C12BCCE1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCCB1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift */; };
+		2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCCC1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib */; };
+		2C12BCD01EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCCC1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib */; };
+		2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD11EF7F05C007AF994 /* MenuItemTblCell.swift */; };
+		2C12BCD41EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD11EF7F05C007AF994 /* MenuItemTblCell.swift */; };
+		2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */; };
+		2C12BCD61EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */; };
+		2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */; };
+		2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */; };
+		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
+		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
@@ -205,6 +249,28 @@
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
+		2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageLiveVideoCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		2C12BC941EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageVidupsCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeConfigurator.swift; sourceTree = "<group>"; };
+		2C12BC961EF7D237007AF994 /* HomeInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		2C12BC971EF7D237007AF994 /* HomeModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		2C12BC981EF7D237007AF994 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		2C12BC991EF7D237007AF994 /* HomeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		2C12BC9A1EF7D237007AF994 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2C12BC9B1EF7D237007AF994 /* HomeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWorker.swift; sourceTree = "<group>"; };
+		2C12BC9E1EF7D237007AF994 /* HomePageLiveVideoClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageLiveVideoClnCell.swift; sourceTree = "<group>"; };
+		2C12BC9F1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageLiveVideoClnCell.xib; sourceTree = "<group>"; };
+		2C12BCA11EF7D237007AF994 /* HomePageVidupClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageVidupClnCell.swift; sourceTree = "<group>"; };
+		2C12BCA21EF7D237007AF994 /* HomePageVidupClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageVidupClnCell.xib; sourceTree = "<group>"; };
+		2C12BCC01EF7D338007AF994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Akshit.storyboard; sourceTree = "<group>"; };
+		2C12BCC31EF7EF99007AF994 /* HomePageTableViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageTableViewAdapter.swift; sourceTree = "<group>"; };
+		2C12BCCB1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCuisineSelectorClnCell.swift; sourceTree = "<group>"; };
+		2C12BCCC1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCuisineSelectorClnCell.xib; sourceTree = "<group>"; };
+		2C12BCD11EF7F05C007AF994 /* MenuItemTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemTblCell.swift; sourceTree = "<group>"; };
+		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
+		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
 		2CA2B4951EF542D30076598C /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
 		2CA2B4961EF542D30076598C /* MFActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFActivity.swift; sourceTree = "<group>"; };
 		2CA2B4971EF542D30076598C /* MFComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFComment.swift; sourceTree = "<group>"; };
@@ -439,6 +505,104 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2C12BC901EF7D237007AF994 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BC911EF7D237007AF994 /* Adapters */,
+				2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */,
+				2C12BC961EF7D237007AF994 /* HomeInteractor.swift */,
+				2C12BC971EF7D237007AF994 /* HomeModels.swift */,
+				2C12BC981EF7D237007AF994 /* HomePresenter.swift */,
+				2C12BC991EF7D237007AF994 /* HomeRouter.swift */,
+				2C12BC9A1EF7D237007AF994 /* HomeViewController.swift */,
+				2C12BC9B1EF7D237007AF994 /* HomeWorker.swift */,
+				2C12BC9C1EF7D237007AF994 /* UICollectionViewCells */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2C12BC911EF7D237007AF994 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */,
+				2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */,
+				2C12BC941EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift */,
+				2C12BCC31EF7EF99007AF994 /* HomePageTableViewAdapter.swift */,
+				2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		2C12BC9C1EF7D237007AF994 /* UICollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BC9D1EF7D237007AF994 /* HomePageLiveVideoClnCell */,
+				2C12BCA01EF7D237007AF994 /* HomePageVidupClnCell */,
+			);
+			path = UICollectionViewCells;
+			sourceTree = "<group>";
+		};
+		2C12BC9D1EF7D237007AF994 /* HomePageLiveVideoClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BC9E1EF7D237007AF994 /* HomePageLiveVideoClnCell.swift */,
+				2C12BC9F1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib */,
+			);
+			path = HomePageLiveVideoClnCell;
+			sourceTree = "<group>";
+		};
+		2C12BCA01EF7D237007AF994 /* HomePageVidupClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCA11EF7D237007AF994 /* HomePageVidupClnCell.swift */,
+				2C12BCA21EF7D237007AF994 /* HomePageVidupClnCell.xib */,
+			);
+			path = HomePageVidupClnCell;
+			sourceTree = "<group>";
+		};
+		2C12BCC61EF7F01E007AF994 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCC81EF7F03F007AF994 /* UICollectionViewCells */,
+				2C12BCC71EF7F01E007AF994 /* UITableViewCells */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2C12BCC71EF7F01E007AF994 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCCA1EF7F044007AF994 /* MenuItemTblCell */,
+			);
+			path = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		2C12BCC81EF7F03F007AF994 /* UICollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCC91EF7F03F007AF994 /* MenuCuisineSelectorClnCell */,
+			);
+			path = UICollectionViewCells;
+			sourceTree = "<group>";
+		};
+		2C12BCC91EF7F03F007AF994 /* MenuCuisineSelectorClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCCB1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift */,
+				2C12BCCC1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib */,
+			);
+			path = MenuCuisineSelectorClnCell;
+			sourceTree = "<group>";
+		};
+		2C12BCCA1EF7F044007AF994 /* MenuItemTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C12BCD11EF7F05C007AF994 /* MenuItemTblCell.swift */,
+				2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */,
+			);
+			path = MenuItemTblCell;
+			sourceTree = "<group>";
+		};
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,7 +617,9 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2C12BCC61EF7F01E007AF994 /* Common */,
 				BFC927001EF00A7E00602153 /* Comments */,
+				2C12BC901EF7D237007AF994 /* Home */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
@@ -496,6 +662,7 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
@@ -522,6 +689,7 @@
 				2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */,
 				2CA2B4A21EF542D30076598C /* MFUser.swift */,
 				2CA2B4A31EF542D30076598C /* Vidup.swift */,
+				2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -876,8 +1044,9 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = 6G977HV28A;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -905,6 +1074,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C12BCBE1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
+				2C12BCD61EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
+				2C12BCBA1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
+				2C12BCD01EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
+				2C12BCC21EF7D338007AF994 /* Akshit.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,17 +1087,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
+				2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
+				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
+				2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
+				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */,
+				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
@@ -987,22 +1166,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
+				2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
+				2C12BCAC1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
+				2C12BCB81EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
+				2C12BCCE1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */,
+				2C12BCBC1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
 				2CA2B4B11EF542D30076598C /* MFLiveStream.swift in Sources */,
+				2C12BCAE1EF7D237007AF994 /* HomeModels.swift in Sources */,
+				2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
 				2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
+				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
+				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
 				2CA2B4BF1EF542D30076598C /* MFUser.swift in Sources */,
+				2C12BCB21EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				2CA2B4B71EF542D30076598C /* MFMessage.swift in Sources */,
+				2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */,
+				2C12BCB01EF7D237007AF994 /* HomePresenter.swift in Sources */,
 				2CA2B4AB1EF542D30076598C /* MFConversation.swift in Sources */,
+				2C12BCD41EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
+				2C12BCB61EF7D237007AF994 /* HomeWorker.swift in Sources */,
 				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
 				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
 				2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */,
+				2C12BCA81EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
+				2C12BCAA1EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				2CA2B4C11EF542D30076598C /* Vidup.swift in Sources */,
 				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
+				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,7 +1209,9 @@
 				2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
+				2C12BCAF1EF7D237007AF994 /* HomePresenter.swift in Sources */,
 				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
+				2C12BCB31EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
@@ -1021,23 +1219,32 @@
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
+				2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */,
 				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */,
+				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
+				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
+				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				BFC9274E1EF00B0700602153 /* LiveVideoCollectionViewCell.swift in Sources */,
+				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
+				2C12BCAD1EF7D237007AF994 /* HomeModels.swift in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
+				2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
+				2C12BCBB1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
+				2C12BCB71EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
 				2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */,
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
@@ -1045,10 +1252,12 @@
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
+				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
+				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
@@ -1092,8 +1301,10 @@
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
+				2C12BCAB1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
@@ -1113,6 +1324,7 @@
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
+				2C12BCA91EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
@@ -1127,6 +1339,7 @@
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
+				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1354,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C12BCC01EF7D338007AF994 /* Base */,
+			);
+			name = Akshit.storyboard;
+			sourceTree = "<group>";
+		};
 		2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1308,7 +1529,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6G977HV28A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1327,7 +1549,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6G977HV28A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

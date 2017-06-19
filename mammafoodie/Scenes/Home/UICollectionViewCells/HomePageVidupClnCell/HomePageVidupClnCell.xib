@@ -21,7 +21,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <color key="backgroundColor" red="0.76862745099999996" green="0.69411764710000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IYd-lr-dvL">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgs-Pl-3iA">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9M-Y0-yNO">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <string key="text">View
+All</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.41176470590000003" blue="0.14117647059999999" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Q9M-Y0-yNO" secondAttribute="trailing" id="223-dF-XWA"/>
+                            <constraint firstItem="Q9M-Y0-yNO" firstAttribute="top" secondItem="Lgs-Pl-3iA" secondAttribute="top" id="OxU-Kz-gJ2"/>
+                            <constraint firstItem="Q9M-Y0-yNO" firstAttribute="leading" secondItem="Lgs-Pl-3iA" secondAttribute="leading" id="dNE-4M-HyU"/>
+                            <constraint firstAttribute="bottom" secondItem="Q9M-Y0-yNO" secondAttribute="bottom" id="jI8-a6-7bp"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconAddWithOrangeGradient" translatesAutoresizingMaskIntoConstraints="NO" id="IYd-lr-dvL">
                         <rect key="frame" x="34" y="34" width="16" height="16"/>
                         <color key="backgroundColor" red="1" green="0.47450980390000003" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -34,7 +54,11 @@
             <constraints>
                 <constraint firstItem="Wdp-ow-V3v" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="29q-XQ-28B"/>
                 <constraint firstItem="IYd-lr-dvL" firstAttribute="bottom" secondItem="Wdp-ow-V3v" secondAttribute="bottom" id="DP9-p2-Aow"/>
+                <constraint firstItem="Lgs-Pl-3iA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="In2-9u-cb1"/>
+                <constraint firstAttribute="trailing" secondItem="Lgs-Pl-3iA" secondAttribute="trailing" id="JiT-KJ-t6e"/>
                 <constraint firstItem="Wdp-ow-V3v" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LIM-W4-93p"/>
+                <constraint firstItem="Lgs-Pl-3iA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gj3-Q5-ucB"/>
+                <constraint firstAttribute="bottom" secondItem="Lgs-Pl-3iA" secondAttribute="bottom" id="mNG-Jz-t4h"/>
                 <constraint firstAttribute="bottom" secondItem="Wdp-ow-V3v" secondAttribute="bottom" id="vg6-wl-Yvj"/>
                 <constraint firstItem="IYd-lr-dvL" firstAttribute="trailing" secondItem="Wdp-ow-V3v" secondAttribute="trailing" id="xnm-7t-pqN"/>
                 <constraint firstAttribute="trailing" secondItem="Wdp-ow-V3v" secondAttribute="trailing" id="z2T-NW-2L0"/>
@@ -42,7 +66,11 @@
             <connections>
                 <outlet property="imgAddIcon" destination="IYd-lr-dvL" id="PS2-Up-Tve"/>
                 <outlet property="imgView" destination="Wdp-ow-V3v" id="4h6-DV-SAB"/>
+                <outlet property="viewForViewAll" destination="Lgs-Pl-3iA" id="7gI-F4-SPt"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="IconAddWithOrangeGradient" width="60" height="60"/>
+    </resources>
 </document>
