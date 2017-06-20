@@ -8,8 +8,16 @@
 
 import UIKit
 
-class LoginRegisterViewController: UIViewController {
+class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
 
+    @IBOutlet weak var passImageView: UIImageView!
+    @IBOutlet weak var emailImageView: UIImageView!
+    @IBOutlet weak var nameImageView: UIImageView!
+    @IBOutlet weak var nameTextFeild: UITextField!
+    
+    @IBOutlet weak var emailTextFeild: UITextField!
+    @IBOutlet weak var passTextFeild: UITextField!
+    
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var nameViewBtn: UIView!
     @IBOutlet weak var userBtn: UIView!
@@ -31,10 +39,13 @@ class LoginRegisterViewController: UIViewController {
         passwordBtn.layer.borderWidth = 1
         passwordBtn.layer.borderColor = UIColor.clear.cgColor
         
-        registerBtn.layer.cornerRadius = 20
+        registerBtn.layer.cornerRadius = 23
         registerBtn.layer.borderWidth = 1
         registerBtn.layer.borderColor = UIColor.clear.cgColor
         registerBtn.clipsToBounds = true
+        nameTextFeild.delegate = self
+        passTextFeild.delegate = self
+        emailTextFeild.delegate = self
 
     }
 
@@ -47,6 +58,19 @@ class LoginRegisterViewController: UIViewController {
         self.registerBtn.applyGradient(colors: [gradientStartColor, gradientEndColor])
     }
     
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if nameTextFeild == textField {
+            nameImageView.image = UIImage(named: "nameclick")
+        }
+        if emailTextFeild == textField {
+            emailImageView.image = UIImage(named: "selectuser")
+        }
+        if passTextFeild == textField {
+        passImageView.image = UIImage(named: "passselect")
+        }
+    }
 
     /*
     // MARK: - Navigation

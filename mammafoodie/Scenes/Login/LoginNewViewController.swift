@@ -25,7 +25,7 @@ class LoginNewViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        self.loginButn.layer.cornerRadius = 22
+        self.loginButn.layer.cornerRadius = 23
         self.loginButn.clipsToBounds = true
         userView.layer.cornerRadius = 5
         userView.layer.borderWidth = 1
