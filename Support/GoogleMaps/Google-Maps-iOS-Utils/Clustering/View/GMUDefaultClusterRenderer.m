@@ -302,11 +302,12 @@ static const double kGMUAnimationDuration = 0.27;  // seconds.
                       clusterIcon:(UIImage *)clusterIcon
                          animated:(BOOL)animated {
     GMSMarker *marker = [self markerForObject:userData];
-    CLLocationCoordinate2D initialPosition = animated ? from : position;
+//    CLLocationCoordinate2D initialPosition = animated ? from : position;
     //  marker.position = initialPosition;
     marker.position = position;
     marker.userData = userData;
-    marker.appearAnimation = kGMSMarkerAnimationPop;
+//    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.appearAnimation = kGMSMarkerAnimationNone;
     if (clusterIcon != nil) {
         marker.icon = clusterIcon;
         marker.groundAnchor = CGPointMake(0.5, 0.5);
