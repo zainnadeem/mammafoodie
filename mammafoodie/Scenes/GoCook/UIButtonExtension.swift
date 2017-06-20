@@ -11,37 +11,7 @@ import UIKit
 
 
 extension UIButton {
-    
-    enum GradeintDirection {
-        case topToBottom, bottomToTop, leftToRight, rightToLeft
-    }
-    
-    func applyGradient(colors: [UIColor], direction: GradeintDirection = .topToBottom) -> Void {
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.bounds
-        gradientLayer.colors = colors.map { $0.cgColor }
-        switch direction {
-        case .topToBottom:
-            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-            break
-            
-        case .bottomToTop:
-            gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-            break
-            
-        case .leftToRight:
-            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-            break
-            
-        case .rightToLeft:
-            gradientLayer.startPoint = CGPoint(x: 1, y: 0)
-            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-            break
-        }
-        self.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
+
     func alignContentVerticallyByCenter(offset:CGFloat = 10) {
         let buttonSize = frame.size
         
