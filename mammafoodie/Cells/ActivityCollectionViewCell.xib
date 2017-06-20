@@ -24,7 +24,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="346" height="155"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XPJ-0m-B2m">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile Image small" translatesAutoresizingMaskIntoConstraints="NO" id="XPJ-0m-B2m">
                         <rect key="frame" x="9" y="9" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="HjV-a0-arB"/>
@@ -32,13 +32,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Douglas Keller ordered a Chicken Momo from Chean Zou" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFm-9R-glD">
-                        <rect key="frame" x="42" y="9" width="296" height="16.5"/>
+                        <rect key="frame" x="42" y="9" width="296" height="17"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_duration_small" translatesAutoresizingMaskIntoConstraints="NO" id="uAT-eQ-vM9">
-                        <rect key="frame" x="42" y="37.5" width="10" height="10"/>
+                        <rect key="frame" x="42" y="38" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="bH2-Ce-sKi"/>
                             <constraint firstAttribute="height" constant="10" id="bJO-mU-Fzn"/>
@@ -50,14 +50,14 @@
                         <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap3" translatesAutoresizingMaskIntoConstraints="NO" id="SDB-6y-Uc6">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BeefTower" translatesAutoresizingMaskIntoConstraints="NO" id="SDB-6y-Uc6">
                         <rect key="frame" x="42" y="60" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="SDB-6y-Uc6" secondAttribute="height" multiplier="1:1" id="NWS-wl-v9a"/>
                             <constraint firstAttribute="width" constant="50" id="PtJ-2X-Mh4"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxy-0T-FEM">
+                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxy-0T-FEM">
                         <rect key="frame" x="8" y="120" width="330" height="1"/>
                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -131,14 +131,23 @@
                 <constraint firstItem="7uq-NE-Vp7" firstAttribute="leading" secondItem="kyN-9C-Gpd" secondAttribute="trailing" constant="4" id="vYA-2R-8u6"/>
             </constraints>
             <size key="customSize" width="346" height="155"/>
+            <connections>
+                <outlet property="emojiImageView" destination="SDB-6y-Uc6" id="ZNp-07-KXU"/>
+                <outlet property="lblActivityDescription" destination="mFm-9R-glD" id="V2q-4b-RNb"/>
+                <outlet property="lblCommentsCount" destination="7uq-NE-Vp7" id="pC0-Ln-Dcu"/>
+                <outlet property="lblLikesCount" destination="NKn-qV-h9W" id="EQS-G2-Ov9"/>
+                <outlet property="lblTimeStamp" destination="Eca-eQ-GSo" id="xN3-Qd-6RX"/>
+                <outlet property="profilePicImageView" destination="XPJ-0m-B2m" id="2jb-R5-Ph8"/>
+            </connections>
             <point key="canvasLocation" x="73" y="-115.5"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Bitmap3" width="381" height="633"/>
+        <image name="BeefTower" width="1000" height="1000"/>
         <image name="Comments" width="69" height="46"/>
         <image name="Liked" width="55" height="52"/>
         <image name="More" width="21" height="6"/>
+        <image name="Profile Image small" width="40" height="40"/>
         <image name="ic_duration_small" width="35" height="35"/>
     </resources>
 </document>

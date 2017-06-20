@@ -26,7 +26,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="143" height="201"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap3" translatesAutoresizingMaskIntoConstraints="NO" id="T2D-JY-60g">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T2D-JY-60g">
                         <rect key="frame" x="0.0" y="0.0" width="143" height="201"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile Image small" translatesAutoresizingMaskIntoConstraints="NO" id="N8T-pi-g7q">
@@ -37,7 +37,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Douglas Keller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9a-VE-AR7">
-                        <rect key="frame" x="38" y="15" width="100" height="13.5"/>
+                        <rect key="frame" x="38" y="15.5" width="100" height="13.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -50,19 +50,19 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6,372" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIi-XA-Ocn">
-                        <rect key="frame" x="37" y="38" width="100" height="13.5"/>
+                        <rect key="frame" x="37" y="38.5" width="100" height="13.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HEALTHY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM4-Lb-ssI">
-                        <rect key="frame" x="8" y="159" width="47" height="14"/>
+                        <rect key="frame" x="8" y="159.5" width="47" height="13.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Veg" translatesAutoresizingMaskIntoConstraints="NO" id="5lE-OK-rcW">
-                        <rect key="frame" x="63" y="160" width="14" height="13"/>
+                        <rect key="frame" x="63" y="160.5" width="14" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="7po-UC-Y4r"/>
                             <constraint firstAttribute="width" constant="14" id="Uzj-yY-d5q"/>
@@ -101,6 +101,7 @@
             </constraints>
             <size key="customSize" width="143" height="201"/>
             <connections>
+                <outlet property="dishImageView" destination="T2D-JY-60g" id="ERx-Rw-vG6"/>
                 <outlet property="lblChefName" destination="P9a-VE-AR7" id="7kf-9e-fFg"/>
                 <outlet property="lblDishName" destination="pad-XS-LEr" id="12w-pB-NJw"/>
                 <outlet property="lblDishTypeTag" destination="sM4-Lb-ssI" id="LDF-MY-wD4"/>
@@ -112,7 +113,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Bitmap3" width="381" height="633"/>
         <image name="Profile Image small" width="40" height="40"/>
         <image name="Veg" width="14" height="13"/>
         <image name="Views" width="49" height="31"/>

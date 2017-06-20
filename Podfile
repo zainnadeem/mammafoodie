@@ -19,6 +19,6 @@ target 'mammafoodie' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'TRMosaicLayout'
-
+  pod 'Alamofire'
   
 end

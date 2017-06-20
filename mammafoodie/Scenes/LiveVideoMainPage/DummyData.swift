@@ -201,6 +201,7 @@ class DummyData {
     
     func getUserForProfilePage()-> MFUser{
         
+        createusers()
         
         let dish1 = MFDish(id: "d1", user: profileUser, description: "", name: "The Beef Tower🍖")
         let media1 = MFMedia(id: "m1", cover_large: "BeefTower", cover_small: "BeefTower", createdAt: Date.init(), dish: dish1, user: profileUser, type: .vidup, numberOfViewers: 236)
@@ -252,7 +253,7 @@ class DummyData {
         ]
         
         
-        createusers()
+        
         let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " liked "), right: self.bold(text: user2.name + "'s " + "dish"))
         let newsText2  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " started following "), right: self.bold(text: user4.name))
         let newsText3  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " is "), right: self.bold(text: " Live "))
