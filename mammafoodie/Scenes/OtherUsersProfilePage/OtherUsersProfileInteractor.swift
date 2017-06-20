@@ -2,11 +2,19 @@ import UIKit
 
 protocol OtherUsersProfileInteractorInput {
     func setUpDishCollectionView(_ collectionView:UICollectionView)
-    func loadDishCollectionViewForIndex(_ index:Int)
+    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
 }
 
 protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:Int)
+    func loadScreenWithData(_ profileData:[AnyHashable:Any])
+}
+
+///Defined in OtherUsersProfileInteractor
+enum SelectedIndexForProfile {
+    case cooked
+    case bought
+    case activity
 }
 
 class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesCollectionViewAdapterDelegate {
@@ -16,7 +24,9 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     var dishCollectionViewAdapter:DishesCollectionViewAdapter!
     
+    
     // MARK: - Business logic
+    
     
     
     //MARK: - Input
@@ -27,12 +37,19 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         dishCollectionViewAdapter.collectionView = collectionView
     }
     
-    func loadDishCollectionViewForIndex(_ index:Int){
+    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile){
         
-        worker.getDishes(boughtOrCooked: index, forUserID: 0) { dishes in
-            dishCollectionViewAdapter.dataSource = dishes
+        worker.getDataSource(forIndex: index, forUserID: 0) { (dataSource) in
+            
+            print(dataSource)
+            
+            dishCollectionViewAdapter.selectedIndexForProfile = index
+            dishCollectionViewAdapter.dataSource = dataSource
+            
+            output.loadScreenWithData(dataSource)
+            
         }
-          
+        
     }
     
     

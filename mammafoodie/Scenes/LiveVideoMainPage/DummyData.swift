@@ -81,7 +81,7 @@ class DummyData {
     }
     
     func addNormal(text: String) -> NSMutableAttributedString {
-        return NSAttributedString(string: text)
+        return NSMutableAttributedString(string: text)
     }
     
     func bold(text : String) -> NSMutableAttributedString {
