@@ -1,7 +1,7 @@
 import UIKit
 
-protocol adaptordelegte {
-    func Test()
+protocol Interactordelegate {
+    func HideandUnhideView()
 }
 
 protocol VidupDetailPageInteractorInput {
@@ -13,7 +13,7 @@ protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
 }
 
-class VidupDetailPageInteractor: VidupDetailPageInteractorInput,adaptordelegte {
+class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
     
     var output: VidupDetailPageInteractorOutput!
     var worker: VidupDetailPageWorker! = VidupDetailPageWorker()
@@ -33,7 +33,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,adaptordelegte {
     }
     
     
-    func Test() {
+    func HideandUnhideView() {
         output.HideandUnhideViewInteractor()
     }
 }

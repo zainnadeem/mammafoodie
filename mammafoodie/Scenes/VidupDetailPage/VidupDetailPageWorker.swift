@@ -5,7 +5,7 @@ class VidupDetailPageWorker:NSObject {
     
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
-    var delegate:adaptordelegte?
+    var delegate:Interactordelegate?
     
     // MARK: - Business Logic
     
@@ -46,7 +46,7 @@ class VidupDetailPageWorker:NSObject {
     }
     
     func FullScreenVideo(ViewTapped:UITapGestureRecognizer){
-        delegate?.Test()
+        delegate?.HideandUnhideView()
         print("Double Tapped.")
     }
 
