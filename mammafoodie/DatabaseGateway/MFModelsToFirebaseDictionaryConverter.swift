@@ -18,6 +18,18 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
     
+    
+//    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
+//       return [
+//            media.accessMode = .owner as AnyObject
+//        ]
+//    }
+    
+    
+    
+    
+    
+    
 //    class func dictionary(from liveVideoGateway: MFLiveVideoGatewayAccountDetails) -> FirebaseDictionary {
 //        return [
 //            liveVideoGateway.host: liveVideoGateway.port as AnyObject
