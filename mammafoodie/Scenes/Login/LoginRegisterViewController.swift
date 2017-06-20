@@ -34,12 +34,17 @@ class LoginRegisterViewController: UIViewController {
         registerBtn.layer.cornerRadius = 20
         registerBtn.layer.borderWidth = 1
         registerBtn.layer.borderColor = UIColor.clear.cgColor
+        registerBtn.clipsToBounds = true
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.registerBtn.applyGradient(colors: [gradientStartColor, gradientEndColor])
     }
     
 

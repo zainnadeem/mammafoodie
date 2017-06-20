@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cvY-Dy-9Qz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="K7e-xf-zLJ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Medium.otf">
@@ -42,7 +42,7 @@
                                         <rect key="frame" x="0.0" y="1" width="373" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="raL-dG-dPp" id="JFj-Ji-Di3">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap" translatesAutoresizingMaskIntoConstraints="NO" id="Lrb-yG-Sg8">
@@ -353,20 +353,23 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbI-nG-zhX">
                                 <rect key="frame" x="46" y="426.5" width="228" height="47.5"/>
-                                <color key="backgroundColor" red="1" green="0.38823529411764707" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47.5" id="PXi-wA-SEE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="13"/>
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not a member yet?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwk-TT-evX">
-                                <rect key="frame" x="93.5" y="602.5" width="133" height="18.5"/>
+                                <rect key="frame" x="94" y="602.5" width="133" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sL-3L-Ga5">
-                                <rect key="frame" x="126" y="616" width="67" height="34"/>
+                                <rect key="frame" x="127" y="616" width="67" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.52549019607843139" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
@@ -422,7 +425,6 @@
                         <constraints>
                             <constraint firstItem="8Iy-Ub-qo2" firstAttribute="height" secondItem="fWn-gp-K5Y" secondAttribute="height" id="2ia-K8-X4G"/>
                             <constraint firstItem="GGq-4a-hq1" firstAttribute="centerX" secondItem="hbI-nG-zhX" secondAttribute="centerX" constant="-45" id="6ox-UO-UgV"/>
-                            <constraint firstItem="hbI-nG-zhX" firstAttribute="height" secondItem="zHZ-cg-Bfv" secondAttribute="height" multiplier="0.07" id="8rb-km-K6A"/>
                             <constraint firstItem="7sL-3L-Ga5" firstAttribute="centerX" secondItem="bwk-TT-evX" secondAttribute="centerX" id="FtV-lz-zfz"/>
                             <constraint firstItem="UNJ-6V-H9O" firstAttribute="top" secondItem="i9q-ez-2b4" secondAttribute="bottom" constant="40" id="ICx-EY-dsA"/>
                             <constraint firstItem="7sL-3L-Ga5" firstAttribute="top" secondItem="bwk-TT-evX" secondAttribute="bottom" constant="-5" id="M4v-5m-kmU"/>
@@ -479,7 +481,7 @@
                                         <rect key="frame" x="0.0" y="28" width="404" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8JS-zR-jjV" id="pBa-S9-Etw">
-                                            <rect key="frame" x="0.0" y="0.0" width="404" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="404" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -559,7 +561,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgM-58-89k">
-                                <rect key="frame" x="147.5" y="207.5" width="81" height="21.5"/>
+                                <rect key="frame" x="147" y="207.5" width="81" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -594,6 +596,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkC-kc-VjT">
                                 <rect key="frame" x="46" y="480" width="283" height="47.5"/>
                                 <color key="backgroundColor" red="1" green="0.38823529410000002" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47.5" id="0fQ-K9-yak"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="13"/>
                                 <state key="normal" title="REGISTER">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -687,7 +692,6 @@
                             <constraint firstItem="rkC-kc-VjT" firstAttribute="trailing" secondItem="H0b-vN-0hI" secondAttribute="trailing" id="arq-UX-3fF"/>
                             <constraint firstItem="H0b-vN-0hI" firstAttribute="trailing" secondItem="Zda-mG-8WE" secondAttribute="trailing" id="bcg-b6-M9c"/>
                             <constraint firstItem="H0b-vN-0hI" firstAttribute="top" secondItem="Zda-mG-8WE" secondAttribute="bottom" constant="2.5" id="d2s-vp-H0U"/>
-                            <constraint firstItem="rkC-kc-VjT" firstAttribute="height" secondItem="IUR-kH-xih" secondAttribute="height" multiplier="0.07" id="d9d-Pc-w9I"/>
                             <constraint firstItem="H0b-vN-0hI" firstAttribute="height" secondItem="Zda-mG-8WE" secondAttribute="height" id="f4B-b2-UYP"/>
                             <constraint firstItem="5cV-np-9vK" firstAttribute="centerX" secondItem="L7c-Tv-kL4" secondAttribute="centerX" id="faf-Ic-zoT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TDk-Ny-6jO" secondAttribute="trailing" constant="30" id="ngE-MQ-cjZ"/>
