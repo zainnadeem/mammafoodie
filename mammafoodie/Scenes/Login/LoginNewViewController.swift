@@ -41,13 +41,13 @@ class LoginNewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated : Bool) {
-        super.viewWillAppear(animated)
-        let colour1 =  UIColor(red: 255, green: 140, blue: 43, alpha: 1.0)
-        let colour2 =  UIColor(red: 255, green: 99, blue: 34, alpha: 1.0)
-
-        loginButn.applyGradient(colors: [colour1,colour2])
-    }
+//    override func viewWillAppear(_ animated : Bool) {
+//        super.viewWillAppear(animated)
+//        let colour1 =  UIColor(red: 255, green: 140, blue: 43, alpha: 1.0)
+//        let colour2 =  UIColor(red: 255, green: 99, blue: 34, alpha: 1.0)
+//
+//        loginButn.applyGradient(colors: [colour1,colour2])
+//    }
 
     /*
     // MARK: - Navigation
