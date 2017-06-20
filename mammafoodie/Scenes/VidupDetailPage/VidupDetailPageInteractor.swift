@@ -2,6 +2,7 @@ import UIKit
 
 protocol Interactordelegate {
     func HideandUnhideView()
+    func DisplayTime(Time:TimeInterval)
 }
 
 protocol VidupDetailPageInteractorInput {
@@ -11,6 +12,7 @@ protocol VidupDetailPageInteractorInput {
 
 protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
+    func DisplayTimeInteractor(Time:TimeInterval)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -36,4 +38,11 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     func HideandUnhideView() {
         output.HideandUnhideViewInteractor()
     }
+    
+    func DisplayTime(Time:TimeInterval){
+        output.DisplayTimeInteractor(Time: Time)
+    }
+    
+        
+    
 }

@@ -2,6 +2,7 @@ import UIKit
 
 protocol VidupDetailPageViewControllerInput {
     func HideandUnhideView()
+    func DisplayTime(Time:String)
 }
 
 protocol VidupDetailPageViewControllerOutput {
@@ -14,10 +15,11 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     var output: VidupDetailPageViewControllerOutput!
     var router: VidupDetailPageRouter!
     
+    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
-    var seconds = 240 //This variable will hold a starting value of seconds. It could be any amount above 0.
-    var timer = Timer()
-    var isTimerRunning = false //This will be used to make sure only one timer is created at a time.
+    
+    
     
     //VidUp URL
     
@@ -30,7 +32,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     @IBOutlet weak var lv_Mediaview: UIView!
     @IBOutlet weak var lv_Comments: UIView!
     @IBOutlet weak var lv_ProfileDetails: UIView!
-     @IBOutlet weak var lbl_Timer: UILabel!
+    @IBOutlet weak var lv_slotView: UIView!
+    @IBOutlet weak var lbl_Timer: UILabel!
+    @IBOutlet weak var mediaplayerbottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var lbtn_like: UIButton!
     
     // MARK: - Object lifecycle
     
@@ -44,7 +49,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        runTimer()
         // Adding Tap Gesture for Comments label
         let commenttap = UITapGestureRecognizer(target: self, action: #selector(commentbtnClicked(_:)))
         lbl_Comment.addGestureRecognizer(commenttap)
@@ -53,11 +57,18 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         //add gradient effect to profile view
         let gradient = CAGradientLayer()
         gradient.frame = lv_ProfileDetails.bounds
-        gradient.colors = [UIColor.gray.cgColor, UIColor.clear.cgColor]
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
         
         lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
+        lv_slotView.addGradienBorder(colors: [gradientStartColor,gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
         output.setupMediaPlayer(view: lv_Mediaview, mediaURL: vidupURL)
+        
+        
+        // FIXME: Check during API Call
+        lbtn_like.isSelected = true
+        
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -70,43 +81,40 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     // MARK: - Event handling
     @IBAction func likebtnClicked(_ sender: Any) {
-        print("LikeClicked")
+        if lbtn_like.isSelected ==  true{
+            lbtn_like.isSelected = false
+        }else{
+            lbtn_like.isSelected = true
+        }
     }
     
     @IBAction func commentbtnClicked(_ sender: Any) {
         print("Comments Clicked")
     }
     
+    @IBAction func closebtnClicked(_ sender: Any) {
+        print("Close Clicked")
+    }
+    
+    
     // MARK: - Display logic
     
     func HideandUnhideView(){
         if lv_Comments.isHidden == true {
             lv_Comments.isHidden = false
-            lv_Mediaview.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height - 51)
+            self.mediaplayerbottomConstraint.constant = self.lv_Comments.frame.height + 1
             lv_ProfileDetails.isHidden = false
         }else{
             lv_Comments.isHidden = true
-            lv_Mediaview.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height)
+            self.mediaplayerbottomConstraint.constant = 0
             lv_ProfileDetails.isHidden = true
         }
     }
     
-    
-    func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    func DisplayTime(Time:String){
+        lbl_Timer.text = Time
     }
     
-    func updateTimer() {
-        seconds -= 1     //This will decrement(count down)the seconds.
-        lbl_Timer.text = timeString(time: TimeInterval(seconds))
-    }
-    
-    func timeString(time:TimeInterval) -> String {
-        let hours = Int(time) / 3600
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
-    }
-    
+        
 }
 
