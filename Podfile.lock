@@ -68,6 +68,10 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
+  - IQKeyboardManagerSwift (4.0.10)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - TRMosaicLayout (1.0.0)
 
 DEPENDENCIES:
@@ -80,6 +84,8 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - JSQMessagesViewController
   - TRMosaicLayout
 
 SPEC CHECKSUMS:
@@ -99,8 +105,11 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
 
-PODFILE CHECKSUM: 53fbc70f1b1853c861189e73e284ed3ef6be7505
+PODFILE CHECKSUM: 4f718b36e5a91d6e0ebb8d677ab5dfdb229bb0a6
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.1.1
