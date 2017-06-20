@@ -5,7 +5,7 @@ struct VidupMainPage {
     struct Request {
     }
     struct Response {
-        var arrayOfVidups = [Vidup]()
+        var arrayOfVidups = [MFMedia]()
     }
     
     struct ViewModel {
