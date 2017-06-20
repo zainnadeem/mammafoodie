@@ -18,8 +18,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     var collectionView:UICollectionView? {
         didSet{
-            collectionView?.delegate = self
-            collectionView?.dataSource = self
+            
         }
     }
     private let reuseIdentifier = "Cell"
@@ -31,6 +30,16 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         didSet{
             collectionView?.reloadData()
         }
+    }
+    
+    
+    
+    func setUpCollectionView(){
+        //Date collectionview
+        collectionView!.register(DishCollectionViewCell.self, forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
+        collectionView!.register(UINib(nibName: "DishCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
     }
     
     
