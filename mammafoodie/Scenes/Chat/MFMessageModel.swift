@@ -3,7 +3,7 @@
 import Foundation
 import JSQMessagesViewController
 
-struct MFMessage {
+struct MFMessage1 {
     var senderId : String = ""
     var messageText : String = ""
     var messageid : String = ""

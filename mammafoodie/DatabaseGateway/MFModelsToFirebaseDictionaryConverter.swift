@@ -18,7 +18,7 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
     
-    class func dictionary(from conversation: MFConversation) -> FirebaseDictionary {
+    class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
         var dishRequestId: String = ""
         
         if conversation.dishRequestId != nil  {
@@ -32,7 +32,7 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
     
-    class func dictionary(from message: MFMessage) -> FirebaseDictionary {
+    class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
         return [
             message.messageid : [
                 "messageText": message.messageText as AnyObject,
@@ -43,4 +43,21 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
 
+    
+//    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
+//       return [
+//            media.accessMode = .owner as AnyObject
+//        ]
+//    }
+    
+    
+    
+    
+    
+    
+//    class func dictionary(from liveVideoGateway: MFLiveVideoGatewayAccountDetails) -> FirebaseDictionary {
+//        return [
+//            liveVideoGateway.host: liveVideoGateway.port as AnyObject
+//        ]
+//    }
 }

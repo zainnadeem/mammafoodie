@@ -194,7 +194,7 @@ extension DatabaseGateway {
         guard let hostIPAddress: String = rawData["hostIPAddress"] as? String else {
             return nil
         }
-        guard let port: Int = rawData["port"] as? Int else {
+        guard let port: Int32 = rawData["port"] as? Int32 else {
             return nil
         }
         guard let sdkKey: String = rawData["sdkKey"] as? String else {
@@ -216,7 +216,7 @@ extension DatabaseGateway {
 // MARK: - Conversation
 extension DatabaseGateway {
     
-    func createConversation(with model: MFConversation, _ completion: @escaping ((_ chatData:MFConversation)->Void)) {
+    func createConversation(with model: MFConversation1, _ completion: @escaping ((_ chatData:MFConversation1)->Void)) {
         var newModel = model
         newModel.id = FirebaseReference.conversations.generateAutoID()
         
@@ -234,7 +234,7 @@ extension DatabaseGateway {
 // MARK: - Messages
 extension DatabaseGateway {
     
-    func createMessage(with model: MFMessage, _ completion: @escaping (()->Void)) {
+    func createMessage(with model: MFMessage1, _ completion: @escaping (()->Void)) {
         
         var newModel = model
         newModel.messageid = FirebaseReference.messages.generateAutoID()
@@ -249,4 +249,3 @@ extension DatabaseGateway {
         }
     }
 }
-

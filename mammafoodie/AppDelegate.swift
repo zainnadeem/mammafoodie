@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
+        
+        
+        
         return true
     }
     

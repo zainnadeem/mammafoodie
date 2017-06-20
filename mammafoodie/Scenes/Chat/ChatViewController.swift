@@ -12,8 +12,8 @@ struct User {
 class ChatViewController: JSQMessagesViewController {
     
     
-    var model = MFConversation()
-    var modelMsg = MFMessage(with: "", messagetext: "", senderId: "")
+    var model = MFConversation1()
+    var modelMsg = MFMessage1(with: "", messagetext: "", senderId: "")
 
     
     var currentUser: User {
@@ -22,7 +22,7 @@ class ChatViewController: JSQMessagesViewController {
 
     
     // MARK: - Object lifecycle
-    var messages = [MFMessage]()
+    var messages = [MFMessage1]()
     var avatarDict = [String: JSQMessagesAvatarImage]()
     
     //ChatUsers
@@ -37,7 +37,7 @@ extension ChatViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         print(senderId)
-        let message = MFMessage(with: senderDisplayName, messagetext: text, senderId: senderId)
+        let message = MFMessage1(with: senderDisplayName, messagetext: text, senderId: senderId)
         messages.append(message)
         // print(messages)
         finishSendingMessage()
@@ -111,7 +111,7 @@ extension ChatViewController {
         }
     }
     
-    func callAPI(completion: @escaping ([MFMessage]) -> Void) {
+    func callAPI(completion: @escaping ([MFMessage1]) -> Void) {
         
         //        let video = Message(name: "1")
         DatabaseGateway.sharedInstance.createConversation(with:model) {newModel in
@@ -129,11 +129,11 @@ extension ChatViewController {
 
 extension ChatViewController {
     
-    func getMessages() -> [MFMessage] {
-        var messages = [MFMessage]()
+    func getMessages() -> [MFMessage1] {
+        var messages = [MFMessage1]()
         
-        let message1 = MFMessage(with: "Steve", messagetext: "Hey how are you?", senderId: "1")
-        let message2 = MFMessage(with: "siri", messagetext: "Iam Fine.", senderId: "2")
+        let message1 = MFMessage1(with: "Steve", messagetext: "Hey how are you?", senderId: "1")
+        let message2 = MFMessage1(with: "siri", messagetext: "Iam Fine.", senderId: "2")
        
         messages.append(message1)
         messages.append(message2)

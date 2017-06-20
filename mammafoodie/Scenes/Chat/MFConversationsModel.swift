@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct MFConversation {
+struct MFConversation1 {
     var id : String?
     var participants : [String]? //Array of userId
     var dishRequestId : String?
