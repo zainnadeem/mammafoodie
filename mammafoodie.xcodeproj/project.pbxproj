@@ -46,7 +46,7 @@
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
 		11FC890F1EF8F157003DCBE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11FC890E1EF8F157003DCBE7 /* Assets.xcassets */; };
-		11FC89111EF9217A003DCBE7 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FC89101EF9217A003DCBE7 /* UIViewExtension.swift */; };
+		11FC89141EF96BF8003DCBE7 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FC89131EF96BF8003DCBE7 /* UIViewExtension.swift */; };
 		2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
@@ -132,7 +132,6 @@
 		57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6B1EF82FE2002E18EF /* GradientView.swift */; };
 		57801F711EF8300F002E18EF /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6E1EF8300F002E18EF /* StringExtention.swift */; };
 		57801F721EF8300F002E18EF /* UItextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */; };
-		57801F731EF8300F002E18EF /* UIViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F701EF8300F002E18EF /* UIViewExtention.swift */; };
 		57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */; };
 		57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */; };
 		57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */; };
@@ -180,11 +179,10 @@
 		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
 		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
 		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
-		BFC9274E1EF00B0700602153 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		BFC9274E1EF00B0700602153 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		BFCE8BAB1EF5A8C200E4C230 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F5F1EF542BB00223D21 /* Assets.xcassets */; };
 		BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F611EF54ECD00223D21 /* Zain.storyboard */; };
-		CDBB0125C606D24BD89F355C /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
 		F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525E1EF2729D009DDAB1 /* ChatModels.swift */; };
 		F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52621EF2729D009DDAB1 /* ChatViewController.swift */; };
 		F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
@@ -213,10 +211,10 @@
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
 		F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */; };
-		F0BBF3A01EF27ACA00D55615 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A11EF27ACA00D55615 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A21EF27ACA00D55615 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A31EF27ACA00D55615 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		F0BBF3A01EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F0BBF3A11EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F0BBF3A21EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F0BBF3A31EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,12 +265,8 @@
 		118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionRouter.swift; sourceTree = "<group>"; };
 		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
-
-		138668FF3F2B0D721FBBE3BE /* Pods-mammafoodie-mammafoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.release.xcconfig"; sourceTree = "<group>"; };
-
 		11FC890E1EF8F157003DCBE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		11FC89101EF9217A003DCBE7 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-
+		11FC89131EF96BF8003DCBE7 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,14 +378,12 @@
 		57801F6B1EF82FE2002E18EF /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		57801F6E1EF8300F002E18EF /* StringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
 		57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UItextFieldExtention.swift; sourceTree = "<group>"; };
-		57801F701EF8300F002E18EF /* UIViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtention.swift; sourceTree = "<group>"; };
 		57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineFiltreWorker.swift; sourceTree = "<group>"; };
 		57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineSearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CuisineSearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
 		57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
 		57801F811EF83466002E18EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7E62883B495ADBB01E299161 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -469,7 +461,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDBB0125C606D24BD89F355C /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,8 +544,6 @@
 			children = (
 				18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */,
 				17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */,
-				7E62883B495ADBB01E299161 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */,
-				138668FF3F2B0D721FBBE3BE /* Pods-mammafoodie-mammafoodieTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -621,11 +610,6 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
-				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				113139BE1EF7B103000050D6 /* UserProfile.storyboard */,
 			);
@@ -856,9 +840,9 @@
 		57801F6D1EF8300F002E18EF /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				11FC89131EF96BF8003DCBE7 /* UIViewExtension.swift */,
 				57801F6E1EF8300F002E18EF /* StringExtention.swift */,
 				57801F6F1EF8300F002E18EF /* UItextFieldExtention.swift */,
-				57801F701EF8300F002E18EF /* UIViewExtention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -911,8 +895,6 @@
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
-				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
-				11FC89101EF9217A003DCBE7 /* UIViewExtension.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
@@ -990,7 +972,6 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-
 				57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */,
 				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
 				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
@@ -1060,12 +1041,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CB8BF0E1EF247A900DA78B3 /* Build configuration list for PBXNativeTarget "mammafoodieTests" */;
 			buildPhases = (
-				9C541CAFDE084CB28BE0F734 /* [CP] Check Pods Manifest.lock */,
 				2CB8BF031EF247A800DA78B3 /* Sources */,
 				2CB8BF041EF247A800DA78B3 /* Frameworks */,
 				2CB8BF051EF247A800DA78B3 /* Resources */,
-				2A4BE4A30429B4D1CFD4AD14 /* [CP] Embed Pods Frameworks */,
-				7FB37EBCC938EF5818BBC57D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1201,36 +1179,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		2A4BE4A30429B4D1CFD4AD14 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7FB37EBCC938EF5818BBC57D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1244,21 +1192,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C541CAFDE084CB28BE0F734 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -1284,14 +1217,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
-				F0BBF3A21EF27ACA00D55615 /* BuildFile in Sources */,
-				F0BBF3A01EF27ACA00D55615 /* BuildFile in Sources */,
+				F0BBF3A21EF27ACA00D55615 /* (null) in Sources */,
+				F0BBF3A01EF27ACA00D55615 /* (null) in Sources */,
 				F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */,
 				F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */,
-				F0BBF3A11EF27ACA00D55615 /* BuildFile in Sources */,
+				F0BBF3A11EF27ACA00D55615 /* (null) in Sources */,
 				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
 				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
-				F0BBF3A31EF27ACA00D55615 /* BuildFile in Sources */,
+				F0BBF3A31EF27ACA00D55615 /* (null) in Sources */,
 				F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
@@ -1332,7 +1265,6 @@
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
-				11FC89111EF9217A003DCBE7 /* UIViewExtension.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */,
@@ -1347,14 +1279,13 @@
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */,
 				F097D8CF1EF3D8BA00FCF967 /* ChatListTableViewCell.swift in Sources */,
-				BFC9274E1EF00B0700602153 /* BuildFile in Sources */,
+				BFC9274E1EF00B0700602153 /* (null) in Sources */,
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
-				57801F731EF8300F002E18EF /* UIViewExtention.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
@@ -1365,6 +1296,7 @@
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
+				11FC89141EF96BF8003DCBE7 /* UIViewExtension.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
@@ -1532,7 +1464,6 @@
 /* Begin XCBuildConfiguration section */
 		2CB8BF0F1EF247A900DA78B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E62883B495ADBB01E299161 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
@@ -1549,7 +1480,6 @@
 		};
 		2CB8BF101EF247A900DA78B3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 138668FF3F2B0D721FBBE3BE /* Pods-mammafoodie-mammafoodieTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = "";
