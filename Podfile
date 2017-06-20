@@ -41,4 +41,6 @@ target 'mammafoodie' do
       
   end
   
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+
 end
