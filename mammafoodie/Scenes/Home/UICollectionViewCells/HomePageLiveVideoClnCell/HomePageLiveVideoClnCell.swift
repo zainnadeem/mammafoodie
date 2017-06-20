@@ -18,10 +18,10 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
         super.awakeFromNib()
         self.imgAddIcon.layer.cornerRadius = 8
         
-        self.imgView.layer.borderColor = UIColor("#FF7927").cgColor
+        self.imgView.layer.borderColor = #colorLiteral(red: 1, green: 0.4745098039, blue: 0.1529411765, alpha: 1).cgColor
         self.imgView.layer.borderWidth = 2
         
-        self.viewForViewAll.layer.borderColor = UIColor("#FF7927").cgColor
+        self.viewForViewAll.layer.borderColor = #colorLiteral(red: 1, green: 0.4745098039, blue: 0.1529411765, alpha: 1).cgColor
         self.viewForViewAll.layer.borderWidth = 2
     }
     

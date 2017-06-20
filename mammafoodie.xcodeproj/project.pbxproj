@@ -87,8 +87,12 @@
 		2C12BCDE1EF8348F007AF994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCDD1EF8348F007AF994 /* Assets.xcassets */; };
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C12BCE01EF83512007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
-		2C12BCE31EF8401B007AF994 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCE21EF8401B007AF994 /* UIView.swift */; };
-		2C12BCE41EF8401B007AF994 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCE21EF8401B007AF994 /* UIView.swift */; };
+		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
+		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
+		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
+		2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
+		2C80012E1EF94CA0005026CE /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80012D1EF94CA0005026CE /* UIViewExtension.swift */; };
+		2C80012F1EF94CA0005026CE /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C80012D1EF94CA0005026CE /* UIViewExtension.swift */; };
 		2CA2B4A41EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4951EF542D30076598C /* LiveVideo.swift */; };
 		2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B4961EF542D30076598C /* MFActivity.swift */; };
@@ -281,7 +285,9 @@
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
 		2C12BCDD1EF8348F007AF994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2C12BCE21EF8401B007AF994 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
+		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
+		2C80012D1EF94CA0005026CE /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2CA2B4951EF542D30076598C /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
 		2CA2B4961EF542D30076598C /* MFActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFActivity.swift; sourceTree = "<group>"; };
 		2CA2B4971EF542D30076598C /* MFComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFComment.swift; sourceTree = "<group>"; };
@@ -590,6 +596,7 @@
 		2C12BCC71EF7F01E007AF994 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				2C8001261EF90945005026CE /* ActivityTblCell */,
 				2C12BCCA1EF7F044007AF994 /* MenuItemTblCell */,
 			);
 			path = UITableViewCells;
@@ -624,9 +631,18 @@
 		2C12BCE11EF84015007AF994 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2C12BCE21EF8401B007AF994 /* UIView.swift */,
+				2C80012D1EF94CA0005026CE /* UIViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2C8001261EF90945005026CE /* ActivityTblCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C8001271EF9094E005026CE /* ActivityTblCell.swift */,
+				2C8001281EF9094E005026CE /* ActivityTblCell.xib */,
+			);
+			path = ActivityTblCell;
 			sourceTree = "<group>";
 		};
 		2CA886C01EE91CA80012405D /* Support */ = {
@@ -1072,7 +1088,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = VC999G43T3;
+						DevelopmentTeam = 6G977HV28A;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1105,6 +1121,7 @@
 				2C12BCBE1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				2C12BCD61EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				2C12BCBA1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
+				2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2C12BCD01EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCC21EF7D338007AF994 /* Akshit.storyboard in Resources */,
 			);
@@ -1125,6 +1142,7 @@
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
+				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				F03B6EBD1EED276000985F62 /* Siri.storyboard in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
@@ -1216,7 +1234,6 @@
 				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
-				2C12BCE41EF8401B007AF994 /* UIView.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
@@ -1228,6 +1245,7 @@
 				2CA2B4AB1EF542D30076598C /* MFConversation.swift in Sources */,
 				2C12BCD41EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
 				2C12BCB61EF7D237007AF994 /* HomeWorker.swift in Sources */,
+				2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				2CB8BF0A1EF247A900DA78B3 /* mammafoodieTests.swift in Sources */,
 				2CB8BF171EF2486D00DA78B3 /* DatabaseGatewayTests.swift in Sources */,
 				2CA2B4A51EF542D30076598C /* LiveVideo.swift in Sources */,
@@ -1236,6 +1254,7 @@
 				2CA2B4C11EF542D30076598C /* Vidup.swift in Sources */,
 				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
 				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
+				2C80012F1EF94CA0005026CE /* UIViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,7 +1326,6 @@
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
-				2C12BCE31EF8401B007AF994 /* UIView.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				5732C0D91EE931EE00E2A61E /* NearbyChefsSearchAdapter.swift in Sources */,
@@ -1371,12 +1389,14 @@
 				2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
+				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
 				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
+				2C80012E1EF94CA0005026CE /* UIViewExtension.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 			);
@@ -1576,7 +1596,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = 6G977HV28A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1595,7 +1615,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VC999G43T3;
+				DEVELOPMENT_TEAM = 6G977HV28A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

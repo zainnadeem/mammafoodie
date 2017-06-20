@@ -8,9 +8,15 @@ enum HomePageTableViewMode {
 class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
+    
     var mode: HomePageTableViewMode = .activity
+    
     var sectionHeaderView: UIView?
+    
+    var activity: [MFNewsFeed] = []
     var menu: [MFMedia] = []
+    
+    var selectedCuisine: MFCuisine!
     
     func setup(with tableView: UITableView) {
         self.tableView = tableView
@@ -22,24 +28,65 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         let name: String = "MenuItemTblCell"
         tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
         
-        DummyData.sharedInstance.populateMenu { (dummyMenu) in
+        let name1: String = "ActivityTblCell"
+        tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
+        
+        self.loadActivities()
+    }
+    
+    func loadActivities() {
+        DummyData.sharedInstance.populateNewsfeed { (dummyData) in
+            self.activity = dummyData
+            self.tableView.reloadData()
+        }
+    }
+    
+    func loadMenu(with cuisine: MFCuisine) {
+        DummyData.sharedInstance.populateMenu(for: cuisine) { (dummyMenu) in
+            self.selectedCuisine = cuisine
             self.menu = dummyMenu
             self.tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell
-        cell.setup(with: self.menu[indexPath.item])
-        return cell
+        if self.mode == .activity {
+            let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
+            cell.setup(with: self.activity[indexPath.item])
+            return cell
+        } else {
+            let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell
+            cell.setup(with: self.menu[indexPath.item])
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is MenuItemTblCell {
+            (cell as! MenuItemTblCell).cellWillDisplay()
+        } else if cell is ActivityTblCell {
+            (cell as! ActivityTblCell).updateShadow()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.menu.count
+        if self.mode == .activity {
+            return self.activity.count
+        } else {
+            return self.menu.count
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 90
+        if self.mode == .activity {
+            return 53
+        } else {
+            return 93
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

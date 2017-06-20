@@ -32,12 +32,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     @IBOutlet weak var viewLiveVideoAndVidups: UIView!
     
     @IBOutlet var viewActivityMenuChooser: UIView!
-    @IBOutlet weak var imgViewMenuIcon: UIImageView!
+    @IBOutlet weak var viewActivityIcon: UIView!
+    @IBOutlet weak var viewMenuIcon: UIView!
     @IBOutlet weak var clnCuisineList: UICollectionView!
-    @IBOutlet weak var btnActivity: UIButton!
+    @IBOutlet weak var viewSwitchMode: UIView!
     @IBOutlet weak var viewCuisineSelectionIndicator: UIView!
     @IBOutlet weak var conLeadingViewCuisineSelectionIndicator: NSLayoutConstraint!
-    
+    @IBOutlet weak var viewOptionActivity: UIView!
+    @IBOutlet weak var viewOptionMenu: UIView!
+    @IBOutlet weak var conTopViewActivity: NSLayoutConstraint!
+    @IBOutlet weak var btnSwitchMode: UIButton!
     
     var isLiveVideosViewExpanded: Bool = false
     var isVidupsViewExpanded: Bool = false
@@ -67,11 +71,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         
         self.setupLiveVideoCollectionViewAdapter()
         self.setupVidupCollectionViewAdapter()
-        self.setupTableViewAdapter()
         self.setupCuisinesCollectionViewAdapter()
+        self.setupTableViewAdapter()
         
-        self.imgViewMenuIcon.layer.cornerRadius = 5
+        self.viewMenuIcon.layer.cornerRadius = 5
+        self.viewActivityIcon.layer.cornerRadius = 5
+        self.viewSwitchMode.layer.cornerRadius = 5
         self.viewCuisineSelectionIndicator.layer.cornerRadius = 2
+        
+        self.viewActivityIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
+        self.viewMenuIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +121,40 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         }
         self.isVidupsViewExpanded  = !self.isVidupsViewExpanded
         self.updateVidupsCollectionView(animated: false, isVidupsExpanded: self.isVidupsViewExpanded)
+    }
+    
+    @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
+        if self.screenMode == .activity {
+            self.switchToMenuMode()
+        } else {
+            self.switchToActivityMode()
+        }
+    }
+    
+    func switchToActivityMode() {
+        if self.screenMode == .menu {
+            UIView.animate(withDuration: 0.27, animations: {
+                self.conTopViewActivity.constant = 0
+                self.viewOptionActivity.superview?.layoutIfNeeded()
+            })
+            self.screenMode = .activity
+            self.tableViewAdapter.mode = .activity
+            self.tableViewAdapter.loadActivities()
+            self.btnSwitchMode.isSelected = false
+        }
+    }
+    
+    func switchToMenuMode() {
+        if self.screenMode == .activity {
+            UIView.animate(withDuration: 0.27, animations: {
+                self.conTopViewActivity.constant = -1 * self.viewOptionActivity.frame.height - 16
+                self.viewOptionActivity.superview?.layoutIfNeeded()
+            })
+            self.screenMode = .menu
+            self.tableViewAdapter.mode = .menu
+            self.tableViewAdapter.loadMenu(with: self.cuisineListAdapter.selectedCuisine)
+            self.btnSwitchMode.isSelected = true
+        }
     }
     
     // MARK: - Display logic
@@ -201,15 +244,21 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     }
     
     func setupTableViewAdapter() {
+        self.tableViewAdapter.selectedCuisine = self.cuisineListAdapter.selectedCuisine
         self.tableViewAdapter.setup(with: self.tblList)
         self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
     }
     
     func setupCuisinesCollectionViewAdapter() {
         self.cuisineListAdapter.createStaticData()
-        self.cuisineListAdapter.setup(with: self.clnCuisineList)
         self.cuisineListAdapter.selectionIndicatorView = self.viewCuisineSelectionIndicator
         self.cuisineListAdapter.conLeadingViewSelectionIndicator = self.conLeadingViewCuisineSelectionIndicator
+        self.cuisineListAdapter.setup(with: self.clnCuisineList)
+        
+        self.cuisineListAdapter.didSelectCuisine = { (selectedCuisine) in
+            print("Cuisine selected: \(selectedCuisine.name)")
+            self.tableViewAdapter.loadMenu(with: selectedCuisine)
+        }
     }
     
     func updateTableHeaderViewHeight(animated: Bool) {
@@ -230,7 +279,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     
     func addShadow(to view: UIView) {
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowColor = UIColor("#040B50").cgColor
+        view.layer.shadowColor = #colorLiteral(red: 0.01568627451, green: 0.0431372549, blue: 0.3137254902, alpha: 1).cgColor
         view.layer.shadowRadius = 6
         view.layer.shadowOpacity = 0.1
     }
@@ -242,4 +291,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         circleShape.path = circlePath.cgPath
         button.layer.mask = circleShape
     }
+    
+    
 }

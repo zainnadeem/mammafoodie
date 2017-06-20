@@ -6,11 +6,12 @@ class CuisineListCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICo
     var cuisines: [MFCuisine] = []
     var selectionIndicatorView: UIView!
     var conLeadingViewSelectionIndicator: NSLayoutConstraint!
-    
-    var selectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
+    var selectedCuisine: MFCuisine!
+    var didSelectCuisine: ((MFCuisine)->Void)?
     
     // Stored property for contentOffset observer
     var contentOffsetKVOContext: UInt8 = 1
+    var selectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
     
     func createStaticData() {
         self.cuisines.append(MFCuisine(id: "1", name: "Italian", isSelected: true))
@@ -32,6 +33,9 @@ class CuisineListCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICo
         self.collectionView.register(UINib(nibName: name, bundle: nil), forCellWithReuseIdentifier: name)
         
         self.addObserverForContentOffset()
+        
+        self.selectedCuisine = self.cuisines.first
+        self.updateSelectionIndicatorView(in: self.collectionView, at: self.selectedIndexPath, animated: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,6 +52,7 @@ class CuisineListCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICo
         self.updateSelectionIndicatorView(in: collectionView, at: indexPath, animated: false)
         self.updateSelection(for: indexPath)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        self.didSelectCuisine?(self.cuisines[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
