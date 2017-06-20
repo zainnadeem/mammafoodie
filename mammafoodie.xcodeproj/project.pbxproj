@@ -109,6 +109,13 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
+		571A67051EF9624500D47766 /* GoCookLiveVideoUploadConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A66FE1EF9624500D47766 /* GoCookLiveVideoUploadConfigurator.swift */; };
+		571A67061EF9624500D47766 /* GoCookLiveVideoUploadInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A66FF1EF9624500D47766 /* GoCookLiveVideoUploadInteractor.swift */; };
+		571A67071EF9624500D47766 /* GoCookLiveVideoUploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A67001EF9624500D47766 /* GoCookLiveVideoUploadModels.swift */; };
+		571A67081EF9624500D47766 /* GoCookLiveVideoUploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A67011EF9624500D47766 /* GoCookLiveVideoUploadPresenter.swift */; };
+		571A67091EF9624500D47766 /* GoCookLiveVideoUploadRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A67021EF9624500D47766 /* GoCookLiveVideoUploadRouter.swift */; };
+		571A670A1EF9624500D47766 /* GoCookLiveVideoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A67031EF9624500D47766 /* GoCookLiveVideoUploadViewController.swift */; };
+		571A670B1EF9624500D47766 /* GoCookLiveVideoUploadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A67041EF9624500D47766 /* GoCookLiveVideoUploadWorker.swift */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -314,6 +321,13 @@
 		2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		571A66FE1EF9624500D47766 /* GoCookLiveVideoUploadConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadConfigurator.swift; sourceTree = "<group>"; };
+		571A66FF1EF9624500D47766 /* GoCookLiveVideoUploadInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadInteractor.swift; sourceTree = "<group>"; };
+		571A67001EF9624500D47766 /* GoCookLiveVideoUploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadModels.swift; sourceTree = "<group>"; };
+		571A67011EF9624500D47766 /* GoCookLiveVideoUploadPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadPresenter.swift; sourceTree = "<group>"; };
+		571A67021EF9624500D47766 /* GoCookLiveVideoUploadRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadRouter.swift; sourceTree = "<group>"; };
+		571A67031EF9624500D47766 /* GoCookLiveVideoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadViewController.swift; sourceTree = "<group>"; };
+		571A67041EF9624500D47766 /* GoCookLiveVideoUploadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadWorker.swift; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -722,6 +736,20 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		571A66EF1EF9565000D47766 /* GoCookLiveVideoUpload */ = {
+			isa = PBXGroup;
+			children = (
+				571A66FE1EF9624500D47766 /* GoCookLiveVideoUploadConfigurator.swift */,
+				571A66FF1EF9624500D47766 /* GoCookLiveVideoUploadInteractor.swift */,
+				571A67001EF9624500D47766 /* GoCookLiveVideoUploadModels.swift */,
+				571A67011EF9624500D47766 /* GoCookLiveVideoUploadPresenter.swift */,
+				571A67021EF9624500D47766 /* GoCookLiveVideoUploadRouter.swift */,
+				571A67031EF9624500D47766 /* GoCookLiveVideoUploadViewController.swift */,
+				571A67041EF9624500D47766 /* GoCookLiveVideoUploadWorker.swift */,
+			);
+			path = GoCookLiveVideoUpload;
+			sourceTree = "<group>";
+		};
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +777,7 @@
 		57801F881EF839EE002E18EF /* GoCook */ = {
 			isa = PBXGroup;
 			children = (
+				571A66EF1EF9565000D47766 /* GoCookLiveVideoUpload */,
 				57801F891EF839EE002E18EF /* GoCookConfigurator.swift */,
 				57801F8A1EF839EE002E18EF /* GoCookInteractor.swift */,
 				57801F8B1EF839EE002E18EF /* GoCookModels.swift */,
@@ -1078,13 +1107,16 @@
 			files = (
 				BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */,
 				BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */,
+				571A67071EF9624500D47766 /* GoCookLiveVideoUploadModels.swift in Sources */,
 				57801F961EF839EE002E18EF /* GoCookViewController.swift in Sources */,
+				571A67081EF9624500D47766 /* GoCookLiveVideoUploadPresenter.swift in Sources */,
 				2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
 				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
+				571A67051EF9624500D47766 /* GoCookLiveVideoUploadConfigurator.swift in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
@@ -1108,11 +1140,13 @@
 				57801F981EF839EE002E18EF /* MediaPicker.swift in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
+				571A67061EF9624500D47766 /* GoCookLiveVideoUploadInteractor.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */,
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
+				571A670A1EF9624500D47766 /* GoCookLiveVideoUploadViewController.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
@@ -1123,6 +1157,8 @@
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
 				1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */,
 				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
+				571A670B1EF9624500D47766 /* GoCookLiveVideoUploadWorker.swift in Sources */,
+				571A67091EF9624500D47766 /* GoCookLiveVideoUploadRouter.swift in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
