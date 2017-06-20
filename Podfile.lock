@@ -1,0 +1,128 @@
+PODS:
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - FBSDKCoreKit (4.23.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.23.0):
+    - FBSDKCoreKit
+  - Firebase/Auth (4.0.2):
+    - Firebase/Core
+    - FirebaseAuth (= 4.0.0)
+  - Firebase/Core (4.0.2):
+    - FirebaseAnalytics (= 4.0.1)
+    - FirebaseCore (= 4.0.2)
+  - Firebase/Database (4.0.2):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.0.0)
+  - Firebase/Storage (4.0.2):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.0)
+  - FirebaseAnalytics (4.0.1):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.2):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - FirebaseStorage (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GeoFire (2.0.0):
+    - Firebase/Database (~> 4.0)
+  - GoogleMaps (2.3.1):
+    - GoogleMaps/Maps (= 2.3.1)
+  - GoogleMaps/Base (2.3.1)
+  - GoogleMaps/Maps (2.3.1):
+    - GoogleMaps/Base
+  - GooglePlaces (2.3.1):
+    - GoogleMaps/Base (= 2.3.1)
+  - GoogleSignIn (4.0.2):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.10):
+    - GTMSessionFetcher/Full (= 1.1.10)
+  - GTMSessionFetcher/Core (1.1.10)
+  - GTMSessionFetcher/Full (1.1.10):
+    - GTMSessionFetcher/Core (= 1.1.10)
+  - IQKeyboardManagerSwift (4.0.10)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - TRMosaicLayout (1.0.0)
+
+DEPENDENCIES:
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Database
+  - Firebase/Storage
+  - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
+  - GoogleMaps
+  - GooglePlaces
+  - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - JSQMessagesViewController
+  - TRMosaicLayout
+
+EXTERNAL SOURCES:
+  GeoFire:
+    :git: https://github.com/firebase/geofire-objc.git
+
+CHECKOUT OPTIONS:
+  GeoFire:
+    :commit: 96d6463f59016785f9c5ae9b669019c44786a23f
+    :git: https://github.com/firebase/geofire-objc.git
+
+SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
+  FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
+  FirebaseCore: 1a8bf6c795ad07d2918278657954ffd2552e9c17
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
+  GeoFire: 02f02683e09367c2eee073c6b09c794da19833ee
+  GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
+  GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
+  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
+
+PODFILE CHECKSUM: 0c456045fb0d53829873a011b15d9820085ab270
+
+COCOAPODS: 1.2.0
