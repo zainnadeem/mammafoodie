@@ -24,10 +24,28 @@ class DishCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var lblDishName: UILabel!
     
+    @IBOutlet weak var dishImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.width/2
+        profilePicImageView.clipsToBounds = true
+        
+        dishImageView.applyGradient(colors: [.black,.clear,.black], direction: .topToBottom)
+        
+    }
+    
+    func setUp(_ dishData:MFMedia){
+        
+        self.lblChefName.text = dishData.user.name
+        self.lblDishName.text = dishData.dish.name
+        self.lblDishTypeTag.text = "HEALTHY"
+        
+        self.lblNumberOfViews.text = dishData.numberOfViewers.description
+        self.profilePicImageView.image = UIImage(named: dishData.user.picture!)!
+        self.dishImageView.image = UIImage(named: dishData.cover_large!)!
     }
 
 }

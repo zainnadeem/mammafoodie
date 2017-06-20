@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -77,6 +78,7 @@ PODS:
   - TRMosaicLayout (1.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase/Auth
@@ -101,6 +103,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/firebase/geofire-objc.git
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
   FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
@@ -123,6 +126,8 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
 
+
 PODFILE CHECKSUM: 0c456045fb0d53829873a011b15d9820085ab270
+
 
 COCOAPODS: 1.2.0
