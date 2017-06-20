@@ -119,6 +119,14 @@
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
+		B62CD40E1EF7CD19003CF74A /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B62CD40C1EF7CD19003CF74A /* VidupDetails.storyboard */; };
+		B62CD4161EF7E73D003CF74A /* VidupDetailPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD40F1EF7E73D003CF74A /* VidupDetailPageConfigurator.swift */; };
+		B62CD4171EF7E73D003CF74A /* VidupDetailPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4101EF7E73D003CF74A /* VidupDetailPageInteractor.swift */; };
+		B62CD4181EF7E73D003CF74A /* VidupDetailPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4111EF7E73D003CF74A /* VidupDetailPageModels.swift */; };
+		B62CD4191EF7E73D003CF74A /* VidupDetailPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4121EF7E73D003CF74A /* VidupDetailPagePresenter.swift */; };
+		B62CD41A1EF7E73D003CF74A /* VidupDetailPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4131EF7E73D003CF74A /* VidupDetailPageRouter.swift */; };
+		B62CD41B1EF7E73D003CF74A /* VidupDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4141EF7E73D003CF74A /* VidupDetailPageViewController.swift */; };
+		B62CD41C1EF7E73D003CF74A /* VidupDetailPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62CD4151EF7E73D003CF74A /* VidupDetailPageWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
 		BF5060E01EE81B9E00DB646F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DF1EE81B9E00DB646F /* Assets.xcassets */; };
@@ -306,6 +314,14 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		B62CD40D1EF7CD19003CF74A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VidupDetails.storyboard; sourceTree = "<group>"; };
+		B62CD40F1EF7E73D003CF74A /* VidupDetailPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageConfigurator.swift; path = VidupDetailPage/VidupDetailPageConfigurator.swift; sourceTree = "<group>"; };
+		B62CD4101EF7E73D003CF74A /* VidupDetailPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageInteractor.swift; path = VidupDetailPage/VidupDetailPageInteractor.swift; sourceTree = "<group>"; };
+		B62CD4111EF7E73D003CF74A /* VidupDetailPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageModels.swift; path = VidupDetailPage/VidupDetailPageModels.swift; sourceTree = "<group>"; };
+		B62CD4121EF7E73D003CF74A /* VidupDetailPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPagePresenter.swift; path = VidupDetailPage/VidupDetailPagePresenter.swift; sourceTree = "<group>"; };
+		B62CD4131EF7E73D003CF74A /* VidupDetailPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageRouter.swift; path = VidupDetailPage/VidupDetailPageRouter.swift; sourceTree = "<group>"; };
+		B62CD4141EF7E73D003CF74A /* VidupDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageViewController.swift; path = VidupDetailPage/VidupDetailPageViewController.swift; sourceTree = "<group>"; };
+		B62CD4151EF7E73D003CF74A /* VidupDetailPageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VidupDetailPageWorker.swift; path = VidupDetailPage/VidupDetailPageWorker.swift; sourceTree = "<group>"; };
 		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -462,6 +478,13 @@
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
+				B62CD40F1EF7E73D003CF74A /* VidupDetailPageConfigurator.swift */,
+				B62CD4101EF7E73D003CF74A /* VidupDetailPageInteractor.swift */,
+				B62CD4111EF7E73D003CF74A /* VidupDetailPageModels.swift */,
+				B62CD4121EF7E73D003CF74A /* VidupDetailPagePresenter.swift */,
+				B62CD4131EF7E73D003CF74A /* VidupDetailPageRouter.swift */,
+				B62CD4141EF7E73D003CF74A /* VidupDetailPageViewController.swift */,
+				B62CD4151EF7E73D003CF74A /* VidupDetailPageWorker.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -500,6 +523,7 @@
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				B62CD40C1EF7CD19003CF74A /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -927,6 +951,7 @@
 				BF5060DE1EE81B9E00DB646F /* Main.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
+				B62CD40E1EF7CD19003CF74A /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1037,6 +1062,7 @@
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
+				B62CD4171EF7E73D003CF74A /* VidupDetailPageInteractor.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */,
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
@@ -1046,6 +1072,7 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				B62CD41A1EF7E73D003CF74A /* VidupDetailPageRouter.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
@@ -1079,9 +1106,11 @@
 				BFC9274F1EF00B0700602153 /* VidupCollectionViewCell.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
+				B62CD4161EF7E73D003CF74A /* VidupDetailPageConfigurator.swift in Sources */,
 				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
+				B62CD4181EF7E73D003CF74A /* VidupDetailPageModels.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
@@ -1094,11 +1123,14 @@
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				B62CD41C1EF7E73D003CF74A /* VidupDetailPageWorker.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
+				B62CD41B1EF7E73D003CF74A /* VidupDetailPageViewController.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
+				B62CD4191EF7E73D003CF74A /* VidupDetailPagePresenter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
 				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
@@ -1147,6 +1179,14 @@
 				2CB8BE9E1EF246DB00DA78B3 /* Base */,
 			);
 			name = NearbyChefs.storyboard;
+			sourceTree = "<group>";
+		};
+		B62CD40C1EF7CD19003CF74A /* VidupDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B62CD40D1EF7CD19003CF74A /* Base */,
+			);
+			name = VidupDetails.storyboard;
 			sourceTree = "<group>";
 		};
 		BF5060DC1EE81B9E00DB646F /* Main.storyboard */ = {
