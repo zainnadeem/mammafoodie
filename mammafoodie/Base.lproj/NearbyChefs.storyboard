@@ -59,10 +59,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c07-OD-otD">
-                                <rect key="frame" x="20" y="80" width="374" height="50"/>
+                                <rect key="frame" x="20" y="80" width="374" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Utz-Px-mSm"/>
+                                    <constraint firstAttribute="height" constant="80" id="Utz-Px-mSm"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="9HX-pD-odS">
                                     <size key="itemSize" width="80" height="38"/>
@@ -73,7 +73,7 @@
                                 <cells/>
                             </collectionView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What would you like to eat" adjustsFontSizeToFit="NO" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="EFp-Xa-mto">
-                                <rect key="frame" x="20" y="145" width="374" height="40"/>
+                                <rect key="frame" x="20" y="175" width="374" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="LFq-r3-3oo"/>

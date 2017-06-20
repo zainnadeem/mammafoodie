@@ -37,6 +37,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     func showMarkers(markers: [Marker]) {
         print("showing marker at location: \(String(describing: markers.first?.position))")
         if markers != nil {
+//            self.clusterManager.clearItems()
             for marker in markers {
                 if !self.allMarks.contains(marker) {
                     self.allMarks.append(marker)
@@ -73,11 +74,12 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-//        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
-        marker.icon = #imageLiteral(resourceName: "chinese_pin")
+        marker.icon = self.selectedFilter?.pin
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        kCameraLatitude = position.target.latitude
+        kCameraLongitude = position.target.longitude
         self.output.loadMarkers(at: position.target)
         print("idle At: \(position.target)")
     }

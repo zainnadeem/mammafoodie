@@ -114,6 +114,7 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
+		571A66ED1EF935F300D47766 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -359,6 +360,7 @@
 		2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Users/arjav/Library/Developer/Xcode/DerivedData/mammafoodie-gpocchshqbxkdievjanonfykbjhl/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				571A66ED1EF935F300D47766 /* GoogleToolboxForMac.framework in Frameworks */,
 				6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,9 +566,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				F097D8C11EF3D8BA00FCF967 /* ChatList */,
-				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
+				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				BFC927001EF00A7E00602153 /* Comments */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
@@ -573,6 +575,7 @@
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
 			);
@@ -1028,6 +1031,7 @@
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */,
 				CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */,
 				2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */,
 			);
@@ -1238,7 +1242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {

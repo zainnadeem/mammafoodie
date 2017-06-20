@@ -77,8 +77,8 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         
         self.btnFeaturedmenuBack.addGestureRecognizer(self.swipGesture)
         
-        self.prepareMap()
         self.prepareCuisineCollectionView()
+        self.prepareMap()
         self.setupSearchTextField()
         self.featuredMenuAdapter = FeaturedMenuCollectionViewAdapter()
         self.featuredMenuAdapter.prepareCollectionView(self.featuredMenuCollectionView)

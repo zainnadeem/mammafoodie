@@ -24,10 +24,10 @@ class NearbyChefsInteractor: NearbyChefsInteractorInput {
         if self.worker == nil {
             self.worker = NearbyChefsWorker()
         }
-//        print("Asking worker For location: \(location)")
-        self.worker.prepareMarkers(for: location) { (markersFound) in
-            self.output.showMarkers(markersFound)
-        }
+        self.output.showMarkers(self.worker.prepareMarkers(for: location))
+//        self.worker.prepareMarkers(for: location) { (markersFound) in
+//            self.output.showMarkers(markersFound)
+//        }
     }
     
     func getCurrentLocation() {
