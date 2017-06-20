@@ -31,7 +31,7 @@ class LoginRegisterViewController: UIViewController {
         passwordBtn.layer.borderWidth = 1
         passwordBtn.layer.borderColor = UIColor.clear.cgColor
         
-        registerBtn.layer.cornerRadius = 25
+        registerBtn.layer.cornerRadius = 20
         registerBtn.layer.borderWidth = 1
         registerBtn.layer.borderColor = UIColor.clear.cgColor
 
