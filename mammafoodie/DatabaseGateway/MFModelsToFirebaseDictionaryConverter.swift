@@ -18,6 +18,31 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
     
+    class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
+        var dishRequestId: String = ""
+        
+        if conversation.dishRequestId != nil  {
+            dishRequestId = conversation.dishRequestId!
+        }
+        return [
+            conversation.id! : [
+                "dishRequestId" : dishRequestId as AnyObject,
+                "createdAt": conversation.createdAt as AnyObject
+            ] as AnyObject
+        ]
+    }
+    
+    class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
+        return [
+            message.messageid : [
+                "messageText": message.messageText as AnyObject,
+                "conversationId": message.conversationId as AnyObject,
+                "senderId": message.senderId as AnyObject,
+                "receiverId": message.receiverId as AnyObject
+                ] as AnyObject
+        ]
+    }
+
     
 //    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
 //       return [

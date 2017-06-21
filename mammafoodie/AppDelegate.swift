@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleMaps
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -17,11 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
-        
-        
-        
         return true
     }
     
@@ -30,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
             return GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
             /*
-            let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
-            let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-            return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
- */
+             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
+             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+             return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
+             */
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

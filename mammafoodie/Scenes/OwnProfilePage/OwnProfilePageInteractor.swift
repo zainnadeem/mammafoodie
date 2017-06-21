@@ -29,9 +29,7 @@ class OwnProfilePageInteractor: OwnProfilePageInteractorInput,DishesCollectionVi
     
     func loadDishCollectionViewForIndex(_ index:Int){
         
-        worker.getDishes(boughtOrCooked: index, forUserID: 0) { dishes in
-            dishCollectionViewAdapter.dataSource = dishes
-        }
+       
     }
     
     //MARK: - DishesCollectionViewAdapterDelegate

@@ -11,14 +11,19 @@ target 'mammafoodie' do
   pod 'Firebase/Storage'
   
   pod 'GoogleSignIn'
-
   
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
 
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'TRMosaicLayout'
 
+  pod 'JSQMessagesViewController'
+  pod 'IQKeyboardManagerSwift'
   
+  pod 'TRMosaicLayout'
+  pod 'Alamofire'
+  
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+
 end

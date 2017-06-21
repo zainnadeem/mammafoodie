@@ -9,6 +9,8 @@ struct MFNewsFeed {
     var activityId: MFActivity!
     var text: String!
     var attributedString: NSMutableAttributedString!
+    var liked: [MFUser:Date] = [:]
+    var comments: [MFComment:Date] = [:]
     
     init(id: String!, actionUserId: MFUser, participantUserId: MFUser, activityID: MFActivity, text: NSMutableAttributedString){
         self.id = id
@@ -17,8 +19,6 @@ struct MFNewsFeed {
         self.attributedString = text
         
     }
-
-
 
 }
 
