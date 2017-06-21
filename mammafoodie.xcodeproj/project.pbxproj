@@ -162,10 +162,6 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
-		2CE479411EF97256003D0F9F /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4793E1EF97256003D0F9F /* StringExtention.swift */; };
-		2CE479421EF97256003D0F9F /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4793E1EF97256003D0F9F /* StringExtention.swift */; };
-		2CE479431EF97256003D0F9F /* UItextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4793F1EF97256003D0F9F /* UItextFieldExtention.swift */; };
-		2CE479441EF97256003D0F9F /* UItextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE4793F1EF97256003D0F9F /* UItextFieldExtention.swift */; };
 		2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479471EF97312003D0F9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
@@ -231,6 +227,45 @@
 		2CFB9BD21EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */; };
 		2CFB9BD41EFA4D3700C08EB3 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */; };
 		571A66ED1EF935F300D47766 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */; };
+		572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */; };
+		572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */; };
+		572E9A811EFAB4AF007DE6D0 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5F1EFAB4AF007DE6D0 /* CuisineCollectionViewAdapter.swift */; };
+		572E9A821EFAB4AF007DE6D0 /* GoCookLiveVideoUploadConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A601EFAB4AF007DE6D0 /* GoCookLiveVideoUploadConfigurator.swift */; };
+		572E9A831EFAB4AF007DE6D0 /* GoCookLiveVideoUploadInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A611EFAB4AF007DE6D0 /* GoCookLiveVideoUploadInteractor.swift */; };
+		572E9A841EFAB4AF007DE6D0 /* GoCookLiveVideoUploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A621EFAB4AF007DE6D0 /* GoCookLiveVideoUploadModels.swift */; };
+		572E9A851EFAB4AF007DE6D0 /* GoCookLiveVideoUploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A631EFAB4AF007DE6D0 /* GoCookLiveVideoUploadPresenter.swift */; };
+		572E9A861EFAB4AF007DE6D0 /* GoCookLiveVideoUploadRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A641EFAB4AF007DE6D0 /* GoCookLiveVideoUploadRouter.swift */; };
+		572E9A871EFAB4AF007DE6D0 /* GoCookLiveVideoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A651EFAB4AF007DE6D0 /* GoCookLiveVideoUploadViewController.swift */; };
+		572E9A881EFAB4AF007DE6D0 /* GoCookLiveVideoUploadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A661EFAB4AF007DE6D0 /* GoCookLiveVideoUploadWorker.swift */; };
+		572E9A891EFAB4AF007DE6D0 /* CuisineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A681EFAB4AF007DE6D0 /* CuisineWorker.swift */; };
+		572E9A8A1EFAB4AF007DE6D0 /* GoCookModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A691EFAB4AF007DE6D0 /* GoCookModels.swift */; };
+		572E9A8B1EFAB4AF007DE6D0 /* GoCookPictureUploadConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A6B1EFAB4AF007DE6D0 /* GoCookPictureUploadConfigurator.swift */; };
+		572E9A8C1EFAB4AF007DE6D0 /* GoCookPictureUploadInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A6C1EFAB4AF007DE6D0 /* GoCookPictureUploadInteractor.swift */; };
+		572E9A8D1EFAB4AF007DE6D0 /* GoCookPictureUploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A6D1EFAB4AF007DE6D0 /* GoCookPictureUploadModels.swift */; };
+		572E9A8E1EFAB4AF007DE6D0 /* GoCookPictureUploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A6E1EFAB4AF007DE6D0 /* GoCookPictureUploadPresenter.swift */; };
+		572E9A8F1EFAB4AF007DE6D0 /* GoCookPictureUploadRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A6F1EFAB4AF007DE6D0 /* GoCookPictureUploadRouter.swift */; };
+		572E9A901EFAB4AF007DE6D0 /* GoCookPictureUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A701EFAB4AF007DE6D0 /* GoCookPictureUploadViewController.swift */; };
+		572E9A911EFAB4AF007DE6D0 /* GoCookPictureUploadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A711EFAB4AF007DE6D0 /* GoCookPictureUploadWorker.swift */; };
+		572E9A921EFAB4AF007DE6D0 /* GoCookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A721EFAB4AF007DE6D0 /* GoCookPresenter.swift */; };
+		572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A731EFAB4AF007DE6D0 /* GoCookRouter.swift */; };
+		572E9A941EFAB4AF007DE6D0 /* GoCookVidupUploadConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A751EFAB4AF007DE6D0 /* GoCookVidupUploadConfigurator.swift */; };
+		572E9A951EFAB4AF007DE6D0 /* GoCookVidupUploadInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A761EFAB4AF007DE6D0 /* GoCookVidupUploadInteractor.swift */; };
+		572E9A961EFAB4AF007DE6D0 /* GoCookVidupUploadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A771EFAB4AF007DE6D0 /* GoCookVidupUploadModels.swift */; };
+		572E9A971EFAB4AF007DE6D0 /* GoCookVidupUploadPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A781EFAB4AF007DE6D0 /* GoCookVidupUploadPresenter.swift */; };
+		572E9A981EFAB4AF007DE6D0 /* GoCookVidupUploadRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A791EFAB4AF007DE6D0 /* GoCookVidupUploadRouter.swift */; };
+		572E9A991EFAB4AF007DE6D0 /* GoCookVidupUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7A1EFAB4AF007DE6D0 /* GoCookVidupUploadViewController.swift */; };
+		572E9A9A1EFAB4AF007DE6D0 /* GoCookVidupUploadWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7B1EFAB4AF007DE6D0 /* GoCookVidupUploadWorker.swift */; };
+		572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7C1EFAB4AF007DE6D0 /* GoCookViewController.swift */; };
+		572E9A9C1EFAB4AF007DE6D0 /* GoCookWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7D1EFAB4AF007DE6D0 /* GoCookWorker.swift */; };
+		572E9A9D1EFAB4AF007DE6D0 /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7E1EFAB4AF007DE6D0 /* MediaPicker.swift */; };
+		572E9AA01EFAB4BC007DE6D0 /* GoCook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572E9A9E1EFAB4BC007DE6D0 /* GoCook.storyboard */; };
+		572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA21EFAB515007DE6D0 /* StringExtension.swift */; };
+		572E9AA71EFAB515007DE6D0 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA31EFAB515007DE6D0 /* UIButtonExtension.swift */; };
+		572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */; };
+		572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */; };
+		572E9AAB1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AAA1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift */; };
+		572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AAD1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift */; };
+		572E9AB01EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 572E9AAE1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib */; };
 		5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
 		5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
 		5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
@@ -239,7 +274,6 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
-		57801F661EF823F9002E18EF /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */; };
 		57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
 		57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */; };
 		57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */; };
@@ -492,8 +526,6 @@
 		2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
-		2CE4793E1EF97256003D0F9F /* StringExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
-		2CE4793F1EF97256003D0F9F /* UItextFieldExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UItextFieldExtention.swift; sourceTree = "<group>"; };
 		2CE479401EF97256003D0F9F /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CFB9B771EFA475100C08EB3 /* LiveVideoGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoGateway.swift; sourceTree = "<group>"; };
@@ -528,6 +560,45 @@
 		2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Users/arjav/Library/Developer/Xcode/DerivedData/mammafoodie-gpocchshqbxkdievjanonfykbjhl/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
+		572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookConfigurator.swift; sourceTree = "<group>"; };
+		572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookInteractor.swift; sourceTree = "<group>"; };
+		572E9A5F1EFAB4AF007DE6D0 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		572E9A601EFAB4AF007DE6D0 /* GoCookLiveVideoUploadConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadConfigurator.swift; sourceTree = "<group>"; };
+		572E9A611EFAB4AF007DE6D0 /* GoCookLiveVideoUploadInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadInteractor.swift; sourceTree = "<group>"; };
+		572E9A621EFAB4AF007DE6D0 /* GoCookLiveVideoUploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadModels.swift; sourceTree = "<group>"; };
+		572E9A631EFAB4AF007DE6D0 /* GoCookLiveVideoUploadPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadPresenter.swift; sourceTree = "<group>"; };
+		572E9A641EFAB4AF007DE6D0 /* GoCookLiveVideoUploadRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadRouter.swift; sourceTree = "<group>"; };
+		572E9A651EFAB4AF007DE6D0 /* GoCookLiveVideoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadViewController.swift; sourceTree = "<group>"; };
+		572E9A661EFAB4AF007DE6D0 /* GoCookLiveVideoUploadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookLiveVideoUploadWorker.swift; sourceTree = "<group>"; };
+		572E9A681EFAB4AF007DE6D0 /* CuisineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineWorker.swift; sourceTree = "<group>"; };
+		572E9A691EFAB4AF007DE6D0 /* GoCookModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookModels.swift; sourceTree = "<group>"; };
+		572E9A6B1EFAB4AF007DE6D0 /* GoCookPictureUploadConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadConfigurator.swift; sourceTree = "<group>"; };
+		572E9A6C1EFAB4AF007DE6D0 /* GoCookPictureUploadInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadInteractor.swift; sourceTree = "<group>"; };
+		572E9A6D1EFAB4AF007DE6D0 /* GoCookPictureUploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadModels.swift; sourceTree = "<group>"; };
+		572E9A6E1EFAB4AF007DE6D0 /* GoCookPictureUploadPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadPresenter.swift; sourceTree = "<group>"; };
+		572E9A6F1EFAB4AF007DE6D0 /* GoCookPictureUploadRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadRouter.swift; sourceTree = "<group>"; };
+		572E9A701EFAB4AF007DE6D0 /* GoCookPictureUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadViewController.swift; sourceTree = "<group>"; };
+		572E9A711EFAB4AF007DE6D0 /* GoCookPictureUploadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPictureUploadWorker.swift; sourceTree = "<group>"; };
+		572E9A721EFAB4AF007DE6D0 /* GoCookPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookPresenter.swift; sourceTree = "<group>"; };
+		572E9A731EFAB4AF007DE6D0 /* GoCookRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookRouter.swift; sourceTree = "<group>"; };
+		572E9A751EFAB4AF007DE6D0 /* GoCookVidupUploadConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadConfigurator.swift; sourceTree = "<group>"; };
+		572E9A761EFAB4AF007DE6D0 /* GoCookVidupUploadInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadInteractor.swift; sourceTree = "<group>"; };
+		572E9A771EFAB4AF007DE6D0 /* GoCookVidupUploadModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadModels.swift; sourceTree = "<group>"; };
+		572E9A781EFAB4AF007DE6D0 /* GoCookVidupUploadPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadPresenter.swift; sourceTree = "<group>"; };
+		572E9A791EFAB4AF007DE6D0 /* GoCookVidupUploadRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadRouter.swift; sourceTree = "<group>"; };
+		572E9A7A1EFAB4AF007DE6D0 /* GoCookVidupUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadViewController.swift; sourceTree = "<group>"; };
+		572E9A7B1EFAB4AF007DE6D0 /* GoCookVidupUploadWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookVidupUploadWorker.swift; sourceTree = "<group>"; };
+		572E9A7C1EFAB4AF007DE6D0 /* GoCookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookViewController.swift; sourceTree = "<group>"; };
+		572E9A7D1EFAB4AF007DE6D0 /* GoCookWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookWorker.swift; sourceTree = "<group>"; };
+		572E9A7E1EFAB4AF007DE6D0 /* MediaPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
+		572E9A9F1EFAB4BC007DE6D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GoCook.storyboard; sourceTree = "<group>"; };
+		572E9AA21EFAB515007DE6D0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		572E9AA31EFAB515007DE6D0 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		572E9AAA1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineSearchCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		572E9AAD1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewCell.swift; sourceTree = "<group>"; };
+		572E9AAE1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CuisineCollectionViewCell.xib; sourceTree = "<group>"; };
 		5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsConfigurator.swift; sourceTree = "<group>"; };
 		5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsInteractor.swift; sourceTree = "<group>"; };
 		5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsModels.swift; sourceTree = "<group>"; };
@@ -537,7 +608,6 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
-		57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByChefsMapAdapter.swift; sourceTree = "<group>"; };
 		57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
@@ -859,6 +929,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				BFC927001EF00A7E00602153 /* Comments */,
@@ -913,6 +984,7 @@
 			isa = PBXGroup;
 			children = (
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
+				572E9A9E1EFAB4BC007DE6D0 /* GoCook.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				113139BE1EF7B103000050D6 /* UserProfile.storyboard */,
@@ -1099,8 +1171,10 @@
 		2CE4793D1EF97256003D0F9F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2CE4793E1EF97256003D0F9F /* StringExtention.swift */,
-				2CE4793F1EF97256003D0F9F /* UItextFieldExtention.swift */,
+				572E9AA21EFAB515007DE6D0 /* StringExtension.swift */,
+				572E9AA31EFAB515007DE6D0 /* UIButtonExtension.swift */,
+				572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */,
+				572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */,
 				2CE479401EF97256003D0F9F /* UIViewExtension.swift */,
 			);
 			path = Extensions;
@@ -1182,6 +1256,85 @@
 			path = VidupDetailPage;
 			sourceTree = "<group>";
 		};
+		572E9A5B1EFAB4AF007DE6D0 /* GoCook */ = {
+			isa = PBXGroup;
+			children = (
+				572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */,
+				572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */,
+				572E9A5E1EFAB4AF007DE6D0 /* GoCookLiveVideoUpload */,
+				572E9A691EFAB4AF007DE6D0 /* GoCookModels.swift */,
+				572E9A6A1EFAB4AF007DE6D0 /* GoCookPictureUpload */,
+				572E9A721EFAB4AF007DE6D0 /* GoCookPresenter.swift */,
+				572E9A731EFAB4AF007DE6D0 /* GoCookRouter.swift */,
+				572E9A741EFAB4AF007DE6D0 /* GoCookVidupUpload */,
+				572E9A7C1EFAB4AF007DE6D0 /* GoCookViewController.swift */,
+				572E9A7D1EFAB4AF007DE6D0 /* GoCookWorker.swift */,
+				572E9A7E1EFAB4AF007DE6D0 /* MediaPicker.swift */,
+			);
+			path = GoCook;
+			sourceTree = "<group>";
+		};
+		572E9A5E1EFAB4AF007DE6D0 /* GoCookLiveVideoUpload */ = {
+			isa = PBXGroup;
+			children = (
+				572E9A5F1EFAB4AF007DE6D0 /* CuisineCollectionViewAdapter.swift */,
+				572E9A601EFAB4AF007DE6D0 /* GoCookLiveVideoUploadConfigurator.swift */,
+				572E9A611EFAB4AF007DE6D0 /* GoCookLiveVideoUploadInteractor.swift */,
+				572E9A621EFAB4AF007DE6D0 /* GoCookLiveVideoUploadModels.swift */,
+				572E9A631EFAB4AF007DE6D0 /* GoCookLiveVideoUploadPresenter.swift */,
+				572E9A641EFAB4AF007DE6D0 /* GoCookLiveVideoUploadRouter.swift */,
+				572E9A651EFAB4AF007DE6D0 /* GoCookLiveVideoUploadViewController.swift */,
+				572E9A661EFAB4AF007DE6D0 /* GoCookLiveVideoUploadWorker.swift */,
+				572E9A671EFAB4AF007DE6D0 /* Worker */,
+			);
+			path = GoCookLiveVideoUpload;
+			sourceTree = "<group>";
+		};
+		572E9A671EFAB4AF007DE6D0 /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				572E9A681EFAB4AF007DE6D0 /* CuisineWorker.swift */,
+			);
+			path = Worker;
+			sourceTree = "<group>";
+		};
+		572E9A6A1EFAB4AF007DE6D0 /* GoCookPictureUpload */ = {
+			isa = PBXGroup;
+			children = (
+				572E9A6B1EFAB4AF007DE6D0 /* GoCookPictureUploadConfigurator.swift */,
+				572E9A6C1EFAB4AF007DE6D0 /* GoCookPictureUploadInteractor.swift */,
+				572E9A6D1EFAB4AF007DE6D0 /* GoCookPictureUploadModels.swift */,
+				572E9A6E1EFAB4AF007DE6D0 /* GoCookPictureUploadPresenter.swift */,
+				572E9A6F1EFAB4AF007DE6D0 /* GoCookPictureUploadRouter.swift */,
+				572E9A701EFAB4AF007DE6D0 /* GoCookPictureUploadViewController.swift */,
+				572E9A711EFAB4AF007DE6D0 /* GoCookPictureUploadWorker.swift */,
+			);
+			path = GoCookPictureUpload;
+			sourceTree = "<group>";
+		};
+		572E9A741EFAB4AF007DE6D0 /* GoCookVidupUpload */ = {
+			isa = PBXGroup;
+			children = (
+				572E9A751EFAB4AF007DE6D0 /* GoCookVidupUploadConfigurator.swift */,
+				572E9A761EFAB4AF007DE6D0 /* GoCookVidupUploadInteractor.swift */,
+				572E9A771EFAB4AF007DE6D0 /* GoCookVidupUploadModels.swift */,
+				572E9A781EFAB4AF007DE6D0 /* GoCookVidupUploadPresenter.swift */,
+				572E9A791EFAB4AF007DE6D0 /* GoCookVidupUploadRouter.swift */,
+				572E9A7A1EFAB4AF007DE6D0 /* GoCookVidupUploadViewController.swift */,
+				572E9A7B1EFAB4AF007DE6D0 /* GoCookVidupUploadWorker.swift */,
+			);
+			path = GoCookVidupUpload;
+			sourceTree = "<group>";
+		};
+		572E9AAC1EFAB5DC007DE6D0 /* CuisineCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				572E9AAD1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift */,
+				572E9AAE1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib */,
+			);
+			path = CuisineCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		5732C0C41EE92A9600E2A61E /* NearbyChefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1210,7 +1363,7 @@
 		57801F611EF823F9002E18EF /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				57801F621EF823F9002E18EF /* CuisineCollectionViewAdapter.swift */,
+				572E9AAA1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift */,
 				57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */,
 				57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */,
 				57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */,
@@ -1351,6 +1504,7 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				572E9AAC1EFAB5DC007DE6D0 /* CuisineCollectionViewCell */,
 				2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */,
 				57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */,
 				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
@@ -1478,7 +1632,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 6G977HV28A;
+						DevelopmentTeam = R4UP7L985F;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1525,6 +1679,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572E9AA01EFAB4BC007DE6D0 /* GoCook.storyboard in Resources */,
 				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
 				57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */,
 				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
@@ -1533,6 +1688,7 @@
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
 				2CFB9BC01EFA479900C08EB3 /* LiveVideo.storyboard in Resources */,
 				2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
+				572E9AB01EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib in Resources */,
 				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				113139D61EF7F4E5000050D6 /* DishCollectionViewCell.xib in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
@@ -1579,7 +1735,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8787676D1BDC384D1E456A59 /* [CP] Copy Pods Resources */ = {
@@ -1619,7 +1775,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE479421EF97256003D0F9F /* StringExtention.swift in Sources */,
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
 				2CFB9B891EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				F0BBF3A21EF27ACA00D55615 /* (null) in Sources */,
@@ -1663,7 +1818,6 @@
 				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
 				2CFB9B931EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
 				2CFB9B951EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
-				2CE479441EF97256003D0F9F /* UItextFieldExtention.swift in Sources */,
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
@@ -1700,6 +1854,7 @@
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */,
 				F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */,
+				572E9A9C1EFAB4AF007DE6D0 /* GoCookWorker.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
 				2C12BCAF1EF7D237007AF994 /* HomePresenter.swift in Sources */,
 				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
@@ -1708,8 +1863,11 @@
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
+				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
+				572E9A831EFAB4AF007DE6D0 /* GoCookLiveVideoUploadInteractor.swift in Sources */,
+				572E9A821EFAB4AF007DE6D0 /* GoCookLiveVideoUploadConfigurator.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
@@ -1717,9 +1875,12 @@
 				2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */,
 				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */,
+				572E9A941EFAB4AF007DE6D0 /* GoCookVidupUploadConfigurator.swift in Sources */,
 				F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */,
 				F0573A081EF2CB2C000F38B1 /* RequestDishRouter.swift in Sources */,
 				2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */,
+				572E9A991EFAB4AF007DE6D0 /* GoCookVidupUploadViewController.swift in Sources */,
+				572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */,
 				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
@@ -1728,8 +1889,10 @@
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				2CFB9BA61EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
+				572E9AA71EFAB515007DE6D0 /* UIButtonExtension.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				2CFB9B861EFA475100C08EB3 /* LiveVideoGateway.swift in Sources */,
+				572E9A9D1EFAB4AF007DE6D0 /* MediaPicker.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */,
 				F097D8CF1EF3D8BA00FCF967 /* ChatListTableViewCell.swift in Sources */,
@@ -1748,6 +1911,7 @@
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
 				F097D8CC1EF3D8BA00FCF967 /* ChatListModels.swift in Sources */,
+				572E9A951EFAB4AF007DE6D0 /* GoCookVidupUploadInteractor.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				2C12BCBB1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
@@ -1756,15 +1920,19 @@
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
+				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
+				572E9A911EFAB4AF007DE6D0 /* GoCookPictureUploadWorker.swift in Sources */,
 				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				572E9A841EFAB4AF007DE6D0 /* GoCookLiveVideoUploadModels.swift in Sources */,
 				F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */,
+				572E9A901EFAB4AF007DE6D0 /* GoCookPictureUploadViewController.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
@@ -1775,18 +1943,24 @@
 				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				113139D91EF80574000050D6 /* ActivityCollectionViewCell.swift in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
+				572E9A921EFAB4AF007DE6D0 /* GoCookPresenter.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
 				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
+				572E9A811EFAB4AF007DE6D0 /* CuisineCollectionViewAdapter.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
-				2CE479411EF97256003D0F9F /* StringExtention.swift in Sources */,
+				572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
+				572E9A961EFAB4AF007DE6D0 /* GoCookVidupUploadModels.swift in Sources */,
 				F02722F41EF8583400A5D6C3 /* LoginRegisterViewController.swift in Sources */,
+				572E9A971EFAB4AF007DE6D0 /* GoCookVidupUploadPresenter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
+				572E9A8F1EFAB4AF007DE6D0 /* GoCookPictureUploadRouter.swift in Sources */,
+				572E9A8B1EFAB4AF007DE6D0 /* GoCookPictureUploadConfigurator.swift in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
@@ -1798,22 +1972,30 @@
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
+				572E9A8E1EFAB4AF007DE6D0 /* GoCookPictureUploadPresenter.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
+				572E9A8D1EFAB4AF007DE6D0 /* GoCookPictureUploadModels.swift in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				F097D8CE1EF3D8BA00FCF967 /* ChatListRouter.swift in Sources */,
 				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
+				572E9A861EFAB4AF007DE6D0 /* GoCookLiveVideoUploadRouter.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
 				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
+				572E9A8A1EFAB4AF007DE6D0 /* GoCookModels.swift in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
+				572E9A871EFAB4AF007DE6D0 /* GoCookLiveVideoUploadViewController.swift in Sources */,
+				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				2CFB9B921EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
+				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
+				572E9A981EFAB4AF007DE6D0 /* GoCookVidupUploadRouter.swift in Sources */,
 				2CFB9BA41EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
@@ -1827,10 +2009,12 @@
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				2C12BCAB1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
+				572E9AAB1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
+				572E9A9A1EFAB4AF007DE6D0 /* GoCookVidupUploadWorker.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
@@ -1842,17 +2026,20 @@
 				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				F097D8CB1EF3D8BA00FCF967 /* ChatListInteractor.swift in Sources */,
 				2CFB9BB41EFA477200C08EB3 /* VidupDetailPageModels.swift in Sources */,
+				572E9A881EFAB4AF007DE6D0 /* GoCookLiveVideoUploadWorker.swift in Sources */,
+				572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
+				572E9A891EFAB4AF007DE6D0 /* CuisineWorker.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */,
 				F097D8CD1EF3D8BA00FCF967 /* ChatListPresenter.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
-				57801F661EF823F9002E18EF /* CuisineCollectionViewAdapter.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
+				572E9A8C1EFAB4AF007DE6D0 /* GoCookPictureUploadInteractor.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
@@ -1872,11 +2059,11 @@
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
-				2CE479431EF97256003D0F9F /* UItextFieldExtention.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
+				572E9A851EFAB4AF007DE6D0 /* GoCookLiveVideoUploadPresenter.swift in Sources */,
 				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
@@ -1884,6 +2071,7 @@
 				2CFB9B901EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
+				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
@@ -1931,6 +2119,14 @@
 				2CFB9BC31EFA47B300C08EB3 /* Base */,
 			);
 			name = VidupDetails.storyboard;
+			sourceTree = "<group>";
+		};
+		572E9A9E1EFAB4BC007DE6D0 /* GoCook.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				572E9A9F1EFAB4BC007DE6D0 /* Base */,
+			);
+			name = GoCook.storyboard;
 			sourceTree = "<group>";
 		};
 		BF5060DC1EE81B9E00DB646F /* Main.storyboard */ = {
@@ -2108,7 +2304,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2116,7 +2312,7 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -2131,7 +2327,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = R4UP7L985F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2139,7 +2335,7 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";

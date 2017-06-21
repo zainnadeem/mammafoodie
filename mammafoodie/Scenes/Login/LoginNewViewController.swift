@@ -8,9 +8,6 @@
 
 import UIKit
 
-let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
-let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
-
 class LoginNewViewController: UIViewController, UITextFieldDelegate {
     
     var shapeLayer: CAShapeLayer!
