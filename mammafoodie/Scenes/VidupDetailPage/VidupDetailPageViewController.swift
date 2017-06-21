@@ -18,9 +18,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
-    
-    
-    
     //VidUp URL
     
     var vidupURL:String = "https://static.videezy.com/system/resources/previews/000/002/212/original/Puffins-Lunga-TreshnishIsles-hd-stock-video.mp4"

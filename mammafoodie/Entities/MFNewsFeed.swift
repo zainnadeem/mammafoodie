@@ -1,25 +1,30 @@
 import Foundation
 
+enum MFNewsFeedRedirectPath {
+    case dish
+    case unknown
+}
+
 struct MFNewsFeed {
     var id: String!
     var actionUserId: MFUser!
     var redirectId: String?
-    var redirectPath: String?
+    var redirectPath: MFNewsFeedRedirectPath? = .unknown
     var participantUserId: MFUser?
-    var activityId: MFActivity!
+    var activity: MFActivity!
     var text: String!
     var attributedString: NSMutableAttributedString!
     var liked: [MFUser:Date] = [:]
     var comments: [MFComment:Date] = [:]
     
-    init(id: String!, actionUserId: MFUser, participantUserId: MFUser, activityID: MFActivity, text: NSMutableAttributedString){
+    init(id: String!, actionUserId: MFUser, participantUserId: MFUser, activity: MFActivity, text: NSMutableAttributedString){
         self.id = id
         self.actionUserId = actionUserId
         self.participantUserId = participantUserId
         self.attributedString = text
-        
+        self.activity = activity
     }
-
+    
 }
 
 extension MFNewsFeed: Hashable {
