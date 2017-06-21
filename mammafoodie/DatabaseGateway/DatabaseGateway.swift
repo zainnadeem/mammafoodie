@@ -68,7 +68,7 @@ class DatabaseGateway {
     // This is to not allow initialization by anyone else other than this class itself. Use sharedInstace for every operation on Firebase
     private init() {
         print("Configuring FirebaseApp ----------------------- START")
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         print("Configuring FirebaseApp ----------------------- END")
     }
 }

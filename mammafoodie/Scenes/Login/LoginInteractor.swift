@@ -25,7 +25,7 @@ class LoginInteractor: NSObject, LoginInteractorInput {
     var output: LoginInteractorOutput!
     lazy var gmailWorker = GmailLoginWorker()
     lazy var forgotPassWorker = ForgotPasswordWorker()
-
+    
     
     // MARK: - Business logic
     func login(with email: String, password: String) {
@@ -45,13 +45,13 @@ class LoginInteractor: NSObject, LoginInteractorInput {
             }
         }
     }
-
+    
     func loginWithFacebook() {
         let worker = FacebookLoginWorker()
         worker.viewController = self.output.viewControllerToPresent()
         worker.login()
     }
-
+    
     
     func logout(with email: String, password: String) {
         let worker: LoginWorker! = LoginWorker()
@@ -63,7 +63,7 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         let worker = FacebookLoginWorker()
         worker.logout()
     }
-
+    
     
     
     func loginWithGoogle() {
@@ -81,5 +81,5 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         self.gmailWorker.signout()
     }
     
-
+    
 }

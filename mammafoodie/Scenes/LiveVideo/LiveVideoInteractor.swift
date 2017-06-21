@@ -19,8 +19,10 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     
     func start(_ liveVideo: MFMedia) {
         self.worker.start(liveVideo, { (cameraView) in
-            self.output.show(cameraView)
-            self.output.showVideoId(liveVideo)
+            if self.output != nil && cameraView != nil {
+                self.output.show(cameraView)
+                self.output.showVideoId(liveVideo)
+            }
         })
     }
     

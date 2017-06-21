@@ -8,6 +8,9 @@ class FacebookLoginWorker {
     weak var viewController: UIViewController!
     let loginManager = FBSDKLoginManager()
     
+    var completionSuccess: (()->Void)?
+    var completionError: (()->Void)?
+    
     class func setup(application: UIApplication, with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -22,10 +25,14 @@ class FacebookLoginWorker {
         if  (Auth.auth().currentUser != nil) && (FBSDKAccessToken.current() != nil){
             if FBSDKAccessToken.current().expirationDate > Date(){
                 FBSDKAccessToken.refreshCurrentAccessToken({ (request, result, error) in
-                    print(error!)
-                    print(result!)
-                    print(request!)
-                    
+                    //                    print(error!)
+                    //                    print(result!)
+                    //                    print(request!)
+                    //                    if error != nil {
+                    //                        self.completionError?()
+                    //                    } else {
+                    //                        self.completionSuccess?()
+                    //                    }
                 })
                 return
             }else{
@@ -43,6 +50,7 @@ class FacebookLoginWorker {
             
             if loginResult?.isCancelled == true {
                 print("cancelled.")
+                self.completionError?()
             }
             else {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
@@ -50,9 +58,11 @@ class FacebookLoginWorker {
                 Auth.auth().signIn(with: credential, completion: { (user, error) in
                     if error != nil {
                         print(error!)
+                        self.completionError?()
                         return
                     }
                     self.UpdateMailId()
+                    self.completionSuccess?()
                     print("Login Sucessfully.")
                 })
             }

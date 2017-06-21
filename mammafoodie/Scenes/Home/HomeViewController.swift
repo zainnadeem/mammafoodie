@@ -81,6 +81,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         
         self.viewActivityIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         self.viewMenuIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,9 +221,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         }
         self.liveVideosAdapter.didSelect = { (selectedLiveVideo) in
             print("Selected live video: \(selectedLiveVideo.id)")
+            if selectedLiveVideo.id == "-1" {
+                // new. push go cook with live video selection
+//                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
+            } else {
+                selectedLiveVideo.accessMode = MediaAccessUserType.viewer
+            }
+            self.performSegue(withIdentifier: "showLiveVideoDetails", sender: selectedLiveVideo)
         }
         self.liveVideosAdapter.didSelectViewAll = {
-            print("DidSelectAll LiveVideos")
+            self.performSegue(withIdentifier: "showLiveVideoList", sender: nil)
         }
     }
     
@@ -237,9 +246,18 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         }
         self.vidupsAdapter.didSelect = { (selectedVidup) in
             print("Selected vidup: \(selectedVidup.id)")
+            if selectedVidup.id == "-1" {
+                // new. push go cook with vidup selection
+                selectedVidup.accessMode = MediaAccessUserType.owner
+//                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
+            } else {
+                selectedVidup.accessMode = MediaAccessUserType.viewer
+            }
+            self.performSegue(withIdentifier: "showVidupDetails", sender: selectedVidup)
         }
         self.vidupsAdapter.didSelectViewAll = {
             print("DidSelectAll Vidup")
+            self.performSegue(withIdentifier: "showVidupsList", sender: nil)
         }
     }
     
@@ -291,6 +309,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         circleShape.path = circlePath.cgPath
         button.layer.mask = circleShape
     }
-    
+
     
 }

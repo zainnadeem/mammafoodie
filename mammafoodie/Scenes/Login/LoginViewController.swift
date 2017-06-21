@@ -20,13 +20,23 @@ protocol LoginViewControllerOutput {
     func logoutWithFacebook()
 }
 
-class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate {
+class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate, UITextFieldDelegate {
     var output: LoginViewControllerOutput!
     var router: LoginRouter!
+    
+    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
+    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    
+    var shapeLayer: CAShapeLayer!
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
+    @IBOutlet weak var passImageView: UIImageView!
+    @IBOutlet weak var emailImageView: UIImageView!
+    @IBOutlet weak var userView: UIView!
+    @IBOutlet weak var passwordView: UIView!
+    @IBOutlet weak var loginButn: UIButton!
     
     
     // MARK: - Object lifecycle
@@ -38,78 +48,90 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        logoutGmailButn()
-        forgotPasswordButn()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //        logoutGmailButn()
+        //        forgotPasswordButn()
         
-        /*
- 
- // Add a custom login button to your app
- let myLoginButton = UIButton(type: .custom)
- myLoginButton.backgroundColor = UIColor.darkGray
- myLoginButton.frame = CGRect(x: 0, y: 200, width: 180, height: 40)
- myLoginButton.setTitle("My Login Button", for: .normal)
- 
- // Handle clicks on the button
- myLoginButton.addTarget(self, action: #selector(self.loginButtonClicked), for: .touchUpInside)
- 
- 
- // Add a custom logout button to your app
- let myLogoutButton = UIButton(type: .custom)
- myLogoutButton.backgroundColor = UIColor.darkGray
- myLogoutButton.frame = CGRect(x: 0, y: 300, width: 180, height: 40)
- myLogoutButton.center = view.center
- myLogoutButton.setTitle("Logout", for: .normal)
- 
- // Handle clicks on the button
- myLogoutButton.addTarget(self, action: #selector(self.logoutButtonClicked), for: .touchUpInside)
- 
- 
- // Add the button to the view
- view.addSubview(myLoginButton)
- view.addSubview(myLogoutButton)
- */
+        self.loginButn.layer.cornerRadius = 23
+        self.loginButn.clipsToBounds = true
+        userView.layer.cornerRadius = 5
+        userView.layer.borderWidth = 1
+        userView.layer.borderColor = UIColor.clear.cgColor
+        
+        passwordView.layer.cornerRadius = 5
+        passwordView.layer.borderWidth = 1
+        passwordView.layer.borderColor = UIColor.clear.cgColor
+        self.txtPassword.delegate = self
+        self.txtEmail.delegate = self
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //        updateShadow()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
- 
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.loginButn.applyGradient(colors: [gradientStartColor, gradientEndColor])
+    }
+    
     // MARK: - Event handling
     @IBAction func btnLoginTapped(_ sender: UIButton) {
         self.output.loginWithGoogle()
-//        if self.txtEmail.text?.isEmpty == true {
-//            return
-//        }
-//        if self.txtPassword.text?.isEmpty == true {
-//            return
-//        }
-//        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
-  
+        //        if self.txtEmail.text?.isEmpty == true {
+        //            return
+        //        }
+        //        if self.txtPassword.text?.isEmpty == true {
+        //            return
+        //        }
+        //        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
+        
     }
     @IBAction func btnPrivacyTapped(_ sender: Any) {
-        router.openSafariVC(with: .privacyPolicy)
-
-        
+        self.router.openSafariVC(with: .privacyPolicy)
     }
     
     @IBAction func btnTermsTapped(_ sender: Any) {
-        router.openSafariVC(with: .terms)
-        
+        self.router.openSafariVC(with: .terms)
     }
     // MARK: - Inputs
     func showLoginSuccessMessage(_ message: String) {
-       // print(message)
+        print(message)
     }
     func showLogoutSuccessMessage(_ message: String) {
-       // print(message)
+        // print(message)
     }
-
+    
     func forgotpasswordWorker(success:String) {
         let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
+    func updateShadow() {
+        if self.shapeLayer == nil {
+            self.self.loginButn.superview?.layoutIfNeeded()
+            self.shapeLayer = CAShapeLayer()
+            self.shapeLayer.shadowColor = #colorLiteral(red: 1, green: 0.7725490196, blue: 0.6, alpha: 0.7041212248).cgColor
+            self.shapeLayer.shadowOpacity = 70.0
+            self.shapeLayer.shadowRadius = 7
+            
+            var shadowFrame: CGRect = self.loginButn.frame
+            shadowFrame.origin.x -= -30
+            shadowFrame.origin.y += 17
+            shadowFrame.size.width += -60
+            shadowFrame.size.height -= 8
+            
+            self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.loginButn.layer.cornerRadius).cgPath
+            self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
+            
+            self.loginButn.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
+        }
+    }
     
     func logoutGmailButn() {
         let logoutGmail = UIButton(type: .custom) as UIButton
@@ -120,9 +142,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.view.addSubview(logoutGmail)
     }
     
-
+    
     func forgotPasswordButn() {
-       
+        
         let forgotPassword = UIButton(type: .custom) as UIButton
         forgotPassword.backgroundColor = .blue
         forgotPassword.setTitle("ForgotPassword", for: .normal)
@@ -134,7 +156,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func buttonTapped(sender: UIButton){
         self.output.forgotpasswordWorker(email: self.txtEmail.text!)
     }
-
+    
     
     func buttonAction(sender: UIButton!) {
         self.output.logoutWithGoogle()
@@ -143,12 +165,12 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func present(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
     }
-   
+    
     func dismiss(_ viewController: UIViewController) {
         self.dismiss(animated: true, completion: nil)
     }
-
-
+    
+    
     func loginButtonClicked() {
         self.output.loginWithFacebook()
     }
@@ -161,17 +183,34 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func viewControllerToPresent() -> UIViewController {
         return self
     }
-
-
-
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == self.txtEmail {
+            self.emailImageView.image = UIImage(named: "selectuser")
+        }
+        if textField == self.txtPassword {
+            self.passImageView.image = UIImage(named: "passselect")
+        }
+    }
+    
+    @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
+        self.output.loginWithFacebook()
+    }
+    
+    @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
+        self.output.loginWithGoogle()
+    }
+    
 }
 
 extension LoginViewController {
     
     enum ViewControllerSegue : String {
-       case unnamed = ""
+        case unnamed = ""
     }
-
+    
     enum SafariAddresses: String {
         case privacyPolicy = "https://www.google.co.in/?gfe_rd=cr&ei=qjc6WdiRFrTv8we-zoTIDg"
         case terms = "https://swifting.io/blog/2016/09/07/architecture-wars-a-new-hope/"

@@ -46,7 +46,6 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
     func updateShadow() {
         if self.shapeLayer == nil {
             self.self.loginButn.superview?.layoutIfNeeded()

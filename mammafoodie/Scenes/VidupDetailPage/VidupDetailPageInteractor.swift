@@ -6,8 +6,9 @@ protocol Interactordelegate {
 }
 
 protocol VidupDetailPageInteractorInput {
-     func setupMediaPlayer(view:UIView,mediaURL:String)
-     func resetViewBounds(view:UIView)
+    func setupMediaPlayer(view:UIView,mediaURL:String)
+    func resetViewBounds(view:UIView)
+    func stopTimer()
 }
 
 protocol VidupDetailPageInteractorOutput {
@@ -20,8 +21,8 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     var output: VidupDetailPageInteractorOutput!
     var worker: VidupDetailPageWorker! = VidupDetailPageWorker()
     
-   
-        
+    
+    
     // MARK: - Business logic
     
     func setupMediaPlayer(view:UIView,mediaURL:String){
@@ -43,6 +44,8 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         output.DisplayTimeInteractor(Time: Time)
     }
     
-        
     
+    func stopTimer() {
+        worker.timer.invalidate()
+    }
 }

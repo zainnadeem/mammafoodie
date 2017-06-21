@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
-
+    
     @IBOutlet weak var passImageView: UIImageView!
     @IBOutlet weak var emailImageView: UIImageView!
     @IBOutlet weak var nameImageView: UIImageView!
@@ -26,33 +26,33 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
     
     
     var shapeLayer: CAShapeLayer!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
         
         nameTextFeild.layer.cornerRadius = 5
         nameTextFeild.layer.borderWidth = 1
         nameTextFeild.layer.borderColor = UIColor.clear.cgColor
         
-       // let color: UIColor = #colorLiteral(red: 0.428863733, green: 0.6729379252, blue: 0.6100127551, alpha: 1)
+        // let color: UIColor = #colorLiteral(red: 0.428863733, green: 0.6729379252, blue: 0.6100127551, alpha: 1)
         
         emailTextFeild.layer.cornerRadius = 5
         emailTextFeild.layer.borderWidth = 1
         emailTextFeild.layer.borderColor = UIColor.clear.cgColor
-
+        
         passTextFeild.layer.cornerRadius = 5
         passTextFeild.layer.borderWidth = 1
         passTextFeild.layer.borderColor = UIColor.clear.cgColor
-
+        
         
         registerBtn.layer.cornerRadius = 23
         registerBtn.layer.borderWidth = 1
         registerBtn.layer.borderColor = UIColor.clear.cgColor
         registerBtn.clipsToBounds = true
-       
+        
         nameTextFeild.delegate = self
         passTextFeild.delegate = self
         emailTextFeild.delegate = self
@@ -65,11 +65,11 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
         
         self.passTextFeild.leftView = self.viewPasswordIcon
         self.passTextFeild.leftViewMode = .always
-
-
-
+        
+        
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -89,10 +89,10 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
             emailImageView.image = UIImage(named: "selectuser")
         }
         if passTextFeild == textField {
-        passImageView.image = UIImage(named: "passselect")
+            passImageView.image = UIImage(named: "passselect")
         }
     }
-
+    
     
     func updateShadow() {
         if self.shapeLayer == nil {
@@ -120,16 +120,16 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
         super.viewWillAppear(animated)
         updateShadow()
     }
-
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
