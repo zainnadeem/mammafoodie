@@ -20,6 +20,9 @@ class MFUser {
     
     var socialAccountIds: [String:String] = [:] // [SocialAccountName:AccountId]
 
+    init() {
+        
+    }
 
     init(id: String, name: String, picture:String, profileDescription: String) {
         self.id = id

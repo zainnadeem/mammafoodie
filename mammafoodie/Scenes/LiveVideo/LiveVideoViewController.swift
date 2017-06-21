@@ -16,12 +16,24 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var router: LiveVideoRouter!
     
     var liveVideo: MFMedia!
-    var gradientLayer: CAGradientLayer!
+    var gradientLayerForUserInfo: CAGradientLayer!
+    var gradientLayerForComments: CAGradientLayer!
     
     @IBOutlet weak var btnEndLive: UIButton!
     @IBOutlet weak var lblVideoName: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var viewSlotDetails: UIView!
+    @IBOutlet weak var viewComments: UIView!
+    @IBOutlet weak var btnEmoji: UIButton!
+    @IBOutlet weak var btnLike: UIButton!
+    @IBOutlet weak var txtNewComment: UITextView!
+    @IBOutlet weak var tblComments: UITableView!
+    @IBOutlet weak var btnClose: UIButton!
+    
+    @IBOutlet var imgViewViewers: [UIImageView]!
+    
+    
+    lazy var commentsAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     
     // MARK: - Object lifecycle
     
@@ -34,6 +46,16 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.btnLike.imageView?.contentMode = .scaleAspectFit
+        self.btnEmoji.imageView?.contentMode = .scaleAspectFit
+        self.btnClose.imageView?.contentMode = .scaleAspectFit
+        self.setupCommentsTableViewAdapter()
+        
+        for imgView in self.imgViewViewers {
+            imgView.layer.cornerRadius = 12
+            imgView.layer.borderWidth = 1
+            imgView.layer.borderColor = UIColor.white.cgColor
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,28 +67,62 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
         self.updateDropShadowForViewUserInfo()
+        self.updateDropShadowForViewComments()
     }
     
     func updateDropShadowForViewUserInfo() {
-        if self.gradientLayer == nil {
+        if self.gradientLayerForUserInfo == nil {
             self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            self.gradientLayer = CAGradientLayer()
+            self.gradientLayerForUserInfo = CAGradientLayer()
             let view: UIView = UIView(frame: self.viewUserInfo.frame)
-            self.gradientLayer.frame = view.bounds
-            self.gradientLayer.colors = [
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.7).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.6).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.5).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.4).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.3).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.2).cgColor,
-                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.1).cgColor,
-                #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0).cgColor
-            ]
-            self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
-            self.gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayer, below: self.viewUserInfo.layer)
+            self.gradientLayerForUserInfo.frame = view.frame
+            self.gradientLayerForUserInfo.colors = self.colorsForUserInfoInnerGradient()
+            self.gradientLayerForUserInfo.startPoint = CGPoint(x: 0.5, y: 0.5)
+            self.gradientLayerForUserInfo.endPoint = CGPoint(x: 0.5, y: 1)
+            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayerForUserInfo, below: self.viewUserInfo.layer)
         }
+    }
+    
+    func updateDropShadowForViewComments() {
+        if self.gradientLayerForComments == nil {
+            self.viewComments.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            self.gradientLayerForComments = CAGradientLayer()
+            let view: UIView = UIView(frame: self.viewComments.frame)
+            self.gradientLayerForComments.frame = view.frame
+            self.gradientLayerForComments.colors = self.colorsForCommentsInnerGradient()
+            self.gradientLayerForComments.startPoint = CGPoint(x: 0.5, y: 0)
+            self.gradientLayerForComments.endPoint = CGPoint(x: 0.5, y: 1)
+            self.viewComments.superview?.layer.insertSublayer(self.gradientLayerForComments, below: self.viewComments.layer)
+        }
+    }
+    
+    func colorsForUserInfoInnerGradient() -> [CGColor] {
+        return [
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.7).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.6).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.5).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.4).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.3).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.2).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.1).cgColor,
+            #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0).cgColor
+        ]
+    }
+    
+    func colorsForCommentsInnerGradient() -> [CGColor] {
+        return [
+            #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.1).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.2).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.3).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.4).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.5).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.6).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.7).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.8).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.9).cgColor,
+            #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 1).cgColor
+        ]
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,6 +135,14 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBAction func btnEndLiveTapped(_ sender: UIButton) {
         self.output.stop(self.liveVideo)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnLikeTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    
+    @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Display logic
@@ -96,4 +160,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     func showVideoId(_ liveVideo: MFMedia) {
         self.lblVideoName.text = liveVideo.id
     }
+    
+    func setupCommentsTableViewAdapter() {
+        self.commentsAdapter.createStaticData()
+        self.commentsAdapter.setup(with: self.tblComments)
+        self.tblComments.reloadData()
+        self.tblComments.setContentOffset(CGPoint(x: 0, y: self.tblComments.contentSize.height-self.tblComments.frame.height), animated: false)
+    }
+    
+    
 }

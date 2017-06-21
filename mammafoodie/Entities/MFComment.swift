@@ -4,6 +4,15 @@ class MFComment {
     var createdAt: Date!
     var user: MFUser!
     var media: MFMedia!
+    
+    init(text: String, username: String, userId: String) {
+        self.text = text
+        
+        let user: MFUser = MFUser()
+        user.name = username
+        user.id = userId
+        self.user = user
+    }
 }
 
 extension MFComment: Hashable {
