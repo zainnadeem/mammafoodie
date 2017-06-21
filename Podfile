@@ -22,24 +22,7 @@ target 'mammafoodie' do
   pod 'IQKeyboardManagerSwift'
   
   pod 'TRMosaicLayout'
-
-  target 'mammafoodieTests' do
-      
-      pod 'Firebase/Core'
-      pod 'Firebase/Database'
-      pod 'Firebase/Auth'
-      pod 'Firebase/Storage'
-      
-      pod 'GoogleSignIn'
-      
-      
-      pod 'FBSDKCoreKit'
-      pod 'FBSDKLoginKit'
-      
-      pod 'GoogleMaps'
-      pod 'GooglePlaces'
-      
-  end
+  pod 'Alamofire'
   
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
