@@ -21,6 +21,12 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
     
     @IBOutlet weak var collectionView:UICollectionView!
     
+    @IBOutlet weak var usersBoughtCollectionView: UICollectionView!
+    
+    @IBOutlet weak var btnDone: UIButton!
+    
+    @IBOutlet weak var lblSlotsPickedCount: UILabel!
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -38,14 +44,36 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         collectionViewAdapter = SlotCollectionViewAdapter()
         collectionViewAdapter.collectionView = self.collectionView
         
-//       let selectedCells = collectionViewAdapter.selectedCells
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        collectionView.reloadData()
+                collectionViewAdapter.addCollectionViewGrid()
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+//        collectionViewAdapter.addCollectionViewGrid()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        collectionView.reloadData()
+//        collectionViewAdapter.addCollectionViewGrid()
+    }
+    
+   
     
     // MARK: - Event handling
     
     func handlePan(_ sender:UIPanGestureRecognizer){
         output.handleSlotSelection(withPanGesture: sender, adapter: collectionViewAdapter)
+    }
+    
+    @IBAction func dismiss(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     

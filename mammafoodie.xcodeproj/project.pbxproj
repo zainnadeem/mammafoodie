@@ -45,6 +45,10 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		11FC891B1EFA4C0C003DCBE7 /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FC89191EFA4C0C003DCBE7 /* VidupDetails.storyboard */; };
+		11FC892A1EFA518B003DCBE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11FC890E1EF8F157003DCBE7 /* Assets.xcassets */; };
+		11FC892E1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FC892C1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.swift */; };
+		11FC892F1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11FC892D1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.xib */; };
 		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */; };
@@ -89,7 +93,6 @@
 		2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */; };
 		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
-		2C12BCDE1EF8348F007AF994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C12BCDD1EF8348F007AF994 /* Assets.xcassets */; };
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C12BCE01EF83512007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
@@ -317,6 +320,9 @@
 		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		11FC890E1EF8F157003DCBE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11FC891A1EFA4C0C003DCBE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VidupDetails.storyboard; sourceTree = "<group>"; };
+		11FC892C1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		11FC892D1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlotSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,7 +348,6 @@
 		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
-		2C12BCDD1EF8348F007AF994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
 		2CA2B4951EF542D30076598C /* LiveVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideo.swift; sourceTree = "<group>"; };
@@ -614,6 +619,15 @@
 			path = SlotSelection;
 			sourceTree = "<group>";
 		};
+		11FC892B1EFA5F33003DCBE7 /* SlotSelectionCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				11FC892C1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.swift */,
+				11FC892D1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.xib */,
+			);
+			path = SlotSelectionCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		2399BC92A1B9B588BDDCF277 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -795,6 +809,7 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				11FC89191EFA4C0C003DCBE7 /* VidupDetails.storyboard */,
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
@@ -1080,7 +1095,6 @@
 		BF5060D71EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXGroup;
 			children = (
-				2C12BCDD1EF8348F007AF994 /* Assets.xcassets */,
 				11FC890E1EF8F157003DCBE7 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
@@ -1160,6 +1174,7 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				11FC892B1EFA5F33003DCBE7 /* SlotSelectionCollectionViewCell */,
 				57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */,
 				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
 				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
@@ -1280,7 +1295,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 6G977HV28A;
+						DevelopmentTeam = P56KSS6ZGU;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1323,6 +1338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11FC892A1EFA518B003DCBE7 /* Assets.xcassets in Resources */,
 				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
 				57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */,
 				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
@@ -1341,10 +1357,10 @@
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
+				11FC892F1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.xib in Resources */,
 				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
-				2C12BCDE1EF8348F007AF994 /* Assets.xcassets in Resources */,
 				2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
@@ -1352,6 +1368,7 @@
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */,
+				11FC891B1EFA4C0C003DCBE7 /* VidupDetails.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
@@ -1576,6 +1593,7 @@
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
+				11FC892E1EFA5FC8003DCBE7 /* SlotSelectionCollectionViewCell.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
@@ -1653,6 +1671,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		11FC89191EFA4C0C003DCBE7 /* VidupDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11FC891A1EFA4C0C003DCBE7 /* Base */,
+			);
+			name = VidupDetails.storyboard;
+			sourceTree = "<group>";
+		};
 		2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1836,11 +1862,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = P56KSS6ZGU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nithinkrishna.mammafoodie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -1855,11 +1881,11 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = P56KSS6ZGU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nithinkrishna.mammafoodie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
