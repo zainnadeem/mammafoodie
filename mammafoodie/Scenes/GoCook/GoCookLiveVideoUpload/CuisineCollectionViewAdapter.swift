@@ -17,10 +17,10 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     var worker : CuisineWorker = CuisineWorker()
     
     func selectFilter(at indexPath: IndexPath) {
+        self.selectedFilter = self.cuisines[indexPath.item]
         if let _ = self.cuisineCollectionView.cellForItem(at: indexPath) {
             self.cuisineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
-        self.selectedFilter = self.cuisines[indexPath.item]
         self.cuisineCollectionView.reloadData()
     }
     
@@ -68,10 +68,10 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let font  = UIFont(name: "", size: 12)
+        let font  = UIFont.MontserratLight(with: 12)
         let cuisine = self.cuisines[indexPath.item]
         let height = 70
-        var width = cuisine.name.calculateWidth(withConstrainedHeight: 21, font: font)
+        var width = cuisine.name.calculateWidth(withConstrainedHeight: 21, font: font!)
         if width < 80 {
             width = 80
         }

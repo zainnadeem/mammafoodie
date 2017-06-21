@@ -24,10 +24,10 @@ class CuisineCollectionViewCell: UICollectionViewCell {
         self.lblMenuTitle.backgroundColor = .clear
         self.lblMenuTitle.text = cuisine.name
         if selected {
-            self.imgViewEmoji.image = cuisine.selectedImage
             let expandTransform:CGAffineTransform =  CGAffineTransform.init(scaleX: 1.15, y: 1.15)
-            UIView.transition(with: self.imgViewEmoji, duration: 0.27, options: .transitionCrossDissolve, animations: {
-                self.imgViewEmoji.transform = expandTransform
+            self.imgViewEmoji.image = cuisine.selectedImage
+            UIView.transition(with: self, duration: 0.27, options: .transitionCrossDissolve, animations: {
+                self.transform = expandTransform
             }, completion: { (finished) in
                 UIView.animate(withDuration: 0.27, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.2, options: .curveEaseOut, animations: {
                     self.transform = expandTransform.inverted()

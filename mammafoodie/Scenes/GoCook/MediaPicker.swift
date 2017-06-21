@@ -35,48 +35,63 @@ class MediaPicker: NSObject {
     fileprivate var imageCompletion : MediaPickerImageCompletion?
     fileprivate var videoCompletion : MediaPickerVideoCompletion?
     
-    class func pickImage(on vc : UIViewController, completion :@escaping MediaPickerImageCompletion) {
+    class func pickImage(on vc : UIViewController, completion :@escaping MediaPickerImageCompletion) -> MediaPicker {
         let mediaPick = MediaPicker()
         mediaPick.imageCompletion = completion
         mediaPick.mediaType = .Image
-        mediaPick.checkCameraPermission { (error) in
-            if error != nil {
-                mediaPick.imageCompletion?(nil, error)
-            } else {
-                mediaPick.showImagePicker(on: vc, sourceType: .camera)
-            }
-        }
+        mediaPick.imagePicker.delegate = mediaPick
+        mediaPick.showImagePicker(on: vc, sourceType: .camera)
+//        mediaPick.checkCameraPermission { (error) in
+//            if error != nil {
+//                mediaPick.imageCompletion?(nil, error)
+//            } else {
+//                
+//            }
+//        }
+        return mediaPick
     }
     
-    class func pickVideo(on vc : UIViewController, completion :@escaping MediaPickerVideoCompletion) {
+    class func recordVideo(on vc : UIViewController, completion :@escaping MediaPickerImageCompletion) -> MediaPicker {
+        let mediaPick = MediaPicker()
+        mediaPick.imageCompletion = completion
+        mediaPick.mediaType = .Video
+        mediaPick.imagePicker.delegate = mediaPick
+        mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
+        mediaPick.showImagePicker(on: vc, sourceType: .camera)
+        return mediaPick
+    }
+    
+    class func pickVideo(on vc : UIViewController, completion :@escaping MediaPickerVideoCompletion) -> MediaPicker {
         let mediaPick = MediaPicker()
         mediaPick.videoCompletion = completion
         mediaPick.mediaType = .Video
         mediaPick.imagePicker.delegate = mediaPick
         mediaPick.imagePicker.sourceType = .photoLibrary
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
-        vc.navigationController?.present(mediaPick.imagePicker, animated: true) {
-            
-        }
-        return
-        mediaPick.checkPhotoLibraryPermission { (error) in
-            if error != nil {
-                mediaPick.videoCompletion?(nil, error)
-            } else {
-                DispatchQueue.main.async {
-                    mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
-                }
-            }
-        }
-        mediaPick.checkCameraPermission { (error) in
-            if error != nil {
-                mediaPick.videoCompletion?(nil, error)
-            } else {
-                DispatchQueue.main.async {
-                    mediaPick.showImagePicker(on: vc, sourceType: .camera)
-                }
-            }
-        }
+        mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+        return mediaPick
+//        vc.present(mediaPick.imagePicker, animated: true) {
+//            
+//        }
+//        return
+//        mediaPick.checkPhotoLibraryPermission { (error) in
+//            if error != nil {
+//                mediaPick.videoCompletion?(nil, error)
+//            } else {
+//                DispatchQueue.main.async {
+//                    mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+//                }
+//            }
+//        }
+//        mediaPick.checkCameraPermission { (error) in
+//            if error != nil {
+//                mediaPick.videoCompletion?(nil, error)
+//            } else {
+//                DispatchQueue.main.async {
+//                    
+//                }
+//            }
+//        }
     }
     
     fileprivate func showImagePicker(on vc: UIViewController, sourceType: UIImagePickerControllerSourceType) {

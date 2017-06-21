@@ -8,17 +8,19 @@ protocol GoCookViewControllerOutput {
     
 }
 
+typealias GoCookCompletion = () -> Void
+
 let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
 let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
 
-fileprivate let unselectedBackColor : UIColor = UIColor.init(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
-fileprivate let selectedBackColor : UIColor = .white
+let unselectedBackColor : UIColor = UIColor.init(red: 0.97, green: 0.97, blue: 0.98, alpha: 1.0)
+let selectedBackColor : UIColor = .white
 
-fileprivate let selectedFont : UIFont? = UIFont.MontserratSemiBold(with: 17.0)
-fileprivate let unselectedFont : UIFont? = UIFont.MontserratLight(with: 16.0)
+let selectedFont : UIFont? = UIFont.MontserratSemiBold(with: 17.0)
+let unselectedFont : UIFont? = UIFont.MontserratLight(with: 16.0)
 
-fileprivate enum GoCookOption {
-    case LiveVideo, Vidups, Menu, None
+enum GoCookOption {
+    case LiveVideo, Vidups, Picture, None
 }
 
 class GoCookViewController: UIViewController, GoCookViewControllerInput {
@@ -26,31 +28,40 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     var output: GoCookViewControllerOutput!
     var router: GoCookRouter!
     
-    fileprivate var selectedOption : GoCookOption = .None {
+    var liveVideoVC : GoCookLiveVideoUploadViewController?
+    var vidupsVC : GoCookVidupUploadViewController?
+    var pictureVC : GoCookPictureUploadViewController?
+    
+    
+    var selectedOption : GoCookOption = .None {
         didSet {
             switch self.selectedOption {
             case .LiveVideo:
                 self.selectView(self.viewLiveVideo)
                 self.deselectView(self.viewVidups)
                 self.deselectView(self.viewMenu)
+                self.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
                 break
                 
             case .Vidups:
                 self.selectView(self.viewVidups)
                 self.deselectView(self.viewLiveVideo)
                 self.deselectView(self.viewMenu)
+                self.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
                 break
                 
-            case .Menu:
+            case .Picture:
                 self.selectView(self.viewMenu)
                 self.deselectView(self.viewLiveVideo)
                 self.deselectView(self.viewVidups)
+                self.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
                 break
                 
             default:
                 self.deselectView(self.viewLiveVideo)
                 self.deselectView(self.viewVidups)
                 self.deselectView(self.viewMenu)
+                self.btnNext.removeGradient()
                 break
                 
             }
@@ -76,6 +87,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     @IBOutlet var allViewOptions: [UIView]!
     @IBOutlet var allButtons: [UIButton]!
     
+    @IBOutlet weak var viewStep1: UIView!
+    @IBOutlet weak var conLeadingViewStep1: NSLayoutConstraint!
+    @IBOutlet weak var viewStep2: UIView!
     
     // MARK: - Object lifecycle
     
@@ -98,7 +112,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     @IBAction func onMenuTap(_ sender: UIButton) {
-        self.selectedOption = .Menu
+        self.selectedOption = .Picture
     }
     
     @IBAction func onLiveVideoTap(_ sender: UIButton) {
@@ -108,11 +122,54 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     @IBAction func onStep1(_ sender: UIButton) {
         sender.isSelected = true
         self.btnStep2.isSelected = false
+        self.showStep1()
     }
     
     @IBAction func onStep2(_ sender: UIButton) {
-        sender.isSelected = true
+        switch self.selectedOption {
+        case .LiveVideo:
+            self.liveVideoVC?.removeFromParentViewController()
+            self.liveVideoVC?.view.removeFromSuperview()
+            
+        case .Vidups:
+            self.vidupsVC?.removeFromParentViewController()
+            self.vidupsVC?.view.removeFromSuperview()
+            
+        case .Picture:
+            self.pictureVC?.removeFromParentViewController()
+            self.pictureVC?.view.removeFromSuperview()
+            
+        default:
+            break
+        }
+        self.onNext(self.btnNext)
+    }
+    
+    @IBAction func onNext(_ sender: UIButton) {
         self.btnStep1.isSelected = false
+        self.btnStep2.isSelected = true
+        switch self.selectedOption {
+        case .LiveVideo:
+            self.liveVideoVC = GoCookLiveVideoUploadViewController.addToParentViewController(self, completion: {
+                
+            })
+            self.showStep2()
+            
+        case .Vidups:
+            self.vidupsVC = GoCookVidupUploadViewController.addToParentViewController(self, completion: {
+                
+            })
+            self.showStep2()
+            
+        case .Picture:
+            self.pictureVC = GoCookPictureUploadViewController.addToParentViewController(self, completion: {
+                
+            })
+            self.showStep2()
+            
+        default:
+            break
+        }
     }
     
     // MARK: - Display logic
@@ -128,8 +185,6 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         }
         self.btnNext.layer.cornerRadius = 26.0
         self.btnNext.clipsToBounds = true
-        
-        self.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
     }
     
     func animate(_ animation :@escaping () -> Void) {
@@ -185,6 +240,28 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         }
     }
     
+    func showStep2() {
+        UIView.animate(withDuration: 0.27, delay: 0, options: .curveLinear, animations: {
+            self.conLeadingViewStep1.constant = self.viewStep1.frame.size.width * -1
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            
+        }
+    }
+    
+    func showStep1() {
+        UIView.animate(withDuration: 0.27, delay: 0, options: .curveLinear, animations: {
+            self.conLeadingViewStep1.constant = 0
+            self.view.layoutIfNeeded()
+        }) { (finished) in
+            
+        }
+    }
+
+    func start(_ meidaOption : GoCookOption) {
+        self.selectedOption = meidaOption
+        self.onNext(self.btnNext)
+    }
 }
 
 extension UIViewController {
