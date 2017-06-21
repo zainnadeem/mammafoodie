@@ -10,19 +10,20 @@ class Marker : GMSMarker, GMUClusterItem {
         marker.position = location
         marker.title = title
         marker.isTappable = true
-        marker.appearAnimation = .pop
+        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
+        marker.appearAnimation = .none
         return marker
     }
     
     static func ==(lhs: Marker, rhs: Marker) -> Bool {
-        if lhs.position.latitude != rhs.position.latitude {
-            return false
-        }
-        
-        if lhs.position.longitude != rhs.position.longitude {
-            return false
-        }
-        return true
+//        if lhs.position.latitude != rhs.position.latitude {
+//            return false
+//        }
+//        
+//        if lhs.position.longitude != rhs.position.longitude {
+//            return false
+//        }
+        return lhs.title == rhs.title
     }
 
 }

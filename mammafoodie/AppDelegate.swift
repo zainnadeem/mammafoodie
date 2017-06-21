@@ -9,16 +9,17 @@
 import UIKit
 import Firebase
 import GoogleMaps
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
-    var uberAccessTokenHandler : ((_ token:String) -> ())?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        IQKeyboardManager.sharedManager().enable = true
+
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         return true
@@ -26,36 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
-            
-            //Handle the callback from uber and extract auth code
-            if url.scheme == "mammafoodie-uber" {
-                let urlString = url.relativeString
-                
-                
-                if let codeRange = urlString.range(of: "code="){
-                    let authCode = urlString.substring(from: (codeRange.upperBound))
-                    UberRushDeliveryWorker.getAccessToken(authorizationCode: authCode, completion: { (json) in
-                        let accessToken = json!["access_token"] as! String
-                        self.uberAccessTokenHandler?(accessToken)
-                    })
-                    
-                } else {
-                    print("We could not get your authorization code from Uber. Please try again.")
-                }
-            }
-
-            
-            //Gmail
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-           
-            //Facebook
-            let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
-            let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-            
-            
-             return (GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication) || FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation))
-            
- 
+            return GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
+            /*
+             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
+             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+             return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
+             */
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
