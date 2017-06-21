@@ -13,6 +13,8 @@ class GoCookLiveVideoUploadViewController: UIViewController, GoCookLiveVideoUplo
     var output: GoCookLiveVideoUploadViewControllerOutput!
     var router: GoCookLiveVideoUploadRouter!
     
+    var cuisinesAdapter : CuisineCollectionViewAdapter = CuisineCollectionViewAdapter()
+    
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var btnDietVeg: UIButton!
     @IBOutlet weak var btnDietNonVeg: UIButton!
@@ -56,6 +58,8 @@ class GoCookLiveVideoUploadViewController: UIViewController, GoCookLiveVideoUplo
         self.btnGoLive.clipsToBounds = true
         
         self.txtPreparationTime.inputView = self.pickerPreparationTime
+        
+        self.cuisinesAdapter.prepareCuisineCollectionView(self.cuisineCollectionView)
     }
     
     override func viewDidLayoutSubviews() {
