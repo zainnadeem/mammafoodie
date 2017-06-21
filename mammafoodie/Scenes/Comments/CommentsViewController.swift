@@ -9,7 +9,7 @@ protocol CommentsViewControllerOutput {
     func EnterComments(comment:String)
 }
 
-class CommentsViewController: UIViewController, CommentsViewControllerInput {
+class CommentsViewController: UIViewController, CommentsViewControllerInput,CommentsAdapterDelegate {
     
     var commentsString = ""
     lazy var commentsTableAdapter = CommentsTableAdapter()	
@@ -35,6 +35,7 @@ class CommentsViewController: UIViewController, CommentsViewControllerInput {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        commentsTableAdapter.delegate = self
         self.commentsTableAdapter.commentsTableView = self.tableView
         // Do any additional setup after loading the view.
         
@@ -54,16 +55,22 @@ class CommentsViewController: UIViewController, CommentsViewControllerInput {
 
     }
     
-    
-    @IBAction func commentsButton(_ sender: Any) {
-        self.output.EnterComments(comment:self.commentsTxt.text!)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
-    
     
     
     func EnterComments(comment:String)
     {
         self.commentsTableAdapter.commentsData(comment: comment)
     }
+    
+    
+    func enterComments(comment: String) {
+        self.output.EnterComments(comment:self.commentsTxt.text!)
+    }
+    
     
 }
