@@ -3,28 +3,14 @@ import UIKit
 protocol LoginPresenterInput {
     func signUpCompletion(errorMessage:String?)
     func loginCompletion(errorMessage:String?)
-    
-    //    func loginSuccess()
-    //    func logoutSuccess()
-    //    func present(_ viewController: UIViewController)
-    //    func dismiss(_ viewController:UIViewController)
     func forgotpasswordCompletion(errorMessage:String?)
     func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
 }
 
 protocol LoginPresenterOutput: class {
-//    func showLoginSuccessMessage(_ message: String)
-//    func showLogoutSuccessMessage(_ message: String)
-//    func present(_ viewController: UIViewController)
-//    func dismiss(_ viewController: UIViewController)
-//    func forgotpasswordWorker(success:String)
-    
-    
     func showHomeScreen()
     func showAlert(alertController:UIAlertController)
-    
-
     func viewControllerToPresent() -> UIViewController
 }
 

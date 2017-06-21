@@ -36,9 +36,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        logoutGmailButn()
-//        forgotPasswordButn()
-        
+
         
         if let currentUser = Auth.auth().currentUser{
             print("\(String(describing: currentUser.displayName)) is logged in already")
@@ -113,17 +111,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
  
     // MARK: - Event handling
-    @IBAction func btnLoginTapped(_ sender: UIButton) {
-        self.output.loginWithGoogle()
-//        if self.txtEmail.text?.isEmpty == true {
-//            return
-//        }
-//        if self.txtPassword.text?.isEmpty == true {
-//            return
-//        }
-//        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
-  
-    }
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         router.openSafariVC(with: .privacyPolicy)
 
@@ -214,63 +201,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func showAlert(alertController: UIAlertController) {
         self.present(alertController, animated: true, completion: nil)
     }
-    
-  
-    
-    
-
-//    func forgotpasswordWorker(success:String) {
-//        let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-//    }
-
-    
-//    func logoutGmailButn() {
-//        let logoutGmail = UIButton(type: .custom) as UIButton
-//        logoutGmail.backgroundColor = .blue
-//        logoutGmail.setTitle("Logout", for: .normal)
-//        logoutGmail.frame = CGRect(x: 30, y: 120, width: 100, height: 40)
-//        logoutGmail.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//        self.view.addSubview(logoutGmail)
-//    }
-//    
-//
-//    func forgotPasswordButn() {
-//       
-//        let forgotPassword = UIButton(type: .custom) as UIButton
-//        forgotPassword.backgroundColor = .blue
-//        forgotPassword.setTitle("ForgotPassword", for: .normal)
-//        forgotPassword.frame = CGRect(x: 100, y: 180, width: 150, height: 35)
-//        forgotPassword.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//        self.view.addSubview(forgotPassword)
-//    }
-//    
-//    func buttonTapped(sender: UIButton){
-//        self.output.forgotpasswordWorker(email: self.txtEmail.text!)
-//    }
-
-    
-//    func buttonAction(sender: UIButton!) {
-//        self.output.logoutWithGoogle()
-//    }
-    
-//    func present(_ viewController: UIViewController) {
-//        self.present(viewController, animated: true, completion: nil)
-//    }
-//   
-//    func dismiss(_ viewController: UIViewController) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
-
-
-//    func loginButtonClicked() {
-//        self.output.loginWithFacebook()
-//    }
-//    
-//    func logoutButtonClicked() {
-//        self.output.logoutWithFacebook()
-//    }
  
 }
 

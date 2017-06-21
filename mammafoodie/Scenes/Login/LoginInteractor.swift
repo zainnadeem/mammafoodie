@@ -5,10 +5,8 @@ protocol LoginInteractorInput {
     func signUpWith(credentials:Login.Credentials)
     func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-//    func logoutWithGoogle()
     func forgotpasswordWorker(email: String)
     func loginWithFacebook()
-//    func logoutWithFacebook()
     func logout()
 }
 
@@ -16,11 +14,6 @@ protocol LoginInteractorOutput {
     
     func signUpCompletion(errorMessage:String?)
     func loginCompletion(errorMessage:String?)
-    
-//    func loginSuccess()
-//    func logoutSuccess()
-//    func present(_ viewController: UIViewController)
-//    func dismiss(_ viewController:UIViewController)
     func forgotpasswordCompletion(errorMessage:String?)
     func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
