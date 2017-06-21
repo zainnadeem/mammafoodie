@@ -27,6 +27,10 @@ class MFMedia {
     
     var accessMode: MediaAccessUserType = .viewer
     
+    init() {
+        
+    }
+    
     init(id: String, cover_large: String, cover_small: String, createdAt: Date, dish: MFDish, user: MFUser, type: MFMediaType, numberOfViewers: UInt) {
         self.id = id
         self.cover_large = cover_large

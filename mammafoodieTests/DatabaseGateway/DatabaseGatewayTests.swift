@@ -41,7 +41,7 @@ extension DatabaseGatewayTests {
     func testCreateLiveStreamModel() {
         let streamName: String = "streamTest"
         let streamId: String = "testId"
-        let liveStream: MFLiveStream? = DatabaseGateway.sharedInstance.createLiveStreamModel(from: streamName, id: streamId)
+        let liveStream: MFMedia? = DatabaseGateway.sharedInstance.createLiveStreamModel(from: streamName, id: streamId)
         XCTAssertEqual(streamName, liveStream?.name)
         XCTAssertEqual(streamId, liveStream?.id)
     }
@@ -59,7 +59,7 @@ extension DatabaseGatewayTests {
     func testUnpublishLiveStream() {
         let expectationUnpublishLiveStreamList = expectation(description: "Live stream list")
         
-        var stream = MFLiveStream()
+        var stream = MFMedia()
         stream.id = "stream2"
         
         DatabaseGateway.sharedInstance.unpublishLiveStream(stream) {

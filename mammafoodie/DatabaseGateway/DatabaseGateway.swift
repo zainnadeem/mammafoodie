@@ -76,13 +76,13 @@ class DatabaseGateway {
 // MARK: - Live streams
 extension DatabaseGateway {
     
-    func getLiveStream(with id: String, _ completion: @escaping ((MFLiveStream?)->Void)) {
+    func getLiveStream(with id: String, _ completion: @escaping ((MFMedia?)->Void)) {
         FirebaseReference.tempLiveVideosStreamNames.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
             guard let liveStreamName = streamNameDataSnapshot.value as? String else {
                 completion(nil)
                 return
             }
-            let liveStream: MFLiveStream? = self.createLiveStreamModel(from: liveStreamName, id: id)
+            let liveStream: MFMedia? = self.createLiveStreamModel(from: liveStreamName, id: id)
             completion(liveStream)
         }) { (error) in
             print(error)
@@ -90,19 +90,19 @@ extension DatabaseGateway {
         }
     }
     
-    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFLiveStream])->Void) {
+    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFMedia])->Void) {
         
         let successClosure: FirebaseObserverSuccessClosure = { (streamNamesDataSnapshot) in
             guard let rawLiveStreams: FirebaseDictionary = streamNamesDataSnapshot.value as? FirebaseDictionary else {
                 completion([])
                 return
             }
-            var liveStreams: [MFLiveStream] = []
+            var liveStreams: [MFMedia] = []
             for rawLiveStreamKey in rawLiveStreams.keys {
                 guard let liveStreamName = rawLiveStreams[rawLiveStreamKey] as? String else {
                     continue
                 }
-                guard let liveStream: MFLiveStream = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
+                guard let liveStream: MFMedia = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
                     continue
                 }
                 liveStreams.append(liveStream)
@@ -123,17 +123,17 @@ extension DatabaseGateway {
         }
     }
     
-    func createLiveStreamModel(from streamName: String, id: String) -> MFLiveStream? {
-        var liveStream: MFLiveStream = MFLiveStream()
+    func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
+        let liveStream: MFMedia = MFMedia()
         liveStream.id = id
-        liveStream.name = streamName
+        liveStream.contentId = streamName
         return liveStream
     }
     
-    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFLiveStream?)->Void)) {
-        var liveStream: MFLiveStream = MFLiveStream()
+    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
+        let liveStream: MFMedia = MFMedia()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.name = name
+        liveStream.contentId = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -146,7 +146,7 @@ extension DatabaseGateway {
         })
     }
     
-    func unpublishLiveStream(_ liveStream: MFLiveStream, _ completion: @escaping (()->Void)) {
+    func unpublishLiveStream(_ liveStream: MFMedia, _ completion: @escaping (()->Void)) {
         FirebaseReference.tempLiveVideosStreamNames.get(with: liveStream.id).removeValue { (error, databaseReference) in
             if error != nil {
                 print(error!)

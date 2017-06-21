@@ -17,15 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         IQKeyboardManager.sharedManager().enable = true
-//        IQKeyboardManager.shared().keyboardDistanceFromTextField = 30
 
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
-        
-        
-        
         return true
     }
     
@@ -34,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
             return GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
             /*
-            let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
-            let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-            return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
- */
+             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
+             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+             return FacebookLoginWorker.openURL(url, application: app, source: source, annotation: annotation)
+             */
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
