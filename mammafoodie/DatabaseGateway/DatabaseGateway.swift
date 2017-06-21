@@ -1,5 +1,4 @@
-import FirebaseDatabase
-import FirebaseCore
+import Firebase
 
 enum FirebaseReference: String {
     
@@ -8,6 +7,7 @@ enum FirebaseReference: String {
     case dishRequests = "DishRequests"
     case dishes = "Dishes"
     case conversations = "Conversations"
+    case messages = "Messages"
     case orders = "Orders"
     case paymentDetails = "PaymentDetails"
     case comments = "Comments"
@@ -16,7 +16,7 @@ enum FirebaseReference: String {
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
-    //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
+    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -30,6 +30,12 @@ enum FirebaseReference: String {
         return self.classReference.child(id) // root/className/id
     }
     
+    func dateConvertion(with date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateString = dateFormatter.string(from:date)
+        return dateString
+    }
     
 }
 
@@ -46,7 +52,7 @@ struct DatabaseConnectionObserver {
     }
 }
 
-enum DataRetrievalFrequency {
+enum DatabaseRetrievalFrequency {
     case single
     case realtime
 }
@@ -65,20 +71,18 @@ class DatabaseGateway {
         FirebaseApp.configure()
         print("Configuring FirebaseApp ----------------------- END")
     }
-    
-    
 }
 
 // MARK: - Live streams
 extension DatabaseGateway {
     
-    func getLiveStream(with id: String, _ completion: @escaping ((MFMedia?)->Void)) {
-        FirebaseReference.liveVideos.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
+    func getLiveStream(with id: String, _ completion: @escaping ((MFLiveStream?)->Void)) {
+        FirebaseReference.tempLiveVideosStreamNames.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
             guard let liveStreamName = streamNameDataSnapshot.value as? String else {
                 completion(nil)
                 return
             }
-            let liveStream: MFMedia? = self.createLiveStreamModel(from: liveStreamName, id: id)
+            let liveStream: MFLiveStream? = self.createLiveStreamModel(from: liveStreamName, id: id)
             completion(liveStream)
         }) { (error) in
             print(error)
@@ -86,19 +90,19 @@ extension DatabaseGateway {
         }
     }
     
-    func getLiveStreams(frequency: DataRetrievalFrequency = .single, _ completion: @escaping ([MFMedia])->Void) {
+    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFLiveStream])->Void) {
         
         let successClosure: FirebaseObserverSuccessClosure = { (streamNamesDataSnapshot) in
             guard let rawLiveStreams: FirebaseDictionary = streamNamesDataSnapshot.value as? FirebaseDictionary else {
                 completion([])
                 return
             }
-            var liveStreams: [MFMedia] = []
+            var liveStreams: [MFLiveStream] = []
             for rawLiveStreamKey in rawLiveStreams.keys {
                 guard let liveStreamName = rawLiveStreams[rawLiveStreamKey] as? String else {
                     continue
                 }
-                guard let liveStream: MFMedia = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
+                guard let liveStream: MFLiveStream = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
                     continue
                 }
                 liveStreams.append(liveStream)
@@ -113,27 +117,26 @@ extension DatabaseGateway {
         
         switch frequency {
         case .realtime:
-            FirebaseReference.liveVideos.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+            FirebaseReference.tempLiveVideosStreamNames.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
         default:
-            FirebaseReference.liveVideos.classReference.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            FirebaseReference.tempLiveVideosStreamNames.classReference.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
         }
     }
     
-    // Need to update this
-    func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
-        var liveStream: MFMedia = MFMedia()
-        liveStream.id = streamName
-        liveStream.contentId = streamName
+    func createLiveStreamModel(from streamName: String, id: String) -> MFLiveStream? {
+        var liveStream: MFLiveStream = MFLiveStream()
+        liveStream.id = id
+        liveStream.name = streamName
         return liveStream
     }
     
-    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
-        var liveStream: MFMedia = MFMedia()
-        liveStream.id = FirebaseReference.liveVideos.generateAutoID()
-        liveStream.contentId = name
+    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFLiveStream?)->Void)) {
+        var liveStream: MFLiveStream = MFLiveStream()
+        liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
+        liveStream.name = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
-        FirebaseReference.liveVideos.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
+        FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
             if error != nil {
                 print(error!)
             } else {
@@ -143,8 +146,8 @@ extension DatabaseGateway {
         })
     }
     
-    func unpublishLiveStream(_ liveStream: MFMedia, _ completion: @escaping (()->Void)) {
-        FirebaseReference.liveVideos.get(with: liveStream.id).removeValue { (error, databaseReference) in
+    func unpublishLiveStream(_ liveStream: MFLiveStream, _ completion: @escaping (()->Void)) {
+        FirebaseReference.tempLiveVideosStreamNames.get(with: liveStream.id).removeValue { (error, databaseReference) in
             if error != nil {
                 print(error!)
             } else {
@@ -158,7 +161,7 @@ extension DatabaseGateway {
 // MARK: - LiveVideoGatewayAccountDetails
 extension DatabaseGateway {
     
-    func getLiveVideoGatewayAccountDetails(frequency: DataRetrievalFrequency = .single, _ completion: @escaping (MFLiveVideoGatewayAccountDetails?)->Void) -> DatabaseConnectionObserver? {
+    func getLiveVideoGatewayAccountDetails(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping (MFLiveVideoGatewayAccountDetails?)->Void) -> DatabaseConnectionObserver? {
         
         let successClosure: FirebaseObserverSuccessClosure  = { (accountDetailsDataSnapshot) in
             guard let rawAccountDetails: FirebaseDictionary = accountDetailsDataSnapshot.value as? FirebaseDictionary else {
@@ -207,5 +210,42 @@ extension DatabaseGateway {
         accountDetails.serviceProviderName = serviceProviderName
         
         return accountDetails
+    }
+}
+
+// MARK: - Conversation
+extension DatabaseGateway {
+    
+    func createConversation(with model: MFConversation1, _ completion: @escaping ((_ chatData:MFConversation1)->Void)) {
+        var newModel = model
+        newModel.id = FirebaseReference.conversations.generateAutoID()
+        
+        let currentDate = Date()
+        let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
+        newModel.createdAt = dateString
+
+        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
+            completion(newModel)
+        }
+    }
+}
+
+// MARK: - Messages
+extension DatabaseGateway {
+    
+    func createMessage(with model: MFMessage1, _ completion: @escaping (()->Void)) {
+        
+        var newModel = model
+        newModel.messageid = FirebaseReference.messages.generateAutoID()
+        
+        let currentDate = Date()
+        let dateString = FirebaseReference.messages.dateConvertion(with: currentDate)
+        newModel.datetime = dateString
+        
+        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
+            completion()
+        }
     }
 }
