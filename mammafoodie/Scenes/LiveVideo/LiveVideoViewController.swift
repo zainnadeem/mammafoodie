@@ -16,9 +16,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var router: LiveVideoRouter!
     
     var liveVideo: MFMedia!
+    var gradientLayer: CAGradientLayer!
     
     @IBOutlet weak var btnEndLive: UIButton!
     @IBOutlet weak var lblVideoName: UILabel!
+    @IBOutlet weak var viewUserInfo: UIView!
+    @IBOutlet weak var viewSlotDetails: UIView!
     
     // MARK: - Object lifecycle
     
@@ -37,7 +40,33 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         super.viewWillAppear(animated)
         
         // This needs to be executed from viewWillAppear or later. Because of the Camera
-        self.output.start(liveVideo)
+        //        self.output.start(self.liveVideo)
+        self.viewSlotDetails.layer.cornerRadius = 15
+        self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
+        
+        self.updateDropShadowForViewUserInfo()
+    }
+    
+    func updateDropShadowForViewUserInfo() {
+        if self.gradientLayer == nil {
+            self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            self.gradientLayer = CAGradientLayer()
+            let view: UIView = UIView(frame: self.viewUserInfo.frame)
+            self.gradientLayer.frame = view.bounds
+            self.gradientLayer.colors = [
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.7).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.6).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.5).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.4).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.3).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.2).cgColor,
+                #colorLiteral(red: 0.1843137255, green: 0.1843137255, blue: 0.1843137255, alpha: 0.1).cgColor,
+                #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0).cgColor
+            ]
+            self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+            self.gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayer, below: self.viewUserInfo.layer)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

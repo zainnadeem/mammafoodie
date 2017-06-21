@@ -47,11 +47,11 @@ class DummyData {
         let newsText4  = combineAttributedStrings(left: self.addUnderline(text: self.user7.name + " tipped"), right: self.bold(text: self.user8.name))
         let newsText5  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " bought"), right: self.bold(text: user6.name + "'s " + " dish"))
         
-        let newsfeed1 = MFNewsFeed(id: "n1", actionUserId: user1, participantUserId: user2, activityID: MFActivity(id:"", name:""), text: newsText1)
-        let newsfeed2 = MFNewsFeed(id: "n2", actionUserId: user3, participantUserId: user4, activityID: MFActivity(id:"", name:""), text: newsText2)
-        let newsfeed3 = MFNewsFeed(id: "n3", actionUserId: user5, participantUserId: user5, activityID: MFActivity(id:"", name:""), text: newsText3)
-        let newsfeed4 = MFNewsFeed(id: "n4", actionUserId: user7, participantUserId: user8, activityID: MFActivity(id:"", name:""), text: newsText4)
-        let newsfeed5 = MFNewsFeed(id: "n5", actionUserId: user9, participantUserId: user1, activityID: MFActivity(id:"", name:""), text: newsText5)
+        let newsfeed1 = MFNewsFeed(id: "1", actionUserId: user1, participantUserId: user2, activity: MFActivity(id:"", name:"", type: .liked), text: newsText1)
+        let newsfeed2 = MFNewsFeed(id: "2", actionUserId: user3, participantUserId: user4, activity: MFActivity(id:"", name:"", type: .followed), text: newsText2)
+        let newsfeed3 = MFNewsFeed(id: "3", actionUserId: user5, participantUserId: user5, activity: MFActivity(id:"", name:"", type: .none), text: newsText3)
+        let newsfeed4 = MFNewsFeed(id: "4", actionUserId: user7, participantUserId: user8, activity: MFActivity(id:"", name:"", type: .tipped), text: newsText4)
+        let newsfeed5 = MFNewsFeed(id: "5", actionUserId: user9, participantUserId: user1, activity: MFActivity(id:"", name:"", type: .bought), text: newsText5)
         
         let newsfeedObjects = [newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5]
         
@@ -270,11 +270,11 @@ class DummyData {
         let newsText4  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " tipped"), right: self.bold(text: self.user8.name))
         let newsText5  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " bought"), right: self.bold(text: user6.name + "'s " + " dish"))
         
-        let newsfeed1 = MFNewsFeed(id: "n1", actionUserId: profileUser, participantUserId: user2, activityID: MFActivity(id:"", name:""), text: newsText1)
-        let newsfeed2 = MFNewsFeed(id: "n2", actionUserId: profileUser, participantUserId: user4, activityID: MFActivity(id:"", name:""), text: newsText2)
-        let newsfeed3 = MFNewsFeed(id: "n3", actionUserId: profileUser, participantUserId: profileUser, activityID: MFActivity(id:"", name:""), text: newsText3)
-        let newsfeed4 = MFNewsFeed(id: "n4", actionUserId: profileUser, participantUserId: user8, activityID: MFActivity(id:"", name:""), text: newsText4)
-        let newsfeed5 = MFNewsFeed(id: "n5", actionUserId: profileUser, participantUserId: user1, activityID: MFActivity(id:"", name:""), text: newsText5)
+        let newsfeed1 = MFNewsFeed(id: "n1", actionUserId: profileUser, participantUserId: user2, activity: MFActivity(id:"", name:"",type:.liked), text: newsText1)
+        let newsfeed2 = MFNewsFeed(id: "n2", actionUserId: profileUser, participantUserId: user4, activity: MFActivity(id:"", name:"",type:.started), text: newsText2)
+        let newsfeed3 = MFNewsFeed(id: "n3", actionUserId: profileUser, participantUserId: profileUser, activity: MFActivity(id:"", name:"",type:.none), text: newsText3)
+        let newsfeed4 = MFNewsFeed(id: "n4", actionUserId: profileUser, participantUserId: user8, activity: MFActivity(id:"", name:"",type:.tipped), text: newsText4)
+        let newsfeed5 = MFNewsFeed(id: "n5", actionUserId: profileUser, participantUserId: user1, activity: MFActivity(id:"", name:"",type:.bought), text: newsText5)
         
         profileUser.userActivity =  [ newsfeed1 : Date.init(),
                                       newsfeed2 : Date.init(),

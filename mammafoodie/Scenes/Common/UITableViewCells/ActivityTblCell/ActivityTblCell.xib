@@ -88,6 +88,10 @@
                                 <state key="normal" title="12" image="IconLike">
                                     <color key="titleColor" red="0.50980392156862742" green="0.59215686274509804" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="selected" image="IconLiked"/>
+                                <connections>
+                                    <action selector="btnLikeTapped:" destination="JlS-rK-8iT" eventType="touchUpInside" id="cvJ-jp-QB6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45l-za-bLI">
                                 <rect key="frame" x="71" y="205.5" width="64" height="40"/>
@@ -140,6 +144,8 @@
             <connections>
                 <outlet property="btnComments" destination="45l-za-bLI" id="zEu-zg-cEn"/>
                 <outlet property="btnLike" destination="PhJ-QC-o3y" id="jB0-PB-xVM"/>
+                <outlet property="conWidthImgCharacterEmoji" destination="yWa-Ta-V4w" id="osx-eE-srq"/>
+                <outlet property="imgCharacterEmoji" destination="FwX-s9-35Z" id="kKn-U5-Xbx"/>
                 <outlet property="imgProfilePicture" destination="7bu-dQ-59W" id="dy9-9P-RAk"/>
                 <outlet property="lblText" destination="ynR-h0-ISe" id="qIj-eO-9aV"/>
                 <outlet property="viewContainer" destination="xxd-VD-EW2" id="MQl-Fq-Zza"/>
@@ -151,6 +157,7 @@
         <image name="IconComments" width="42" height="42"/>
         <image name="IconDuration" width="35" height="35"/>
         <image name="IconLike" width="42" height="42"/>
+        <image name="IconLiked" width="42" height="42"/>
         <image name="IconMore" width="46" height="13"/>
         <image name="ProfilePicture0" width="204" height="207"/>
         <image name="TempCuisineEmoji" width="251" height="251"/>

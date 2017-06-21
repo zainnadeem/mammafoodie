@@ -14,7 +14,9 @@ class ActivityTblCell: UITableViewCell {
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var btnComments: UIButton!
     @IBOutlet weak var imgProfilePicture: UIImageView!
+    @IBOutlet weak var imgCharacterEmoji: UIImageView!
     @IBOutlet weak var lblText: UILabel!
+    @IBOutlet weak var conWidthImgCharacterEmoji: NSLayoutConstraint!
     
     var shapeLayer: CAShapeLayer!
     
@@ -27,6 +29,30 @@ class ActivityTblCell: UITableViewCell {
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblText.attributedText = newsFeed.attributedString
+        switch newsFeed.activity.type {
+        case .none:
+            self.imgCharacterEmoji.image = nil
+            self.conWidthImgCharacterEmoji.constant = 0
+        default:
+            
+            self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
+            self.conWidthImgCharacterEmoji.constant = 64
+        }
+    }
+    
+    private func getEmojiCharacter(for cuisineId: String) -> UIImage {
+        if cuisineId == "1" {
+            return #imageLiteral(resourceName: "EmojiChineseFemale")
+        } else if cuisineId == "2" {
+            return #imageLiteral(resourceName: "EmojiItalian")
+        } else if cuisineId == "3" {
+            return #imageLiteral(resourceName: "EmojiMexican")
+        } else if cuisineId == "4" {
+            return #imageLiteral(resourceName: "EmojiJapanese")
+        } else if cuisineId == "5" {
+            return #imageLiteral(resourceName: "EmojiSardarji")
+        }
+        return #imageLiteral(resourceName: "EmojiChineseMale")
     }
     
     func updateShadow() {
@@ -48,6 +74,10 @@ class ActivityTblCell: UITableViewCell {
             
             self.contentView.layer.insertSublayer(self.shapeLayer, at: 0)
         }
+    }
+    
+    @IBAction func btnLikeTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
     }
     
 }
