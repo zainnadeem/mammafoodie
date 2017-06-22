@@ -33,6 +33,7 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
+        collectionView?.allowsMultipleSelection = true
     }
     
     
@@ -79,8 +80,6 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
             horizontalView.clipsToBounds = true
             collectionView!.addSubview(horizontalView)
         }
-        
-        
     }
     
     
@@ -100,7 +99,7 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlotSelectionCollectionViewCell.reuseIdentifier, for: indexPath) as! SlotSelectionCollectionViewCell
        
-        if cell.isSelected {
+        if selectedCells[indexPath.item] != nil {
             cell.imageView.image = UIImage(named: "Food Bowl Selected")
         } else {
             cell.imageView.image = UIImage(named: "Food Bowl Unselected")
@@ -112,12 +111,14 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     
     func selectCollectionViewCell(atIndexPath: IndexPath){
         self.collectionView?.selectItem(at: atIndexPath, animated: true, scrollPosition: .centeredVertically)
+        
         self.collectionView!.delegate!.collectionView!(self.collectionView!, didSelectItemAt: atIndexPath)
         
     }
     
     func deSelectCollectionViewCell(atIndexPath: IndexPath){
         self.collectionView?.deselectItem(at: atIndexPath, animated: true)
+        
         self.collectionView!.delegate!.collectionView!(self.collectionView!, didDeselectItemAt: atIndexPath)
     }
     
@@ -126,8 +127,10 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! SlotSelectionCollectionViewCell
-        cell.imageView.image = UIImage(named: "Food Bowl Selected")
-        cell.isSelected = true
+        
+    
+            cell.imageView.image = UIImage(named: "Food Bowl Selected")
+            cell.isSelected = true
         
         selectedCells.updateValue(true, forKey: indexPath.item)
         

@@ -37,6 +37,7 @@
 		1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */; };
 		1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */; };
 		1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */; };
+		11611F4C1EFBD96400CEDE0C /* UsersBoughtCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F4B1EFBD96400CEDE0C /* UsersBoughtCollectionViewAdapter.swift */; };
 		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -312,6 +313,7 @@
 		1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageRouter.swift; sourceTree = "<group>"; };
 		1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageViewController.swift; sourceTree = "<group>"; };
 		1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageWorker.swift; sourceTree = "<group>"; };
+		11611F4B1EFBD96400CEDE0C /* UsersBoughtCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersBoughtCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
 		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */,
 				118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */,
 				110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */,
+				11611F4B1EFBD96400CEDE0C /* UsersBoughtCollectionViewAdapter.swift */,
 			);
 			path = SlotSelection;
 			sourceTree = "<group>";
@@ -1500,6 +1503,7 @@
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
+				11611F4C1EFBD96400CEDE0C /* UsersBoughtCollectionViewAdapter.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */,

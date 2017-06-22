@@ -16,23 +16,14 @@ class SlotSelectionWorker: NSObject {
             let cellSX = cell.frame.origin.x
 //            let cellEX = cell.frame.origin.x + cell.frame.size.width
             let cellSY = cell.frame.origin.y
-            let cellEY = cell.frame.origin.y + cell.frame.size.height/2
+            let cellEY = cell.frame.origin.y + cell.frame.size.height
             
-            
-            
-            //            if (touchX >= cellSX && touchX <= cellEX && touchY >= cellSY && touchY <= cellEY){
+      
             let touchOver = collectionView.indexPath(for: cell)
             if (touchX > cellSX  && touchY > cellSY || touchY > cellEY ){
-                
-                
-                //if lastAccessed != touchOver {
-                
-//                if cell.isSelected && cell.tag == 0 {
-//                    //deSelectCollectionViewCell(atIndexPath: touchOver!)
-//                } else {
-                   adapter.selectCollectionViewCell(atIndexPath: touchOver!)
-                    //                        cell.tag = 1
-//                }
+      
+                adapter.selectCollectionViewCell(atIndexPath: touchOver!)
+
             } else {
                 adapter.deSelectCollectionViewCell(atIndexPath: touchOver!)
             }

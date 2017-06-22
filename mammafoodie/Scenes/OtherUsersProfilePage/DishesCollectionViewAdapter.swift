@@ -118,7 +118,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if self.selectedIndexForProfile == .activity{
-            cellSize = CGSize(width: collectionView.frame.size.width, height: 150)
+            cellSize = CGSize(width: collectionView.frame.size.width - 10, height: 150)
         } else {
             cellSize = CGSize(width: collectionView.frame.size.width/3 - 2, height: 150)
         }
