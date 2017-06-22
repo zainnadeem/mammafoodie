@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        updateShadow()
+        updateShadow()
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -96,17 +96,17 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
     
     func updateShadow() {
         if self.shapeLayer == nil {
-            self.self.registerBtn.superview?.layoutIfNeeded()
+            self.view.layoutIfNeeded()
             self.shapeLayer = CAShapeLayer()
-            self.shapeLayer.shadowColor = #colorLiteral(red: 1, green: 0.7725490196, blue: 0.6, alpha: 0.7041212248).cgColor
-            self.shapeLayer.shadowOpacity = 70.0
+            self.shapeLayer.shadowColor = #colorLiteral(red: 1, green: 0.7725490196, blue: 0.6, alpha: 1).cgColor
+            self.shapeLayer.shadowOpacity = 0.7
             self.shapeLayer.shadowRadius = 7
             
             var shadowFrame: CGRect = self.registerBtn.frame
-            shadowFrame.origin.x -= -35
-            shadowFrame.origin.y += 17
-            shadowFrame.size.width += -65
-            shadowFrame.size.height -= 8
+            shadowFrame.origin.x += 35
+            shadowFrame.origin.y += 30
+            shadowFrame.size.width -= 70
+            //            shadowFrame.size.height -= 8
             
             self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.registerBtn.layer.cornerRadius).cgPath
             self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
@@ -118,18 +118,7 @@ class LoginRegisterViewController: UIViewController, UITextFieldDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateShadow()
+        self.updateShadow()
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
