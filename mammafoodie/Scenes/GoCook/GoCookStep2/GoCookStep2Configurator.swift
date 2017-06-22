@@ -2,38 +2,37 @@ import UIKit
 
 // MARK: - Connect View, Interactor, and Presenter
 
-extension GoCookViewController: GoCookPresenterOutput {
+extension GoCookStep2ViewController: GoCookStep2PresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
 }
 
-extension GoCookInteractor: GoCookViewControllerOutput {
+extension GoCookStep2Interactor: GoCookStep2ViewControllerOutput {
 }
 
-extension GoCookPresenter: GoCookInteractorOutput {
+extension GoCookStep2Presenter: GoCookStep2InteractorOutput {
 }
 
-class GoCookConfigurator {
+class GoCookStep2Configurator {
 
     // MARK: - Object lifecycle
     
-    static let sharedInstance = GoCookConfigurator()
+    static let sharedInstance = GoCookStep2Configurator()
     
     private init() {}
     
     // MARK: - Configuration
     
-    func configure(viewController: GoCookViewController) {
-        let router = GoCookRouter()
+    func configure(viewController: GoCookStep2ViewController) {
+        let router = GoCookStep2Router()
         router.viewController = viewController
         viewController.router = router
         
-        let interactor = GoCookInteractor()
-        let presenter = GoCookPresenter()
+        let interactor = GoCookStep2Interactor()
+        let presenter = GoCookStep2Presenter()
         viewController.output = interactor
         interactor.output = presenter
         presenter.output = viewController
-        presenter.viewController = viewController
     }
 }

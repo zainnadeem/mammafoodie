@@ -90,22 +90,22 @@ class GoCookPictureUploadViewController: UIViewController, GoCookPictureUploadVi
         self.btnPostDish.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
     }
     
-    class func addToParentViewController(_ parentVC: GoCookViewController, completion : @escaping GoCookCompletion) -> GoCookPictureUploadViewController? {
-        let story = UIStoryboard.init(name: "GoCook", bundle: nil)
-        if let pictureVC = parentVC.pictureVC {
-            pictureVC.completion = completion
-            pictureVC.addToParent(parentVC)
-            return pictureVC
-        } else if let pictureVC = story.instantiateViewController(withIdentifier: "GoCookPictureUploadViewController") as? GoCookPictureUploadViewController{
-            pictureVC.completion = completion
-            pictureVC.addToParent(parentVC)
-            return pictureVC
-        } else {
-            print("Critical Error")
-        }
-        return nil
-        
-    }
+//    class func addToParentViewController(_ parentVC: GoCookViewController, completion : @escaping GoCookCompletion) -> GoCookPictureUploadViewController? {
+//        let story = UIStoryboard.init(name: "GoCook", bundle: nil)
+//        if let pictureVC = parentVC.pictureVC {
+//            pictureVC.completion = completion
+//            pictureVC.addToParent(parentVC)
+//            return pictureVC
+//        } else if let pictureVC = story.instantiateViewController(withIdentifier: "GoCookPictureUploadViewController") as? GoCookPictureUploadViewController{
+//            pictureVC.completion = completion
+//            pictureVC.addToParent(parentVC)
+//            return pictureVC
+//        } else {
+//            print("Critical Error")
+//        }
+//        return nil
+//        
+//    }
     
     private func addToParent(_ parentVC: GoCookViewController) {
         parentVC.addChildViewController(self)

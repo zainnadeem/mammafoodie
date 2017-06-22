@@ -35,7 +35,7 @@ class DummyData {
         user9 = MFUser(id: "u9", name: "Laura Park", picture: "LauraPark", profileDescription: "")
         
         
-        profileUser = MFUser(id: "u1", name: "Johnny Jones", picture: "JohnnyJones", profileDescription: "26/M/NYC My dishes are always made with ❤️ and Garlic")
+        profileUser = MFUser(id: "u1", name: "Johnny Jones", picture: "JohnnyJoClean Swiftnes", profileDescription: "26/M/NYC My dishes are always made with ❤️ and Garlic")
     }
     
     
