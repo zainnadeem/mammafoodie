@@ -223,7 +223,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             print("Selected live video: \(selectedLiveVideo.id)")
             if selectedLiveVideo.id == "-1" {
                 // new. push go cook with live video selection
-//                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
+                //                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
             } else {
                 selectedLiveVideo.accessMode = MediaAccessUserType.viewer
             }
@@ -249,7 +249,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             if selectedVidup.id == "-1" {
                 // new. push go cook with vidup selection
                 selectedVidup.accessMode = MediaAccessUserType.owner
-//                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
+                //                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
             } else {
                 selectedVidup.accessMode = MediaAccessUserType.viewer
             }
@@ -309,6 +309,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         circleShape.path = circlePath.cgPath
         button.layer.mask = circleShape
     }
-
+    
     
 }

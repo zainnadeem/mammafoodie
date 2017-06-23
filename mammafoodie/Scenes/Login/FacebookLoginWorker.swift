@@ -21,10 +21,10 @@ class FacebookLoginWorker {
     }
     
     
-    func login(completion:@escaping (_ errorMessage:String?, _ authCredential:AuthCredential?)->()){
+    func login(completion: @escaping ((_ errorMessage:String?, _ authCredential:AuthCredential?)->Void)) {
         
         loginManager.logOut()
-        
+
         loginManager.logIn(withReadPermissions:["email", "public_profile"] , from: self.viewController) { (loginResult, error) in
             
             if let error = error {
@@ -44,34 +44,38 @@ class FacebookLoginWorker {
                 return
             } else {
                 
-                    //Check if email is empty in facebook user profile
-                    let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
-                    
-                    request!.start(completionHandler: { (connection, result, error) in
-                        if(error == nil)
-                        {
-                            guard let email = (result as? NSDictionary)?.value(forKey: "email") as? String, email != ""  else {
-                                
-                                completion("We are unable to retreive your email from facebook. Please provide your email to continue", nil)
-                                return
-                            }
-                            
-                        } else {
-                            completion(error?.localizedDescription, nil)
-                        }
-
-                    })
+                //Check if email is empty in facebook user profile
+                let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
                 
-                Auth.auth().signIn(with: credential, completion: { (user, error) in
-                    if error != nil {
-                        print(error!)
-                        self.completionError?()
-                        return
+                request!.start(completionHandler: { (connection, result, error) in
+                    if(error == nil)
+                    {
+                        guard let email = (result as? NSDictionary)?.value(forKey: "email") as? String, email != ""  else {
+                            
+                            completion("We are unable to retreive your email from facebook. Please provide your email to continue", nil)
+                            return
+                        }
+                        
+                    } else {
+                        completion(error?.localizedDescription, nil)
                     }
-                    self.UpdateMailId()
-                    self.completionSuccess?()
-                    print("Login Sucessfully.")
+                    
                 })
+                
+//                Auth.auth().signIn(with: credential, completion: { (user, error) in
+//                    
+//                })
+                
+//                Auth.auth().signIn(with: credential, completion: { (user, error) in
+//                    if error != nil {
+//                        print(error!)
+//                        self.completionError?()
+//                        return
+//                    }
+//                    self.UpdateMailId()
+//                    self.completionSuccess?()
+//                    print("Login Sucessfully.")
+//                })
             }
             
             guard let accessToken = FBSDKAccessToken.current() else {
@@ -99,11 +103,11 @@ class FacebookLoginWorker {
         }
     }
     
-//    func UpdateMailId (){
-//        Auth.auth().currentUser?.updateEmail(to: "sreeram888@gmail.com", completion: { (error) in
-//            if error != nil {
-//                print(error!)
-//            }
-//        })
-//    }
+    //    func UpdateMailId (){
+    //        Auth.auth().currentUser?.updateEmail(to: "sreeram888@gmail.com", completion: { (error) in
+    //            if error != nil {
+    //                print(error!)
+    //            }
+    //        })
+    //    }
 }
