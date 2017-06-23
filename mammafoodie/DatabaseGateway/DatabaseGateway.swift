@@ -14,6 +14,7 @@ enum FirebaseReference: String {
     case notifications = "Notifications"
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
+    case users = "Users"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -247,5 +248,20 @@ extension DatabaseGateway {
         FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion()
         }
+        
     }
+}
+
+extension DatabaseGateway {
+    
+    func createUser(with model: MFUser, _ completion: @escaping (()->Void)) {
+        let newModel = model
+        newModel.id = FirebaseReference.users.generateAutoID()
+        
+        let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
+            completion()
+        }
+    }
+
 }

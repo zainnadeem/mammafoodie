@@ -26,7 +26,7 @@
         <!--Comments View Controller-->
         <scene sceneID="aIE-yn-0oo">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M20-7N-sAU" customClass="CommentsViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M20-7N-sAU" customClass="CommentsViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ho4-gy-TMt"/>
                         <viewControllerLayoutGuide type="bottom" id="cAV-5d-at1"/>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="1" y="64" width="373" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentsList" rowHeight="160" id="raL-dG-dPp" customClass="CommentsListTableViewCell" customModule="mammafoodie" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentsList" rowHeight="160" id="raL-dG-dPp" customClass="CommentsListTableViewCell" customModule="mamma__foodie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="373" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="raL-dG-dPp" id="JFj-Ji-Di3">
@@ -201,7 +201,7 @@
         <!--Chat View Controller-->
         <scene sceneID="JUC-aD-Z9p">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="P5Z-xc-mWl" customClass="ChatViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="P5Z-xc-mWl" customClass="ChatViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N11-l4-jcW"/>
                         <viewControllerLayoutGuide type="bottom" id="tvy-My-YkO"/>
@@ -219,7 +219,7 @@
         <!--Request Dish View Controller-->
         <scene sceneID="Fdn-sv-7Hy">
             <objects>
-                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zie-Xh-td4"/>
                         <viewControllerLayoutGuide type="bottom" id="sq6-sc-34F"/>
@@ -524,7 +524,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Px2-Nu-6qs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1108.125" y="926.4084507042254"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="Idp-Ql-oj4">
@@ -613,7 +612,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="SyY-3L-zW0">
             <objects>
-                <viewController storyboardIdentifier="ChatListViewController" id="VYD-Kc-FPe" customClass="ChatListViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListViewController" id="VYD-Kc-FPe" customClass="ChatListViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r2Q-HK-MMv"/>
                         <viewControllerLayoutGuide type="bottom" id="HqL-re-du8"/>
@@ -694,7 +693,7 @@
         <!--Register View Controller-->
         <scene sceneID="lNt-GA-77M">
             <objects>
-                <viewController storyboardIdentifier="LoginRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lfz-O7-95b" customClass="RegisterViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lfz-O7-95b" customClass="RegisterViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IAT-RK-Amd"/>
                         <viewControllerLayoutGuide type="bottom" id="PPO-cp-lVf"/>
@@ -733,6 +732,9 @@
                                 <state key="normal" title="REGISTER">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerBtn:" destination="lfz-O7-95b" eventType="touchUpInside" id="33r-dC-0w2"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already a member?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhk-lR-Od6">
                                 <rect key="frame" x="92.5" y="611.5" width="136" height="18.5"/>
@@ -926,4 +928,7 @@
         <image name="unselectpass" width="35" height="47"/>
         <image name="unselectuser" width="44" height="47"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="RWe-9D-Sg6"/>
+    </inferredMetricsTieBreakers>
 </document>

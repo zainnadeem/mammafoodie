@@ -61,6 +61,7 @@ class FacebookLoginWorker {
                         }
 
                     })
+
             }
             
             guard let accessToken = FBSDKAccessToken.current() else {
