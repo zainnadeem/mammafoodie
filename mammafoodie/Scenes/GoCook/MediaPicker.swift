@@ -40,14 +40,11 @@ class MediaPicker: NSObject {
         mediaPick.imageCompletion = completion
         mediaPick.mediaType = .Image
         mediaPick.imagePicker.delegate = mediaPick
-        mediaPick.showImagePicker(on: vc, sourceType: .camera)
-//        mediaPick.checkCameraPermission { (error) in
-//            if error != nil {
-//                mediaPick.imageCompletion?(nil, error)
-//            } else {
-//                
-//            }
-//        }
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            mediaPick.showImagePicker(on: vc, sourceType: .camera)
+        } else {
+            mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+        }
         return mediaPick
     }
     
@@ -57,7 +54,11 @@ class MediaPicker: NSObject {
         mediaPick.mediaType = .Video
         mediaPick.imagePicker.delegate = mediaPick
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
-        mediaPick.showImagePicker(on: vc, sourceType: .camera)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            mediaPick.showImagePicker(on: vc, sourceType: .camera)
+        } else {
+            mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+        }
         return mediaPick
     }
     
@@ -70,28 +71,6 @@ class MediaPicker: NSObject {
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
         mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
         return mediaPick
-//        vc.present(mediaPick.imagePicker, animated: true) {
-//            
-//        }
-//        return
-//        mediaPick.checkPhotoLibraryPermission { (error) in
-//            if error != nil {
-//                mediaPick.videoCompletion?(nil, error)
-//            } else {
-//                DispatchQueue.main.async {
-//                    mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
-//                }
-//            }
-//        }
-//        mediaPick.checkCameraPermission { (error) in
-//            if error != nil {
-//                mediaPick.videoCompletion?(nil, error)
-//            } else {
-//                DispatchQueue.main.async {
-//                    
-//                }
-//            }
-//        }
     }
     
     fileprivate func showImagePicker(on vc: UIViewController, sourceType: UIImagePickerControllerSourceType) {

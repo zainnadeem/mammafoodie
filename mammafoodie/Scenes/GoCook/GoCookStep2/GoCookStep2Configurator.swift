@@ -34,5 +34,6 @@ class GoCookStep2Configurator {
         viewController.output = interactor
         interactor.output = presenter
         presenter.output = viewController
+        presenter.viewController = viewController
     }
 }

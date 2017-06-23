@@ -27,7 +27,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     var selectedOption : GoCookOption = .None {
         didSet {
             self.output.selectOption(option: self.selectedOption)
-            
+            self.step2VC.selectedOption = self.selectedOption
         }
     }
     
@@ -76,6 +76,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     // MARK: - Event handling
     @IBAction func onVidUpTap(_ sender: UIButton) {
         self.selectedOption = .Vidups
+        
     }
     
     @IBAction func onMenuTap(_ sender: UIButton) {

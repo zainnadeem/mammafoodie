@@ -119,39 +119,6 @@ class GoCookLiveVideoUploadViewController: UIViewController, GoCookLiveVideoUplo
     func secondsToHoursMinutes(_ seconds : Int) -> (Int, Int) {
         return (seconds / 3600, (seconds % 3600) / 60)
     }
-    
-//    class func addToParentViewController(_ parentVC: GoCookViewController, completion : @escaping GoCookCompletion) -> GoCookLiveVideoUploadViewController? {
-//        let story = UIStoryboard.init(name: "GoCook", bundle: nil)
-//        if let liveVideoVC = parentVC.liveVideoVC {
-//            liveVideoVC.addToParent(parentVC)
-//            liveVideoVC.completion = completion
-//            return liveVideoVC
-//        } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "GoCookLiveVideoUploadViewController") as? GoCookLiveVideoUploadViewController{
-//            liveVideoVC.addToParent(parentVC)
-//            liveVideoVC.completion = completion
-//            return liveVideoVC
-//        } else {
-//            print("Critical Error")
-//        }
-//        return nil
-//        
-//    }
-//    
-    private func addToParent(_ parentVC: GoCookViewController) {
-        parentVC.addChildViewController(self)
-        parentVC.viewStep2.addSubview(self.view)
-        
-        
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.leftAnchor.constraint(equalTo: parentVC.viewStep2.leftAnchor).isActive = true
-        self.view.rightAnchor.constraint(equalTo: parentVC.viewStep2.rightAnchor).isActive = true
-        self.view.topAnchor.constraint(equalTo: parentVC.viewStep2.topAnchor).isActive = true
-        self.view.bottomAnchor.constraint(equalTo: parentVC.viewStep2.bottomAnchor).isActive = true
-        
-        parentVC.view.layoutIfNeeded()
-        self.view.layoutIfNeeded()
-
-    }
 }
 
 extension GoCookLiveVideoUploadViewController : UITextFieldDelegate {

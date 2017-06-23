@@ -5,7 +5,20 @@ protocol GoCookStep2ViewControllerInput {
 }
 
 protocol GoCookStep2ViewControllerOutput {
-    
+    func setPreparationTime()
+    func setDealDuration()
+    func setupViewController()
+    func selectDiet(_ diet : GoCookDiet)
+    func selectMediaUploadType(_ type : GoCookMediaUploadType)
+    func showOption(_ option : GoCookOption)
+}
+
+enum GoCookMediaUploadType {
+    case VideoUpload, VideoShoot, PictureUpload, None
+}
+
+enum GoCookDiet {
+    case Veg, NonVeg, Vegan, None
 }
 
 class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInput {
@@ -13,9 +26,27 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var output: GoCookStep2ViewControllerOutput!
     var router: GoCookStep2Router!
     
+    var selectedOption : GoCookOption = . None {
+        didSet {
+            self.output.showOption(self.selectedOption)
+        }
+    }
+    
+    var selectedDiet : GoCookDiet = .None {
+        didSet {
+            self.output.selectDiet(self.selectedDiet)
+        }
+    }
+    
+    var selectedMediaUploadType : GoCookMediaUploadType = .None {
+        didSet {
+            self.output.selectMediaUploadType(self.selectedMediaUploadType)
+        }
+    }
+    
     var cuisinesAdapter : CuisineCollectionViewAdapter = CuisineCollectionViewAdapter()
     var numberOfServings : UInt = 0
-    
+    var mediaPicker : MediaPicker?
     var completion : GoCookCompletion?
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -62,6 +93,11 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBOutlet weak var btnPostDish: UIButton!
     
+    
+    @IBOutlet weak var conVerticalViewPictureContainer_lblPrepareTime: NSLayoutConstraint!
+    @IBOutlet weak var conVerticalCuisineClnView_lblPrepareTime: NSLayoutConstraint!
+    @IBOutlet weak var conVerticalViewVideoContainer_lblPreparationTime: NSLayoutConstraint!
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -73,10 +109,87 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.output.setupViewController()
+        self.cuisinesAdapter.prepareCuisineCollectionView(self.cuisineCollectionView)
     }
     
     // MARK: - Event handling
     
+    @IBAction func onDietTap(_ sender: UIButton) {
+        switch sender {
+        case self.btnDietVegan:
+            self.output.selectDiet(.Vegan)
+            
+        case self.btnDietVeg:
+            self.output.selectDiet(.Veg)
+            
+        case self.btnDietNonVeg:
+            self.output.selectDiet(.NonVeg)
+            
+        default:
+            self.output.selectDiet(.None)
+        }
+    }
+    
+    @IBAction func onMinusTap(_ sender: UIButton) {
+        if self.numberOfServings > 0 {
+            self.numberOfServings -= 1
+            self.lblServingsCount.text = "\(self.numberOfServings)"
+        }
+    }
+    
+    @IBAction func onPlusTap(_ sender: UIButton) {
+        self.numberOfServings += 1
+        self.lblServingsCount.text = "\(self.numberOfServings)"
+    }
+    
+    
+    @IBAction func onPostDishTap(_ sender: UIButton) {
+        self.completion?()
+    }
+    
+    @IBAction func onPreparationTimeChange(_ sender: UIDatePicker) {
+        self.output.setPreparationTime()
+    }
+    
+    @IBAction func onDealDurationChange(_ sender: UIDatePicker) {
+        self.output.setDealDuration()
+    }
+    
+    @IBAction func onCameraTap(_ sender: UIButton) {
+        self.selectedMediaUploadType = .PictureUpload
+//        self.mediaPicker = MediaPicker.pickImage(on: self, completion: { (image, error) in
+//            print(image as Any)
+//        })
+    }
+    
+    @IBAction func onUploadVideo(_ sender: UIButton) {
+        self.selectedMediaUploadType = .VideoUpload
+//        self.mediaPicker = MediaPicker.pickVideo(on: self, completion: { (url, error) in
+//            print(url as Any)
+//        })
+    }
+    
+    @IBAction func onShootVideo(_ sender: UIButton) {
+        self.selectedMediaUploadType = .VideoShoot
+//        self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (url, error) in
+//            print(url as Any)
+//        })
+    }
+
+    
     // MARK: - Display logic
     
 }
+
+extension GoCookStep2ViewController : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField : UITextField) {
+        if textField == self.txtPreparationTime {
+            self.output.setPreparationTime()
+        } else if textField == self.txtDealDuration {
+            self.output.setDealDuration()
+        }
+        
+    }
+}
+

@@ -1,11 +1,11 @@
 import UIKit
 
 protocol GoCookRouterInput {
-
+    
 }
 
 class GoCookRouter: GoCookRouterInput {
-
+    
     weak var viewController: GoCookViewController!
     
     // MARK: - Navigation

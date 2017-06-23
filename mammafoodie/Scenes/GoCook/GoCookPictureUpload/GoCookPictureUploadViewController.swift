@@ -90,37 +90,6 @@ class GoCookPictureUploadViewController: UIViewController, GoCookPictureUploadVi
         self.btnPostDish.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
     }
     
-//    class func addToParentViewController(_ parentVC: GoCookViewController, completion : @escaping GoCookCompletion) -> GoCookPictureUploadViewController? {
-//        let story = UIStoryboard.init(name: "GoCook", bundle: nil)
-//        if let pictureVC = parentVC.pictureVC {
-//            pictureVC.completion = completion
-//            pictureVC.addToParent(parentVC)
-//            return pictureVC
-//        } else if let pictureVC = story.instantiateViewController(withIdentifier: "GoCookPictureUploadViewController") as? GoCookPictureUploadViewController{
-//            pictureVC.completion = completion
-//            pictureVC.addToParent(parentVC)
-//            return pictureVC
-//        } else {
-//            print("Critical Error")
-//        }
-//        return nil
-//        
-//    }
-    
-    private func addToParent(_ parentVC: GoCookViewController) {
-        parentVC.addChildViewController(self)
-        parentVC.viewStep2.addSubview(self.view)
-        
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.leftAnchor.constraint(equalTo: parentVC.viewStep2.leftAnchor).isActive = true
-        self.view.rightAnchor.constraint(equalTo: parentVC.viewStep2.rightAnchor).isActive = true
-        self.view.topAnchor.constraint(equalTo: parentVC.viewStep2.topAnchor).isActive = true
-        self.view.bottomAnchor.constraint(equalTo: parentVC.viewStep2.bottomAnchor).isActive = true
-        
-        parentVC.view.layoutIfNeeded()
-        self.view.layoutIfNeeded()
-    }
-    
     // MARK: - Event handling
     @IBAction func onDietTap(_ sender: UIButton) {
         for diet  in self.allDiets {
@@ -147,8 +116,6 @@ class GoCookPictureUploadViewController: UIViewController, GoCookPictureUploadVi
         } else {
             self.selectView(self.viewCamera)
         }
-        
-        
         self.mediaPicker = MediaPicker.pickImage(on: self, completion: { (image, error) in
             print(image)
         })
@@ -157,7 +124,7 @@ class GoCookPictureUploadViewController: UIViewController, GoCookPictureUploadVi
     @IBAction func onPostDishTap(_ sender: UIButton) {
         self.completion?()
     }
-    
+
     @IBAction func onPreparationTimeChange(_ sender: UIDatePicker) {
         self.setPreparationTime()
     }
