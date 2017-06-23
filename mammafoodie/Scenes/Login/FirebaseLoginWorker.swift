@@ -10,14 +10,18 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class FirebaseLoginWorker {
+class FirebaseLoginWorker:HUDRenderer {
     
     ///Creates a new Firebase user with given credentials and calls back with a status and an errorMessage if any
     
     func signUp(with Credentials: Login.Credentials, completion: @escaping (_ errorMessage:String?)->()){
         
+        showActivityIndicator()
+        
         Auth.auth().createUser(withEmail: Credentials.email, password: Credentials.password){
             (user, error) in
+            
+            self.hideActivityIndicator()
             
             if error != nil { //SignUp Failure
                 completion(error!.localizedDescription)
@@ -33,8 +37,12 @@ class FirebaseLoginWorker {
     
     func login(with Credentials:Login.Credentials, completion: @escaping (_ errorMessage:String?)->()){
         
+        showActivityIndicator()
+        
         Auth.auth().signIn(withEmail: Credentials.email, password: Credentials.password){
             (user, error) in
+            
+            self.hideActivityIndicator()
             
             if error != nil { //Login Failure
                 completion(error!.localizedDescription)
@@ -48,7 +56,11 @@ class FirebaseLoginWorker {
     
     func login(with Credentials:AuthCredential, completion : @escaping (_ errorMessage:String?) -> ()) {
         
+        self.showActivityIndicator()
+        
         Auth.auth().signIn(with: Credentials) { (user, error) in
+            
+            self.hideActivityIndicator()
             
             if error != nil { //Login Failure
                 completion(error!.localizedDescription)
