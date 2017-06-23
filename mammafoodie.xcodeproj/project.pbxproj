@@ -16,7 +16,6 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
-		113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113139BE1EF7B103000050D6 /* UserProfile.storyboard */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -91,6 +90,8 @@
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C12BCE01EF83512007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
+		2C7C13A01EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
@@ -302,7 +303,14 @@
 		F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
 		F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */; };
 		F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */; };
-		F02722F41EF8583400A5D6C3 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */; };
+		F037E8351EFBCE970085C5C1 /* RegisterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */; };
+		F037E8361EFBCE970085C5C1 /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */; };
+		F037E8371EFBCE970085C5C1 /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E8301EFBCE970085C5C1 /* RegisterModels.swift */; };
+		F037E8381EFBCE970085C5C1 /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E8311EFBCE970085C5C1 /* RegisterPresenter.swift */; };
+		F037E8391EFBCE970085C5C1 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E8321EFBCE970085C5C1 /* RegisterRouter.swift */; };
+		F037E83A1EFBCE970085C5C1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E8331EFBCE970085C5C1 /* RegisterViewController.swift */; };
+		F037E83B1EFBCE970085C5C1 /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E8341EFBCE970085C5C1 /* RegisterWorker.swift */; };
+		F037E83D1EFBD5D30085C5C1 /* RegisterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E83C1EFBD5D30085C5C1 /* RegisterAdapter.swift */; };
 		F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */; };
 		F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */; };
 		F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */; };
@@ -346,7 +354,6 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
-		113139BE1EF7B103000050D6 /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -399,6 +406,7 @@
 		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
+		2C7C139E1EFA9BFD00C673DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
 		2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTblCell.swift; sourceTree = "<group>"; };
@@ -598,7 +606,14 @@
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
 		F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNewViewController.swift; sourceTree = "<group>"; };
-		F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
+		F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterConfigurator.swift; sourceTree = "<group>"; };
+		F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
+		F037E8301EFBCE970085C5C1 /* RegisterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
+		F037E8311EFBCE970085C5C1 /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		F037E8321EFBCE970085C5C1 /* RegisterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		F037E8331EFBCE970085C5C1 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		F037E8341EFBCE970085C5C1 /* RegisterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
+		F037E83C1EFBD5D30085C5C1 /* RegisterAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAdapter.swift; sourceTree = "<group>"; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 		F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishConfigurator.swift; path = RequestDish/RequestDishConfigurator.swift; sourceTree = "<group>"; };
 		F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishInteractor.swift; path = RequestDish/RequestDishInteractor.swift; sourceTree = "<group>"; };
@@ -859,6 +874,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F037E82D1EFBCE970085C5C1 /* Register */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				BFC927001EF00A7E00602153 /* Comments */,
@@ -895,7 +911,6 @@
 				2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */,
 				2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */,
 				F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */,
-				F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -912,10 +927,14 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
+				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
+				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
+				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				113139BE1EF7B103000050D6 /* UserProfile.storyboard */,
+				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,				
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1271,10 +1290,6 @@
 			children = (
 				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
-				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
-				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
-				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
@@ -1372,6 +1387,21 @@
 				F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		F037E82D1EFBCE970085C5C1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */,
+				F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */,
+				F037E8301EFBCE970085C5C1 /* RegisterModels.swift */,
+				F037E8311EFBCE970085C5C1 /* RegisterPresenter.swift */,
+				F037E8321EFBCE970085C5C1 /* RegisterRouter.swift */,
+				F037E8331EFBCE970085C5C1 /* RegisterViewController.swift */,
+				F037E8341EFBCE970085C5C1 /* RegisterWorker.swift */,
+				F037E83C1EFBD5D30085C5C1 /* RegisterAdapter.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		F0573A0B1EF2CBCA000F38B1 /* RequestDish */ = {
@@ -1518,6 +1548,7 @@
 				2CFB9B741EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				2C12BCD01EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCC21EF7D338007AF994 /* Akshit.storyboard in Resources */,
+				2C7C13A01EFA9BFD00C673DD /* UserProfile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1540,6 +1571,7 @@
 				2CE479471EF97312003D0F9F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
+				2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
@@ -1554,7 +1586,6 @@
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
-				113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
@@ -1748,9 +1779,11 @@
 				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
 				F097D8CC1EF3D8BA00FCF967 /* ChatListModels.swift in Sources */,
+				F037E8381EFBCE970085C5C1 /* RegisterPresenter.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				2C12BCBB1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
+				F037E83D1EFBD5D30085C5C1 /* RegisterAdapter.swift in Sources */,
 				2C12BCB71EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
 				2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */,
 				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
@@ -1783,7 +1816,6 @@
 				2CE479411EF97256003D0F9F /* StringExtention.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
-				F02722F41EF8583400A5D6C3 /* LoginRegisterViewController.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -1799,6 +1831,8 @@
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
+				F037E8361EFBCE970085C5C1 /* RegisterInteractor.swift in Sources */,
+				F037E8391EFBCE970085C5C1 /* RegisterRouter.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
@@ -1845,7 +1879,9 @@
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
+				F037E8371EFBCE970085C5C1 /* RegisterModels.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
+				F037E83B1EFBCE970085C5C1 /* RegisterWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
 				F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */,
@@ -1855,7 +1891,9 @@
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
+				F037E83A1EFBCE970085C5C1 /* RegisterViewController.swift in Sources */,
 				57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
+				F037E8351EFBCE970085C5C1 /* RegisterConfigurator.swift in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
 				2CFB9B981EFA475100C08EB3 /* LiveVideoPublisherWorker.swift in Sources */,
@@ -1907,6 +1945,14 @@
 				2C12BCC01EF7D338007AF994 /* Base */,
 			);
 			name = Akshit.storyboard;
+			sourceTree = "<group>";
+		};
+		2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C7C139E1EFA9BFD00C673DD /* Base */,
+			);
+			name = UserProfile.storyboard;
 			sourceTree = "<group>";
 		};
 		2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */ = {
@@ -2106,6 +2152,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6G977HV28A;
@@ -2116,7 +2164,7 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
@@ -2129,6 +2177,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6G977HV28A;
@@ -2139,7 +2189,7 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.staging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";

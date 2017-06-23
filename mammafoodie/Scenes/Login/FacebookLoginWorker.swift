@@ -8,6 +8,9 @@ class FacebookLoginWorker {
     weak var viewController: UIViewController!
     lazy var loginManager = FBSDKLoginManager()
     
+    var completionSuccess: (()->Void)?
+    var completionError: (()->Void)?
+    
     class func setup(application: UIApplication, with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -59,6 +62,16 @@ class FacebookLoginWorker {
 
                     })
                 
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    if error != nil {
+                        print(error!)
+                        self.completionError?()
+                        return
+                    }
+                    self.UpdateMailId()
+                    self.completionSuccess?()
+                    print("Login Sucessfully.")
+                })
             }
             
             guard let accessToken = FBSDKAccessToken.current() else {

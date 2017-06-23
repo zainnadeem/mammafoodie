@@ -145,6 +145,10 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
             })
         }
     }
+    
+    @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension NearbyChefsViewController : UITextFieldDelegate {

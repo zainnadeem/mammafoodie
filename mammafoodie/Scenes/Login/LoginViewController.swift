@@ -18,13 +18,23 @@ protocol LoginViewControllerOutput {
     func logout()
 }
 
-class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate {
+class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate, UITextFieldDelegate {
     var output: LoginViewControllerOutput!
     var router: LoginRouter!
+    
+    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
+    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    
+    var shapeLayer: CAShapeLayer!
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
+    @IBOutlet weak var passImageView: UIImageView!
+    @IBOutlet weak var emailImageView: UIImageView!
+    @IBOutlet weak var userView: UIView!
+    @IBOutlet weak var passwordView: UIView!
+    @IBOutlet weak var loginButn: UIButton!
     
     
     // MARK: - Object lifecycle
@@ -36,90 +46,91 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //        logoutGmailButn()
+        //        forgotPasswordButn()
         
-        if let currentUser = Auth.auth().currentUser{
-            print("\(String(describing: currentUser.displayName)) is logged in already")
-        }
+        self.loginButn.layer.cornerRadius = 23
+        self.loginButn.clipsToBounds = true
+        userView.layer.cornerRadius = 5
+        userView.layer.borderWidth = 1
+        userView.layer.borderColor = UIColor.clear.cgColor
         
-        
- 
-         // Add a custom login button to your app
-         let facebookLoginButton = UIButton(type: .custom)
-         facebookLoginButton.backgroundColor = UIColor.darkGray
-         facebookLoginButton.frame = CGRect(x: 30, y: 200, width: 180, height: 40)
-         facebookLoginButton.setTitle("Login with Facebook", for: .normal)
-         
-          //Handle clicks on the button
-         facebookLoginButton.addTarget(self, action: #selector(self.loginWithFacebook(sender:)), for: .touchUpInside)
-         
-         
-         // Add a custom logout button to your app
-         let googleLoginButton = UIButton(type: .custom)
-         googleLoginButton.backgroundColor = UIColor.darkGray
-         googleLoginButton.frame = CGRect(x: 30, y: 300, width: 180, height: 40)
-         //googleLoginButton.center = view.center
-         googleLoginButton.setTitle("Login with Google", for: .normal)
-         
-         // Handle clicks on the button
-         googleLoginButton.addTarget(self, action: #selector(self.loginWithGoogle(sender:)), for: .touchUpInside)
-        
-        
-        // Add a custom logout button to your app
-        let fireBaseSignUpButton = UIButton(type: .custom)
-        fireBaseSignUpButton.backgroundColor = UIColor.darkGray
-        fireBaseSignUpButton.frame = CGRect(x: 30, y: 400, width: 180, height: 40)
-        //fireBaseSignUpButton.center = view.center
-        fireBaseSignUpButton.setTitle("Firebase Signup", for: .normal)
-        
-        // Handle clicks on the button
-        fireBaseSignUpButton.addTarget(self, action: #selector(self.signUpWithFireBase(sender:)), for: .touchUpInside)
-        
-        
-        // Add a custom logout button to your app
-        let firebaseLoginButton = UIButton(type: .custom)
-        firebaseLoginButton.backgroundColor = UIColor.darkGray
-        firebaseLoginButton.frame = CGRect(x: 30, y: 500, width: 180, height: 40)
-        //firebaseLoginButton.center = view.center
-        firebaseLoginButton.setTitle("Firebase Login", for: .normal)
-        
-        // Handle clicks on the button
-        firebaseLoginButton.addTarget(self, action: #selector(self.loginWithFireBase(sender:)), for: .touchUpInside)
-        
-        
-        // Add a custom logout button to your app
-        let firebaseLogoutButton = UIButton(type: .custom)
-        firebaseLogoutButton.backgroundColor = UIColor.darkGray
-        firebaseLogoutButton.frame = CGRect(x: 30, y: 600, width: 180, height: 40)
-        //firebaseLoginButton.center = view.center
-        firebaseLogoutButton.setTitle("Firebase Logout", for: .normal)
-        
-        // Handle clicks on the button
-        firebaseLogoutButton.addTarget(self, action: #selector(self.logout(sender:)), for: .touchUpInside)
-         
-         // Add the button to the view
-         view.addSubview(facebookLoginButton)
-         view.addSubview(googleLoginButton)
-         view.addSubview(fireBaseSignUpButton)
-         view.addSubview(firebaseLoginButton)
-        view.addSubview(firebaseLogoutButton)
- 
+        passwordView.layer.cornerRadius = 5
+        passwordView.layer.borderWidth = 1
+        passwordView.layer.borderColor = UIColor.clear.cgColor
+        self.txtPassword.delegate = self
+        self.txtEmail.delegate = self
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateShadow()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
- 
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.loginButn.applyGradient(colors: [gradientStartColor, gradientEndColor])
+    }
+    
     // MARK: - Event handling
-    @IBAction func btnPrivacyTapped(_ sender: Any) {
-        router.openSafariVC(with: .privacyPolicy)
-
+    @IBAction func btnLoginTapped(_ sender: UIButton) {
+        self.output.loginWithGoogle()
+        //        if self.txtEmail.text?.isEmpty == true {
+        //            return
+        //        }
+        //        if self.txtPassword.text?.isEmpty == true {
+        //            return
+        //        }
+        //        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
         
+    }
+
+    @IBAction func btnPrivacyTapped(_ sender: Any) {
+        self.router.openSafariVC(with: .privacyPolicy)
     }
     
     @IBAction func btnTermsTapped(_ sender: Any) {
-        router.openSafariVC(with: .terms)
-        
+        self.router.openSafariVC(with: .terms)
+    }
+
+    // MARK: - Inputs
+    func showLoginSuccessMessage(_ message: String) {
+        print(message)
+    }
+    func showLogoutSuccessMessage(_ message: String) {
+        // print(message)
+    }
+    
+    func forgotpasswordWorker(success:String) {
+        let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateShadow() {
+        if self.shapeLayer == nil {
+            self.self.loginButn.superview?.layoutIfNeeded()
+            self.shapeLayer = CAShapeLayer()
+            self.shapeLayer.shadowColor = #colorLiteral(red: 1, green: 0.7725490196, blue: 0.6, alpha: 0.7041212248).cgColor
+            self.shapeLayer.shadowOpacity = 70.0
+            self.shapeLayer.shadowRadius = 7
+            
+            var shadowFrame: CGRect = self.loginButn.frame
+            shadowFrame.origin.x -= -30
+            shadowFrame.origin.y += 17
+            shadowFrame.size.width += -60
+            shadowFrame.size.height -= 8
+            
+            self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.loginButn.layer.cornerRadius).cgPath
+            self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
+            
+            self.loginButn.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
+        }
     }
     
     
@@ -131,7 +142,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.signUpWith(credentials: credentials)
-        
     }
     
     @IBAction func loginWithFireBase(sender:UIButton){
@@ -141,7 +151,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.loginWith(credentials: credentials)
     }
-    
     
     //Login with Facebook
     
@@ -202,14 +211,33 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.present(alertController, animated: true, completion: nil)
     }
  
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == self.txtEmail {
+            self.emailImageView.image = UIImage(named: "selectuser")
+        }
+        if textField == self.txtPassword {
+            self.passImageView.image = UIImage(named: "passselect")
+        }
+    }
+    
+    @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
+        self.output.loginWithFacebook()
+    }
+    
+    @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
+        self.output.loginWithGoogle()
+    }
+    
 }
 
 extension LoginViewController {
     
     enum ViewControllerSegue : String {
-       case unnamed = ""
+        case unnamed = ""
     }
-
+    
     enum SafariAddresses: String {
         case privacyPolicy = "https://www.google.co.in/?gfe_rd=cr&ei=qjc6WdiRFrTv8we-zoTIDg"
         case terms = "https://swifting.io/blog/2016/09/07/architecture-wars-a-new-hope/"

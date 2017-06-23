@@ -8,6 +8,7 @@ protocol VidupDetailPageViewControllerInput {
 protocol VidupDetailPageViewControllerOutput {
     func setupMediaPlayer(view:UIView,mediaURL:String)
     func resetViewBounds(view:UIView)
+    func stopTimer()
 }
 
 class VidupDetailPageViewController: UIViewController, VidupDetailPageViewControllerInput {
@@ -68,6 +69,11 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.output.stopTimer()
+    }
+    
     override func viewWillLayoutSubviews() {
         output.resetViewBounds(view: lv_Mediaview)
     }
@@ -112,6 +118,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         lbl_Timer.text = Time
     }
     
-        
+    
 }
 

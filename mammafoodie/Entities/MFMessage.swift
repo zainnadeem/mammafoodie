@@ -7,6 +7,11 @@ struct MFMessage {
     var createdAt: Date!
     var isSenderCopyDeleted: Bool = false
     var isReceiverCopyDeleted: Bool = false
+    
+    init(with senderDisplayName: String,  messagetext: String, senderId: String) {
+        //        self.name = name
+        self.text = messagetext
+    }
 }
 
 extension MFMessage: Hashable {
