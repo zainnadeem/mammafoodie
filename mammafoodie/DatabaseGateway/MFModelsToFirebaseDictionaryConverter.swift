@@ -44,6 +44,14 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
 
+    class func dictionary(from message: MFUser) -> FirebaseDictionary {
+        return [
+            message.id : [
+                "username": message.name as AnyObject,
+                "useremail": message.email as AnyObject
+                ] as AnyObject
+        ]
+    }
     
 //    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
 //       return [

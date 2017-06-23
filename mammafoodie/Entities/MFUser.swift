@@ -24,11 +24,20 @@ class MFUser {
         
     }
 
+
     init(id: String, name: String, picture:String, profileDescription: String) {
         self.id = id
         self.name = name
         self.picture = picture
         self.profileDescription = profileDescription
+    }
+    
+    init(id: String, name: String, picture:String, profileDescription: String, email:String) {
+        self.id = id
+        self.name = name
+        self.picture = picture
+        self.profileDescription = profileDescription
+        self.email = email
     }
 }
 
