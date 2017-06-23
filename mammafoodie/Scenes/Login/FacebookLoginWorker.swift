@@ -61,17 +61,6 @@ class FacebookLoginWorker {
                         }
 
                     })
-                
-                Auth.auth().signIn(with: credential, completion: { (user, error) in
-                    if error != nil {
-                        print(error!)
-                        self.completionError?()
-                        return
-                    }
-                    self.UpdateMailId()
-                    self.completionSuccess?()
-                    print("Login Sucessfully.")
-                })
             }
             
             guard let accessToken = FBSDKAccessToken.current() else {

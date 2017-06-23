@@ -57,6 +57,8 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         registerBtnSetup()
         self.RegisterAdapterTextfeild.setupTextfeildView()
         output.updateShadow()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     

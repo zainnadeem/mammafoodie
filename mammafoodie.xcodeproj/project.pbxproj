@@ -36,6 +36,13 @@
 		1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */; };
 		1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */; };
 		1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */; };
+		11611F501EFD47E200CEDE0C /* HUDProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F4F1EFD47E200CEDE0C /* HUDProtocols.swift */; };
+		11611F591EFD510900CEDE0C /* ForgotPasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F521EFD510900CEDE0C /* ForgotPasswordConfigurator.swift */; };
+		11611F5A1EFD510900CEDE0C /* ForgotPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F531EFD510900CEDE0C /* ForgotPasswordInteractor.swift */; };
+		11611F5B1EFD510900CEDE0C /* ForgotPasswordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F541EFD510900CEDE0C /* ForgotPasswordModels.swift */; };
+		11611F5C1EFD510900CEDE0C /* ForgotPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F551EFD510900CEDE0C /* ForgotPasswordPresenter.swift */; };
+		11611F5D1EFD510900CEDE0C /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F561EFD510900CEDE0C /* ForgotPasswordRouter.swift */; };
+		11611F5E1EFD510900CEDE0C /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11611F571EFD510900CEDE0C /* ForgotPasswordViewController.swift */; };
 		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -374,6 +381,13 @@
 		1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageRouter.swift; sourceTree = "<group>"; };
 		1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageViewController.swift; sourceTree = "<group>"; };
 		1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageWorker.swift; sourceTree = "<group>"; };
+		11611F4F1EFD47E200CEDE0C /* HUDProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDProtocols.swift; sourceTree = "<group>"; };
+		11611F521EFD510900CEDE0C /* ForgotPasswordConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordConfigurator.swift; sourceTree = "<group>"; };
+		11611F531EFD510900CEDE0C /* ForgotPasswordInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractor.swift; sourceTree = "<group>"; };
+		11611F541EFD510900CEDE0C /* ForgotPasswordModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModels.swift; sourceTree = "<group>"; };
+		11611F551EFD510900CEDE0C /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		11611F561EFD510900CEDE0C /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
+		11611F571EFD510900CEDE0C /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
 		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
@@ -491,7 +505,7 @@
 		2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseGatewayTests.swift; sourceTree = "<group>"; };
 		2CB8BF181EF25C1B00DA78B3 /* FacebookLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginWorker.swift; sourceTree = "<group>"; };
 		2CB8BF191EF25C1B00DA78B3 /* FirebaseLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLoginWorker.swift; sourceTree = "<group>"; };
-		2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
+		2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordWorker.swift; path = ../Login/ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 		2CB8BF1B1EF25C1B00DA78B3 /* GmailLoginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailLoginWorker.swift; sourceTree = "<group>"; };
 		2CB8BF1C1EF25C1B00DA78B3 /* LoginConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		2CB8BF1D1EF25C1B00DA78B3 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -710,6 +724,20 @@
 			path = OwnProfilePage;
 			sourceTree = "<group>";
 		};
+		11611F511EFD4ED800CEDE0C /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				11611F521EFD510900CEDE0C /* ForgotPasswordConfigurator.swift */,
+				11611F531EFD510900CEDE0C /* ForgotPasswordInteractor.swift */,
+				11611F541EFD510900CEDE0C /* ForgotPasswordModels.swift */,
+				11611F551EFD510900CEDE0C /* ForgotPasswordPresenter.swift */,
+				11611F561EFD510900CEDE0C /* ForgotPasswordRouter.swift */,
+				11611F571EFD510900CEDE0C /* ForgotPasswordViewController.swift */,
+				2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
 		118FB2AE1EEAC93300E5E6E5 /* SlotSelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,6 +910,7 @@
 				2C12BC901EF7D237007AF994 /* Home */,
 				2CFB9B751EFA475100C08EB3 /* LiveVideo */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
+				11611F511EFD4ED800CEDE0C /* ForgotPassword */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
@@ -901,7 +930,6 @@
 			children = (
 				2CB8BF181EF25C1B00DA78B3 /* FacebookLoginWorker.swift */,
 				2CB8BF191EF25C1B00DA78B3 /* FirebaseLoginWorker.swift */,
-				2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */,
 				2CB8BF1D1EF25C1B00DA78B3 /* LoginInteractor.swift */,
 				2CB8BF1B1EF25C1B00DA78B3 /* GmailLoginWorker.swift */,
 				2CB8BF1C1EF25C1B00DA78B3 /* LoginConfigurator.swift */,
@@ -934,7 +962,7 @@
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,				
+				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1290,6 +1318,7 @@
 			children = (
 				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
+				11611F4F1EFD47E200CEDE0C /* HUDProtocols.swift */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
@@ -1770,7 +1799,9 @@
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
+				11611F5B1EFD510900CEDE0C /* ForgotPasswordModels.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
+				11611F591EFD510900CEDE0C /* ForgotPasswordConfigurator.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
@@ -1797,6 +1828,7 @@
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
+				11611F5D1EFD510900CEDE0C /* ForgotPasswordRouter.swift in Sources */,
 				F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
@@ -1851,6 +1883,7 @@
 				2CFB9BA41EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
+				11611F501EFD47E200CEDE0C /* HUDProtocols.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
@@ -1858,7 +1891,9 @@
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
 				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
+				11611F5C1EFD510900CEDE0C /* ForgotPasswordPresenter.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
+				11611F5A1EFD510900CEDE0C /* ForgotPasswordInteractor.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
 				2C12BCAB1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
@@ -1904,6 +1939,7 @@
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
 				2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */,
+				11611F5E1EFD510900CEDE0C /* ForgotPasswordViewController.swift in Sources */,
 				2CFB9B8A1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
 				2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */,
 				2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
