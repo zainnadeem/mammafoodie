@@ -1,23 +1,21 @@
 import UIKit
 import SafariServices
-
+import FirebaseAuth
+import Alamofire
 
 protocol LoginViewControllerInput {
-    func showLoginSuccessMessage(_ message: String)
-    func showLogoutSuccessMessage(_ message: String)
-    func present(_ viewController: UIViewController)
-    func dismiss(_ viewController: UIViewController)
-    func forgotpasswordWorker(success:String)
+    func showHomeScreen()
+    func showAlert(alertController:UIAlertController)
     func viewControllerToPresent() -> UIViewController
 }
 
 protocol LoginViewControllerOutput {
-    func login(with email: String, password: String)
+    func signUpWith(credentials:Login.Credentials)
+    func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-    func logoutWithGoogle()
     func forgotpasswordWorker(email: String)
     func loginWithFacebook()
-    func logoutWithFacebook()
+    func logout()
 }
 
 class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate, UITextFieldDelegate {
@@ -40,7 +38,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     
     // MARK: - Object lifecycle
-    override func awakeFromNib() {
+    override func awakeFromNib(){
         super.awakeFromNib()
         LoginConfigurator.sharedInstance.configure(viewController: self)
     }
@@ -91,6 +89,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         //        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
         
     }
+
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         self.router.openSafariVC(with: .privacyPolicy)
     }
@@ -98,6 +97,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBAction func btnTermsTapped(_ sender: Any) {
         self.router.openSafariVC(with: .terms)
     }
+
     // MARK: - Inputs
     func showLoginSuccessMessage(_ message: String) {
         print(message)
@@ -133,57 +133,84 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         }
     }
     
-    func logoutGmailButn() {
-        let logoutGmail = UIButton(type: .custom) as UIButton
-        logoutGmail.backgroundColor = .blue
-        logoutGmail.setTitle("Logout", for: .normal)
-        logoutGmail.frame = CGRect(x: 30, y: 120, width: 100, height: 40)
-        logoutGmail.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(logoutGmail)
-    }
     
+    //FireBase SignUP
     
-    func forgotPasswordButn() {
+    @IBAction func signUpWithFireBase(sender:UIButton){
         
-        let forgotPassword = UIButton(type: .custom) as UIButton
-        forgotPassword.backgroundColor = .blue
-        forgotPassword.setTitle("ForgotPassword", for: .normal)
-        forgotPassword.frame = CGRect(x: 100, y: 180, width: 150, height: 35)
-        forgotPassword.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        self.view.addSubview(forgotPassword)
+        guard validateCredentials() else {return}
+        
+        let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
+        output.signUpWith(credentials: credentials)
     }
     
-    func buttonTapped(sender: UIButton){
-        self.output.forgotpasswordWorker(email: self.txtEmail.text!)
+    @IBAction func loginWithFireBase(sender:UIButton){
+        
+        guard validateCredentials() else {return}
+        
+        let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
+        output.loginWith(credentials: credentials)
     }
     
+    //Login with Facebook
     
-    func buttonAction(sender: UIButton!) {
-        self.output.logoutWithGoogle()
-    }
-    
-    func present(_ viewController: UIViewController) {
-        self.present(viewController, animated: true, completion: nil)
-    }
-    
-    func dismiss(_ viewController: UIViewController) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func loginWithFacebook(sender:UIButton){
+        output.loginWithFacebook()
     }
     
     
-    func loginButtonClicked() {
-        self.output.loginWithFacebook()
+    //Login with Google
+    @IBAction func loginWithGoogle(sender:UIButton){
+        output.loginWithGoogle()
     }
     
-    func logoutButtonClicked() {
-        self.output.logoutWithFacebook()
+    @IBAction func forgotPassword(sender:UIButton){
+        
+        guard self.txtEmail.text != nil else {return}
+        
+        output.forgotpasswordWorker(email: self.txtEmail.text!)
+    }
+    
+    @IBAction func logout(sender:UIButton){
+        
+        //guard self.txtEmail.text != nil else {return}
+        
+        
+        output.logout()
     }
     
     
+    //Validations
+    
+    func validateCredentials() -> Bool{
+        guard (txtEmail.text != nil && txtPassword.text != nil), !txtEmail.text!.isEmpty, !txtPassword.text!.isEmpty else {
+            //Show alert
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    
+    // MARK: - Inputs
+   
     func viewControllerToPresent() -> UIViewController {
         return self
     }
     
+    func showHomeScreen() {
+        
+        let alertController = UIAlertController(title: "Success" , message: "Login successful. Navigate to home screen", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.showAlert(alertController: alertController)
+    }
+    
+    func showAlert(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+    }
+ 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         

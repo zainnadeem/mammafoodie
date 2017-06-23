@@ -3,16 +3,16 @@ import Firebase
 
 class ForgotPasswordWorker {
     
-    func callApI(email:String, completion: @escaping (_ success:Bool, _ errorMessage:String?)->()) {
+    func callApI(email:String, completion: @escaping (_ errorMessage:String?)->()) {
         
             Auth.auth().sendPasswordReset(withEmail: email) { error in
-                // Your code here
+                
                 if error != nil {
-                    completion(false, error!.localizedDescription)
+                    completion(error!.localizedDescription)
                 }
                 else {
-                    completion(true, nil)
-                    print(email)
+                    completion(nil)
+//                    print(email)
                 }
             }
         }

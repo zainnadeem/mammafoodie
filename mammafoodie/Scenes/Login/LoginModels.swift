@@ -20,6 +20,6 @@ struct Login {
     struct Credentials{
         var email:String
         var password:String
-        var authProvider: AuthProvider
+        //var authProvider: AuthProvider
     }
 }

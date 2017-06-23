@@ -26,15 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+        
             
-            if url.absoluteString.contains("facebook") {
-                let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
-                let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-                return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation)
-            } else {
-                let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-                return GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
-            }
+             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
+             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+            
+            
+             return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation) || GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
+            
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
