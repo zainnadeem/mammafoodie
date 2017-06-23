@@ -48,17 +48,17 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
     
     func updateShadow() {
         if self.shapeLayer == nil {
-            self.self.loginButn.superview?.layoutIfNeeded()
+            self.view.layoutIfNeeded()
             self.shapeLayer = CAShapeLayer()
-            self.shapeLayer.shadowColor = #colorLiteral(red: 1, green: 0.7725490196, blue: 0.6, alpha: 0.7041212248).cgColor
-            self.shapeLayer.shadowOpacity = 70.0
+            self.shapeLayer.shadowColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor
+            self.shapeLayer.shadowOpacity = 0.7
             self.shapeLayer.shadowRadius = 7
             
             var shadowFrame: CGRect = self.loginButn.frame
-            shadowFrame.origin.x -= -30
-            shadowFrame.origin.y += 17
-            shadowFrame.size.width += -60
-            shadowFrame.size.height -= 8
+            shadowFrame.origin.x += 35
+            shadowFrame.origin.y += 40
+            shadowFrame.size.width -= 70
+            //            shadowFrame.size.height -= 8
             
             self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.loginButn.layer.cornerRadius).cgPath
             self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
@@ -68,6 +68,7 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,24 +92,36 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
         
         if emailTextField == textField {
             emailImageView.image = UIImage(named: "selectuser")
+            emailTextChange()
         }
         if passwordTextField == textField {
             passImageView.image = UIImage(named: "passselect")
+            PassTextChangeImage()
         }
     }
 
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func emailTextChange() {
+        if emailTextField.text == "" {
+            emailImageView.image = UIImage(named: "unselectuser")
+        }
+        else {
+            emailImageView.image = UIImage(named: "username")
+        }
+    }
     
+    func PassTextChangeImage() {
+        
+        if passwordTextField.text == "" {
+            passImageView.image = UIImage(named: "unselectpass")
+        }
+        else {
+            passImageView.image = UIImage(named: "Password")
+        }
+    }
+
+
 }
 
 
