@@ -19,7 +19,7 @@ class CuisineCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imgViewEmoji: UIImageView!
     @IBOutlet weak var lblMenuTitle: UILabel!
     
-    func prepareCell(for cuisine: Cuisine, is selected : Bool) {
+    func prepareCell(for cuisine: MFCuisine, is selected : Bool) {
         self.contentView.layoutIfNeeded()
         self.lblMenuTitle.backgroundColor = .clear
         self.lblMenuTitle.text = cuisine.name

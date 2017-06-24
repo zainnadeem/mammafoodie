@@ -6,7 +6,7 @@ protocol GoCookStep2PresenterInput {
     func selectDiet(_ diet : GoCookDiet)
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
-    func showOption(_ option : GoCookOption)
+    func showOption(_ option : MFMediaType)
 }
 
 protocol GoCookStep2PresenterOutput: class {
@@ -187,12 +187,12 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         }
     }
     
-    func showOption(_ option : GoCookOption) {
+    func showOption(_ option : MFMediaType) {
         switch option {
-        case .Vidups:
+        case .vidup:
             self.showVidupMode()
             
-        case .Picture:
+        case .picture:
             self.showPictureMode()
             
         default:

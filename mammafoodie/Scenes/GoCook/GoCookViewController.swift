@@ -6,16 +6,12 @@ protocol GoCookViewControllerInput {
 
 protocol GoCookViewControllerOutput {
     func prepareOptions()
-    func selectOption(option : GoCookOption)
+    func selectOption(option : MFMediaType)
     func showStep1()
     func showStep2()
 }
 
-typealias GoCookCompletion = () -> Void
-
-enum GoCookOption {
-    case LiveVideo, Vidups, Picture, None
-}
+typealias GoCookCompletion = (MFMedia) -> Void
 
 class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
@@ -24,7 +20,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var step2VC : GoCookStep2ViewController!
     
-    var selectedOption : GoCookOption = .None {
+    var createdmedia : MFMedia?
+    
+    var selectedOption : MFMediaType = .unknown {
         didSet {
             self.output.selectOption(option: self.selectedOption)
             self.step2VC.selectedOption = self.selectedOption
@@ -68,6 +66,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         for childVC in self.childViewControllers {
             if childVC is GoCookStep2ViewController {
                 self.step2VC = childVC as!GoCookStep2ViewController
+                self.step2VC.completion = { (media) in
+                    DispatchQueue.main.async {
+                        self.createMedia(media)
+                    }
+                }
             }
         }
         self.output.prepareOptions()
@@ -75,16 +78,15 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     // MARK: - Event handling
     @IBAction func onVidUpTap(_ sender: UIButton) {
-        self.selectedOption = .Vidups
-        
+        self.selectedOption = .vidup
     }
     
     @IBAction func onMenuTap(_ sender: UIButton) {
-        self.selectedOption = .Picture
+        self.selectedOption = .picture
     }
     
     @IBAction func onLiveVideoTap(_ sender: UIButton) {
-        self.selectedOption = .LiveVideo
+        self.selectedOption = .liveVideo
     }
     
     @IBAction func onStep1(_ sender: UIButton) {
@@ -99,7 +101,13 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         self.output.showStep2()
     }
     
+    
     // MARK: - Display logic
+    
+    func createMedia(_ media : MFMedia) {
+        self.createdmedia = media
+        self.createdmedia?.type = self.selectedOption
+    }
 }
 
 extension UIViewController {

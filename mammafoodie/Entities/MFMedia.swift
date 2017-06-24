@@ -18,7 +18,7 @@ class MFMedia {
     var cover_small: String?
     var createdAt: Date!
     var endedAt: Date?
-    var dish: MFDish!
+    weak var dish: MFDish!
     var likes: [Date:MFUser] = [:]
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown

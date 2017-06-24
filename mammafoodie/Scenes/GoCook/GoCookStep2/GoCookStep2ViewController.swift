@@ -10,7 +10,7 @@ protocol GoCookStep2ViewControllerOutput {
     func setupViewController()
     func selectDiet(_ diet : GoCookDiet)
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
-    func showOption(_ option : GoCookOption)
+    func showOption(_ option : MFMediaType)
 }
 
 enum GoCookMediaUploadType {
@@ -26,7 +26,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var output: GoCookStep2ViewControllerOutput!
     var router: GoCookStep2Router!
     
-    var selectedOption : GoCookOption = . None {
+    var selectedOption : MFMediaType = . unknown {
         didSet {
             self.output.showOption(self.selectedOption)
         }
@@ -145,7 +145,18 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     
     @IBAction func onPostDishTap(_ sender: UIButton) {
-        self.completion?()
+        if let cuisine = self.cuisinesAdapter.selectedCuisine {
+            let totalSlots = UInt(self.lblServingsCount.text ?? "0")!
+            let pricePerSlots = Double(self.txtPricePerServing.text ?? "0")!
+            
+            let dish = MFDish.init(name: self.txtTitle.text ?? "Dish Name", description: self.textViewDescription.text, cuisine: cuisine, totalSlots: totalSlots, withPrice: pricePerSlots)
+            let media = MFMedia.init()
+            media.accessMode = .owner
+            dish.media = media
+            media.dish = dish
+            media.id = FirebaseReference.media.generateAutoID()
+            self.completion?(media)
+        }
     }
     
     @IBAction func onPreparationTimeChange(_ sender: UIDatePicker) {

@@ -24,6 +24,15 @@ class MFDish {
         self.name = name
         self.cuisine = cuisine
     }
+    
+    init(name : String!, description : String?, cuisine : MFCuisine, totalSlots : UInt, withPrice perSlot: Double) {
+        self.id = FirebaseReference.dishes.generateAutoID()
+        self.name = name
+        self.description = description
+        self.cuisine = cuisine
+        self.totalSlots = totalSlots
+        self.pricePerSlot = perSlot
+    }
 }
 
 extension MFDish: Hashable {
