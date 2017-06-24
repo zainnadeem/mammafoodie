@@ -240,28 +240,28 @@ class DummyData {
         let dish9 = MFDish(id: "d9", user: profileUser, description: "", name: "Salmon🐠")
         let media9 = MFMedia(id: "m9", cover_large: "Salmon", cover_small: "Salmon", createdAt: Date.init(), dish: dish9, user: profileUser, type: .vidup, numberOfViewers: 222)
         
-        profileUser.cookedDishes = [ media1 : Date.init(),
-                                     media2 : Date.init(),
-                                     media3 : Date.init(),
-                                     media4 : Date.init(),
-                                     media5 : Date.init(),
-                                     media6 : Date.init(),
-                                     media7 : Date.init(),
-                                     media8 : Date.init(),
-                                     media9 : Date.init()
-        ]
-        
-        profileUser.boughtDishes =  [ media9 : Date.init(),
-                                      media8 : Date.init(),
-                                      media7 : Date.init(),
-                                      media6 : Date.init(),
-                                      media5 : Date.init(),
-                                      media4 : Date.init(),
-                                      media3 : Date.init(),
-                                      media2 : Date.init(),
-                                      media1 : Date.init()
-        ]
-        
+//        profileUser.cookedDishes = [ media1 : Date.init(),
+//                                     media2 : Date.init(),
+//                                     media3 : Date.init(),
+//                                     media4 : Date.init(),
+//                                     media5 : Date.init(),
+//                                     media6 : Date.init(),
+//                                     media7 : Date.init(),
+//                                     media8 : Date.init(),
+//                                     media9 : Date.init()
+//        ]
+//        
+//        profileUser.boughtDishes =  [ media9 : Date.init(),
+//                                      media8 : Date.init(),
+//                                      media7 : Date.init(),
+//                                      media6 : Date.init(),
+//                                      media5 : Date.init(),
+//                                      media4 : Date.init(),
+//                                      media3 : Date.init(),
+//                                      media2 : Date.init(),
+//                                      media1 : Date.init()
+//        ]
+//        
         
         
         let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.profileUser.name + " liked"), right: self.bold(text: user2.name + "'s " + "dish"))
@@ -276,16 +276,16 @@ class DummyData {
         let newsfeed4 = MFNewsFeed(id: "n4", actionUserId: profileUser, participantUserId: user8, activity: MFActivity(id:"", name:"",type:.tipped), text: newsText4)
         let newsfeed5 = MFNewsFeed(id: "n5", actionUserId: profileUser, participantUserId: user1, activity: MFActivity(id:"", name:"",type:.bought), text: newsText5)
         
-        profileUser.userActivity =  [ newsfeed1 : Date.init(),
-                                      newsfeed2 : Date.init(),
-                                      newsfeed3 : Date.init(),
-                                      newsfeed4 : Date.init(),
-                                      newsfeed5 : Date.init(),
-        ]
-        
-        for activity in profileUser.userActivity {
-            print(activity.key.attributedString)
-        }
+//        profileUser.userActivity =  [ newsfeed1 : Date.init(),
+//                                      newsfeed2 : Date.init(),
+//                                      newsfeed3 : Date.init(),
+//                                      newsfeed4 : Date.init(),
+//                                      newsfeed5 : Date.init(),
+//        ]
+//        
+//        for activity in profileUser.userActivity {
+//            print(activity.key.attributedString)
+//        }
         
         
         return profileUser

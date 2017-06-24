@@ -254,13 +254,44 @@ extension DatabaseGateway {
 
 extension DatabaseGateway {
     
-    func createUser(with model: MFUser, _ completion: @escaping (()->Void)) {
-        let newModel = model
-        newModel.id = FirebaseReference.users.generateAutoID()
+    func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
         
-        let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
         FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
-            completion()
+            completion(error?.localizedDescription)
+        }
+    }
+    
+    func updateUserEntity(with model:MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
+    
+    func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
+        
+        FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let user:MFUser = MFUser(from: userData)
+            user.id = userID
+            
+            completion(user)
+        }) { (error) in
+            print(error)
+            completion(nil)
         }
     }
 

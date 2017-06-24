@@ -311,4 +311,20 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     }
 
     
+    @IBAction func logout(){
+        
+        let firebaseWorker = FirebaseLoginWorker()
+        
+        firebaseWorker.signOut(){ errorMessage in
+            
+            if errorMessage != nil {
+                 print(errorMessage)
+            } else {
+                print("Logged out successfully")
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        }
+    }
+    
 }

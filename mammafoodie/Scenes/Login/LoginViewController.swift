@@ -203,7 +203,41 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     func showHomeScreen() {
         
-        let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        if let  currentUser = Auth.auth().currentUser{
+           print(currentUser.uid)
+            
+//            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
+            
+            
+//            let user = MFUser()
+            
+            
+//            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
+//                print("User created")
+//            })
+            
+//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
+//                if let user = user {
+//                    user.name = "nithin updated"
+//                    user.following = ["Krishna":true, "sreeram":true]
+//                    user.cookedDishes = ["Dish1":true, "Dish2":true]
+//                    user.email = "nithintest@gmail.com"
+//
+//                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
+//                        if errorMessage != nil {
+//                            print("Error updating profile")
+//                        }
+//                    })
+//                }
+//             
+//            })
+            
+            
+            
+        }
+        
+        let homeVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         self.navigationController?.pushViewController(homeVC, animated: true)
         
     }
