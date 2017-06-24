@@ -5,37 +5,40 @@ class HomePageCollectionViewAdapter: NSObject {
     var collectionView: UICollectionView!
     var conHeightCollectionView: NSLayoutConstraint!
     
-    var didExpand: (()->Void)?
-    var didCollapse: (()->Void)?
+    //    var didExpand: (()->Void)?
+    //    var didCollapse: (()->Void)?
     var didSelect: ((MFMedia)->Void)?
     var didSelectViewAll: (()->Void)?
     
     func expand(animated: Bool) {
         let duration: Double = animated ? 0.27 : 0
-        UIView.animate(withDuration: duration) {
+        UIView.animate(withDuration: duration, animations: {
+            //            self.didExpand?()
             let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: true)
             let numberOfRows: CGFloat = 5
             let newHeight = layout.minimumLineSpacing*(numberOfRows-1) + (layout.itemSize.height*numberOfRows) + layout.sectionInset.top + layout.sectionInset.bottom
             self.conHeightCollectionView.constant = newHeight
-            self.didExpand?()
-        }
+        })
     }
     
     func collapse(animated: Bool) {
         let duration: Double = animated ? 0.27 : 0
-        UIView.animate(withDuration: duration) {
-            let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: false)
-            let newHeight: CGFloat = layout.itemSize.height + layout.sectionInset.top + layout.sectionInset.bottom
-            self.conHeightCollectionView.constant = newHeight
-            self.didCollapse?()
-        }
+        UIView.animate(withDuration: duration, animations: {
+            self.conHeightCollectionView.constant = self.getCollapsedHeight()
+        })
+    }
+    
+    func getCollapsedHeight() -> CGFloat {
+        let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: false)
+        let newHeight: CGFloat = layout.itemSize.height + layout.sectionInset.top + layout.sectionInset.bottom
+        return newHeight
     }
     
     func updateCollectionViewLayout(animated: Bool, isExpanded: Bool) {
         let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: isExpanded)
         self.collectionView.setCollectionViewLayout(layout, animated: animated)
         self.collectionView.reloadData()
-//        self.collectionView.setContentOffset(.zero, animated: false)
+        //        self.collectionView.setContentOffset(.zero, animated: false)
     }
     
     func getCollectionViewLayout(isExpanded: Bool) -> UICollectionViewFlowLayout {

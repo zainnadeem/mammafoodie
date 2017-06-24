@@ -19,8 +19,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
     
-//    @IBOutlet weak var btnEndLive: UIButton!
-//    @IBOutlet weak var lblVideoName: UILabel!
+    //    @IBOutlet weak var btnEndLive: UIButton!
+    //    @IBOutlet weak var lblVideoName: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var viewSlotDetails: UIView!
     @IBOutlet weak var viewComments: UIView!
@@ -159,7 +159,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func showVideoId(_ liveVideo: MFMedia) {
-//        self.lblVideoName.text = liveVideo.id
+        //        self.lblVideoName.text = liveVideo.id
     }
     
     func setupCommentsTableViewAdapter() {
