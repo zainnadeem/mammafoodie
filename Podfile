@@ -27,5 +27,6 @@ target 'mammafoodie' do
     pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
     
     pod 'NextGrowingTextView'
+    pod 'KLCPopup'
 
 end

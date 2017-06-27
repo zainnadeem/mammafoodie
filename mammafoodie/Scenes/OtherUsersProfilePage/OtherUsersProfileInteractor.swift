@@ -1,13 +1,12 @@
 import UIKit
 
 protocol OtherUsersProfileInteractorInput {
-    func setUpDishCollectionView(_ collectionView:UICollectionView)
+    func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
 }
 
 protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:Int)
-    func loadScreenWithData(_ profileData:[AnyHashable:Any])
 }
 
 ///Defined in OtherUsersProfileInteractor
@@ -31,9 +30,10 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     //MARK: - Input
     
-    func setUpDishCollectionView(_ collectionView:UICollectionView){
+    func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType){
         dishCollectionViewAdapter = DishesCollectionViewAdapter()
         dishCollectionViewAdapter.delegate = self
+        dishCollectionViewAdapter.profileType = profileType
         dishCollectionViewAdapter.collectionView = collectionView
     }
     
@@ -45,8 +45,6 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             
             dishCollectionViewAdapter.selectedIndexForProfile = index
             dishCollectionViewAdapter.dataSource = dataSource
-            
-            output.loadScreenWithData(dataSource)
             
         }
         

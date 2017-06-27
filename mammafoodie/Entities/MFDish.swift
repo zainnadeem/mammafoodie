@@ -1,14 +1,14 @@
 class MFDish {
     var id: String!
     var name: String!
-    var user: MFUser!
-    var media: MFMedia?
+    var chefID: String! //MFUser id
+    var mediaID: String?  //MFMedia id
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
-    var boughtBy: [MFOrder:Date] = [:]
-    var cuisine: MFCuisine!
+    var boughtOrders: [String:Date] = [:] //MFOrder id
+    var cuisineID: String! //MFCusine id
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
@@ -17,13 +17,34 @@ class MFDish {
         self.name = name
     }
     
-    init(id: String, user: MFUser, description: String, name: String, cuisine: MFCuisine) {
+    init(id: String, name: String, chefID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String) {
         self.id = id
-        self.user = user
+        self.chefID = chefID
         self.description = description
         self.name = name
-        self.cuisine = cuisine
+        self.cuisineID = cuisineID
+        self.totalSlots = totalSlots
+        self.availableSlots = availableSlots
+        self.pricePerSlot = pricePerSlot
+        self.boughtOrders = boughtOrders
+        self.mediaID = mediaID
+        
     }
+    
+    init(from dishDataDictionary:[String:AnyObject]){
+        self.id = dishDataDictionary["id"] as? String ?? ""
+        self.name = dishDataDictionary["name"] as? String ?? ""
+        self.chefID = dishDataDictionary["chefID"]   as? String ?? ""
+        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
+        self.description = dishDataDictionary["description"]  as? String ?? ""
+        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
+        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
+        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
+        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
+        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        
+    }
+    
 }
 
 extension MFDish: Hashable {

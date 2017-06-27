@@ -5,28 +5,42 @@ protocol LoginPresenterInput {
     func loginCompletion(errorMessage:String?)
     func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
+    func forgotpasswordCompletion(errorMessage:String?)
 }
 
 protocol LoginPresenterOutput: class {
     func showHomeScreen()
-    func showAlert(alertController:UIAlertController)
     func viewControllerToPresent() -> UIViewController
 }
 
-class LoginPresenter: LoginPresenterInput {
+class LoginPresenter: LoginPresenterInput ,HUDRenderer{
     weak var output: LoginPresenterOutput!
     
     // MARK: - Presentation logic
 
+    func forgotpasswordCompletion(errorMessage:String?){
+        
+        var message = ""
+        var title = ""
+        
+        if let errorMessage = errorMessage{
+            message = errorMessage
+            title = "Error"
+        } else {
+            message = "You can reset your password by following the instructions sent to you on your registered email."
+            title = "Success"
+        }
+        
+        showAlert(title: title, message: message, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+        
+    }
     
     func signUpCompletion(errorMessage:String?){
         
         if let errorMessage = errorMessage{
-            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
             
-            self.output.showAlert(alertController: alertController)
+             showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+            
         } else {
             self.output.showHomeScreen()
         }
@@ -36,10 +50,7 @@ class LoginPresenter: LoginPresenterInput {
     func loginCompletion(errorMessage:String?){
         
         if let errorMessage = errorMessage{
-            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            self.output.showAlert(alertController: alertController)
+           showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
         } else {
             self.output.showHomeScreen()
         }
@@ -58,10 +69,7 @@ class LoginPresenter: LoginPresenterInput {
             msg = "Logged out successfully"
         }
         
-        let alertController = UIAlertController(title: title , message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.output.showAlert(alertController: alertController)
+       showAlert(title: title, message: msg, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
     }
     
     

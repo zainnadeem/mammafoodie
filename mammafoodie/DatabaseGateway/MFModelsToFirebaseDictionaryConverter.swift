@@ -47,6 +47,7 @@ class MFModelsToFirebaseDictionaryConverter {
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
         return [
             user.id : [
+                "id"                : user.id as AnyObject,
                 "name"              : user.name as AnyObject,
                 "email"             : user.email as AnyObject,
                 "address"           : user.address as AnyObject,
@@ -67,6 +68,27 @@ class MFModelsToFirebaseDictionaryConverter {
                 ] as AnyObject
         ]
     }
+    
+    
+    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
+        
+        return [
+        
+            dish.id : [
+                "id"            : dish.id as AnyObject,
+                "name"          : dish.name as AnyObject,
+                "chefID"        : dish.chefID as AnyObject,
+                "mediaID"       : dish.mediaID as AnyObject,
+                "description"   : dish.description as AnyObject,
+                "totalSlots"    : dish.totalSlots as AnyObject,
+                "availableSlots": dish.availableSlots as AnyObject,
+                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
+                "boughtOrders"  : dish.boughtOrders as AnyObject,
+                "cuisineID"     : dish.cuisineID as AnyObject
+            ]
+        ]
+    }
+    
     
 //    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
 //       return [

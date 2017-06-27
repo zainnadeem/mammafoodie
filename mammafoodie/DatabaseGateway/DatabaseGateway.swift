@@ -252,6 +252,8 @@ extension DatabaseGateway {
     }
 }
 
+
+//MARK: - User
 extension DatabaseGateway {
     
     func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
@@ -286,7 +288,7 @@ extension DatabaseGateway {
             }
             
             let user:MFUser = MFUser(from: userData)
-            user.id = userID
+            
             
             completion(user)
         }) { (error) in
@@ -296,3 +298,44 @@ extension DatabaseGateway {
     }
 
 }
+
+//MARK: - Dish
+extension DatabaseGateway {
+    
+    
+    func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
+        
+        FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let dish:MFDish = MFDish(from: dishData)
+            
+            completion(dish)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+    
+    
+    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
+    
+    
+    
+}
+

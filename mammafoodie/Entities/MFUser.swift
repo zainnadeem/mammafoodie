@@ -40,6 +40,7 @@ class MFUser {
     
     init(from Dictionary:[String:AnyObject]){
         
+        self.id = Dictionary["id"] as? String ?? ""
         self.name = Dictionary["name"] as? String ?? ""
         self.picture = Dictionary["picture"] as? String ?? ""
         self.address = Dictionary["address"] as? String ?? ""

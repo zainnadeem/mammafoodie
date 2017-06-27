@@ -11,7 +11,7 @@ import UIKit
 protocol DishesCollectionViewAdapterDelegate{
     
     func openDishPageWith(dishID:Int)
-    
+    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
 }
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -21,6 +21,8 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             setUpCollectionView()
         }
     }
+    
+    var profileType:ProfileType!
     
     var cellSize:CGSize!
     
@@ -61,14 +63,16 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print(dataSource?.keys.count)
+//        print(dataSource?.keys.count)
         return dataSource?.keys.count ?? 0
     
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell : UICollectionViewCell!
+        var cell : UICollectionViewCell! = UICollectionViewCell()
+        cell.backgroundColor = .red
+        
         
         if selectedIndexForProfile == .cooked || selectedIndexForProfile == .bought {
             
@@ -92,17 +96,17 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             
             let activityCell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCollectionViewCell.reuseIdentifier, for: indexPath) as! ActivityCollectionViewCell
             
-            var activityDataSource = [MFNewsFeed]()
-            
-            for activity in dataSource!.keys where ((activity as? MFNewsFeed) != nil) {
-                
-                activityDataSource.append(activity as! MFNewsFeed)
-                
-            }
-            
-            let activityData = activityDataSource[indexPath.item]
-            
-            activityCell.setup(activityData)
+//            var activityDataSource = [MFNewsFeed]()
+//            
+//            for activity in dataSource!.keys where ((activity as? MFNewsFeed) != nil) {
+//                
+//                activityDataSource.append(activity as! MFNewsFeed)
+//                
+//            }
+//            
+//            let activityData = activityDataSource[indexPath.item]
+//            
+//            activityCell.setup(activityData)
             
             cell = activityCell
             
@@ -111,7 +115,28 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         
         return cell
     }
-
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var reusableView = UICollectionReusableView()
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "userHeaderView", for: indexPath) as!UserProfileCollectionViewHeader
+            
+            view.delegate = self.delegate
+            view.profileType = self.profileType
+            
+            view.setUp(dataSource)
+            reusableView = view
+        } else {
+            assert(false, "Unexpected element kind")
+        }
+        
+        return reusableView
+        
+    }
+    
     
     // MARK: UICollectionViewDelegate
     
