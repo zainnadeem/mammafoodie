@@ -19,7 +19,7 @@ extension DatabaseGatewayTests {
     func testGetStreamWithId() {
         let expectationGetLiveStreamList = expectation(description: "Live stream list")
         DatabaseGateway.sharedInstance.getLiveStream(with: "stream1", { (liveStream) in
-            print(liveStream?.name ?? "Akshit")
+            print(liveStream?.id ?? "Akshit")
             expectationGetLiveStreamList.fulfill()
         })
         waitForExpectations(timeout: 20) { (error) in
@@ -30,7 +30,7 @@ extension DatabaseGatewayTests {
     func testLiveStreamsList() {
         let expectationLiveStreamList = expectation(description: "Live stream list")
         DatabaseGateway.sharedInstance.getLiveStreams { (liveStreams) in
-            print(liveStreams.first?.name ?? "Name")
+            print(liveStreams.first?.id ?? "Name")
             expectationLiveStreamList.fulfill()
         }
         waitForExpectations(timeout: 20) { (error) in
@@ -42,7 +42,6 @@ extension DatabaseGatewayTests {
         let streamName: String = "streamTest"
         let streamId: String = "testId"
         let liveStream: MFMedia? = DatabaseGateway.sharedInstance.createLiveStreamModel(from: streamName, id: streamId)
-        XCTAssertEqual(streamName, liveStream?.name)
         XCTAssertEqual(streamId, liveStream?.id)
     }
     
@@ -95,7 +94,7 @@ extension DatabaseGatewayTests {
         let accountDetails: MFLiveVideoGatewayAccountDetails? = DatabaseGateway.sharedInstance.createLiveVideoGatewayAccountDetailsModel(from: rawData)
         XCTAssertNotNil(accountDetails)
         XCTAssertEqual(accountDetails!.host, rawData["hostIPAddress"] as! String)
-        XCTAssertEqual(accountDetails!.port, rawData["port"] as! Int)
+        XCTAssertEqual(accountDetails!.port, Int32(rawData["port"] as! Int))
         XCTAssertEqual(accountDetails!.sdkKey, rawData["sdkKey"] as! String)
         XCTAssertEqual(accountDetails!.serviceProviderName, rawData["name"] as! String)
     }
@@ -108,12 +107,12 @@ extension DatabaseGatewayTests {
         let expectationCreateConversation = expectation(description: "Expectation")
         
         var model: MFConversation = MFConversation()
-        model.dishRequestId = "jbdsjk2332"
+        model.dishRequestId?.id = "jbdsjk2332"
         //model.createdAt = Date()
-        DatabaseGateway.sharedInstance.createConversation(with: model, {newModel in
-            print("Conversation test passed")
-            expectationCreateConversation.fulfill()
-        })
+//        DatabaseGateway.sharedInstance.createConversation(with: model, {newModel in
+//            print("Conversation test passed")
+//            expectationCreateConversation.fulfill()
+//        })
         
         waitForExpectations(timeout: 200) { (error) in
             print("Completed conversations")
@@ -124,21 +123,21 @@ extension DatabaseGatewayTests {
 // MARK: - Messages
 extension DatabaseGatewayTests {
     
-    func testCreateMessage() {
-        let expectationCreateMessages = expectation(description: "Expectation")
-        
-        var model: MFMessage = MFMessage(with: <#String#>, messagetext: <#String#>, senderId: <#String#>)
-//        model.id = "789788tvbdgsajdgahf"
-        model.messageText = "hai...!"
-        model.conversationId = "233564747khjfdks"
-        DatabaseGateway.sharedInstance.createMessage(with: model, {
-            print("Conversation test passed")
-            expectationCreateMessages.fulfill()
-        })
-        
-        waitForExpectations(timeout: 200) { (error) in
-            print("Completed conversations")
-        }
-    }
+//    func testCreateMessage() {
+//        let expectationCreateMessages = expectation(description: "Expectation")
+//        
+//        var model: MFMessage = MFMessage(with: <#String#>, messagetext: <#String#>, senderId: <#String#>)
+////        model.id = "789788tvbdgsajdgahf"
+//        model.messageText = "hai...!"
+//        model.conversationId = "233564747khjfdks"
+//        DatabaseGateway.sharedInstance.createMessage(with: model, {
+//            print("Conversation test passed")
+//            expectationCreateMessages.fulfill()
+//        })
+//        
+//        waitForExpectations(timeout: 200) { (error) in
+//            print("Completed conversations")
+//        }
+//    }
 }
 

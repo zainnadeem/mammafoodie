@@ -3,7 +3,7 @@ import UIKit
 protocol GoCookStep2InteractorInput {
     func setPreparationTime()
     func setupViewController()
-    func selectDiet(_ diet : GoCookDiet)
+    func selectDiet(_ diet : MFDishType)
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
@@ -12,7 +12,7 @@ protocol GoCookStep2InteractorInput {
 protocol GoCookStep2InteractorOutput {
     func setPreparationTime()
     func setupViewController()
-    func selectDiet(_ diet : GoCookDiet)
+    func selectDiet(_ diet : MFDishType)
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
@@ -32,7 +32,7 @@ class GoCookStep2Interactor: GoCookStep2InteractorInput {
         self.output.setupViewController()
     }
     
-    func selectDiet(_ diet : GoCookDiet) {
+    func selectDiet(_ diet : MFDishType) {
         self.output.selectDiet(diet)
     }
     

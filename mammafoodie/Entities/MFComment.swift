@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 class MFComment {
     var id: String!
     var text: String!

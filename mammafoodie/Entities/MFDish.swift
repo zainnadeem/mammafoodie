@@ -1,6 +1,17 @@
+import Foundation
+
+
+enum MFDishType : String {
+    case Veg = "veg"
+    case NonVeg = "nonveg"
+    case Vegan = "vegan"
+    case None = "NA"
+}
+
 class MFDish {
     var id: String!
     var name: String!
+    var type : MFDishType!
     var user: MFUser!
     var media: MFMedia?
     var description: String?
@@ -25,9 +36,10 @@ class MFDish {
         self.cuisine = cuisine
     }
     
-    init(name : String!, description : String?, cuisine : MFCuisine, totalSlots : UInt, withPrice perSlot: Double) {
+    init(name : String!, description : String?, cuisine : MFCuisine, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType) {
         self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
+        self.type = dishType
         self.description = description
         self.cuisine = cuisine
         self.totalSlots = totalSlots

@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 enum MFMediaType : String {
     case liveVideo = "liveVideo"
     case vidup = "vidup"

@@ -1,4 +1,8 @@
-import Firebase
+import UIKit
+import FirebaseCore
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 enum FirebaseReference: String {
     
@@ -246,6 +250,43 @@ extension DatabaseGateway {
         let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
         FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion()
+        }
+    }
+}
+
+// MARK: - Media
+extension DatabaseGateway {
+    func save(image : UIImage, at path : String, completion : @escaping (URL?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let imagePathRef = storageRef.child(path)
+        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+            let uploadTask = imagePathRef.putData(imageData, metadata: nil) { (metadata, error) in
+                guard let metadata = metadata else {
+                    completion(nil)
+                    return
+                }
+                completion(metadata.downloadURL())
+            }
+            uploadTask.resume()
+        } else {
+            completion(nil)
+        }
+    }
+    
+    func save(video : URL, at path : String, completion : @escaping (URL?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let videoPathRef = storageRef.child(path)
+        let fileManager : FileManager = FileManager.default
+        if fileManager.fileExists(atPath: video.absoluteString) {
+            videoPathRef.putFile(from: video, metadata: nil) { (metaData, error) in
+                guard let metadata = metaData else {
+                    completion(nil)
+                    return
+                }
+                completion(metadata.downloadURL())
+            }
+        } else {
+            completion(nil)
         }
     }
 }

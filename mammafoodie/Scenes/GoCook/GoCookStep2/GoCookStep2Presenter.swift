@@ -3,7 +3,7 @@ import UIKit
 protocol GoCookStep2PresenterInput {
     func setPreparationTime()
     func setupViewController()
-    func selectDiet(_ diet : GoCookDiet)
+    func selectDiet(_ diet : MFDishType)
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
@@ -71,7 +71,7 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         }
     }
     
-    func selectDiet(_ diet : GoCookDiet) {
+    func selectDiet(_ diet : MFDishType) {
         switch diet {
         case .Veg:
             self.select(self.viewController?.btnDietVeg)

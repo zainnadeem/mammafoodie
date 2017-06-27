@@ -8,17 +8,13 @@ protocol GoCookStep2ViewControllerOutput {
     func setPreparationTime()
     func setDealDuration()
     func setupViewController()
-    func selectDiet(_ diet : GoCookDiet)
+    func selectDiet(_ diet : MFDishType)
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
 }
 
 enum GoCookMediaUploadType {
     case VideoUpload, VideoShoot, PictureUpload, None
-}
-
-enum GoCookDiet {
-    case Veg, NonVeg, Vegan, None
 }
 
 class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInput {
@@ -32,7 +28,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         }
     }
     
-    var selectedDiet : GoCookDiet = .None {
+    var selectedDiet : MFDishType = .None {
         didSet {
             self.output.selectDiet(self.selectedDiet)
         }
@@ -149,7 +145,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
             let totalSlots = UInt(self.lblServingsCount.text ?? "0")!
             let pricePerSlots = Double(self.txtPricePerServing.text ?? "0")!
             
-            let dish = MFDish.init(name: self.txtTitle.text ?? "Dish Name", description: self.textViewDescription.text, cuisine: cuisine, totalSlots: totalSlots, withPrice: pricePerSlots)
+            let dish = MFDish.init(name: self.txtTitle.text ?? "Dish Name", description: self.textViewDescription.text, cuisine: cuisine, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet)
             let media = MFMedia.init()
             media.accessMode = .owner
             dish.media = media

@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 struct MFCuisine : Equatable {
     var id: String!
     var name: String!

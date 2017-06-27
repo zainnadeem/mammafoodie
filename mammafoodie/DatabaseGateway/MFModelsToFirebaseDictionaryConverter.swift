@@ -13,9 +13,32 @@ class MFModelsToFirebaseDictionaryConverter {
     typealias FirebaseDictionary = [String:AnyObject]
     
     // Need to update this
-    class func dictionary(from liveStream: MFMedia) -> FirebaseDictionary {
+    class func dictionary(from media: MFMedia) -> FirebaseDictionary {
         return [
-            liveStream.id: liveStream.id as AnyObject
+            media.id: [
+                "mediaId" : media.id,
+                "userId" : media.user.id,
+                "type" : media.type.rawValue,
+                "cover_small" : media.cover_small ?? "",
+                "cover_large" : media.cover_large ?? "",
+                "dishId" : media.dish.id,
+                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate
+                ] as AnyObject
+        ]
+    }
+    
+    class func dictionary(from dish: MFDish) -> FirebaseDictionary {
+        return [
+            dish.id: [
+                "dishId" : dish.id,
+                "userId" : dish.user.id,
+                "mediaId" : dish.media!.id ?? "",
+                "description" : dish.description ?? "",
+                "totalSlots" : dish.totalSlots,
+                "pricePerSlot" : dish.pricePerSlot,
+                "type" : dish.type.rawValue,
+                "cuisineId" : dish.cuisine.id
+                ] as AnyObject
         ]
     }
     
@@ -29,7 +52,7 @@ class MFModelsToFirebaseDictionaryConverter {
             conversation.id! : [
                 "dishRequestId" : dishRequestId as AnyObject,
                 "createdAt": conversation.createdAt as AnyObject
-            ] as AnyObject
+                ] as AnyObject
         ]
     }
     
@@ -43,22 +66,5 @@ class MFModelsToFirebaseDictionaryConverter {
                 ] as AnyObject
         ]
     }
-
     
-//    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
-//       return [
-//            media.accessMode = .owner as AnyObject
-//        ]
-//    }
-    
-    
-    
-    
-    
-    
-//    class func dictionary(from liveVideoGateway: MFLiveVideoGatewayAccountDetails) -> FirebaseDictionary {
-//        return [
-//            liveVideoGateway.host: liveVideoGateway.port as AnyObject
-//        ]
-//    }
 }
