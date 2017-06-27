@@ -16,10 +16,12 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     var output: VidupDetailPageViewControllerOutput!
     var router: VidupDetailPageRouter!
     
+    var gradientLayerForUserInfo: CAGradientLayer!
+    
     let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
-    //VidUp URL
+    //FIXME: - Input need to be passed to ViewController
     
     var vidupURL:String = "https://static.videezy.com/system/resources/previews/000/002/212/original/Puffins-Lunga-TreshnishIsles-hd-stock-video.mp4"
     
@@ -55,9 +57,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         //add gradient effect to profile view
         let gradient = CAGradientLayer()
         gradient.frame = lv_ProfileDetails.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-        
+        gradient.colors = [UIColor.darkGray.cgColor, UIColor.clear.cgColor]
         lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
+        
+        
         lv_slotView.addGradienBorder(colors: [gradientStartColor,gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
         output.setupMediaPlayer(view: lv_Mediaview, mediaURL: vidupURL)
@@ -76,6 +79,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     override func viewWillLayoutSubviews() {
         output.resetViewBounds(view: lv_Mediaview)
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
@@ -117,7 +124,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     func DisplayTime(Time:String){
         lbl_Timer.text = Time
     }
-    
-    
+
 }
 

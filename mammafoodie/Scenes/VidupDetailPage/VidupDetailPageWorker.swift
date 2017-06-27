@@ -11,16 +11,11 @@ class VidupDetailPageWorker:NSObject {
     let loadingIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     
-    //Timer
-    var seconds = 600 //This variable will hold a starting value of seconds. It could be any amount above 0.
-    var timer = Timer()
-    var isTimerRunning = false //This will be used to make sure only one timer is created at a time.
-    
-    
     // MARK: - Business Logic
     
     func SetupMediaPlayer(view:UIView){
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.white
+        //        view.backgroundColor = UIColor.black
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
@@ -50,7 +45,6 @@ class VidupDetailPageWorker:NSObject {
         avPlayer.replaceCurrentItem(with: playerItem)
         loadingIndicatorView.startAnimating()
         avPlayer.play()
-        runTimer()
     }
     
     
@@ -65,9 +59,8 @@ class VidupDetailPageWorker:NSObject {
     
     func FullScreenVideo(ViewTapped:UITapGestureRecognizer){
         delegate?.HideandUnhideView()
-        print("Double Tapped.")
     }
-
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &playbackLikelyToKeepUpContext {
             if avPlayer.currentItem!.isPlaybackLikelyToKeepUp {
@@ -77,21 +70,5 @@ class VidupDetailPageWorker:NSObject {
             }
         }
     }
-    
-    //MARK: - Timer Functions
-    
-    func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-    }
-    
-    func updateTimer() {
-        seconds -= 1     //This will decrement(count down)the seconds.
-        delegate?.DisplayTime(Time: TimeInterval(seconds))
-    }
-    
-    
-
-
-    
     
 }

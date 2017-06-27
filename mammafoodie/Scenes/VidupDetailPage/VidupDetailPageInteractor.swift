@@ -19,20 +19,24 @@ protocol VidupDetailPageInteractorOutput {
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
     
     var output: VidupDetailPageInteractorOutput!
-    var worker: VidupDetailPageWorker! = VidupDetailPageWorker()
+    var Vidupworker: VidupDetailPageWorker! = VidupDetailPageWorker()
+    var VidupTimerworker: TimerWorker! = TimerWorker()
     
     
     
     // MARK: - Business logic
     
     func setupMediaPlayer(view:UIView,mediaURL:String){
-        worker.delegate = self
-        worker.SetupMediaPlayer(view: view)
-        worker.PlayVideo(MediaURL: mediaURL)
+        Vidupworker.delegate = self
+        Vidupworker.SetupMediaPlayer(view: view)
+        Vidupworker.PlayVideo(MediaURL: mediaURL)
+        VidupTimerworker.delegate = self
+        VidupTimerworker.seconds = 10
+        VidupTimerworker.runTimer()
     }
     
     func resetViewBounds(view:UIView){
-        worker.resetMediaPlayerViewBounds(view: view)
+        Vidupworker.resetMediaPlayerViewBounds(view: view)
     }
     
     
@@ -46,6 +50,6 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     
     
     func stopTimer() {
-        worker.timer.invalidate()
+        VidupTimerworker.stopTimer()
     }
 }

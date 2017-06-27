@@ -252,6 +252,7 @@
 		57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		B691513B1EF94EA500DB6481 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		B6DA5E641EFD508300D41203 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA5E631EFD508300D41203 /* TimerWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
 		BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */; };
@@ -555,6 +556,7 @@
 		57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CuisineSearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
 		57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
+		B6DA5E631EFD508300D41203 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -934,7 +936,7 @@
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,				
+				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1197,6 +1199,7 @@
 				2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */,
 				2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */,
 				2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */,
+				B6DA5E631EFD508300D41203 /* TimerWorker.swift */,
 			);
 			path = VidupDetailPage;
 			sourceTree = "<group>";
@@ -1508,9 +1511,8 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 6G977HV28A;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1900,6 +1902,7 @@
 				2C946EB21EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */,
 				2C12BCA91EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
+				B6DA5E641EFD508300D41203 /* TimerWorker.swift in Sources */,
 				2CFB9B8C1EFA475100C08EB3 /* LiveVideoModels.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
@@ -2156,7 +2159,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2181,7 +2184,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6G977HV28A;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
