@@ -127,14 +127,14 @@ extension DatabaseGateway {
     func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = id
-        liveStream.contentId = streamName
+        liveStream.contentID = streamName
         return liveStream
     }
     
     func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.contentId = name
+        liveStream.contentID = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -272,7 +272,7 @@ extension DatabaseGateway {
         let id :String = "\(model.id!)"
         let userProfileData = rawUserData[id] as! FirebaseDictionary
         
-        FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
+        FirebaseReference.users.classReference.child(model.id!).updateChildValues(userProfileData) { (error, databaseReference) in
             
             completion(error?.localizedDescription)
             
@@ -288,7 +288,7 @@ extension DatabaseGateway {
             }
             
             let user:MFUser = MFUser(from: userData)
-            
+            user.id = userID
             
             completion(user)
         }) { (error) in
@@ -335,7 +335,52 @@ extension DatabaseGateway {
         }
     }
     
+}
+
+//MARK: - Media
+extension  DatabaseGateway {
+    
+    func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFMedia?)->Void ){
+        
+        FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let media:MFMedia = MFMedia(from: mediaData)
+            
+            completion(media)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
     
     
 }
+
+//MARK: NewsFeed
+
+extension DatabaseGateway {
+    
+    func getNewsFeedWith(newsFeedID:String, _ completion:@escaping (_ activity:MFNewsFeed?)->Void ) {
+        
+        FirebaseReference.newsFeed.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let newsFeedData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
+                
+            completion(newsFeed)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+        
+    }
+    
+}
+
+
 

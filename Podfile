@@ -28,5 +28,6 @@ target 'mammafoodie' do
     
     pod 'NextGrowingTextView'
     pod 'KLCPopup'
+    pod 'SDWebImage', '~>3.8'
 
 end

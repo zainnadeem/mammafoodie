@@ -84,8 +84,10 @@ class MFModelsToFirebaseDictionaryConverter {
                 "availableSlots": dish.availableSlots as AnyObject,
                 "pricePerSlot"  : dish.pricePerSlot as AnyObject,
                 "boughtOrders"  : dish.boughtOrders as AnyObject,
-                "cuisineID"     : dish.cuisineID as AnyObject
-            ]
+                "cuisineID"     : dish.cuisineID as AnyObject,
+                "tag"           : dish.tag as AnyObject,
+                "dishType"      : dish.dishType?.rawValue as? AnyObject
+            ] as AnyObject
         ]
     }
     

@@ -250,19 +250,22 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             
             
 //            let user = MFUser()
-            
-            
+//            
+//            
 //            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
 //                print("User created")
 //            })
             
 //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
 //                if let user = user {
-//                    user.name = "nithin updated"
-//                    user.following = ["Krishna":true, "sreeram":true]
-//                    user.cookedDishes = ["Dish1":true, "Dish2":true]
-//                    user.email = "nithintest@gmail.com"
-//
+//                    user.name = "nithin"
+//                    user.following.updateValue(true, forKey: "Dish1")
+//                    user.following.updateValue(true, forKey: "Dish2")
+                    
+                        //["Krishna":true, "sreeram":true]
+                   // user.cookedDishes = ["Dish3":true, "Dish4":true]
+                    //user.email = "nithintest@gmail.com"
+
 //                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
 //                        if errorMessage != nil {
 //                            print("Error updating profile")

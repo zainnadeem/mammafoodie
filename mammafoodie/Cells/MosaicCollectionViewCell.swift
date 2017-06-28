@@ -23,20 +23,20 @@ class MosaicCollectionViewCell: UICollectionViewCell {
 
         screenShotImageView.image = UIImage(named: self.media.cover_large!)
 
-        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
-        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
-        
-        //need to figure out date
-//        btnTimeLeft.titleLabel?.text = String(self.media.e)
-        btnUsername.setTitle(self.media.user.name!, for: .normal)
-        self.title.text = self.media.dish.name!
-        
-        if self.media.type == .liveVideo {
-            btnTimeLeft.isHidden = true
-            
-        }else{
-            btnTimeLeft.isHidden = false
-        }
+//        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
+//        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
+//        
+//        //need to figure out date
+////        btnTimeLeft.titleLabel?.text = String(self.media.e)
+//        btnUsername.setTitle(self.media.user.name!, for: .normal)
+//        self.title.text = self.media.dish.name!
+//        
+//        if self.media.type == .liveVideo {
+//            btnTimeLeft.isHidden = true
+//            
+//        }else{
+//            btnTimeLeft.isHidden = false
+//        }
  
     }
     

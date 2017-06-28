@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:Int)
@@ -7,7 +8,8 @@ protocol OtherUsersProfileViewControllerInput {
 protocol OtherUsersProfileViewControllerOutput {
     
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
-    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    func loadUserProfileData(userID:String)
 }
 
 enum ProfileType{
@@ -44,7 +46,12 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         super.viewDidLoad()
         
         output.setUpDishCollectionView(self.collectionView, self.profileType)
-        output.loadDishCollectionViewForIndex(.cooked) //Loads first segment data by default
+//        output.loadDishCollectionViewForIndex(.cooked) //Loads first segment data by default
+        
+        if let user = Auth.auth().currentUser{
+            output.loadUserProfileData(userID: user.uid)
+        }
+        
     }
 
     

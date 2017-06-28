@@ -1,3 +1,10 @@
+
+enum DishType : String {
+    case veg
+    case nonveg
+    case unknown
+}
+
 class MFDish {
     var id: String!
     var name: String!
@@ -9,15 +16,17 @@ class MFDish {
     var pricePerSlot: Double = 0
     var boughtOrders: [String:Date] = [:] //MFOrder id
     var cuisineID: String! //MFCusine id
+    var tag:String!
+    var dishType:DishType?
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
-        self.user = user
+//        self.user = user
         self.description = description
         self.name = name
     }
     
-    init(id: String, name: String, chefID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String) {
+    init(id: String, name: String, chefID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:DishType) {
         self.id = id
         self.chefID = chefID
         self.description = description
@@ -28,6 +37,8 @@ class MFDish {
         self.pricePerSlot = pricePerSlot
         self.boughtOrders = boughtOrders
         self.mediaID = mediaID
+        self.tag = tag
+        self.dishType = dishType
         
     }
     
@@ -42,6 +53,15 @@ class MFDish {
         self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
         self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
         self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        self.tag = dishDataDictionary["tag"] as? String ?? ""
+        
+        let dishType = dishDataDictionary["dishType"] as? String ?? ""
+        
+        if let dishType = DishType(rawValue: dishType){
+            self.dishType = dishType
+        } else {
+            self.dishType = .unknown
+        }
         
     }
     

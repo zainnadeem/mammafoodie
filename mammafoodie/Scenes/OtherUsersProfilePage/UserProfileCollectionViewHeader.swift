@@ -125,23 +125,27 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     
-    func setUp(_ data:[AnyHashable:Any]?){
+    func setUp(_ data:MFUser?){
         
         self.layoutIfNeeded()
         
         //Load Data
         
-        let profile = DummyData.sharedInstance.profileUser!
+        guard let data = data else {return}
         
-        self.lblUserName.text = profile.name
-        self.lblFollowers.text = profile.followers.keys.count.description
-        self.lblFollowing.text = profile.following.keys.count.description
-        self.lblProfileDescription.text = profile.profileDescription
-        self.lblDishesSold.text = profile.dishesSoldCount.description
-        self.lblCookedDishesCount.text = profile.cookedDishes.keys.count.description
-        self.lblCookedCount.text = profile.cookedDishes.keys.count.description
-        self.lblLikedDishesCount.text = profile.likedDishes.keys.count.description
-        self.profilePicImageView.image = UIImage(named: profile.picture!)!
+        self.lblUserName.text = data.name
+        self.lblFollowers.text = data.followers.keys.count.description
+        self.lblFollowing.text = data.following.keys.count.description
+        self.lblProfileDescription.text = data.profileDescription
+        self.lblDishesSold.text = data.dishesSoldCount.description
+        self.lblCookedDishesCount.text = data.cookedDishes.keys.count.description
+        self.lblCookedCount.text = data.cookedDishes.keys.count.description
+        self.lblLikedDishesCount.text = data.likedDishes.keys.count.description
+        
+        if let profilePicURL = data.picture{
+            self.profilePicImageView.sd_setImage(with: URL(string: profilePicURL)!)
+        }
+        
         
         self.updateHairLineMenuPosition()
 

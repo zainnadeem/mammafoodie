@@ -22,7 +22,11 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         }
     }
     
-    var profileType:ProfileType!
+    var profileType:ProfileType! {
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
     
     var cellSize:CGSize!
     
@@ -30,13 +34,23 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     var selectedIndexForProfile:SelectedIndexForProfile!
     
-    var dataSource : [AnyHashable:Any]? {
+    var userData : MFUser? {
         didSet{
             collectionView?.reloadData()
         }
     }
     
+    var dishData:[MFDish]?{
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
     
+    var activityData:[MFNewsFeed]?{
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
     
     func setUpCollectionView(){
         
@@ -63,9 +77,11 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-//        print(dataSource?.keys.count)
-        return dataSource?.keys.count ?? 0
-    
+        if selectedIndexForProfile == .cooked || selectedIndexForProfile == .bought {
+            return dishData?.count ?? 0
+        } else {
+            return activityData?.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,36 +94,18 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             
             let dishCell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as! DishCollectionViewCell
             
-            var mediaDataSource = [MFMedia]()
-            
-            for media in dataSource!.keys where ((media as? MFMedia) != nil) {
-                
-                mediaDataSource.append(media as! MFMedia)
-                
-            }
-            
-            let dishData = mediaDataSource[indexPath.item] 
-            
-            dishCell.setUp(dishData)
-            
+            let dish = dishData![indexPath.item]
+            dishCell.setUp(dish)
+        
             cell = dishCell
             
         } else if selectedIndexForProfile == .activity {
             
             let activityCell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCollectionViewCell.reuseIdentifier, for: indexPath) as! ActivityCollectionViewCell
             
-//            var activityDataSource = [MFNewsFeed]()
-//            
-//            for activity in dataSource!.keys where ((activity as? MFNewsFeed) != nil) {
-//                
-//                activityDataSource.append(activity as! MFNewsFeed)
-//                
-//            }
-//            
-//            let activityData = activityDataSource[indexPath.item]
-//            
-//            activityCell.setup(activityData)
-            
+
+            let activity = activityData![indexPath.item]
+            activityCell.setup(activity)
             cell = activityCell
             
         }
@@ -122,12 +120,13 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         var reusableView = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "userHeaderView", for: indexPath) as!UserProfileCollectionViewHeader
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "userHeaderView", for: indexPath) as! UserProfileCollectionViewHeader
             
             view.delegate = self.delegate
             view.profileType = self.profileType
             
-            view.setUp(dataSource)
+            view.setUp(userData)
+            
             reusableView = view
         } else {
             assert(false, "Unexpected element kind")
