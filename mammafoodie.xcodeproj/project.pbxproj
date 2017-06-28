@@ -302,6 +302,10 @@
 		F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
 		F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
 		F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */; };
+		F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */; };
+		F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */; };
+		F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A6B1F03AAEB0081599A /* CommentsView.swift */; };
+		F0191A6E1F03AB1C0081599A /* CommentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0191A6D1F03AB1C0081599A /* CommentsView.xib */; };
 		F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */; };
 		F037E8351EFBCE970085C5C1 /* RegisterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */; };
 		F037E8361EFBCE970085C5C1 /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */; };
@@ -605,6 +609,10 @@
 		F00F52621EF2729D009DDAB1 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
+		F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsCustomTableViewCell.swift; path = ../Comments/CommentsCustomTableViewCell.swift; sourceTree = "<group>"; };
+		F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentsCustomTableViewCell.xib; path = ../Comments/CommentsCustomTableViewCell.xib; sourceTree = "<group>"; };
+		F0191A6B1F03AAEB0081599A /* CommentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsView.swift; path = ../Comments/CommentsView.swift; sourceTree = "<group>"; };
+		F0191A6D1F03AB1C0081599A /* CommentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentsView.xib; path = ../Comments/CommentsView.xib; sourceTree = "<group>"; };
 		F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNewViewController.swift; sourceTree = "<group>"; };
 		F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterConfigurator.swift; sourceTree = "<group>"; };
 		F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
@@ -792,6 +800,7 @@
 		2C12BCC61EF7F01E007AF994 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F0191A6F1F03E1EC0081599A /* UIViews */,
 				2C12BCC81EF7F03F007AF994 /* UICollectionViewCells */,
 				2C12BCC71EF7F01E007AF994 /* UITableViewCells */,
 			);
@@ -1389,6 +1398,25 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		F0191A6F1F03E1EC0081599A /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0191A701F03E2080081599A /* CommentsView */,
+			);
+			name = UIViews;
+			sourceTree = "<group>";
+		};
+		F0191A701F03E2080081599A /* CommentsView */ = {
+			isa = PBXGroup;
+			children = (
+				F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */,
+				F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */,
+				F0191A6B1F03AAEB0081599A /* CommentsView.swift */,
+				F0191A6D1F03AB1C0081599A /* CommentsView.xib */,
+			);
+			name = CommentsView;
+			sourceTree = "<group>";
+		};
 		F037E82D1EFBCE970085C5C1 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -1572,6 +1600,7 @@
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */,
+				F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
@@ -1584,6 +1613,7 @@
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
+				F0191A6E1F03AB1C0081599A /* CommentsView.xib in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
@@ -1739,6 +1769,7 @@
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
+				F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
@@ -1911,6 +1942,7 @@
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				2CE479431EF97256003D0F9F /* UItextFieldExtention.swift in Sources */,
+				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */,
