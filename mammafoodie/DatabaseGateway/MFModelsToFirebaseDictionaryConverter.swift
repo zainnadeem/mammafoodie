@@ -16,7 +16,7 @@ class MFModelsToFirebaseDictionaryConverter {
     class func dictionary(from media: MFMedia) -> FirebaseDictionary {
         return [
             media.id: [
-                "mediaId" : media.id,
+                "id" : media.id,
                 "userId" : media.user.id,
                 "type" : media.type.rawValue,
                 "cover_small" : media.cover_small ?? "",
@@ -30,7 +30,7 @@ class MFModelsToFirebaseDictionaryConverter {
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
         return [
             dish.id: [
-                "dishId" : dish.id,
+                "id" : dish.id,
                 "userId" : dish.user.id,
                 "mediaId" : dish.media!.id ?? "",
                 "description" : dish.description ?? "",

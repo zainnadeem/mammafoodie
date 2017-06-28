@@ -227,7 +227,7 @@ extension DatabaseGateway {
         let currentDate = Date()
         let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
         newModel.createdAt = dateString
-
+        
         let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
         FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion(newModel)
@@ -256,37 +256,49 @@ extension DatabaseGateway {
 
 // MARK: - Media
 extension DatabaseGateway {
-    func save(image : UIImage, at path : String, completion : @escaping (URL?) -> Void) {
+    func saveMedia(_ media : MFMedia, completion : (Error?) -> Void) {
+        let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
+        
+    }
+}
+
+// MARK: - Save Image and Video
+extension DatabaseGateway {
+    
+    func save(data : Data, at path : String, completion : @escaping (URL?, Error?) -> Void) {
         let storageRef = Storage.storage().reference()
-        let imagePathRef = storageRef.child(path)
-        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
-            let uploadTask = imagePathRef.putData(imageData, metadata: nil) { (metadata, error) in
-                guard let metadata = metadata else {
-                    completion(nil)
-                    return
-                }
-                completion(metadata.downloadURL())
+        let pathRef = storageRef.child(path)
+        pathRef.putData(data, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                completion(nil, error)
+                return
             }
-            uploadTask.resume()
-        } else {
-            completion(nil)
+            completion(metadata.downloadURL(), nil)
         }
     }
     
-    func save(video : URL, at path : String, completion : @escaping (URL?) -> Void) {
+    func save(fileAt : URL, at path : String, completion : @escaping (URL?, Error?) -> Void) {
         let storageRef = Storage.storage().reference()
-        let videoPathRef = storageRef.child(path)
-        let fileManager : FileManager = FileManager.default
-        if fileManager.fileExists(atPath: video.absoluteString) {
-            videoPathRef.putFile(from: video, metadata: nil) { (metaData, error) in
-                guard let metadata = metaData else {
-                    completion(nil)
-                    return
-                }
-                completion(metadata.downloadURL())
+        let pathRef = storageRef.child(path)
+        pathRef.putFile(from: fileAt, metadata: nil) { (metaData, error) in
+            guard let metadata = metaData else {
+                completion(nil, error)
+                return
             }
-        } else {
-            completion(nil)
+            completion(metadata.downloadURL(), error)
         }
+    }
+    
+    
+    func save(image : UIImage, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+            self.save(data: imageData, at: path, completion: completion)
+        } else {
+            completion(nil, NSError.init(domain: "Image is invalid", code: 401, userInfo: nil))
+        }
+    }
+    
+    func save(video : URL, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        self.save(fileAt: video, at: path, completion: completion)
     }
 }

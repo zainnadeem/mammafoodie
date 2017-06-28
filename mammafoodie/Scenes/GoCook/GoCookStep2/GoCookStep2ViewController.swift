@@ -34,6 +34,10 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         }
     }
     
+    var selectedImage : UIImage?
+    var selectedVideoPath : URL?
+    
+    
     var selectedMediaUploadType : GoCookMediaUploadType = .None {
         didSet {
             self.output.selectMediaUploadType(self.selectedMediaUploadType)
@@ -105,6 +109,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pickerDealDuration.countDownDuration = 0
+        self.pickerPreparationTime.countDownDuration = 0
         self.output.setupViewController()
         self.cuisinesAdapter.prepareCuisineCollectionView(self.cuisineCollectionView)
     }
@@ -114,15 +120,19 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     @IBAction func onDietTap(_ sender: UIButton) {
         switch sender {
         case self.btnDietVegan:
+            self.selectedDiet = .Vegan
             self.output.selectDiet(.Vegan)
             
         case self.btnDietVeg:
+            self.selectedDiet = .Veg
             self.output.selectDiet(.Veg)
             
         case self.btnDietNonVeg:
+            self.selectedDiet = .NonVeg
             self.output.selectDiet(.NonVeg)
             
         default:
+            self.selectedDiet = .None
             self.output.selectDiet(.None)
         }
     }
@@ -139,19 +149,66 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         self.lblServingsCount.text = "\(self.numberOfServings)"
     }
     
-    
     @IBAction func onPostDishTap(_ sender: UIButton) {
-        if let cuisine = self.cuisinesAdapter.selectedCuisine {
-            let totalSlots = UInt(self.lblServingsCount.text ?? "0")!
-            let pricePerSlots = Double(self.txtPricePerServing.text ?? "0")!
-            
-            let dish = MFDish.init(name: self.txtTitle.text ?? "Dish Name", description: self.textViewDescription.text, cuisine: cuisine, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet)
-            let media = MFMedia.init()
-            media.accessMode = .owner
-            dish.media = media
-            media.dish = dish
-            media.id = FirebaseReference.media.generateAutoID()
-            self.completion?(media)
+        if let dishName = self.txtTitle.text {
+            if self.selectedDiet != .None {
+                if let cuisine = self.cuisinesAdapter.selectedCuisine {
+                    if let preparationTimeText = self.txtPreparationTime.text {
+                        if let totalSlots = UInt(self.lblServingsCount.text ?? "0") {
+                            if let pricePerSlots = Double(self.txtPricePerServing.text ?? "0") {
+                                var ready = false
+                                switch self.selectedOption {
+                                case .liveVideo:
+                                    ready = true
+                                    
+                                case .vidup:
+                                    if let _ = self.selectedVideoPath {
+                                        ready = false
+                                        self.showAlert("Required!", message: "Please select video.")
+                                    } else {
+                                        ready = true
+                                    }
+                                    
+                                    if let _ = self.txtDealDuration.text {
+                                        let countDown = Double(self.pickerDealDuration.countDownDuration)
+                                        if countDown == 0 {
+                                            countDown = -1
+                                        }
+                                    }
+                                    
+                                case .picture:
+                                    if let _ = self.selectedVideoPath {
+                                        ready = false
+                                        self.showAlert("Required!", message: "Please select picture.")
+                                    } else {
+                                        ready = true
+                                    }
+                                    
+                                default:
+                                    ready = false
+                                }
+                                if ready {
+                                    let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTimeText, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet)
+                                    let media = MFMedia.createNewMedia(for: dish, type: self.selectedOption)
+                                    dish.media = media
+                                    
+                                    self.completion?(media, self.selectedImage, self.selectedVideoPath)
+                                }
+                            } else {
+                                self.showAlert("Required!", message: "Please enter price per servings.")
+                            }
+                        }
+                    } else {
+                        self.showAlert("Required!", message: "Please enter preparation.")
+                    }
+                } else {
+                    self.showAlert("Required!", message: "Please select cuisine.")
+                }
+            } else {
+                self.showAlert("Required!", message: "Please enter dish diet.")
+            }
+        } else {
+            self.showAlert("Required!", message: "Please enter dish name.")
         }
     }
     
@@ -165,28 +222,39 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBAction func onCameraTap(_ sender: UIButton) {
         self.selectedMediaUploadType = .PictureUpload
-//        self.mediaPicker = MediaPicker.pickImage(on: self, completion: { (image, error) in
-//            print(image as Any)
-//        })
+        self.mediaPicker = MediaPicker.pickImage(on: self, completion: { (image, error) in
+            if let img = image {
+                self.selectedImage = img
+            } else {
+                self.showAlert("Error!", message: "Image Not Found")
+            }
+        })
     }
     
     @IBAction func onUploadVideo(_ sender: UIButton) {
         self.selectedMediaUploadType = .VideoUpload
-//        self.mediaPicker = MediaPicker.pickVideo(on: self, completion: { (url, error) in
-//            print(url as Any)
-//        })
+        self.mediaPicker = MediaPicker.pickVideo(on: self, completion: { (urlString, error) in
+            if let string = urlString {
+                self.selectedVideoPath = URL.init(fileURLWithPath: string)
+            } else {
+                self.showAlert("Error!", message: "No Video found")
+            }
+        })
     }
     
     @IBAction func onShootVideo(_ sender: UIButton) {
         self.selectedMediaUploadType = .VideoShoot
-//        self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (url, error) in
-//            print(url as Any)
-//        })
+        self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (url, error) in
+            if let string = urlString {
+                self.selectedVideoPath = URL.init(fileURLWithPath: string)
+            } else {
+                self.showAlert("Error!", message: "No Video found")
+            }
+        })
     }
-
+    
     
     // MARK: - Display logic
-    
 }
 
 extension GoCookStep2ViewController : UITextFieldDelegate {

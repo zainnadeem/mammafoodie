@@ -6,6 +6,7 @@
 //  Copyright © 2017 Zain Nadeem. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class DishCollectionViewCell: UICollectionViewCell {
@@ -25,7 +26,7 @@ class DishCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblDishName: UILabel!
     
     @IBOutlet weak var dishImageView: UIImageView!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,7 +46,15 @@ class DishCollectionViewCell: UICollectionViewCell {
         
         self.lblNumberOfViews.text = dishData.numberOfViewers.description
         self.profilePicImageView.image = UIImage(named: dishData.user.picture!)!
-        self.dishImageView.image = UIImage(named: dishData.cover_large!)!
+        do {
+            if let coverURL = dishData.cover_small {
+                let imageData = try Data.init(contentsOf: coverURL)
+                self.dishImageView.image = UIImage.init(data: imageData)
+                
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
-
+    
 }

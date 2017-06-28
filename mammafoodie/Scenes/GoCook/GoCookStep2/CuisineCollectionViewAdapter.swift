@@ -25,7 +25,6 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     
     func showCuisines(_ cuisines: [MFCuisine]) {
         self.cuisines = cuisines
-        self.selectedCuisine = self.cuisines.first
         self.cuisineCollectionView.reloadData()
     }
     

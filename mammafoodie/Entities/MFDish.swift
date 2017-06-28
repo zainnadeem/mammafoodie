@@ -18,6 +18,7 @@ class MFDish {
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
+    var preparationTime : String!
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
     
@@ -36,10 +37,11 @@ class MFDish {
         self.cuisine = cuisine
     }
     
-    init(name : String!, description : String?, cuisine : MFCuisine, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType) {
+    init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : String, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType) {
         self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
         self.type = dishType
+        self.preparationTime = preparationTime
         self.description = description
         self.cuisine = cuisine
         self.totalSlots = totalSlots

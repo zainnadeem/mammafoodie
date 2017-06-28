@@ -261,6 +261,11 @@
 		57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */; };
 		57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */; };
 		57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */; };
+		57C948101F0373E600DF5674 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57C9480F1F0373E600DF5674 /* video.mp4 */; };
+		57C948121F0373FD00DF5674 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57C948111F0373FD00DF5674 /* image.jpg */; };
+		57C948131F03781000DF5674 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 57C948111F0373FD00DF5674 /* image.jpg */; };
+		57C948141F03781000DF5674 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 57C9480F1F0373E600DF5674 /* video.mp4 */; };
+		57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C948151F03D9A300DF5674 /* UIViewControllerExtension.swift */; };
 		57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0AF1EFC015B00C3BA21 /* GoCookStep2Configurator.swift */; };
 		57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B01EFC015B00C3BA21 /* GoCookStep2Interactor.swift */; };
 		57DDD0B81EFC015B00C3BA21 /* GoCookStep2Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B11EFC015B00C3BA21 /* GoCookStep2Models.swift */; };
@@ -580,6 +585,9 @@
 		57801F781EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CuisineSearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
 		57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
+		57C9480F1F0373E600DF5674 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		57C948111F0373FD00DF5674 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		57C948151F03D9A300DF5674 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		57DDD0AF1EFC015B00C3BA21 /* GoCookStep2Configurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Configurator.swift; sourceTree = "<group>"; };
 		57DDD0B01EFC015B00C3BA21 /* GoCookStep2Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Interactor.swift; sourceTree = "<group>"; };
 		57DDD0B11EFC015B00C3BA21 /* GoCookStep2Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Models.swift; sourceTree = "<group>"; };
@@ -1129,6 +1137,8 @@
 		2CB8BF131EF2486D00DA78B3 /* DatabaseGateway */ = {
 			isa = PBXGroup;
 			children = (
+				57C948111F0373FD00DF5674 /* image.jpg */,
+				57C9480F1F0373E600DF5674 /* video.mp4 */,
 				2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */,
 			);
 			path = DatabaseGateway;
@@ -1156,6 +1166,7 @@
 				572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */,
 				572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */,
 				2CE479401EF97256003D0F9F /* UIViewExtension.swift */,
+				57C948151F03D9A300DF5674 /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1610,8 +1621,10 @@
 				2CFB9BC51EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CFB9B741EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
+				57C948101F0373E600DF5674 /* video.mp4 in Resources */,
 				2C12BCD01EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCC21EF7D338007AF994 /* Akshit.storyboard in Resources */,
+				57C948121F0373FD00DF5674 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1650,10 +1663,12 @@
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
+				57C948141F03781000DF5674 /* video.mp4 in Resources */,
 				113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
+				57C948131F03781000DF5674 /* image.jpg in Resources */,
 				2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
@@ -1904,6 +1919,7 @@
 				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
 				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
+				57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,

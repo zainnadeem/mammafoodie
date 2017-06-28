@@ -11,7 +11,7 @@ protocol GoCookViewControllerOutput {
     func showStep2()
 }
 
-typealias GoCookCompletion = (MFMedia) -> Void
+typealias GoCookCompletion = (MFMedia, UIImage?, URL?) -> Void
 
 class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
@@ -66,9 +66,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         for childVC in self.childViewControllers {
             if childVC is GoCookStep2ViewController {
                 self.step2VC = childVC as!GoCookStep2ViewController
-                self.step2VC.completion = { (media) in
+                self.step2VC.completion = { (media, image, videoPathURL) in
                     DispatchQueue.main.async {
-                        self.createMedia(media)
+                        self.createMedia(media, image: image, videoURL: videoPathURL)
                     }
                 }
             }
@@ -103,30 +103,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     
     // MARK: - Display logic
-    
-    func createMedia(_ media : MFMedia) {
+    func createMedia(_ media : MFMedia, image : UIImage?, videoURL :  URL?) {
         self.createdmedia = media
         self.createdmedia?.type = self.selectedOption
-    }
-}
-
-extension UIViewController {
-    func showAlert(_ title : String?, message : String?) {
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { (action) in
-            
-        }))
-        self.present(alertController, animated: true) {
-            
+        media.setCoverImage(image!) { (error) in
+            self.showAlert(error.localizedDescription, message: nil)
         }
     }
-    
-    func showAlert(_ title : String?, message : String?, actionTitle : String, actionStyle : UIAlertActionStyle, actionhandler : ((UIAlertAction) -> Swift.Void)? = nil) {
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: actionTitle, style: actionStyle, handler: actionhandler))
-        self.present(alertController, animated: true) {
-            
-        }
-    }
-    
 }
