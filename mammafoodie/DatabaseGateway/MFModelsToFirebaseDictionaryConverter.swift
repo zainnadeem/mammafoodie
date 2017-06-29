@@ -19,8 +19,8 @@ class MFModelsToFirebaseDictionaryConverter {
                 "id" : media.id,
                 "userId" : media.user.id,
                 "type" : media.type.rawValue,
-                "cover_small" : media.cover_small ?? "",
-                "cover_large" : media.cover_large ?? "",
+                "cover_small" : media.cover_small?.absoluteString ?? "",
+                "cover_large" : media.cover_large?.absoluteString ?? "",
                 "dishId" : media.dish.id,
                 "createdAt" : media.createdAt.timeIntervalSinceReferenceDate
                 ] as AnyObject

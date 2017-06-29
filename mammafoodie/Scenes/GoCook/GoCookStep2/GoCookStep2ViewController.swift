@@ -151,61 +151,73 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBAction func onPostDishTap(_ sender: UIButton) {
         if let dishName = self.txtTitle.text {
-            if self.selectedDiet != .None {
-                if let cuisine = self.cuisinesAdapter.selectedCuisine {
-                    if let preparationTimeText = self.txtPreparationTime.text {
-                        if let totalSlots = UInt(self.lblServingsCount.text ?? "0") {
-                            if let pricePerSlots = Double(self.txtPricePerServing.text ?? "0") {
-                                var ready = false
-                                switch self.selectedOption {
-                                case .liveVideo:
-                                    ready = true
-                                    
-                                case .vidup:
-                                    if let _ = self.selectedVideoPath {
-                                        ready = false
-                                        self.showAlert("Required!", message: "Please select video.")
-                                    } else {
+            if !dishName.isEmpty {
+                if self.selectedDiet != .None {
+                    if let cuisine = self.cuisinesAdapter.selectedCuisine {
+                        if let _ = self.txtPreparationTime.text {
+                            let preparationTime : Double = self.pickerPreparationTime.countDownDuration
+                            if let totalSlots = UInt(self.lblServingsCount.text ?? "0") {
+                                if let pricePerSlots = Double(self.txtPricePerServing.text ?? "0") {
+                                    var ready = false
+                                    var countDown : Double = -1
+                                    switch self.selectedOption {
+                                    case .liveVideo:
                                         ready = true
-                                    }
-                                    
-                                    if let _ = self.txtDealDuration.text {
-                                        let countDown = Double(self.pickerDealDuration.countDownDuration)
-                                        if countDown == 0 {
-                                            countDown = -1
+                                        
+                                    case .vidup:
+                                        if let _ = self.selectedVideoPath {
+                                            ready = false
+                                            self.showAlert("Required!", message: "Please select video.")
+                                        } else {
+                                            ready = true
                                         }
-                                    }
-                                    
-                                case .picture:
-                                    if let _ = self.selectedVideoPath {
+                                        
+                                        if let _ = self.txtDealDuration.text {
+                                            countDown = Double(self.pickerDealDuration.countDownDuration)
+                                            if countDown == 0 {
+                                                countDown = -1
+                                            }
+                                        }
+                                        
+                                    case .picture:
+                                        if let _ = self.selectedVideoPath {
+                                            ready = false
+                                            self.showAlert("Required!", message: "Please select picture.")
+                                        } else {
+                                            ready = true
+                                        }
+                                        
+                                    default:
                                         ready = false
-                                        self.showAlert("Required!", message: "Please select picture.")
-                                    } else {
-                                        ready = true
                                     }
-                                    
-                                default:
-                                    ready = false
+                                    if ready {
+                                        let media = MFMedia.createNewMedia(with : self.selectedOption)
+                                        let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTime, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet, media : media)
+                                        let user = MFUser.init()
+                                        user.id = FirebaseReference.user.generateAutoID()
+                                        user.name = "Arjav"
+                                        dish.media.user = user
+                                        dish.user = user
+                                        media.dish = dish
+                                        media.dealTime = countDown
+                                        media.createdAt = Date.init()
+                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                    }
+                                } else {
+                                    self.showAlert("Required!", message: "Please enter price per servings.")
                                 }
-                                if ready {
-                                    let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTimeText, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet)
-                                    let media = MFMedia.createNewMedia(for: dish, type: self.selectedOption)
-                                    dish.media = media
-                                    
-                                    self.completion?(media, self.selectedImage, self.selectedVideoPath)
-                                }
-                            } else {
-                                self.showAlert("Required!", message: "Please enter price per servings.")
                             }
+                        } else {
+                            self.showAlert("Required!", message: "Please enter preparation.")
                         }
                     } else {
-                        self.showAlert("Required!", message: "Please enter preparation.")
+                        self.showAlert("Required!", message: "Please select cuisine.")
                     }
                 } else {
-                    self.showAlert("Required!", message: "Please select cuisine.")
+                    self.showAlert("Required!", message: "Please enter dish diet.")
                 }
             } else {
-                self.showAlert("Required!", message: "Please enter dish diet.")
+                self.showAlert("Required!", message: "Please enter dish name.")
             }
         } else {
             self.showAlert("Required!", message: "Please enter dish name.")
@@ -244,7 +256,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBAction func onShootVideo(_ sender: UIButton) {
         self.selectedMediaUploadType = .VideoShoot
-        self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (url, error) in
+        self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (urlString, error) in
             if let string = urlString {
                 self.selectedVideoPath = URL.init(fileURLWithPath: string)
             } else {

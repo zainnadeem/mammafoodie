@@ -46,10 +46,9 @@ class MFMedia {
         self.numberOfViewers = numberOfViewers
     }
     
-    class func createNewMedia(for dish : MFDish, type : MFMediaType) -> MFMedia {
+    class func createNewMedia(with type : MFMediaType) -> MFMedia {
         let media = MFMedia.init()
         media.accessMode = .owner
-        media.dish = dish
         media.type = type
         media.id = FirebaseReference.media.generateAutoID()
         media.cover_small = media.generateCoverThumbImageURL()
@@ -67,13 +66,21 @@ class MFMedia {
     }
     
     func generateCoverImageURL() -> URL {
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(self.id).jpg?alt=media"
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(self.id).jpg?alt=media"
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID)).jpg?alt=media"
         return URL.init(string: string)!
+    }
+    
+    func save() {
+        DatabaseGateway.sharedInstance.saveMedia(self) { (error) in
+            print(error?.localizedDescription ?? "No Error")
+        }
     }
     
 }

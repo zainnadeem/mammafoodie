@@ -6,6 +6,7 @@ import FirebaseDatabase
 
 enum FirebaseReference: String {
     
+    case user = "User"
     case media = "Media"
     case liveVideos = "LiveVideos"
     case dishRequests = "DishRequests"
@@ -256,9 +257,21 @@ extension DatabaseGateway {
 
 // MARK: - Media
 extension DatabaseGateway {
-    func saveMedia(_ media : MFMedia, completion : (Error?) -> Void) {
+    func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
+        let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
+        FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
+            completion(error)
+        }
+    }
+}
+
+// MARK: - Media
+extension DatabaseGateway {
+    func saveMedia(_ media : MFMedia, completion : @escaping (Error?) -> Void) {
         let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
-        
+        FirebaseReference.media.classReference.updateChildValues(mediaDict) { (error, ref) in
+            completion(error)
+        }
     }
 }
 

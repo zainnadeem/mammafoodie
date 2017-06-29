@@ -11,7 +11,7 @@ protocol GoCookViewControllerOutput {
     func showStep2()
 }
 
-typealias GoCookCompletion = (MFMedia, UIImage?, URL?) -> Void
+typealias GoCookCompletion = (MFDish, UIImage?, URL?) -> Void
 
 class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
@@ -66,9 +66,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         for childVC in self.childViewControllers {
             if childVC is GoCookStep2ViewController {
                 self.step2VC = childVC as!GoCookStep2ViewController
-                self.step2VC.completion = { (media, image, videoPathURL) in
+                self.step2VC.completion = { (dish, image, videoPathURL) in
                     DispatchQueue.main.async {
-                        self.createMedia(media, image: image, videoURL: videoPathURL)
+                        self.create(dish, image: image, videoURL: videoPathURL)
                     }
                 }
             }
@@ -103,11 +103,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     
     // MARK: - Display logic
-    func createMedia(_ media : MFMedia, image : UIImage?, videoURL :  URL?) {
-        self.createdmedia = media
-        self.createdmedia?.type = self.selectedOption
-        media.setCoverImage(image!) { (error) in
-            self.showAlert(error.localizedDescription, message: nil)
-        }
+    func create(_ dish : MFDish, image : UIImage?, videoURL :  URL?) {
+        dish.media.type = self.selectedOption
+        dish.save()
+        dish.media.save()
+//        dish.media.setCoverImage(image!) { (error) in
+//            self.showAlert(error.localizedDescription, message: nil)
+//        }
     }
 }

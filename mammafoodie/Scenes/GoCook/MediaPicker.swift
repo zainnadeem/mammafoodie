@@ -48,9 +48,9 @@ class MediaPicker: NSObject {
         return mediaPick
     }
     
-    class func recordVideo(on vc : UIViewController, completion :@escaping MediaPickerImageCompletion) -> MediaPicker {
+    class func recordVideo(on vc : UIViewController, completion :@escaping MediaPickerVideoCompletion) -> MediaPicker {
         let mediaPick = MediaPicker()
-        mediaPick.imageCompletion = completion
+        mediaPick.videoCompletion = completion
         mediaPick.mediaType = .Video
         mediaPick.imagePicker.delegate = mediaPick
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
