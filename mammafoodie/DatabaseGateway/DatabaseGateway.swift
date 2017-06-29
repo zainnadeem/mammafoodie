@@ -364,6 +364,33 @@ extension  DatabaseGateway {
     
 }
 
+// MARK: - News Feed
+extension DatabaseGateway {
+    
+    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let rawNewsFeed: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+                completion([])
+                return
+            }
+            let newsFeed: MFNewsFeed? = self.createNewsFeedModel(from: rawNewsFeed)
+            completion([newsFeed!])
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
+        var feed: MFNewsFeed = MFNewsFeed()
+        return feed
+    }
+}
+
 //MARK: NewsFeed
 
 extension DatabaseGateway {
@@ -449,4 +476,3 @@ extension DatabaseGateway {
         self.save(fileAt: video, at: path, completion: completion)
     }
 }
-

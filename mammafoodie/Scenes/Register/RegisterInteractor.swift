@@ -30,7 +30,7 @@ class RegisterInteractor: RegisterInteractorInput {
         firebaseworker.signUp(with: Login.Credentials(email:email,password:password)) { (errorMessage) in
             
             if errorMessage == nil {
-                print(self.model)
+               // print(self.model)
                 self.model = MFUser(id: "", name: name, picture:"", profileDescription: "", email:email)
                 DatabaseGateway.sharedInstance.createUserEntity(with:self.model) {newModel in
                     print(self.model)
