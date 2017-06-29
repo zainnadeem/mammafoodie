@@ -68,7 +68,7 @@ class DatabaseGateway {
     // This is to not allow initialization by anyone else other than this class itself. Use sharedInstace for every operation on Firebase
     private init() {
         print("Configuring FirebaseApp ----------------------- START")
-//        FirebaseApp.configure()
+        //        FirebaseApp.configure()
         print("Configuring FirebaseApp ----------------------- END")
     }
 }
@@ -223,7 +223,7 @@ extension DatabaseGateway {
         let currentDate = Date()
         let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
         newModel.createdAt = dateString
-
+        
         let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
         FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion(newModel)
@@ -247,5 +247,32 @@ extension DatabaseGateway {
         FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion()
         }
+    }
+}
+
+// MARK: - News Feed
+extension DatabaseGateway {
+    
+    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let rawNewsFeed: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+                completion([])
+                return
+            }
+            let newsFeed: MFNewsFeed? = self.createNewsFeedModel(from: rawNewsFeed)
+            completion([newsFeed!])
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
+        var feed: MFNewsFeed = MFNewsFeed()
+        return feed
     }
 }

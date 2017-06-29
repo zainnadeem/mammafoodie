@@ -17,6 +17,10 @@ struct MFNewsFeed {
     var liked: [MFUser:Date] = [:]
     var comments: [MFComment:Date] = [:]
     
+    init() {
+        
+    }
+    
     init(id: String!, actionUserId: MFUser, participantUserId: MFUser, activity: MFActivity, text: NSMutableAttributedString){
         self.id = id
         self.actionUserId = actionUserId

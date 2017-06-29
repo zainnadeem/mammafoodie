@@ -24,7 +24,6 @@ class MFMedia {
     var type: MFMediaType = .unknown
     var user: MFUser!
     
-    
     var accessMode: MediaAccessUserType = .viewer
     
     init() {

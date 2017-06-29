@@ -13,10 +13,12 @@ enum HomeViewControllerScreenMode {
     case menu
 }
 
-class HomeViewController: UIViewController, HomeViewControllerInput {
+class HomeViewController: UIViewController, HomeViewControllerInput, CircleTransitionPresentAnimationDelegate {
     
     var output: HomeViewControllerOutput!
     var router: HomeRouter!
+    
+    var startCircleFrame: CGRect = .zero
     
     @IBOutlet weak var tblList: UITableView!
     @IBOutlet weak var viewLiveVideos: UIView!
@@ -82,11 +84,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         self.viewActivityIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         self.viewMenuIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.addShadow(to: self.viewLiveVideos)
         self.addShadow(to: self.viewVidups)
         
@@ -94,15 +91,27 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         
         self.isLiveVideosViewExpanded = false
         self.collapseLiveVideoView(animated: false)
-        self.updateLiveVideoCollectionView(animated: false, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
         
         self.isVidupsViewExpanded = false
         self.collapseVidupsView(animated: false)
+        
+        self.updateLiveVideoCollectionView(animated: false, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
         self.updateVidupsCollectionView(animated: false, isVidupsExpanded: self.isVidupsViewExpanded)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.clnLiveVideos.reloadData()
+        self.clnVidups.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     // MARK: - Event handling
@@ -128,10 +137,21 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     }
     
     @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
+        
+        let shouldResetContentOffset: Bool = self.tblList.contentOffset.y > self.viewLiveVideoAndVidups.frame.height
+        let newContentOffset: CGPoint = CGPoint(x: 0, y: self.viewLiveVideoAndVidups.frame.height)
+        
+        if self.isLiveVideosViewExpanded || self.isVidupsViewExpanded {
+            
+        }
         if self.screenMode == .activity {
             self.switchToMenuMode()
         } else {
             self.switchToActivityMode()
+        }
+        
+        if shouldResetContentOffset {
+            self.tblList.setContentOffset(newContentOffset, animated: false)
         }
     }
     
@@ -270,7 +290,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         self.liveVideosAdapter.createStaticData()
         self.liveVideosAdapter.conHeightCollectionView = self.conHeightClnLiveVideos
         self.liveVideosAdapter.setup(with: self.clnLiveVideos)
-        self.liveVideosAdapter.didSelect = { (selectedLiveVideo) in
+        self.liveVideosAdapter.didSelect = { (selectedLiveVideo, cellFrame) in
             print("Selected live video: \(selectedLiveVideo.id)")
             if selectedLiveVideo.id == "-1" {
                 // new. push go cook with live video selection
@@ -278,7 +298,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             } else {
                 selectedLiveVideo.accessMode = MediaAccessUserType.viewer
             }
-            self.performSegue(withIdentifier: "showLiveVideoDetails", sender: selectedLiveVideo)
+            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
         }
         self.liveVideosAdapter.didSelectViewAll = {
             self.performSegue(withIdentifier: "showLiveVideoList", sender: nil)
@@ -289,7 +310,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         self.vidupsAdapter.createStaticData()
         self.vidupsAdapter.conHeightCollectionView = self.conHeightClnVidups
         self.vidupsAdapter.setup(with: self.clnVidups)
-        self.vidupsAdapter.didSelect = { (selectedVidup) in
+        self.vidupsAdapter.didSelect = { (selectedVidup, cellFrame) in
             print("Selected vidup: \(selectedVidup.id)")
             if selectedVidup.id == "-1" {
                 // new. push go cook with vidup selection
@@ -298,7 +319,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             } else {
                 selectedVidup.accessMode = MediaAccessUserType.viewer
             }
-            self.performSegue(withIdentifier: "showVidupDetails", sender: selectedVidup)
+            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
         }
         self.vidupsAdapter.didSelectViewAll = {
             print("DidSelectAll Vidup")

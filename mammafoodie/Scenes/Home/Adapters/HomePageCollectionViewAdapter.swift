@@ -7,7 +7,7 @@ class HomePageCollectionViewAdapter: NSObject {
     
     //    var didExpand: (()->Void)?
     //    var didCollapse: (()->Void)?
-    var didSelect: ((MFMedia)->Void)?
+    var didSelect: ((_ media: MFMedia, _ cellFrame: CGRect)->Void)?
     var didSelectViewAll: (()->Void)?
     
     func expand(animated: Bool) {

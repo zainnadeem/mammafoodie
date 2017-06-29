@@ -127,8 +127,8 @@ extension DatabaseGatewayTests {
     func testCreateMessage() {
         let expectationCreateMessages = expectation(description: "Expectation")
         
-        var model: MFMessage = MFMessage(with: <#String#>, messagetext: <#String#>, senderId: <#String#>)
-//        model.id = "789788tvbdgsajdgahf"
+        //        var model: MFMessage = MFMessage(with: <#String#>, messagetext: <#String#>, senderId: <#String#>)
+        //        model.id = "789788tvbdgsajdgahf"
         model.messageText = "hai...!"
         model.conversationId = "233564747khjfdks"
         DatabaseGateway.sharedInstance.createMessage(with: model, {
@@ -142,3 +142,9 @@ extension DatabaseGatewayTests {
     }
 }
 
+// MARK: - News Feed
+extension DatabaseGatewayTests {
+    func testNewsFeed() {
+//        DatabaseGateway.sharedInstance.getNewsFeed(for: "", <#T##completion: (([MFNewsFeed]) -> Void)##(([MFNewsFeed]) -> Void)##([MFNewsFeed]) -> Void#>)
+    }
+}
