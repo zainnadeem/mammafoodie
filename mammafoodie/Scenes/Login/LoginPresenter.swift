@@ -3,7 +3,6 @@ import UIKit
 protocol LoginPresenterInput {
     func signUpCompletion(errorMessage:String?)
     func loginCompletion(errorMessage:String?)
-    func forgotpasswordCompletion(errorMessage:String?)
     func logoutCompletion(errorMessage:String?)
     func viewControllerToPresent() -> UIViewController
 }
@@ -40,20 +39,6 @@ class LoginPresenter: LoginPresenterInput {
             let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
-            
-            self.output.showAlert(alertController: alertController)
-        } else {
-            self.output.showHomeScreen()
-        }
-    }
-    
-    func forgotpasswordCompletion(errorMessage:String?){
-        
-        if let errorMessage = errorMessage{
-            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            
             self.output.showAlert(alertController: alertController)
         } else {
             self.output.showHomeScreen()

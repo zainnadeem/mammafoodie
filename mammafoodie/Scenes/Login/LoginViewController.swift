@@ -13,7 +13,7 @@ protocol LoginViewControllerOutput {
     func signUpWith(credentials:Login.Credentials)
     func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-    func forgotpasswordWorker(email: String)
+    
     func loginWithFacebook()
     func logout()
 }
@@ -26,6 +26,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
     
     var shapeLayer: CAShapeLayer!
+    
+    var activityIndicatorView:UIView?
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
@@ -66,6 +68,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateShadow()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,22 +77,11 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.loginButn.applyGradient(colors: [gradientStartColor, gradientEndColor])
+        self.loginButn.applyGradient(colors: [gradientStartColor, gradientEndColor],direction: .rightToLeft)
     }
     
     // MARK: - Event handling
-    @IBAction func btnLoginTapped(_ sender: UIButton) {
-        self.output.loginWithGoogle()
-        //        if self.txtEmail.text?.isEmpty == true {
-        //            return
-        //        }
-        //        if self.txtPassword.text?.isEmpty == true {
-        //            return
-        //        }
-        //        self.output.login(with: self.txtEmail.text!, password: self.txtPassword.text!)
-        
-    }
-
+  
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         self.router.openSafariVC(with: .privacyPolicy)
     }
@@ -98,14 +90,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.router.openSafariVC(with: .terms)
     }
 
-    // MARK: - Inputs
-    func showLoginSuccessMessage(_ message: String) {
-        print(message)
-    }
-    func showLogoutSuccessMessage(_ message: String) {
-        // print(message)
-    }
-    
+
+   
     func forgotpasswordWorker(success:String) {
         let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
@@ -122,7 +108,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             
             var shadowFrame: CGRect = self.loginButn.frame
             shadowFrame.origin.x -= -30
-            shadowFrame.origin.y += 17
+            shadowFrame.origin.y += 30
             shadowFrame.size.width += -60
             shadowFrame.size.height -= 8
             
@@ -142,57 +128,73 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.signUpWith(credentials: credentials)
+        
+        
     }
     
     @IBAction func loginWithFireBase(sender:UIButton){
         
-        guard validateCredentials() else {return}
+        guard validateCredentials() && isValidEmail(emailStr: txtEmail.text!) else {return}
         
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.loginWith(credentials: credentials)
-    }
-    
-    //Login with Facebook
-    
-    @IBAction func loginWithFacebook(sender:UIButton){
-        output.loginWithFacebook()
-    }
-    
-    
-    //Login with Google
-    @IBAction func loginWithGoogle(sender:UIButton){
-        output.loginWithGoogle()
-    }
-    
-    @IBAction func forgotPassword(sender:UIButton){
         
-        guard self.txtEmail.text != nil else {return}
-        
-        output.forgotpasswordWorker(email: self.txtEmail.text!)
     }
     
+    
+        
     @IBAction func logout(sender:UIButton){
-        
-        //guard self.txtEmail.text != nil else {return}
-        
-        
         output.logout()
+        
     }
+    
+    
+    @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
+        self.output.loginWithFacebook()
+        
+    }
+    
+    @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
+        self.output.loginWithGoogle()
+    }
+    
     
     
     //Validations
     
     func validateCredentials() -> Bool{
         guard (txtEmail.text != nil && txtPassword.text != nil), !txtEmail.text!.isEmpty, !txtPassword.text!.isEmpty else {
-            //Show alert
+            
+            let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.showAlert(alertController: alertController)
             return false
         }
         
         return true
     }
     
+    func isValidEmail(emailStr:String) -> Bool {
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        
+        if !emailTest.evaluate(with: emailStr) {
+            
+            let alertController = UIAlertController(title: "Error" , message: "The email entered is not in a valid format.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.showAlert(alertController: alertController)
+            
+            return false
+        }
+        
+            return true
+    }
     
     
+
     // MARK: - Inputs
    
     func viewControllerToPresent() -> UIViewController {
@@ -201,10 +203,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     func showHomeScreen() {
         
-        let alertController = UIAlertController(title: "Success" , message: "Login successful. Navigate to home screen", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.showAlert(alertController: alertController)
+        let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.navigationController?.pushViewController(homeVC, animated: true)
+        
     }
     
     func showAlert(alertController: UIAlertController) {
@@ -222,14 +223,14 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         }
     }
     
-    @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
-        self.output.loginWithFacebook()
-    }
     
-    @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
-        self.output.loginWithGoogle()
-    }
+    //Routing
     
+    
+    
+   
+    
+
 }
 
 extension LoginViewController {
