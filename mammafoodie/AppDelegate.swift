@@ -24,20 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
         let currentUser = Auth.auth().currentUser
-        
-        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
-        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
-        
-        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        navigationController.viewControllers = [loginVC]
-        self.window?.rootViewController = navigationController
-        
-        if currentUser != nil { //User is already logged in, show home screen
-            
-            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-             loginVC.navigationController?.pushViewController(homeVC, animated: false)
-        }
+//        
+//        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
+//        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
+//        
+//        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        
+//        navigationController.viewControllers = [loginVC]
+//        self.window?.rootViewController = navigationController
+//        
+//        if currentUser != nil { //User is already logged in, show home screen
+//            
+//            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+//             loginVC.navigationController?.pushViewController(homeVC, animated: false)
+//        }
         
         return true
     }

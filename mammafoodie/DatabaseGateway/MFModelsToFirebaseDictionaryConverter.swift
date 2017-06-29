@@ -68,6 +68,30 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
 
+    
+    
+//    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
+//
+//        return [
+//
+//            dish.id : [
+//                "id"            : dish.id as AnyObject,
+//                "name"          : dish.name as AnyObject,
+//                "chefID"        : dish.chefID as AnyObject,
+//                "mediaID"       : dish.mediaID as AnyObject,
+//                "description"   : dish.description as AnyObject,
+//                "totalSlots"    : dish.totalSlots as AnyObject,
+//                "availableSlots": dish.availableSlots as AnyObject,
+//                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
+//                "boughtOrders"  : dish.boughtOrders as AnyObject,
+//                "cuisineID"     : dish.cuisineID as AnyObject,
+//                "tag"           : dish.tag as AnyObject,
+//                "dishType"      : dish.dishType?.rawValue as? AnyObject
+//            ] as AnyObject
+//        ]
+//    }
+    
+    
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
         return [
             user.id : [
@@ -95,9 +119,9 @@ class MFModelsToFirebaseDictionaryConverter {
     
     
 //    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
-//
+//        
 //        return [
-//
+//            
 //            dish.id : [
 //                "id"            : dish.id as AnyObject,
 //                "name"          : dish.name as AnyObject,
@@ -109,9 +133,8 @@ class MFModelsToFirebaseDictionaryConverter {
 //                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
 //                "boughtOrders"  : dish.boughtOrders as AnyObject,
 //                "cuisineID"     : dish.cuisineID as AnyObject,
-//                "tag"           : dish.tag as AnyObject,
-//                "dishType"      : dish.dishType?.rawValue as? AnyObject
-//            ] as AnyObject
+//                "tag"           : dish.tag as AnyObject
+//                ] as AnyObject
 //        ]
 //    }
     
@@ -121,6 +144,6 @@ class MFModelsToFirebaseDictionaryConverter {
 //            media.accessMode = .owner as AnyObject
 //        ]
 //    }
-    
+//    
     
 }
