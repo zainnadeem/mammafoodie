@@ -34,9 +34,9 @@ class ActivityTblCell: UITableViewCell {
 //            self.imgCharacterEmoji.image = nil
 //            self.conWidthImgCharacterEmoji.constant = 0
 //        default:
-//            
-//            self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
-//            self.conWidthImgCharacterEmoji.constant = 64
+        
+            self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
+            self.conWidthImgCharacterEmoji.constant = 64
 //        }
     }
     

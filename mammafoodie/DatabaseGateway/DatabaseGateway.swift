@@ -1,7 +1,12 @@
-import Firebase
+import UIKit
+import FirebaseCore
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 enum FirebaseReference: String {
     
+    case user = "User"
     case media = "Media"
     case liveVideos = "LiveVideos"
     case dishRequests = "DishRequests"
@@ -127,14 +132,14 @@ extension DatabaseGateway {
     func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = id
-        liveStream.contentId = streamName
+        liveStream.contentID = streamName
         return liveStream
     }
     
     func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.contentId = name
+        liveStream.contentID = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -249,6 +254,8 @@ extension DatabaseGateway {
             completion()
         }
         
+<<<<<<< HEAD
+=======
     }
 }
 
@@ -296,9 +303,139 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
+
+}
+
+//MARK: - Dish
+extension DatabaseGateway {
+    
+    
+    func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
+        
+        FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let dish:MFDish = MFDish(from: dishData)
+            
+            completion(dish)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+    
+    
+    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
     
 }
 
+//MARK: - Media
+extension  DatabaseGateway {
+    
+    func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFMedia?)->Void ){
+        
+        FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let media:MFMedia = MFMedia(from: mediaData)
+            
+            completion(media)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+>>>>>>> origin/CreatingUserEntity
+    }
+    
+    
+}
+
+<<<<<<< HEAD
+
+//MARK: - User
+extension DatabaseGateway {
+    
+    func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
+        
+        let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
+            completion(error?.localizedDescription)
+        }
+    }
+    
+    func updateUserEntity(with model:MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id!).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
+    
+    func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
+        
+        FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let user:MFUser = MFUser(from: userData)
+            user.id = userID
+            
+            completion(user)
+=======
+//MARK: NewsFeed
+
+extension DatabaseGateway {
+    
+    func getNewsFeedWith(newsFeedID:String, _ completion:@escaping (_ activity:MFNewsFeed?)->Void ) {
+        
+        FirebaseReference.newsFeed.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let newsFeedData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
+                
+            completion(newsFeed)
+>>>>>>> origin/CreatingUserEntity
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> origin/CreatingUserEntity
+    }
+    
+}
+
+<<<<<<< HEAD
 //MARK: - Dish
 extension DatabaseGateway {
     
@@ -382,3 +519,68 @@ extension DatabaseGateway {
     }
     
 }
+=======
+
+
+// MARK: - Media
+extension DatabaseGateway {
+    func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
+        let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
+        FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
+            completion(error)
+        }
+    }
+}
+
+// MARK: - Media
+extension DatabaseGateway {
+    func saveMedia(_ media : MFMedia, completion : @escaping (Error?) -> Void) {
+        let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
+        FirebaseReference.media.classReference.updateChildValues(mediaDict) { (error, ref) in
+            completion(error)
+        }
+    }
+}
+
+// MARK: - Save Image and Video
+extension DatabaseGateway {
+    
+    func save(data : Data, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let pathRef = storageRef.child(path)
+        pathRef.putData(data, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                completion(nil, error)
+                return
+            }
+            completion(metadata.downloadURL(), nil)
+        }
+    }
+    
+    func save(fileAt : URL, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let pathRef = storageRef.child(path)
+        pathRef.putFile(from: fileAt, metadata: nil) { (metaData, error) in
+            guard let metadata = metaData else {
+                completion(nil, error)
+                return
+            }
+            completion(metadata.downloadURL(), error)
+        }
+    }
+    
+    
+    func save(image : UIImage, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+            self.save(data: imageData, at: path, completion: completion)
+        } else {
+            completion(nil, NSError.init(domain: "Image is invalid", code: 401, userInfo: nil))
+        }
+    }
+    
+    func save(video : URL, at path : String, completion : @escaping (URL?, Error?) -> Void) {
+        self.save(fileAt: video, at: path, completion: completion)
+    }
+}
+
+>>>>>>> origin/CreatingUserEntity

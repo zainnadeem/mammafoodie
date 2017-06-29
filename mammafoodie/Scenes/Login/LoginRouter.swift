@@ -14,20 +14,11 @@ class LoginRouter: LoginRouterInput {
     
     func openSegue(_ segue: UIStoryboardSegue) {
         
-        //        guard let identifier = segue.identifier else {
-        //            assertionFailure("Segue had no identifier")
-        //            return
-        //        }
-        //
-        //        guard let identifierCase = LoginViewController.ViewControllerSegue(rawValue: identifier) else {
-        //            assertionFailure("identifier case not found")
-        //            return
-        //        }
-        
-        //        switch identifierCase  {
-        //        case .unnamed:
-        //            print("unnamed segue")
-        //        }
+               guard let identifier = segue.identifier else {
+//                    assertionFailure("Segue had no identifier")
+                    return
+                }
+      
         
     }
     

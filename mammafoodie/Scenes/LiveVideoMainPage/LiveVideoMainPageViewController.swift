@@ -39,7 +39,7 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
             
         }
         
-        let user = dData.getUserForProfilePage()
+        _ = dData.getUserForProfilePage()
         
     }
    

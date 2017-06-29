@@ -1,27 +1,42 @@
 
-enum DishType : String {
-    case veg
-    case nonveg
-    case unknown
+
+import Foundation
+
+
+enum MFDishType : String {
+    case Veg = "veg"
+    case NonVeg = "nonveg"
+    case Vegan = "vegan"
+    case None = "NA"
 }
 
 class MFDish {
     var id: String!
     var name: String!
-    var chefID: String! //MFUser id
     var mediaID: String?  //MFMedia id
+    
+    var type : MFDishType!
+    var user: MFUser!
+    var media: MFMedia!
+    
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
+    
     var boughtOrders: [String:Date] = [:] //MFOrder id
     var cuisineID: String! //MFCusine id
     var tag:String!
-    var dishType:DishType?
+    
+    
+    var preparationTime : Double!
+    var boughtBy: [MFOrder:Date] = [:]
+    var cuisine: MFCuisine!
+    
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
-        //        self.user = user
+//        self.user = user
         self.description = description
         self.name = name
     }
@@ -41,6 +56,7 @@ class MFDish {
         self.dishType = dishType
         
     }
+    
     
     init(from dishDataDictionary:[String:AnyObject]){
         self.id = dishDataDictionary["id"] as? String ?? ""
@@ -64,8 +80,25 @@ class MFDish {
         }
         
     }
+    init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType, media : MFMedia) {
+        self.id = FirebaseReference.dishes.generateAutoID()
+        self.name = name
+        self.type = dishType
+        self.preparationTime = preparationTime
+        self.description = description
+        self.cuisine = cuisine
+        self.totalSlots = totalSlots
+        self.pricePerSlot = perSlot
+        self.media = media
+    }
     
-}
+    func save() {
+        DatabaseGateway.sharedInstance.saveDish(self) { (error) in
+            print(error?.localizedDescription ?? "No Error")
+        }
+    }
+    
+        
 
 extension MFDish: Hashable {
     var hashValue: Int {

@@ -7,7 +7,7 @@ protocol RegisterViewControllerInput {
 protocol RegisterViewControllerOutput {
 //    func RegisterAdapterTextSetup(_ textFeild:UITextField)
     func updateShadow()
-
+    func register(name: String, email: String, password: String)
 }
 
 class RegisterViewController: UIViewController, RegisterViewControllerInput , UITextFieldDelegate{
@@ -57,6 +57,8 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         registerBtnSetup()
         self.RegisterAdapterTextfeild.setupTextfeildView()
         output.updateShadow()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     
@@ -65,12 +67,16 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         registerBtn.layer.borderWidth = 1
         registerBtn.layer.borderColor = UIColor.clear.cgColor
         registerBtn.clipsToBounds = true
-
     }
+    
    
     // MARK: - Event handling
     
     // MARK: - Display logic
+    
+       func showAlert(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     
     override func viewDidLayoutSubviews() {
@@ -79,7 +85,51 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     }
     
     
+    @IBAction func registerBtn(_ sender: Any) {
         
+        guard validateCredentials() && isValidEmail(emailStr: emailTextFeild.text!) else {return
+        }
+        output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
+    }
+    
+    
+    
+    func validateCredentials() -> Bool{
+        guard (emailTextFeild.text != nil && passTextFeild.text != nil && nameTextField.text != ""), !emailTextFeild.text!.isEmpty, !passTextFeild.text!.isEmpty, !nameTextField.text!.isEmpty else {
+            let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.showAlert(alertController: alertController)
+            return false
+        }
+        
+        return true
+    }
+    
+    func isValidEmail(emailStr:String) -> Bool {
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*_+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        
+        if !emailTest.evaluate(with: emailStr) {
+            
+            let alertController = UIAlertController(title: "Error" , message: "The email entered is not in a valid format.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.showAlert(alertController: alertController)
+            
+            return false
+        }
+        
+        return true
+    }
+
+    
+    func navigateHomePage() {
+        let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+        let destViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.navigationController?.pushViewController(destViewController, animated: true)
+    }
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)

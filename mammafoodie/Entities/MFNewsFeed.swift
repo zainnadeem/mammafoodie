@@ -22,7 +22,7 @@ struct MFNewsFeed {
         self.actionUserID = actionUserId
         self.participantUserID = participantUserId
         self.attributedString = text
-        //        self.activity = activity
+//        self.activity = activity
     }
     
     init(from dictionary:[String:AnyObject]){
@@ -42,7 +42,7 @@ struct MFNewsFeed {
         self.participantUserID = dictionary["participantUserID"] as? String ?? ""
         self.activityID = dictionary["activityID"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
-        //        self.attributedString = dictionary[]
+//        self.attributedString = dictionary[]
         
         self.liked = dictionary["liked"] as? [String:Bool] ?? [:]
         self.comments = dictionary["comments"] as? [String:Bool] ?? [:]

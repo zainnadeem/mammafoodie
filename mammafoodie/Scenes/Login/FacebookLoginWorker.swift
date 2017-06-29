@@ -61,8 +61,8 @@ class FacebookLoginWorker {
                         }
 
                     })
-                
-        }
+
+            }
             
             guard let accessToken = FBSDKAccessToken.current() else {
                 completion("Failed to get access token. Please try again.", nil)
