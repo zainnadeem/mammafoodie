@@ -18,10 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var activityIndicatorView:UIView?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        DatabaseGateway.sharedInstance
         IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
+        
+        let currentUser = Auth.auth().currentUser
+        
+        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
+        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
+        
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        
+        navigationController.viewControllers = [loginVC]
+        self.window?.rootViewController = navigationController
+        
+        if currentUser != nil { //User is already logged in, show home screen
+            
+            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+             loginVC.navigationController?.pushViewController(homeVC, animated: false)
+        }
+        
         return true
     }
     

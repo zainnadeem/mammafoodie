@@ -199,13 +199,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not a member yet?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4B-Er-ob8">
-                                <rect key="frame" x="121.5" y="589.5" width="133" height="18.5"/>
+                                <rect key="frame" x="121" y="589.5" width="133" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKh-jH-uca">
-                                <rect key="frame" x="154.5" y="608" width="67" height="34"/>
+                                <rect key="frame" x="153.5" y="608" width="67" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.52549019610000003" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,7 +352,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p49-rR-F27">
-                                <rect key="frame" x="147.5" y="164" width="81" height="21.5"/>
+                                <rect key="frame" x="147" y="164" width="81" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -539,7 +539,7 @@
         <!--Home View Controller-->
         <scene sceneID="PeX-0f-9TP">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="Gmm-pi-Gxw" customClass="HomeViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="Gmm-pi-Gxw" customClass="HomeViewController" customModule="mamma__foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OYu-yR-xKq"/>
                         <viewControllerLayoutGuide type="bottom" id="Pis-Tz-Be3"/>
@@ -619,7 +619,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="98.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Po-2g-Bxg">
-                                                            <rect key="frame" x="152" y="8" width="72" height="18"/>
+                                                            <rect key="frame" x="151.5" y="8" width="72" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="fVj-Zl-c8t"/>
                                                             </constraints>
@@ -1660,7 +1660,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tD-UA-LtQ">
-                                        <rect key="frame" x="59" y="15" width="90" height="20"/>
+                                        <rect key="frame" x="59" y="15.5" width="90" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="gPA-dP-zUo"/>
                                         </constraints>
@@ -2513,7 +2513,7 @@ Di0OMA5CDkUOSgAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAA5MA
         <image name="user-shape" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yHM-1k-cqk"/>
         <segue reference="vRp-5w-I2X"/>
+        <segue reference="thr-eX-OZE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -2,10 +2,10 @@ import UIKit
 import SafariServices
 import FirebaseAuth
 import Alamofire
+import KLCPopup
 
 protocol LoginViewControllerInput {
     func showHomeScreen()
-    func showAlert(alertController:UIAlertController)
     func viewControllerToPresent() -> UIViewController
 }
 
@@ -13,7 +13,7 @@ protocol LoginViewControllerOutput {
     func signUpWith(credentials:Login.Credentials)
     func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-    
+    func forgotpasswordWorker(email: String)
     func loginWithFacebook()
     func logout()
 }
@@ -37,6 +37,15 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var loginButn: UIButton!
+    
+    
+    @IBOutlet var forgotPasswordPopup: UIView!
+    
+    @IBOutlet weak var txfForgotPassword: UITextField!
+    
+    @IBOutlet weak var btnForgotPasswordSubmit: UIButton!
+    
+    var KLCforgotPasswordPopup:KLCPopup?
     
     
     // MARK: - Object lifecycle
@@ -63,6 +72,13 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         passwordView.layer.borderColor = UIColor.clear.cgColor
         self.txtPassword.delegate = self
         self.txtEmail.delegate = self
+        
+        self.btnForgotPasswordSubmit.layer.cornerRadius = 22.5
+        self.btnForgotPasswordSubmit.clipsToBounds = true
+        
+        self.forgotPasswordPopup.layer.cornerRadius = 3
+        self.forgotPasswordPopup.clipsToBounds = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,12 +107,35 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
 
 
-   
-    func forgotpasswordWorker(success:String) {
-        let alert = UIAlertController(title: "Alert", message: success, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func forgotPasswordClicked(_ sender: UIButton) {
+        
+        
+        let forgotPasswordVC = self.forgotPasswordPopup
+        forgotPasswordVC?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 40, height: 260)
+        
+        
+    KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+        
+        KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 130) , in: self.view)
+        
+        
+        txfForgotPassword.text = txtEmail.text
+        txfForgotPassword.becomeFirstResponder()
+        
+        
     }
+    
+    
+    @IBAction func forgotPasswordSubmitButtonClicked(_ sender: UIButton) {
+        
+        
+        guard self.txfForgotPassword.text != nil && self.txfForgotPassword.text != "" else {return}
+        
+        output.forgotpasswordWorker(email: self.txfForgotPassword.text!)
+        
+        KLCforgotPasswordPopup?.dismiss(true)
+    }
+    
     
     func updateShadow() {
         if self.shapeLayer == nil {
@@ -168,7 +207,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
-            self.showAlert(alertController: alertController)
+            self.present(alertController, animated: true, completion: nil)
             return false
         }
         
@@ -185,7 +224,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             let alertController = UIAlertController(title: "Error" , message: "The email entered is not in a valid format.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)
-            self.showAlert(alertController: alertController)
+            self.present(alertController, animated: true, completion: nil)
             
             return false
         }
@@ -203,15 +242,48 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     func showHomeScreen() {
         
-        let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        if let  currentUser = Auth.auth().currentUser{
+           print(currentUser.uid)
+            
+//            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
+            
+            
+//            let user = MFUser()
+//            
+//            
+//            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
+//                print("User created")
+//            })
+            
+//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
+//                if let user = user {
+//                    user.name = "nithin"
+//                    user.following.updateValue(true, forKey: "Dish1")
+//                    user.following.updateValue(true, forKey: "Dish2")
+                    
+                        //["Krishna":true, "sreeram":true]
+                   // user.cookedDishes = ["Dish3":true, "Dish4":true]
+                    //user.email = "nithintest@gmail.com"
+
+//                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
+//                        if errorMessage != nil {
+//                            print("Error updating profile")
+//                        }
+//                    })
+//                }
+//             
+//            })
+            
+            
+            
+        }
+        
+        let homeVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         self.navigationController?.pushViewController(homeVC, animated: true)
         
     }
     
-    func showAlert(alertController: UIAlertController) {
-        self.present(alertController, animated: true, completion: nil)
-    }
- 
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         

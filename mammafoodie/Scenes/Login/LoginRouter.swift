@@ -19,13 +19,6 @@ class LoginRouter: LoginRouterInput {
                     return
                 }
       
-        if identifier == "forgotPassword"{
-         
-            let destinationVC = segue.destination as! ForgotPasswordViewController
-            destinationVC.email = viewController.txtEmail.text
-            
-            
-        }
         
     }
     

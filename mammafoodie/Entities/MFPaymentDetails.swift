@@ -1,3 +1,5 @@
+import Foundation
+
 class MFPaymentDetails {
     var id: String!
     var order: MFOrder!
