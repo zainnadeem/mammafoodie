@@ -41,9 +41,11 @@ class MFDish {
         self.name = name
     }
     
-    init(id: String, name: String, chefID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:DishType) {
+    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
         self.id = id
-        self.chefID = chefID
+        
+        self.user = MFUser() ; user.id = userID
+        
         self.description = description
         self.name = name
         self.cuisineID = cuisineID
@@ -53,7 +55,7 @@ class MFDish {
         self.boughtOrders = boughtOrders
         self.mediaID = mediaID
         self.tag = tag
-        self.dishType = dishType
+        self.type = dishType
         
     }
     
@@ -61,7 +63,10 @@ class MFDish {
     init(from dishDataDictionary:[String:AnyObject]){
         self.id = dishDataDictionary["id"] as? String ?? ""
         self.name = dishDataDictionary["name"] as? String ?? ""
-        self.chefID = dishDataDictionary["chefID"]   as? String ?? ""
+        
+        let userID = dishDataDictionary["userID"]   as? String ?? ""
+        self.user = MFUser() ; user.id = userID
+        
         self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
@@ -73,10 +78,10 @@ class MFDish {
         
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
         
-        if let dishType = DishType(rawValue: dishType){
-            self.dishType = dishType
+        if let dishType = MFDishType(rawValue: dishType){
+            self.type = dishType
         } else {
-            self.dishType = .unknown
+            self.type = .None
         }
         
     }
@@ -98,7 +103,7 @@ class MFDish {
         }
     }
     
-        
+}
 
 extension MFDish: Hashable {
     var hashValue: Int {

@@ -37,7 +37,7 @@ class LiveVideoWorker {
     }
     
     func subscribe(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
-        self.liveVideoGateway.subscribe(liveVideo.contentID, { (newCameraView) in
+        self.liveVideoGateway.subscribe(liveVideo.contentId, { (newCameraView) in
             completion(newCameraView)
         })
     }

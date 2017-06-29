@@ -14,16 +14,16 @@ class MFModelsToFirebaseDictionaryConverter {
     
     // Need to update this
     class func dictionary(from media: MFMedia) -> FirebaseDictionary {
-        return [
-            media.id: [
-                "id" : media.id,
-                "userId" : media.user.id,
-                "type" : media.type.rawValue,
-                "cover_small" : media.cover_small?.absoluteString ?? "",
-                "cover_large" : media.cover_large?.absoluteString ?? "",
-                "dishId" : media.dish.id,
-                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate
-                ] as AnyObject
+        return [ :
+//            media.id: [
+//                "id" : media.id as AnyObject ,
+//                "userId" : media.user.id as AnyObject,
+//                "type" : media.type.rawValue as AnyObject,
+//                "cover_small" : media.cover_small?.absoluteString ?? "" as AnyObject,
+//                "cover_large" : media.cover_large?.absoluteString ?? "" as AnyObject,
+//                "dishId" : media.dish.id as AnyObject,
+//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate as AnyObject
+//                ] as AnyObject
         ]
     }
     
