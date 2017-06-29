@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 struct MFConversation {
     var id: String!
     var participants: [MFUser:Date] = [:]

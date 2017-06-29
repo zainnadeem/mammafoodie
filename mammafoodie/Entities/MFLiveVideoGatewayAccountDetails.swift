@@ -1,3 +1,5 @@
+import Foundation
+
 struct MFLiveVideoGatewayAccountDetails {
     var host: String!
     var serviceProviderName: String?

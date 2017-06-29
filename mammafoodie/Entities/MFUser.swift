@@ -1,3 +1,5 @@
+import Foundation
+
 class MFUser {
     var id: String!
     var name: String!

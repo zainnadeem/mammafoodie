@@ -21,7 +21,15 @@ class MosaicCollectionViewCell: UICollectionViewCell {
     
     func updateUI(){
 
-        screenShotImageView.image = UIImage(named: self.media.cover_large!)
+        do {
+            if let coverURL = self.media.cover_large {
+                let imageData = try Data.init(contentsOf: coverURL)
+                screenShotImageView.image = UIImage(data : imageData)
+                
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
 
 //        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
 //        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)

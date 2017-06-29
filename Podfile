@@ -30,4 +30,11 @@ target 'mammafoodie' do
     pod 'KLCPopup'
     pod 'SDWebImage', '~>3.8'
 
+    target 'mammafoodieTests' do
+        pod 'Firebase/Core'
+        pod 'Firebase/Database'
+        pod 'Firebase/Auth'
+        pod 'Firebase/Storage'
+    end
+
 end

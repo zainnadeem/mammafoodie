@@ -60,6 +60,27 @@ extension UITextField {
         self.rightView = rightImageViewContainer
     }
     
+    enum TextFieldViewSide {
+        case rightSide, leftSide
+    }
+    
+    func add(padding : CGFloat, viewMode : TextFieldViewSide) {
+        var paddingFrame : CGRect = self.frame
+        paddingFrame.origin = .zero
+        paddingFrame.size.width = padding
+        
+        let paddingView = UIView.init(frame: paddingFrame)
+        switch viewMode {
+        case .rightSide:
+            self.rightView = paddingView
+            self.rightViewMode = .always
+            
+        default:
+            self.leftView = paddingView
+            self.leftViewMode = .always
+        }
+    }
+    
     @objc fileprivate func clearTextField(_ sender: UIButton) {
         var clear = true
         if let del = self.delegate {

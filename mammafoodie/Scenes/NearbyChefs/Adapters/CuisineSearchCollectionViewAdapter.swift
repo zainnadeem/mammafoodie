@@ -67,7 +67,7 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let filter = self.cuisineFilters[indexPath.item]
+        _ = self.cuisineFilters[indexPath.item]
         let height = collectionView.frame.size.height * 0.9
 //        var width = filter.name.calculateWidth(withConstrainedHeight: 21, font: CuisineFilterCellFont)
 //        if width < 90 {
