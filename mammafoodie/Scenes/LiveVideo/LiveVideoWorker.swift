@@ -3,13 +3,13 @@ import UIKit
 class LiveVideoWorker {
     // MARK: - Business Logic
     
-    let liveVideoGateway: LiveVideoGateway = LiveVideoGateway()
+    var liveVideoGateway: LiveVideoGateway? = LiveVideoGateway()
     
     typealias LiveVideoViewClosure = (_ cameraView: UIView)->Void
     
     func start(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
-        self.liveVideoGateway.delegate = self
-        self.liveVideoGateway.getConfigurations({ (cameraView) in
+        self.liveVideoGateway!.delegate = self
+        self.liveVideoGateway!.getConfigurations({ (cameraView) in
             if liveVideo.accessMode == .owner {
                 self.publish(liveVideo, completion)
             } else {
@@ -19,7 +19,7 @@ class LiveVideoWorker {
     }
     
     func publish(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
-        self.liveVideoGateway.publish(with: liveVideo.id, { (newCameraView) in
+        self.liveVideoGateway!.publish(with: liveVideo.id, { (newCameraView) in
             completion(newCameraView)
             self.publishStreamToDatabase(liveVideo, completion)
         })
@@ -37,7 +37,7 @@ class LiveVideoWorker {
     }
     
     func subscribe(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
-        self.liveVideoGateway.subscribe(liveVideo.contentId, { (newCameraView) in
+        self.liveVideoGateway!.subscribe(liveVideo.contentId, { (newCameraView) in
             completion(newCameraView)
         })
     }
@@ -46,7 +46,7 @@ class LiveVideoWorker {
         if liveVideo.accessMode == .owner {
             self.unpublishStreamFromDatabase(liveVideo)
         }
-        self.liveVideoGateway.stop()
+        self.liveVideoGateway!.stop()
     }
 }
 

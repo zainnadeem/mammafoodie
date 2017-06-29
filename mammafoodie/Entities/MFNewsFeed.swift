@@ -17,6 +17,10 @@ struct MFNewsFeed {
     var liked: [String:Bool] = [:] //MFUser id
     var comments: [String:Bool] = [:] //MFComments id
     
+    init() {
+        
+    }
+    
     init(id: String!, actionUserId: String, participantUserId: String, activity: MFActivity, text: NSMutableAttributedString){
         self.id = id
         self.actionUserID = actionUserId

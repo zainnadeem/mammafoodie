@@ -79,9 +79,9 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if self.mode == .activity {
-            return 53
+            return 65
         } else {
-            return 93
+            return 101
         }
     }
     

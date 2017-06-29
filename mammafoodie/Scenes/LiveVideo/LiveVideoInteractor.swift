@@ -12,7 +12,7 @@ protocol LiveVideoInteractorOutput {
 
 class LiveVideoInteractor: LiveVideoInteractorInput {
     
-    var output: LiveVideoInteractorOutput!
+    var output: LiveVideoInteractorOutput?
     lazy var worker: LiveVideoWorker = LiveVideoWorker()
     
     // MARK: - Business logic
@@ -20,8 +20,8 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     func start(_ liveVideo: MFMedia) {
         self.worker.start(liveVideo, { (cameraView) in
             if self.output != nil && cameraView != nil {
-                self.output.show(cameraView)
-                self.output.showVideoId(liveVideo)
+                self.output!.show(cameraView)
+                self.output!.showVideoId(liveVideo)
             }
         })
     }

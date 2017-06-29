@@ -87,10 +87,21 @@
 		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
+		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
+		2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
+		2C7C13A01EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
 		2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
+		2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8290931F027CF000BB7ECA /* CircleView.swift */; };
+		2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8290931F027CF000BB7ECA /* CircleView.swift */; };
+		2C878AD61F022DA600A630DF /* MFNavigationBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */; };
+		2C878AD91F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */; };
+		2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */; };
 		2C946EB21EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */; };
 		2C946EB31EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */; };
 		2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C946EB11EFA7B9200FD2FC0 /* CommentTblCell.xib */; };
@@ -419,8 +430,14 @@
 		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
+		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
+		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
+		2C7C139E1EFA9BFD00C673DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
+		2C8290931F027CF000BB7ECA /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationBarDelegate.swift; sourceTree = "<group>"; };
+		2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionPresentAnimator.swift; sourceTree = "<group>"; };
 		2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTblCell.swift; sourceTree = "<group>"; };
 		2C946EB11EFA7B9200FD2FC0 /* CommentTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTblCell.xib; sourceTree = "<group>"; };
 		2C946EB71EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewAdapter.swift; sourceTree = "<group>"; };
@@ -858,6 +875,16 @@
 			path = MenuItemTblCell;
 			sourceTree = "<group>";
 		};
+		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				2C878AD71F022DF700A630DF /* Animators */,
+				2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */,
+				2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */,
+			);
+			path = MFNavigationController;
+			sourceTree = "<group>";
+		};
 		2C8001261EF90945005026CE /* ActivityTblCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,6 +892,15 @@
 				2C8001281EF9094E005026CE /* ActivityTblCell.xib */,
 			);
 			path = ActivityTblCell;
+			sourceTree = "<group>";
+		};
+		2C878AD71F022DF700A630DF /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */,
+				2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */,
+			);
+			path = Animators;
 			sourceTree = "<group>";
 		};
 		2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */ = {
@@ -960,6 +996,7 @@
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
+				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1297,6 +1334,7 @@
 			isa = PBXGroup;
 			children = (
 				57801F6B1EF82FE2002E18EF /* GradientView.swift */,
+				2C8290931F027CF000BB7ECA /* CircleView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1362,10 +1400,12 @@
 				113948CA1F05082400F98E74 /* HUDProtocols.swift */,
 				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
+				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
 				2CE4793D1EF97256003D0F9F /* Extensions */,
+				2C5E8B001EFD11D8009F24F5 /* MFNavigationController */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 				2CB8BEA01EF246EA00DA78B3 /* Storyboards */,
 				57801F6A1EF82FE2002E18EF /* UIView */,
@@ -1603,7 +1643,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = R4UP7L985F;
+						DevelopmentTeam = 3K8C5C5YMF;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1798,7 +1838,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */,
+				2CE479421EF97256003D0F9F /* StringExtention.swift in Sources */,
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
+				2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
+				2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
 				2CFB9B891EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				F0BBF3A21EF27ACA00D55615 /* (null) in Sources */,
 				F0BBF3A01EF27ACA00D55615 /* (null) in Sources */,
@@ -1862,6 +1906,7 @@
 				2C12BCA81EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2C12BCAA1EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
+				2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 			);
@@ -1982,6 +2027,7 @@
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
+				2C878AD91F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */,
@@ -2003,12 +2049,14 @@
 				2CFB9BA41EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
+				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
+				2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
@@ -2019,6 +2067,7 @@
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
+				2C878AD61F022DA600A630DF /* MFNavigationBarDelegate.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
@@ -2078,6 +2127,7 @@
 				57DDD0BB1EFC015B00C3BA21 /* GoCookStep2ViewController.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
+				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
@@ -2321,7 +2371,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = 3K8C5C5YMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2344,7 +2394,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = 3K8C5C5YMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

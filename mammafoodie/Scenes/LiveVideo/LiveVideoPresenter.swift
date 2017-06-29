@@ -11,15 +11,19 @@ protocol LiveVideoPresenterOutput: class {
 }
 
 class LiveVideoPresenter: LiveVideoPresenterInput {
-    weak var output: LiveVideoPresenterOutput!
+    weak var output: LiveVideoPresenterOutput?
     
     // MARK: - Presentation logic
     
     func show(_ cameraView: UIView) {
-        self.output.show(cameraView)
+        if self.output != nil {
+            self.output!.show(cameraView)
+        }
     }
     
     func showVideoId(_ liveVideo: MFMedia) {
-        self.output.showVideoId(liveVideo)
+        if self.output != nil {
+            self.output!.showVideoId(liveVideo)
+        }
     }
 }
