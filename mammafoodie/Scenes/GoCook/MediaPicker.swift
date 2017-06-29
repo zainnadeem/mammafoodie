@@ -12,7 +12,7 @@ import Photos
 import MobileCoreServices
 
 typealias MediaPickerImageCompletion = (UIImage?, Error?) -> Void
-typealias MediaPickerVideoCompletion = (String?, Error?) -> Void
+typealias MediaPickerVideoCompletion = (URL?, Error?) -> Void
 
 enum MediaType {
     case Video
@@ -151,6 +151,22 @@ class MediaPicker: NSObject {
         }
     }
     
+    class func createThumbnailOfVideoFromFileURL(_ strVideoURL: String) -> UIImage? {
+        
+        let asset = AVAsset(url: URL(string: strVideoURL)!)
+        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        let time = CMTimeMakeWithSeconds(Float64(1), 100)
+        do {
+            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage: img)
+            return thumbnail
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
+    
 }
 
 extension MediaPicker : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -162,6 +178,19 @@ extension MediaPicker : UIImagePickerControllerDelegate, UINavigationControllerD
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if self.mediaType == .Video {
+            if let videoURL =  info[UIImagePickerControllerMediaURL] as? URL {
+                self.videoCompletion?(videoURL, nil)
+            } else {
+                self.videoCompletion?(nil, NSError.init(domain: "No Video Found", code: 404, userInfo: nil))
+            }
+        } else {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                self.imageCompletion?(image, nil)
+            } else {
+                self.imageCompletion?(nil, NSError.init(domain: "Image not found", code: 404, userInfo: nil))
+            }
+        }
         self.imagePicker.dismiss(animated: true) {
             
         }

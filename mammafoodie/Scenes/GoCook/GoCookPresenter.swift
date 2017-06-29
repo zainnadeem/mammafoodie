@@ -90,6 +90,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.selectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewMenu)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         case .vidup:
@@ -97,6 +98,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.selectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewMenu)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         case .picture:
@@ -104,6 +106,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.selectView(self.viewController?.viewMenu)
             self.deselectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewVidups)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         default:
@@ -111,6 +114,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.deselectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewMenu)
             self.viewController?.btnNext.removeGradient()
+            self.viewController?.btnNext.isEnabled = false
             break
             
         }

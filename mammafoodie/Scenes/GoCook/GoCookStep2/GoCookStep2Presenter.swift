@@ -7,6 +7,7 @@ protocol GoCookStep2PresenterInput {
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
+    func clearData()
 }
 
 protocol GoCookStep2PresenterOutput: class {
@@ -18,6 +19,18 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
     weak var viewController : GoCookStep2ViewController?
     
     // MARK: - Presentation logic
+    
+    func clearData() {
+        self.viewController?.txtTitle.text = ""
+        self.viewController?.txtDealDuration.text = ""
+        self.viewController?.pickerDealDuration.countDownDuration = 0
+        self.viewController?.pickerPreparationTime.countDownDuration = 0
+        self.viewController?.txtPreparationTime.text = ""
+        self.viewController?.textViewDescription.text = ""
+        self.viewController?.selectedDiet = .None
+        self.viewController?.selectedMediaUploadType = .None
+        
+    }
     
     func setupViewController() {
         if let allTextFields = self.viewController?.allTextFields {

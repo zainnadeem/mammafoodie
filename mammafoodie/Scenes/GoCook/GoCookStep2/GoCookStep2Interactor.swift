@@ -7,6 +7,7 @@ protocol GoCookStep2InteractorInput {
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
+    func clearData()
 }
 
 protocol GoCookStep2InteractorOutput {
@@ -16,6 +17,7 @@ protocol GoCookStep2InteractorOutput {
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
+    func clearData()
 }
 
 class GoCookStep2Interactor: GoCookStep2InteractorInput {
@@ -46,6 +48,9 @@ class GoCookStep2Interactor: GoCookStep2InteractorInput {
     
     func showOption(_ option : MFMediaType) {
         self.output.showOption(option)
+    }
+    func clearData() {
+        self.output.clearData()
     }
     
 }

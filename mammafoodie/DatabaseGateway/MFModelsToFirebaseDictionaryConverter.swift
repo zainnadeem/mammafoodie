@@ -21,8 +21,10 @@ class MFModelsToFirebaseDictionaryConverter {
                 "type" : media.type.rawValue,
                 "cover_small" : media.cover_small?.absoluteString ?? "",
                 "cover_large" : media.cover_large?.absoluteString ?? "",
+                "media_url" : media.mediaURL?.absoluteString ?? "",
                 "dishId" : media.dish.id,
-                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate
+                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
+                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
                 ] as AnyObject
         ]
     }
@@ -36,6 +38,7 @@ class MFModelsToFirebaseDictionaryConverter {
                 "description" : dish.description ?? "",
                 "totalSlots" : dish.totalSlots,
                 "pricePerSlot" : dish.pricePerSlot,
+                "availableSlots" : dish.totalSlots,
                 "type" : dish.type.rawValue,
                 "cuisineId" : dish.cuisine.id
                 ] as AnyObject

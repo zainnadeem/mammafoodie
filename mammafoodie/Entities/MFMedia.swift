@@ -19,7 +19,6 @@ class MFMedia {
     var contentId: String!
     var cover_large: URL?
     var cover_small: URL?
-    var dealTime : Double = -1
     var createdAt: Date!
     var endedAt: Date?
     weak var dish: MFDish!
@@ -27,7 +26,7 @@ class MFMedia {
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
     var user: MFUser!
-    
+    var mediaURL : URL!
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -77,10 +76,15 @@ class MFMedia {
         return URL.init(string: string)!
     }
     
-    func save() {
+    func save(_ completion : @escaping (Error?) -> Void ) {
         DatabaseGateway.sharedInstance.saveMedia(self) { (error) in
-            print(error?.localizedDescription ?? "No Error")
+            completion(error)
         }
+    }
+    
+    func getStoragePath() -> String {
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        return "/media/\(urlencodedID)"
     }
     
 }

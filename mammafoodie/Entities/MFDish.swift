@@ -49,7 +49,10 @@ class MFDish {
         self.media = media
     }
     
-    func save() {
+    func save(_ completion : @escaping (Error?) -> Void ) {
+        
+        self.media.save { (error) in
+        }
         DatabaseGateway.sharedInstance.saveDish(self) { (error) in
             print(error?.localizedDescription ?? "No Error")
         }

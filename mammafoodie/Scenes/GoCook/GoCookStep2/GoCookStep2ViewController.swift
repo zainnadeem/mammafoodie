@@ -11,6 +11,7 @@ protocol GoCookStep2ViewControllerOutput {
     func selectDiet(_ diet : MFDishType)
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
     func showOption(_ option : MFMediaType)
+    func clearData()
 }
 
 enum GoCookMediaUploadType {
@@ -166,10 +167,10 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         
                                     case .vidup:
                                         if let _ = self.selectedVideoPath {
+                                            ready = true
+                                        } else {
                                             ready = false
                                             self.showAlert("Required!", message: "Please select video.")
-                                        } else {
-                                            ready = true
                                         }
                                         
                                         if let _ = self.txtDealDuration.text {
@@ -180,11 +181,11 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         }
                                         
                                     case .picture:
-                                        if let _ = self.selectedVideoPath {
+                                        if let _ = self.selectedImage {
+                                            ready = true
+                                        } else {
                                             ready = false
                                             self.showAlert("Required!", message: "Please select picture.")
-                                        } else {
-                                            ready = true
                                         }
                                         
                                     default:
@@ -199,15 +200,16 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         dish.media.user = user
                                         dish.user = user
                                         media.dish = dish
-                                        media.dealTime = countDown
                                         media.createdAt = Date.init()
+                                        media.endedAt = media.createdAt.addingTimeInterval(countDown)
+                                        self.clearData()
                                         self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                     }
                                 } else {
                                     self.showAlert("Required!", message: "Please enter price per servings.")
                                 }
                             }
-                        } else {
+                        } else {              
                             self.showAlert("Required!", message: "Please enter preparation.")
                         }
                     } else {
@@ -246,8 +248,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     @IBAction func onUploadVideo(_ sender: UIButton) {
         self.selectedMediaUploadType = .VideoUpload
         self.mediaPicker = MediaPicker.pickVideo(on: self, completion: { (urlString, error) in
-            if let string = urlString {
-                self.selectedVideoPath = URL.init(fileURLWithPath: string)
+            if let videoURL = urlString {
+                self.selectedVideoPath = videoURL
             } else {
                 self.showAlert("Error!", message: "No Video found")
             }
@@ -257,16 +259,18 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     @IBAction func onShootVideo(_ sender: UIButton) {
         self.selectedMediaUploadType = .VideoShoot
         self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (urlString, error) in
-            if let string = urlString {
-                self.selectedVideoPath = URL.init(fileURLWithPath: string)
+            if let videoURL = urlString {
+                self.selectedVideoPath = videoURL
             } else {
                 self.showAlert("Error!", message: "No Video found")
             }
         })
     }
     
-    
     // MARK: - Display logic
+    func clearData() {
+        self.output.clearData()
+    }
 }
 
 extension GoCookStep2ViewController : UITextFieldDelegate {

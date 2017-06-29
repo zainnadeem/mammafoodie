@@ -94,10 +94,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     @IBAction func onStep2(_ sender: UIButton) {
-        self.output.showStep2()
+        
     }
     
     @IBAction func onNext(_ sender: UIButton) {
+        self.step2VC.clearData()
         self.output.showStep2()
     }
     
@@ -105,10 +106,51 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     // MARK: - Display logic
     func create(_ dish : MFDish, image : UIImage?, videoURL :  URL?) {
         dish.media.type = self.selectedOption
-        dish.save()
-        dish.media.save()
-//        dish.media.setCoverImage(image!) { (error) in
-//            self.showAlert(error.localizedDescription, message: nil)
-//        }
+        switch self.selectedOption {
+        case .liveVideo:
+            dish.save { (error) in
+                self.showAlert(error?.localizedDescription, message: nil)
+            }
+            
+        case .picture:
+            if let img = image {
+                DatabaseGateway.sharedInstance.save(image: img, at: dish.media.getStoragePath(), completion: { (downloadURL, error) in
+                    if let url = downloadURL {
+                        self.saveDish(dish, mediaURL: url)
+                        dish.media.setCoverImage(img) { (error) in
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlert(error?.localizedDescription, message: nil)
+                        }
+                    }
+                })
+            }
+            
+        case .vidup:
+            if let video = videoURL {
+                DatabaseGateway.sharedInstance.save(video: video, at: dish.media.getStoragePath(), completion: { (downloadURL, error) in
+                    if let url = downloadURL {
+                        self.saveDish(dish, mediaURL: url)
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlert(error?.localizedDescription, message: nil)
+                        }
+                    }
+                })
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    func saveDish(_ dish : MFDish, mediaURL : URL) {
+        dish.media.mediaURL = mediaURL
+        dish.save { (error) in
+            DispatchQueue.main.async {
+                self.showAlert(error?.localizedDescription, message: nil)
+            }
+        }
     }
 }

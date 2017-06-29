@@ -131,14 +131,14 @@ extension DatabaseGateway {
     func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = id
-        liveStream.contentId = streamName
+//        liveStream.contentId = streamName
         return liveStream
     }
     
     func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.contentId = name
+//        liveStream.contentId = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
