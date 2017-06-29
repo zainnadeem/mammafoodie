@@ -44,9 +44,8 @@ class VidupDetailPageWorker:NSObject {
         loadingIndicatorView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
     }
     
-    func PlayVideo(MediaURL:String){
-        let url = NSURL(string: MediaURL)
-        let playerItem = AVPlayerItem(url: url! as URL)
+    func PlayVideo(MediaURL:URL){
+        let playerItem = AVPlayerItem(url: MediaURL)
         avPlayer.replaceCurrentItem(with: playerItem)
         loadingIndicatorView.startAnimating()
         avPlayer.play()

@@ -271,6 +271,7 @@
 		57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */; };
 		57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
+		B6832E051F052E4200ECE835 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6832E041F052E4200ECE835 /* TimerWorker.swift */; };
 		B691513B1EF94EA500DB6481 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
@@ -588,6 +589,7 @@
 		57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Worker.swift; sourceTree = "<group>"; };
 		57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		7EC67241EBB9432A18D278A9 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6832E041F052E4200ECE835 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -1212,6 +1214,7 @@
 		2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */ = {
 			isa = PBXGroup;
 			children = (
+				B6832E041F052E4200ECE835 /* TimerWorker.swift */,
 				2CFB9BA91EFA477200C08EB3 /* VidupDetailPageConfigurator.swift */,
 				2CFB9BAA1EFA477200C08EB3 /* VidupDetailPageInteractor.swift */,
 				2CFB9BAB1EFA477200C08EB3 /* VidupDetailPageModels.swift */,
@@ -1560,7 +1563,6 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = R4UP7L985F;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1957,6 +1959,7 @@
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
+				B6832E051F052E4200ECE835 /* TimerWorker.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
@@ -2272,7 +2275,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2295,7 +2298,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

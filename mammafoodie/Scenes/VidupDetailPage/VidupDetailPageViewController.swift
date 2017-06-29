@@ -26,10 +26,9 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
     //TODO: - VidUp URL and Expire Time.
-//    var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
-//    var DishId:String = ""
-        var userId:String = "975112"
-        var DishId:String = "95380"
+    var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
+    var DishId:String = "KnmktPhvbyk0EAfUWd7"
+
     
     
     //MARK: - IBOutlet
@@ -140,7 +139,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
                 user_image.image = UIImage(data: data as Data)
             }
         }
-        
     }
     
     func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia) {

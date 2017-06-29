@@ -37,12 +37,11 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
             self.output.UserInfo(UserInfo: Userdetails)
         }
-        
-        Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
+        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
             if Dishdetails != nil {
                 self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
                 self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.id)!)
+                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.cover_large)!)
                 if Int((MediaDetails?.dealTime)!) > 0 {
                     self.VidupTimerworker.seconds = 10
                     self.VidupTimerworker.runTimer()
