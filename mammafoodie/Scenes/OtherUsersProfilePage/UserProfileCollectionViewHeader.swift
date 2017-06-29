@@ -59,7 +59,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     @IBOutlet weak var hairLineViewXConstraint: NSLayoutConstraint?
     
     
-    @IBOutlet weak var lblLikedDishesCount: UILabel!
+    @IBOutlet weak var lblFavouriteDishesCount: UILabel!
     
     
     @IBOutlet weak var lblCookedDishesCount: UILabel!
@@ -74,6 +74,9 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     @IBOutlet weak var lblActivityMenuHeader: UILabel!
     
     @IBOutlet weak var btnSettings: UIButton!
+    
+    @IBOutlet weak var favouriteDishesStackView: UIStackView!
+    
     
 
     
@@ -113,12 +116,16 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         if profileType == .othersProfile{
             btnFollow.applyGradient(colors: [color1, color2], direction: .leftToRight)
             btnSettings.isHidden = true
+            
+            favouriteDishesStackView.isHidden = true //Hide favourite dishes in others profile page
+            
         } else {
             //Own profile
             let greenColor = UIColor(red: 0, green: 0.74, blue: 0.22, alpha: 1)
             btnFollow.backgroundColor = greenColor
             btnFollow.setTitle("Go Cook", for: .normal)
             btnSettings.isHidden = false
+            favouriteDishesStackView.isHidden = false
         }
         
         menuSelectionHairlineView.applyGradient(colors: [color1, color2], direction: .leftToRight)
@@ -140,7 +147,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         self.lblDishesSold.text = data.dishesSoldCount.description
         self.lblCookedDishesCount.text = data.cookedDishes.keys.count.description
         self.lblCookedCount.text = data.cookedDishes.keys.count.description
-        self.lblLikedDishesCount.text = data.likedDishes.keys.count.description
+        self.lblFavouriteDishesCount.text = data.likedDishes.keys.count.description
         
         if let profilePicURL = data.picture{
             self.profilePicImageView.sd_setImage(with: URL(string: profilePicURL)!)

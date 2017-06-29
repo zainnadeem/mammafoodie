@@ -41,6 +41,7 @@
 		11CAE5221F0236DC0042E71F /* ForgotPasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CAE5211F0236DC0042E71F /* ForgotPasswordPopup.xib */; };
 		11CAE5261F0243A10042E71F /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAE5251F0243A10042E71F /* ForgotPasswordWorker.swift */; };
 		11CAE5281F025C970042E71F /* UserProfileCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAE5271F025C970042E71F /* UserProfileCollectionViewHeader.swift */; };
+		11CAE52C1F04DBC50042E71F /* FavouriteDishesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CAE52B1F04DBC50042E71F /* FavouriteDishesList.swift */; };
 		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */; };
@@ -374,6 +375,7 @@
 		11CAE5211F0236DC0042E71F /* ForgotPasswordPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgotPasswordPopup.xib; sourceTree = "<group>"; };
 		11CAE5251F0243A10042E71F /* ForgotPasswordWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordWorker.swift; sourceTree = "<group>"; };
 		11CAE5271F025C970042E71F /* UserProfileCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewHeader.swift; sourceTree = "<group>"; };
+		11CAE52B1F04DBC50042E71F /* FavouriteDishesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteDishesList.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -657,6 +659,7 @@
 		110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				11CAE52A1F04DBB00042E71F /* FavouriteDishesList */,
 				110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */,
 				110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */,
 				110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */,
@@ -702,6 +705,14 @@
 				110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */,
 			);
 			path = SlotSelection;
+			sourceTree = "<group>";
+		};
+		11CAE52A1F04DBB00042E71F /* FavouriteDishesList */ = {
+			isa = PBXGroup;
+			children = (
+				11CAE52B1F04DBC50042E71F /* FavouriteDishesList.swift */,
+			);
+			path = FavouriteDishesList;
 			sourceTree = "<group>";
 		};
 		2399BC92A1B9B588BDDCF277 /* Pods */ = {
@@ -1771,6 +1782,7 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
+				11CAE52C1F04DBC50042E71F /* FavouriteDishesList.swift in Sources */,
 				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */,
