@@ -103,6 +103,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         }else{
             lbtn_like.isSelected = true
             output.dishLiked(user_id: userId, dish_id: DishId)
+            animateLike()
         }
     }
     
@@ -146,6 +147,41 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         lbl_dishName.text = DishInfo.name!
         lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(MediaInfo.numberOfViewers)"
+    }
+    
+    func animateLike(){
+        let imageview = UIImageView(image: #imageLiteral(resourceName: "Liked"))
+        imageview.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path =  CustomPath().cgPath
+        animation.duration = 1.5
+        animation.fillMode = kCAFillModeRemoved
+        animation.isRemovedOnCompletion = false
+        imageview.layer.add(animation, forKey: "nil")
+        
+        UIView.animate(withDuration: 2  , animations: {
+            imageview.alpha = 0
+        }) { (finished) in
+            imageview.removeFromSuperview()
+        }
+        
+        lv_Mediaview.addSubview(imageview)
+    }
+    
+    func CustomPath()-> UIBezierPath {
+        
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: self.view.frame.width-35, y: self.view.frame.height - 50))
+        
+        let endpoint = CGPoint(x: self.view.frame.width-35, y: self.view.frame.height - 300)
+        
+        let cp1 = CGPoint(x: (self.view.frame.width-35)+20, y: self.view.frame.height - 100)
+        let cp2 = CGPoint(x: (self.view.frame.width-35)-20, y: self.view.frame.height - 250)
+        
+        path.addCurve(to: endpoint, controlPoint1: cp1, controlPoint2: cp2)
+        return path
     }
     
 }
