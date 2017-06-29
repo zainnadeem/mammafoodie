@@ -10,8 +10,6 @@ import UIKit
 
 class TimerWorker:NSObject {
     
-    
-    //TODO: Input for timer
     var seconds:Int = 0
     var timer:Timer?
     var delegate:Interactordelegate?

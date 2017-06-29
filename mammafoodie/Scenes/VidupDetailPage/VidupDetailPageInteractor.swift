@@ -6,7 +6,7 @@ protocol Interactordelegate {
 }
 
 protocol VidupDetailPageInteractorInput {
-    func setupMediaPlayer(view:UIView,mediaURL:String)
+    func setupMediaPlayer(view:UIView,user_id:String,dish_id: String)
     func resetViewBounds(view:UIView)
     func stopTimer()
 }
@@ -14,6 +14,8 @@ protocol VidupDetailPageInteractorInput {
 protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
+    func UserInfo(UserInfo:MFUser)
+    func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -26,13 +28,25 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     
     // MARK: - Business logic
     
-    func setupMediaPlayer(view:UIView,mediaURL:String){
+    func setupMediaPlayer(view:UIView,user_id:String,dish_id: String){
+        //Setup the media player
         Vidupworker.delegate = self
         Vidupworker.SetupMediaPlayer(view: view)
-        Vidupworker.PlayVideo(MediaURL: mediaURL)
-        VidupTimerworker.delegate = self
-        VidupTimerworker.seconds = 10
-        VidupTimerworker.runTimer()
+        Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
+            self.output.UserInfo(UserInfo: Userdetails)
+        }
+        
+        Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
+            if Dishdetails != nil {
+                self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
+                self.VidupTimerworker.delegate = self
+                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.id)!)
+                if Int((MediaDetails?.dealTime)!) > 0 {
+                    self.VidupTimerworker.seconds = 10
+                    self.VidupTimerworker.runTimer()
+                }
+            }
+        }
     }
     
     func resetViewBounds(view:UIView){

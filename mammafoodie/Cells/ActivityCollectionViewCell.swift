@@ -57,7 +57,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         self.lblTimeStamp.text = "2 mins ago."
         self.lblLikesCount.text = "12"
         self.lblCommentsCount.text = "23"
-        self.profilePicImageView.image = UIImage(named: activityData.actionUserId.picture!)!
+//        self.profilePicImageView.image = UIImage(named: activityData.actionUserID.picture!)!
         self.emojiImageView.image = UIImage(named: "BeefTower")
     }
 

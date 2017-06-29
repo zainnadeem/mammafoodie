@@ -23,6 +23,7 @@ class MFMedia {
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
     var user: MFUser!
+    var dealTime:Double = -1
     
     
     var accessMode: MediaAccessUserType = .viewer
@@ -41,6 +42,30 @@ class MFMedia {
         self.type = type
         self.numberOfViewers = numberOfViewers
     }
+    
+    init(from dishDataDictionary:[String:AnyObject]){
+//        self.id = dishDataDictionary["id"] as? String ?? ""
+//        self.name = dishDataDictionary["name"] as? String ?? ""
+//        self.chefID = dishDataDictionary["chefID"]   as? String ?? ""
+//        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
+//        self.description = dishDataDictionary["description"]  as? String ?? ""
+//        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
+//        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
+//        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
+//        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
+//        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+//        self.tag = dishDataDictionary["tag"] as? String ?? ""
+//        
+//        let dishType = dishDataDictionary["dishType"] as? String ?? ""
+//        
+//        if let dishType = DishType(rawValue: dishType){
+//            self.dishType = dishType
+//        } else {
+//            self.dishType = .unknown
+//        }
+        
+    }
+
 }
 
 extension MFMedia: Hashable {

@@ -11,20 +11,24 @@ class VidupDetailPageWorker:NSObject {
     let loadingIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     
+    
     // MARK: - Business Logic
     
+    
     func SetupMediaPlayer(view:UIView){
-        view.backgroundColor = UIColor.white
-        //        view.backgroundColor = UIColor.black
+        
+        view.backgroundColor = UIColor.black
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
         let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
         playandpauseTap.numberOfTapsRequired = 1
         view.addGestureRecognizer(playandpauseTap)
+        
         let fullscreenTap = UITapGestureRecognizer(target: self, action: #selector(FullScreenVideo(ViewTapped:)))
         fullscreenTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(fullscreenTap)
+        
         playandpauseTap.require(toFail: fullscreenTap)
         
         loadingIndicatorView.hidesWhenStopped = true
@@ -47,7 +51,6 @@ class VidupDetailPageWorker:NSObject {
         avPlayer.play()
     }
     
-    
     func PlayandPauseVideo(ViewTapped:UITapGestureRecognizer){
         let playerIsPlaying = avPlayer.rate > 0
         if playerIsPlaying {
@@ -68,6 +71,22 @@ class VidupDetailPageWorker:NSObject {
             } else {
                 loadingIndicatorView.startAnimating()
             }
+        }
+    }
+    
+    func GetUserDetails(Id:String,completion:@escaping(_ UserInfo:MFUser)->()){
+        DatabaseGateway.sharedInstance.getUserWith(userID: Id) { (UserInfo) in
+            completion(UserInfo!)
+        }
+    }
+    
+    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
+        DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
+            
+            DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
+              completion(DishInfo, mediaDetails)
+            })
+            
         }
     }
     
