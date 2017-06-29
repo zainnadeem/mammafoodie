@@ -9,6 +9,8 @@ protocol VidupDetailPageInteractorInput {
     func setupMediaPlayer(view:UIView,user_id:String,dish_id: String)
     func resetViewBounds(view:UIView)
     func stopTimer()
+    func dishLiked(user_id:String,dish_id: String)
+    func dishUnliked(user_id:String,dish_id: String)
 }
 
 protocol VidupDetailPageInteractorOutput {
@@ -65,5 +67,15 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     
     func stopTimer() {
         VidupTimerworker.stopTimer()
+    }
+    
+    
+    func dishLiked(user_id:String,dish_id: String){
+        Vidupworker.likeDish(Id: user_id, DishId: dish_id)
+    }
+    
+    
+    func dishUnliked(user_id:String,dish_id: String){
+        Vidupworker.UnlikeDish(Id: user_id, DishId: dish_id)
     }
 }

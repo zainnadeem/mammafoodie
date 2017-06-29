@@ -11,6 +11,8 @@ protocol VidupDetailPageViewControllerOutput {
     func setupMediaPlayer(view:UIView,user_id:String,dish_id: String)
     func resetViewBounds(view:UIView)
     func stopTimer()
+    func dishLiked(user_id:String,dish_id: String)
+    func dishUnliked(user_id:String,dish_id: String)
 }
 
 class VidupDetailPageViewController: UIViewController, VidupDetailPageViewControllerInput {
@@ -24,8 +26,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
     //TODO: - VidUp URL and Expire Time.
-    var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
-    var DishId:String = ""
+//    var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
+//    var DishId:String = ""
+        var userId:String = "975112"
+        var DishId:String = "95380"
     
     
     //MARK: - IBOutlet
@@ -95,8 +99,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     @IBAction func likebtnClicked(_ sender: Any) {
         if lbtn_like.isSelected ==  true{
             lbtn_like.isSelected = false
+            output.dishUnliked(user_id: userId, dish_id: DishId)
         }else{
             lbtn_like.isSelected = true
+            output.dishLiked(user_id: userId, dish_id: DishId)
         }
     }
     

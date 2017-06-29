@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import Alamofire
 
 private var playbackLikelyToKeepUpContext = 0
 
@@ -76,18 +77,40 @@ class VidupDetailPageWorker:NSObject {
     
     func GetUserDetails(Id:String,completion:@escaping(_ UserInfo:MFUser)->()){
         DatabaseGateway.sharedInstance.getUserWith(userID: Id) { (UserInfo) in
-            completion(UserInfo!)
+            if UserInfo != nil{
+                completion(UserInfo!)
+            }
         }
     }
     
     func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
         DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
             
-            DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
-              completion(DishInfo, mediaDetails)
-            })
+            if DishInfo != nil {
+                DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
+                    completion(DishInfo, mediaDetails)
+                })
+            }
             
         }
     }
     
+    
+    func likeDish(Id:String,DishId:String){
+        let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/likeDish?dishId=\(DishId)&userId=\(Id)"
+        
+        Alamofire.request(RequestURL)
+            .responseString { response in
+                print(response.result.error ?? "")
+        }
+    }
+    
+    func UnlikeDish(Id:String,DishId:String){
+        let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unlikeDish?dishId=\(DishId)&userId=\(Id)"
+        
+        Alamofire.request(RequestURL)
+            .responseString { response in
+                print(response.result.error ?? "")
+        }
+    }
 }
