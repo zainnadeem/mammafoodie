@@ -74,7 +74,7 @@ class DatabaseGateway {
     // This is to not allow initialization by anyone else other than this class itself. Use sharedInstace for every operation on Firebase
     private init() {
         print("Configuring FirebaseApp ----------------------- START")
-        //        FirebaseApp.configure()
+        FirebaseApp.configure()
         print("Configuring FirebaseApp ----------------------- END")
     }
 }
@@ -132,14 +132,14 @@ extension DatabaseGateway {
     func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = id
-        liveStream.contentID = streamName
+        liveStream.contentId = streamName
         return liveStream
     }
     
     func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
         let liveStream: MFMedia = MFMedia()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.contentID = name
+        liveStream.contentId = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -253,6 +253,7 @@ extension DatabaseGateway {
         FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion()
         }
+        
     }
 }
 
@@ -359,8 +360,9 @@ extension  DatabaseGateway {
             completion(nil)
         }
     }
+    
+    
 }
-
 
 //MARK: NewsFeed
 
@@ -380,6 +382,7 @@ extension DatabaseGateway {
             print(error)
             completion(nil)
         }
+        
     }
     
 }
@@ -446,3 +449,4 @@ extension DatabaseGateway {
         self.save(fileAt: video, at: path, completion: completion)
     }
 }
+

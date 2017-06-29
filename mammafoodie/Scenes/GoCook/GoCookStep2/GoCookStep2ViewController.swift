@@ -196,7 +196,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         let user = MFUser.init()
                                         user.id = FirebaseReference.user.generateAutoID()
                                         user.name = "Arjav"
-                                        dish.media.user = user
+//                                        dish.media.user = user
                                         dish.user = user
                                         media.dish = dish
                                         media.dealTime = countDown

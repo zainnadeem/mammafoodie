@@ -40,13 +40,13 @@ class DishCollectionViewCell: UICollectionViewCell {
             self.lblDishName.text = dishData.name
             self.lblDishTypeTag.text = dishData.tag
             
-            if  dishData.dishType != nil {
+            if  dishData.type != nil {
                 
-                switch dishData.dishType! {
+                switch dishData.type! {
                     
-                case .nonveg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
-                case .veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
-                case .unknown: self.vegIndicatorImageView.image = nil
+                case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
+                case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
+                case .Vegan , .None: self.vegIndicatorImageView.image = nil
                     
                 }
                 
@@ -55,7 +55,7 @@ class DishCollectionViewCell: UICollectionViewCell {
             self.lblNumberOfViews.text = media.numberOfViewers.description
             
             if let picURL = media.cover_large{
-                self.dishImageView.sd_setImage(with: URL(string: picURL)!)
+                self.dishImageView.sd_setImage(with: picURL)
             }
         }
     }
