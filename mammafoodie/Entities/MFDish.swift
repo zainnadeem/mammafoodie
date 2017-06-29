@@ -80,6 +80,7 @@ class MFDish {
         }
         
     }
+    
     init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType, media : MFMedia) {
         self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
@@ -97,8 +98,9 @@ class MFDish {
             print(error?.localizedDescription ?? "No Error")
         }
     }
-    
-        
+
+}
+
 
 extension MFDish: Hashable {
     var hashValue: Int {

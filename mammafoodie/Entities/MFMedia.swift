@@ -16,14 +16,14 @@ enum MediaAccessUserType {
 class MFMedia {
     var id: String!
     
-    var comments: [String:Bool] = [:] //MFComment id
-    var contentID: String!
-    var cover_large: String?
-    var cover_small: String?
-    var createdAt: String! //Date timestamp
-    var endedAt: String! //Date timestamp
+//    var comments: [String:Bool] = [:] //MFComment id
+//    var contentID: String!
+//    var cover_large: String?
+//    var cover_small: String?
+//    var createdAt: String! //Date timestamp
+//    var endedAt: String! //Date timestamp
     var dishID: String! //MFDish id
-    var likes: [String:Bool] = [:] //MFUser id
+//    var likes: [String:Bool] = [:] //MFUser id
     
     var comments: [Date:MFComment] = [:]
     var contentId: String!
@@ -37,12 +37,9 @@ class MFMedia {
     
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
-<<<<<<< HEAD
     var user: MFUser!
-    var dealTime:Double = -1
-=======
+//    var dealTime:Double = -1
     var chefID: String! //MFUser id
->>>>>>> origin/CreatingUserEntity
     
     
     var accessMode: MediaAccessUserType = .viewer
@@ -51,7 +48,7 @@ class MFMedia {
         
     }
     
-    init(id: String, cover_large: String, cover_small: String, createdAt: String, dishID: String, chefID: String, type: MFMediaType, numberOfViewers: UInt) {
+    init(id: String, cover_large: String, cover_small: String, createdAt: Date, dishID: String, chefID: String, type: MFMediaType, numberOfViewers: UInt) {
         self.id = id
         self.cover_large = URL.init(string: cover_large)
         self.cover_small = URL.init(string: cover_small)
@@ -62,38 +59,12 @@ class MFMedia {
         self.numberOfViewers = numberOfViewers
     }
     
-<<<<<<< HEAD
-    init(from dishDataDictionary:[String:AnyObject]){
-//        self.id = dishDataDictionary["id"] as? String ?? ""
-//        self.name = dishDataDictionary["name"] as? String ?? ""
-//        self.chefID = dishDataDictionary["chefID"]   as? String ?? ""
-//        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
-//        self.description = dishDataDictionary["description"]  as? String ?? ""
-//        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
-//        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
-//        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
-//        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
-//        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
-//        self.tag = dishDataDictionary["tag"] as? String ?? ""
-//        
-//        let dishType = dishDataDictionary["dishType"] as? String ?? ""
-//        
-//        if let dishType = DishType(rawValue: dishType){
-//            self.dishType = dishType
-//        } else {
-//            self.dishType = .unknown
-//        }
-        
-    }
-
-}
-=======
     
     init(from mediaDictionary:[String:AnyObject]) {
         
         self.id = mediaDictionary["id"] as? String ?? ""
         self.comments = mediaDictionary["comments"] as? [String:Bool] ?? [:]
-        self.contentID = mediaDictionary["contentID"] as? String ?? ""
+        self.contentId = mediaDictionary["contentID"] as? String ?? ""
         self.cover_large = mediaDictionary["cover_large"] as? String ?? ""
         self.cover_small = mediaDictionary["cover_small"] as? String ?? ""
         self.createdAt = mediaDictionary["createdAt"] as? String ?? ""
@@ -112,6 +83,7 @@ class MFMedia {
         
         self.chefID = mediaDictionary["chefID"] as? String ?? ""
     }
+    
     class func createNewMedia(with type : MFMediaType) -> MFMedia {
         let media = MFMedia.init()
         media.accessMode = .owner
@@ -148,8 +120,8 @@ class MFMedia {
             print(error?.localizedDescription ?? "No Error")
         }
     }
-    
->>>>>>> origin/CreatingUserEntity
+
+}
 
 extension MFMedia: Hashable {
     var hashValue: Int {
