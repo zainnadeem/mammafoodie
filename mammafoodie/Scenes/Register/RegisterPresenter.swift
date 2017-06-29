@@ -1,8 +1,8 @@
 import UIKit
 
 protocol RegisterPresenterInput {
+    func signUpCompletion(errorMessage:String?)
     func updateShadow()
-
 }
 
 protocol RegisterPresenterOutput: class {
@@ -21,7 +21,19 @@ class RegisterPresenter: RegisterPresenterInput {
     {
        updateShadowSetup()
     }
-    
+    func signUpCompletion(errorMessage:String?)
+    {
+        if let errorMessage = errorMessage{
+            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            
+            self.viewcontroller?.showAlert(alertController: alertController)
+        } else {
+            self.viewcontroller?.navigateHomePage()
+        }
+
+    }
     
     func updateShadowSetup() {
         if self.shapeLayer == nil {
@@ -40,7 +52,7 @@ class RegisterPresenter: RegisterPresenterInput {
             self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.self.viewcontroller!.registerBtn.layer.cornerRadius).cgPath
             self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
             
-            self.self.viewcontroller!.registerBtn.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
+            self.viewcontroller!.registerBtn.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
         }
     }
 

@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 class MFComment {
     var id: String!
     var text: String!
@@ -12,6 +15,10 @@ class MFComment {
         user.name = username
         user.id = userId
         self.user = user
+    }
+    
+    init(){
+        
     }
 }
 

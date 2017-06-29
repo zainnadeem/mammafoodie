@@ -48,18 +48,14 @@ class FacebookLoginWorker {
                 let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
                 
                 request!.start(completionHandler: { (connection, result, error) in
-                    if(error == nil)
-                    {
-                        guard let email = (result as? NSDictionary)?.value(forKey: "email") as? String, email != ""  else {
-                            
+                    if(error == nil) {
+                        guard let email = (result as? NSDictionary)?.value(forKey: "email") as? String, email != ""  else {   
                             completion("We are unable to retreive your email from facebook. Please provide your email to continue", nil)
                             return
                         }
-                        
                     } else {
                         completion(error?.localizedDescription, nil)
                     }
-                    
                 })
                 
 //                Auth.auth().signIn(with: credential, completion: { (user, error) in

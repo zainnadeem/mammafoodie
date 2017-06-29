@@ -1,3 +1,5 @@
+import Foundation
+
 enum MFOrderStatus {
     case pending
     case beingPrepared

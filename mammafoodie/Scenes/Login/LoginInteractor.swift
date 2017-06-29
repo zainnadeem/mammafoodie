@@ -5,9 +5,9 @@ protocol LoginInteractorInput {
     func signUpWith(credentials:Login.Credentials)
     func loginWith(credentials:Login.Credentials)
     func loginWithGoogle()
-    func forgotpasswordWorker(email: String)
     func loginWithFacebook()
     func logout()
+    func forgotpasswordWorker(email: String)
 }
 
 protocol LoginInteractorOutput {
@@ -24,8 +24,20 @@ class LoginInteractor: NSObject, LoginInteractorInput {
     
     var output: LoginInteractorOutput!
     lazy var gmailWorker = GmailLoginWorker()
+    
     lazy var forgotPassWorker = ForgotPasswordWorker()
     
+    
+    //Passing Email From View
+    func forgotpasswordWorker(email: String){
+        print(email)
+        forgotPassWorker.callApI(email: email) { (errorMessage) in
+            //print(email)
+            
+            self.output.forgotpasswordCompletion(errorMessage:errorMessage)
+            
+        }
+    }
     
     // MARK: - Business logic
     
@@ -109,16 +121,7 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         
     }
     
-    //Passing Email From View
-    func forgotpasswordWorker(email: String){
-        print(email)
-        forgotPassWorker.callApI(email: email) { (errorMessage) in
-            //print(email)
-            if errorMessage != nil {
-                self.output.forgotpasswordCompletion(errorMessage:errorMessage!)
-            }
-        }
-    }
+   
 
     //logout
     func logout() {

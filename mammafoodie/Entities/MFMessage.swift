@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 struct MFMessage {
     var id: String!
     var conversation: MFConversation!

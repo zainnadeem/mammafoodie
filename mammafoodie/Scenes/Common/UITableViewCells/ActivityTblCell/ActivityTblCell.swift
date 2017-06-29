@@ -31,15 +31,15 @@ class ActivityTblCell: UITableViewCell {
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblText.attributedText = newsFeed.attributedString
-        switch newsFeed.activity.type {
-        case .none:
-            self.imgCharacterEmoji.image = nil
-            self.conWidthImgCharacterEmoji.constant = 0
-        default:
-            
+//        switch newsFeed.activityID.type {
+//        case .none:
+//            self.imgCharacterEmoji.image = nil
+//            self.conWidthImgCharacterEmoji.constant = 0
+//        default:
+        
             self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
             self.conWidthImgCharacterEmoji.constant = 64
-        }
+//        }
     }
     
     private func getEmojiCharacter(for cuisineId: String) -> UIImage {

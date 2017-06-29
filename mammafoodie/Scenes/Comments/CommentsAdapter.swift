@@ -88,7 +88,6 @@ class CommentsTableAdapter:NSObject, UITableViewDelegate,UITableViewDataSource, 
 
 
     //MARK: - TextView Delegate
-    
     func textViewDidChange(_ textView: UITextView) {
         if textView.contentSize.height <= 70   {
             if textView.text.characters.count == 15 {

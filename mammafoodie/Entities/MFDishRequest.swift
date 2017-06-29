@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 struct MFDishRequest {
     var id: String!
     var dish: MFDish!

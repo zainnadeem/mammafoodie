@@ -10,3 +10,15 @@ struct Register {
         }
   //  }
 }
+
+struct MFUsers1 {
+    var name : String = ""
+    var email : String = ""
+    var userId : String = ""
+    
+    init(with name: String,  email: String) {
+        self.name = name
+        self.email = email
+    }
+    
+}
