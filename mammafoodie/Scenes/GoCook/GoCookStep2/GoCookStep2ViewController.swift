@@ -1,4 +1,6 @@
 import UIKit
+import AVFoundation
+import AVKit
 
 protocol GoCookStep2ViewControllerInput {
     
@@ -22,6 +24,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     var output: GoCookStep2ViewControllerOutput!
     var router: GoCookStep2Router!
+    
+    var moviePlayer : AVPlayerViewController = AVPlayerViewController.init()
     
     var selectedOption : MFMediaType = . unknown {
         didSet {
@@ -99,6 +103,18 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     @IBOutlet weak var conVerticalCuisineClnView_lblPrepareTime: NSLayoutConstraint!
     @IBOutlet weak var conVerticalViewVideoContainer_lblPreparationTime: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var btnClosePicturePreview: UIButton!
+    @IBOutlet weak var btnPicturePreview: UIButton!
+    
+    @IBOutlet weak var btnVideoUploadPreview: UIButton!
+    @IBOutlet weak var btnCloseVideoUploadPreview: UIButton!
+    
+    @IBOutlet weak var btnVideoShootPreview: UIButton!
+    @IBOutlet weak var btnCloseVideoShootPreview: UIButton!
+    
+    @IBOutlet var previewButtons: [UIButton]!
+    @IBOutlet var previewCloseButtons: [UIButton]!
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -155,61 +171,65 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
             if !dishName.isEmpty {
                 if self.selectedDiet != .None {
                     if let cuisine = self.cuisinesAdapter.selectedCuisine {
-                        if let _ = self.txtPreparationTime.text {
-                            let preparationTime : Double = self.pickerPreparationTime.countDownDuration
-                            if let totalSlots = UInt(self.lblServingsCount.text ?? "0") {
-                                if let pricePerSlots = Double(self.txtPricePerServing.text ?? "0") {
-                                    var ready = false
-                                    var countDown : Double = -1
-                                    switch self.selectedOption {
-                                    case .liveVideo:
-                                        ready = true
-                                        
-                                    case .vidup:
-                                        if let _ = self.selectedVideoPath {
+                        if let textPreparationTime = self.txtPreparationTime.text {
+                            if !textPreparationTime.isEmpty {
+                                let preparationTime : Double = self.pickerPreparationTime.countDownDuration
+                                if let totalSlots = UInt(self.lblServingsCount.text ?? "0") {
+                                    if let pricePerSlots = Double(self.txtPricePerServing.text ?? "0") {
+                                        var ready = false
+                                        var countDown : Double = -1
+                                        switch self.selectedOption {
+                                        case .liveVideo:
                                             ready = true
-                                        } else {
-                                            ready = false
-                                            self.showAlert("Required!", message: "Please select video.")
-                                        }
-                                        
-                                        if let _ = self.txtDealDuration.text {
-                                            countDown = Double(self.pickerDealDuration.countDownDuration)
-                                            if countDown == 0 {
-                                                countDown = -1
+                                            
+                                        case .vidup:
+                                            if let _ = self.selectedVideoPath {
+                                                ready = true
+                                            } else {
+                                                ready = false
+                                                self.showAlert("Required!", message: "Please select video.")
                                             }
-                                        }
-                                        
-                                    case .picture:
-                                        if let _ = self.selectedImage {
-                                            ready = true
-                                        } else {
+                                            
+                                            if let _ = self.txtDealDuration.text {
+                                                countDown = Double(self.pickerDealDuration.countDownDuration)
+                                                if countDown == 0 {
+                                                    countDown = -1
+                                                }
+                                            }
+                                            
+                                        case .picture:
+                                            if let _ = self.selectedImage {
+                                                ready = true
+                                            } else {
+                                                ready = false
+                                                self.showAlert("Required!", message: "Please select picture.")
+                                            }
+                                            
+                                        default:
                                             ready = false
-                                            self.showAlert("Required!", message: "Please select picture.")
                                         }
-                                        
-                                    default:
-                                        ready = false
+                                        if ready {
+                                            let media = MFMedia.createNewMedia(with : self.selectedOption)
+                                            let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTime, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet, media : media)
+                                            let user = MFUser.init()
+                                            user.id = FirebaseReference.user.generateAutoID()
+                                            user.name = "Arjav"
+                                            dish.media.user = user
+                                            dish.user = user
+                                            media.dish = dish
+                                            media.createdAt = Date.init()
+                                            media.endedAt = media.createdAt.addingTimeInterval(countDown)
+                                            self.clearData()
+                                            self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                        }
+                                    } else {
+                                        self.showAlert("Required!", message: "Please enter price per servings.")
                                     }
-                                    if ready {
-                                        let media = MFMedia.createNewMedia(with : self.selectedOption)
-                                        let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTime, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet, media : media)
-                                        let user = MFUser.init()
-                                        user.id = FirebaseReference.user.generateAutoID()
-                                        user.name = "Arjav"
-                                        dish.media.user = user
-                                        dish.user = user
-                                        media.dish = dish
-                                        media.createdAt = Date.init()
-                                        media.endedAt = media.createdAt.addingTimeInterval(countDown)
-                                        self.clearData()
-                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
-                                    }
-                                } else {
-                                    self.showAlert("Required!", message: "Please enter price per servings.")
                                 }
+                            } else {
+                                self.showAlert("Required!", message: "Please enter preparation.")
                             }
-                        } else {              
+                        } else {
                             self.showAlert("Required!", message: "Please enter preparation.")
                         }
                     } else {
@@ -237,10 +257,16 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     @IBAction func onCameraTap(_ sender: UIButton) {
         self.selectedMediaUploadType = .PictureUpload
         self.mediaPicker = MediaPicker.pickImage(on: self, completion: { (image, error) in
-            if let img = image {
-                self.selectedImage = img
-            } else {
-                self.showAlert("Error!", message: "Image Not Found")
+            DispatchQueue.main.async {
+                if let img = image {
+                    self.selectedImage = img
+                    self.showPreview(image : img)
+                } else if let _ = error {
+                    self.showAlert("Error!", message: "Image Not Found")
+                } else {
+                    //Cancelled
+                    self.selectedMediaUploadType = .None
+                }
             }
         })
     }
@@ -250,8 +276,12 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         self.mediaPicker = MediaPicker.pickVideo(on: self, completion: { (urlString, error) in
             if let videoURL = urlString {
                 self.selectedVideoPath = videoURL
+                self.showPreview(video: videoURL, for: .VideoUpload)
+            } else if let _ = error {
+                self.showAlert("Error!", message: "No Video Found")
             } else {
-                self.showAlert("Error!", message: "No Video found")
+                //Cancelled
+                self.clearPreviews()
             }
         })
     }
@@ -261,15 +291,107 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         self.mediaPicker = MediaPicker.recordVideo(on: self, completion: { (urlString, error) in
             if let videoURL = urlString {
                 self.selectedVideoPath = videoURL
+                self.showPreview(video: videoURL, for: .VideoShoot)
+            } else if let _ = error {
+                self.showAlert("Error!", message: "No Video Found")
             } else {
-                self.showAlert("Error!", message: "No Video found")
+                //Cancelled
+                self.clearPreviews()
             }
+            
         })
+    }
+    
+    @IBAction func onPicturePreview(_ sender: UIButton) {
+        if let originalImage = self.selectedImage {
+            ImageEditorVC.presentEditor(with: originalImage, on: self, completion: { (editedImage) in
+                if let eImage = editedImage {
+                    self.selectedImage = eImage
+                    self.showPreview(image: eImage)
+                }
+            })
+        }
+    }
+    
+    @IBAction func onClosePicturePreview(_ sender: UIButton) {
+        self.selectedImage = nil
+        self.btnPicturePreview.isHidden = true
+        self.btnClosePicturePreview.isHidden = true
+        self.btnPicturePreview.setImage(nil, for: .normal)
+        self.selectedMediaUploadType = .None
+    }
+    
+    @IBAction func onVideoShoorPreview(_ sender: UIButton) {
+        if let videoPath = self.selectedVideoPath {
+            moviePlayer.player = AVPlayer.init(url: videoPath)
+            moviePlayer.player?.play()
+            moviePlayer.allowsPictureInPicturePlayback = false
+            moviePlayer.showsPlaybackControls = true
+            self.present(moviePlayer, animated: true, completion: {
+                
+            })
+        }
+    }
+    
+    @IBAction func onVideoUploadPreview(_ sender: UIButton) {
+        self.onVideoShoorPreview(sender)
+    }
+    
+    @IBAction func onCloseVideoShootPreview(_ sender: UIButton) {
+        self.clearPreviews()
+    }
+    
+    @IBAction func onCloseVideUploadPreview(_ sender: UIButton) {
+        self.clearPreviews()
     }
     
     // MARK: - Display logic
     func clearData() {
         self.output.clearData()
+        self.clearPreviews()
+    }
+    
+    func showPreview(image : UIImage) {
+        self.btnPicturePreview.isHidden = false
+        self.btnClosePicturePreview.isHidden = false
+        self.btnPicturePreview.setImage(image, for: .normal)
+        self.viewPictureContainer.bringSubview(toFront: self.btnPicturePreview)
+    }
+    
+    func showPreview(video : URL, for mode : GoCookMediaUploadType) {
+        if let thumb = MediaPicker.createThumbnailOfVideoFromFileURL(video) {
+            switch mode {
+            case .VideoShoot:
+                self.btnVideoShootPreview.setImage(thumb, for: .normal)
+                self.btnVideoShootPreview.isHidden = false
+                self.btnCloseVideoShootPreview.isHidden = false
+                self.btnCloseVideoUploadPreview.isHidden = true
+                self.btnVideoUploadPreview.isHidden = true
+                self.btnVideoUploadPreview.setImage(nil, for: .normal)
+                
+            default:
+                self.btnVideoUploadPreview.setImage(thumb, for: .normal)
+                self.btnCloseVideoUploadPreview.isHidden = false
+                self.btnVideoUploadPreview.isHidden = false
+                self.btnVideoShootPreview.isHidden = true
+                self.btnCloseVideoShootPreview.isHidden = true
+                self.btnVideoShootPreview.setImage(nil, for: .normal)
+                break
+            }
+        } else {
+            self.clearPreviews()
+        }
+    }
+    
+    func clearPreviews() {
+        self.selectedMediaUploadType = .None
+        self.selectedVideoPath = nil
+        self.btnVideoUploadPreview.setImage(nil, for: .normal)
+        self.btnVideoShootPreview.setImage(nil, for: .normal)
+        self.btnVideoShootPreview.isHidden = true
+        self.btnCloseVideoShootPreview.isHidden = true
+        self.btnCloseVideoUploadPreview.isHidden = true
+        self.btnVideoUploadPreview.isHidden = true
     }
 }
 

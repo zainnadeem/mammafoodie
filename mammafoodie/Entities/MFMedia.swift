@@ -65,13 +65,19 @@ class MFMedia {
     }
     
     func generateCoverImageURL() -> URL {
-        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        var urlencodedID : String! = ""
+        if self.type == .picture {
+            urlencodedID = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        }
         let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
-        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        var urlencodedID : String! = ""
+        if self.type == .picture {
+            urlencodedID = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        }
         let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID)).jpg?alt=media"
         return URL.init(string: string)!
     }
@@ -83,7 +89,12 @@ class MFMedia {
     }
     
     func getStoragePath() -> String {
-        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        var urlencodedID : String = ""
+        if self.type == .picture {
+            urlencodedID = "\(self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!).jpg"
+        } else if self.type == .vidup {
+            urlencodedID = "\(self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!).mp4"
+        }
         return "/media/\(urlencodedID)"
     }
     

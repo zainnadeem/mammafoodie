@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 protocol GoCookStep2PresenterInput {
@@ -25,9 +26,16 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         self.viewController?.txtDealDuration.text = ""
         self.viewController?.pickerDealDuration.countDownDuration = 0
         self.viewController?.pickerPreparationTime.countDownDuration = 0
+        self.viewController?.txtPricePerServing.text = ""
         self.viewController?.txtPreparationTime.text = ""
         self.viewController?.textViewDescription.text = ""
         self.viewController?.selectedDiet = .None
+        self.viewController?.cuisinesAdapter.selectedCuisine = nil
+        self.viewController?.cuisineCollectionView.reloadData()
+        self.selectDiet(.None)
+        self.selectMediaUploadType(.None)
+        self.viewController?.lblServingsCount.text = "0"
+        
         self.viewController?.selectedMediaUploadType = .None
         
     }
@@ -66,6 +74,8 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         
         self.viewController?.txtPreparationTime.inputView = self.viewController?.pickerPreparationTime
         
+        self.setupPreviewButtons()
+        self.setupPreviewCloseButtons()
     }
     
     func select(_ btnDiet : UIButton?) {
@@ -287,6 +297,32 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         }
         NSLayoutConstraint.activate(activatedCons)
         self.viewController?.view.setNeedsLayout()
+    }
+    
+    private func setupPreviewCloseButtons() {
+        if let closeButtons = self.viewController?.previewCloseButtons {
+            for btnClose in  closeButtons {
+                btnClose.layer.cornerRadius = btnClose.frame.size.height / 2
+                btnClose.imageView?.contentMode = .scaleAspectFit
+                btnClose.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction : .topToBottom, borderWidth : 1.0, animated : true)
+                btnClose.isHidden = true
+            }
+        }
+    }
+    
+    private func setupPreviewButtons() {
+        if let previewButtons = self.viewController?.previewButtons {
+            for btnPreview in  previewButtons {
+                btnPreview.imageView?.contentMode = .scaleAspectFit
+                btnPreview.backgroundColor = .white
+                btnPreview.setImage(nil, for: .normal)
+                btnPreview.layer.shadowColor = UIColor.black.cgColor
+                btnPreview.layer.shadowOpacity = 0.3
+                btnPreview.layer.shadowOffset = CGSize.init(width: 0, height: 0.3)
+                btnPreview.layer.shadowRadius = 2.0
+                btnPreview.isHidden = true
+            }
+        }
     }
     
 }

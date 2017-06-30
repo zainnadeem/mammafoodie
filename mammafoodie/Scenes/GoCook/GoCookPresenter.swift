@@ -159,6 +159,7 @@ class GoCookPresenter: GoCookPresenterInput {
         }
     }
     
+    
     //MARK: - Private Methods
     private func moveStep2(_ move : Bool) {
         var distance : CGFloat = 0

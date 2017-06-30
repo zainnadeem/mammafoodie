@@ -35,6 +35,7 @@ class MFModelsToFirebaseDictionaryConverter {
                 "id" : dish.id,
                 "userId" : dish.user.id,
                 "mediaId" : dish.media!.id ?? "",
+                "name" : dish.name,
                 "description" : dish.description ?? "",
                 "totalSlots" : dish.totalSlots,
                 "pricePerSlot" : dish.pricePerSlot,

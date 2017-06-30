@@ -149,7 +149,14 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         dish.media.mediaURL = mediaURL
         dish.save { (error) in
             DispatchQueue.main.async {
-                self.showAlert(error?.localizedDescription, message: nil)
+                if let er = error {
+                    self.showAlert(er.localizedDescription, message: nil)
+                } else {
+                    self.showAlert("Dish Saved", message: "")
+                }
+                self.selectedOption = .unknown
+                self.onStep1(self.btnStep1)
+                self.step2VC.clearData()
             }
         }
     }
