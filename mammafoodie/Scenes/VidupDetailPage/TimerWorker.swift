@@ -6,30 +6,30 @@
 //  Copyright © 2017 Zain Nadeem. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class TimerWorker:NSObject {
+class TimerWorker {
     
-    var seconds:Int = 0
-    var timer:Timer?
-    var delegate:Interactordelegate?
+    var seconds: Int = 0
+    var timer: Timer?
+    var delegate: Interactordelegate?
     
     
     func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
     }
     
-    func updateTimer() {
-        seconds -= 1
-        if seconds == 0 {
-            timer!.invalidate()
+    @objc func updateTimer() {
+        self.seconds -= 1
+        if self.seconds == 0 {
+            self.timer!.invalidate()
         }
-        delegate?.DisplayTime(Time: TimeInterval(seconds))
+        self.delegate?.DisplayTime(Time: TimeInterval(seconds))
     }
     
     func stopTimer(){
-        if timer != nil {
-            timer!.invalidate()
+        if self.timer != nil {
+            self.timer!.invalidate()
         }
     }
     

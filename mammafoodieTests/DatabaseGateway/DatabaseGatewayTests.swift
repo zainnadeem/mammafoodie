@@ -185,7 +185,7 @@ extension DatabaseGatewayTests {
     //            print("Conversation test passed")
     //            expectationCreateMessages.fulfill()
     //        })
-    //        
+    //
     //        waitForExpectations(timeout: 200) { (error) in
     //            print("Completed conversations")
     //        }
@@ -195,6 +195,6 @@ extension DatabaseGatewayTests {
 // MARK: - News Feed
 extension DatabaseGatewayTests {
     func testNewsFeed() {
-//        DatabaseGateway.sharedInstance.getNewsFeed(for: "", <#T##completion: (([MFNewsFeed]) -> Void)##(([MFNewsFeed]) -> Void)##([MFNewsFeed]) -> Void#>)
+        //        DatabaseGateway.sharedInstance.getNewsFeed(for: "", <#T##completion: (([MFNewsFeed]) -> Void)##(([MFNewsFeed]) -> Void)##([MFNewsFeed]) -> Void#>)
     }
 }

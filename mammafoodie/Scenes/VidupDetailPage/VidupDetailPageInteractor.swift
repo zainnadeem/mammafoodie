@@ -24,7 +24,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     
     var output: VidupDetailPageInteractorOutput!
     var Vidupworker: VidupDetailPageWorker! = VidupDetailPageWorker()
-    var VidupTimerworker: TimerWorker! = TimerWorker()
+    var VidupTimerworker: TimerWorker = TimerWorker()
     
     
     

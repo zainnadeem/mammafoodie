@@ -28,7 +28,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     //TODO: - VidUp URL and Expire Time.
     var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
     var DishId:String = "KnmktPhvbyk0EAfUWd7"
-
+    
     
     
     //MARK: - IBOutlet
