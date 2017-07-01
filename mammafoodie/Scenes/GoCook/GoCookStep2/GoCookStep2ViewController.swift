@@ -219,7 +219,6 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                             media.dish = dish
                                             media.createdAt = Date.init()
                                             media.endedAt = media.createdAt.addingTimeInterval(countDown)
-                                            self.clearData()
                                             self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                         }
                                     } else {

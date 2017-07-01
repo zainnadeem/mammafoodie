@@ -52,7 +52,7 @@ class MFDish {
     func save(_ completion : @escaping (Error?) -> Void ) {
         self.media.save { (error) in
             if let er = error {
-                completion(error)
+                completion(er)
             } else {
                 DatabaseGateway.sharedInstance.saveDish(self) { (errorDish) in
                     completion(errorDish)

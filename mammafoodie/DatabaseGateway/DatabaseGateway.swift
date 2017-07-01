@@ -262,7 +262,7 @@ extension DatabaseGateway {
         FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }
-    }
+    }            
 }
 
 // MARK: - Media

@@ -17,7 +17,10 @@ class MFModelsToFirebaseDictionaryConverter {
         return [
             media.id: [
                 "id" : media.id,
-                "userId" : media.user.id,
+                "user" : [
+                    "id" : media.user.id,
+                    "name" : media.user.name
+                ],
                 "type" : media.type.rawValue,
                 "cover_small" : media.cover_small?.absoluteString ?? "",
                 "cover_large" : media.cover_large?.absoluteString ?? "",
@@ -33,15 +36,28 @@ class MFModelsToFirebaseDictionaryConverter {
         return [
             dish.id: [
                 "id" : dish.id,
-                "userId" : dish.user.id,
-                "mediaId" : dish.media!.id ?? "",
+                "user" : [
+                    "id" : dish.user.id,
+                    "name" : dish.user.name
+                ],
+                "media" : [
+                    "id": dish.media.id,
+                    "type": dish.media.type.rawValue
+                ],
+                "mediaType": dish.media.type.rawValue,
                 "name" : dish.name,
+                "likesCount" : 0,
+                "commentsCount" : 0,
                 "description" : dish.description ?? "",
                 "totalSlots" : dish.totalSlots,
                 "pricePerSlot" : dish.pricePerSlot,
                 "availableSlots" : dish.totalSlots,
                 "type" : dish.type.rawValue,
-                "cuisineId" : dish.cuisine.id
+                "preparationTime" : dish.preparationTime,
+                "cuisine" : [
+                    "id" : dish.cuisine.id,
+                    "name" : dish.cuisine.name
+                ]
                 ] as AnyObject
         ]
     }
