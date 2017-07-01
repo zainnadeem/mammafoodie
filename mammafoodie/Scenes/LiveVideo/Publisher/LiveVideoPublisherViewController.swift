@@ -2,11 +2,16 @@ import UIKit
 import R5Streaming
 import AVKit
 
+protocol LiveVideoPublisherDelegate {
+    func onR5StreamStatus(_ stream: R5Stream!, withStatus statusCode: Int32, withMessage msg: String!)
+}
+
 class LiveVideoPublisherViewController: R5VideoViewController {
     
     var stream: R5Stream!
     var configurations: R5Configuration!
     var liveVideo: MFMedia?
+    var delegate: LiveVideoPublisherDelegate?
     
     // MARK: - Object lifecycle
     
@@ -20,7 +25,7 @@ class LiveVideoPublisherViewController: R5VideoViewController {
     
     func preview() {
         
-        self.showDebugInfo(true)
+        self.showDebugInfo(false)
         
         let cameras: [Any] = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         let cameraDevice: AVCaptureDevice? = cameras.last as? AVCaptureDevice
@@ -29,6 +34,7 @@ class LiveVideoPublisherViewController: R5VideoViewController {
             return
         }
         
+        camera.orientation = 90
         camera.width = 480
         camera.height = 640
         camera.fps = 24
@@ -65,6 +71,6 @@ class LiveVideoPublisherViewController: R5VideoViewController {
 
 extension LiveVideoPublisherViewController: R5StreamDelegate {
     func onR5StreamStatus(_ stream: R5Stream!, withStatus statusCode: Int32, withMessage msg: String!) {
-        print("Stream \(r5_string_for_status(statusCode)!) - \(msg)")
+        self.delegate?.onR5StreamStatus(stream, withStatus: statusCode, withMessage: msg)
     }
 }

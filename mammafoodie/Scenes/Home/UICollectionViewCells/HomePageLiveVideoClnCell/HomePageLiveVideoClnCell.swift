@@ -44,8 +44,13 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             // Show existing live video details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
-            self.imgView.image = UIImage(named: "ProfilePicture\(liveVideo.id!)")!
+            
+            if let image = UIImage(named: "ProfilePicture\(liveVideo.id!)") {
+                self.imgView.image = image
+            } else {
+                self.imgView.image = UIImage(named: "ProfilePicture21")!
+            }
         }
         
-    }    
+    }
 }

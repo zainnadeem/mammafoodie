@@ -33,7 +33,7 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
         let media1: MFMedia = MFMedia()
         media1.type = .liveVideo
         media1.id = id
-        media1.contentId = id
+//        media1.contentId = id
         return media1
     }
     
