@@ -63,13 +63,13 @@ class MFMedia {
         
         self.id = mediaDictionary["id"] as? String ?? ""
         
-        let comments = mediaDictionary["comments"] as? [String:Bool] ?? [:]
+//        let comments = mediaDictionary["comments"] as? [String:Bool] ?? [:]
         
-        for commentId in comments.keys {
-            let comment = MFComment()
-            comment.id = commentId
-            self.comments.updateValue(true, forKey: comment)
-        }
+//        for commentId in comments.keys {
+//            let comment = MFComment()
+//            comment.id = commentId
+//            self.comments.updateValue(true, forKey: comment)
+//        }
         
         
         self.contentId = mediaDictionary["contentId"] as? String ?? ""
@@ -87,8 +87,13 @@ class MFMedia {
         
         
         let dishId = mediaDictionary["dishId"] as? String ?? ""
+        
+        let dish: MFDish = MFDish()
+        dish.id = dishId
+        self.dish = dish
+        
 //        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
-        self.numberOfViewers = mediaDictionary["numberOfViewers"] as? UInt ?? 0
+//        self.numberOfViewers = mediaDictionary["numberOfViewers"] as? UInt ?? 0
         
         let type = mediaDictionary["type"] as? String ?? ""
         

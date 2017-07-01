@@ -91,8 +91,7 @@
 		2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
 		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
-		2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
-		2C7C13A01EFA9BFD00C673DD /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */; };
+		2C7C139F1EFA9BFD00C673DD /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
@@ -433,7 +432,6 @@
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
 		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
 		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
-		2C7C139E1EFA9BFD00C673DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
 		2C8290931F027CF000BB7ECA /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -998,7 +996,6 @@
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				2C7C139D1EFA9BFD00C673DD /* UserProfile.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1401,7 +1398,6 @@
 			isa = PBXGroup;
 			children = (
 				113948CA1F05082400F98E74 /* HUDProtocols.swift */,
-				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
 				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BFC9274B1EF00B0700602153 /* Cells */,
@@ -1522,21 +1518,6 @@
 				F0191A6D1F03AB1C0081599A /* CommentsView.xib */,
 			);
 			name = CommentsView;
-			sourceTree = "<group>";
-		};
-		F037E82D1EFBCE970085C5C1 /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				F037E82E1EFBCE970085C5C1 /* RegisterConfigurator.swift */,
-				F037E82F1EFBCE970085C5C1 /* RegisterInteractor.swift */,
-				F037E8301EFBCE970085C5C1 /* RegisterModels.swift */,
-				F037E8311EFBCE970085C5C1 /* RegisterPresenter.swift */,
-				F037E8321EFBCE970085C5C1 /* RegisterRouter.swift */,
-				F037E8331EFBCE970085C5C1 /* RegisterViewController.swift */,
-				F037E8341EFBCE970085C5C1 /* RegisterWorker.swift */,
-				F037E83C1EFBD5D30085C5C1 /* RegisterAdapter.swift */,
-			);
-			path = Register;
 			sourceTree = "<group>";
 		};
 		F0573A0B1EF2CBCA000F38B1 /* RequestDish */ = {
@@ -1712,7 +1693,7 @@
 				2CE479471EF97312003D0F9F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
-				2C7C139F1EFA9BFD00C673DD /* UserProfile.storyboard in Resources */,
+				2C7C139F1EFA9BFD00C673DD /* (null) in Resources */,
 				F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
@@ -1842,7 +1823,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */,
-				2CE479421EF97256003D0F9F /* StringExtention.swift in Sources */,
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
 				2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
@@ -2117,7 +2097,6 @@
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
-				2CE479431EF97256003D0F9F /* UItextFieldExtention.swift in Sources */,
 				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,

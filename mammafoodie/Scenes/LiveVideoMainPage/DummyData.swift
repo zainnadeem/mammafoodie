@@ -185,34 +185,34 @@ class DummyData {
     
     
     func populateLiveVideos(completion: ([MFMedia]) -> Void) {
-//        let dish1 = MFDish(id: "d1", user: user1, description: "", name: "The Beef Tower🍖")
-//        let media1 = MFMedia(id: "m1", cover_large: "JohnnyJonesLive", cover_small: "JohnnyJonesLive", createdAt: Date.init(), dish: dish1, user: user1, type: .liveVideo, numberOfViewers: 236)
-//        
-//        let dish2 = MFDish(id: "d2", user: user2, description: "", name: "Coleslaw Burger!🍔🥒")
-//        let media2 = MFMedia(id: "m2", cover_large: "AlexaGrimesLive", cover_small: "AlexaGrimesLive", createdAt: Date.init(), dish: dish2, user: user2, type: .liveVideo, numberOfViewers: 144)
-//        
-//        let dish3 = MFDish(id: "d3", user: user3, description: "", name: "The Best Crab Cakes")
-//        let media3 = MFMedia(id: "m3", cover_large: "BobbyLoveLive", cover_small: "BobbyLoveLive", createdAt: Date.init(), dish: dish3, user: user3, type: .liveVideo, numberOfViewers: 966)
-//        
-//        let dish4 = MFDish(id: "d4", user: user4, description: "", name: "Goatcheese Canape🐐🧀!!")
-//        let media4 = MFMedia(id: "m4", cover_large: "HadidShakurLive", cover_small: "HadidShakurLive", createdAt: Date.init(), dish: dish4, user: user4, type: .liveVideo, numberOfViewers: 533)
-//        
-//        let dish5 = MFDish(id: "d5", user: user5, description: "", name: "Go To Guac & Chips🥑")
-//        let media5 = MFMedia(id: "m5", cover_large: "SheenaJohnsonLive", cover_small: "SheenaJohnsonLive", createdAt: Date.init(), dish: dish5, user: user5, type: .liveVideo, numberOfViewers: 128)
-//        
-//        let dish6 = MFDish(id: "d6", user: user6, description: "", name: "Pineapple Cakes")
-//        let media6 = MFMedia(id: "m6", cover_large: "JackieLoboLive", cover_small: "JackieLoboLive", createdAt: Date.init(), dish: dish6, user: user6, type: .liveVideo, numberOfViewers: 95)
-//        
-//        let dish7 = MFDish(id: "d7", user: user7, description: "", name: "JUMBO Jambalaya🌶")
-//        let media7 = MFMedia(id: "m7", cover_large: "LincolnJeanLive", cover_small: "LincolnJeanLive", createdAt: Date.init(), dish: dish7, user: user7, type: .liveVideo, numberOfViewers: 95)
-//        
-//        let dish8 = MFDish(id: "d8", user: user8, description: "", name: "Tangy Tacos!!🌮")
-//        let media8 = MFMedia(id: "m8", cover_large: "KateFergusonLive", cover_small: "KateFergusonLive", createdAt: Date.init(), dish: dish8, user: user8, type: .liveVideo, numberOfViewers: 433)
-//        
-//        let dish9 = MFDish(id: "d9", user: user9, description: "", name: "Salmon🐠")
-//        let media9 = MFMedia(id: "m9", cover_large: "LauraParkLive", cover_small: "LauraParkLive", createdAt: Date.init(), dish: dish9, user: user9, type: .liveVideo, numberOfViewers: 222)
-//        
-//        completion([media1, media2, media3, media4, media5, media6, media7, media8, media9])
+        let dish1 = MFDish(id: "d1", user: user1, description: "", name: "The Beef Tower🍖")
+        let media1 = MFMedia(id: "m1", cover_large: "JohnnyJonesLive", cover_small: "JohnnyJonesLive", createdAt: "", dish: dish1, chefID: "1", type: .liveVideo, numberOfViewers: 236)
+        
+        let dish2 = MFDish(id: "d2", user: user2, description: "", name: "Coleslaw Burger!🍔🥒")
+        let media2 = MFMedia(id: "m2", cover_large: "AlexaGrimesLive", cover_small: "AlexaGrimesLive", createdAt: "", dish: dish2, chefID: "2", type: .liveVideo, numberOfViewers: 144)
+        
+        let dish3 = MFDish(id: "d3", user: user3, description: "", name: "The Best Crab Cakes")
+        let media3 = MFMedia(id: "m3", cover_large: "BobbyLoveLive", cover_small: "BobbyLoveLive", createdAt: "", dish: dish3, chefID: "3", type: .liveVideo, numberOfViewers: 966)
+        
+        let dish4 = MFDish(id: "d4", user: user4, description: "", name: "Goatcheese Canape🐐🧀!!")
+        let media4 = MFMedia(id: "m4", cover_large: "HadidShakurLive", cover_small: "HadidShakurLive", createdAt: "", dish: dish4, chefID: "4", type: .liveVideo, numberOfViewers: 533)
+        
+        let dish5 = MFDish(id: "d5", user: user5, description: "", name: "Go To Guac & Chips🥑")
+        let media5 = MFMedia(id: "m5", cover_large: "SheenaJohnsonLive", cover_small: "SheenaJohnsonLive", createdAt: "", dish: dish5, chefID: "5", type: .liveVideo, numberOfViewers: 128)
+        
+        let dish6 = MFDish(id: "d6", user: user6, description: "", name: "Pineapple Cakes")
+        let media6 = MFMedia(id: "m6", cover_large: "JackieLoboLive", cover_small: "JackieLoboLive", createdAt: "", dish: dish6, chefID: "6", type: .liveVideo, numberOfViewers: 95)
+        
+        let dish7 = MFDish(id: "d7", user: user7, description: "", name: "JUMBO Jambalaya🌶")
+        let media7 = MFMedia(id: "m7", cover_large: "LincolnJeanLive", cover_small: "LincolnJeanLive", createdAt: "", dish: dish7, chefID: "7", type: .liveVideo, numberOfViewers: 95)
+        
+        let dish8 = MFDish(id: "d8", user: user8, description: "", name: "Tangy Tacos!!🌮")
+        let media8 = MFMedia(id: "m8", cover_large: "KateFergusonLive", cover_small: "KateFergusonLive", createdAt: "", dish: dish8, chefID: "8", type: .liveVideo, numberOfViewers: 433)
+        
+        let dish9 = MFDish(id: "d9", user: user9, description: "", name: "Salmon🐠")
+        let media9 = MFMedia(id: "m9", cover_large: "LauraParkLive", cover_small: "LauraParkLive", createdAt: "", dish: dish9, chefID: "9", type: .liveVideo, numberOfViewers: 222)
+        completion([media1, media2, media3, media4, media5, media6, media7, media8, media9])
+        
     }
     
     

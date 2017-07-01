@@ -33,6 +33,7 @@ class MFDish {
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
     
+    init() {}
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id

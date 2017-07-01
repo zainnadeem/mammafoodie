@@ -476,3 +476,42 @@ extension DatabaseGateway {
         self.save(fileAt: video, at: path, completion: completion)
     }
 }
+
+// MARK: - MFMedia LiveVedio
+extension DatabaseGateway {
+    
+    func getLiveVedioDish(_ media : MFMedia, _ completion:@escaping (_ dishes:[MFDish])->Void ){
+        let baseRef = FirebaseReference.media.classReference.queryOrdered(byChild: "type").queryEqual(toValue: "liveVideo")
+        baseRef.observe(.value, with: { snapshot in
+            if let allMedia = snapshot.value as? FirebaseDictionary {
+                var mediaArray: [MFMedia] = []
+                for (_,mediaData) in allMedia {
+                    //print(allMedia)
+                    let id = mediaData["dishId"]! as! String
+                    let mediaDataObj:MFMedia = MFMedia(from: mediaData as! [String:AnyObject])
+                    mediaArray.append(mediaDataObj)
+                    self.getDishList(model:id)
+                }
+            }
+    })
+    }
+}
+
+// MARK: - MFDish LiveVedio
+extension DatabaseGateway {
+    
+    func getDishList(model:String){
+        let dishid :String = "\(model)"
+        FirebaseReference.dishes.classReference.child(dishid).observeSingleEvent(of: .value, with: { snapshot in
+            var dishArray: [MFDish] = []
+           if let allDishesData = snapshot.value as? FirebaseDictionary  {
+                let id = allDishesData["media"]
+                let dishData:MFDish = MFDish(from: allDishesData)
+                dishArray.append(dishData)
+            let mediaId = id?["id"] as? String
+            //let resultPredicate : NSPredicate = NSPredicate(format: "name contains[c]\(String(describing: mediaId))")
+            //print(resultPredicate)
+            }
+        })
+}
+}

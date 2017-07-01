@@ -15,13 +15,19 @@ class LiveVideoMainPageInteractor: LiveVideoMainPageInteractorInput {
     let loadLiveVideoWorker = LoadLiveVideosWorker()
     
     // MARK: - Business logic
-    
+    var model = MFMedia()
+    var dishModel = MFDish()
+
     func loadLiveVideos() {
         loadLiveVideoWorker.callAPI { liveVideos in
             let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
             output.presentLiveVideos(response)
-  
+            
+            DatabaseGateway.sharedInstance.getLiveVedioDish(model) {newModel in
+                print(newModel)
+//                self.dishModel = newModel
+
+            }
         }
     }
-    
 }

@@ -25,7 +25,6 @@ class MosaicCollectionViewCell: UICollectionViewCell {
             if let coverURL = self.media.cover_large {
                 let imageData = try Data.init(contentsOf: coverURL)
                 screenShotImageView.image = UIImage(data : imageData)
-                
             }
         } catch {
             print(error.localizedDescription)
@@ -45,7 +44,6 @@ class MosaicCollectionViewCell: UICollectionViewCell {
 //        }else{
 //            btnTimeLeft.isHidden = false
 //        }
- 
     }
     
     
