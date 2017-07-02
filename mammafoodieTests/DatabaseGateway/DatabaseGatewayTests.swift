@@ -1,5 +1,4 @@
 import XCTest
-import Foundation
 import UIKit
 
 @testable import mammafoodie
@@ -11,6 +10,7 @@ class DatabaseGatewayTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
     }
     
     override func tearDown() {
@@ -92,7 +92,7 @@ extension DatabaseGatewayTests {
     func testCreateLiveStreamModel() {
         let streamName: String = "streamTest"
         let streamId: String = "testId"
-        let liveStream: MFMedia? = DatabaseGateway.sharedInstance.createLiveStreamModel(from: streamName, id: streamId)
+        let liveStream: MFDish? = DatabaseGateway.sharedInstance.createLiveStreamModel(from: streamName, id: streamId)
         XCTAssertEqual(streamId, liveStream?.id)
     }
     
@@ -196,5 +196,17 @@ extension DatabaseGatewayTests {
 extension DatabaseGatewayTests {
     func testNewsFeed() {
         //        DatabaseGateway.sharedInstance.getNewsFeed(for: "", <#T##completion: (([MFNewsFeed]) -> Void)##(([MFNewsFeed]) -> Void)##([MFNewsFeed]) -> Void#>)
+    }
+}
+
+// Media
+extension DatabaseGatewayTests {
+    func testLiveVideoList() {
+        let e = expectation(description: "e")
+        DatabaseGateway.sharedInstance.getLiveVideos { (dishes) in
+            print(dishes)
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 100, handler: nil)
     }
 }

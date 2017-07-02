@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
+//        let currentUser = Auth.auth().currentUser
         let currentUser = Auth.auth().currentUser
 //        
 //        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)

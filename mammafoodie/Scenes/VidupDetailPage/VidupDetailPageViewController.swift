@@ -4,7 +4,7 @@ protocol VidupDetailPageViewControllerInput {
     func HideandUnhideView()
     func DisplayTime(Time:String)
     func DisplayUserInfo(UserInfo:MFUser)
-    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFDish)
 }
 
 protocol VidupDetailPageViewControllerOutput {
@@ -141,7 +141,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         }
     }
     
-    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia) {
+    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFDish) {
         lbl_dishName.text = DishInfo.name!
         lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(MediaInfo.numberOfViewers)"

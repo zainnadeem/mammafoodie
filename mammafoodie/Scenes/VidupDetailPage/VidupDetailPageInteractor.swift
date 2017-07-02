@@ -17,7 +17,7 @@ protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-    func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func DishInfo(DishInfo:MFDish,MediaInfo:MFDish)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {

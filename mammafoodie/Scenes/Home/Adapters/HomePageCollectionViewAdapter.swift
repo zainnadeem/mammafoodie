@@ -2,20 +2,25 @@ import UIKit
 
 class HomePageCollectionViewAdapter: NSObject {
     
+    var list: [MFDish] = []
+    
     var collectionView: UICollectionView!
     var conHeightCollectionView: NSLayoutConstraint!
     
-    //    var didExpand: (()->Void)?
-    //    var didCollapse: (()->Void)?
-    var didSelect: ((_ media: MFMedia, _ cellFrame: CGRect)->Void)?
+    var didSelect: ((_ dish: MFDish, _ cellFrame: CGRect)->Void)?
     var didSelectViewAll: (()->Void)?
+    
+    func getFirstCellForCurrentUser() -> MFDish {
+        let dish: MFDish = MFDish()
+        dish.id = "-1"
+        return dish
+    }
     
     func expand(animated: Bool) {
         let duration: Double = animated ? 0.27 : 0
         UIView.animate(withDuration: duration, animations: {
-            //            self.didExpand?()
             let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: true)
-            let numberOfRows: CGFloat = 5
+            let numberOfRows: CGFloat = ceil(CGFloat(Double(self.list.count+1)/5.0))
             let newHeight = layout.minimumLineSpacing*(numberOfRows-1) + (layout.itemSize.height*numberOfRows) + layout.sectionInset.top + layout.sectionInset.bottom
             self.conHeightCollectionView.constant = newHeight
         })
