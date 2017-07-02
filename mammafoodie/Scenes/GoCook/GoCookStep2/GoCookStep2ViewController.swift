@@ -194,7 +194,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         let media = MFMedia.createNewMedia(with : self.selectedOption)
                                         let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTime, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet, media : media)
                                         let user = MFUser.init()
-                                        user.id = FirebaseReference.user.generateAutoID()
+                                        user.id = FirebaseReference.users.generateAutoID()
                                         user.name = "Arjav"
 //                                        dish.media.user = user
                                         dish.user = user

@@ -89,6 +89,10 @@
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
 		2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C2FB2141F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */; };
+		2C2FB2151F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */; };
+		2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
+		2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C6978DE1F07C77400787DCC /* FirebaseLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF191EF25C1B00DA78B3 /* FirebaseLoginWorker.swift */; };
@@ -579,6 +583,8 @@
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
 		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
+		2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoListWorker.swift; sourceTree = "<group>"; };
+		2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupsListWorker.swift; sourceTree = "<group>"; };
 		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
 		2C6979771F07C95F00787DCC /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
 		2C6979781F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
@@ -925,6 +931,7 @@
 		2C12BC901EF7D237007AF994 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2C2FB2121F091404004EEA0F /* Workers */,
 				2C12BC911EF7D237007AF994 /* Adapters */,
 				2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */,
 				2C12BC961EF7D237007AF994 /* HomeInteractor.swift */,
@@ -1020,6 +1027,15 @@
 				2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */,
 			);
 			path = MenuItemTblCell;
+			sourceTree = "<group>";
+		};
+		2C2FB2121F091404004EEA0F /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */,
+				2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */,
+			);
+			path = Workers;
 			sourceTree = "<group>";
 		};
 		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
@@ -2017,6 +2033,7 @@
 				2C6979271F07C88D00787DCC /* CuisineSearchCollectionViewAdapter.swift in Sources */,
 				2C69793A1F07C88D00787DCC /* OtherUsersProfileViewController.swift in Sources */,
 				2CFB9B9B1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
+				2C2FB2151F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */,
 				F0BBF3A31EF27ACA00D55615 /* (null) in Sources */,
 				2C6979311F07C88D00787DCC /* CurrentLocationWorker.swift in Sources */,
 				F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
@@ -2087,6 +2104,7 @@
 				2C69792B1F07C88D00787DCC /* NearbyChefsConfigurator.swift in Sources */,
 				2C6979441F07C88D00787DCC /* PermissionsAlertPresenter.swift in Sources */,
 				2C6979121F07C88D00787DCC /* CommentsViewController.swift in Sources */,
+				2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */,
 				2C6978EE1F07C85000787DCC /* UIViewControllerExtension.swift in Sources */,
 				2C12BCBC1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
 				2C12BCAE1EF7D237007AF994 /* HomeModels.swift in Sources */,
@@ -2229,6 +2247,7 @@
 				2C6979CF1F07C95F00787DCC /* GMUGroundOverlay.m in Sources */,
 				2CFB9B9C1EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
+				2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */,
 				57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */,
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */,
@@ -2277,6 +2296,7 @@
 				113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				2C946EB81EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift in Sources */,
+				2C2FB2141F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */,
 				F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */,
 				113139D91EF80574000050D6 /* ActivityCollectionViewCell.swift in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,

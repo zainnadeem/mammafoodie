@@ -10,12 +10,24 @@ enum MFDishType : String {
     case None = "NA"
 }
 
+enum MFDishMediaType: String {
+    case liveVideo = "liveVideo"
+    case vidup = "vidup"
+    case picture = "picture"
+    case undefined = "undefined"
+}
+
+enum MFDishMediaAccessMode {
+    case owner
+    case viewer
+}
+
 class MFDish {
     var id: String!
     var name: String!
     var mediaID: String?  //MFMedia id
     
-    var type : MFDishType!
+    var dishType : MFDishType!
     var user: MFUser!
     var media: MFMedia!
     
@@ -33,6 +45,15 @@ class MFDish {
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
     
+    var likesCount: UInt = 0
+    var commentsCount: UInt = 0
+    var createTimestamp: TimeInterval = 0
+    var endTimestamp: TimeInterval = 0
+    var mediaType: MFDishMediaType = MFDishMediaType.undefined
+    var mediaURL: URL?
+    var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
+    
+    init() {}
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
@@ -55,7 +76,7 @@ class MFDish {
         self.boughtOrders = boughtOrders
         self.mediaID = mediaID
         self.tag = tag
-        self.type = dishType
+        self.dishType = dishType
         
     }
     
@@ -79,16 +100,16 @@ class MFDish {
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
         
         if let dishType = MFDishType(rawValue: dishType){
-            self.type = dishType
+            self.dishType = dishType
         } else {
-            self.type = .None
+            self.dishType = .None
         }
         
     }
     init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType, media : MFMedia) {
         self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
-        self.type = dishType
+        self.dishType = dishType
         self.preparationTime = preparationTime
         self.description = description
         self.cuisine = cuisine

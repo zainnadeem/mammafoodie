@@ -15,8 +15,11 @@ class HomePageVidupClnCell: UICollectionViewCell {
     @IBOutlet weak var viewForViewAll: UIView!
     @IBOutlet weak var circleView: CircleView!
     
+    var vidup: MFDish?
     var timerCountdown: Timer?
     var circleLayer: CAShapeLayer!
+    
+    var vidupDidEnd: ((MFDish)->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,11 +32,10 @@ class HomePageVidupClnCell: UICollectionViewCell {
         self.viewForViewAll.layer.borderWidth = 2
     }
     
-    func setup(with vidup: MFMedia) {
-        if self.timerCountdown != nil {
-            self.timerCountdown!.invalidate()
-            self.timerCountdown = nil
-        }
+    func setup(with vidup: MFDish) {
+        self.vidup = vidup
+        
+        self.stopTimer()
         
         self.viewForViewAll.isHidden = true
         if vidup.id == "-1" {
@@ -41,25 +43,61 @@ class HomePageVidupClnCell: UICollectionViewCell {
             self.imgView.layer.borderWidth = 2
             self.imgAddIcon.isHidden = false
             self.imgView.image = UIImage(named: "ProfilePicture21")!
+            self.circleView.isHidden = true
+            self.circleView.vidup = nil
+            self.circleView.currentValue = 0
         } else if vidup.id == "30" {
             self.viewForViewAll.isHidden = false
+            self.circleView.isHidden = false
         } else {
             // Show existing vidup details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
-            self.imgView.image = UIImage(named: "ProfilePicture\(vidup.id!)")!
+            if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
+                self.imgView.sd_setImage(with: url)
+            } else {
+                self.imgView.image = nil
+            }
+            self.circleView.isHidden = false
         }
         self.imgView.layer.cornerRadius = self.imgView.frame.width/2
         self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
         self.circleView.layer.cornerRadius = self.circleView.frame.width/2
         
-        self.circleView.setup()
-        self.animateCircleView()
+        if vidup.endTimestamp > 0 {
+            self.circleView.setup()
+            self.circleView.vidup = vidup
+            
+            if vidup.endTimestamp < Date().timeIntervalSinceReferenceDate {
+                self.circleView.animateCircle(duration: 0, toValue: 1)
+            } else {
+                self.timerCountdown = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                    if vidup != self.circleView.vidup {
+                        self.circleView.vidup = vidup
+                        self.circleView.currentValue = 0
+                    }
+                    let totalSeconds: TimeInterval = vidup.endTimestamp - vidup.createTimestamp
+                    let currentTimestamp: TimeInterval = Date().timeIntervalSinceReferenceDate
+                    let secondsPassed: TimeInterval = currentTimestamp - vidup.createTimestamp
+                    self.circleView.animateCircle(duration: 0.5, toValue: secondsPassed/totalSeconds)
+                    
+                    if secondsPassed > totalSeconds {
+                        self.stopTimer()
+                        self.vidupDidEnd?(self.vidup!)
+                    }
+                    
+                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
+                })
+            }
+        } else {
+            self.circleView.isHidden = true
+        }
     }
     
-    func animateCircleView() {
-        // Animate the drawing of the circle over the course of 1 second
-        self.circleView.animateCircle(duration: 0.5)
+    func stopTimer() {
+        if self.timerCountdown != nil {
+            self.timerCountdown!.invalidate()
+            self.timerCountdown = nil
+        }
     }
-    
 }

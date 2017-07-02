@@ -203,7 +203,7 @@ extension DatabaseGatewayTests {
 extension DatabaseGatewayTests {
     func testLiveVideoList() {
         let e = expectation(description: "e")
-        DatabaseGateway.sharedInstance.getDishes(type: MFMediaType.liveVideo) { (dishes) in
+        DatabaseGateway.sharedInstance.getLiveVideos { (dishes) in
             print(dishes)
             e.fulfill()
         }

@@ -6,7 +6,6 @@ import FirebaseDatabase
 
 enum FirebaseReference: String {
     
-    case user = "User"
     case media = "Media"
     case liveVideos = "LiveVideos"
     case dishRequests = "DishRequests"
@@ -43,6 +42,11 @@ enum FirebaseReference: String {
         return dateString
     }
     
+    func getImagePath(with id: String) -> URL? {
+        let classPath: String = self.rawValue.lowercased()
+        let path: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/\(classPath)%2F\(id).jpg?alt=media"
+        return URL(string: path)
+    }
 }
 
 struct DatabaseConnectionObserver {
@@ -301,7 +305,6 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
-    
 }
 
 //MARK: - Dish
@@ -419,29 +422,114 @@ extension DatabaseGateway {
 // MARK: - Media
 extension DatabaseGateway {
     
-    func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) {
-        self.getDishes(type: MFMediaType.liveVideo) { (dishes) in
-            
+    func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
+        return self.getDishes(type: MFDishMediaType.liveVideo, frequency: .realtime) { (dishes) in
+            let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
+                if dish.endTimestamp > 0 {
+                    return true
+                }
+                return false
+            })
+            completion(filteredDishes)
         }
     }
     
-    func getDishes(type: MFMediaType, _ completion: @escaping ((_ liveVideos: [MFDish])->Void)) {
-        FirebaseReference.dishes.classReference.queryOrdered(byChild: "media/type").queryEqual(toValue: type.rawValue).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+    func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
+        return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
+            let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
+                if dish.endTimestamp > Date().timeIntervalSinceReferenceDate {
+                    return true
+                }
+                return false
+            })
+            completion(filteredDishes)
+        }
+    }
+    
+    func getDishes(type: MFDishMediaType, frequency: DatabaseRetrievalFrequency, _ completion: @escaping ((_ dishes: [MFDish])->Void)) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
             guard let rawList = snapshot.value as? FirebaseDictionary else {
                 completion([])
                 return
             }
             var dishes: [MFDish] = []
-            for (key,rawDish) in rawList.enumerated() {
+            for (_,rawDish) in rawList.enumerated() {
                 let rawDishFirebase: FirebaseDictionary = rawDish.value as? FirebaseDictionary ?? [:]
                 dishes.append(self.createDish(from: rawDishFirebase))
             }
-            print(dishes)
-        })
+            completion(dishes)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.queryOrdered(byChild: "mediaType").queryEqual(toValue: type.rawValue)
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = observer.databaseReference!.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        default:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+        }
+        return nil
     }
     
     func createDish(from rawDish: FirebaseDictionary) -> MFDish {
-        let dish: MFDish = MFDish(from: rawDish)
+        let dish: MFDish = MFDish()
+        
+        dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
+        dish.commentsCount = rawDish["commentsCount"] as? UInt ?? 0
+        dish.createTimestamp = rawDish["createTimestamp"] as? TimeInterval ?? 0
+        
+        if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
+            var cuisine: MFCuisine = MFCuisine()
+            cuisine.id = rawCuisine["id"] as? String ?? ""
+            cuisine.name = rawCuisine["name"] as? String ?? ""
+            dish.cuisine = cuisine
+        }
+        
+        dish.description = rawDish["description"] as? String ?? ""
+        
+        if let rawDishType = rawDish["dishType"] as? String {
+            if let dishType: MFDishType = MFDishType(rawValue: rawDishType) {
+                dish.dishType = dishType
+            }
+        }
+        
+        dish.endTimestamp = rawDish["endTimestamp"] as? TimeInterval ?? 0
+        dish.id = rawDish["id"] as? String ?? ""
+        dish.likesCount = rawDish["likesCount"] as? UInt ?? 0
+        
+        if let rawDishMediaType = rawDish["mediaType"] as? String {
+            if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
+                dish.mediaType = dishMediaType
+            }
+        }
+        
+        if let rawMediaURL: String = rawDish["mediaURL"] as? String {
+            if let mediaURL: URL = URL(string: rawMediaURL) {
+                dish.mediaURL = mediaURL
+            }
+        }
+        
+        dish.name = rawDish["name"] as? String ?? ""
+        dish.preparationTime = rawDish["preparationTime"] as? TimeInterval ?? 0
+        dish.pricePerSlot = rawDish["pricePerSlot"] as? Double ?? 0
+        dish.totalSlots = rawDish["totalSlots"] as? UInt ?? 0
+        
+        if let rawUser: FirebaseDictionary = rawDish["user"] as? FirebaseDictionary {
+            let user: MFUser = MFUser()
+            user.id = rawUser["id"] as? String ?? ""
+            user.name = rawUser["name"] as? String ?? ""
+            dish.user = user
+        }
+        
         return dish
     }
     
@@ -501,5 +589,12 @@ extension DatabaseGateway {
     
     func save(video : URL, at path : String, completion : @escaping (URL?, Error?) -> Void) {
         self.save(fileAt: video, at: path, completion: completion)
+    }
+}
+
+// Get media paths
+extension DatabaseGateway {
+    func getUserProfilePicturePath(for userId: String) -> URL? {
+        return FirebaseReference.users.getImagePath(with: userId)
     }
 }
