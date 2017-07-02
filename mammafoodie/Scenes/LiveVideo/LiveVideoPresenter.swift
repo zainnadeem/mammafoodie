@@ -2,12 +2,12 @@ import UIKit
 
 protocol LiveVideoPresenterInput {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
 }
 
 protocol LiveVideoPresenterOutput: class {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
 }
 
 class LiveVideoPresenter: LiveVideoPresenterInput {
@@ -21,7 +21,7 @@ class LiveVideoPresenter: LiveVideoPresenterInput {
         }
     }
     
-    func showVideoId(_ liveVideo: MFMedia) {
+    func showVideoId(_ liveVideo: MFDish) {
         if self.output != nil {
             self.output!.showVideoId(liveVideo)
         }

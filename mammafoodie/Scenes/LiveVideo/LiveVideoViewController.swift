@@ -2,12 +2,12 @@ import UIKit
 
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
 }
 
 protocol LiveVideoViewControllerOutput {
-    func start(_ liveVideo: MFMedia)
-    func stop(_ liveVideo: MFMedia)
+    func start(_ liveVideo: MFDish)
+    func stop(_ liveVideo: MFDish)
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
@@ -15,7 +15,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
     
-    var liveVideo: MFMedia!
+    var liveVideo: MFDish!
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
     
@@ -167,7 +167,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
     }
     
-    func showVideoId(_ liveVideo: MFMedia) {
+    func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
     }
     

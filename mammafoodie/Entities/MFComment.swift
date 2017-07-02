@@ -6,7 +6,7 @@ class MFComment {
     var text: String!
     var createdAt: Date!
     var user: MFUser!
-    var media: MFMedia!
+    var media: MFDish!
     
     init(text: String, username: String, userId: String) {
         self.text = text

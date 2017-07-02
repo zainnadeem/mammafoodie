@@ -12,7 +12,7 @@ import Photos
 import MobileCoreServices
 
 typealias MediaPickerImageCompletion = (UIImage?, Error?) -> Void
-typealias MediaPickerVideoCompletion = (String?, Error?) -> Void
+typealias MediaPickerVideoCompletion = (URL?, Error?) -> Void
 
 enum MediaType {
     case Video
@@ -40,10 +40,23 @@ class MediaPicker: NSObject {
         mediaPick.imageCompletion = completion
         mediaPick.mediaType = .Image
         mediaPick.imagePicker.delegate = mediaPick
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            mediaPick.showImagePicker(on: vc, sourceType: .camera)
-        } else {
+        mediaPick.imagePicker.allowsEditing = true
+        
+        let alertSource = UIAlertController.init(title: "Choose Image From", message: "", preferredStyle: .alert)
+        alertSource.addAction(UIAlertAction.init(title: "Camera", style: .default, handler: { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                mediaPick.showImagePicker(on: vc, sourceType: .camera)
+            } else {
+                mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+            }
+        }))
+        
+        alertSource.addAction(UIAlertAction.init(title: "Photo Library", style: .default, handler: { (action) in
             mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
+        }))
+        
+        vc.present(alertSource, animated: true) {
+            
         }
         return mediaPick
     }
@@ -54,6 +67,8 @@ class MediaPicker: NSObject {
         mediaPick.mediaType = .Video
         mediaPick.imagePicker.delegate = mediaPick
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
+        mediaPick.imagePicker.allowsEditing = true
+        mediaPick.imagePicker.videoMaximumDuration = 60
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             mediaPick.showImagePicker(on: vc, sourceType: .camera)
         } else {
@@ -69,6 +84,8 @@ class MediaPicker: NSObject {
         mediaPick.imagePicker.delegate = mediaPick
         mediaPick.imagePicker.sourceType = .photoLibrary
         mediaPick.imagePicker.mediaTypes = [mediaPick.mediaType.type]
+        mediaPick.imagePicker.allowsEditing = true
+        mediaPick.imagePicker.videoMaximumDuration = 60
         mediaPick.showImagePicker(on: vc, sourceType: .photoLibrary)
         return mediaPick
     }
@@ -106,7 +123,7 @@ class MediaPicker: NSObject {
                 })
             }
         } else {
-            completion(NSError.init(domain: "Device does not support Photo Library", code: 404, userInfo: nil))   
+            completion(NSError.init(domain: "Device does not support Photo Library", code: 404, userInfo: nil))
         }
     }
     
@@ -151,17 +168,55 @@ class MediaPicker: NSObject {
         }
     }
     
+    class func createThumbnailOfVideoFromFileURL(_ videoURL: URL) -> UIImage? {
+        
+        let asset = AVAsset(url: videoURL)
+        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        let time = CMTimeMakeWithSeconds(Float64(1), 100)
+        do {
+            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage: img)
+            return thumbnail
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
 }
 
 extension MediaPicker : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        if let completion = self.imageCompletion {
+            completion(nil, nil)
+        }
+        
+        if let completion = self.videoCompletion {
+            completion(nil, nil)
+        }
+        
         self.imagePicker.dismiss(animated: true) {
             
         }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if self.mediaType == .Video {
+            if let videoURL =  info[UIImagePickerControllerMediaURL] as? URL {
+                self.videoCompletion?(videoURL, nil)
+            } else {
+                self.videoCompletion?(nil, NSError.init(domain: "No Video Found", code: 404, userInfo: nil))
+            }
+        } else {
+            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                self.imageCompletion?(image, nil)
+            } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                self.imageCompletion?(image, nil)
+            } else {
+                self.imageCompletion?(nil, NSError.init(domain: "Image not found", code: 404, userInfo: nil))
+            }
+        }
         self.imagePicker.dismiss(animated: true) {
             
         }

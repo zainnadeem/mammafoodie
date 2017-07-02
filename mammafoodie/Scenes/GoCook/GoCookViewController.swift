@@ -6,7 +6,7 @@ protocol GoCookViewControllerInput {
 
 protocol GoCookViewControllerOutput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
@@ -20,9 +20,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var step2VC : GoCookStep2ViewController!
     
-    var createdmedia : MFMedia?
+    var createdmedia : MFDish?
     
-    var selectedOption : MFMediaType = .unknown {
+    var selectedOption : MFDishMediaType = .unknown {
         didSet {
             self.output.selectOption(option: self.selectedOption)
             self.step2VC.selectedOption = self.selectedOption
@@ -94,21 +94,68 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     @IBAction func onStep2(_ sender: UIButton) {
-        self.output.showStep2()
+        
     }
     
     @IBAction func onNext(_ sender: UIButton) {
+        self.step2VC.clearData()
         self.output.showStep2()
     }
     
     
     // MARK: - Display logic
     func create(_ dish : MFDish, image : UIImage?, videoURL :  URL?) {
-        dish.media.type = self.selectedOption
-        dish.save()
-        dish.media.save()
-//        dish.media.setCoverImage(image!) { (error) in
-//            self.showAlert(error.localizedDescription, message: nil)
-//        }
+        dish.mediaType = self.selectedOption
+        switch self.selectedOption {
+        case .liveVideo:
+            dish.save { (error) in
+                self.showAlert(error?.localizedDescription, message: nil)
+            }
+            
+        case .picture:
+            if let img = image {
+                DatabaseGateway.sharedInstance.save(image: img, at: dish.getStoragePath(), completion: { (downloadURL, error) in
+                    if let url = downloadURL {
+                        self.saveDish(dish, mediaURL: url)
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlert(error?.localizedDescription, message: nil)
+                        }
+                    }
+                })
+            }
+            
+        case .vidup:
+            if let video = videoURL {
+                DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
+                    if let url = downloadURL {
+                        self.saveDish(dish, mediaURL: url)
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showAlert(error?.localizedDescription, message: nil)
+                        }
+                    }
+                })
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    func saveDish(_ dish : MFDish, mediaURL : URL) {
+        dish.mediaURL = mediaURL
+        dish.save { (error) in
+            DispatchQueue.main.async {
+                if let er = error {
+                    self.showAlert(er.localizedDescription, message: nil)
+                } else {
+                    self.showAlert("Dish Saved", message: "")
+                }
+                self.selectedOption = .unknown
+                self.onStep1(self.btnStep1)
+                self.step2VC.clearData()
+            }
+        }
     }
 }

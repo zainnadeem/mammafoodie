@@ -64,11 +64,14 @@ class HomePageVidupClnCell: UICollectionViewCell {
         self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
         self.circleView.layer.cornerRadius = self.circleView.frame.width/2
         
-        if vidup.endTimestamp > 0 {
+        
+        let createTimestamp: TimeInterval = vidup.createdAt?.timeIntervalSinceReferenceDate ?? 0
+        let endTimestamp: TimeInterval = vidup.endedAt?.timeIntervalSinceReferenceDate ?? 0
+        if endTimestamp > 0 {
             self.circleView.setup()
             self.circleView.vidup = vidup
             
-            if vidup.endTimestamp < Date().timeIntervalSinceReferenceDate {
+            if endTimestamp < Date().timeIntervalSinceReferenceDate {
                 self.circleView.animateCircle(duration: 0, toValue: 1)
             } else {
                 self.timerCountdown = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
@@ -76,9 +79,9 @@ class HomePageVidupClnCell: UICollectionViewCell {
                         self.circleView.vidup = vidup
                         self.circleView.currentValue = 0
                     }
-                    let totalSeconds: TimeInterval = vidup.endTimestamp - vidup.createTimestamp
+                    let totalSeconds: TimeInterval = endTimestamp - createTimestamp
                     let currentTimestamp: TimeInterval = Date().timeIntervalSinceReferenceDate
-                    let secondsPassed: TimeInterval = currentTimestamp - vidup.createTimestamp
+                    let secondsPassed: TimeInterval = currentTimestamp - createTimestamp
                     self.circleView.animateCircle(duration: 0.5, toValue: secondsPassed/totalSeconds)
                     
                     if secondsPassed > totalSeconds {

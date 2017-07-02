@@ -1,13 +1,13 @@
 import UIKit
 
 protocol LiveVideoInteractorInput {
-    func start(_ liveVideo: MFMedia)
-    func stop(_ liveVideo: MFMedia)
+    func start(_ liveVideo: MFDish)
+    func stop(_ liveVideo: MFDish)
 }
 
 protocol LiveVideoInteractorOutput {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
 }
 
 class LiveVideoInteractor: LiveVideoInteractorInput {
@@ -17,7 +17,7 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     
     // MARK: - Business logic
     
-    func start(_ liveVideo: MFMedia) {
+    func start(_ liveVideo: MFDish) {
         self.worker.start(liveVideo, { (cameraView) in
             if self.output != nil && cameraView != nil {
                 self.output!.show(cameraView)
@@ -26,7 +26,7 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
         })
     }
     
-    func stop(_ liveVideo: MFMedia) {
+    func stop(_ liveVideo: MFDish) {
         self.worker.stop(liveVideo)
     }
 }

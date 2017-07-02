@@ -6,7 +6,7 @@ struct LiveVideoMainPage {
         
     }
     struct Response {
-        var arrayOfLiveVideos = [MFMedia]()
+        var arrayOfLiveVideos = [MFDish]()
     }
     
     struct ViewModel {

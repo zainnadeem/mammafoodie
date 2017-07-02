@@ -86,13 +86,13 @@ class DatabaseGateway {
 // MARK: - Live streams
 extension DatabaseGateway {
     
-    func getLiveStream(with id: String, _ completion: @escaping ((MFMedia?)->Void)) {
+    func getLiveStream(with id: String, _ completion: @escaping ((MFDish?)->Void)) {
         FirebaseReference.tempLiveVideosStreamNames.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
             guard let liveStreamName = streamNameDataSnapshot.value as? String else {
                 completion(nil)
                 return
             }
-            let liveStream: MFMedia? = self.createLiveStreamModel(from: liveStreamName, id: id)
+            let liveStream: MFDish? = self.createLiveStreamModel(from: liveStreamName, id: id)
             completion(liveStream)
         }) { (error) in
             print(error)
@@ -100,19 +100,19 @@ extension DatabaseGateway {
         }
     }
     
-    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFMedia])->Void) {
+    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFDish])->Void) {
         
         let successClosure: FirebaseObserverSuccessClosure = { (streamNamesDataSnapshot) in
             guard let rawLiveStreams: FirebaseDictionary = streamNamesDataSnapshot.value as? FirebaseDictionary else {
                 completion([])
                 return
             }
-            var liveStreams: [MFMedia] = []
+            var liveStreams: [MFDish] = []
             for rawLiveStreamKey in rawLiveStreams.keys {
                 guard let liveStreamName = rawLiveStreams[rawLiveStreamKey] as? String else {
                     continue
                 }
-                guard let liveStream: MFMedia = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
+                guard let liveStream: MFDish = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
                     continue
                 }
                 liveStreams.append(liveStream)
@@ -133,17 +133,17 @@ extension DatabaseGateway {
         }
     }
     
-    func createLiveStreamModel(from streamName: String, id: String) -> MFMedia? {
-        let liveStream: MFMedia = MFMedia()
+    func createLiveStreamModel(from streamName: String, id: String) -> MFDish? {
+        let liveStream: MFDish = MFDish()
         liveStream.id = id
-        liveStream.contentId = streamName
+//        liveStream.contentId = streamName
         return liveStream
     }
     
-    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
-        let liveStream: MFMedia = MFMedia()
+    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFDish?)->Void)) {
+        let liveStream: MFDish = MFDish()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        liveStream.contentId = name
+//        liveStream.contentId = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -156,7 +156,7 @@ extension DatabaseGateway {
         })
     }
     
-    func unpublishLiveStream(_ liveStream: MFMedia, _ completion: @escaping (()->Void)) {
+    func unpublishLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
         FirebaseReference.tempLiveVideosStreamNames.get(with: liveStream.id).removeValue { (error, databaseReference) in
             if error != nil {
                 print(error!)
@@ -348,14 +348,14 @@ extension DatabaseGateway {
 //MARK: - Media
 extension  DatabaseGateway {
     
-    func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFMedia?)->Void ){
+    func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFDish?)->Void ){
         
         FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            let media:MFMedia = MFMedia(from: mediaData)
+            let media:MFDish = MFDish(from: mediaData)
             
             completion(media)
         }) { (error) in
@@ -425,7 +425,7 @@ extension DatabaseGateway {
     func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.liveVideo, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp > 0 {
+                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > 0 {
                     return true
                 }
                 return false
@@ -437,7 +437,7 @@ extension DatabaseGateway {
     func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp > Date().timeIntervalSinceReferenceDate {
+                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
                     return true
                 }
                 return false
@@ -484,8 +484,8 @@ extension DatabaseGateway {
         let dish: MFDish = MFDish()
         
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
-        dish.commentsCount = rawDish["commentsCount"] as? UInt ?? 0
-        dish.createTimestamp = rawDish["createTimestamp"] as? TimeInterval ?? 0
+        dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
+        dish.createdAt = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
             var cuisine: MFCuisine = MFCuisine()
@@ -502,9 +502,9 @@ extension DatabaseGateway {
             }
         }
         
-        dish.endTimestamp = rawDish["endTimestamp"] as? TimeInterval ?? 0
+        dish.endedAt = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
         dish.id = rawDish["id"] as? String ?? ""
-        dish.likesCount = rawDish["likesCount"] as? UInt ?? 0
+        dish.likesCount = rawDish["likesCount"] as? Double ?? 0
         
         if let rawDishMediaType = rawDish["mediaType"] as? String {
             if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
@@ -538,12 +538,12 @@ extension DatabaseGateway {
         FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }
-    }
+    }            
 }
 
 // MARK: - Media
 extension DatabaseGateway {
-    func saveMedia(_ media : MFMedia, completion : @escaping (Error?) -> Void) {
+    func saveMedia(_ media : MFDish, completion : @escaping (Error?) -> Void) {
         let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
         FirebaseReference.media.classReference.updateChildValues(mediaDict) { (error, ref) in
             completion(error)

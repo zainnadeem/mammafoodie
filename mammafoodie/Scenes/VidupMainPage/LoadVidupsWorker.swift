@@ -1,14 +1,12 @@
 import UIKit
 
 class LoadVidupsWorker {
-
-    let dData = DummyData.sharedInstance
     
-    func callAPI(completion: ([MFMedia]) -> Void){
+    func callAPI(completion: ([MFDish]) -> Void){
         print("Place firebase logic for obtaining live video links")
-        dData.populateVidupPage { media in
-            completion(media)
-        }
+//        dData.populateVidupPage { media in
+//            completion(media)
+//        }
     }
 
 }

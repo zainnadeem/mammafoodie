@@ -3,18 +3,18 @@
 import Foundation
 
 
+enum MFDishMediaType : String {
+    case liveVideo = "liveVideo"
+    case vidup = "vidup"
+    case picture = "picture"
+    case unknown = "unknown"
+}
+
 enum MFDishType : String {
     case Veg = "veg"
     case NonVeg = "nonveg"
     case Vegan = "vegan"
     case None = "NA"
-}
-
-enum MFDishMediaType: String {
-    case liveVideo = "liveVideo"
-    case vidup = "vidup"
-    case picture = "picture"
-    case undefined = "undefined"
 }
 
 enum MFDishMediaAccessMode {
@@ -25,39 +25,37 @@ enum MFDishMediaAccessMode {
 class MFDish {
     var id: String!
     var name: String!
-    var mediaID: String?  //MFMedia id
-    
     var dishType : MFDishType!
     var user: MFUser!
-    var media: MFMedia!
-    
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
+    var numberOfViewers: UInt = 0
     
     var boughtOrders: [String:Date] = [:] //MFOrder id
     var cuisineID: String! //MFCusine id
     var tag:String!
     
-    
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
     
-    var likesCount: UInt = 0
-    var commentsCount: UInt = 0
-    var createTimestamp: TimeInterval = 0
-    var endTimestamp: TimeInterval = 0
-    var mediaType: MFDishMediaType = MFDishMediaType.undefined
+    var mediaType: MFDishMediaType = MFDishMediaType.unknown
     var mediaURL: URL?
     var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
+    
+    var likesCount : Double = 0
+    var commentsCount : Double = 0
+    
+    var createdAt: Date!
+    var endedAt: Date?
     
     init() {}
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
-//        self.user = user
+        //        self.user = user
         self.description = description
         self.name = name
     }
@@ -74,12 +72,19 @@ class MFDish {
         self.availableSlots = availableSlots
         self.pricePerSlot = pricePerSlot
         self.boughtOrders = boughtOrders
-        self.mediaID = mediaID
         self.tag = tag
         self.dishType = dishType
         
     }
     
+    init(name : String!, description : String?, cuisine : MFCuisine, dishType : MFDishType, mediaType : MFDishMediaType) {
+        self.id = FirebaseReference.dishes.generateAutoID()
+        self.name = name
+        self.dishType = dishType
+        self.description = description
+        self.cuisine = cuisine
+        self.mediaType = mediaType
+    }
     
     init(from dishDataDictionary:[String:AnyObject]){
         self.id = dishDataDictionary["id"] as? String ?? ""
@@ -88,7 +93,6 @@ class MFDish {
         let userID = dishDataDictionary["userID"]   as? String ?? ""
         self.user = MFUser() ; user.id = userID
         
-        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
@@ -106,7 +110,8 @@ class MFDish {
         }
         
     }
-    init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType, media : MFMedia) {
+    
+    init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType) {
         self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
         self.dishType = dishType
@@ -115,14 +120,38 @@ class MFDish {
         self.cuisine = cuisine
         self.totalSlots = totalSlots
         self.pricePerSlot = perSlot
-        self.media = media
     }
     
-    func save() {
-        DatabaseGateway.sharedInstance.saveDish(self) { (error) in
-            print(error?.localizedDescription ?? "No Error")
+    func save(_ completion : @escaping (Error?) -> Void ) {
+        DatabaseGateway.sharedInstance.saveDish(self) { (errorDish) in
+            completion(errorDish)
         }
     }
+    
+    func generateCoverImageURL() -> URL {
+        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+        return URL.init(string: string)!
+    }
+    
+    func generateCoverThumbImageURL() -> URL {
+        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
+        return URL.init(string: string)!
+    }
+    
+    func getStoragePath() -> String {
+        var urlencodedID : String! = ""
+        if let idEncoded = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            if self.mediaType == .picture    {
+                urlencodedID = "\(idEncoded).jpg"
+            } else if self.mediaType == .vidup {
+                urlencodedID = "\(idEncoded).mp4"
+            }
+        }
+        return "/dishes/\(urlencodedID!)"
+    }
+    
     
 }
 

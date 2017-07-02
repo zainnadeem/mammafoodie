@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
 //        let currentUser = Auth.auth().currentUser
+        let currentUser = Auth.auth().currentUser
 //        
 //        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
 //        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController

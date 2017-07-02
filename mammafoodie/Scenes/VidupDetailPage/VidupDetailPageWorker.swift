@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import Alamofire
 
 private var playbackLikelyToKeepUpContext = 0
 
@@ -11,15 +12,12 @@ class VidupDetailPageWorker:NSObject {
     let loadingIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     
-    //Timer
-    var seconds = 600 //This variable will hold a starting value of seconds. It could be any amount above 0.
-    var timer = Timer()
-    var isTimerRunning = false //This will be used to make sure only one timer is created at a time.
-    
     
     // MARK: - Business Logic
     
+    
     func SetupMediaPlayer(view:UIView){
+        
         view.backgroundColor = UIColor.black
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         view.layer.insertSublayer(avPlayerLayer, at: 0)
@@ -27,9 +25,11 @@ class VidupDetailPageWorker:NSObject {
         let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
         playandpauseTap.numberOfTapsRequired = 1
         view.addGestureRecognizer(playandpauseTap)
+        
         let fullscreenTap = UITapGestureRecognizer(target: self, action: #selector(FullScreenVideo(ViewTapped:)))
         fullscreenTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(fullscreenTap)
+        
         playandpauseTap.require(toFail: fullscreenTap)
         
         loadingIndicatorView.hidesWhenStopped = true
@@ -44,15 +44,12 @@ class VidupDetailPageWorker:NSObject {
         loadingIndicatorView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
     }
     
-    func PlayVideo(MediaURL:String){
-        let url = NSURL(string: MediaURL)
-        let playerItem = AVPlayerItem(url: url! as URL)
+    func PlayVideo(MediaURL:URL){
+        let playerItem = AVPlayerItem(url: MediaURL)
         avPlayer.replaceCurrentItem(with: playerItem)
         loadingIndicatorView.startAnimating()
         avPlayer.play()
-        runTimer()
     }
-    
     
     func PlayandPauseVideo(ViewTapped:UITapGestureRecognizer){
         let playerIsPlaying = avPlayer.rate > 0
@@ -65,9 +62,8 @@ class VidupDetailPageWorker:NSObject {
     
     func FullScreenVideo(ViewTapped:UITapGestureRecognizer){
         delegate?.HideandUnhideView()
-        print("Double Tapped.")
     }
-
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &playbackLikelyToKeepUpContext {
             if avPlayer.currentItem!.isPlaybackLikelyToKeepUp {
@@ -78,20 +74,36 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
-    //MARK: - Timer Functions
-    
-    func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    func GetUserDetails(Id:String,completion:@escaping(_ UserInfo:MFUser)->()){
+        DatabaseGateway.sharedInstance.getUserWith(userID: Id) { (UserInfo) in
+            if UserInfo != nil{
+                completion(UserInfo!)
+            }
+        }
     }
     
-    func updateTimer() {
-        seconds -= 1     //This will decrement(count down)the seconds.
-        delegate?.DisplayTime(Time: TimeInterval(seconds))
+    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?)->()){
+        DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
+            completion(DishInfo)
+        }
     }
     
     
-
-
+    func likeDish(Id:String,DishId:String){
+        let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/likeDish?dishId=\(DishId)&userId=\(Id)"
+        
+        Alamofire.request(RequestURL)
+            .responseString { response in
+                print(response.result.error ?? "")
+        }
+    }
     
-    
+    func UnlikeDish(Id:String,DishId:String){
+        let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unlikeDish?dishId=\(DishId)&userId=\(Id)"
+        
+        Alamofire.request(RequestURL)
+            .responseString { response in
+                print(response.result.error ?? "")
+        }
+    }
 }
