@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var activityIndicatorView:UIView?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        DatabaseGateway.sharedInstance
+        _ = DatabaseGateway.sharedInstance
         IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
