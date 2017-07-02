@@ -307,6 +307,20 @@ extension DatabaseGateway {
 //MARK: - Dish
 extension DatabaseGateway {
     
+    func getAllDish(_ completion : @escaping ([MFDish]) -> Void) {
+        FirebaseReference.dishes.classReference.observeSingleEvent(of: .value, with: { (snaphot) in
+            var allDishes = [MFDish]()
+            if let dishes = snaphot.value as? FirebaseDictionary {
+                for (_, value) in dishes {
+                    if let dict = value as? FirebaseDictionary {
+                        let dish = MFDish.init(from: dict)
+                        allDishes.append(dish)
+                    }
+                }
+            }
+            completion(allDishes)
+        })
+    }
     
     func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
         

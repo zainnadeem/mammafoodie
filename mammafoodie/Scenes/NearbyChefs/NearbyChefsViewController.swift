@@ -19,7 +19,7 @@ var kCameraLongitude : CLLocationDegrees = 0.0
 
 let MFThemeColorBlue = UIColor(red: 0.09, green: 0.17, blue: 0.27, alpha: 1)
 
-class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInput, NearbyChefsSearchAdapterResult {
+class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInput {
     
     var output: NearbyChefsViewControllerOutput!
     var router: NearbyChefsRouter!
@@ -82,12 +82,18 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         self.setupSearchTextField()
         self.featuredMenuAdapter = FeaturedMenuCollectionViewAdapter()
         self.featuredMenuAdapter.prepareCollectionView(self.featuredMenuCollectionView)
+        
+        self.searchAdapter = NearbyChefsSearchAdapter()
+        self.searchAdapter.prepare(with : self.txtSearch)
+        self.searchAdapter.adapterResult = { (dishes) in
+            print("Found Dishes: \(dishes)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.output.getCurrentLocation()
-//        self.featuredMenuCollectionView.reloadData()
+        //        self.featuredMenuCollectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,9 +113,6 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     // MARK: - Event handling
-    func didSelect(cusine: CuisineLocation) {
-        print("Selected Cuisine: \(cusine.name)")
-    }
     
     // MARK: - Display logic
     func showError(error:Error) {
@@ -123,9 +126,16 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     @IBAction func onHideFeaturedMenu(_ sender: UIButton) {
-        let bottom = self.conBottomFeaturedMenuCollectionView.constant
-        let height = self.conHeightFeaturedMenuCollectionView.constant
-        self.showFeaturedMenu((bottom == height * -1))
+        let alert = UIAlertController(title: "No Featured Menu Found!", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true) {
+            
+        }
+        //        let bottom = self.conBottomFeaturedMenuCollectionView.constant
+        //        let height = self.conHeightFeaturedMenuCollectionView.constant
+        //        self.showFeaturedMenu((bottom == height * -1))
     }
     
     func showFeaturedMenu(_ show : Bool) {
@@ -144,10 +154,6 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
             }, completion: { (finished) in
             })
         }
-    }
-    
-    @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -37,13 +37,8 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     func showMarkers(markers: [Marker]) {
         print("showing marker at location: \(String(describing: markers.first?.position))")
         if markers != nil {
-//            self.clusterManager.clearItems()
-            for marker in markers {
-                if !self.allMarks.contains(marker) {
-                    self.allMarks.append(marker)
-                    self.clusterManager.add(marker)
-                }
-            }
+            self.clusterManager.clearItems()
+            self.clusterManager.add(markers)
             self.clusterManager.cluster()
         }
         print("Total Pins: \(self.clusterManager.algorithm.allItems().count)")
@@ -55,7 +50,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             kCameraLongitude = currentLocation.coordinate.longitude
             let camera = GMSCameraPosition.camera(withLatitude: kCameraLatitude, longitude: kCameraLongitude, zoom: 12)
             self.mapView.animate(to: camera)
-            self.output.loadMarkers(at: currentLocation.coordinate)
+            
         } else {
             print("Location not found")
         }
@@ -77,10 +72,10 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         marker.icon = self.selectedFilter?.pin
     }
     
-    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        kCameraLatitude = position.target.latitude
-        kCameraLongitude = position.target.longitude
-        self.output.loadMarkers(at: position.target)
-        print("idle At: \(position.target)")
-    }
+//    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+//        kCameraLatitude = position.target.latitude
+//        kCameraLongitude = position.target.longitude
+//        self.output.loadMarkers(at: position.target)
+//        print("idle At: \(position.target)")
+//    }
 }
