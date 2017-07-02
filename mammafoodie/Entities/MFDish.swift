@@ -1,3 +1,5 @@
+
+
 import Foundation
 
 
@@ -24,12 +26,19 @@ enum MFDishType : String {
 class MFDish {
     var id: String!
     var name: String!
+
     var dishType : MFDishType!
     var user: MFUser!
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
+    
+    var boughtOrders: [String:Date] = [:] //MFOrder id
+    var cuisineID: String! //MFCusine id
+    var tag:String!
+    
+    
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
@@ -46,21 +55,31 @@ class MFDish {
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id
-        self.user = user
+//        self.user = user
         self.description = description
         self.name = name
     }
     
-    init(id: String, user: MFUser, description: String, name: String, cuisine: MFCuisine) {
+    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
         self.id = id
-        self.user = user
+        
+        self.user = MFUser() ; user.id = userID
+        
         self.description = description
         self.name = name
-        self.cuisine = cuisine
+        self.cuisineID = cuisineID
+        self.totalSlots = totalSlots
+        self.availableSlots = availableSlots
+        self.pricePerSlot = pricePerSlot
+        self.boughtOrders = boughtOrders
+        self.mediaID = mediaID
+        self.tag = tag
+        self.type = dishType
+        
     }
     
     init(name : String!, description : String?, cuisine : MFCuisine, dishType : MFDishType, mediaType : MFDishMediaType) {
-        self.id = FirebaseReference.dishes.generateAutoID()
+      self.id = FirebaseReference.dishes.generateAutoID()
         self.name = name
         self.dishType = dishType
         self.description = description
@@ -68,6 +87,32 @@ class MFDish {
         self.mediaType = mediaType
     }
     
+    init(from dishDataDictionary:[String:AnyObject]){
+        self.id = dishDataDictionary["id"] as? String ?? ""
+        self.name = dishDataDictionary["name"] as? String ?? ""
+        
+        let userID = dishDataDictionary["userID"]   as? String ?? ""
+        self.user = MFUser() ; user.id = userID
+        
+        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
+        self.description = dishDataDictionary["description"]  as? String ?? ""
+        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
+        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
+        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
+        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
+        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        self.tag = dishDataDictionary["tag"] as? String ?? ""
+        
+        let dishType = dishDataDictionary["dishType"] as? String ?? ""
+        
+        if let dishType = MFDishType(rawValue: dishType){
+            self.type = dishType
+        } else {
+            self.type = .None
+        }
+        
+    }
+
     func save(_ completion : @escaping (Error?) -> Void ) {
         DatabaseGateway.sharedInstance.saveDish(self) { (errorDish) in
             completion(errorDish)

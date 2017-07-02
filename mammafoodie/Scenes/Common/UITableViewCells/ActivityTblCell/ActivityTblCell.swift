@@ -13,6 +13,7 @@ class ActivityTblCell: UITableViewCell {
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var btnComments: UIButton!
+    @IBOutlet weak var btnShare: UIButton!
     @IBOutlet weak var imgProfilePicture: UIImageView!
     @IBOutlet weak var imgCharacterEmoji: UIImageView!
     @IBOutlet weak var lblText: UILabel!
@@ -24,20 +25,21 @@ class ActivityTblCell: UITableViewCell {
         super.awakeFromNib()
         self.btnLike.imageView?.contentMode = .scaleAspectFit
         self.btnComments.imageView?.contentMode = .scaleAspectFit
+        self.btnShare.imageView?.contentMode = .scaleAspectFit
         self.viewContainer.layer.cornerRadius = 8
     }
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblText.attributedText = newsFeed.attributedString
-        switch newsFeed.activity.type {
-        case .none:
-            self.imgCharacterEmoji.image = nil
-            self.conWidthImgCharacterEmoji.constant = 0
-        default:
-            
+//        switch newsFeed.activityID.type {
+//        case .none:
+//            self.imgCharacterEmoji.image = nil
+//            self.conWidthImgCharacterEmoji.constant = 0
+//        default:
+        
             self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
             self.conWidthImgCharacterEmoji.constant = 64
-        }
+//        }
     }
     
     private func getEmojiCharacter(for cuisineId: String) -> UIImage {
@@ -72,7 +74,7 @@ class ActivityTblCell: UITableViewCell {
             self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.viewContainer.layer.cornerRadius).cgPath
             self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
             
-            self.contentView.layer.insertSublayer(self.shapeLayer, at: 0)
+            self.viewContainer.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
         }
     }
     

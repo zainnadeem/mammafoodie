@@ -20,6 +20,8 @@ class LiveVideoGateway: NSObject {
     lazy var publishViewController: LiveVideoPublisherViewController = LiveVideoPublisherViewController()
     lazy var subscriberViewController: LiveVideoSubscriberViewController = LiveVideoSubscriberViewController()
     
+    var configurationDataObserver: DatabaseConnectionObserver?
+    
     typealias ConfigurationsDownloadSuccessClosure = (_ success: Bool)->Void
     
     override init() {
@@ -27,7 +29,7 @@ class LiveVideoGateway: NSObject {
     }
     
     func getConfigurations(_ completion: @escaping ConfigurationsDownloadSuccessClosure) {
-        _ = DatabaseGateway.sharedInstance.getLiveVideoGatewayAccountDetails(frequency: .realtime, { (accountDetails) in
+        self.configurationDataObserver = DatabaseGateway.sharedInstance.getLiveVideoGatewayAccountDetails(frequency: .realtime, { (accountDetails) in
             if accountDetails != nil {
                 self.hasLoadedConfigurations = true
                 print("Configurations downloaded successfully")
@@ -71,6 +73,8 @@ class LiveVideoGateway: NSObject {
     func stop() {
         self.liveStream?.stop()
         self.liveStream?.delegate = nil
+        self.liveStream = nil
+        self.configurationDataObserver?.stop()
     }
     
     func subscribe(_ streamName: String, _ completion: (_ cameraView: UIView)->Void) {

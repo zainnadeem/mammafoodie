@@ -16,7 +16,6 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
-		113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113139BE1EF7B103000050D6 /* UserProfile.storyboard */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -30,13 +29,10 @@
 		113139D61EF7F4E5000050D6 /* DishCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113139D41EF7F4E5000050D6 /* DishCollectionViewCell.xib */; };
 		113139D91EF80574000050D6 /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113139D71EF80574000050D6 /* ActivityCollectionViewCell.swift */; };
 		113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113139D81EF80574000050D6 /* ActivityCollectionViewCell.xib */; };
-		1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */; };
-		1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */; };
-		1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */; };
-		1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */; };
-		1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */; };
-		1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */; };
-		1144D9251EEFE8F8006213A4 /* OwnProfilePageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */; };
+		113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948CA1F05082400F98E74 /* HUDProtocols.swift */; };
+		113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948CF1F050C0E00F98E74 /* DateHelper.swift */; };
+		113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */; };
+		113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113948D41F052A4900F98E74 /* UserProfile.storyboard */; };
 		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -91,10 +87,21 @@
 		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
+		2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6832E041F052E4200ECE835 /* TimerWorker.swift */; };
+		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
+		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
+		2C7C139F1EFA9BFD00C673DD /* (null) in Resources */ = {isa = PBXBuildFile; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
 		2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
+		2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8290931F027CF000BB7ECA /* CircleView.swift */; };
+		2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8290931F027CF000BB7ECA /* CircleView.swift */; };
+		2C878AD61F022DA600A630DF /* MFNavigationBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */; };
+		2C878AD91F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */; };
+		2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */; };
 		2C946EB21EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */; };
 		2C946EB31EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */; };
 		2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C946EB11EFA7B9200FD2FC0 /* CommentTblCell.xib */; };
@@ -351,8 +358,11 @@
 		F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
 		F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
 		F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */; };
+		F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */; };
+		F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */; };
+		F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A6B1F03AAEB0081599A /* CommentsView.swift */; };
+		F0191A6E1F03AB1C0081599A /* CommentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0191A6D1F03AB1C0081599A /* CommentsView.xib */; };
 		F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */; };
-		F02722F41EF8583400A5D6C3 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */; };
 		F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */; };
 		F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */; };
 		F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */; };
@@ -396,7 +406,6 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
-		113139BE1EF7B103000050D6 /* UserProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserProfile.storyboard; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -410,13 +419,10 @@
 		113139D41EF7F4E5000050D6 /* DishCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DishCollectionViewCell.xib; sourceTree = "<group>"; };
 		113139D71EF80574000050D6 /* ActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 		113139D81EF80574000050D6 /* ActivityCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCollectionViewCell.xib; sourceTree = "<group>"; };
-		1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageConfigurator.swift; sourceTree = "<group>"; };
-		1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageInteractor.swift; sourceTree = "<group>"; };
-		1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageModels.swift; sourceTree = "<group>"; };
-		1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePagePresenter.swift; sourceTree = "<group>"; };
-		1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageRouter.swift; sourceTree = "<group>"; };
-		1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageViewController.swift; sourceTree = "<group>"; };
-		1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnProfilePageWorker.swift; sourceTree = "<group>"; };
+		113948CA1F05082400F98E74 /* HUDProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDProtocols.swift; sourceTree = "<group>"; };
+		113948CF1F050C0E00F98E74 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewHeader.swift; sourceTree = "<group>"; };
+		113948D51F052A4900F98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
 		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
@@ -449,8 +455,13 @@
 		2C12BCD21EF7F05C007AF994 /* MenuItemTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemTblCell.xib; sourceTree = "<group>"; };
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
+		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
+		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
+		2C8290931F027CF000BB7ECA /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationBarDelegate.swift; sourceTree = "<group>"; };
+		2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionPresentAnimator.swift; sourceTree = "<group>"; };
 		2C946EB01EFA7B9200FD2FC0 /* CommentTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTblCell.swift; sourceTree = "<group>"; };
 		2C946EB11EFA7B9200FD2FC0 /* CommentTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTblCell.xib; sourceTree = "<group>"; };
 		2C946EB71EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewAdapter.swift; sourceTree = "<group>"; };
@@ -647,6 +658,7 @@
 		57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Worker.swift; sourceTree = "<group>"; };
 		57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		7EC67241EBB9432A18D278A9 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6832E041F052E4200ECE835 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -698,8 +710,11 @@
 		F00F52621EF2729D009DDAB1 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
+		F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsCustomTableViewCell.swift; path = ../Comments/CommentsCustomTableViewCell.swift; sourceTree = "<group>"; };
+		F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentsCustomTableViewCell.xib; path = ../Comments/CommentsCustomTableViewCell.xib; sourceTree = "<group>"; };
+		F0191A6B1F03AAEB0081599A /* CommentsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsView.swift; path = ../Comments/CommentsView.swift; sourceTree = "<group>"; };
+		F0191A6D1F03AB1C0081599A /* CommentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentsView.xib; path = ../Comments/CommentsView.xib; sourceTree = "<group>"; };
 		F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNewViewController.swift; sourceTree = "<group>"; };
-		F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 		F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishConfigurator.swift; path = RequestDish/RequestDishConfigurator.swift; sourceTree = "<group>"; };
 		F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishInteractor.swift; path = RequestDish/RequestDishInteractor.swift; sourceTree = "<group>"; };
@@ -752,6 +767,7 @@
 		110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */,
 				110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */,
 				110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */,
 				110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */,
@@ -781,20 +797,6 @@
 				113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		1144D9171EEFE31E006213A4 /* OwnProfilePage */ = {
-			isa = PBXGroup;
-			children = (
-				1144D9181EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift */,
-				1144D9191EEFE8F8006213A4 /* OwnProfilePageInteractor.swift */,
-				1144D91A1EEFE8F8006213A4 /* OwnProfilePageModels.swift */,
-				1144D91B1EEFE8F8006213A4 /* OwnProfilePagePresenter.swift */,
-				1144D91C1EEFE8F8006213A4 /* OwnProfilePageRouter.swift */,
-				1144D91D1EEFE8F8006213A4 /* OwnProfilePageViewController.swift */,
-				1144D91E1EEFE8F8006213A4 /* OwnProfilePageWorker.swift */,
-			);
-			path = OwnProfilePage;
 			sourceTree = "<group>";
 		};
 		118FB2AE1EEAC93300E5E6E5 /* SlotSelection */ = {
@@ -881,6 +883,7 @@
 		2C12BCC61EF7F01E007AF994 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F0191A6F1F03E1EC0081599A /* UIViews */,
 				2C12BCC81EF7F03F007AF994 /* UICollectionViewCells */,
 				2C12BCC71EF7F01E007AF994 /* UITableViewCells */,
 			);
@@ -922,6 +925,16 @@
 			path = MenuItemTblCell;
 			sourceTree = "<group>";
 		};
+		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				2C878AD71F022DF700A630DF /* Animators */,
+				2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */,
+				2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */,
+			);
+			path = MFNavigationController;
+			sourceTree = "<group>";
+		};
 		2C8001261EF90945005026CE /* ActivityTblCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +942,15 @@
 				2C8001281EF9094E005026CE /* ActivityTblCell.xib */,
 			);
 			path = ActivityTblCell;
+			sourceTree = "<group>";
+		};
+		2C878AD71F022DF700A630DF /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				2C878AD81F022E0300A630DF /* CircleTransitionPresentAnimator.swift */,
+				2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */,
+			);
+			path = Animators;
 			sourceTree = "<group>";
 		};
 		2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */ = {
@@ -974,7 +996,6 @@
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
-				1144D9171EEFE31E006213A4 /* OwnProfilePage */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
@@ -1000,7 +1021,6 @@
 				2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */,
 				2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */,
 				F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */,
-				F02722F31EF8583400A5D6C3 /* LoginRegisterViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1017,6 +1037,7 @@
 		2CB8BEA01EF246EA00DA78B3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				113948D41F052A4900F98E74 /* UserProfile.storyboard */,
 				2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */,
 				572E9A9E1EFAB4BC007DE6D0 /* GoCook.storyboard */,
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
@@ -1025,7 +1046,6 @@
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
-				113139BE1EF7B103000050D6 /* UserProfile.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
 			name = Storyboards;
@@ -1211,6 +1231,7 @@
 		2CE4793D1EF97256003D0F9F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				113948CF1F050C0E00F98E74 /* DateHelper.swift */,
 				572E9AA21EFAB515007DE6D0 /* StringExtension.swift */,
 				572E9AA31EFAB515007DE6D0 /* UIButtonExtension.swift */,
 				572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */,
@@ -1286,6 +1307,7 @@
 		2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */ = {
 			isa = PBXGroup;
 			children = (
+				B6832E041F052E4200ECE835 /* TimerWorker.swift */,
 				2CFB9BA91EFA477200C08EB3 /* VidupDetailPageConfigurator.swift */,
 				2CFB9BAA1EFA477200C08EB3 /* VidupDetailPageInteractor.swift */,
 				2CFB9BAB1EFA477200C08EB3 /* VidupDetailPageModels.swift */,
@@ -1435,6 +1457,7 @@
 			isa = PBXGroup;
 			children = (
 				57801F6B1EF82FE2002E18EF /* GradientView.swift */,
+				2C8290931F027CF000BB7ECA /* CircleView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -1497,12 +1520,14 @@
 		BF5060D71EE81B9E00DB646F /* mammafoodie */ = {
 			isa = PBXGroup;
 			children = (
-				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
+				113948CA1F05082400F98E74 /* HUDProtocols.swift */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
+				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
 				2CE4793D1EF97256003D0F9F /* Extensions */,
+				2C5E8B001EFD11D8009F24F5 /* MFNavigationController */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 				2CB8BEA01EF246EA00DA78B3 /* Storyboards */,
 				57801F6A1EF82FE2002E18EF /* UIView */,
@@ -1597,6 +1622,25 @@
 				F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		F0191A6F1F03E1EC0081599A /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				F0191A701F03E2080081599A /* CommentsView */,
+			);
+			name = UIViews;
+			sourceTree = "<group>";
+		};
+		F0191A701F03E2080081599A /* CommentsView */ = {
+			isa = PBXGroup;
+			children = (
+				F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */,
+				F0191A681F0386160081599A /* CommentsCustomTableViewCell.xib */,
+				F0191A6B1F03AAEB0081599A /* CommentsView.swift */,
+				F0191A6D1F03AB1C0081599A /* CommentsView.xib */,
+			);
+			name = CommentsView;
 			sourceTree = "<group>";
 		};
 		F0573A0B1EF2CBCA000F38B1 /* RequestDish */ = {
@@ -1706,7 +1750,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = R4UP7L985F;
+						DevelopmentTeam = 3K8C5C5YMF;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1775,6 +1819,8 @@
 				2CE479471EF97312003D0F9F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
+				2C7C139F1EFA9BFD00C673DD /* (null) in Resources */,
+				F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */,
 				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
@@ -1788,10 +1834,11 @@
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
+				113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */,
+				F0191A6E1F03AB1C0081599A /* CommentsView.xib in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				57C948141F03781000DF5674 /* video.mp4 in Resources */,
-				113139BF1EF7B103000050D6 /* UserProfile.storyboard in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
@@ -1817,7 +1864,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -1877,7 +1924,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -1902,7 +1949,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
+				2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
+				2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
 				2CFB9B891EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				F0BBF3A21EF27ACA00D55615 /* (null) in Sources */,
 				F0BBF3A01EF27ACA00D55615 /* (null) in Sources */,
@@ -1966,6 +2016,7 @@
 				2C12BCA81EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2C12BCAA1EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
+				2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 			);
@@ -1991,9 +2042,10 @@
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
+				113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */,
 				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
+				F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
-				1144D9211EEFE8F8006213A4 /* OwnProfilePageModels.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
@@ -2014,6 +2066,7 @@
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */,
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
+				113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */,
 				2CFB9BA61EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				572E9AA71EFAB515007DE6D0 /* UIButtonExtension.swift in Sources */,
@@ -2032,7 +2085,6 @@
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
-				1144D9201EEFE8F8006213A4 /* OwnProfilePageInteractor.swift in Sources */,
 				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
 				2C12BCAD1EF7D237007AF994 /* HomeModels.swift in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
@@ -2050,10 +2102,8 @@
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
-				1144D9241EEFE8F8006213A4 /* OwnProfilePageViewController.swift in Sources */,
 				57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
-				1144D9221EEFE8F8006213A4 /* OwnProfilePagePresenter.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
@@ -2062,6 +2112,7 @@
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
+				113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				2C946EB81EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift in Sources */,
 				570ED4121F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift in Sources */,
@@ -2073,13 +2124,10 @@
 				572E9A921EFAB4AF007DE6D0 /* GoCookPresenter.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
 				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
-				1144D91F1EEFE8F8006213A4 /* OwnProfilePageConfigurator.swift in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
-				1144D9231EEFE8F8006213A4 /* OwnProfilePageRouter.swift in Sources */,
-				F02722F41EF8583400A5D6C3 /* LoginRegisterViewController.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
 				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -2096,6 +2144,7 @@
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
+				2C878AD91F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */,
@@ -2118,6 +2167,7 @@
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
+				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
@@ -2125,6 +2175,7 @@
 				2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
+				2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
@@ -2137,6 +2188,8 @@
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
 				2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
+				2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */,
+				2C878AD61F022DA600A630DF /* MFNavigationBarDelegate.swift in Sources */,
 				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
@@ -2188,6 +2241,7 @@
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
+				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */,
@@ -2204,6 +2258,7 @@
 				570ED4111F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
+				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
@@ -2223,6 +2278,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		113948D41F052A4900F98E74 /* UserProfile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				113948D51F052A4900F98E74 /* Base */,
+			);
+			name = UserProfile.storyboard;
+			sourceTree = "<group>";
+		};
 		2C12BCBF1EF7D338007AF994 /* Akshit.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2440,7 +2503,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = 3K8C5C5YMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2463,7 +2526,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R4UP7L985F;
+				DEVELOPMENT_TEAM = 3K8C5C5YMF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

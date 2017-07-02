@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.0)
+  - Alamofire (4.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -42,13 +42,13 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - GeoFire (2.0.0):
     - Firebase/Database (~> 4.0)
-  - GoogleMaps (2.3.1):
-    - GoogleMaps/Maps (= 2.3.1)
-  - GoogleMaps/Base (2.3.1)
-  - GoogleMaps/Maps (2.3.1):
+  - GoogleMaps (2.3.0):
+    - GoogleMaps/Maps (= 2.3.0)
+  - GoogleMaps/Base (2.3.0)
+  - GoogleMaps/Maps (2.3.0):
     - GoogleMaps/Base
-  - GooglePlaces (2.3.1):
-    - GoogleMaps/Base (= 2.3.1)
+  - GooglePlaces (2.3.0):
+    - GoogleMaps/Base (= 2.3.0)
   - GoogleSignIn (4.0.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -75,7 +75,11 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - KLCPopup (1.0)
   - NextGrowingTextView (1.1.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - TRMosaicLayout (1.0.0)
 
 DEPENDENCIES:
@@ -92,7 +96,9 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - JSQMessagesViewController
+  - KLCPopup
   - NextGrowingTextView
+  - SDWebImage (~> 3.8)
   - TRMosaicLayout
 
 EXTERNAL SOURCES:
@@ -105,7 +111,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/firebase/geofire-objc.git
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
   FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
@@ -117,8 +123,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GeoFire: 02f02683e09367c2eee073c6b09c794da19833ee
-  GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
-  GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
+  GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
+  GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
@@ -126,9 +132,11 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  KLCPopup: 76c5a19227977f1e53d85236f9ef42257c168d98
   NextGrowingTextView: ad11259355559362ac82046438152a312aa0d7ee
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
 
-PODFILE CHECKSUM: c604dcfcb6aa73a65fadc401674b61e666873a7b
+PODFILE CHECKSUM: 4e29028e0f2a5b76dce836ec4281fbf581ec1b15
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.2.0

@@ -6,16 +6,12 @@
 //  Copyright © 2017 Zain Nadeem. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import SDWebImage
 
 class DishCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "DishCell"
-    
-    @IBOutlet weak var profilePicImageView: UIImageView!
-    
-    @IBOutlet weak var lblChefName: UILabel!
     
     @IBOutlet weak var lblNumberOfViews: UILabel!
     
@@ -26,35 +22,42 @@ class DishCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblDishName: UILabel!
     
     @IBOutlet weak var dishImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.width/2
-        profilePicImageView.clipsToBounds = true
         
         dishImageView.applyGradient(colors: [.black,.clear,.black], direction: .topToBottom)
         
     }
     
-    func setUp(_ dishData:MFMedia){
+    func setUp(_ dishData:MFDish){
         
-        self.lblChefName.text = dishData.user.name
-        self.lblDishName.text = dishData.dish.name
-        self.lblDishTypeTag.text = "HEALTHY"
-        
-        self.lblNumberOfViews.text = dishData.numberOfViewers.description
-        self.profilePicImageView.image = UIImage(named: dishData.user.picture!)!
-        do {
-            if let coverURL = dishData.cover_small {
-                let imageData = try Data.init(contentsOf: coverURL)
-                self.dishImageView.image = UIImage.init(data: imageData)
+        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.mediaID!) { (media) in
+            
+            guard let media = media else {return}
+            
+            self.lblDishName.text = dishData.name
+            self.lblDishTypeTag.text = dishData.tag
+            
+            if  dishData.type != nil {
+                
+                switch dishData.type! {
+                    
+                case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
+                case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
+                case .Vegan , .None: self.vegIndicatorImageView.image = nil
+                    
+                }
                 
             }
-        } catch {
-            print(error.localizedDescription)
+            
+            self.lblNumberOfViews.text = media.numberOfViewers.description
+            
+            if let picURL = media.cover_large{
+                self.dishImageView.sd_setImage(with: picURL)
+            }
         }
     }
-    
+
 }

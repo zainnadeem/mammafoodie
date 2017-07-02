@@ -16,6 +16,10 @@ class MFComment {
         user.id = userId
         self.user = user
     }
+    
+    init(){
+        
+    }
 }
 
 extension MFComment: Hashable {

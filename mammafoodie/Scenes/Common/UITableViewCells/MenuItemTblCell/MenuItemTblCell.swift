@@ -44,17 +44,10 @@ class MenuItemTblCell: UITableViewCell {
     }
     
     func setup(with media: MFMedia) {
-        do {
-            if let coverURL = media.cover_small {
-                let imageData = try Data.init(contentsOf: coverURL)
-                self.imgView.image = UIImage.init(data: imageData)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        self.lblDishName.text = media.dish.name
-        self.lblUsername.text =  media.user.name
-        self.imgViewProfilePicture.image = UIImage(named: media.user.picture!)!
+//        self.imgView.image = UIImage(named: media.cover_small!)!
+//        self.lblDishName.text = media.dish.name
+//        self.lblUsername.text =  media.user.name
+//        self.imgViewProfilePicture.image = UIImage(named: media.user.picture!)!
     }
     
     func cellWillDisplay() {

@@ -50,8 +50,14 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageVidupClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageVidupClnCell", for: indexPath) as! HomePageVidupClnCell
         cell.setup(with: self.vidups[indexPath.item])
+//        cell.addProgressCircle(for: self.vidups[indexPath.item])
         return cell
     }
+    
+    //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    //        let vidupCell: HomePageVidupClnCell = cell as! HomePageVidupClnCell
+    //
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.vidups.count
@@ -61,7 +67,9 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
         if self.vidups[indexPath.item] == self.vidups.last {
             self.didSelectViewAll?()
         } else {
-            self.didSelect?(self.vidups[indexPath.item])
+            let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+            //            let cellFrameInSuperview: CGRect = collectionView.convert(theAttributes.frame, to: collectionView.superview)
+            self.didSelect?(self.vidups[indexPath.item], theAttributes.frame)
         }
     }
 }

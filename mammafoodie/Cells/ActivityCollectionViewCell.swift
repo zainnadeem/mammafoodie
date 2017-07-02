@@ -57,7 +57,15 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         self.lblTimeStamp.text = "2 mins ago."
         self.lblLikesCount.text = "12"
         self.lblCommentsCount.text = "23"
-        self.profilePicImageView.image = UIImage(named: activityData.actionUserId.picture!)!
+        
+        DatabaseGateway.sharedInstance.getUserWith(userID: activityData.actionUserID) { (user) in
+            
+            guard let user = user else {return}
+            let picURL = user.picture!
+            self.profilePicImageView.sd_setImage(with: URL(string: picURL)!)
+        }
+        
+//        self.profilePicImageView.image = UIImage(named: activityData.actionUserID.picture!)!
         self.emojiImageView.image = UIImage(named: "BeefTower")
     }
 

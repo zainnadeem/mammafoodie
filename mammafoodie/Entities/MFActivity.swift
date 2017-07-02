@@ -1,4 +1,4 @@
-enum MFActivityType {
+enum MFActivityType:String {
     case liked
     case bought
     case tipped
@@ -17,4 +17,19 @@ struct MFActivity {
         self.name = name
         self.type = type
     }
+    
+    init(from dictionary:[String:AnyObject]){
+        self.id = dictionary["id"] as? String ?? ""
+        self.name = dictionary["name"] as? String ?? ""
+        
+        let type = dictionary["type"]  as? String ?? ""
+        
+        if let type = MFActivityType(rawValue:type){
+            self.type  = type
+        } else {
+            self.type = .none
+        }
+        
+    }
+    
 }

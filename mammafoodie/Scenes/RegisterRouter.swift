@@ -1,12 +1,12 @@
 import UIKit
 
-protocol OwnProfilePageRouterInput {
+protocol RegisterRouterInput {
 
 }
 
-class OwnProfilePageRouter: OwnProfilePageRouterInput {
+class RegisterRouter: RegisterRouterInput {
 
-    weak var viewController: OwnProfilePageViewController!
+    weak var viewController: RegisterViewController!
     
     // MARK: - Navigation
     

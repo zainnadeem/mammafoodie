@@ -2,35 +2,35 @@ import UIKit
 
 // MARK: - Connect View, Interactor, and Presenter
 
-extension OwnProfilePageViewController: OwnProfilePagePresenterOutput {
+extension RegisterViewController: RegisterPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
 }
 
-extension OwnProfilePageInteractor: OwnProfilePageViewControllerOutput {
+extension RegisterInteractor: RegisterViewControllerOutput {
 }
 
-extension OwnProfilePagePresenter: OwnProfilePageInteractorOutput {
+extension RegisterPresenter: RegisterInteractorOutput {
 }
 
-class OwnProfilePageConfigurator {
+class RegisterConfigurator {
 
     // MARK: - Object lifecycle
     
-    static let sharedInstance = OwnProfilePageConfigurator()
+    static let sharedInstance = RegisterConfigurator()
     
     private init() {}
     
     // MARK: - Configuration
     
-    func configure(viewController: OwnProfilePageViewController) {
-        let router = OwnProfilePageRouter()
+    func configure(viewController: RegisterViewController) {
+        let router = RegisterRouter()
         router.viewController = viewController
         viewController.router = router
         
-        let interactor = OwnProfilePageInteractor()
-        let presenter = OwnProfilePagePresenter()
+        let interactor = RegisterInteractor()
+        let presenter = RegisterPresenter()
         viewController.output = interactor
         interactor.output = presenter
         presenter.output = viewController

@@ -19,6 +19,7 @@ enum FirebaseReference: String {
     case notifications = "Notifications"
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
+    case users = "Users"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -252,8 +253,168 @@ extension DatabaseGateway {
         FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
             completion()
         }
+        
     }
 }
+
+
+//MARK: - User
+extension DatabaseGateway {
+    
+    func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
+        
+        let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
+            completion(error?.localizedDescription)
+        }
+    }
+    
+    func updateUserEntity(with model:MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id!).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
+    
+    func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
+        
+        FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let user:MFUser = MFUser(from: userData)
+            user.id = userID
+            
+            completion(user)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+
+}
+
+//MARK: - Dish
+extension DatabaseGateway {
+    
+    
+    func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
+        
+        FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let dish:MFDish = MFDish(from: dishData)
+            
+            completion(dish)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+    
+    
+    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+        
+        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        
+        let id :String = "\(model.id!)"
+        let userProfileData = rawUserData[id] as! FirebaseDictionary
+        
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
+            
+            completion(error?.localizedDescription)
+            
+        }
+    }
+    
+}
+
+//MARK: - Media
+extension  DatabaseGateway {
+    
+    func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFMedia?)->Void ){
+        
+        FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let media:MFMedia = MFMedia(from: mediaData)
+            
+            completion(media)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+    
+    
+}
+
+// MARK: - News Feed
+extension DatabaseGateway {
+    
+    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let rawNewsFeed: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+                completion([])
+                return
+            }
+            let newsFeed: MFNewsFeed? = self.createNewsFeedModel(from: rawNewsFeed)
+            completion([newsFeed!])
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
+        var feed: MFNewsFeed = MFNewsFeed()
+        return feed
+    }
+}
+
+//MARK: NewsFeed
+
+extension DatabaseGateway {
+    
+    func getNewsFeedWith(newsFeedID:String, _ completion:@escaping (_ activity:MFNewsFeed?)->Void ) {
+        
+        FirebaseReference.newsFeed.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+            guard let newsFeedData = userDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
+                
+            completion(newsFeed)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+        
+    }
+    
+}
+
+
 
 // MARK: - Media
 extension DatabaseGateway {
