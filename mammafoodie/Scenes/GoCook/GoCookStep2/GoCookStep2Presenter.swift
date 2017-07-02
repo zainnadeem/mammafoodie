@@ -7,7 +7,7 @@ protocol GoCookStep2PresenterInput {
     func selectDiet(_ diet : MFDishType)
     func setDealDuration()
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
-    func showOption(_ option : MFMediaType)
+    func showOption(_ option : MFDishMediaType)
     func clearData()
 }
 
@@ -210,7 +210,7 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         }
     }
     
-    func showOption(_ option : MFMediaType) {
+    func showOption(_ option : MFDishMediaType) {
         switch option {
         case .vidup:
             self.showVidupMode()

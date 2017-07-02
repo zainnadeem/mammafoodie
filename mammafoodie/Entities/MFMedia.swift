@@ -8,11 +8,6 @@ enum MFMediaType : String {
     case unknown = "unknown"
 }
 
-enum MediaAccessUserType {
-    case owner
-    case viewer
-}
-
 class MFMedia {
     var id: String!
     var comments: [Date:MFComment] = [:]

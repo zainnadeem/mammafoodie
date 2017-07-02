@@ -33,33 +33,36 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
-        return [
-            dish.id: [
+        var mediaURL : String! = ""
+        if dish.mediaURL != nil {
+            mediaURL = dish.mediaURL.absoluteString
+        }
+        let dict =
+            [dish.id : [
                 "id" : dish.id,
+                "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+                "endTimestamp" : dish.endedAt.timeIntervalSinceReferenceDate,
                 "user" : [
                     "id" : dish.user.id,
                     "name" : dish.user.name
-                ],
-                "media" : [
-                    "id": dish.media.id,
-                    "type": dish.media.type.rawValue
-                ],
-                "mediaType": dish.media.type.rawValue,
+                    ],
+                "mediaType": dish.mediaType.rawValue,
                 "name" : dish.name,
-                "likesCount" : 0,
-                "commentsCount" : 0,
+                "likesCount" : dish.likesCount,
+                "commentsCount" : dish.commentsCount,
                 "description" : dish.description ?? "",
+                "mediaURL" : mediaURL!,
                 "totalSlots" : dish.totalSlots,
                 "pricePerSlot" : dish.pricePerSlot,
                 "availableSlots" : dish.totalSlots,
-                "type" : dish.type.rawValue,
+                "dishType" : dish.dishType.rawValue,
                 "preparationTime" : dish.preparationTime,
                 "cuisine" : [
                     "id" : dish.cuisine.id,
                     "name" : dish.cuisine.name
-                ]
-                ] as AnyObject
-        ]
+                    ]
+                ] as AnyObject]
+        return dict
     }
     
     class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {

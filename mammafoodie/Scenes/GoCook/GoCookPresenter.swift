@@ -2,7 +2,7 @@ import UIKit
 
 protocol GoCookPresenterInput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
@@ -83,7 +83,7 @@ class GoCookPresenter: GoCookPresenterInput {
         }
     }
     
-    func selectOption(option: MFMediaType) {
+    func selectOption(option: MFDishMediaType) {
         switch  option {
         case .liveVideo:
             self.viewController?.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
@@ -139,7 +139,7 @@ class GoCookPresenter: GoCookPresenterInput {
     }
     
     func showStep2() {
-        if self.viewController?.selectedOption != MFMediaType.unknown {
+        if self.viewController?.selectedOption != MFDishMediaType.unknown {
             self.viewController?.btnStep2.isSelected = true
             self.viewController?.btnStep1.isSelected = false
             self.moveStep2(true)
@@ -152,7 +152,7 @@ class GoCookPresenter: GoCookPresenterInput {
         self.moveStep2(false)
     }
     
-    func start(_ meidaOption : MFMediaType) {
+    func start(_ meidaOption : MFDishMediaType) {
         self.viewController?.selectedOption = meidaOption
         if let btnNext = self.viewController?.btnNext {
             self.viewController?.onNext(btnNext)

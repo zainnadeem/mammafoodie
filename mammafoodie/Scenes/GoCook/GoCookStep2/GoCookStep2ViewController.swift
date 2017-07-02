@@ -12,7 +12,7 @@ protocol GoCookStep2ViewControllerOutput {
     func setupViewController()
     func selectDiet(_ diet : MFDishType)
     func selectMediaUploadType(_ type : GoCookMediaUploadType)
-    func showOption(_ option : MFMediaType)
+    func showOption(_ option : MFDishMediaType)
     func clearData()
 }
 
@@ -27,7 +27,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     var moviePlayer : AVPlayerViewController = AVPlayerViewController.init()
     
-    var selectedOption : MFMediaType = . unknown {
+    var selectedOption : MFDishMediaType = . unknown {
         didSet {
             self.output.showOption(self.selectedOption)
         }
@@ -209,16 +209,18 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                             ready = false
                                         }
                                         if ready {
-                                            let media = MFMedia.createNewMedia(with : self.selectedOption)
-                                            let dish = MFDish.init(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, preparationTime : preparationTime, totalSlots: totalSlots, withPrice: pricePerSlots, dishType : self.selectedDiet, media : media)
                                             let user = MFUser.init()
                                             user.id = FirebaseReference.user.generateAutoID()
                                             user.name = "Arjav"
-                                            dish.media.user = user
+
+                                            let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
+                                            dish.preparationTime = preparationTime
+                                            dish.availableSlots = totalSlots
+                                            dish.totalSlots = totalSlots
+                                            dish.pricePerSlot = pricePerSlots
                                             dish.user = user
-                                            media.dish = dish
-                                            media.createdAt = Date.init()
-                                            media.endedAt = media.createdAt.addingTimeInterval(countDown)
+                                            dish.createdAt = Date.init()
+                                            dish.endedAt = dish.createdAt.addingTimeInterval(countDown)
                                             self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                         }
                                     } else {

@@ -6,7 +6,7 @@ protocol GoCookViewControllerInput {
 
 protocol GoCookViewControllerOutput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
@@ -22,7 +22,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var createdmedia : MFMedia?
     
-    var selectedOption : MFMediaType = .unknown {
+    var selectedOption : MFDishMediaType = .unknown {
         didSet {
             self.output.selectOption(option: self.selectedOption)
             self.step2VC.selectedOption = self.selectedOption
@@ -105,7 +105,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     // MARK: - Display logic
     func create(_ dish : MFDish, image : UIImage?, videoURL :  URL?) {
-        dish.media.type = self.selectedOption
+        dish.mediaType = self.selectedOption
         switch self.selectedOption {
         case .liveVideo:
             dish.save { (error) in
@@ -114,11 +114,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             
         case .picture:
             if let img = image {
-                DatabaseGateway.sharedInstance.save(image: img, at: dish.media.getStoragePath(), completion: { (downloadURL, error) in
+                DatabaseGateway.sharedInstance.save(image: img, at: dish.getStoragePath(), completion: { (downloadURL, error) in
                     if let url = downloadURL {
                         self.saveDish(dish, mediaURL: url)
-                        dish.media.setCoverImage(img) { (error) in
-                        }
                     } else {
                         DispatchQueue.main.async {
                             self.showAlert(error?.localizedDescription, message: nil)
@@ -129,7 +127,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             
         case .vidup:
             if let video = videoURL {
-                DatabaseGateway.sharedInstance.save(video: video, at: dish.media.getStoragePath(), completion: { (downloadURL, error) in
+                DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
                     if let url = downloadURL {
                         self.saveDish(dish, mediaURL: url)
                     } else {
@@ -146,7 +144,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     func saveDish(_ dish : MFDish, mediaURL : URL) {
-        dish.media.mediaURL = mediaURL
+        dish.mediaURL = mediaURL
         dish.save { (error) in
             DispatchQueue.main.async {
                 if let er = error {
