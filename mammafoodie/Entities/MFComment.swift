@@ -5,8 +5,9 @@ class MFComment {
     var id: String!
     var text: String!
     var createdAt: Date!
-    var user: MFUser!
-    var media: MFMedia!
+    var user: MFUser?
+    var media: MFMedia?
+    var username: String!
     
     init(text: String, username: String, userId: String) {
         self.text = text
@@ -20,6 +21,16 @@ class MFComment {
     init(){
         
     }
+    
+    init(from commentDictionary:[String:AnyObject]) {
+        
+        self.id = commentDictionary["id"] as? String ?? ""
+        self.text = commentDictionary["text"] as? String ?? ""
+        let createdDateString = commentDictionary["createdAt"] as? String ?? ""
+        self.createdAt = Date(fromString:createdDateString, format: .isoDateTimeSec)
+        
+    }
+  
 }
 
 extension MFComment: Hashable {

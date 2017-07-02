@@ -20,6 +20,7 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case dishComments = "DishComments"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -340,6 +341,30 @@ extension DatabaseGateway {
         }
     }
     
+    
+    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
+        
+        FirebaseReference.dishComments.classReference.child(dishID).observeSingleEvent(of: .value, with: {(commentsDataSnapshot) in
+            guard let commentsData = commentsDataSnapshot.value as? FirebaseDictionary else {
+                
+                completion(nil)
+                return
+            
+            }
+            var comments: [MFComment] = []
+            
+            for rawComment in commentsData {
+                let newComment = MFComment(from: rawComment.value as! [String : AnyObject])
+                comments.append(newComment)
+            }
+            
+            completion(comments)
+        
+        }) {(error) in
+            print(error)
+            completion(nil)
+        }
+    }
 }
 
 //MARK: - Media

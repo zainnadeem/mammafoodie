@@ -18,11 +18,15 @@ class MFDish {
     var type : MFDishType!
     var user: MFUser!
     var media: MFMedia!
+    var username: String!
     
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
+    
+    var numberOfComments: UInt = 0
+    var numberOfLikes: UInt = 0
     
     var boughtOrders: [String:Date] = [:] //MFOrder id
     var cuisineID: String! //MFCusine id
@@ -34,7 +38,7 @@ class MFDish {
     var cuisine: MFCuisine!
     
     
-    init(id: String, user: MFUser, description: String, name: String) {
+    init(id: String, description: String, name: String) {
         self.id = id
 //        self.user = user
         self.description = description
@@ -63,9 +67,13 @@ class MFDish {
     init(from dishDataDictionary:[String:AnyObject]){
         self.id = dishDataDictionary["id"] as? String ?? ""
         self.name = dishDataDictionary["name"] as? String ?? ""
+
+        if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
+            self.user = MFUser(from: userDict)
+        }
         
-        let userID = dishDataDictionary["userID"]   as? String ?? ""
-        self.user = MFUser() ; user.id = userID
+        self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
+        self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
         
         self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
         self.description = dishDataDictionary["description"]  as? String ?? ""
