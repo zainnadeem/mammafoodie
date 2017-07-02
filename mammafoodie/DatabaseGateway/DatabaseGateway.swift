@@ -301,7 +301,7 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
-
+    
 }
 
 //MARK: - Dish
@@ -403,7 +403,7 @@ extension DatabaseGateway {
                 return
             }
             let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
-                
+            
             completion(newsFeed)
         }) { (error) in
             print(error)
@@ -418,6 +418,33 @@ extension DatabaseGateway {
 
 // MARK: - Media
 extension DatabaseGateway {
+    
+    func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) {
+        self.getDishes(type: MFMediaType.liveVideo) { (dishes) in
+            
+        }
+    }
+    
+    func getDishes(type: MFMediaType, _ completion: @escaping ((_ liveVideos: [MFDish])->Void)) {
+        FirebaseReference.dishes.classReference.queryOrdered(byChild: "media/type").queryEqual(toValue: type.rawValue).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            guard let rawList = snapshot.value as? FirebaseDictionary else {
+                completion([])
+                return
+            }
+            var dishes: [MFDish] = []
+            for (key,rawDish) in rawList.enumerated() {
+                let rawDishFirebase: FirebaseDictionary = rawDish.value as? FirebaseDictionary ?? [:]
+                dishes.append(self.createDish(from: rawDishFirebase))
+            }
+            print(dishes)
+        })
+    }
+    
+    func createDish(from rawDish: FirebaseDictionary) -> MFDish {
+        let dish: MFDish = MFDish(from: rawDish)
+        return dish
+    }
+    
     func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
         let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
         FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in

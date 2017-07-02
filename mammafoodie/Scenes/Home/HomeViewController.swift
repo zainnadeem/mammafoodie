@@ -287,7 +287,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     func setupLiveVideoCollectionViewAdapter() {
-        self.liveVideosAdapter.createStaticData()
+        //        self.liveVideosAdapter.createStaticData()
         self.liveVideosAdapter.conHeightCollectionView = self.conHeightClnLiveVideos
         self.liveVideosAdapter.setup(with: self.clnLiveVideos)
         self.liveVideosAdapter.didSelect = { (selectedLiveVideo, cellFrame) in
@@ -378,12 +378,12 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     @IBAction func logout(){
         
-        let firebaseWorker = FirebaseLoginWorker()
+        let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
         
         firebaseWorker.signOut(){ errorMessage in
             
             if errorMessage != nil {
-                 print(errorMessage)
+                print(errorMessage)
             } else {
                 print("Logged out successfully")
                 self.navigationController?.popViewController(animated: true)

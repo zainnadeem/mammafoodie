@@ -4,30 +4,34 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
     
     var liveVideos: [MFMedia] = []
     
-    func createStaticData() {
-        self.liveVideos.append(self.liveVideo(with: String(describing: -1)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 17)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 8)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 13)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 6)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 5)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 9)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 0)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 10)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 11)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 12)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 2)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 3)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 14)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 15)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 16)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 1)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 18)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 19)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 4)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 20)))
-        self.liveVideos.append(self.liveVideo(with: String(describing: 30)))
+    func loadLiveVideos() {
+        
     }
+    
+    //    func createStaticData() {
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: -1)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 17)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 8)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 13)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 6)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 5)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 9)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 0)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 10)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 11)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 12)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 2)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 3)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 14)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 15)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 16)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 1)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 18)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 19)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 4)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 20)))
+    //        self.liveVideos.append(self.liveVideo(with: String(describing: 30)))
+    //    }
     
     func liveVideo(with id: String) -> MFMedia {
         let media1: MFMedia = MFMedia()
@@ -61,7 +65,7 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
             self.didSelectViewAll?()
         } else {
             let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
-//            let cellFrameInSuperview: CGRect = collectionView.convert(, to: collectionView.superview)
+            //            let cellFrameInSuperview: CGRect = collectionView.convert(, to: collectionView.superview)
             self.didSelect?(self.liveVideos[indexPath.item], theAttributes.frame)
         }
     }

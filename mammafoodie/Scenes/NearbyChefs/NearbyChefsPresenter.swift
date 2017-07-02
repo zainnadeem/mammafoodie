@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 
 protocol NearbyChefsPresenterInput {
     func showMarkers(_ markers: [Marker])

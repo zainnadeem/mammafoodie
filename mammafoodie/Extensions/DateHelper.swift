@@ -7,7 +7,7 @@
 //  Copyright (c) 2014. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 public extension Date {
@@ -65,7 +65,7 @@ public extension Date {
             return self.toString(dateStyle: .full, timeStyle: .full, isRelative: false)
         case .ordinalDay:
             let formatter = Date.cachedOrdinalNumberFormatter()
-            return formatter.string(from: component(.day)! as NSNumber)!
+            return formatter.string(from: self.component(.day)! as NSNumber)!
         case .weekday:
             let weekdaySymbols = Date.cachedFormatter().weekdaySymbols!
             let string = weekdaySymbols[component(.weekday)!-1] as String
