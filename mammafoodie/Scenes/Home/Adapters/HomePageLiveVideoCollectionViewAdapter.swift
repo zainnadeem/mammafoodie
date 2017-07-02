@@ -60,7 +60,9 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
         if self.liveVideos[indexPath.item] == self.liveVideos.last {
             self.didSelectViewAll?()
         } else {
-            self.didSelect?(self.liveVideos[indexPath.item])
+            let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+//            let cellFrameInSuperview: CGRect = collectionView.convert(, to: collectionView.superview)
+            self.didSelect?(self.liveVideos[indexPath.item], theAttributes.frame)
         }
     }
 }

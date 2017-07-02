@@ -12,15 +12,15 @@ protocol LiveVideoViewControllerOutput {
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
-    var output: LiveVideoViewControllerOutput!
+    var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
     
     var liveVideo: MFMedia!
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
     
-//    @IBOutlet weak var btnEndLive: UIButton!
-//    @IBOutlet weak var lblVideoName: UILabel!
+    //    @IBOutlet weak var btnEndLive: UIButton!
+    //    @IBOutlet weak var lblVideoName: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var viewSlotDetails: UIView!
     @IBOutlet weak var viewComments: UIView!
@@ -61,8 +61,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         // This needs to be executed from viewWillAppear or later. Because of the Camera
-        self.output.start(self.liveVideo)
+        if self.output != nil {
+            self.output!.start(self.liveVideo)
+        }
         
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
@@ -128,13 +132,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.output.stop(self.liveVideo)
+        if self.output != nil {
+            self.output!.stop(self.liveVideo)
+        }
     }
     
     // MARK: - Event handling
     
     @IBAction func btnEndLiveTapped(_ sender: UIButton) {
-        self.output.stop(self.liveVideo)
+        if self.output != nil {
+            self.output!.stop(self.liveVideo)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -143,6 +151,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -159,7 +168,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func showVideoId(_ liveVideo: MFMedia) {
-//        self.lblVideoName.text = liveVideo.id
+        //        self.lblVideoName.text = liveVideo.id
     }
     
     func setupCommentsTableViewAdapter() {
@@ -169,5 +178,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.tblComments.setContentOffset(CGPoint(x: 0, y: self.tblComments.contentSize.height-self.tblComments.frame.height), animated: false)
     }
     
+    deinit {
+        print("Deinit LiveVideoVC")
+    }
     
 }

@@ -39,7 +39,6 @@ class MFMedia {
     var type: MFMediaType = .unknown
 //    var chefID: String! //MFUser id
     
-    
     var accessMode: MediaAccessUserType = .viewer
     
     init() {

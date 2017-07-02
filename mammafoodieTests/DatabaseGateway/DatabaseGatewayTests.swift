@@ -192,3 +192,9 @@ extension DatabaseGatewayTests {
     //    }
 }
 
+// MARK: - News Feed
+extension DatabaseGatewayTests {
+    func testNewsFeed() {
+//        DatabaseGateway.sharedInstance.getNewsFeed(for: "", <#T##completion: (([MFNewsFeed]) -> Void)##(([MFNewsFeed]) -> Void)##([MFNewsFeed]) -> Void#>)
+    }
+}

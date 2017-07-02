@@ -25,6 +25,12 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
         self.viewForViewAll.layer.borderWidth = 2
     }
     
+    override func layoutSubviews() {
+        self.imgView.layer.cornerRadius = self.imgView.frame.width/2
+        self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
+        super.layoutSubviews()
+    }
+    
     func setup(with liveVideo: MFMedia) {
         self.viewForViewAll.isHidden = true
         if liveVideo.id == "-1" {
@@ -40,7 +46,6 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             self.imgAddIcon.isHidden = true
             self.imgView.image = UIImage(named: "ProfilePicture\(liveVideo.id!)")!
         }
-        self.imgView.layer.cornerRadius = self.frame.width/2
-        self.viewForViewAll.layer.cornerRadius = self.frame.width/2
+        
     }    
 }
