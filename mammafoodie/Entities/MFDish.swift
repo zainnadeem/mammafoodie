@@ -72,9 +72,8 @@ class MFDish {
         self.availableSlots = availableSlots
         self.pricePerSlot = pricePerSlot
         self.boughtOrders = boughtOrders
-        self.mediaID = mediaID
         self.tag = tag
-        self.type = dishType
+        self.dishType = dishType
         
     }
     
@@ -93,8 +92,7 @@ class MFDish {
         
         let userID = dishDataDictionary["userID"]   as? String ?? ""
         self.user = MFUser() ; user.id = userID
-        
-        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
+
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
@@ -106,9 +104,9 @@ class MFDish {
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
         
         if let dishType = MFDishType(rawValue: dishType){
-            self.type = dishType
+            self.dishType = dishType
         } else {
-            self.type = .None
+            self.dishType = .None
         }
         
     }
