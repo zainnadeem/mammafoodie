@@ -8,11 +8,6 @@ enum MFMediaType : String {
     case unknown = "unknown"
 }
 
-enum MediaAccessUserType {
-    case owner
-    case viewer
-}
-
 class MFMedia {
     var id: String!
     
@@ -29,7 +24,6 @@ class MFMedia {
     var contentId: String!
     var cover_large: URL?
     var cover_small: URL?
-    var dealTime : Double = -1
     var createdAt: Date!
     var endedAt: Date?
     weak var dish: MFDish!
@@ -37,7 +31,8 @@ class MFMedia {
     
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
-//    var chefID: String! //MFUser id
+    var user: MFUser!
+    var mediaURL : URL!
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -120,21 +115,31 @@ class MFMedia {
     }
     
     func generateCoverImageURL() -> URL {
-        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID).jpg?alt=media"
+        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID!).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
-        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID)).jpg?alt=media"
+        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
         return URL.init(string: string)!
     }
     
-    func save() {
+    func save(_ completion : @escaping (Error?) -> Void ) {
         DatabaseGateway.sharedInstance.saveMedia(self) { (error) in
-            print(error?.localizedDescription ?? "No Error")
+            completion(error)
         }
+    }
+    
+    func getStoragePath() -> String {
+        var urlencodedID : String! = ""
+        if self.type == .picture {
+            urlencodedID = "\((self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!).jpg"
+        } else if self.type == .vidup {
+            urlencodedID = "\((self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!).mp4"
+        }
+        return "/media/\(urlencodedID)"
     }
 }
 

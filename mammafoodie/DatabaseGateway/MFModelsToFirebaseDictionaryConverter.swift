@@ -14,32 +14,55 @@ class MFModelsToFirebaseDictionaryConverter {
     
     // Need to update this
     class func dictionary(from media: MFMedia) -> FirebaseDictionary {
-        return [ :
-//            media.id: [
-//                "id" : media.id as AnyObject ,
-//                "userId" : media.user.id as AnyObject,
-//                "type" : media.type.rawValue as AnyObject,
-//                "cover_small" : media.cover_small?.absoluteString ?? "" as AnyObject,
-//                "cover_large" : media.cover_large?.absoluteString ?? "" as AnyObject,
-//                "dishId" : media.dish.id as AnyObject,
-//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate as AnyObject
-//                ] as AnyObject
+        return [
+            media.id: [
+                "id" : media.id,
+                "user" : [
+                    "id" : media.user.id,
+                    "name" : media.user.name
+                ],
+                "type" : media.type.rawValue,
+                "cover_small" : media.cover_small?.absoluteString ?? "",
+                "cover_large" : media.cover_large?.absoluteString ?? "",
+                "media_url" : media.mediaURL?.absoluteString ?? "",
+                "dishId" : media.dish.id,
+                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
+                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
+                ] as AnyObject
         ]
     }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
-        return [
-            dish.id: [
+        var mediaURL : String! = ""
+        if dish.mediaURL != nil {
+            mediaURL = dish.mediaURL.absoluteString
+        }
+        let dict =
+            [dish.id : [
                 "id" : dish.id,
-                "userId" : dish.user.id,
-                "mediaId" : dish.media!.id ?? "",
+                "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+                "endTimestamp" : dish.endedAt.timeIntervalSinceReferenceDate,
+                "user" : [
+                    "id" : dish.user.id,
+                    "name" : dish.user.name
+                    ],
+                "mediaType": dish.mediaType.rawValue,
+                "name" : dish.name,
+                "likesCount" : dish.likesCount,
+                "commentsCount" : dish.commentsCount,
                 "description" : dish.description ?? "",
+                "mediaURL" : mediaURL!,
                 "totalSlots" : dish.totalSlots,
                 "pricePerSlot" : dish.pricePerSlot,
-                "type" : dish.type.rawValue,
-                "cuisineId" : dish.cuisine.id
-                ] as AnyObject
-        ]
+                "availableSlots" : dish.totalSlots,
+                "dishType" : dish.dishType.rawValue,
+                "preparationTime" : dish.preparationTime,
+                "cuisine" : [
+                    "id" : dish.cuisine.id,
+                    "name" : dish.cuisine.name
+                    ]
+                ] as AnyObject]
+        return dict
     }
     
     class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
