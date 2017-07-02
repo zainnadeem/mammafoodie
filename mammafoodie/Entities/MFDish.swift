@@ -19,6 +19,8 @@ class MFDish {
     var user: MFUser!
     var media: MFMedia!
     
+    var mediaURL:URL!
+    
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0

@@ -365,9 +365,10 @@ extension DatabaseGateway {
                 completion(false)
                 return
             }
-            
-            let likeStatus = dishData[user_Id]
-            
+            guard dishData[user_Id] != nil else {
+                completion(false)
+                return
+            }
             completion(true)
         }) { (error) in
             print(error)

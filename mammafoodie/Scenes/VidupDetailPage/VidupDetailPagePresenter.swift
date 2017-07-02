@@ -6,6 +6,7 @@ protocol VidupDetailPagePresenterInput {
     func UserInfo(UserInfo:MFUser)
      func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
     func UpdateLikeCountInteractor(likeCount:Int)
+    func UpdateLikeStatusInteractor(Status:Bool)
 }
 
 protocol VidupDetailPagePresenterOutput: class {
@@ -14,10 +15,13 @@ protocol VidupDetailPagePresenterOutput: class {
     func DisplayUserInfo(UserInfo:MFUser)
     func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
     func UpdateLikeCount(likeCount:Int)
+    func UpdateLikeStatus(Status:Bool)
 
 }
 
 class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
+   
+
     weak var output: VidupDetailPagePresenterOutput!
     
     // MARK: - Presentation logic
@@ -49,4 +53,7 @@ class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
         output.DisplayDishInfo(DishInfo: DishInfo,MediaInfo: MediaInfo)
     }
 
+    func UpdateLikeStatusInteractor(Status: Bool) {
+        output.UpdateLikeStatus(Status: Status)
+    }
 }

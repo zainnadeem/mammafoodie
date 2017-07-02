@@ -17,8 +17,9 @@ protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-    func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func DishInfo(DishInfo:MFDish)
     func UpdateLikeCountInteractor(likeCount:Int)
+    func UpdateLikeStatusInteractor(Status:Bool)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -35,20 +36,26 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         //Setup the media player
         Vidupworker.delegate = self
         Vidupworker.SetupMediaPlayer(view: view)
+        
         Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
             self.output.UserInfo(UserInfo: Userdetails)
         }
-        
-        Vidupworker.GetlikeStatus(Id: user_id, DishId: dish_id) { (status) in
-            print(status)
-        }
-
-
         
         Vidupworker.GetDishLikeDetails(Id: dish_id) { (LikeCount) in
             self.output.UpdateLikeCountInteractor(likeCount: LikeCount)
         }
         
+        Vidupworker.GetDishInfo(Id: dish_id) { (dishDetails) in
+            if dishDetails != nil{
+                self.output.DishInfo(DishInfo: dishDetails!)
+                self.VidupTimerworker.delegate = self
+                self.Vidupworker.PlayVideo(MediaURL: dishDetails?.mediaURL)
+                self.Vidupworker.getexpireTime(endedAt: dishDetails.endTimestamp)
+            }
+        }
+        
+        
+        /*
         self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
             if Dishdetails != nil {
                 self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
@@ -66,6 +73,11 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
                     self.VidupTimerworker.runTimer()
                 }
             }
+        }
+        */
+        
+        Vidupworker.GetlikeStatus(Id: user_id, DishId: dish_id) { (status) in
+            self.output.UpdateLikeStatusInteractor(Status: status)
         }
     }
     

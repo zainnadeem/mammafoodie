@@ -6,6 +6,7 @@ protocol VidupDetailPageViewControllerInput {
     func DisplayUserInfo(UserInfo:MFUser)
     func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
     func UpdateLikeCount(likeCount:Int)
+    func UpdateLikeStatus(Status:Bool)
 }
 
 protocol VidupDetailPageViewControllerOutput {
@@ -28,7 +29,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     //TODO: - VidUp URL and Expire Time.
     var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
-    var DishId:String = "Hhjkkjjhkhjkkjlh"
+    var DishId:String = "KnyI6lh4X10Wo18exDH3"
 
     
     
@@ -150,6 +151,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     func UpdateLikeCount(likeCount:Int) {
         lbl_Like.text! = "\(likeCount)"
+    }
+    
+    func UpdateLikeStatus(Status:Bool) {
+        lbtn_like.isSelected = Status
     }
     
     func animateLike(){

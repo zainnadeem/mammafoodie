@@ -88,18 +88,27 @@ class VidupDetailPageWorker:NSObject {
         })
     }
     
-    
-    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
+    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?)->()){
+        
         DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
-            
-            if DishInfo != nil {
-                DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
-                    completion(DishInfo, mediaDetails)
-                })
-            }
-            
+            completion(DishInfo)
         }
     }
+    
+    
+    
+    
+//    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
+//        DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
+//            
+//            if DishInfo != nil {
+//                DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
+//                    completion(DishInfo, mediaDetails)
+//                })
+//            }
+//            
+//        }
+//    }
     
     func GetDishLikeDetails(Id:String,completion:@escaping(_ likeCount:Int)->()){
         DatabaseGateway.sharedInstance.getDishLike(dishID: Id) { (LikeCount) in
@@ -129,12 +138,11 @@ class VidupDetailPageWorker:NSObject {
     func getexpireTime(endedAt:Date)->Int{
         
         var TimeLeft:Int = 0
-
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.A"
-//        let endedAtDate = dateFormatter.date(from: endedAt)!
         
-        TimeLeft = Int(endedAt.timeIntervalSinceNow)
+        let CurrentTime = Date().timeIntervalSinceReferenceDate
+        
+        TimeLeft = endedAt - CurrentTime
+        
         return TimeLeft
     }
     
