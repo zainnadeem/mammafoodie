@@ -18,6 +18,7 @@ protocol VidupDetailPageInteractorOutput {
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
     func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func UpdateLikeCountInteractor(likeCount:Int)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -37,13 +38,31 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
             self.output.UserInfo(UserInfo: Userdetails)
         }
+        
+        Vidupworker.GetlikeStatus(Id: user_id, DishId: dish_id) { (status) in
+            print(status)
+        }
+
+
+        
+        Vidupworker.GetDishLikeDetails(Id: dish_id) { (LikeCount) in
+            self.output.UpdateLikeCountInteractor(likeCount: LikeCount)
+        }
+        
         self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
             if Dishdetails != nil {
                 self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
                 self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.cover_large)!)
+                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.generateVidUpVideoURL())!)
                 if Int((MediaDetails?.dealTime)!) > 0 {
-                    self.VidupTimerworker.seconds = 10
+                    
+                    var timeLeft:Int = self.Vidupworker.getexpireTime(endedAt: (MediaDetails?.endedAt)!)
+                    
+                    if timeLeft < 0 {
+                        timeLeft = 0
+                    }
+                    
+                    self.VidupTimerworker.seconds = timeLeft
                     self.VidupTimerworker.runTimer()
                 }
             }

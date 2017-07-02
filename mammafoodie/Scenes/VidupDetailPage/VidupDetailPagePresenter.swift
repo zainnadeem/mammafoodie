@@ -5,6 +5,7 @@ protocol VidupDetailPagePresenterInput {
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
      func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func UpdateLikeCountInteractor(likeCount:Int)
 }
 
 protocol VidupDetailPagePresenterOutput: class {
@@ -12,6 +13,7 @@ protocol VidupDetailPagePresenterOutput: class {
     func DisplayTime(Time:String)
     func DisplayUserInfo(UserInfo:MFUser)
     func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func UpdateLikeCount(likeCount:Int)
 
 }
 
@@ -26,6 +28,10 @@ class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
     
     func DisplayTimeInteractor(Time:TimeInterval){
         output.DisplayTime(Time: self.timeString(time: Time))
+    }
+    
+    func UpdateLikeCountInteractor(likeCount: Int) {
+        output.UpdateLikeCount(likeCount: likeCount)
     }
     
     func timeString(time:TimeInterval) -> String {

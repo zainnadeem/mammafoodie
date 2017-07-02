@@ -137,6 +137,12 @@ class MFMedia {
             print(error?.localizedDescription ?? "No Error")
         }
     }
+    
+    func generateVidUpVideoURL()->URL{
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID).jpg?alt=media"
+        return URL.init(string: string)!
+    }
 }
 
 extension MFMedia: Hashable {

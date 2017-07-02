@@ -20,6 +20,7 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case dishLikes = "DishLikes"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -338,6 +339,41 @@ extension DatabaseGateway {
             completion(error?.localizedDescription)
             
         }
+    }
+    
+    func getDishLike(dishID:String, _ completion:@escaping (_ likeCount:Int?)->Void){
+        
+        let successClosure: FirebaseObserverSuccessClosure = { (dishLikeDataSnapshot) in
+            guard let dishData = dishLikeDataSnapshot.value as? FirebaseDictionary else {
+                completion(0)
+                return
+            }
+            completion(dishData.count)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion(0)
+        }
+        
+        FirebaseReference.dishLikes.classReference.child(dishID).observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func getLikeStatus(dishID:String,user_Id:String , _ completion:@escaping (_ likeStatus:Bool?)->Void){
+        FirebaseReference.dishLikes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (dishLikeDataSnapshot) in
+            guard let dishData = dishLikeDataSnapshot.value as? FirebaseDictionary else {
+                completion(false)
+                return
+            }
+            
+            let likeStatus = dishData[user_Id]
+            
+            completion(true)
+        }) { (error) in
+            print(error)
+            completion(false)
+        }
+
     }
     
 }

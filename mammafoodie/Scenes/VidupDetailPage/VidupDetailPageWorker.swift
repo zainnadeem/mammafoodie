@@ -82,6 +82,13 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
+    func GetlikeStatus(Id:String,DishId:String,completion:@escaping(_ likeStatus:Bool)->()){
+        DatabaseGateway.sharedInstance.getLikeStatus(dishID: DishId, user_Id: Id, { (Status) in
+            completion(Status!)
+        })
+    }
+    
+    
     func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
         DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
             
@@ -94,6 +101,11 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
+    func GetDishLikeDetails(Id:String,completion:@escaping(_ likeCount:Int)->()){
+        DatabaseGateway.sharedInstance.getDishLike(dishID: Id) { (LikeCount) in
+            completion(LikeCount!)
+        }
+    }
     
     func likeDish(Id:String,DishId:String){
         let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/likeDish?dishId=\(DishId)&userId=\(Id)"
@@ -112,4 +124,19 @@ class VidupDetailPageWorker:NSObject {
                 print(response.result.error ?? "")
         }
     }
+    
+
+    func getexpireTime(endedAt:Date)->Int{
+        
+        var TimeLeft:Int = 0
+
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.A"
+//        let endedAtDate = dateFormatter.date(from: endedAt)!
+        
+        TimeLeft = Int(endedAt.timeIntervalSinceNow)
+        return TimeLeft
+    }
+    
+    
 }
