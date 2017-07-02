@@ -33,16 +33,16 @@ class DishCollectionViewCell: UICollectionViewCell {
     
     func setUp(_ dishData:MFDish){
         
-        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.mediaID!) { (media) in
+        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id!) { (media) in
             
             guard let media = media else {return}
             
             self.lblDishName.text = dishData.name
             self.lblDishTypeTag.text = dishData.tag
             
-            if  dishData.type != nil {
+            if  dishData.dishType != nil {
                 
-                switch dishData.type! {
+                switch dishData.dishType! {
                     
                 case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
                 case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
