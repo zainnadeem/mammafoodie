@@ -20,6 +20,7 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case dishLikes = "DishLikes"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -313,7 +314,7 @@ extension DatabaseGateway {
     
     
     func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
-        
+        print(dishID)
         FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
@@ -342,6 +343,42 @@ extension DatabaseGateway {
             completion(error?.localizedDescription)
             
         }
+    }
+    
+    func getDishLike(dishID:String, _ completion:@escaping (_ likeCount:Int?)->Void){
+        
+        let successClosure: FirebaseObserverSuccessClosure = { (dishLikeDataSnapshot) in
+            guard let dishData = dishLikeDataSnapshot.value as? FirebaseDictionary else {
+                completion(0)
+                return
+            }
+            completion(dishData.count)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion(0)
+        }
+        
+        FirebaseReference.dishLikes.classReference.child(dishID).observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func getLikeStatus(dishID:String,user_Id:String , _ completion:@escaping (_ likeStatus:Bool?)->Void){
+        FirebaseReference.dishLikes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (dishLikeDataSnapshot) in
+            guard let dishData = dishLikeDataSnapshot.value as? FirebaseDictionary else {
+                completion(false)
+                return
+            }
+            guard dishData[user_Id] != nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }) { (error) in
+            print(error)
+            completion(false)
+        }
+
     }
     
 }
@@ -426,7 +463,7 @@ extension DatabaseGateway {
     func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.liveVideo, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > 0 {
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > 0 {
                     return true
                 }
                 return false
@@ -438,7 +475,7 @@ extension DatabaseGateway {
     func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
                     return true
                 }
                 return false
@@ -503,7 +540,7 @@ extension DatabaseGateway {
             }
         }
         
-        dish.endedAt = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
+        dish.endTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
         dish.id = rawDish["id"] as? String ?? ""
         dish.likesCount = rawDish["likesCount"] as? Double ?? 0
         

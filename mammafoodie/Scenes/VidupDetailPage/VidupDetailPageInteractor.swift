@@ -17,7 +17,8 @@ protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-    func DishInfo(DishInfo:MFDish,MediaInfo:MFDish)
+    func DishInfo(DishInfo:MFDish)
+    func UpdateLikeStatusInteractor(Status:Bool)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -25,6 +26,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     var output: VidupDetailPageInteractorOutput!
     var Vidupworker: VidupDetailPageWorker! = VidupDetailPageWorker()
     var VidupTimerworker: TimerWorker = TimerWorker()
+    var mediaPlaying:Bool = false
     
     
     
@@ -34,19 +36,49 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         //Setup the media player
         Vidupworker.delegate = self
         Vidupworker.SetupMediaPlayer(view: view)
+        
         Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
             self.output.UserInfo(UserInfo: Userdetails)
         }
-        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails) in
-            if Dishdetails != nil {
-//                self.output.DishInfo(DishInfo: Dishdetails!, MediaInfo: MediaDetails!)
+        
+        Vidupworker.GetDishInfo(Id: dish_id) { (dishDetails) in
+            if dishDetails != nil{
+                self.output.DishInfo(DishInfo: dishDetails!)
                 self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: (Dishdetails?.mediaURL)!)
-//                if Int((Dishdetails?.dealTime)!) > 0 {
-//                    self.VidupTimerworker.seconds = 10
-//                    self.VidupTimerworker.runTimer()
-//                }
+                if self.mediaPlaying ==  false {
+                    self.mediaPlaying = true
+                    self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
+                    let timeLeft:Int = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
+                    self.VidupTimerworker.seconds = timeLeft
+                    self.VidupTimerworker.runTimer()
+                }
             }
+        }
+        
+        
+        /*
+        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
+            if Dishdetails != nil {
+                self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
+                self.VidupTimerworker.delegate = self
+                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.generateVidUpVideoURL())!)
+                if Int((MediaDetails?.dealTime)!) > 0 {
+                    
+                    var timeLeft:Int = self.Vidupworker.getexpireTime(endedAt: (MediaDetails?.endedAt)!)
+                    
+                    if timeLeft < 0 {
+                        timeLeft = 0
+                    }
+                    
+                    self.VidupTimerworker.seconds = timeLeft
+                    self.VidupTimerworker.runTimer()
+                }
+            }
+        }
+        */
+        
+        Vidupworker.GetlikeStatus(Id: user_id, DishId: dish_id) { (status) in
+            self.output.UpdateLikeStatusInteractor(Status: status)
         }
     }
     

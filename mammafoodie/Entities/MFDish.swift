@@ -49,7 +49,7 @@ class MFDish {
     var commentsCount : Double = 0
     
     var createdAt: Date!
-    var endedAt: Date?
+    var endTimestamp: Date?
     
     init() {}
     
@@ -93,12 +93,15 @@ class MFDish {
         let userID = dishDataDictionary["userID"]   as? String ?? ""
         self.user = MFUser() ; user.id = userID
         
+        self.mediaURL = NSURL(string: dishDataDictionary["mediaURL"]  as? String ?? "") as URL?
+        self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: dishDataDictionary["endTimestamp"] as! TimeInterval)
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
         self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
         self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
         self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        self.tag = dishDataDictionary["tag"] as? String ?? ""
         self.tag = dishDataDictionary["tag"] as? String ?? ""
         
         let dishType = dishDataDictionary["dishType"] as? String ?? ""

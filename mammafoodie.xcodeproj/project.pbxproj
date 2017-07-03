@@ -498,6 +498,7 @@
 		F0573A081EF2CB2C000F38B1 /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */; };
 		F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */; };
 		F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */; };
+		F09720851F0A162200DDA4FA /* DishesSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09720841F0A162200DDA4FA /* DishesSavedViewController.swift */; };
 		F097D8CA1EF3D8BA00FCF967 /* ChatListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C21EF3D8BA00FCF967 /* ChatListConfigurator.swift */; };
 		F097D8CB1EF3D8BA00FCF967 /* ChatListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C31EF3D8BA00FCF967 /* ChatListInteractor.swift */; };
 		F097D8CC1EF3D8BA00FCF967 /* ChatListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C41EF3D8BA00FCF967 /* ChatListModels.swift */; };
@@ -833,6 +834,7 @@
 		F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishRouter.swift; path = RequestDish/RequestDishRouter.swift; sourceTree = "<group>"; };
 		F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishViewController.swift; path = RequestDish/RequestDishViewController.swift; sourceTree = "<group>"; };
 		F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishWorker.swift; path = RequestDish/RequestDishWorker.swift; sourceTree = "<group>"; };
+		F09720841F0A162200DDA4FA /* DishesSavedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesSavedViewController.swift; sourceTree = "<group>"; };
 		F097D8C21EF3D8BA00FCF967 /* ChatListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListConfigurator.swift; sourceTree = "<group>"; };
 		F097D8C31EF3D8BA00FCF967 /* ChatListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListInteractor.swift; sourceTree = "<group>"; };
 		F097D8C41EF3D8BA00FCF967 /* ChatListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListModels.swift; sourceTree = "<group>"; };
@@ -1236,6 +1238,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F09720831F0A15D400DDA4FA /* DishesSaved */,
+				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
@@ -1734,6 +1738,14 @@
 				F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */,
 			);
 			name = RequestDish;
+			sourceTree = "<group>";
+		};
+		F09720831F0A15D400DDA4FA /* DishesSaved */ = {
+			isa = PBXGroup;
+			children = (
+				F09720841F0A162200DDA4FA /* DishesSavedViewController.swift */,
+			);
+			name = DishesSaved;
 			sourceTree = "<group>";
 		};
 		F097D8C11EF3D8BA00FCF967 /* ChatList */ = {
@@ -2271,6 +2283,7 @@
 				570ED4161F0684F000B41F0E /* IC_UIImageExtensions.swift in Sources */,
 				572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */,
 				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
+				F09720851F0A162200DDA4FA /* DishesSavedViewController.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				570ED41F1F0684F000B41F0E /* ImageCollectionViewAdapter.swift in Sources */,
 				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
