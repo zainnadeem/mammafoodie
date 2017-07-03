@@ -23,18 +23,21 @@ class CuisineCollectionViewCell: UICollectionViewCell {
         self.contentView.layoutIfNeeded()
         self.lblMenuTitle.backgroundColor = .clear
         self.lblMenuTitle.text = cuisine.name
+        let expandTransform:CGAffineTransform =  CGAffineTransform.init(scaleX: 1.15, y: 1.15)
         if selected {
-            let expandTransform:CGAffineTransform =  CGAffineTransform.init(scaleX: 1.15, y: 1.15)
-            self.imgViewEmoji.image = cuisine.selectedImage
+            self.imgViewEmoji.sd_setImage(with: cuisine.imageURL)
             UIView.transition(with: self, duration: 0.27, options: .transitionCrossDissolve, animations: {
                 self.transform = expandTransform
+                self.lblMenuTitle.font = UIFont.MontserratMedium(with: 14)
             }, completion: { (finished) in
                 UIView.animate(withDuration: 0.27, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.2, options: .curveEaseOut, animations: {
-                    self.transform = expandTransform.inverted()
+//                    self.transform = expandTransform.inverted()
                 }, completion: nil)
             })
         } else {
-            self.imgViewEmoji.image = cuisine.unselectedImage
+            self.imgViewEmoji.sd_setImage(with: cuisine.imageURL)
+            self.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            self.lblMenuTitle.font = UIFont.MontserratRegular(with: 12)
         }
     }
 

@@ -20,6 +20,7 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
@@ -312,6 +313,20 @@ extension DatabaseGateway {
 //MARK: - Dish
 extension DatabaseGateway {
     
+    func getAllDish(_ completion : @escaping ([MFDish]) -> Void) {
+        FirebaseReference.dishes.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            var allDishes = [MFDish]()
+            if let dishes = snapshot.value as? FirebaseDictionary {
+                for (_, value) in dishes {
+                    if let dict = value as? FirebaseDictionary {
+                        let dish = MFDish.init(from: dict)
+                        allDishes.append(dish)
+                    }
+                }
+            }
+            completion(allDishes)
+        })
+    }
     
     func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
         print(dishID)
@@ -335,7 +350,7 @@ extension DatabaseGateway {
         
         let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         
-        let id :String = "\(model.id!)"
+        let id :String = "\(model.id)"
         let userProfileData = rawUserData[id] as! FirebaseDictionary
         
         FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
@@ -401,8 +416,6 @@ extension  DatabaseGateway {
             completion(nil)
         }
     }
-    
-    
 }
 
 // MARK: - News Feed
@@ -455,7 +468,23 @@ extension DatabaseGateway {
     
 }
 
-
+// MARK: - Media
+extension DatabaseGateway {
+    func getCuisines(_ completion : @escaping ([MFCuisine]) -> Void) {
+        FirebaseReference.cuisines.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            var allCuisins = [MFCuisine]()
+            if let rawCuisines = snapshot.value as? FirebaseDictionary {
+                for (_, value) in rawCuisines {
+                    if let dict = value as? FirebaseDictionary {
+                        let cuisine = MFCuisine.init(with: dict)
+                        allCuisins.append(cuisine)
+                    }
+                }
+            }
+            completion(allCuisins)
+        })
+    }
+}
 
 // MARK: - Dish
 extension DatabaseGateway {
@@ -520,15 +549,12 @@ extension DatabaseGateway {
     
     func createDish(from rawDish: FirebaseDictionary) -> MFDish {
         let dish: MFDish = MFDish()
-        
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
         dish.createdAt = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
-            var cuisine: MFCuisine = MFCuisine()
-            cuisine.id = rawCuisine["id"] as? String ?? ""
-            cuisine.name = rawCuisine["name"] as? String ?? ""
+            var cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
             dish.cuisine = cuisine
         }
         

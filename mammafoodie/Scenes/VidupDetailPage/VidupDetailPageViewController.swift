@@ -143,7 +143,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     }
     
     func DisplayDishInfo(DishInfo:MFDish) {
-        lbl_dishName.text = DishInfo.name!
+        lbl_dishName.text = DishInfo.name
         lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
         lbl_Like.text = "\(Int(DishInfo.likesCount))"
