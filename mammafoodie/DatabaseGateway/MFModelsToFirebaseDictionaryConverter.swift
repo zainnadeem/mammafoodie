@@ -13,33 +13,56 @@ class MFModelsToFirebaseDictionaryConverter {
     typealias FirebaseDictionary = [String:AnyObject]
     
     // Need to update this
-    class func dictionary(from media: MFMedia) -> FirebaseDictionary {
-        return [ :
+//    class func dictionary(from media: MFDish) -> FirebaseDictionary {
+//        return [
 //            media.id: [
-//                "id" : media.id as AnyObject ,
-//                "userId" : media.user.id as AnyObject,
-//                "type" : media.type.rawValue as AnyObject,
-//                "cover_small" : media.cover_small?.absoluteString ?? "" as AnyObject,
-//                "cover_large" : media.cover_large?.absoluteString ?? "" as AnyObject,
-//                "dishId" : media.dish.id as AnyObject,
-//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate as AnyObject
+//                "id" : media.id,
+//                "user" : [
+//                    "id" : media.user.id,
+//                    "name" : media.user.name
+//                ],
+//                "type" : media.type.rawValue,
+//                "cover_small" : media.cover_small?.absoluteString ?? "",
+//                "cover_large" : media.cover_large?.absoluteString ?? "",
+//                "media_url" : media.mediaURL?.absoluteString ?? "",
+//                "dishId" : media.dish.id,
+//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
+//                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
 //                ] as AnyObject
-        ]
-    }
+//        ]
+//    }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
-        return [
-            dish.id: [
-                "id" : dish.id,
-                "userId" : dish.user.id,
-                "mediaId" : dish.media!.id ?? "",
-                "description" : dish.description ?? "",
-                "totalSlots" : dish.totalSlots,
-                "pricePerSlot" : dish.pricePerSlot,
-                "type" : dish.type.rawValue,
-                "cuisineId" : dish.cuisine.id
-                ] as AnyObject
+        
+        var rawDish: [String:Any] = [
+            "id" : dish.id,
+            "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+            "user" : [
+                "id" : dish.user.id,
+                "name" : dish.user.name
+            ],
+            "mediaType": dish.mediaType.rawValue,
+            "name" : dish.name,
+            "likesCount" : dish.likesCount,
+            "commentsCount" : dish.commentsCount,
+            "description" : dish.description ?? "",
+            "mediaURL" : dish.mediaURL?.absoluteString ?? "",
+            "totalSlots" : dish.totalSlots,
+            "pricePerSlot" : dish.pricePerSlot,
+            "availableSlots" : dish.totalSlots,
+            "dishType" : dish.dishType.rawValue,
+            "preparationTime" : dish.preparationTime,
+            "cuisine" : [
+                "id" : dish.cuisine.id,
+                "name" : dish.cuisine.name
+            ]
         ]
+        
+        if dish.mediaType != MFDishMediaType.liveVideo {
+            rawDish["endTimestamp"] = dish.endedAt?.timeIntervalSinceReferenceDate
+        }
+        
+        return [dish.id : rawDish as AnyObject]
     }
     
     class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
@@ -67,7 +90,31 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
     }
     
-
+    
+    
+    
+    //    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
+    //
+    //        return [
+    //
+    //            dish.id : [
+    //                "id"            : dish.id as AnyObject,
+    //                "name"          : dish.name as AnyObject,
+    //                "chefID"        : dish.chefID as AnyObject,
+    //                "mediaID"       : dish.mediaID as AnyObject,
+    //                "description"   : dish.description as AnyObject,
+    //                "totalSlots"    : dish.totalSlots as AnyObject,
+    //                "availableSlots": dish.availableSlots as AnyObject,
+    //                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
+    //                "boughtOrders"  : dish.boughtOrders as AnyObject,
+    //                "cuisineID"     : dish.cuisineID as AnyObject,
+    //                "tag"           : dish.tag as AnyObject,
+    //                "dishType"      : dish.dishType?.rawValue as? AnyObject
+    //            ] as AnyObject
+    //        ]
+    //    }
+    
+    
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
         return [
             user.id : [
@@ -94,33 +141,32 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
     
-//    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
-//
-//        return [
-//
-//            dish.id : [
-//                "id"            : dish.id as AnyObject,
-//                "name"          : dish.name as AnyObject,
-//                "chefID"        : dish.chefID as AnyObject,
-//                "mediaID"       : dish.mediaID as AnyObject,
-//                "description"   : dish.description as AnyObject,
-//                "totalSlots"    : dish.totalSlots as AnyObject,
-//                "availableSlots": dish.availableSlots as AnyObject,
-//                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
-//                "boughtOrders"  : dish.boughtOrders as AnyObject,
-//                "cuisineID"     : dish.cuisineID as AnyObject,
-//                "tag"           : dish.tag as AnyObject,
-//                "dishType"      : dish.dishType?.rawValue as? AnyObject
-//            ] as AnyObject
-//        ]
-//    }
+    //    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
+    //
+    //        return [
+    //
+    //            dish.id : [
+    //                "id"            : dish.id as AnyObject,
+    //                "name"          : dish.name as AnyObject,
+    //                "chefID"        : dish.chefID as AnyObject,
+    //                "mediaID"       : dish.mediaID as AnyObject,
+    //                "description"   : dish.description as AnyObject,
+    //                "totalSlots"    : dish.totalSlots as AnyObject,
+    //                "availableSlots": dish.availableSlots as AnyObject,
+    //                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
+    //                "boughtOrders"  : dish.boughtOrders as AnyObject,
+    //                "cuisineID"     : dish.cuisineID as AnyObject,
+    //                "tag"           : dish.tag as AnyObject
+    //                ] as AnyObject
+    //        ]
+    //    }
     
     
-//    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
-//       return [
-//            media.accessMode = .owner as AnyObject
-//        ]
-//    }
-    
+    //    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
+    //       return [
+    //            media.accessMode = .owner as AnyObject
+    //        ]
+    //    }
+    //    
     
 }

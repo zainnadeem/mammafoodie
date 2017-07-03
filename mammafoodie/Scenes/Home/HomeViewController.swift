@@ -13,10 +13,12 @@ enum HomeViewControllerScreenMode {
     case menu
 }
 
-class HomeViewController: UIViewController, HomeViewControllerInput {
+class HomeViewController: UIViewController, HomeViewControllerInput, CircleTransitionPresentAnimationDelegate {
     
     var output: HomeViewControllerOutput!
     var router: HomeRouter!
+    
+    var startCircleFrame: CGRect = .zero
     
     @IBOutlet weak var tblList: UITableView!
     @IBOutlet weak var viewLiveVideos: UIView!
@@ -49,6 +51,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     let vidupsAdapter: HomePageVidupsCollectionViewAdapter = HomePageVidupsCollectionViewAdapter()
     let tableViewAdapter: HomePageTableviewAdapter = HomePageTableviewAdapter()
     let cuisineListAdapter: CuisineListCollectionViewAdapter = CuisineListCollectionViewAdapter()
+    var conHeightViewTableViewHeader: NSLayoutConstraint!
     
     var screenMode: HomeViewControllerScreenMode = .activity
     
@@ -66,8 +69,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         self.addArc(to: self.btnExpandLiveVideosView)
         self.addArc(to: self.btnExpandVidupsView)
         
-        self.tblList.tableHeaderView = self.viewLiveVideoAndVidups
-        self.updateTableHeaderViewHeight(animated: false)
+        self.tblList.tableHeaderView?.translatesAutoresizingMaskIntoConstraints = false
         
         self.setupLiveVideoCollectionViewAdapter()
         self.setupVidupCollectionViewAdapter()
@@ -82,25 +84,34 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         self.viewActivityIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         self.viewMenuIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.addShadow(to: self.viewLiveVideos)
+        self.addShadow(to: self.viewVidups)
+        
+        self.addConstraints(to: self.viewLiveVideoAndVidups, in: self.tblList)
+        
+        self.isLiveVideosViewExpanded = false
+        self.collapseLiveVideoView(animated: false)
+        
+        self.isVidupsViewExpanded = false
+        self.collapseVidupsView(animated: false)
+        
+        self.updateLiveVideoCollectionView(animated: false, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
+        self.updateVidupsCollectionView(animated: false, isVidupsExpanded: self.isVidupsViewExpanded)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.addShadow(to: self.viewLiveVideos)
-        self.addShadow(to: self.viewVidups)
-        
-        self.isLiveVideosViewExpanded = false
-        self.collapseLiveVideoView(animated: false)
-        self.updateLiveVideoCollectionView(animated: false, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
-        
-        self.isVidupsViewExpanded = false
-        self.collapseVidupsView(animated: false)
-        self.updateVidupsCollectionView(animated: false, isVidupsExpanded: self.isVidupsViewExpanded)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.clnLiveVideos.reloadData()
+        self.clnVidups.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     // MARK: - Event handling
@@ -112,7 +123,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             self.expandLiveVideoView(animated: true)
         }
         self.isLiveVideosViewExpanded  = !self.isLiveVideosViewExpanded
-        self.updateLiveVideoCollectionView(animated: false, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
+        self.updateLiveVideoCollectionView(animated: !self.isLiveVideosViewExpanded, isLiveVideoExpanded: self.isLiveVideosViewExpanded)
     }
     
     @IBAction func btnExpandVidupsTapped(_ sender: UIButton) {
@@ -122,14 +133,25 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
             self.expandVidupsView(animated: true)
         }
         self.isVidupsViewExpanded  = !self.isVidupsViewExpanded
-        self.updateVidupsCollectionView(animated: false, isVidupsExpanded: self.isVidupsViewExpanded)
+        self.updateVidupsCollectionView(animated: !self.isVidupsViewExpanded, isVidupsExpanded: self.isVidupsViewExpanded)
     }
     
     @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
+        
+        let shouldResetContentOffset: Bool = self.tblList.contentOffset.y > self.viewLiveVideoAndVidups.frame.height
+        let newContentOffset: CGPoint = CGPoint(x: 0, y: self.viewLiveVideoAndVidups.frame.height)
+        
+        if self.isLiveVideosViewExpanded || self.isVidupsViewExpanded {
+            
+        }
         if self.screenMode == .activity {
             self.switchToMenuMode()
         } else {
             self.switchToActivityMode()
+        }
+        
+        if shouldResetContentOffset {
+            self.tblList.setContentOffset(newContentOffset, animated: false)
         }
     }
     
@@ -161,6 +183,34 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     
     // MARK: - Display logic
     
+    func addConstraints(to headerView: UIView, in tableView: UITableView) {
+        if self.conHeightViewTableViewHeader == nil {
+            // align headerView from the left and right
+            tableView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": headerView]));
+            
+            // align headerView from the top
+            tableView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": headerView]));
+            
+            tableView.addConstraint(NSLayoutConstraint(item: headerView,
+                                                       attribute: NSLayoutAttribute.width,
+                                                       relatedBy: NSLayoutRelation.equal,
+                                                       toItem: tableView,
+                                                       attribute: NSLayoutAttribute.width,
+                                                       multiplier: 1,
+                                                       constant: 0))
+            
+            let height: CGFloat = self.viewLiveVideoAndVidups.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            self.conHeightViewTableViewHeader = NSLayoutConstraint(item: headerView,
+                                                                   attribute: NSLayoutAttribute.height,
+                                                                   relatedBy: NSLayoutRelation.equal,
+                                                                   toItem: nil,
+                                                                   attribute: NSLayoutAttribute.notAnAttribute,
+                                                                   multiplier: 1,
+                                                                   constant: height)
+            tableView.addConstraint(self.conHeightViewTableViewHeader)
+        }
+    }
+    
     func rotateExpandLiveVideosIcon(isLiveVideoExpanded: Bool) {
         UIView.animate(withDuration: 0.27) {
             var transformation: CGAffineTransform = CGAffineTransform.identity
@@ -183,12 +233,26 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     
     func expandLiveVideoView(animated: Bool) {
         self.rotateExpandLiveVideosIcon(isLiveVideoExpanded: true)
-        self.liveVideosAdapter.expand(animated: animated)
+        
+        UIView.animate(withDuration: animated ? 0.27 : 0, animations: {
+            self.conHeightViewTableViewHeader.isActive = false
+            self.liveVideosAdapter.expand(animated: false)
+            self.updateTableHeaderViewHeight()
+        }) { (isCompleted) in
+            print("Live video view expanded")
+        }
     }
     
     func collapseLiveVideoView(animated: Bool) {
         self.rotateExpandLiveVideosIcon(isLiveVideoExpanded: false)
-        self.liveVideosAdapter.collapse(animated: animated)
+        
+        UIView.animate(withDuration: animated ? 0.27 : 0, animations: {
+            self.conHeightViewTableViewHeader.isActive = false
+            self.liveVideosAdapter.collapse(animated: false)
+            self.updateTableHeaderViewHeight()
+        }) { (isCompleted) in
+            print("Live video view collapsed")
+        }
     }
     
     func updateLiveVideoCollectionView(animated: Bool, isLiveVideoExpanded: Bool) {
@@ -197,12 +261,25 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     
     func expandVidupsView(animated: Bool) {
         self.rotateExpandVidupsIcon(isVidupsExpanded: true)
-        self.vidupsAdapter.expand(animated: animated)
+        UIView.animate(withDuration: animated ? 0.27 : 0, animations: {
+            self.conHeightViewTableViewHeader.isActive = false
+            self.vidupsAdapter.expand(animated: false)
+            self.updateTableHeaderViewHeight()
+        }) { (isCompleted) in
+            print("Vidups view expanded")
+        }
     }
     
     func collapseVidupsView(animated: Bool) {
         self.rotateExpandVidupsIcon(isVidupsExpanded: false)
-        self.vidupsAdapter.collapse(animated: animated)
+        
+        UIView.animate(withDuration: animated ? 0.27 : 0, animations: {
+            self.conHeightViewTableViewHeader.isActive = false
+            self.vidupsAdapter.collapse(animated: animated)
+            self.updateTableHeaderViewHeight()
+        }) { (isCompleted) in
+            print("Vidups view collapsed")
+        }
     }
     
     func updateVidupsCollectionView(animated: Bool, isVidupsExpanded: Bool) {
@@ -210,24 +287,19 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     }
     
     func setupLiveVideoCollectionViewAdapter() {
-        self.liveVideosAdapter.createStaticData()
+        self.liveVideosAdapter.loadLiveVideos()
         self.liveVideosAdapter.conHeightCollectionView = self.conHeightClnLiveVideos
         self.liveVideosAdapter.setup(with: self.clnLiveVideos)
-        self.liveVideosAdapter.didExpand = {
-            self.updateTableHeaderViewHeight(animated: true)
-        }
-        self.liveVideosAdapter.didCollapse = {
-            self.updateTableHeaderViewHeight(animated: true)
-        }
-        self.liveVideosAdapter.didSelect = { (selectedLiveVideo) in
+        self.liveVideosAdapter.didSelect = { (selectedLiveVideo, cellFrame) in
             print("Selected live video: \(selectedLiveVideo.id)")
             if selectedLiveVideo.id == "-1" {
                 // new. push go cook with live video selection
-//                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
+                //                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
             } else {
-                selectedLiveVideo.accessMode = MediaAccessUserType.viewer
+                selectedLiveVideo.accessMode = MFDishMediaAccessMode.viewer
             }
-            self.performSegue(withIdentifier: "showLiveVideoDetails", sender: selectedLiveVideo)
+            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
         }
         self.liveVideosAdapter.didSelectViewAll = {
             self.performSegue(withIdentifier: "showLiveVideoList", sender: nil)
@@ -235,25 +307,20 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
     }
     
     func setupVidupCollectionViewAdapter() {
-        self.vidupsAdapter.createStaticData()
+        self.vidupsAdapter.loadVidup()
         self.vidupsAdapter.conHeightCollectionView = self.conHeightClnVidups
         self.vidupsAdapter.setup(with: self.clnVidups)
-        self.vidupsAdapter.didExpand = {
-            self.updateTableHeaderViewHeight(animated: true)
-        }
-        self.vidupsAdapter.didCollapse = {
-            self.updateTableHeaderViewHeight(animated: true)
-        }
-        self.vidupsAdapter.didSelect = { (selectedVidup) in
+        self.vidupsAdapter.didSelect = { (selectedVidup, cellFrame) in
             print("Selected vidup: \(selectedVidup.id)")
             if selectedVidup.id == "-1" {
                 // new. push go cook with vidup selection
-                selectedVidup.accessMode = MediaAccessUserType.owner
-//                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
+                selectedVidup.accessMode = MFDishMediaAccessMode.owner
+                //                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
             } else {
-                selectedVidup.accessMode = MediaAccessUserType.viewer
+                selectedVidup.accessMode = MFDishMediaAccessMode.viewer
             }
-            self.performSegue(withIdentifier: "showVidupDetails", sender: selectedVidup)
+            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
         }
         self.vidupsAdapter.didSelectViewAll = {
             print("DidSelectAll Vidup")
@@ -279,20 +346,18 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         }
     }
     
-    func updateTableHeaderViewHeight(animated: Bool) {
+    func updateTableHeaderViewHeight() {
         guard let headerView: UIView = self.tblList.tableHeaderView else {
             print("No tableHeaderView to update")
             return
         }
-        UIView.animate(withDuration: animated ? 0.27 : 0) {
-            headerView.setNeedsLayout()
-            headerView.layoutIfNeeded()
-            var newFrame: CGRect = headerView.frame
-            newFrame.size.height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + 1
-            headerView.frame = newFrame
-            self.tblList.tableHeaderView = headerView
-            self.view.layoutIfNeeded()
-        }
+        var frame = headerView.frame
+        frame.size.height = self.viewLiveVideoAndVidups.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        headerView.frame = frame
+        self.tblList.tableHeaderView = headerView
+        self.view.layoutIfNeeded()
+        self.conHeightViewTableViewHeader.constant = self.viewLiveVideoAndVidups.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        self.conHeightViewTableViewHeader.isActive = true
     }
     
     func addShadow(to view: UIView) {
@@ -309,16 +374,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput {
         circleShape.path = circlePath.cgPath
         button.layer.mask = circleShape
     }
-
+    
     
     @IBAction func logout(){
         
-        let firebaseWorker = FirebaseLoginWorker()
+        let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
         
         firebaseWorker.signOut(){ errorMessage in
             
             if errorMessage != nil {
-                 print(errorMessage)
+                print(errorMessage)
             } else {
                 print("Logged out successfully")
                 self.navigationController?.popViewController(animated: true)

@@ -1,13 +1,13 @@
 class LiveVideoPublisherWorker {
     // MARK: - Business Logic
 
-    func publishStream(with name: String, _ completion: @escaping ((MFMedia?)->Void)) {
+    func publishStream(with name: String, _ completion: @escaping ((MFDish?)->Void)) {
         DatabaseGateway.sharedInstance.publishNewLiveStream(with: name) { (newLiveStream) in
             completion(newLiveStream)
         }
     }
     
-    func unpublishStream(_ liveStream: MFMedia) {
+    func unpublishStream(_ liveStream: MFDish) {
         DatabaseGateway.sharedInstance.unpublishLiveStream(liveStream) {
             
         }

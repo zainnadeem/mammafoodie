@@ -12,8 +12,8 @@ class HomeRouter: HomeRouterInput {
     
     func passDataToNextScene(segue: UIStoryboardSegue, sender: Any?) {
         // NOTE: Teach the router which scenes it can communicate with
-        if segue.identifier == "showLiveVideoDetails" {
-            (segue.destination as! LiveVideoViewController).liveVideo = sender as! MFMedia
+        if segue.identifier == "segueShowLiveVideoDetails" {
+//            (segue.destination as! LiveVideoViewController).liveVideo = sender as! MFDish
         } else if segue.identifier == "showLiveVideoList" {
             
         } else if segue.identifier == "showVidupDetails" {

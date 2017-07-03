@@ -75,6 +75,12 @@ class MFUser {
         self.profileDescription = profileDescription
         self.email = email
     }
+    
+    func generateProfilePictureURL() -> URL {
+        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/user%2Fprofile%2F\(urlencodedID!).jpg?alt=media"
+        return URL.init(string: string)!
+    }
 }
 
 extension MFUser: Hashable {

@@ -13,7 +13,7 @@ class MosaicCollectionViewCell: UICollectionViewCell {
     @IBOutlet var smallCellConstraints: [NSLayoutConstraint]!
     @IBOutlet var largeCellConstraints: [NSLayoutConstraint]!
     
-    var media: MFMedia! {
+    var media: MFDish! {
         didSet {
             self.updateUI()
         }
@@ -22,10 +22,9 @@ class MosaicCollectionViewCell: UICollectionViewCell {
     func updateUI(){
 
         do {
-            if let coverURL = self.media.cover_large {
+            if let coverURL = self.media.mediaURL {
                 let imageData = try Data.init(contentsOf: coverURL)
                 screenShotImageView.image = UIImage(data : imageData)
-                
             }
         } catch {
             print(error.localizedDescription)
