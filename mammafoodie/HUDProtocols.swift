@@ -5,10 +5,9 @@
 import UIKit
 
 
-protocol HUDRenderer{}
+protocol HUDRenderer {}
 
 extension HUDRenderer {
-    
     
     func showAlert(title:String = "",message:String, okButtonText:String = "OK",cancelButtonText:String? = nil, handler: @escaping (_ succeeded:Bool)->() = {_ in  }){
         
@@ -55,14 +54,13 @@ extension HUDRenderer {
                 
                 window.addSubview(delegate.activityIndicatorView!)
                 
-                
             }
             
         }
         
     }
     
-    func hideActivityIndicator(){
+    func hideActivityIndicator() {
         let delegate = (UIApplication.shared.delegate as! AppDelegate)
         if delegate.activityIndicatorView != nil {
             delegate.activityIndicatorView?.removeFromSuperview()
