@@ -8,6 +8,8 @@ struct MFCuisine : Equatable {
     var selectedImage : UIImage?
     var unselectedImage : UIImage?
     
+    init() {}
+    
     init(id: String!, name: String!, isSelected: Bool) {
         self.id = id
         self.name = name

@@ -20,7 +20,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var step2VC : GoCookStep2ViewController!
     
-    var createdmedia : MFMedia?
+    var createdmedia : MFDish?
     
     var selectedOption : MFDishMediaType = .unknown {
         didSet {

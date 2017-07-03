@@ -8,22 +8,28 @@ enum MFMediaType : String {
     case unknown = "unknown"
 }
 
+enum MediaAccessUserType {
+    case owner
+    case viewer
+}
+
 class MFMedia {
     var id: String!
     
-//    var comments: [String:Bool] = [:] //MFComment id
-//    var contentID: String!
-//    var cover_large: String?
-//    var cover_small: String?
-//    var createdAt: String! //Date timestamp
-//    var endedAt: String! //Date timestamp
-//    var dishID: String! //MFDish id
-//    var likes: [String:Bool] = [:] //MFUser id
+    //    var comments: [String:Bool] = [:] //MFComment id
+    //    var contentID: String!
+    //    var cover_large: String?
+    //    var cover_small: String?
+    //    var createdAt: String! //Date timestamp
+    //    var endedAt: String! //Date timestamp
+    //    var dishID: String! //MFDish id
+    //    var likes: [String:Bool] = [:] //MFUser id
     
     var comments: [MFComment:Bool] = [:]
-    var contentId: String!
+    //    var contentId: String!
     var cover_large: URL?
     var cover_small: URL?
+    var dealTime : Double = -1
     var createdAt: Date!
     var endedAt: Date?
     weak var dish: MFDish!
@@ -31,8 +37,7 @@ class MFMedia {
     
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
-    var user: MFUser!
-    var mediaURL : URL!
+    //    var chefID: String! //MFUser id
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -44,10 +49,10 @@ class MFMedia {
         self.id = id
         self.cover_large = URL.init(string: cover_large)
         self.cover_small = URL.init(string: cover_small)
-
+        
         self.createdAt = Date(fromString: createdAt, format: .isoDateTimeSec)
         self.dish = dish
-//        self.chefID = chefID
+        //        self.chefID = chefID
         self.type = type
         self.numberOfViewers = numberOfViewers
         
@@ -67,7 +72,7 @@ class MFMedia {
         }
         
         
-        self.contentId = mediaDictionary["contentId"] as? String ?? ""
+//        self.contentId = mediaDictionary["contentId"] as? String ?? ""
         
         
         
@@ -82,7 +87,7 @@ class MFMedia {
         
         
         let dishId = mediaDictionary["dishId"] as? String ?? ""
-//        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
+        //        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
         self.numberOfViewers = mediaDictionary["numberOfViewers"] as? UInt ?? 0
         
         let type = mediaDictionary["type"] as? String ?? ""
@@ -93,7 +98,7 @@ class MFMedia {
             self.type = .unknown
         }
         
-//        self.chefID = mediaDictionary["chefID"] as? String ?? ""
+        //        self.chefID = mediaDictionary["chefID"] as? String ?? ""
     }
     class func createNewMedia(with type : MFMediaType) -> MFMedia {
         let media = MFMedia.init()
@@ -115,31 +120,21 @@ class MFMedia {
     }
     
     func generateCoverImageURL() -> URL {
-        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
-        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
+        let urlencodedID : String = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/media%2Fcover%2F\(urlencodedID)).jpg?alt=media"
         return URL.init(string: string)!
     }
     
-    func save(_ completion : @escaping (Error?) -> Void ) {
+    func save() {
         DatabaseGateway.sharedInstance.saveMedia(self) { (error) in
-            completion(error)
+            print(error?.localizedDescription ?? "No Error")
         }
-    }
-    
-    func getStoragePath() -> String {
-        var urlencodedID : String! = ""
-        if self.type == .picture {
-            urlencodedID = "\((self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!).jpg"
-        } else if self.type == .vidup {
-            urlencodedID = "\((self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!).mp4"
-        }
-        return "/media/\(urlencodedID)"
     }
 }
 

@@ -2,12 +2,15 @@ import Foundation
 import R5Streaming
 
 protocol LiveVideoGatewayDelegate {
-    //    func gatewaySetupCompleted()
-    //    func gatewayConnected()
-    //    func gatewayDisconnected()
+    func gatewayConnected()
+    func gatewayDisconnected()
     func streamPublished()
     func streamSubscribed()
-    //    func streamReconnected()
+    func streamClosed()
+    func streamUnpublished()
+    func unknownError(_ error: String)
+    func insufficientBandwidth()
+    func invalidMedia()
 }
 
 class LiveVideoGateway: NSObject {
@@ -60,6 +63,7 @@ class LiveVideoGateway: NSObject {
     
     func publish(with name: String, _ completion: (_ cameraView: UIView)->Void) {
         self.publishViewController.configurations = self.configurations!
+        self.publishViewController.delegate = self
         self.publishViewController.preview()
         self.publishViewController.startPublishing(with: name)
         
@@ -80,6 +84,7 @@ class LiveVideoGateway: NSObject {
     func subscribe(_ streamName: String, _ completion: (_ cameraView: UIView)->Void) {
         self.subscriberViewController.configurations = self.configurations!
         self.subscriberViewController.start(with: streamName)
+        self.subscriberViewController.delegate = self
         
         self.liveStream = self.subscriberViewController.stream
         
@@ -87,14 +92,32 @@ class LiveVideoGateway: NSObject {
         
         self.delegate?.streamSubscribed()
     }
-    
-    //    func getCurrentLiveVideoView() -> UIView? {
-    //        return nil
-    //    }
 }
 
-extension LiveVideoGateway: R5StreamDelegate {
+extension LiveVideoGateway: LiveVideoPublisherDelegate, LiveVideoSubscriberDelegate {
     func onR5StreamStatus(_ stream: R5Stream!, withStatus statusCode: Int32, withMessage msg: String!) {
-        
+        var streamStatusCode: LiveVideoStreamStatusCode? = .unknown
+        if LiveVideoStreamStatusCode(rawValue: statusCode) != nil {
+            streamStatusCode = LiveVideoStreamStatusCode(rawValue: statusCode)!
+        }
+        let status = LiveVideoStreamStatus(code: streamStatusCode!, message: msg)
+        switch status.code {
+        case .closed:
+            self.delegate?.streamClosed()
+        case .connected:
+            self.delegate?.gatewayConnected()
+        case .disconnected:
+            self.delegate?.gatewayDisconnected()
+        case .unpublished:
+            self.delegate?.streamUnpublished()
+        case .startedStreaming:
+            self.delegate?.streamPublished()
+        case .validLicense:
+            print("Valid license")
+        case .invalidMedia:
+            self.delegate?.invalidMedia()
+        case .unknown:
+            self.delegate?.unknownError(msg)
+        }
     }
 }

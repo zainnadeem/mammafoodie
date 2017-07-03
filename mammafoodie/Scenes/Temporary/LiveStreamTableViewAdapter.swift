@@ -26,7 +26,7 @@ class LiveStreamTableViewAdapter: NSObject, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.streams[indexPath.item].contentId
+        cell.textLabel?.text = self.streams[indexPath.item].id
         return cell
     }
     

@@ -2,12 +2,14 @@ import UIKit
 
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
+    func liveVideoClosed()
+    func streamUnpublished()
 }
 
 protocol LiveVideoViewControllerOutput {
-    func start(_ liveVideo: MFMedia)
-    func stop(_ liveVideo: MFMedia)
+    func start(_ liveVideo: MFDish)
+    func stop(_ liveVideo: MFDish)
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
@@ -15,7 +17,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
     
-    var liveVideo: MFMedia!
+    var liveVideo: MFDish!
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
     
@@ -29,9 +31,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBOutlet weak var txtNewComment: UITextView!
     @IBOutlet weak var tblComments: UITableView!
     @IBOutlet weak var btnClose: UIButton!
-    
+    @IBOutlet weak var imgViewPlaceholder: UIImageView!
+    @IBOutlet weak var viewVisualBlurEffect: UIVisualEffectView!
     @IBOutlet var imgViewViewers: [UIImageView]!
-    
+    @IBOutlet weak var lblLiveVideoEndedMessage: UILabel!
+    @IBOutlet weak var btnCloseLiveVideo: UIButton!
+    @IBOutlet weak var viewLiveVideoEnded: UIView!
+    var viewCamera: UIView!
     
     lazy var commentsAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     
@@ -46,6 +52,11 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.viewLiveVideoEnded.isHidden = true
+        self.imgViewPlaceholder.image = nil
+        //        self.viewVisualBlurEffect.isHidden = true
+        
         self.btnLike.imageView?.contentMode = .scaleAspectFit
         self.btnEmoji.imageView?.contentMode = .scaleAspectFit
         self.btnClose.imageView?.contentMode = .scaleAspectFit
@@ -56,6 +67,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             imgView.layer.borderWidth = 1
             imgView.layer.borderColor = UIColor.white.cgColor
         }
+        
+        self.updateShadowForButtonCloseLiveVideo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +78,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
+            self.createTestLiveVideo()
             self.output!.start(self.liveVideo)
         }
         
@@ -73,6 +87,24 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         self.updateDropShadowForViewUserInfo()
         self.updateDropShadowForViewComments()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    // Remove this while merging into the Development
+    private func createTestLiveVideo() {
+        self.liveVideo.id = "-KnmktPfRQq61M1iswq5"
+        self.liveVideo.accessMode = MFDishMediaAccessMode.viewer // .owner
+        self.liveVideo.mediaType = MFDishMediaType.liveVideo
+    }
+    
+    func updateShadowForButtonCloseLiveVideo() {
+        let layer: CALayer = self.btnCloseLiveVideo.layer
+        layer.cornerRadius = 5
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
     }
     
     func updateDropShadowForViewUserInfo() {
@@ -158,17 +190,36 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     // MARK: - Display logic
     
     func show(_ cameraView: UIView) {
-        self.view.insertSubview(cameraView, at: 0)
+        self.viewCamera = cameraView
+        
+        self.view.insertSubview(cameraView, aboveSubview: self.viewVisualBlurEffect)
         
         // align cameraView from the left and right
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
         // align cameraView from the top and bottom
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
+        
+        //        if self.liveVideo.accessMode == .viewer {
+        //            self.viewCamera.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+        //        }
     }
     
-    func showVideoId(_ liveVideo: MFMedia) {
+    func streamUnpublished() {
+        self.viewLiveVideoEnded.isHidden = false
+        self.viewCamera.removeFromSuperview()
+    }
+    
+    func liveVideoClosed() {
+        // Closed
+    }
+    
+    func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
+        if liveVideo.id != nil {
+            //            self.viewVisualBlurEffect.removeFromSuperview()
+            //            self.imgViewPlaceholder.removeFromSuperview()
+        }
     }
     
     func setupCommentsTableViewAdapter() {
@@ -182,4 +233,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         print("Deinit LiveVideoVC")
     }
     
+    @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.27, animations: {
+            let shouldHide = !self.viewUserInfo.isHidden
+            self.viewUserInfo.isHidden = shouldHide
+            self.viewComments.isHidden = shouldHide
+            self.gradientLayerForComments.isHidden = shouldHide
+            self.gradientLayerForUserInfo.isHidden = shouldHide
+        }) { (isFinished) in
+            if isFinished {
+                print("Animation finished btnShowHideExtrasTapped")
+            }
+        }
+    }
 }
