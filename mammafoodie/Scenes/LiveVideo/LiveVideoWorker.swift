@@ -16,7 +16,7 @@ class LiveVideoWorker {
     
     typealias LiveVideoViewClosure = (_ cameraView: UIView)->Void
     
-    func start(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
+    func start(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.delegate = self
         self.liveVideoGateway!.getConfigurations({ (cameraView) in
             if liveVideo.accessMode == .owner {
@@ -27,31 +27,31 @@ class LiveVideoWorker {
         })
     }
     
-    func publish(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
+    func publish(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.publish(with: liveVideo.id, { (newCameraView) in
             completion(newCameraView)
             self.publishStreamToDatabase(liveVideo, completion)
         })
     }
     
-    func publishStreamToDatabase(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
+    func publishStreamToDatabase(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         let worker: LiveVideoPublisherWorker = LiveVideoPublisherWorker()
         worker.publishStream(with: liveVideo.id, { (liveVideo) in
         })
     }
     
-    func unpublishStreamFromDatabase(_ liveVideo: MFMedia) {
+    func unpublishStreamFromDatabase(_ liveVideo: MFDish) {
         let worker: LiveVideoPublisherWorker = LiveVideoPublisherWorker()
         worker.unpublishStream(liveVideo)
     }
     
-    func subscribe(_ liveVideo: MFMedia, _ completion: @escaping LiveVideoViewClosure) {
+    func subscribe(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.subscribe(liveVideo.id, { (newCameraView) in
             completion(newCameraView)
         })
     }
     
-    func stop(_ liveVideo: MFMedia) {
+    func stop(_ liveVideo: MFDish) {
         if liveVideo.accessMode == .owner {
             self.unpublishStreamFromDatabase(liveVideo)
         }

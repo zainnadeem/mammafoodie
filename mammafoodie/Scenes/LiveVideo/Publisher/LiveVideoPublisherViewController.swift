@@ -10,8 +10,8 @@ class LiveVideoPublisherViewController: R5VideoViewController {
     
     var stream: R5Stream!
     var configurations: R5Configuration!
-    var liveVideo: MFMedia?
     var delegate: LiveVideoPublisherDelegate?
+    var liveVideo: MFDish?
     
     // MARK: - Object lifecycle
     

@@ -1,13 +1,13 @@
 import UIKit
 
 protocol LiveVideoInteractorInput {
-    func start(_ liveVideo: MFMedia)
-    func stop(_ liveVideo: MFMedia)
+    func start(_ liveVideo: MFDish)
+    func stop(_ liveVideo: MFDish)
 }
 
 protocol LiveVideoInteractorOutput {
     func show(_ cameraView: UIView)
-    func showVideoId(_ liveVideo: MFMedia)
+    func showVideoId(_ liveVideo: MFDish)
     func show(message: String)
     func liveVideoClosed()
     func streamUnpublished()
@@ -20,8 +20,7 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     
     // MARK: - Business logic
     
-    func start(_ liveVideo: MFMedia) {
-        self.worker.delegate = self
+    func start(_ liveVideo: MFDish) {
         self.worker.start(liveVideo, { (cameraView) in
             if self.output != nil {
                 UIApplication.shared.isIdleTimerDisabled = true
@@ -31,8 +30,7 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
         })
     }
     
-    func stop(_ liveVideo: MFMedia) {
-        UIApplication.shared.isIdleTimerDisabled = false
+    func stop(_ liveVideo: MFDish) {
         self.worker.stop(liveVideo)
     }
 }

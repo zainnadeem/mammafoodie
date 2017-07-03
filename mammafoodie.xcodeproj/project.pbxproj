@@ -86,13 +86,188 @@
 		2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */; };
 		2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
 		2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */; };
-		2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
 		2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */; };
+		2C2FB2141F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */; };
+		2C2FB2151F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */; };
+		2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
+		2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6832E041F052E4200ECE835 /* TimerWorker.swift */; };
 		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
-		2C7C139F1EFA9BFD00C673DD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2C6978DE1F07C77400787DCC /* FirebaseLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF191EF25C1B00DA78B3 /* FirebaseLoginWorker.swift */; };
+		2C6978DF1F07C7B800787DCC /* HUDProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948CA1F05082400F98E74 /* HUDProtocols.swift */; };
+		2C6978E01F07C81300787DCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
+		2C6978E11F07C82700787DCC /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1E1EF25C1B00DA78B3 /* LoginModels.swift */; };
+		2C6978E21F07C83700787DCC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
+		2C6978E31F07C84B00787DCC /* CuisineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AAD1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift */; };
+		2C6978E41F07C84B00787DCC /* CuisineSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F771EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift */; };
+		2C6978E51F07C84B00787DCC /* FeaturedMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */; };
+		2C6978E61F07C84B00787DCC /* MosaicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */; };
+		2C6978E71F07C84B00787DCC /* DishCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113139D31EF7F4E5000050D6 /* DishCollectionViewCell.swift */; };
+		2C6978E81F07C84B00787DCC /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113139D71EF80574000050D6 /* ActivityCollectionViewCell.swift */; };
+		2C6978EA1F07C85000787DCC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA21EFAB515007DE6D0 /* StringExtension.swift */; };
+		2C6978EB1F07C85000787DCC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA31EFAB515007DE6D0 /* UIButtonExtension.swift */; };
+		2C6978EC1F07C85000787DCC /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA41EFAB515007DE6D0 /* UIFontExtension.swift */; };
+		2C6978ED1F07C85000787DCC /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */; };
+		2C6978EE1F07C85000787DCC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C948151F03D9A300DF5674 /* UIViewControllerExtension.swift */; };
+		2C6978EF1F07C85700787DCC /* MFNavigationBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */; };
+		2C6978F01F07C85700787DCC /* GoCookStep2Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0AF1EFC015B00C3BA21 /* GoCookStep2Configurator.swift */; };
+		2C6978F11F07C85700787DCC /* GoCookStep2Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B01EFC015B00C3BA21 /* GoCookStep2Interactor.swift */; };
+		2C6978F21F07C85700787DCC /* GoCookStep2Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B11EFC015B00C3BA21 /* GoCookStep2Models.swift */; };
+		2C6978F31F07C85700787DCC /* GoCookStep2Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B21EFC015B00C3BA21 /* GoCookStep2Presenter.swift */; };
+		2C6978F41F07C85700787DCC /* GoCookStep2Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B31EFC015B00C3BA21 /* GoCookStep2Router.swift */; };
+		2C6978F51F07C85700787DCC /* GoCookStep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B41EFC015B00C3BA21 /* GoCookStep2ViewController.swift */; };
+		2C6978F61F07C85700787DCC /* GoCookStep2Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */; };
+		2C6978F71F07C85700787DCC /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
+		2C6978F81F07C85700787DCC /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */; };
+		2C6978F91F07C85700787DCC /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */; };
+		2C6978FA1F07C85700787DCC /* GoCookModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A691EFAB4AF007DE6D0 /* GoCookModels.swift */; };
+		2C6978FB1F07C85700787DCC /* GoCookPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A721EFAB4AF007DE6D0 /* GoCookPresenter.swift */; };
+		2C6978FC1F07C85700787DCC /* GoCookRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A731EFAB4AF007DE6D0 /* GoCookRouter.swift */; };
+		2C6978FD1F07C85700787DCC /* GoCookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7C1EFAB4AF007DE6D0 /* GoCookViewController.swift */; };
+		2C6978FE1F07C85700787DCC /* GoCookWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7D1EFAB4AF007DE6D0 /* GoCookWorker.swift */; };
+		2C6978FF1F07C85700787DCC /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A7E1EFAB4AF007DE6D0 /* MediaPicker.swift */; };
+		2C6979001F07C88D00787DCC /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525E1EF2729D009DDAB1 /* ChatModels.swift */; };
+		2C6979011F07C88D00787DCC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52621EF2729D009DDAB1 /* ChatViewController.swift */; };
+		2C6979021F07C88D00787DCC /* ChatListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C21EF3D8BA00FCF967 /* ChatListConfigurator.swift */; };
+		2C6979031F07C88D00787DCC /* ChatListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C31EF3D8BA00FCF967 /* ChatListInteractor.swift */; };
+		2C6979041F07C88D00787DCC /* ChatListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C41EF3D8BA00FCF967 /* ChatListModels.swift */; };
+		2C6979051F07C88D00787DCC /* ChatListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C51EF3D8BA00FCF967 /* ChatListPresenter.swift */; };
+		2C6979061F07C88D00787DCC /* ChatListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C61EF3D8BA00FCF967 /* ChatListRouter.swift */; };
+		2C6979071F07C88D00787DCC /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C71EF3D8BA00FCF967 /* ChatListTableViewCell.swift */; };
+		2C6979081F07C88D00787DCC /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */; };
+		2C6979091F07C88D00787DCC /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
+		2C69790A1F07C88D00787DCC /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
+		2C69790B1F07C88D00787DCC /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
+		2C69790C1F07C88D00787DCC /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
+		2C69790D1F07C88D00787DCC /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
+		2C69790E1F07C88D00787DCC /* CommentsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */; };
+		2C69790F1F07C88D00787DCC /* CommentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927051EF00A7E00602153 /* CommentsModels.swift */; };
+		2C6979101F07C88D00787DCC /* CommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927061EF00A7E00602153 /* CommentsPresenter.swift */; };
+		2C6979111F07C88D00787DCC /* CommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927071EF00A7E00602153 /* CommentsRouter.swift */; };
+		2C6979121F07C88D00787DCC /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927081EF00A7E00602153 /* CommentsViewController.swift */; };
+		2C6979131F07C88D00787DCC /* CommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927091EF00A7E00602153 /* CommentsWorker.swift */; };
+		2C6979141F07C88D00787DCC /* TextViewPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */; };
+		2C6979151F07C88D00787DCC /* CommentsCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A671F0386160081599A /* CommentsCustomTableViewCell.swift */; };
+		2C6979161F07C88D00787DCC /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0191A6B1F03AAEB0081599A /* CommentsView.swift */; };
+		2C6979171F07C88D00787DCC /* LiveVideoMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */; };
+		2C6979181F07C88D00787DCC /* LiveVideoMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */; };
+		2C6979191F07C88D00787DCC /* LiveVideoMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */; };
+		2C69791A1F07C88D00787DCC /* LiveVideoMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927111EF00A7E00602153 /* LiveVideoMainPagePresenter.swift */; };
+		2C69791B1F07C88D00787DCC /* LiveVideoMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927121EF00A7E00602153 /* LiveVideoMainPageRouter.swift */; };
+		2C69791C1F07C88D00787DCC /* LiveVideoMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927131EF00A7E00602153 /* LiveVideoMainPageViewController.swift */; };
+		2C69791D1F07C88D00787DCC /* LoadLiveVideosWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927141EF00A7E00602153 /* LoadLiveVideosWorker.swift */; };
+		2C69791E1F07C88D00787DCC /* FacebookLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF181EF25C1B00DA78B3 /* FacebookLoginWorker.swift */; };
+		2C69791F1F07C88D00787DCC /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */; };
+		2C6979201F07C88D00787DCC /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1D1EF25C1B00DA78B3 /* LoginInteractor.swift */; };
+		2C6979211F07C88D00787DCC /* GmailLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1B1EF25C1B00DA78B3 /* GmailLoginWorker.swift */; };
+		2C6979221F07C88D00787DCC /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1C1EF25C1B00DA78B3 /* LoginConfigurator.swift */; };
+		2C6979231F07C88D00787DCC /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1F1EF25C1B00DA78B3 /* LoginPresenter.swift */; };
+		2C6979241F07C88D00787DCC /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
+		2C6979251F07C88D00787DCC /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
+		2C6979261F07C88D00787DCC /* LoginNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */; };
+		2C6979271F07C88D00787DCC /* CuisineSearchCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9AAA1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift */; };
+		2C6979281F07C88D00787DCC /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
+		2C6979291F07C88D00787DCC /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */; };
+		2C69792A1F07C88D00787DCC /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */; };
+		2C69792B1F07C88D00787DCC /* NearbyChefsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C51EE92A9600E2A61E /* NearbyChefsConfigurator.swift */; };
+		2C69792C1F07C88D00787DCC /* NearbyChefsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C61EE92A9600E2A61E /* NearbyChefsInteractor.swift */; };
+		2C69792E1F07C88D00787DCC /* NearbyChefsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C81EE92A9600E2A61E /* NearbyChefsPresenter.swift */; };
+		2C69792F1F07C88D00787DCC /* NearbyChefsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C91EE92A9600E2A61E /* NearbyChefsRouter.swift */; };
+		2C6979301F07C88D00787DCC /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
+		2C6979311F07C88D00787DCC /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
+		2C6979321F07C88D00787DCC /* CuisineFiltreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */; };
+		2C6979331F07C88D00787DCC /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		2C6979341F07C88D00787DCC /* UserProfileCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */; };
+		2C6979351F07C88D00787DCC /* OtherUsersProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */; };
+		2C6979361F07C88D00787DCC /* OtherUsersProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */; };
+		2C6979371F07C88D00787DCC /* OtherUsersProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4E1EEEAEC9008B6F2D /* OtherUsersProfileModels.swift */; };
+		2C6979381F07C88D00787DCC /* OtherUsersProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE4F1EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift */; };
+		2C6979391F07C88D00787DCC /* OtherUsersProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE501EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift */; };
+		2C69793A1F07C88D00787DCC /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
+		2C69793B1F07C88D00787DCC /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
+		2C69793C1F07C88D00787DCC /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		2C69793D1F07C88D00787DCC /* EnableCameraWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927161EF00A7E00602153 /* EnableCameraWorker.swift */; };
+		2C69793E1F07C88D00787DCC /* EnableLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927171EF00A7E00602153 /* EnableLocationWorker.swift */; };
+		2C69793F1F07C88D00787DCC /* EnableMicrophoneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927181EF00A7E00602153 /* EnableMicrophoneWorker.swift */; };
+		2C6979401F07C88D00787DCC /* EnablePhotoLibraryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927191EF00A7E00602153 /* EnablePhotoLibraryWorker.swift */; };
+		2C6979411F07C88D00787DCC /* PermissionsAlertConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271A1EF00A7E00602153 /* PermissionsAlertConfigurator.swift */; };
+		2C6979421F07C88D00787DCC /* PermissionsAlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271B1EF00A7E00602153 /* PermissionsAlertInteractor.swift */; };
+		2C6979431F07C88D00787DCC /* PermissionsAlertModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271C1EF00A7E00602153 /* PermissionsAlertModels.swift */; };
+		2C6979441F07C88D00787DCC /* PermissionsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */; };
+		2C6979451F07C88D00787DCC /* PermissionsAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */; };
+		2C6979461F07C88D00787DCC /* PermissionsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */; };
+		2C6979471F07C88D00787DCC /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */; };
+		2C6979481F07C88D00787DCC /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */; };
+		2C6979491F07C88D00787DCC /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */; };
+		2C69794A1F07C88D00787DCC /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A001EF2CB2C000F38B1 /* RequestDishPresenter.swift */; };
+		2C69794B1F07C88E00787DCC /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */; };
+		2C69794C1F07C88E00787DCC /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */; };
+		2C69794D1F07C88E00787DCC /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */; };
+		2C69794E1F07C88E00787DCC /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
+		2C69794F1F07C88E00787DCC /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
+		2C6979501F07C88E00787DCC /* SlotSelectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */; };
+		2C6979511F07C88E00787DCC /* SlotSelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B21EEACA1200E5E6E5 /* SlotSelectionPresenter.swift */; };
+		2C6979521F07C88E00787DCC /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
+		2C6979531F07C88E00787DCC /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
+		2C6979541F07C88E00787DCC /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		2C6979551F07C88E00787DCC /* SlotSelectionCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE491EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift */; };
+		2C6979561F07C88E00787DCC /* LoadVidupsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927211EF00A7E00602153 /* LoadVidupsWorker.swift */; };
+		2C6979571F07C88E00787DCC /* VidupMainPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927221EF00A7E00602153 /* VidupMainPageConfigurator.swift */; };
+		2C6979581F07C88E00787DCC /* VidupMainPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927231EF00A7E00602153 /* VidupMainPageInteractor.swift */; };
+		2C6979591F07C88E00787DCC /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
+		2C69795A1F07C88E00787DCC /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
+		2C69795B1F07C88E00787DCC /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
+		2C69795C1F07C88E00787DCC /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
+		2C69795D1F07C88E00787DCC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F6B1EF82FE2002E18EF /* GradientView.swift */; };
+		2C6979B51F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979791F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m */; };
+		2C6979B61F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979791F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m */; };
+		2C6979B71F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797B1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
+		2C6979B81F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797B1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
+		2C6979B91F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797D1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m */; };
+		2C6979BA1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797D1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m */; };
+		2C6979BB1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797F1F07C95F00787DCC /* GMUWrappingDictionaryKey.m */; };
+		2C6979BC1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69797F1F07C95F00787DCC /* GMUWrappingDictionaryKey.m */; };
+		2C6979BD1F07C95F00787DCC /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979841F07C95F00787DCC /* GMUClusterManager.m */; };
+		2C6979BE1F07C95F00787DCC /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979841F07C95F00787DCC /* GMUClusterManager.m */; };
+		2C6979BF1F07C95F00787DCC /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979871F07C95F00787DCC /* GMUStaticCluster.m */; };
+		2C6979C01F07C95F00787DCC /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979871F07C95F00787DCC /* GMUStaticCluster.m */; };
+		2C6979C11F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69798D1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m */; };
+		2C6979C21F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69798D1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m */; };
+		2C6979C31F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979901F07C95F00787DCC /* GMUDefaultClusterRenderer.m */; };
+		2C6979C41F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979901F07C95F00787DCC /* GMUDefaultClusterRenderer.m */; };
+		2C6979C51F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979931F07C95F00787DCC /* GMUGeoJSONParser.m */; };
+		2C6979C61F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979931F07C95F00787DCC /* GMUGeoJSONParser.m */; };
+		2C6979C71F07C95F00787DCC /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979951F07C95F00787DCC /* GMUGeometryRenderer.m */; };
+		2C6979C81F07C95F00787DCC /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979951F07C95F00787DCC /* GMUGeometryRenderer.m */; };
+		2C6979C91F07C95F00787DCC /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979971F07C95F00787DCC /* GMUKMLParser.m */; };
+		2C6979CA1F07C95F00787DCC /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979971F07C95F00787DCC /* GMUKMLParser.m */; };
+		2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69799A1F07C95F00787DCC /* GMUFeature.m */; };
+		2C6979CC1F07C95F00787DCC /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69799A1F07C95F00787DCC /* GMUFeature.m */; };
+		2C6979CD1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69799D1F07C95F00787DCC /* GMUGeometryCollection.m */; };
+		2C6979CE1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69799D1F07C95F00787DCC /* GMUGeometryCollection.m */; };
+		2C6979CF1F07C95F00787DCC /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A01F07C95F00787DCC /* GMUGroundOverlay.m */; };
+		2C6979D01F07C95F00787DCC /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A01F07C95F00787DCC /* GMUGroundOverlay.m */; };
+		2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A21F07C95F00787DCC /* GMULineString.m */; };
+		2C6979D21F07C95F00787DCC /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A21F07C95F00787DCC /* GMULineString.m */; };
+		2C6979D31F07C95F00787DCC /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A41F07C95F00787DCC /* GMUPlacemark.m */; };
+		2C6979D41F07C95F00787DCC /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A41F07C95F00787DCC /* GMUPlacemark.m */; };
+		2C6979D51F07C95F00787DCC /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A61F07C95F00787DCC /* GMUPoint.m */; };
+		2C6979D61F07C95F00787DCC /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A61F07C95F00787DCC /* GMUPoint.m */; };
+		2C6979D71F07C95F00787DCC /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A81F07C95F00787DCC /* GMUPolygon.m */; };
+		2C6979D81F07C95F00787DCC /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979A81F07C95F00787DCC /* GMUPolygon.m */; };
+		2C6979D91F07C95F00787DCC /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979AA1F07C95F00787DCC /* GMUStyle.m */; };
+		2C6979DA1F07C95F00787DCC /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979AA1F07C95F00787DCC /* GMUStyle.m */; };
+		2C6979DB1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979AF1F07C95F00787DCC /* GQTPointQuadTree.m */; };
+		2C6979DC1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979AF1F07C95F00787DCC /* GQTPointQuadTree.m */; };
+		2C6979DD1F07C95F00787DCC /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979B11F07C95F00787DCC /* GQTPointQuadTreeChild.m */; };
+		2C6979DE1F07C95F00787DCC /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6979B11F07C95F00787DCC /* GQTPointQuadTreeChild.m */; };
+		2C6979DF1F07C95F00787DCC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C6979B31F07C95F00787DCC /* GoogleService-Info.plist */; };
+		2C6979E01F07C95F00787DCC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C6979B31F07C95F00787DCC /* GoogleService-Info.plist */; };
+		2C6979E11F07C95F00787DCC /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C6979B41F07C95F00787DCC /* MapStyle.json */; };
+		2C6979E21F07C95F00787DCC /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C6979B41F07C95F00787DCC /* MapStyle.json */; };
+		2C6979E31F07CBF900787DCC /* NearbyChefsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0C71EE92A9600E2A61E /* NearbyChefsModels.swift */; };
 		2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8001271EF9094E005026CE /* ActivityTblCell.swift */; };
 		2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8001281EF9094E005026CE /* ActivityTblCell.xib */; };
@@ -120,8 +295,6 @@
 		2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49A1EF542D30076598C /* MFDishRequest.swift */; };
 		2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */; };
 		2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */; };
-		2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49D1EF542D30076598C /* MFMedia.swift */; };
-		2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49D1EF542D30076598C /* MFMedia.swift */; };
 		2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49E1EF542D30076598C /* MFMessage.swift */; };
 		2CA2B4B71EF542D30076598C /* MFMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49E1EF542D30076598C /* MFMessage.swift */; };
 		2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */; };
@@ -135,29 +308,6 @@
 		2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */; };
 		2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */; };
 		2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */; };
-		2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */; };
-		2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
-		2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */; };
-		2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */; };
-		2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */; };
-		2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */; };
-		2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */; };
-		2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */; };
-		2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */; };
-		2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */; };
-		2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */; };
-		2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */; };
-		2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */; };
-		2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */; };
-		2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BED91EF2475F00DA78B3 /* GMULineString.m */; };
-		2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */; };
-		2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */; };
-		2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */; };
-		2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */; };
-		2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */; };
-		2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */; };
-		2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
-		2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */; };
 		2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF181EF25C1B00DA78B3 /* FacebookLoginWorker.swift */; };
 		2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF191EF25C1B00DA78B3 /* FirebaseLoginWorker.swift */; };
 		2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF1A1EF25C1B00DA78B3 /* ForgotPasswordWorker.swift */; };
@@ -169,6 +319,13 @@
 		2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF201EF25C1B00DA78B3 /* LoginRouter.swift */; };
 		2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF211EF25C1B00DA78B3 /* LoginViewController.swift */; };
 		2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF221EF25C1B00DA78B3 /* LoginWorker.swift */; };
+		2CD37DB01F0992790058EFDF /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2CD37DB11F0992790058EFDF /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2CD37DB21F0992790058EFDF /* (null) in Resources */ = {isa = PBXBuildFile; };
+		2CD37DB31F0992790058EFDF /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2CD37DB41F0992790058EFDF /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2CD37DB51F0992790058EFDF /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2CD37DB61F0992790058EFDF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479471EF97312003D0F9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
@@ -201,12 +358,6 @@
 		2CFB9B9B1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9B831EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift */; };
 		2CFB9B9C1EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9B841EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift */; };
 		2CFB9B9D1EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9B841EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift */; };
-		2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9B9F1EFA476C00C08EB3 /* LiveStreamListWorker.swift */; };
-		2CFB9BA31EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9B9F1EFA476C00C08EB3 /* LiveStreamListWorker.swift */; };
-		2CFB9BA41EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA01EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift */; };
-		2CFB9BA51EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA01EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift */; };
-		2CFB9BA61EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA11EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift */; };
-		2CFB9BA71EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA11EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift */; };
 		2CFB9BB01EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA91EFA477200C08EB3 /* VidupDetailPageConfigurator.swift */; };
 		2CFB9BB11EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BA91EFA477200C08EB3 /* VidupDetailPageConfigurator.swift */; };
 		2CFB9BB21EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAA1EFA477200C08EB3 /* VidupDetailPageInteractor.swift */; };
@@ -231,6 +382,31 @@
 		2CFB9BD01EFA4D1B00C08EB3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BCF1EFA4D1B00C08EB3 /* libz.tbd */; };
 		2CFB9BD21EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */; };
 		2CFB9BD41EFA4D3700C08EB3 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */; };
+		570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3ED1F0684F000B41F0E /* AKImageCropperOverlayView.swift */; };
+		570ED40B1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3EE1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift */; };
+		570ED40C1F0684F000B41F0E /* AKImageCropperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3EF1F0684F000B41F0E /* AKImageCropperScrollView.swift */; };
+		570ED40D1F0684F000B41F0E /* AKImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F01F0684F000B41F0E /* AKImageCropperView.swift */; };
+		570ED40E1F0684F000B41F0E /* AKImageCropperOverlayViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F21F0684F000B41F0E /* AKImageCropperOverlayViewConfiguration.swift */; };
+		570ED40F1F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F31F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift */; };
+		570ED4101F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F41F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationEdge.swift */; };
+		570ED4111F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F51F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift */; };
+		570ED4121F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F61F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift */; };
+		570ED4131F0684F000B41F0E /* IC_CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F81F0684F000B41F0E /* IC_CGFloatExtension.swift */; };
+		570ED4141F0684F000B41F0E /* IC_CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3F91F0684F000B41F0E /* IC_CGPointExtension.swift */; };
+		570ED4151F0684F000B41F0E /* IC_CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3FA1F0684F000B41F0E /* IC_CGSizeExtensions.swift */; };
+		570ED4161F0684F000B41F0E /* IC_UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3FB1F0684F000B41F0E /* IC_UIImageExtensions.swift */; };
+		570ED4171F0684F000B41F0E /* CropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3FC1F0684F000B41F0E /* CropVC.swift */; };
+		570ED4181F0684F000B41F0E /* EditOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3FE1F0684F000B41F0E /* EditOptionsCell.swift */; };
+		570ED4191F0684F000B41F0E /* EditOptionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 570ED3FF1F0684F000B41F0E /* EditOptionsCell.xib */; };
+		570ED41A1F0684F000B41F0E /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4001F0684F000B41F0E /* Extentions.swift */; };
+		570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4011F0684F000B41F0E /* FilterVC.swift */; };
+		570ED41C1F0684F000B41F0E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4021F0684F000B41F0E /* Image.swift */; };
+		570ED41D1F0684F000B41F0E /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4041F0684F000B41F0E /* ImageCollectionCell.swift */; };
+		570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 570ED4051F0684F000B41F0E /* ImageCollectionCell.xib */; };
+		570ED41F1F0684F000B41F0E /* ImageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4061F0684F000B41F0E /* ImageCollectionViewAdapter.swift */; };
+		570ED4201F0684F000B41F0E /* ImageEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570ED4071F0684F000B41F0E /* ImageEditor.storyboard */; };
+		570ED4211F0684F000B41F0E /* ImageEditor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 570ED4081F0684F000B41F0E /* ImageEditor.xcassets */; };
+		570ED4221F0684F000B41F0E /* ImageEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4091F0684F000B41F0E /* ImageEditorVC.swift */; };
 		571A66ED1EF935F300D47766 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */; };
 		572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */; };
 		572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */; };
@@ -256,7 +432,6 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
-		5760E2931F029F80003E7064 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */; };
 		57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
 		57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */; };
 		57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */; };
@@ -280,14 +455,12 @@
 		57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */; };
 		57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
-		B691513B1EF94EA500DB6481 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
 		BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */; };
 		BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */; };
 		BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */; };
 		BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */; };
-		BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */; };
 		BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927011EF00A7E00602153 /* CommentsAdapter.swift */; };
 		BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */; };
 		BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927031EF00A7E00602153 /* CommentsInteractor.swift */; };
@@ -320,7 +493,6 @@
 		BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927251EF00A7E00602153 /* VidupMainPagePresenter.swift */; };
 		BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */; };
 		BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */; };
-		BFC9274E1EF00B0700602153 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F5F1EF542BB00223D21 /* Assets.xcassets */; };
 		BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD80F611EF54ECD00223D21 /* Zain.storyboard */; };
 		F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F525E1EF2729D009DDAB1 /* ChatModels.swift */; };
@@ -353,10 +525,6 @@
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
 		F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */; };
-		F0BBF3A01EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A11EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A21EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		F0BBF3A31EF27ACA00D55615 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -429,7 +597,67 @@
 		2C12BCD71EF80559007AF994 /* CuisineListCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineListCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCuisine.swift; sourceTree = "<group>"; };
 		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
+		2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoListWorker.swift; sourceTree = "<group>"; };
+		2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupsListWorker.swift; sourceTree = "<group>"; };
 		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
+		2C6979771F07C95F00787DCC /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
+		2C6979781F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
+		2C6979791F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
+		2C69797A1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUNonHierarchicalDistanceBasedAlgorithm.h; sourceTree = "<group>"; };
+		2C69797B1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
+		2C69797C1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
+		2C69797D1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
+		2C69797E1F07C95F00787DCC /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
+		2C69797F1F07C95F00787DCC /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUWrappingDictionaryKey.m; sourceTree = "<group>"; };
+		2C6979801F07C95F00787DCC /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUCluster.h; sourceTree = "<group>"; };
+		2C6979811F07C95F00787DCC /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterItem.h; sourceTree = "<group>"; };
+		2C6979821F07C95F00787DCC /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
+		2C6979831F07C95F00787DCC /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterManager.h; sourceTree = "<group>"; };
+		2C6979841F07C95F00787DCC /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
+		2C6979851F07C95F00787DCC /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUMarkerClustering.h; sourceTree = "<group>"; };
+		2C6979861F07C95F00787DCC /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
+		2C6979871F07C95F00787DCC /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStaticCluster.m; sourceTree = "<group>"; };
+		2C6979891F07C95F00787DCC /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterIconGenerator.h; sourceTree = "<group>"; };
+		2C69798A1F07C95F00787DCC /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterRenderer.h; sourceTree = "<group>"; };
+		2C69798B1F07C95F00787DCC /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
+		2C69798C1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterIconGenerator.h; sourceTree = "<group>"; };
+		2C69798D1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
+		2C69798E1F07C95F00787DCC /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
+		2C69798F1F07C95F00787DCC /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
+		2C6979901F07C95F00787DCC /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
+		2C6979921F07C95F00787DCC /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeoJSONParser.h; sourceTree = "<group>"; };
+		2C6979931F07C95F00787DCC /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeoJSONParser.m; sourceTree = "<group>"; };
+		2C6979941F07C95F00787DCC /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryRenderer.h; sourceTree = "<group>"; };
+		2C6979951F07C95F00787DCC /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryRenderer.m; sourceTree = "<group>"; };
+		2C6979961F07C95F00787DCC /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUKMLParser.h; sourceTree = "<group>"; };
+		2C6979971F07C95F00787DCC /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUKMLParser.m; sourceTree = "<group>"; };
+		2C6979991F07C95F00787DCC /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
+		2C69799A1F07C95F00787DCC /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
+		2C69799B1F07C95F00787DCC /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
+		2C69799C1F07C95F00787DCC /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
+		2C69799D1F07C95F00787DCC /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
+		2C69799E1F07C95F00787DCC /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
+		2C69799F1F07C95F00787DCC /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
+		2C6979A01F07C95F00787DCC /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
+		2C6979A11F07C95F00787DCC /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
+		2C6979A21F07C95F00787DCC /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
+		2C6979A31F07C95F00787DCC /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
+		2C6979A41F07C95F00787DCC /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
+		2C6979A51F07C95F00787DCC /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
+		2C6979A61F07C95F00787DCC /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
+		2C6979A71F07C95F00787DCC /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
+		2C6979A81F07C95F00787DCC /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
+		2C6979A91F07C95F00787DCC /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
+		2C6979AA1F07C95F00787DCC /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
+		2C6979AC1F07C95F00787DCC /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
+		2C6979AD1F07C95F00787DCC /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPoint.h; sourceTree = "<group>"; };
+		2C6979AE1F07C95F00787DCC /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTree.h; sourceTree = "<group>"; };
+		2C6979AF1F07C95F00787DCC /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTree.m; sourceTree = "<group>"; };
+		2C6979B01F07C95F00787DCC /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
+		2C6979B11F07C95F00787DCC /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
+		2C6979B21F07C95F00787DCC /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
+		2C6979B31F07C95F00787DCC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C6979B41F07C95F00787DCC /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
 		2C8001271EF9094E005026CE /* ActivityTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTblCell.swift; sourceTree = "<group>"; };
 		2C8001281EF9094E005026CE /* ActivityTblCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTblCell.xib; sourceTree = "<group>"; };
 		2C8290931F027CF000BB7ECA /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -444,7 +672,6 @@
 		2CA2B4991EF542D30076598C /* MFDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDish.swift; sourceTree = "<group>"; };
 		2CA2B49A1EF542D30076598C /* MFDishRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFDishRequest.swift; sourceTree = "<group>"; };
 		2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFLiveVideoGatewayAccountDetails.swift; sourceTree = "<group>"; };
-		2CA2B49D1EF542D30076598C /* MFMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMedia.swift; sourceTree = "<group>"; };
 		2CA2B49E1EF542D30076598C /* MFMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessage.swift; sourceTree = "<group>"; };
 		2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNewsFeed.swift; sourceTree = "<group>"; };
 		2CA2B4A01EF542D30076598C /* MFOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFOrder.swift; sourceTree = "<group>"; };
@@ -453,64 +680,6 @@
 		2CB8BE991EF2467500DA78B3 /* DatabaseGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseGateway.swift; sourceTree = "<group>"; };
 		2CB8BE9A1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFModelsToFirebaseDictionaryConverter.swift; sourceTree = "<group>"; };
 		2CB8BE9E1EF246DB00DA78B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/NearbyChefs.storyboard; sourceTree = "<group>"; };
-		2CB8BEAE1EF2475F00DA78B3 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
-		2CB8BEAF1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
-		2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
-		2CB8BEB11EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUNonHierarchicalDistanceBasedAlgorithm.h; sourceTree = "<group>"; };
-		2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUNonHierarchicalDistanceBasedAlgorithm.m; sourceTree = "<group>"; };
-		2CB8BEB31EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUSimpleClusterAlgorithm.h; sourceTree = "<group>"; };
-		2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUSimpleClusterAlgorithm.m; sourceTree = "<group>"; };
-		2CB8BEB51EF2475F00DA78B3 /* GMUWrappingDictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUWrappingDictionaryKey.h; sourceTree = "<group>"; };
-		2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUWrappingDictionaryKey.m; sourceTree = "<group>"; };
-		2CB8BEB71EF2475F00DA78B3 /* GMUCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUCluster.h; sourceTree = "<group>"; };
-		2CB8BEB81EF2475F00DA78B3 /* GMUClusterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterItem.h; sourceTree = "<group>"; };
-		2CB8BEB91EF2475F00DA78B3 /* GMUClusterManager+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUClusterManager+Testing.h"; sourceTree = "<group>"; };
-		2CB8BEBA1EF2475F00DA78B3 /* GMUClusterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterManager.h; sourceTree = "<group>"; };
-		2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUClusterManager.m; sourceTree = "<group>"; };
-		2CB8BEBC1EF2475F00DA78B3 /* GMUMarkerClustering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUMarkerClustering.h; sourceTree = "<group>"; };
-		2CB8BEBD1EF2475F00DA78B3 /* GMUStaticCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStaticCluster.h; sourceTree = "<group>"; };
-		2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStaticCluster.m; sourceTree = "<group>"; };
-		2CB8BEC01EF2475F00DA78B3 /* GMUClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterIconGenerator.h; sourceTree = "<group>"; };
-		2CB8BEC11EF2475F00DA78B3 /* GMUClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterRenderer.h; sourceTree = "<group>"; };
-		2CB8BEC21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterIconGenerator+Testing.h"; sourceTree = "<group>"; };
-		2CB8BEC31EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterIconGenerator.h; sourceTree = "<group>"; };
-		2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterIconGenerator.m; sourceTree = "<group>"; };
-		2CB8BEC51EF2475F00DA78B3 /* GMUDefaultClusterRenderer+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMUDefaultClusterRenderer+Testing.h"; sourceTree = "<group>"; };
-		2CB8BEC61EF2475F00DA78B3 /* GMUDefaultClusterRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUDefaultClusterRenderer.h; sourceTree = "<group>"; };
-		2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUDefaultClusterRenderer.m; sourceTree = "<group>"; };
-		2CB8BEC91EF2475F00DA78B3 /* GMUGeoJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeoJSONParser.h; sourceTree = "<group>"; };
-		2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeoJSONParser.m; sourceTree = "<group>"; };
-		2CB8BECB1EF2475F00DA78B3 /* GMUGeometryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryRenderer.h; sourceTree = "<group>"; };
-		2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryRenderer.m; sourceTree = "<group>"; };
-		2CB8BECD1EF2475F00DA78B3 /* GMUKMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUKMLParser.h; sourceTree = "<group>"; };
-		2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUKMLParser.m; sourceTree = "<group>"; };
-		2CB8BED01EF2475F00DA78B3 /* GMUFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUFeature.h; sourceTree = "<group>"; };
-		2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUFeature.m; sourceTree = "<group>"; };
-		2CB8BED21EF2475F00DA78B3 /* GMUGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometry.h; sourceTree = "<group>"; };
-		2CB8BED31EF2475F00DA78B3 /* GMUGeometryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryCollection.h; sourceTree = "<group>"; };
-		2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGeometryCollection.m; sourceTree = "<group>"; };
-		2CB8BED51EF2475F00DA78B3 /* GMUGeometryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGeometryContainer.h; sourceTree = "<group>"; };
-		2CB8BED61EF2475F00DA78B3 /* GMUGroundOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGroundOverlay.h; sourceTree = "<group>"; };
-		2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGroundOverlay.m; sourceTree = "<group>"; };
-		2CB8BED81EF2475F00DA78B3 /* GMULineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMULineString.h; sourceTree = "<group>"; };
-		2CB8BED91EF2475F00DA78B3 /* GMULineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMULineString.m; sourceTree = "<group>"; };
-		2CB8BEDA1EF2475F00DA78B3 /* GMUPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPlacemark.h; sourceTree = "<group>"; };
-		2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPlacemark.m; sourceTree = "<group>"; };
-		2CB8BEDC1EF2475F00DA78B3 /* GMUPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPoint.h; sourceTree = "<group>"; };
-		2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPoint.m; sourceTree = "<group>"; };
-		2CB8BEDE1EF2475F00DA78B3 /* GMUPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUPolygon.h; sourceTree = "<group>"; };
-		2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUPolygon.m; sourceTree = "<group>"; };
-		2CB8BEE01EF2475F00DA78B3 /* GMUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUStyle.h; sourceTree = "<group>"; };
-		2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUStyle.m; sourceTree = "<group>"; };
-		2CB8BEE31EF2475F00DA78B3 /* GQTBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTBounds.h; sourceTree = "<group>"; };
-		2CB8BEE41EF2475F00DA78B3 /* GQTPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPoint.h; sourceTree = "<group>"; };
-		2CB8BEE51EF2475F00DA78B3 /* GQTPointQuadTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTree.h; sourceTree = "<group>"; };
-		2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTree.m; sourceTree = "<group>"; };
-		2CB8BEE71EF2475F00DA78B3 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
-		2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
-		2CB8BEE91EF2475F00DA78B3 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
-		2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
 		2CB8BF071EF247A800DA78B3 /* mammafoodieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mammafoodieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB8BF091EF247A900DA78B3 /* mammafoodieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mammafoodieTests.swift; sourceTree = "<group>"; };
 		2CB8BF0B1EF247A900DA78B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -540,9 +709,6 @@
 		2CFB9B811EFA475100C08EB3 /* LiveVideoPublisherWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoPublisherWorker.swift; sourceTree = "<group>"; };
 		2CFB9B831EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoSubscriberViewController.swift; sourceTree = "<group>"; };
 		2CFB9B841EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoSubscriberWorker.swift; sourceTree = "<group>"; };
-		2CFB9B9F1EFA476C00C08EB3 /* LiveStreamListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamListWorker.swift; sourceTree = "<group>"; };
-		2CFB9BA01EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveStreamTableViewAdapter.swift; sourceTree = "<group>"; };
-		2CFB9BA11EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoChoiceViewController.swift; sourceTree = "<group>"; };
 		2CFB9BA91EFA477200C08EB3 /* VidupDetailPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageConfigurator.swift; sourceTree = "<group>"; };
 		2CFB9BAA1EFA477200C08EB3 /* VidupDetailPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageInteractor.swift; sourceTree = "<group>"; };
 		2CFB9BAB1EFA477200C08EB3 /* VidupDetailPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageModels.swift; sourceTree = "<group>"; };
@@ -558,6 +724,31 @@
 		2CFB9BCF1EFA4D1B00C08EB3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		570ED3ED1F0684F000B41F0E /* AKImageCropperOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayView.swift; sourceTree = "<group>"; };
+		570ED3EE1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewTouchState.swift; sourceTree = "<group>"; };
+		570ED3EF1F0684F000B41F0E /* AKImageCropperScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperScrollView.swift; sourceTree = "<group>"; };
+		570ED3F01F0684F000B41F0E /* AKImageCropperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperView.swift; sourceTree = "<group>"; };
+		570ED3F21F0684F000B41F0E /* AKImageCropperOverlayViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewConfiguration.swift; sourceTree = "<group>"; };
+		570ED3F31F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewConfigurationCorner.swift; sourceTree = "<group>"; };
+		570ED3F41F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewConfigurationEdge.swift; sourceTree = "<group>"; };
+		570ED3F51F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewConfigurationGrid.swift; sourceTree = "<group>"; };
+		570ED3F61F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewConfigurationOverlay.swift; sourceTree = "<group>"; };
+		570ED3F81F0684F000B41F0E /* IC_CGFloatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_CGFloatExtension.swift; sourceTree = "<group>"; };
+		570ED3F91F0684F000B41F0E /* IC_CGPointExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_CGPointExtension.swift; sourceTree = "<group>"; };
+		570ED3FA1F0684F000B41F0E /* IC_CGSizeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_CGSizeExtensions.swift; sourceTree = "<group>"; };
+		570ED3FB1F0684F000B41F0E /* IC_UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_UIImageExtensions.swift; sourceTree = "<group>"; };
+		570ED3FC1F0684F000B41F0E /* CropVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropVC.swift; sourceTree = "<group>"; };
+		570ED3FE1F0684F000B41F0E /* EditOptionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOptionsCell.swift; sourceTree = "<group>"; };
+		570ED3FF1F0684F000B41F0E /* EditOptionsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditOptionsCell.xib; sourceTree = "<group>"; };
+		570ED4001F0684F000B41F0E /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		570ED4011F0684F000B41F0E /* FilterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
+		570ED4021F0684F000B41F0E /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		570ED4041F0684F000B41F0E /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		570ED4051F0684F000B41F0E /* ImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
+		570ED4061F0684F000B41F0E /* ImageCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		570ED4071F0684F000B41F0E /* ImageEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageEditor.storyboard; sourceTree = "<group>"; };
+		570ED4081F0684F000B41F0E /* ImageEditor.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageEditor.xcassets; sourceTree = "<group>"; };
+		570ED4091F0684F000B41F0E /* ImageEditorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEditorVC.swift; sourceTree = "<group>"; };
 		571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Users/arjav/Library/Developer/Xcode/DerivedData/mammafoodie-gpocchshqbxkdievjanonfykbjhl/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookConfigurator.swift; sourceTree = "<group>"; };
 		572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookInteractor.swift; sourceTree = "<group>"; };
@@ -648,7 +839,6 @@
 		BFC927261EF00A7E00602153 /* VidupMainPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageRouter.swift; sourceTree = "<group>"; };
 		BFC927271EF00A7E00602153 /* VidupMainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupMainPageViewController.swift; sourceTree = "<group>"; };
 		BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionViewCell.swift; sourceTree = "<group>"; };
-		BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DummyData.swift; path = mammafoodie/Scenes/LiveVideoMainPage/DummyData.swift; sourceTree = "<group>"; };
 		BFD80F5F1EF542BB00223D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFD80F621EF54ECD00223D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Zain.storyboard; sourceTree = "<group>"; };
 		CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -775,6 +965,7 @@
 		2C12BC901EF7D237007AF994 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2C2FB2121F091404004EEA0F /* Workers */,
 				2C12BC911EF7D237007AF994 /* Adapters */,
 				2C12BC951EF7D237007AF994 /* HomeConfigurator.swift */,
 				2C12BC961EF7D237007AF994 /* HomeInteractor.swift */,
@@ -872,6 +1063,15 @@
 			path = MenuItemTblCell;
 			sourceTree = "<group>";
 		};
+		2C2FB2121F091404004EEA0F /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */,
+				2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,6 +1080,127 @@
 				2C878AD51F022DA600A630DF /* MFNavigationBarDelegate.swift */,
 			);
 			path = MFNavigationController;
+			sourceTree = "<group>";
+		};
+		2C6979731F07C95F00787DCC /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979741F07C95F00787DCC /* Google-Maps-iOS-Utils */,
+				2C6979B31F07C95F00787DCC /* GoogleService-Info.plist */,
+				2C6979B41F07C95F00787DCC /* MapStyle.json */,
+			);
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		2C6979741F07C95F00787DCC /* Google-Maps-iOS-Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979751F07C95F00787DCC /* Clustering */,
+				2C6979911F07C95F00787DCC /* Geometry */,
+				2C6979AB1F07C95F00787DCC /* QuadTree */,
+			);
+			path = "Google-Maps-iOS-Utils";
+			sourceTree = "<group>";
+		};
+		2C6979751F07C95F00787DCC /* Clustering */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979761F07C95F00787DCC /* Algo */,
+				2C6979801F07C95F00787DCC /* GMUCluster.h */,
+				2C6979811F07C95F00787DCC /* GMUClusterItem.h */,
+				2C6979821F07C95F00787DCC /* GMUClusterManager+Testing.h */,
+				2C6979831F07C95F00787DCC /* GMUClusterManager.h */,
+				2C6979841F07C95F00787DCC /* GMUClusterManager.m */,
+				2C6979851F07C95F00787DCC /* GMUMarkerClustering.h */,
+				2C6979861F07C95F00787DCC /* GMUStaticCluster.h */,
+				2C6979871F07C95F00787DCC /* GMUStaticCluster.m */,
+				2C6979881F07C95F00787DCC /* View */,
+			);
+			path = Clustering;
+			sourceTree = "<group>";
+		};
+		2C6979761F07C95F00787DCC /* Algo */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979771F07C95F00787DCC /* GMUClusterAlgorithm.h */,
+				2C6979781F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.h */,
+				2C6979791F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m */,
+				2C69797A1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
+				2C69797B1F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
+				2C69797C1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.h */,
+				2C69797D1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m */,
+				2C69797E1F07C95F00787DCC /* GMUWrappingDictionaryKey.h */,
+				2C69797F1F07C95F00787DCC /* GMUWrappingDictionaryKey.m */,
+			);
+			path = Algo;
+			sourceTree = "<group>";
+		};
+		2C6979881F07C95F00787DCC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979891F07C95F00787DCC /* GMUClusterIconGenerator.h */,
+				2C69798A1F07C95F00787DCC /* GMUClusterRenderer.h */,
+				2C69798B1F07C95F00787DCC /* GMUDefaultClusterIconGenerator+Testing.h */,
+				2C69798C1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.h */,
+				2C69798D1F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m */,
+				2C69798E1F07C95F00787DCC /* GMUDefaultClusterRenderer+Testing.h */,
+				2C69798F1F07C95F00787DCC /* GMUDefaultClusterRenderer.h */,
+				2C6979901F07C95F00787DCC /* GMUDefaultClusterRenderer.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C6979911F07C95F00787DCC /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979921F07C95F00787DCC /* GMUGeoJSONParser.h */,
+				2C6979931F07C95F00787DCC /* GMUGeoJSONParser.m */,
+				2C6979941F07C95F00787DCC /* GMUGeometryRenderer.h */,
+				2C6979951F07C95F00787DCC /* GMUGeometryRenderer.m */,
+				2C6979961F07C95F00787DCC /* GMUKMLParser.h */,
+				2C6979971F07C95F00787DCC /* GMUKMLParser.m */,
+				2C6979981F07C95F00787DCC /* Model */,
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		2C6979981F07C95F00787DCC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979991F07C95F00787DCC /* GMUFeature.h */,
+				2C69799A1F07C95F00787DCC /* GMUFeature.m */,
+				2C69799B1F07C95F00787DCC /* GMUGeometry.h */,
+				2C69799C1F07C95F00787DCC /* GMUGeometryCollection.h */,
+				2C69799D1F07C95F00787DCC /* GMUGeometryCollection.m */,
+				2C69799E1F07C95F00787DCC /* GMUGeometryContainer.h */,
+				2C69799F1F07C95F00787DCC /* GMUGroundOverlay.h */,
+				2C6979A01F07C95F00787DCC /* GMUGroundOverlay.m */,
+				2C6979A11F07C95F00787DCC /* GMULineString.h */,
+				2C6979A21F07C95F00787DCC /* GMULineString.m */,
+				2C6979A31F07C95F00787DCC /* GMUPlacemark.h */,
+				2C6979A41F07C95F00787DCC /* GMUPlacemark.m */,
+				2C6979A51F07C95F00787DCC /* GMUPoint.h */,
+				2C6979A61F07C95F00787DCC /* GMUPoint.m */,
+				2C6979A71F07C95F00787DCC /* GMUPolygon.h */,
+				2C6979A81F07C95F00787DCC /* GMUPolygon.m */,
+				2C6979A91F07C95F00787DCC /* GMUStyle.h */,
+				2C6979AA1F07C95F00787DCC /* GMUStyle.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C6979AB1F07C95F00787DCC /* QuadTree */ = {
+			isa = PBXGroup;
+			children = (
+				2C6979AC1F07C95F00787DCC /* GQTBounds.h */,
+				2C6979AD1F07C95F00787DCC /* GQTPoint.h */,
+				2C6979AE1F07C95F00787DCC /* GQTPointQuadTree.h */,
+				2C6979AF1F07C95F00787DCC /* GQTPointQuadTree.m */,
+				2C6979B01F07C95F00787DCC /* GQTPointQuadTreeChild.h */,
+				2C6979B11F07C95F00787DCC /* GQTPointQuadTreeChild.m */,
+				2C6979B21F07C95F00787DCC /* GQTPointQuadTreeItem.h */,
+			);
+			path = QuadTree;
 			sourceTree = "<group>";
 		};
 		2C8001261EF90945005026CE /* ActivityTblCell */ = {
@@ -920,9 +1241,9 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				2C6979731F07C95F00787DCC /* GoogleMaps */,
 				2CFB9BC61EFA4CA600C08EB3 /* R5Streaming.framework */,
 				113139C01EF7BA1C000050D6 /* Fonts */,
-				2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */,
 				BF5060E41EE81B9E00DB646F /* Info.plist */,
 				5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */,
 			);
@@ -946,7 +1267,6 @@
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
-				2CFB9B9E1EFA476C00C08EB3 /* Temporary */,
 				2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
 			);
@@ -1006,7 +1326,6 @@
 				2CA2B4991EF542D30076598C /* MFDish.swift */,
 				2CA2B49A1EF542D30076598C /* MFDishRequest.swift */,
 				2CA2B49C1EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift */,
-				2CA2B49D1EF542D30076598C /* MFMedia.swift */,
 				2CA2B49E1EF542D30076598C /* MFMessage.swift */,
 				2CA2B49F1EF542D30076598C /* MFNewsFeed.swift */,
 				2CA2B4A01EF542D30076598C /* MFOrder.swift */,
@@ -1015,127 +1334,6 @@
 				2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		2CB8BEAA1EF2475F00DA78B3 /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEAB1EF2475F00DA78B3 /* Google-Maps-iOS-Utils */,
-				2CB8BEEA1EF2475F00DA78B3 /* GoogleService-Info.plist */,
-				2CB8BEEB1EF2475F00DA78B3 /* MapStyle.json */,
-			);
-			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
-		2CB8BEAB1EF2475F00DA78B3 /* Google-Maps-iOS-Utils */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEAC1EF2475F00DA78B3 /* Clustering */,
-				2CB8BEC81EF2475F00DA78B3 /* Geometry */,
-				2CB8BEE21EF2475F00DA78B3 /* QuadTree */,
-			);
-			path = "Google-Maps-iOS-Utils";
-			sourceTree = "<group>";
-		};
-		2CB8BEAC1EF2475F00DA78B3 /* Clustering */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEAD1EF2475F00DA78B3 /* Algo */,
-				2CB8BEB71EF2475F00DA78B3 /* GMUCluster.h */,
-				2CB8BEB81EF2475F00DA78B3 /* GMUClusterItem.h */,
-				2CB8BEB91EF2475F00DA78B3 /* GMUClusterManager+Testing.h */,
-				2CB8BEBA1EF2475F00DA78B3 /* GMUClusterManager.h */,
-				2CB8BEBB1EF2475F00DA78B3 /* GMUClusterManager.m */,
-				2CB8BEBC1EF2475F00DA78B3 /* GMUMarkerClustering.h */,
-				2CB8BEBD1EF2475F00DA78B3 /* GMUStaticCluster.h */,
-				2CB8BEBE1EF2475F00DA78B3 /* GMUStaticCluster.m */,
-				2CB8BEBF1EF2475F00DA78B3 /* View */,
-			);
-			path = Clustering;
-			sourceTree = "<group>";
-		};
-		2CB8BEAD1EF2475F00DA78B3 /* Algo */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEAE1EF2475F00DA78B3 /* GMUClusterAlgorithm.h */,
-				2CB8BEAF1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.h */,
-				2CB8BEB01EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m */,
-				2CB8BEB11EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.h */,
-				2CB8BEB21EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */,
-				2CB8BEB31EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.h */,
-				2CB8BEB41EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m */,
-				2CB8BEB51EF2475F00DA78B3 /* GMUWrappingDictionaryKey.h */,
-				2CB8BEB61EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m */,
-			);
-			path = Algo;
-			sourceTree = "<group>";
-		};
-		2CB8BEBF1EF2475F00DA78B3 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEC01EF2475F00DA78B3 /* GMUClusterIconGenerator.h */,
-				2CB8BEC11EF2475F00DA78B3 /* GMUClusterRenderer.h */,
-				2CB8BEC21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator+Testing.h */,
-				2CB8BEC31EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.h */,
-				2CB8BEC41EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m */,
-				2CB8BEC51EF2475F00DA78B3 /* GMUDefaultClusterRenderer+Testing.h */,
-				2CB8BEC61EF2475F00DA78B3 /* GMUDefaultClusterRenderer.h */,
-				2CB8BEC71EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2CB8BEC81EF2475F00DA78B3 /* Geometry */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEC91EF2475F00DA78B3 /* GMUGeoJSONParser.h */,
-				2CB8BECA1EF2475F00DA78B3 /* GMUGeoJSONParser.m */,
-				2CB8BECB1EF2475F00DA78B3 /* GMUGeometryRenderer.h */,
-				2CB8BECC1EF2475F00DA78B3 /* GMUGeometryRenderer.m */,
-				2CB8BECD1EF2475F00DA78B3 /* GMUKMLParser.h */,
-				2CB8BECE1EF2475F00DA78B3 /* GMUKMLParser.m */,
-				2CB8BECF1EF2475F00DA78B3 /* Model */,
-			);
-			path = Geometry;
-			sourceTree = "<group>";
-		};
-		2CB8BECF1EF2475F00DA78B3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BED01EF2475F00DA78B3 /* GMUFeature.h */,
-				2CB8BED11EF2475F00DA78B3 /* GMUFeature.m */,
-				2CB8BED21EF2475F00DA78B3 /* GMUGeometry.h */,
-				2CB8BED31EF2475F00DA78B3 /* GMUGeometryCollection.h */,
-				2CB8BED41EF2475F00DA78B3 /* GMUGeometryCollection.m */,
-				2CB8BED51EF2475F00DA78B3 /* GMUGeometryContainer.h */,
-				2CB8BED61EF2475F00DA78B3 /* GMUGroundOverlay.h */,
-				2CB8BED71EF2475F00DA78B3 /* GMUGroundOverlay.m */,
-				2CB8BED81EF2475F00DA78B3 /* GMULineString.h */,
-				2CB8BED91EF2475F00DA78B3 /* GMULineString.m */,
-				2CB8BEDA1EF2475F00DA78B3 /* GMUPlacemark.h */,
-				2CB8BEDB1EF2475F00DA78B3 /* GMUPlacemark.m */,
-				2CB8BEDC1EF2475F00DA78B3 /* GMUPoint.h */,
-				2CB8BEDD1EF2475F00DA78B3 /* GMUPoint.m */,
-				2CB8BEDE1EF2475F00DA78B3 /* GMUPolygon.h */,
-				2CB8BEDF1EF2475F00DA78B3 /* GMUPolygon.m */,
-				2CB8BEE01EF2475F00DA78B3 /* GMUStyle.h */,
-				2CB8BEE11EF2475F00DA78B3 /* GMUStyle.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2CB8BEE21EF2475F00DA78B3 /* QuadTree */ = {
-			isa = PBXGroup;
-			children = (
-				2CB8BEE31EF2475F00DA78B3 /* GQTBounds.h */,
-				2CB8BEE41EF2475F00DA78B3 /* GQTPoint.h */,
-				2CB8BEE51EF2475F00DA78B3 /* GQTPointQuadTree.h */,
-				2CB8BEE61EF2475F00DA78B3 /* GQTPointQuadTree.m */,
-				2CB8BEE71EF2475F00DA78B3 /* GQTPointQuadTreeChild.h */,
-				2CB8BEE81EF2475F00DA78B3 /* GQTPointQuadTreeChild.m */,
-				2CB8BEE91EF2475F00DA78B3 /* GQTPointQuadTreeItem.h */,
-			);
-			path = QuadTree;
 			sourceTree = "<group>";
 		};
 		2CB8BF081EF247A800DA78B3 /* mammafoodieTests */ = {
@@ -1240,16 +1438,6 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
-		2CFB9B9E1EFA476C00C08EB3 /* Temporary */ = {
-			isa = PBXGroup;
-			children = (
-				2CFB9B9F1EFA476C00C08EB3 /* LiveStreamListWorker.swift */,
-				2CFB9BA01EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift */,
-				2CFB9BA11EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift */,
-			);
-			path = Temporary;
-			sourceTree = "<group>";
-		};
 		2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,9 +1453,82 @@
 			path = VidupDetailPage;
 			sourceTree = "<group>";
 		};
+		570ED3EB1F0684F000B41F0E /* ImageEditor */ = {
+			isa = PBXGroup;
+			children = (
+				570ED3EC1F0684F000B41F0E /* AKImageCropperView */,
+				570ED3FC1F0684F000B41F0E /* CropVC.swift */,
+				570ED3FD1F0684F000B41F0E /* EditOptionsCell */,
+				570ED4001F0684F000B41F0E /* Extentions.swift */,
+				570ED4011F0684F000B41F0E /* FilterVC.swift */,
+				570ED4021F0684F000B41F0E /* Image.swift */,
+				570ED4031F0684F000B41F0E /* ImageCollectionCell */,
+				570ED4061F0684F000B41F0E /* ImageCollectionViewAdapter.swift */,
+				570ED4071F0684F000B41F0E /* ImageEditor.storyboard */,
+				570ED4081F0684F000B41F0E /* ImageEditor.xcassets */,
+				570ED4091F0684F000B41F0E /* ImageEditorVC.swift */,
+			);
+			path = ImageEditor;
+			sourceTree = "<group>";
+		};
+		570ED3EC1F0684F000B41F0E /* AKImageCropperView */ = {
+			isa = PBXGroup;
+			children = (
+				570ED3ED1F0684F000B41F0E /* AKImageCropperOverlayView.swift */,
+				570ED3EE1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift */,
+				570ED3EF1F0684F000B41F0E /* AKImageCropperScrollView.swift */,
+				570ED3F01F0684F000B41F0E /* AKImageCropperView.swift */,
+				570ED3F11F0684F000B41F0E /* Configuration */,
+				570ED3F71F0684F000B41F0E /* Extentions */,
+			);
+			path = AKImageCropperView;
+			sourceTree = "<group>";
+		};
+		570ED3F11F0684F000B41F0E /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				570ED3F21F0684F000B41F0E /* AKImageCropperOverlayViewConfiguration.swift */,
+				570ED3F31F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift */,
+				570ED3F41F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationEdge.swift */,
+				570ED3F51F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift */,
+				570ED3F61F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		570ED3F71F0684F000B41F0E /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				570ED3F81F0684F000B41F0E /* IC_CGFloatExtension.swift */,
+				570ED3F91F0684F000B41F0E /* IC_CGPointExtension.swift */,
+				570ED3FA1F0684F000B41F0E /* IC_CGSizeExtensions.swift */,
+				570ED3FB1F0684F000B41F0E /* IC_UIImageExtensions.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		570ED3FD1F0684F000B41F0E /* EditOptionsCell */ = {
+			isa = PBXGroup;
+			children = (
+				570ED3FE1F0684F000B41F0E /* EditOptionsCell.swift */,
+				570ED3FF1F0684F000B41F0E /* EditOptionsCell.xib */,
+			);
+			path = EditOptionsCell;
+			sourceTree = "<group>";
+		};
+		570ED4031F0684F000B41F0E /* ImageCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				570ED4041F0684F000B41F0E /* ImageCollectionCell.swift */,
+				570ED4051F0684F000B41F0E /* ImageCollectionCell.xib */,
+			);
+			path = ImageCollectionCell;
+			sourceTree = "<group>";
+		};
 		572E9A5B1EFAB4AF007DE6D0 /* GoCook */ = {
 			isa = PBXGroup;
 			children = (
+				570ED3EB1F0684F000B41F0E /* ImageEditor */,
 				57DDD0AE1EFC015B00C3BA21 /* GoCookStep2 */,
 				572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */,
 				572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */,
@@ -1372,7 +1633,6 @@
 			isa = PBXGroup;
 			children = (
 				FA0FFFE83E7371F529687F8A /* Frameworks */,
-				BFCE8BAA1EF5A8C200E4C230 /* DummyData.swift */,
 				BF5060D71EE81B9E00DB646F /* mammafoodie */,
 				2CB8BF081EF247A800DA78B3 /* mammafoodieTests */,
 				2399BC92A1B9B588BDDCF277 /* Pods */,
@@ -1653,10 +1913,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6979E01F07C95F00787DCC /* GoogleService-Info.plist in Resources */,
 				2C12BCBE1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				2C12BCD61EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				2C12BCBA1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				2C946EB51EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
+				2C6979E21F07C95F00787DCC /* MapStyle.json in Resources */,
 				2CFB9BC51EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CFB9B741EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
@@ -1671,6 +1933,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				570ED4191F0684F000B41F0E /* EditOptionsCell.xib in Resources */,
 				572E9AA01EFAB4BC007DE6D0 /* GoCook.storyboard in Resources */,
 				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
 				57801F7D1EF8308C002E18EF /* CuisineSearchCollectionViewCell.xib in Resources */,
@@ -1680,22 +1943,24 @@
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
 				2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				572E9AB01EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib in Resources */,
+				570ED4201F0684F000B41F0E /* ImageEditor.storyboard in Resources */,
 				113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */,
 				113139D61EF7F4E5000050D6 /* DishCollectionViewCell.xib in Resources */,
+				570ED4211F0684F000B41F0E /* ImageEditor.xcassets in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
 				2CE479481EF97312003D0F9F /* Siri.storyboard in Resources */,
 				2CE479471EF97312003D0F9F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
-				2C7C139F1EFA9BFD00C673DD /* (null) in Resources */,
+				2CD37DB11F0992790058EFDF /* (null) in Resources */,
 				F0191A6A1F0386160081599A /* CommentsCustomTableViewCell.xib in Resources */,
-				2CB8BF011EF2475F00DA78B3 /* GoogleService-Info.plist in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
+				570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
-				2CB8BF021EF2475F00DA78B3 /* MapStyle.json in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
-				B691513B1EF94EA500DB6481 /* (null) in Resources */,
+				2C6979E11F07C95F00787DCC /* MapStyle.json in Resources */,
+				2CD37DB21F0992790058EFDF /* (null) in Resources */,
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
 				2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
@@ -1713,6 +1978,7 @@
 				2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
+				2C6979DF1F07C95F00787DCC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1819,73 +2085,218 @@
 				2C8290951F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
 				2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
+				2C6979131F07C88D00787DCC /* CommentsWorker.swift in Sources */,
+				2C6978F51F07C85700787DCC /* GoCookStep2ViewController.swift in Sources */,
+				2C6979531F07C88E00787DCC /* SlotSelectionViewController.swift in Sources */,
+				2C6979081F07C88D00787DCC /* ChatListViewController.swift in Sources */,
+				2C6978DF1F07C7B800787DCC /* HUDProtocols.swift in Sources */,
+				2C69792E1F07C88D00787DCC /* NearbyChefsPresenter.swift in Sources */,
+				2C6978FA1F07C85700787DCC /* GoCookModels.swift in Sources */,
 				2C252E321F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
 				2CFB9B891EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
-				F0BBF3A21EF27ACA00D55615 /* (null) in Sources */,
-				F0BBF3A01EF27ACA00D55615 /* (null) in Sources */,
+				2C6979011F07C88D00787DCC /* ChatViewController.swift in Sources */,
+				2C69791F1F07C88D00787DCC /* ForgotPasswordWorker.swift in Sources */,
+				2CD37DB31F0992790058EFDF /* (null) in Sources */,
+				2C6979291F07C88D00787DCC /* NearByChefsMapAdapter.swift in Sources */,
+				2C6979C01F07C95F00787DCC /* GMUStaticCluster.m in Sources */,
+				2C6979151F07C88D00787DCC /* CommentsCustomTableViewCell.swift in Sources */,
+				2C6978F91F07C85700787DCC /* GoCookInteractor.swift in Sources */,
+				2C6979DA1F07C95F00787DCC /* GMUStyle.m in Sources */,
+				2C6979481F07C88D00787DCC /* RequestDishInteractor.swift in Sources */,
+				2CD37DB41F0992790058EFDF /* (null) in Sources */,
+				2C6978F71F07C85700787DCC /* CuisineCollectionViewAdapter.swift in Sources */,
 				2CFB9B8B1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
 				2CFB9BBB1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
+				2C69795A1F07C88E00787DCC /* VidupMainPagePresenter.swift in Sources */,
+				2C69792F1F07C88D00787DCC /* NearbyChefsRouter.swift in Sources */,
+				2C6979021F07C88D00787DCC /* ChatListConfigurator.swift in Sources */,
 				F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */,
 				F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */,
-				F0BBF3A11EF27ACA00D55615 /* (null) in Sources */,
+				2C6979361F07C88D00787DCC /* OtherUsersProfileInteractor.swift in Sources */,
+				2C6978F81F07C85700787DCC /* GoCookConfigurator.swift in Sources */,
+				2CD37DB51F0992790058EFDF /* (null) in Sources */,
 				2CE4794A1EF97313003D0F9F /* mammafoodieTests.swift in Sources */,
+				2C6978F41F07C85700787DCC /* GoCookStep2Router.swift in Sources */,
+				2C6978FE1F07C85700787DCC /* GoCookWorker.swift in Sources */,
+				2C6978F61F07C85700787DCC /* GoCookStep2Worker.swift in Sources */,
+				2C6979141F07C88D00787DCC /* TextViewPlaceHolder.swift in Sources */,
 				2CE479491EF97313003D0F9F /* DatabaseGatewayTests.swift in Sources */,
+				2C6978DE1F07C77400787DCC /* FirebaseLoginWorker.swift in Sources */,
 				2CFB9BB71EFA477200C08EB3 /* VidupDetailPagePresenter.swift in Sources */,
+				2C6979101F07C88D00787DCC /* CommentsPresenter.swift in Sources */,
+				2C6979281F07C88D00787DCC /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
+				2C6979B81F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
+				2C6979271F07C88D00787DCC /* CuisineSearchCollectionViewAdapter.swift in Sources */,
+				2C69793A1F07C88D00787DCC /* OtherUsersProfileViewController.swift in Sources */,
 				2CFB9B9B1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
-				F0BBF3A31EF27ACA00D55615 /* (null) in Sources */,
+				2C2FB2151F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */,
+				2CD37DB61F0992790058EFDF /* (null) in Sources */,
+				2C6979311F07C88D00787DCC /* CurrentLocationWorker.swift in Sources */,
 				F00F52711EF277CF009DDAB1 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
+				2C69791C1F07C88D00787DCC /* LiveVideoMainPageViewController.swift in Sources */,
+				2C6979CC1F07C95F00787DCC /* GMUFeature.m in Sources */,
+				2C6978E51F07C84B00787DCC /* FeaturedMenuCollectionCell.swift in Sources */,
 				2CFB9BB91EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */,
+				2C69794B1F07C88E00787DCC /* RequestDishRouter.swift in Sources */,
+				2C6978E71F07C84B00787DCC /* DishCollectionViewCell.swift in Sources */,
+				2C6979411F07C88D00787DCC /* PermissionsAlertConfigurator.swift in Sources */,
+				2C69791E1F07C88D00787DCC /* FacebookLoginWorker.swift in Sources */,
 				2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
+				2C69793E1F07C88D00787DCC /* EnableLocationWorker.swift in Sources */,
 				2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
+				2C6979331F07C88D00787DCC /* NearbyChefsWorker.swift in Sources */,
+				2C6979BA1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
+				2C6979231F07C88D00787DCC /* LoginPresenter.swift in Sources */,
+				2C6979461F07C88D00787DCC /* PermissionsAlertViewController.swift in Sources */,
+				2C6979D21F07C95F00787DCC /* GMULineString.m in Sources */,
+				2C6979051F07C88D00787DCC /* ChatListPresenter.swift in Sources */,
+				2C6979201F07C88D00787DCC /* LoginInteractor.swift in Sources */,
+				2C6979071F07C88D00787DCC /* ChatListTableViewCell.swift in Sources */,
 				2C12BCAC1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
+				2C6979451F07C88D00787DCC /* PermissionsAlertRouter.swift in Sources */,
+				2C6978FB1F07C85700787DCC /* GoCookPresenter.swift in Sources */,
+				2C6978ED1F07C85000787DCC /* UITextFieldExtension.swift in Sources */,
 				2CFB9B871EFA475100C08EB3 /* LiveVideoGateway.swift in Sources */,
+				2C6978F11F07C85700787DCC /* GoCookStep2Interactor.swift in Sources */,
 				2C946EB31EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */,
 				2C946EB91EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift in Sources */,
-				2CFB9BA31EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
+				2C6978E41F07C84B00787DCC /* CuisineSearchCollectionViewCell.swift in Sources */,
+				2C6979BC1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
+				2C6979301F07C88D00787DCC /* NearbyChefsViewController.swift in Sources */,
+				2C69794C1F07C88E00787DCC /* RequestDishViewController.swift in Sources */,
+				2C6979371F07C88D00787DCC /* OtherUsersProfileModels.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
+				2C6978E61F07C84B00787DCC /* MosaicCollectionViewCell.swift in Sources */,
+				2C6978FD1F07C85700787DCC /* GoCookViewController.swift in Sources */,
+				2C69790B1F07C88D00787DCC /* CommentsAdapter.swift in Sources */,
 				2CFB9B911EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
+				2C6979241F07C88D00787DCC /* LoginRouter.swift in Sources */,
+				2C6979CE1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
+				2C6979D61F07C95F00787DCC /* GMUPoint.m in Sources */,
+				2C6979401F07C88D00787DCC /* EnablePhotoLibraryWorker.swift in Sources */,
+				2C69793D1F07C88D00787DCC /* EnableCameraWorker.swift in Sources */,
+				2C6979501F07C88E00787DCC /* SlotSelectionModels.swift in Sources */,
+				2C6978EC1F07C85000787DCC /* UIFontExtension.swift in Sources */,
+				2C6979C81F07C95F00787DCC /* GMUGeometryRenderer.m in Sources */,
+				2C6978F21F07C85700787DCC /* GoCookStep2Models.swift in Sources */,
 				2C12BCB81EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
-				2CFB9BA51EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */,
-				2CFB9BA71EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */,
+				2C6979DE1F07C95F00787DCC /* GQTPointQuadTreeChild.m in Sources */,
+				2C6979391F07C88D00787DCC /* OtherUsersProfileRouter.swift in Sources */,
+				2C69791B1F07C88D00787DCC /* LiveVideoMainPageRouter.swift in Sources */,
+				2C6979381F07C88D00787DCC /* OtherUsersProfilePresenter.swift in Sources */,
+				2C69790E1F07C88D00787DCC /* CommentsListTableViewCell.swift in Sources */,
+				2C6978E01F07C81300787DCC /* AppDelegate.swift in Sources */,
+				2C6979041F07C88D00787DCC /* ChatListModels.swift in Sources */,
 				2C12BCCE1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
+				2C69792A1F07C88D00787DCC /* NearbyChefsSearchAdapter.swift in Sources */,
+				2C6979211F07C88D00787DCC /* GmailLoginWorker.swift in Sources */,
+				2C69794E1F07C88E00787DCC /* SlotSelectionConfigurator.swift in Sources */,
+				2C6979261F07C88D00787DCC /* LoginNewViewController.swift in Sources */,
 				2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */,
+				2C69792B1F07C88D00787DCC /* NearbyChefsConfigurator.swift in Sources */,
+				2C6979441F07C88D00787DCC /* PermissionsAlertPresenter.swift in Sources */,
+				2C6979121F07C88D00787DCC /* CommentsViewController.swift in Sources */,
+				2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */,
+				2C6978EE1F07C85000787DCC /* UIViewControllerExtension.swift in Sources */,
 				2C12BCBC1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
 				2C12BCAE1EF7D237007AF994 /* HomeModels.swift in Sources */,
 				2CFB9BB51EFA477200C08EB3 /* VidupDetailPageModels.swift in Sources */,
+				2C6979541F07C88E00787DCC /* SlotSelectionWorker.swift in Sources */,
 				2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
+				2C69792C1F07C88D00787DCC /* NearbyChefsInteractor.swift in Sources */,
+				2C69795B1F07C88E00787DCC /* VidupMainPageRouter.swift in Sources */,
+				2C6979171F07C88D00787DCC /* LiveVideoMainPageConfigurator.swift in Sources */,
 				2CFB9B8F1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
+				2C6978EA1F07C85000787DCC /* StringExtension.swift in Sources */,
 				2CFB9B8D1EFA475100C08EB3 /* LiveVideoModels.swift in Sources */,
+				2C69794A1F07C88D00787DCC /* RequestDishPresenter.swift in Sources */,
+				2C69790F1F07C88D00787DCC /* CommentsModels.swift in Sources */,
 				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
-				2CA2B4B51EF542D30076598C /* MFMedia.swift in Sources */,
+				2C6979431F07C88D00787DCC /* PermissionsAlertModels.swift in Sources */,
+				2C6979001F07C88D00787DCC /* ChatModels.swift in Sources */,
 				2CFB9B931EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
+				2C69790A1F07C88D00787DCC /* ChatListAdapter.swift in Sources */,
+				2C69793B1F07C88D00787DCC /* OtherUsersProfileWorker.swift in Sources */,
+				2C6978FC1F07C85700787DCC /* GoCookRouter.swift in Sources */,
+				2C6979321F07C88D00787DCC /* CuisineFiltreWorker.swift in Sources */,
+				2C6978EB1F07C85000787DCC /* UIButtonExtension.swift in Sources */,
+				2C6979111F07C88D00787DCC /* CommentsRouter.swift in Sources */,
+				2C69795D1F07C88E00787DCC /* GradientView.swift in Sources */,
 				2CFB9B951EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
-				5760E2931F029F80003E7064 /* DummyData.swift in Sources */,
+				2C6979D01F07C95F00787DCC /* GMUGroundOverlay.m in Sources */,
+				2C6979031F07C88D00787DCC /* ChatListInteractor.swift in Sources */,
+				2C6979581F07C88E00787DCC /* VidupMainPageInteractor.swift in Sources */,
+				2C6979421F07C88D00787DCC /* PermissionsAlertInteractor.swift in Sources */,
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
+				2C6979341F07C88D00787DCC /* UserProfileCollectionViewHeader.swift in Sources */,
+				2C6979DC1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */,
+				2C6979521F07C88E00787DCC /* SlotSelectionRouter.swift in Sources */,
+				2C6979351F07C88D00787DCC /* OtherUsersProfileConfigurator.swift in Sources */,
 				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
+				2C69790C1F07C88D00787DCC /* CommentsConfigurator.swift in Sources */,
+				2C6979591F07C88E00787DCC /* VidupMainPageModels.swift in Sources */,
+				2C6979561F07C88E00787DCC /* LoadVidupsWorker.swift in Sources */,
+				2C6979C21F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */,
+				2C6979091F07C88D00787DCC /* ChatListWorker.swift in Sources */,
 				2CA2B4BD1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
+				2C69790D1F07C88D00787DCC /* CommentsInteractor.swift in Sources */,
 				2CA2B4BF1EF542D30076598C /* MFUser.swift in Sources */,
+				2C69791D1F07C88D00787DCC /* LoadLiveVideosWorker.swift in Sources */,
+				2C6979D41F07C95F00787DCC /* GMUPlacemark.m in Sources */,
 				2C12BCB21EF7D237007AF994 /* HomeRouter.swift in Sources */,
+				2C6979BE1F07C95F00787DCC /* GMUClusterManager.m in Sources */,
 				2CFB9B971EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
+				2C6979191F07C88D00787DCC /* LiveVideoMainPageModels.swift in Sources */,
+				2C69794F1F07C88E00787DCC /* SlotSelectionInteractor.swift in Sources */,
 				2CA2B4B71EF542D30076598C /* MFMessage.swift in Sources */,
+				2C6979C41F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */,
+				2C6979061F07C88D00787DCC /* ChatListRouter.swift in Sources */,
+				2C69791A1F07C88D00787DCC /* LiveVideoMainPagePresenter.swift in Sources */,
 				2C12BCDC1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 				2C12BCB01EF7D237007AF994 /* HomePresenter.swift in Sources */,
 				2CA2B4AB1EF542D30076598C /* MFConversation.swift in Sources */,
 				2CFB9B9D1EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift in Sources */,
+				2C6979551F07C88E00787DCC /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				2CFB9BB31EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */,
 				2C12BCD41EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
+				2C6978E21F07C83700787DCC /* LoginViewController.swift in Sources */,
+				2C6979491F07C88D00787DCC /* RequestDishModels.swift in Sources */,
+				2C6979251F07C88D00787DCC /* LoginWorker.swift in Sources */,
+				2C6979E31F07CBF900787DCC /* NearbyChefsModels.swift in Sources */,
+				2C6979B61F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				2C12BCB61EF7D237007AF994 /* HomeWorker.swift in Sources */,
+				2C69795C1F07C88E00787DCC /* VidupMainPageViewController.swift in Sources */,
+				2C6978F31F07C85700787DCC /* GoCookStep2Presenter.swift in Sources */,
+				2C6979511F07C88E00787DCC /* SlotSelectionPresenter.swift in Sources */,
+				2C69793F1F07C88D00787DCC /* EnableMicrophoneWorker.swift in Sources */,
+				2C6978EF1F07C85700787DCC /* MFNavigationBarDelegate.swift in Sources */,
+				2C6978E31F07C84B00787DCC /* CuisineCollectionViewCell.swift in Sources */,
+				2C69794D1F07C88E00787DCC /* RequestDishWorker.swift in Sources */,
 				2CFB9BB11EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
+				2C69793C1F07C88D00787DCC /* DishesCollectionViewAdapter.swift in Sources */,
 				2CFB9B991EFA475100C08EB3 /* LiveVideoPublisherWorker.swift in Sources */,
 				2C80012A1EF9094E005026CE /* ActivityTblCell.swift in Sources */,
+				2C6979161F07C88D00787DCC /* CommentsView.swift in Sources */,
+				2C6978F01F07C85700787DCC /* GoCookStep2Configurator.swift in Sources */,
+				2C6979D81F07C95F00787DCC /* GMUPolygon.m in Sources */,
 				2C12BCA81EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2C12BCAA1EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				2CA2B4A71EF542D30076598C /* MFActivity.swift in Sources */,
+				2C6978FF1F07C85700787DCC /* MediaPicker.swift in Sources */,
+				2C6979571F07C88E00787DCC /* VidupMainPageConfigurator.swift in Sources */,
+				2C6979CA1F07C95F00787DCC /* GMUKMLParser.m in Sources */,
+				2C6979181F07C88D00787DCC /* LiveVideoMainPageInteractor.swift in Sources */,
 				2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
+				2C6978E11F07C82700787DCC /* LoginModels.swift in Sources */,
+				2C6979221F07C88D00787DCC /* LoginConfigurator.swift in Sources */,
+				2C6979471F07C88D00787DCC /* RequestDishConfigurator.swift in Sources */,
 				2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
+				2C6978E81F07C84B00787DCC /* ActivityCollectionViewCell.swift in Sources */,
+				2C6979C61F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1893,22 +2304,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFB6112C1EF555ED00601626 /* GoogleService-Info.plist in Sources */,
 				BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */,
-				2CA2B4B41EF542D30076598C /* MFMedia.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */,
 				F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */,
 				572E9A9C1EFAB4AF007DE6D0 /* GoCookWorker.swift in Sources */,
 				BFC9272D1EF00A7E00602153 /* CommentsPresenter.swift in Sources */,
+				570ED4151F0684F000B41F0E /* IC_CGSizeExtensions.swift in Sources */,
 				2C12BCAF1EF7D237007AF994 /* HomePresenter.swift in Sources */,
 				2CB8BE9B1EF2467500DA78B3 /* DatabaseGateway.swift in Sources */,
 				2C12BCB31EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				113139D51EF7F4E5000050D6 /* DishCollectionViewCell.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
-				2CB8BF001EF2475F00DA78B3 /* GQTPointQuadTreeChild.m in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */,
+				2C6979B51F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
 				F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
@@ -1917,49 +2327,52 @@
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2CFB9BB21EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */,
 				2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */,
-				2CB8BEFC1EF2475F00DA78B3 /* GMUPoint.m in Sources */,
 				F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */,
 				F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */,
 				F0573A081EF2CB2C000F38B1 /* RequestDishRouter.swift in Sources */,
 				2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */,
+				570ED4161F0684F000B41F0E /* IC_UIImageExtensions.swift in Sources */,
 				572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */,
 				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
+				570ED41F1F0684F000B41F0E /* ImageCollectionViewAdapter.swift in Sources */,
 				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
+				2C6979CF1F07C95F00787DCC /* GMUGroundOverlay.m in Sources */,
 				2CFB9B9C1EFA475100C08EB3 /* LiveVideoSubscriberWorker.swift in Sources */,
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
+				2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */,
 				57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */,
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */,
-				2CFB9BA61EFA476C00C08EB3 /* LiveVideoChoiceViewController.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
 				572E9AA71EFAB515007DE6D0 /* UIButtonExtension.swift in Sources */,
 				5732C0CE1EE92A9600E2A61E /* NearbyChefsModels.swift in Sources */,
 				2CFB9B861EFA475100C08EB3 /* LiveVideoGateway.swift in Sources */,
+				570ED41D1F0684F000B41F0E /* ImageCollectionCell.swift in Sources */,
 				572E9A9D1EFAB4AF007DE6D0 /* MediaPicker.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				57801F7C1EF8308C002E18EF /* CuisineSearchCollectionViewCell.swift in Sources */,
 				F097D8CF1EF3D8BA00FCF967 /* ChatListTableViewCell.swift in Sources */,
-				BFC9274E1EF00B0700602153 /* (null) in Sources */,
+				2CD37DB01F0992790058EFDF /* (null) in Sources */,
+				2C6979C31F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */,
+				2C6979DB1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */,
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CFB9BB61EFA477200C08EB3 /* VidupDetailPagePresenter.swift in Sources */,
+				2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
-				2CB8BEF91EF2475F00DA78B3 /* GMUGroundOverlay.m in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				BFC9272A1EF00A7E00602153 /* CommentsInteractor.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
-				2CB8BEFE1EF2475F00DA78B3 /* GMUStyle.m in Sources */,
 				2C12BCAD1EF7D237007AF994 /* HomeModels.swift in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
-				2CB8BEF71EF2475F00DA78B3 /* GMUFeature.m in Sources */,
 				2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
 				F097D8CC1EF3D8BA00FCF967 /* ChatListModels.swift in Sources */,
+				570ED40E1F0684F000B41F0E /* AKImageCropperOverlayViewConfiguration.swift in Sources */,
 				110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */,
 				118FB2B91EEACA1200E5E6E5 /* SlotSelectionPresenter.swift in Sources */,
 				2C12BCBB1EF7D237007AF994 /* HomePageVidupClnCell.swift in Sources */,
 				2C12BCB71EF7D237007AF994 /* HomePageLiveVideoClnCell.swift in Sources */,
 				2CB8BF251EF25C1B00DA78B3 /* ForgotPasswordWorker.swift in Sources */,
-				2CB8BEF31EF2475F00DA78B3 /* GMUDefaultClusterRenderer.m in Sources */,
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
@@ -1968,29 +2381,27 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
-				2C12BCDF1EF83511007AF994 /* DummyData.swift in Sources */,
+				2C6979B91F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
 				F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */,
-				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
 				113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				2C946EB81EFA7E5900FD2FC0 /* CommentsTableViewAdapter.swift in Sources */,
+				2C2FB2141F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */,
+				570ED4121F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationOverlay.swift in Sources */,
 				F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */,
-				2CB8BEFA1EF2475F00DA78B3 /* GMULineString.m in Sources */,
 				113139D91EF80574000050D6 /* ActivityCollectionViewCell.swift in Sources */,
 				2CB8BF241EF25C1B00DA78B3 /* FirebaseLoginWorker.swift in Sources */,
 				572E9A921EFAB4AF007DE6D0 /* GoCookPresenter.swift in Sources */,
 				118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */,
-				2CB8BEEF1EF2475F00DA78B3 /* GMUWrappingDictionaryKey.m in Sources */,
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
 				5732C0CF1EE92A9600E2A61E /* NearbyChefsPresenter.swift in Sources */,
-				2CB8BEEC1EF2475F00DA78B3 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */,
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
@@ -1998,39 +2409,38 @@
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				BFC9272F1EF00A7E00602153 /* CommentsViewController.swift in Sources */,
 				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
-				2CB8BEF51EF2475F00DA78B3 /* GMUGeometryRenderer.m in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,
 				2C878AD91F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
-				2CB8BEF81EF2475F00DA78B3 /* GMUGeometryCollection.m in Sources */,
 				BFC927341EF00A7E00602153 /* LiveVideoMainPageInteractor.swift in Sources */,
 				57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				F097D8CE1EF3D8BA00FCF967 /* ChatListRouter.swift in Sources */,
-				2CB8BEF11EF2475F00DA78B3 /* GMUStaticCluster.m in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
 				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
 				572E9A8A1EFAB4AF007DE6D0 /* GoCookModels.swift in Sources */,
+				2C6979BB1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
+				2C6979D71F07C95F00787DCC /* GMUPolygon.m in Sources */,
 				2CFB9B921EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
 				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				BFC9272B1EF00A7E00602153 /* CommentsListTableViewCell.swift in Sources */,
-				2CFB9BA41EFA476C00C08EB3 /* LiveStreamTableViewAdapter.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
+				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
+				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
-				2CFB9BA21EFA476C00C08EB3 /* LiveStreamListWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
 				2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
@@ -2041,15 +2451,19 @@
 				2C12BCAB1EF7D237007AF994 /* HomeInteractor.swift in Sources */,
 				572E9AAB1EFAB537007DE6D0 /* CuisineSearchCollectionViewAdapter.swift in Sources */,
 				BFC9272E1EF00A7E00602153 /* CommentsRouter.swift in Sources */,
+				570ED4181F0684F000B41F0E /* EditOptionsCell.swift in Sources */,
+				570ED4101F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationEdge.swift in Sources */,
 				BFC927411EF00A7E00602153 /* PermissionsAlertPresenter.swift in Sources */,
+				2C6979DD1F07C95F00787DCC /* GQTPointQuadTreeChild.m in Sources */,
 				2C12BCD81EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CB8BF261EF25C1B00DA78B3 /* GmailLoginWorker.swift in Sources */,
 				2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */,
 				2C878AD61F022DA600A630DF /* MFNavigationBarDelegate.swift in Sources */,
-				2CB8BEFD1EF2475F00DA78B3 /* GMUPolygon.m in Sources */,
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
-				2CB8BEFF1EF2475F00DA78B3 /* GQTPointQuadTree.m in Sources */,
+				2C6979BD1F07C95F00787DCC /* GMUClusterManager.m in Sources */,
+				2C6979BF1F07C95F00787DCC /* GMUStaticCluster.m in Sources */,
 				BFC927281EF00A7E00602153 /* CommentsAdapter.swift in Sources */,
+				570ED40C1F0684F000B41F0E /* AKImageCropperScrollView.swift in Sources */,
 				F097D8CA1EF3D8BA00FCF967 /* ChatListConfigurator.swift in Sources */,
 				57DDD0B81EFC015B00C3BA21 /* GoCookStep2Models.swift in Sources */,
 				2CFB9BB81EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */,
@@ -2057,13 +2471,16 @@
 				2CFB9BB01EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
 				57DDD0B91EFC015B00C3BA21 /* GoCookStep2Presenter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
-				2CB8BEF21EF2475F00DA78B3 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				F097D8CB1EF3D8BA00FCF967 /* ChatListInteractor.swift in Sources */,
 				2CFB9BB41EFA477200C08EB3 /* VidupDetailPageModels.swift in Sources */,
+				2C6979CD1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
 				572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
+				2C6979C11F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */,
+				570ED40B1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift in Sources */,
+				570ED4141F0684F000B41F0E /* IC_CGPointExtension.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */,
@@ -2073,35 +2490,44 @@
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,
+				2C6979D31F07C95F00787DCC /* GMUPlacemark.m in Sources */,
 				BFC9272C1EF00A7E00602153 /* CommentsModels.swift in Sources */,
 				57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */,
+				2C6979C91F07C95F00787DCC /* GMUKMLParser.m in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
-				2CB8BEF61EF2475F00DA78B3 /* GMUKMLParser.m in Sources */,
+				2C6979C51F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */,
 				2CFB9B981EFA475100C08EB3 /* LiveVideoPublisherWorker.swift in Sources */,
 				2C946EB21EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */,
+				2C6979D51F07C95F00787DCC /* GMUPoint.m in Sources */,
+				570ED41C1F0684F000B41F0E /* Image.swift in Sources */,
 				2C12BCA91EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
 				2CFB9B8C1EFA475100C08EB3 /* LiveVideoModels.swift in Sources */,
+				570ED4171F0684F000B41F0E /* CropVC.swift in Sources */,
+				570ED40F1F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift in Sources */,
 				BFC927431EF00A7E00602153 /* PermissionsAlertViewController.swift in Sources */,
 				2CA2B4BC1EF542D30076598C /* MFPaymentDetails.swift in Sources */,
-				2CB8BEEE1EF2475F00DA78B3 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				2CFB9B8A1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
-				2CB8BEF01EF2475F00DA78B3 /* GMUClusterManager.m in Sources */,
+				2C6979C71F07C95F00787DCC /* GMUGeometryRenderer.m in Sources */,
 				2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
-				2CB8BEF41EF2475F00DA78B3 /* GMUGeoJSONParser.m in Sources */,
+				2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
-				2CB8BEFB1EF2475F00DA78B3 /* GMUPlacemark.m in Sources */,
 				F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
+				570ED40D1F0684F000B41F0E /* AKImageCropperView.swift in Sources */,
 				2CFB9B901EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
+				2C6979B71F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
+				570ED4221F0684F000B41F0E /* ImageEditorVC.swift in Sources */,
+				570ED4131F0684F000B41F0E /* IC_CGFloatExtension.swift in Sources */,
 				57DDD0BB1EFC015B00C3BA21 /* GoCookStep2ViewController.swift in Sources */,
+				570ED4111F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
@@ -2109,6 +2535,8 @@
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
+				2C6979D91F07C95F00787DCC /* GMUStyle.m in Sources */,
+				570ED41A1F0684F000B41F0E /* Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2215,6 +2643,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.mammafoodieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mammafoodie.app/mammafoodie";
 			};
@@ -2236,6 +2665,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.mammafoodieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mammafoodie.app/mammafoodie";
 			};

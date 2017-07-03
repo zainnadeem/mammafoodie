@@ -2,39 +2,20 @@ import UIKit
 
 class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var vidups: [MFMedia] = []
-    
-    func createStaticData() {
-        self.vidups.append(self.vidup(with: String(describing: "-1")))
-        self.vidups.append(self.vidup(with: String(describing: 0)))
-        self.vidups.append(self.vidup(with: String(describing: 1)))
-        self.vidups.append(self.vidup(with: String(describing: 2)))
-        self.vidups.append(self.vidup(with: String(describing: 3)))
-        self.vidups.append(self.vidup(with: String(describing: 4)))
-        self.vidups.append(self.vidup(with: String(describing: 5)))
-        self.vidups.append(self.vidup(with: String(describing: 6)))
-        self.vidups.append(self.vidup(with: String(describing: 7)))
-        self.vidups.append(self.vidup(with: String(describing: 8)))
-        self.vidups.append(self.vidup(with: String(describing: 9)))
-        self.vidups.append(self.vidup(with: String(describing: 10)))
-        self.vidups.append(self.vidup(with: String(describing: 11)))
-        self.vidups.append(self.vidup(with: String(describing: 12)))
-        self.vidups.append(self.vidup(with: String(describing: 13)))
-        self.vidups.append(self.vidup(with: String(describing: 14)))
-        self.vidups.append(self.vidup(with: String(describing: 15)))
-        self.vidups.append(self.vidup(with: String(describing: 16)))
-        self.vidups.append(self.vidup(with: String(describing: 17)))
-        self.vidups.append(self.vidup(with: String(describing: 18)))
-        self.vidups.append(self.vidup(with: String(describing: 19)))
-        self.vidups.append(self.vidup(with: String(describing: 30)))
+    func loadVidup() {
+        let worker: VidupListWorker = VidupListWorker()
+        worker.getList { (dishes) in
+            self.list = [self.getFirstCellForCurrentUser()]
+            self.list.append(contentsOf: dishes)
+            self.collectionView.reloadData()
+        }
     }
     
-    func vidup(with id: String) -> MFMedia {
-        let media1: MFMedia = MFMedia()
-        media1.type = .vidup
-        media1.id = id
-//        media1.contentId = id
-        return media1
+    func remove(vidup: MFDish) {
+        if let index: Int = self.list.index(of: vidup) {
+            self.list.remove(at: index)
+            self.collectionView.deleteItems(at: [ IndexPath(row: index, section: 0) ])
+        }
     }
     
     func setup(with tableView: UICollectionView) {
@@ -49,27 +30,23 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageVidupClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageVidupClnCell", for: indexPath) as! HomePageVidupClnCell
-        cell.setup(with: self.vidups[indexPath.item])
-//        cell.addProgressCircle(for: self.vidups[indexPath.item])
+        cell.setup(with: self.list[indexPath.item])
+        cell.vidupDidEnd = { (endedVidup) in
+            self.remove(vidup: endedVidup)
+        }
         return cell
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    //        let vidupCell: HomePageVidupClnCell = cell as! HomePageVidupClnCell
-    //
-    //    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.vidups.count
+        return self.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.vidups[indexPath.item] == self.vidups.last {
+        if self.list[indexPath.item] == self.list.last {
             self.didSelectViewAll?()
         } else {
             let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
-            //            let cellFrameInSuperview: CGRect = collectionView.convert(theAttributes.frame, to: collectionView.superview)
-            self.didSelect?(self.vidups[indexPath.item], theAttributes.frame)
+            self.didSelect?(self.list[indexPath.item], theAttributes.frame)
         }
     }
 }
