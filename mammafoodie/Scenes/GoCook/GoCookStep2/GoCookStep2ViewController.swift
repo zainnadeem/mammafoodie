@@ -220,7 +220,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                             dish.pricePerSlot = pricePerSlots
                                             dish.user = user
                                             dish.createdAt = Date.init()
-                                            dish.endedAt = dish.createdAt.addingTimeInterval(countDown)
+                                            dish.endTimestamp = dish.createdAt.addingTimeInterval(countDown)
                                             self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                         }
                                     } else {
