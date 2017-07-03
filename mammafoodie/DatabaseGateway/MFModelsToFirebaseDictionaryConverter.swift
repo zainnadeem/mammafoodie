@@ -125,16 +125,16 @@ class MFModelsToFirebaseDictionaryConverter {
                 "addressLocation"   : user.addressLocation as AnyObject,
                 "picture"           : user.picture as AnyObject,
                 "dishesSoldCount"   : user.dishesSoldCount as AnyObject,
-                "profileDescription": user.profileDescription as AnyObject,
-                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
-                "userActivity"      : user.userActivity as AnyObject,
-                "cookedDishes"      : user.cookedDishes as AnyObject,
-                "boughtDishes"      : user.boughtDishes as AnyObject,
-                "favouriteDishes"   : user.favoriteDishes as AnyObject,
-                "likedDishes"       : user.likedDishes as AnyObject,
-                "followers"         : user.followers as AnyObject,
-                "following"         : user.following as AnyObject,
-                "blocked"           : user.blocked as AnyObject
+                "profileDescription": user.profileDescription as AnyObject
+//                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
+//                "userActivity"      : user.userActivity as AnyObject,
+//                "cookedDishes"      : user.cookedDishes as AnyObject,
+//                "boughtDishes"      : user.boughtDishes as AnyObject,
+//                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+//                "likedDishes"       : user.likedDishes as AnyObject,
+//                "followers"         : user.followers as AnyObject,
+//                "following"         : user.following as AnyObject,
+//                "blocked"           : user.blocked as AnyObject
                 
                 ] as AnyObject
         ]

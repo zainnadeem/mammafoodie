@@ -21,6 +21,9 @@ enum FirebaseReference: String {
     case users = "Users"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
+    case followers = "UserFollowers"
+    case following = "UserFollowing"
+    case userNewsFeed = "UserNewsFeed"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -331,7 +334,7 @@ extension DatabaseGateway {
     }
     
     
-    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
         
         FirebaseReference.cookedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
             
@@ -340,23 +343,12 @@ extension DatabaseGateway {
                 return
             }
             
-            var dishes = [MFDish]()
-            
-            for dishID in dishData.keys {
-                
-                self.getDishWith(dishID: dishID, { (dish) in
-                    if dish != nil {
-                      dishes.append(dish!)
-                    }
-                })
-            }
-            
-            completion(dishes)
+            completion(dishData)
         })
     }
     
     
-    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
         
         FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
             
@@ -365,18 +357,7 @@ extension DatabaseGateway {
                 return
             }
             
-            var dishes = [MFDish]()
-            
-            for dishID in dishData.keys {
-                
-                self.getDishWith(dishID: dishID, { (dish) in
-                    if dish != nil {
-                        dishes.append(dish!)
-                    }
-                })
-            }
-            
-            completion(dishes)
+            completion(dishData)
         })
     }
     
@@ -644,6 +625,40 @@ extension DatabaseGateway {
         self.save(fileAt: video, at: path, completion: completion)
     }
 }
+
+
+//get Followers and following list of an user
+extension DatabaseGateway{
+    
+    func getFollowersForUser(userID:String, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(followers)
+        })
+    }
+    
+    func getFollowingForUser(userID:String, _ completion:@escaping (_ following:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.following.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let following = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(following)
+        })
+    }
+    
+    
+}
+
 
 // Get media paths
 extension DatabaseGateway {

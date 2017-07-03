@@ -17,7 +17,7 @@ enum SelectedIndexForProfile {
     case activity
 }
 
-class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesCollectionViewAdapterDelegate {
+class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesCollectionViewAdapterDelegate , HUDRenderer {
     
     var output: OtherUsersProfileInteractorOutput!
     var worker: OtherUsersProfileWorker! = OtherUsersProfileWorker()
@@ -46,66 +46,72 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     }
     
     func loadUserProfileData(userID:String) {
+        self.showActivityIndicator()
         worker.getUserDataWith(userID: userID) { (user) in
             
             self.user = user
             self.dishCollectionViewAdapter.userData = user
             self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
+            self.hideActivityIndicator()
             
         }
+        
+        worker.getFollowersForUser(userID: userID) { (followers) in
+            self.dishCollectionViewAdapter.followers = followers
+        }
+        
+        worker.getFollowingForUser(userID: userID) { (following) in
+            self.dishCollectionViewAdapter.following = following
+        }
+        
     }
     
     
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile){
         
+        
+        
         guard let user = self.user else {return}
+        
+        self.showActivityIndicator()
         
         switch index {
         case .cooked:
             
-            var cookedDishes = [MFDish]()
+            worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
+                self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
+                self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+            })
             
-            for dishID in user.cookedDishes.keys{
-                worker.getDishWith(dishID: dishID , completion: { (dish) in
-                    if dish != nil {
-                       cookedDishes.append(dish!)
-                    }
-                })
-            }
             
-            dishCollectionViewAdapter.dishData = cookedDishes
-            dishCollectionViewAdapter.selectedIndexForProfile = .cooked
             
         case .bought:
             
-            var boughtDishes = [MFDish]()
+          worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
+            self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
+            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+
+          })
             
-            for dishID in user.boughtDishes.keys{
-                worker.getDishWith(dishID: dishID , completion: { (dish) in
-                    if dish != nil {
-                        boughtDishes.append(dish!)
-                    }
-                })
-            }
-            
-            dishCollectionViewAdapter.dishData = boughtDishes
-            dishCollectionViewAdapter.selectedIndexForProfile = .bought
             
         case .activity:
             
             var activities = [MFNewsFeed]()
             
-            for newsFeedID in user.userActivity.keys{
-                worker.getActivityWith(newsFeedID: newsFeedID, completion: { (newsFeed) in
-                    if newsFeed != nil {
-                        activities.append(newsFeed!)
-                    }
-                })
-            }
+//            for newsFeedID in user.userActivity.keys{
+//                worker.getActivityWith(newsFeedID: newsFeedID, completion: { (newsFeed) in
+//                    if newsFeed != nil {
+//                        activities.append(newsFeed!)
+//                    }
+//                })
+//            }
             
+            dishCollectionViewAdapter.selectedIndexForProfile = .activity
             dishCollectionViewAdapter.activityData = activities
             
         }
+        
+        self.hideActivityIndicator()
         
     }
     

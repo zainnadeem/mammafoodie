@@ -22,42 +22,44 @@ class DishCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblDishName: UILabel!
     
     @IBOutlet weak var dishImageView: UIImageView!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         dishImageView.applyGradient(colors: [.black,.clear,.black], direction: .topToBottom)
+        self.layer.cornerRadius = 6
+        self.clipsToBounds = true
         
     }
     
     func setUp(_ dishData:MFDish){
         
-        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id!) { (media) in
+        
+        self.lblDishName.text = dishData.name
+        self.lblDishTypeTag.text = dishData.tag
+        
+        if  dishData.dishType != nil {
             
-            guard let media = media else {return}
-            
-            self.lblDishName.text = dishData.name
-            self.lblDishTypeTag.text = dishData.tag
-            
-            if  dishData.dishType != nil {
+            switch dishData.dishType! {
                 
-                switch dishData.dishType! {
-                    
-                case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
-                case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
-                case .Vegan , .None: self.vegIndicatorImageView.image = nil
-                    
-                }
+            case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
+            case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
+            case .Vegan , .None: self.vegIndicatorImageView.image = nil
                 
             }
             
-            self.lblNumberOfViews.text = dishData.numberOfViewers.description
+        }
+        
+        self.lblDishTypeTag.text = "Healthy"
+        self.lblNumberOfViews.text = dishData.numberOfViewers.description
+        
+        if let picURL = dishData.mediaURL {
             
-            if let picURL = dishData.mediaURL {
-                self.dishImageView.sd_setImage(with: picURL)
-            }
+            print(picURL.absoluteString)
+            
+            self.dishImageView.sd_setImage(with: picURL)
         }
     }
-
+    
 }

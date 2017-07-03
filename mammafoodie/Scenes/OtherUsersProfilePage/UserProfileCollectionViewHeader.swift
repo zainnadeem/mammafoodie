@@ -77,6 +77,9 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     @IBOutlet weak var favouriteDishesStackView: UIStackView!
     
+    @IBOutlet weak var followersSegmentStackView: UIStackView!
+    
+    @IBOutlet weak var followingSegmentStackView: UIStackView!
     
 
     
@@ -105,6 +108,14 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         
                 profilePicImageView.layer.cornerRadius = 5
                 profilePicImageView.clipsToBounds  = true
+        
+        
+        let tapFollowers = UITapGestureRecognizer(target: self, action: #selector(self.openFollowers(sender:)))
+        
+        let tapFollowing = UITapGestureRecognizer(target: self, action: #selector(self.openFollowing(sender:)))
+        
+        followersSegmentStackView.addGestureRecognizer(tapFollowers)
+        followingSegmentStackView.addGestureRecognizer(tapFollowing)
     
     }
     
@@ -132,7 +143,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     
-    func setUp(_ data:MFUser?){
+    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String){
         
         self.layoutIfNeeded()
         
@@ -141,13 +152,15 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         guard let data = data else {return}
         
         self.lblUserName.text = data.name
-        self.lblFollowers.text = data.followers.keys.count.description
-        self.lblFollowing.text = data.following.keys.count.description
+        self.lblFollowers.text = followersCount
+        self.lblFollowing.text = followingCount
         self.lblProfileDescription.text = data.profileDescription
         self.lblDishesSold.text = data.dishesSoldCount.description
-        self.lblCookedDishesCount.text = data.cookedDishes.keys.count.description
-        self.lblCookedCount.text = data.cookedDishes.keys.count.description
-        self.lblFavouriteDishesCount.text = data.likedDishes.keys.count.description
+        self.lblCookedDishesCount.text = cookedDishesCount
+        self.lblCookedCount.text = cookedDishesCount
+        self.lblFavouriteDishesCount.text = favouriteDishesCount
+        self.lblBoughtCount.text = boughtDishesCount
+        
         
         if let profilePicURL = data.picture,  let url = URL(string: profilePicURL){
             self.profilePicImageView.sd_setImage(with: url)
@@ -195,6 +208,13 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     
+    func openFollowers(sender:UITapGestureRecognizer){
+        
+    }
+    
+    func openFollowing(sender:UITapGestureRecognizer){
+        
+    }
     
     func updateHairLineMenuPosition(){
 
