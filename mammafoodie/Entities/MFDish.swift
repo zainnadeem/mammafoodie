@@ -47,9 +47,10 @@ class MFDish {
     var commentsCount : Double = 0
     
     var createdAt: Date!
-    var endedAt: Date!
+    var endTimestamp: Date!
     var mediaType: MFDishMediaType = .unknown
     var mediaURL : URL!
+    var numberOfViewers:String!
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -60,7 +61,7 @@ class MFDish {
         self.name = name
     }
     
-    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
+    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:URL, tag:String, dishType:MFDishType) {
         self.id = id
         
         self.user = MFUser() ; user.id = userID
@@ -72,9 +73,9 @@ class MFDish {
         self.availableSlots = availableSlots
         self.pricePerSlot = pricePerSlot
         self.boughtOrders = boughtOrders
-        self.mediaID = mediaID
+        self.mediaURL = mediaID
         self.tag = tag
-        self.type = dishType
+        self.dishType = dishType
         
     }
     
@@ -94,7 +95,7 @@ class MFDish {
         let userID = dishDataDictionary["userID"]   as? String ?? ""
         self.user = MFUser() ; user.id = userID
         
-        self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
+        self.mediaURL = NSURL(string: dishDataDictionary["mediaURL"]as? String ?? "")! as URL
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
@@ -102,13 +103,14 @@ class MFDish {
         self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
         self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
         self.tag = dishDataDictionary["tag"] as? String ?? ""
+        self.numberOfViewers = dishDataDictionary["numberOfViewers"] as? String ?? "0"
         
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
         
         if let dishType = MFDishType(rawValue: dishType){
-            self.type = dishType
+            self.dishType = dishType
         } else {
-            self.type = .None
+            self.dishType = .None
         }
         
     }

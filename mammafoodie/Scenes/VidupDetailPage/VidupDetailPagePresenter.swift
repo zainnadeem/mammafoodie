@@ -4,8 +4,7 @@ protocol VidupDetailPagePresenterInput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-     func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
-    func UpdateLikeCountInteractor(likeCount:Int)
+     func DishInfo(DishInfo:MFDish)
     func UpdateLikeStatusInteractor(Status:Bool)
 }
 
@@ -13,8 +12,7 @@ protocol VidupDetailPagePresenterOutput: class {
     func HideandUnhideView()
     func DisplayTime(Time:String)
     func DisplayUserInfo(UserInfo:MFUser)
-    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
-    func UpdateLikeCount(likeCount:Int)
+    func DisplayDishInfo(DishInfo:MFDish)
     func UpdateLikeStatus(Status:Bool)
 
 }
@@ -34,9 +32,6 @@ class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
         output.DisplayTime(Time: self.timeString(time: Time))
     }
     
-    func UpdateLikeCountInteractor(likeCount: Int) {
-        output.UpdateLikeCount(likeCount: likeCount)
-    }
     
     func timeString(time:TimeInterval) -> String {
         let hours = Int(time) / 3600
@@ -49,8 +44,8 @@ class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
         output.DisplayUserInfo(UserInfo: UserInfo)
     }
     
-    func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia){
-        output.DisplayDishInfo(DishInfo: DishInfo,MediaInfo: MediaInfo)
+    func DishInfo(DishInfo:MFDish){
+        output.DisplayDishInfo(DishInfo: DishInfo)
     }
 
     func UpdateLikeStatusInteractor(Status: Bool) {

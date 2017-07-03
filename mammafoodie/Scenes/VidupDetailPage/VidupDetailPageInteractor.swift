@@ -18,7 +18,6 @@ protocol VidupDetailPageInteractorOutput {
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
     func DishInfo(DishInfo:MFDish)
-    func UpdateLikeCountInteractor(likeCount:Int)
     func UpdateLikeStatusInteractor(Status:Bool)
 }
 
@@ -27,6 +26,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     var output: VidupDetailPageInteractorOutput!
     var Vidupworker: VidupDetailPageWorker! = VidupDetailPageWorker()
     var VidupTimerworker: TimerWorker = TimerWorker()
+    var mediaPlaying:Bool = false
     
     
     
@@ -41,16 +41,15 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
             self.output.UserInfo(UserInfo: Userdetails)
         }
         
-        Vidupworker.GetDishLikeDetails(Id: dish_id) { (LikeCount) in
-            self.output.UpdateLikeCountInteractor(likeCount: LikeCount)
-        }
-        
         Vidupworker.GetDishInfo(Id: dish_id) { (dishDetails) in
             if dishDetails != nil{
                 self.output.DishInfo(DishInfo: dishDetails!)
                 self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: dishDetails?.mediaURL)
-                self.Vidupworker.getexpireTime(endedAt: dishDetails.endTimestamp)
+                if self.mediaPlaying ==  false {
+                    self.mediaPlaying = true
+                self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
+                self.Vidupworker.getexpireTime(endedAt: (dishDetails?.endTimestamp)!)
+                }
             }
         }
         

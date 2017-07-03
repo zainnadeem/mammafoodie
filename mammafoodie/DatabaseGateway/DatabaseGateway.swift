@@ -310,7 +310,7 @@ extension DatabaseGateway {
     
     
     func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
-        
+        print(dishID)
         FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)

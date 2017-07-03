@@ -141,7 +141,7 @@ class VidupDetailPageWorker:NSObject {
         
         let CurrentTime = Date().timeIntervalSinceReferenceDate
         
-        TimeLeft = endedAt - CurrentTime
+//        TimeLeft = endedAt - CurrentTime
         
         return TimeLeft
     }

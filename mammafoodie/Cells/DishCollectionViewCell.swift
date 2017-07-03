@@ -32,8 +32,8 @@ class DishCollectionViewCell: UICollectionViewCell {
     }
     
     func setUp(_ dishData:MFDish){
-        
-        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.mediaID!) { (media) in
+        /*
+        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.mediaURL!) { (media) in
             
             guard let media = media else {return}
             
@@ -58,6 +58,7 @@ class DishCollectionViewCell: UICollectionViewCell {
                 self.dishImageView.sd_setImage(with: picURL)
             }
         }
+ */
     }
 
 }
