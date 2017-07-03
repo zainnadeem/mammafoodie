@@ -46,8 +46,8 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     @IBOutlet weak var lblDistanceAway: UILabel!
     @IBOutlet weak var lblNumberOfTimesOrdered: UILabel!
     @IBOutlet weak var lblPrepTime: UILabel!
-    
-    @IBOutlet weak var txtViewDishDescription: UITextView!
+    @IBOutlet weak var lblDishDescription: UILabel!
+    @IBOutlet weak var lv_contentView: UIView!
     
     @IBOutlet weak var btnRequest: UIButton!
     
@@ -60,26 +60,29 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     override func awakeFromNib() {
         super.awakeFromNib()
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
+        
     }
+    
+    
+    //TODO: - Need to be changed
+    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
+    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
+    
+   
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dishID = "-KnyI6lh4X10Wo18exDH3"
+    
         
-        
-        if let passedDish = dishForView {
-            displayDish(passedDish)
-        }else{
-            if let id = dishID {
-                self.output.getDish(with: id)
-            } else {
-                print("Set up AlertVC saying no dish found")
-            }
-        }
+           }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
     }
+    
     
     // MARK: - Event handling
     func displayDish(_ response: DishDetail.Dish.Response) {
@@ -92,12 +95,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
         self.lblDishType.text = data.dishType.rawValue
-        self.lblNumberOfComments.text = String(describing: data.commentsCount)
-        self.lblNumberOfLikes.text = String(describing: data.likesCount)
+        self.lblNumberOfComments.text = "\(Int(data.commentsCount))"
+        self.lblNumberOfLikes.text = "\(Int(data.likesCount))"
         self.lblNumberOfTimesOrdered.text = String(describing: data.boughtOrders.count)
-        self.lblPrepTime.text = String(describing: Date)
-        self.txtViewDishDescription.text = data.description
-        self.lblNumberOfTimesOrdered.text = String(data.boughtOrders.count)
+        self.lblPrepTime.text = "\(Int(data.preparationTime! / 60)) mins"
+        self.lblDishDescription.text = data.description
+        self.lblNumberOfTimesOrdered.text = "\(data.boughtOrders.count) Orders"
+        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
+        
+        
+//        self.lblDistanceAway.text = "\((coordinate0.distance(from: coordinate1))/1000) Kms"
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
         
