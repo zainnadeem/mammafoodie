@@ -13,24 +13,40 @@ class MFModelsToFirebaseDictionaryConverter {
     typealias FirebaseDictionary = [String:AnyObject]
     
     // Need to update this
-//    class func dictionary(from media: MFDish) -> FirebaseDictionary {
-//        return [
-//            media.id: [
-//                "id" : media.id,
-//                "user" : [
-//                    "id" : media.user.id,
-//                    "name" : media.user.name
-//                ],
-//                "type" : media.type.rawValue,
-//                "cover_small" : media.cover_small?.absoluteString ?? "",
-//                "cover_large" : media.cover_large?.absoluteString ?? "",
-//                "media_url" : media.mediaURL?.absoluteString ?? "",
-//                "dishId" : media.dish.id,
-//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
-//                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
-//                ] as AnyObject
-//        ]
-//    }
+    //    class func dictionary(from media: MFDish) -> FirebaseDictionary {
+    //        return [
+    //            media.id: [
+    //                "id" : media.id,
+    //                "user" : [
+    //                    "id" : media.user.id,
+    //                    "name" : media.user.name
+    //                ],
+    //                "type" : media.type.rawValue,
+    //                "cover_small" : media.cover_small?.absoluteString ?? "",
+    //                "cover_large" : media.cover_large?.absoluteString ?? "",
+    //                "media_url" : media.mediaURL?.absoluteString ?? "",
+    //                "dishId" : media.dish.id,
+    //                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
+    //                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
+    //                ] as AnyObject
+    //        ]
+    //    }
+    
+    class func dictionary(from comment: MFComment) -> FirebaseDictionary {
+        comment.id = FirebaseReference.dishComments.generateAutoID()
+        let raw: FirebaseDictionary = [
+            comment.id: [
+                "id": comment.id,
+                "text": comment.text,
+                "createTimestamp": comment.createdAt.timeIntervalSinceReferenceDate,
+                "user": [
+                    "id": comment.user.id,
+                    "name": comment.user.name
+                ]
+            ] as AnyObject
+        ]
+        return raw
+    }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
         
