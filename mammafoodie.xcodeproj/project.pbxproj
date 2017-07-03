@@ -283,6 +283,10 @@
 		57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		B691513B1EF94EA500DB6481 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		BF4800A81F09237F005E47B1 /* CheckLikeStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800A71F09237F005E47B1 /* CheckLikeStatusWorker.swift */; };
+		BF4800AA1F09239D005E47B1 /* CheckFavoriteStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800A91F09239D005E47B1 /* CheckFavoriteStatusWorker.swift */; };
+		BF4800AD1F092810005E47B1 /* LikeTappedWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800AC1F092810005E47B1 /* LikeTappedWorker.swift */; };
+		BF4800AF1F09282A005E47B1 /* FavoritesTappedWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800AE1F092829005E47B1 /* FavoritesTappedWorker.swift */; };
 		BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5060D81EE81B9E00DB646F /* AppDelegate.swift */; };
 		BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */; };
 		BF5AD5CF1F062B3900827223 /* DishDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5AD5CE1F062B3900827223 /* DishDetail.storyboard */; };
@@ -617,6 +621,10 @@
 		57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		7EC67241EBB9432A18D278A9 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6832E041F052E4200ECE835 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
+		BF4800A71F09237F005E47B1 /* CheckLikeStatusWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckLikeStatusWorker.swift; sourceTree = "<group>"; };
+		BF4800A91F09239D005E47B1 /* CheckFavoriteStatusWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckFavoriteStatusWorker.swift; sourceTree = "<group>"; };
+		BF4800AC1F092810005E47B1 /* LikeTappedWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeTappedWorker.swift; sourceTree = "<group>"; };
+		BF4800AE1F092829005E47B1 /* FavoritesTappedWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTappedWorker.swift; sourceTree = "<group>"; };
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -1389,6 +1397,18 @@
 			path = GoCookStep2;
 			sourceTree = "<group>";
 		};
+		BF4800AB1F0923AD005E47B1 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				BF5AD5DF1F07C8E600827223 /* LoadDishWorker.swift */,
+				BF4800A71F09237F005E47B1 /* CheckLikeStatusWorker.swift */,
+				BF4800A91F09239D005E47B1 /* CheckFavoriteStatusWorker.swift */,
+				BF4800AC1F092810005E47B1 /* LikeTappedWorker.swift */,
+				BF4800AE1F092829005E47B1 /* FavoritesTappedWorker.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
 		BF5060CC1EE81B9E00DB646F = {
 			isa = PBXGroup;
 			children = (
@@ -1439,7 +1459,7 @@
 				BF5AD5D31F062B4B00827223 /* DishDetailPresenter.swift */,
 				BF5AD5D41F062B4B00827223 /* DishDetailRouter.swift */,
 				BF5AD5D51F062B4B00827223 /* DishDetailViewController.swift */,
-				BF5AD5DF1F07C8E600827223 /* LoadDishWorker.swift */,
+				BF4800AB1F0923AD005E47B1 /* Workers */,
 			);
 			name = DishDetail;
 			sourceTree = "<group>";
@@ -1950,6 +1970,7 @@
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */,
 				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
+				BF4800AD1F092810005E47B1 /* LikeTappedWorker.swift in Sources */,
 				F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
@@ -2016,6 +2037,7 @@
 				F00F526B1EF2729D009DDAB1 /* ChatViewController.swift in Sources */,
 				2CB8BEED1EF2475F00DA78B3 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				110FCE561EEEAEC9008B6F2D /* OtherUsersProfilePresenter.swift in Sources */,
+				BF4800AF1F09282A005E47B1 /* FavoritesTappedWorker.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
 				113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
@@ -2113,8 +2135,10 @@
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */,
 				BFC927451EF00A7E00602153 /* VidupMainPageConfigurator.swift in Sources */,
+				BF4800AA1F09239D005E47B1 /* CheckFavoriteStatusWorker.swift in Sources */,
 				F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */,
 				F097D8CD1EF3D8BA00FCF967 /* ChatListPresenter.swift in Sources */,
+				BF4800A81F09237F005E47B1 /* CheckLikeStatusWorker.swift in Sources */,
 				BFC9273D1EF00A7E00602153 /* EnablePhotoLibraryWorker.swift in Sources */,
 				BFC927371EF00A7E00602153 /* LiveVideoMainPageRouter.swift in Sources */,
 				BFC927291EF00A7E00602153 /* CommentsConfigurator.swift in Sources */,

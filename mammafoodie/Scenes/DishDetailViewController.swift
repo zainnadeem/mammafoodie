@@ -1,16 +1,25 @@
 import UIKit
 
 protocol DishDetailViewControllerInput {
-    func displayDish(_ response: DishDetail.Response)
+    func displayDish(_ response: DishDetail.Dish.Response)
+    func displayLikeStatus(_ response: DishDetail.Like.Response)
+    func displayFavoriteStatus(_ response: DishDetail.Favorite.Response)
+    
 }
 
 protocol DishDetailViewControllerOutput {
     func getDish(with id: String)
-
+    
+    func likeButtonTapped(userId: String, dishId: String, selected: Bool)
+    func checkLikeStatus(userId: String, dishId: String)
+    
+    func checkFavoritesStatus(userId: String, dishId: String)
+    func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
+    
 }
 
 class DishDetailViewController: UIViewController, DishDetailViewControllerInput {
-    
+
     var output: DishDetailViewControllerOutput!
     var router: DishDetailRouter!
     
@@ -46,7 +55,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     var dishID: String?
     
     //if dish object is passed 
-    var dish: DishDetail.Response?
+    var dishForView: DishDetail.Dish.Response?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,10 +67,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dishID = "-KnyGJpK7WjR9zjrlxZS"
+        dishID = "-KnyI6lh4X10Wo18exDH3"
         
         
-        if let passedDish = dish {
+        if let passedDish = dishForView {
             displayDish(passedDish)
         }else{
             if let id = dishID {
@@ -73,23 +82,56 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     }
     
     // MARK: - Event handling
-    
-    
-
-    
-    func displayDish(_ response: DishDetail.Response) {
+    func displayDish(_ response: DishDetail.Dish.Response) {
         
         guard let data = response.dish else { return }
         
         self.lblDishName.text = data.name
-        self.lblUsername.text = data.username
+        self.lblUsername.text = data.user.name
         self.lblDishType.text = data.type.rawValue
         self.lblNumberOfComments.text = String(describing: data.numberOfComments)
         self.lblNumberOfLikes.text = String(describing: data.numberOfLikes)
         self.lblNumberOfTimesOrdered.text = String(describing: data.boughtOrders.count)
         self.lblPrepTime.text = String(describing: data.preparationTime)
         self.txtViewDishDescription.text = data.description
+        self.lblNumberOfTimesOrdered.text = String(data.boughtOrders.count)
+        self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
+        self.dishImageView.sd_setImage(with: URL(string: data.mediaURL!))
         
+        //set profile imageview
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.layer.shadowRadius = 3
+        profileImageView.layer.shadowColor = UIColor.blue.cgColor
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        profileImageView.clipsToBounds = true
+        
+    
+        //set button 
+        if Date.init() > data.endTimestamp {
+            self.btnRequest.setTitle("Buy now", for: .normal)
+        } else {
+            self.btnRequest.setTitle("request", for: .normal)
+        }
+        
+       
+        self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
+        self.output.checkFavoritesStatus(userId: data.user.id, dishId: data.id)
+  
+    }
+    
+    
+    func displayFavoriteStatus(_ response: DishDetail.Favorite.Response) {
+        
+    }
+    
+    
+    func displayLikeStatus(_ response: DishDetail.Like.Response){
+        if response.status == true {
+            self.btnLikes.isSelected = false
+        }else{
+            self.btnLikes.isSelected = true
+        }
     }
 
     func getDistanceAway(){
@@ -99,11 +141,26 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
 
     @IBAction func commentsBtnTapped(_ sender: Any) {
         //route to comments
-        
+        let destinationVC = CommentsViewController()
+   
+        if let response = self.dishForView {
+            destinationVC.dishID = response.dish?.id
+            self.present(destinationVC, animated: true, completion: nil)
+        }
+ 
     }
     
     @IBAction func likeBtnTapped(_ sender: Any) {
         //like the dish
+        if btnLikes.isSelected == false {
+            btnLikes.isSelected = true
+        }else{
+            btnLikes.isSelected = false
+        }
+        
+        if let dish = self.dishForView?.dish{
+            self.output.likeButtonTapped(userId: dish.user.id, dishId: dish.id, selected: self.btnLikes.isSelected)
+        }
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
@@ -118,6 +175,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     }
     
     @IBAction func prepTimeTapped(_ sender: Any) {
+        print("Preptime tapped")
     }
     
     @IBAction func requestBtnTapped(_ sender: Any) {

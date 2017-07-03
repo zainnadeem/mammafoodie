@@ -32,7 +32,11 @@ class MFDish {
     var cuisineID: String! //MFCusine id
     var tag:String!
     
+    var createTimestamp: Date!
+    var endTimestamp: Date!
     
+    var mediaURL: String?
+
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
@@ -74,6 +78,14 @@ class MFDish {
         
         self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
         self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
+        
+        let creationTimestamp = dishDataDictionary["createTimestamp"] as! TimeInterval
+        self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
+        
+        let endingTimestamp = dishDataDictionary["endTimestamp"] as! TimeInterval
+        self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        
+        self.mediaURL = dishDataDictionary["mediaURL"] as? String ?? ""
         
         self.mediaID = dishDataDictionary["mediaID"] as? String ?? ""
         self.description = dishDataDictionary["description"]  as? String ?? ""

@@ -44,6 +44,12 @@ enum FirebaseReference: String {
         return dateString
     }
     
+    func getImagePath(with id: String) -> URL? {
+        let classPath: String = self.rawValue.lowercased()
+        let path: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/\(classPath)%2F\(id).jpg?alt=media"
+        return URL(string: path)
+    }
+    
 }
 
 struct DatabaseConnectionObserver {
@@ -301,6 +307,10 @@ extension DatabaseGateway {
             print(error)
             completion(nil)
         }
+    }
+    
+    func getUserProfilePicturePath(for userId: String) -> URL? {
+        return FirebaseReference.users.getImagePath(with: userId)
     }
 
 }
