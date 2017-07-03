@@ -13,7 +13,7 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     func prepareCuisineCollectionView() {
         self.cuisineCollectionView.delegate = self
         self.cuisineCollectionView.dataSource = self
-        self.cuisineCollectionView.register(UINib.init(nibName: "CuisineSearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CuisineSearchCollectionViewCell")
+        self.cuisineCollectionView.register(UINib.init(nibName: "CuisineCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CuisineCollectionViewCell")
         self.cuisineCollectionView.reloadData()
         self.output.loadCuisines()
     }
@@ -22,14 +22,26 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
         if let _ = self.cuisineCollectionView.cellForItem(at: indexPath) {
             self.cuisineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
-        self.selectedFilter = self.cuisineFilters[indexPath.item]
+        
+        let filter = self.cuisineFilters[indexPath.item]
+        for cuisine in self.cuisineFilters {
+            if filter == cuisine {
+                if cuisine.isSelected {
+                    cuisine.isSelected = false
+                    self.searchAdapter.filter(for: nil)
+                } else {
+                   cuisine.isSelected = true
+                    self.searchAdapter.filter(for: cuisine)
+                }
+            } else {
+                cuisine.isSelected = false
+            }
+        }
         self.cuisineCollectionView.reloadData()
-        self.output.loadMarkers(at: CLLocationCoordinate2D.init(latitude: kCameraLatitude, longitude: kCameraLongitude))
     }
     
-    func showCuisines(_ cuisines: [CuisineFilter]) {
+    func showCuisines(_ cuisines: [MFCuisine]) {
         self.cuisineFilters = cuisines
-        self.selectedFilter = self.cuisineFilters.first
         self.cuisineCollectionView.reloadData()
     }
     
@@ -42,13 +54,16 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuisineSearchCollectionViewCell", for: indexPath) as! CuisineSearchCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuisineCollectionViewCell", for: indexPath) as! CuisineCollectionViewCell
         let filter = self.cuisineFilters[indexPath.item]
-        if let selfilter = self.selectedFilter {
-            cell.prepareCell(for: filter, is : (selfilter == filter))
+        if filter.isSelected {
+            cell.prepareCell(for: filter, is : true)
+            cell.lblMenuTitle.textColor = .white
         } else {
             cell.prepareCell(for: filter, is : false)
+            cell.lblMenuTitle.textColor = .white
         }
+        
         return cell
     }
     
@@ -56,25 +71,15 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
         self.selectFilter(at: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //WARNING : sdsd
-        
-        //FIXME: Bug in imageview clip bounds
-        if let cuisineCell = cell as? CuisineSearchCollectionViewCell {
-            cuisineCell.contentView.layoutIfNeeded()
-            cuisineCell.imgViewEmoji.layer.cornerRadius = (cuisineCell.imgViewEmoji.frame.size.height / 2)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        _ = self.cuisineFilters[indexPath.item]
+        let filter = self.cuisineFilters[indexPath.item]
         let height = collectionView.frame.size.height * 0.9
-//        var width = filter.name.calculateWidth(withConstrainedHeight: 21, font: CuisineFilterCellFont)
-//        if width < 90 {
-//            width = 90
-//        }
-//        width += 8
-        return CGSize.init(width: height, height: height)
+        var width = filter.name.calculateWidth(withConstrainedHeight: 21, font: UIFont.MontserratLight(with: 12)!)
+        if width < 90 {
+            width = 90
+        }
+        width += 2
+        return CGSize.init(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -88,17 +93,5 @@ extension NearbyChefsViewController : UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 10, 0, 0)
     }
-
-}
-
-struct CuisineFilter : Equatable {
-    let name : String!
-    let id : String!
-    let selectedImage : UIImage?
-    let unselectedImage : UIImage?
-    let pin : UIImage?
     
-    static func ==(lhs: CuisineFilter, rhs : CuisineFilter) -> Bool {
-        return lhs.id == rhs.id
-    }
 }

@@ -5,7 +5,7 @@ import MapKit
 protocol NearbyChefsViewControllerInput {
     func showMarkers(markers: [Marker])
     func showCurrentLocation(_ location: CLLocation?)
-    func showCuisines(_ cuisines:[CuisineFilter])
+    func showCuisines(_ cuisines:[MFCuisine])
 }
 
 protocol NearbyChefsViewControllerOutput {
@@ -31,8 +31,9 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     var searchAdapter: NearbyChefsSearchAdapter!
     var featuredMenuAdapter : FeaturedMenuCollectionViewAdapter!
     
-    var cuisineFilters = [CuisineFilter]()
-    var selectedFilter : CuisineFilter?
+    var cuisineFilters = [MFCuisine]()
+    
+    var searchResults : [MFDish]! = [MFDish]()
     
     var swipGesture : UISwipeGestureRecognizer!
     
@@ -87,17 +88,31 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         self.searchAdapter.prepare(with : self.txtSearch)
         self.searchAdapter.adapterResult = { (dishes) in
             print("Found Dishes: \(dishes)")
+            DispatchQueue.main.async {
+                if dishes.count < 0 {
+                    self.showAlert("No Results Found", message: nil)
+                }
+                self.searchResults.removeAll()
+                self.searchResults.append(contentsOf: dishes)
+                self.reloadSearchData()
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.output.getCurrentLocation()
-        //        self.featuredMenuCollectionView.reloadData()
+        self.featuredMenuCollectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.featuredMenuCollectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.featuredMenuCollectionView.reloadData()
     }
     
     func setupSearchTextField() {

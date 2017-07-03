@@ -5,6 +5,7 @@ class Marker : GMSMarker, GMUClusterItem {
     
     var isSelected = false
     var index : Int = -1
+    var dishID : String = ""
     
     class func marker(with title: String, at location: CLLocationCoordinate2D, with index : Int) -> Marker {
         let marker = Marker()

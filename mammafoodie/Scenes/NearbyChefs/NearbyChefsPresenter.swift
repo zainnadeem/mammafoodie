@@ -1,16 +1,16 @@
 import UIKit
-
+import MapKit
 protocol NearbyChefsPresenterInput {
     func showMarkers(_ markers: [Marker])
     func setCurrentLocation(_ location: CLLocation?, error: Error?)
-    func showCuisineFilters(_ filters: [CuisineFilter]?, with error: Error?)
+    func showCuisineFilters(_ filters: [MFCuisine]?, with error: Error?)
 }
 
 protocol NearbyChefsPresenterOutput: class {
     func showMarkers(markers: [Marker])
     func showCurrentLocation(_ location: CLLocation?)
     func showError(error:Error)
-    func showCuisines(_ cuisines:[CuisineFilter])
+    func showCuisines(_ cuisines:[MFCuisine])
 }
 
 class NearbyChefsPresenter: NearbyChefsPresenterInput {
@@ -30,7 +30,7 @@ class NearbyChefsPresenter: NearbyChefsPresenterInput {
         }
     }
     
-    func showCuisineFilters(_ filters: [CuisineFilter]?, with error: Error?) {
+    func showCuisineFilters(_ filters: [MFCuisine]?, with error: Error?) {
         if let er = error {
             self.output.showError(error: er)
         } else {

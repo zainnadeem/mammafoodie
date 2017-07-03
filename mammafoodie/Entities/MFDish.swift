@@ -1,7 +1,5 @@
-
-
 import Foundation
-
+import MapKit
 
 enum MFDishMediaType : String {
     case liveVideo = "liveVideo"
@@ -24,8 +22,8 @@ enum MFDishType : String {
 }
 
 class MFDish {
-    var id: String!
-    var name: String!
+    var id: String
+    var name: String
 
     var dishType : MFDishType!
     var user: MFUser!
@@ -35,9 +33,7 @@ class MFDish {
     var pricePerSlot: Double = 0
     
     var boughtOrders: [String:Date] = [:] //MFOrder id
-    var cuisineID: String! //MFCusine id
     var tag:String!
-    
     
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
@@ -50,6 +46,9 @@ class MFDish {
     var endedAt: Date!
     var mediaType: MFDishMediaType = .unknown
     var mediaURL : URL!
+    
+    var location : CLLocationCoordinate2D?
+    var address : String = ""
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -67,7 +66,7 @@ class MFDish {
         
         self.description = description
         self.name = name
-        self.cuisineID = cuisineID
+        self.cuisine = MFCuisine.init(with: ["id" : cuisineID as AnyObject])
         self.totalSlots = totalSlots
         self.availableSlots = availableSlots
         self.pricePerSlot = pricePerSlot
@@ -98,7 +97,7 @@ class MFDish {
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
         self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
         self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
-        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        
         self.tag = dishDataDictionary["tag"] as? String ?? ""
         
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
@@ -107,6 +106,17 @@ class MFDish {
             self.dishType = dishType
         } else {
             self.dishType = .None
+        }
+        
+        if let rawCuisine = dishDataDictionary["cuisine"] as? [String : AnyObject] {
+            self.cuisine = MFCuisine.init(with: rawCuisine)
+        }
+        
+        if let rawLocation = dishDataDictionary["location"] as? [String : AnyObject] {
+            let lat = rawLocation["latitude"] as! CLLocationDegrees
+            let lon = rawLocation["longitude"] as! CLLocationDegrees
+            self.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
+            self.address = rawLocation["address"] as? String ?? ""
         }
         
     }
@@ -119,13 +129,13 @@ class MFDish {
     
     func generateCoverImageURL() -> URL {
         let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
         let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
         return URL.init(string: string)!
     }
     
