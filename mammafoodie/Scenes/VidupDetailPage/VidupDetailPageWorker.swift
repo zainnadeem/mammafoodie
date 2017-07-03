@@ -82,15 +82,9 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
-    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
+    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?)->()){
         DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
-            
-            if DishInfo != nil {
-                DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
-                    completion(DishInfo, mediaDetails)
-                })
-            }
-            
+            completion(DishInfo)
         }
     }
     

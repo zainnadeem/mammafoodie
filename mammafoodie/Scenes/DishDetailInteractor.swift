@@ -64,7 +64,7 @@ class DishDetailInteractor: DishDetailInteractorInput {
     
     func checkFavoritesStatus(userId: String, dishId: String) {
         favoriteStatusWorker = CheckFavoriteStatusWorker()
-        favoriteStatusWorker.checkStatus(userId: userId, dishID: dishId) { (status) in
+        favoriteStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
             
         }
         

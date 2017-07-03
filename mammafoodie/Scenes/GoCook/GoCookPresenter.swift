@@ -2,7 +2,7 @@ import UIKit
 
 protocol GoCookPresenterInput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
@@ -83,13 +83,14 @@ class GoCookPresenter: GoCookPresenterInput {
         }
     }
     
-    func selectOption(option: MFMediaType) {
+    func selectOption(option: MFDishMediaType) {
         switch  option {
         case .liveVideo:
             self.viewController?.btnNext.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
             self.selectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewMenu)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         case .vidup:
@@ -97,6 +98,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.selectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewMenu)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         case .picture:
@@ -104,6 +106,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.selectView(self.viewController?.viewMenu)
             self.deselectView(self.viewController?.viewLiveVideo)
             self.deselectView(self.viewController?.viewVidups)
+            self.viewController?.btnNext.isEnabled = true
             break
             
         default:
@@ -111,6 +114,7 @@ class GoCookPresenter: GoCookPresenterInput {
             self.deselectView(self.viewController?.viewVidups)
             self.deselectView(self.viewController?.viewMenu)
             self.viewController?.btnNext.removeGradient()
+            self.viewController?.btnNext.isEnabled = false
             break
             
         }
@@ -135,7 +139,7 @@ class GoCookPresenter: GoCookPresenterInput {
     }
     
     func showStep2() {
-        if self.viewController?.selectedOption != MFMediaType.unknown {
+        if self.viewController?.selectedOption != MFDishMediaType.unknown {
             self.viewController?.btnStep2.isSelected = true
             self.viewController?.btnStep1.isSelected = false
             self.moveStep2(true)
@@ -148,12 +152,13 @@ class GoCookPresenter: GoCookPresenterInput {
         self.moveStep2(false)
     }
     
-    func start(_ meidaOption : MFMediaType) {
+    func start(_ meidaOption : MFDishMediaType) {
         self.viewController?.selectedOption = meidaOption
         if let btnNext = self.viewController?.btnNext {
             self.viewController?.onNext(btnNext)
         }
     }
+    
     
     //MARK: - Private Methods
     private func moveStep2(_ move : Bool) {

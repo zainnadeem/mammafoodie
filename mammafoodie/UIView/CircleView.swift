@@ -3,6 +3,8 @@ import UIKit
 class CircleView: UIView {
     
     var circleLayer: CAShapeLayer!
+    var vidup: MFDish!
+    var currentValue: TimeInterval = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +28,7 @@ class CircleView: UIView {
             let circlePath = UIBezierPath(arcCenter: arcCenter,
                                           radius: frame.size.width/2 - 1,
                                           startAngle: -.pi / 2,
-                                          endAngle: .pi * 2,
+                                          endAngle: (.pi * 2) - (.pi / 2),
                                           clockwise: true)
             
             // Setup the CAShapeLayer with the path, colors, and line width
@@ -34,7 +36,7 @@ class CircleView: UIView {
             self.circleLayer.path = circlePath.cgPath
             self.circleLayer.fillColor = UIColor.clear.cgColor
             self.circleLayer.strokeColor = UIColor.red.cgColor
-            self.circleLayer.lineWidth = 2;
+            self.circleLayer.lineWidth = 4;
             
             // Don't draw the circle initially
             self.circleLayer.strokeEnd = 0.0
@@ -44,23 +46,26 @@ class CircleView: UIView {
         }
     }
     
-    func animateCircle(duration: TimeInterval) {
+    func animateCircle(duration: TimeInterval, toValue: Double) {
         // We want to animate the strokeEnd property of the circleLayer
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         
         // Set the animation duration appropriately
         animation.duration = duration
         
+        self.circleLayer.strokeStart = 0
+        
         // Animate from 0 (no circle) to 1 (full circle)
-        animation.fromValue = 0
-        animation.toValue = 1
+        animation.fromValue = self.currentValue
+        animation.toValue = toValue
+        self.currentValue = animation.toValue as! TimeInterval
         
         // Do a linear animation (i.e. the speed of the animation stays the same)
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         
         // Set the self.circleLayer's strokeEnd property to 1.0 now so that it's the
         // right value when the animation ends.
-        self.circleLayer.strokeEnd = 1.0
+        self.circleLayer.strokeEnd = CGFloat(toValue)
         
         // Do the actual animation
         self.circleLayer.add(animation, forKey: "animateCircle")

@@ -2,14 +2,14 @@ import UIKit
 
 protocol GoCookInteractorInput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
 
 protocol GoCookInteractorOutput {
     func prepareOptions()
-    func selectOption(option : MFMediaType)
+    func selectOption(option : MFDishMediaType)
     func showStep1()
     func showStep2()
 }
@@ -24,7 +24,7 @@ class GoCookInteractor: GoCookInteractorInput {
         self.output.prepareOptions()
     }
     
-    func selectOption(option: MFMediaType) {
+    func selectOption(option: MFDishMediaType) {
         self.output.selectOption(option: option)
     }
     

@@ -86,17 +86,22 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         
         guard let data = response.dish else { return }
         
+        self.dishForView = response
+        
+        
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
-        self.lblDishType.text = data.type.rawValue
-        self.lblNumberOfComments.text = String(describing: data.numberOfComments)
-        self.lblNumberOfLikes.text = String(describing: data.numberOfLikes)
+        self.lblDishType.text = data.dishType.rawValue
+        self.lblNumberOfComments.text = String(describing: data.commentsCount)
+        self.lblNumberOfLikes.text = String(describing: data.likesCount)
         self.lblNumberOfTimesOrdered.text = String(describing: data.boughtOrders.count)
-        self.lblPrepTime.text = String(describing: data.preparationTime)
+        self.lblPrepTime.text = String(describing: Date)
         self.txtViewDishDescription.text = data.description
         self.lblNumberOfTimesOrdered.text = String(data.boughtOrders.count)
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
-        self.dishImageView.sd_setImage(with: URL(string: data.mediaURL!))
+        
+        
+        self.dishImageView.sd_setImage(with: data.mediaURL)
         
         //set profile imageview
         profileImageView.contentMode = .scaleAspectFill
@@ -108,7 +113,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         
     
         //set button 
-        if Date.init() > data.endTimestamp {
+        if Date.init() > data.endedAt! {
             self.btnRequest.setTitle("Buy now", for: .normal)
         } else {
             self.btnRequest.setTitle("request", for: .normal)

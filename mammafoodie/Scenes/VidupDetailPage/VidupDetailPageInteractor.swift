@@ -17,7 +17,7 @@ protocol VidupDetailPageInteractorOutput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-    func DishInfo(DishInfo:MFDish,MediaInfo:MFMedia)
+    func DishInfo(DishInfo:MFDish,MediaInfo:MFDish)
 }
 
 class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelegate {
@@ -37,15 +37,15 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
             self.output.UserInfo(UserInfo: Userdetails)
         }
-        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
+        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails) in
             if Dishdetails != nil {
-                self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
+//                self.output.DishInfo(DishInfo: Dishdetails!, MediaInfo: MediaDetails!)
                 self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.cover_large)!)
-                if Int((MediaDetails?.dealTime)!) > 0 {
-                    self.VidupTimerworker.seconds = 10
-                    self.VidupTimerworker.runTimer()
-                }
+                self.Vidupworker.PlayVideo(MediaURL: (Dishdetails?.mediaURL)!)
+//                if Int((Dishdetails?.dealTime)!) > 0 {
+//                    self.VidupTimerworker.seconds = 10
+//                    self.VidupTimerworker.runTimer()
+//                }
             }
         }
     }

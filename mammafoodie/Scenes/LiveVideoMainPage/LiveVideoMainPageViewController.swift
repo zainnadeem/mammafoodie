@@ -32,14 +32,14 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
     @IBAction func populateNewsfeed(_ sender: Any) {
         
-        let dData = DummyData.sharedInstance
+//        let dData = DummyData.sharedInstance
         
-        dData.populateNewsfeed { (newsfeed) in
-            
-            
-        }
-        
-        _ = dData.getUserForProfilePage()
+//        dData.populateNewsfeed { (newsfeed) in
+//            
+//            
+//        }
+//        
+//        _ = dData.getUserForProfilePage()
         
     }
    

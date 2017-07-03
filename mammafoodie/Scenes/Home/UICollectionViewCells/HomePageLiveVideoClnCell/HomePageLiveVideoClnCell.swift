@@ -31,8 +31,9 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    func setup(with liveVideo: MFMedia) {
+    func setup(with liveVideo: MFDish) {
         self.viewForViewAll.isHidden = true
+        self.imgView.sd_cancelCurrentImageLoad()
         if liveVideo.id == "-1" {
             // Option to create new live video
             self.imgView.layer.borderWidth = 2
@@ -44,8 +45,13 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             // Show existing live video details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
-            self.imgView.image = UIImage(named: "ProfilePicture\(liveVideo.id!)")!
+            
+            if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: liveVideo.user.id) {
+                self.imgView.sd_setImage(with: url)
+            } else {
+                self.imgView.image = nil
+            }
         }
         
-    }    
+    }
 }
