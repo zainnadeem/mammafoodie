@@ -10,6 +10,7 @@ enum FirebaseReference: String {
     case liveVideos = "LiveVideos"
     case dishRequests = "DishRequests"
     case dishes = "Dishes"
+    case dishComments = "DishComments"
     case conversations = "Conversations"
     case messages = "Messages"
     case orders = "Orders"
@@ -136,14 +137,14 @@ extension DatabaseGateway {
     func createLiveStreamModel(from streamName: String, id: String) -> MFDish? {
         let liveStream: MFDish = MFDish()
         liveStream.id = id
-//        liveStream.contentId = streamName
+        //        liveStream.contentId = streamName
         return liveStream
     }
     
     func publishNewLiveStream(with name: String, _ completion: @escaping ((MFDish?)->Void)) {
         let liveStream: MFDish = MFDish()
         liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-//        liveStream.contentId = name
+        //        liveStream.contentId = name
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         
         FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
@@ -419,7 +420,7 @@ extension DatabaseGateway {
 
 
 
-// MARK: - Media
+// MARK: - Dish
 extension DatabaseGateway {
     
     func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
@@ -538,7 +539,80 @@ extension DatabaseGateway {
         FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }
-    }            
+    }
+}
+
+// MARK: - DishComments
+extension DatabaseGateway {
+    
+    func getComments(on dish: MFDish, frequency: DatabaseRetrievalFrequency, completion: @escaping (([MFComment])->Void)) -> DatabaseConnectionObserver? {
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let rawList = snapshot.value as? FirebaseDictionary else {
+                completion([])
+                return
+            }
+            var comments: [MFComment] = []
+//            for key in rawList.keys {
+//                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
+//                    comments.append(self.createComment(from: rawComment))
+//                }
+//            }
+            
+//            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
+                comments.append(self.createComment(from: rawList))
+//            }
+            
+            completion(comments)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.dishComments.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(dish.id)
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(DataEventType.childAdded, with: successClosure, withCancel: cancelClosure)
+            return observer
+        default:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+        }
+        return nil
+    }
+    
+    func createComment(from rawComment: FirebaseDictionary) -> MFComment {
+        let comment: MFComment = MFComment()
+        comment.id = rawComment["id"] as? String ?? ""
+        comment.text = rawComment["text"] as? String ?? ""
+        
+        if let timeInterval: TimeInterval = rawComment["createTimestamp"] as? TimeInterval {
+            comment.createdAt = Date(timeIntervalSinceReferenceDate: timeInterval)
+        }
+        
+        if let rawUser: FirebaseDictionary = rawComment["user"] as? FirebaseDictionary {
+            comment.user = self.createUser(from: rawUser)
+        }
+        
+        return comment
+    }
+    
+    func createUser(from rawUser: FirebaseDictionary) -> MFUser {
+        let user: MFUser = MFUser()
+        user.id = rawUser["id"] as? String ?? ""
+        user.name = rawUser["name"] as? String ?? ""
+        return user
+    }
+    
+    func postComment(_ comment: MFComment, on dish: MFDish, _ completion: @escaping (()->Void)) {
+        let rawComment: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: comment)
+        FirebaseReference.dishComments.get(with: dish.id).updateChildValues(rawComment) { (error, databaseReference) in
+            completion()
+        }
+    }
 }
 
 // MARK: - Media
