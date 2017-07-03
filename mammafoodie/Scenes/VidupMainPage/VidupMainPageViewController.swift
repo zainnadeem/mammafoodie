@@ -54,7 +54,7 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
         
         //Move to cell once object is established
-        cell.media = self.vidups.arrayOfVidups[indexPath.row]
+        cell.dish = self.vidups.arrayOfVidups[indexPath.row]
         cell.setViewProperties()
         
 

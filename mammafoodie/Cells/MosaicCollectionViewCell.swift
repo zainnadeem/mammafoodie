@@ -13,40 +13,60 @@ class MosaicCollectionViewCell: UICollectionViewCell {
     @IBOutlet var smallCellConstraints: [NSLayoutConstraint]!
     @IBOutlet var largeCellConstraints: [NSLayoutConstraint]!
     
-    var media: MFDish! {
+    var dish: MFDish! {
         didSet {
             self.updateUI()
         }
     }
     
     func updateUI(){
-
-        do {
-            if let coverURL = self.media.mediaURL {
-                let imageData = try Data.init(contentsOf: coverURL)
-                screenShotImageView.image = UIImage(data : imageData)
-            }
-        } catch {
-            print(error.localizedDescription)
+        self.screenShotImageView.sd_cancelCurrentImageLoad()
+        
+        self.screenShotImageView.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.clear
+        
+        if let url: URL = self.dish.mediaURL {
+            self.screenShotImageView.contentMode = UIViewContentMode.scaleAspectFill
+            self.screenShotImageView.sd_setImage(with: url, completed: { (downloadedImage, error, cacheType, url) in
+                if downloadedImage == nil || error != nil {
+                    self.setLogo()
+                }
+            })
+        } else {
+            self.setLogo()
         }
-
-//        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
-//        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
-//        
-//        //need to figure out date
-////        btnTimeLeft.titleLabel?.text = String(self.media.e)
-//        btnUsername.setTitle(self.media.user.name!, for: .normal)
-//        self.title.text = self.media.dish.name!
-//        
-//        if self.media.type == .liveVideo {
-//            btnTimeLeft.isHidden = true
-//            
-//        }else{
-//            btnTimeLeft.isHidden = false
-//        }
- 
+        
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.dish.user.id) {
+            self.btnProfileImage.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+            self.btnProfileImage.imageView?.sd_setImage(with: url, completed: { (downloadedImage, error, cacheType, url) in
+                if downloadedImage == nil || error != nil {
+                    //                    self.setLogo()
+                }
+            })
+        } else {
+            //            self.setLogo()
+        }
+        
+        
+        self.btnNumberOfViews.setTitle(String(self.dish.numberOfViewers), for: .normal)
+        
+        //need to figure out date
+        //        btnTimeLeft.titleLabel?.text = String(self.media.e)
+        self.btnUsername.setTitle(self.dish.user.name!, for: .normal)
+        self.title.text = self.dish.name
+        
+        if self.dish.mediaType == .liveVideo {
+            self.btnTimeLeft.isHidden = true
+        }else{
+            self.btnTimeLeft.isHidden = false
+        }
+        
     }
     
+    func setLogo() {
+        self.screenShotImageView.contentMode = UIViewContentMode.center
+        self.screenShotImageView.image = UIImage(named: "LogoMammaFoodieWithoutName")!
+    }
     
     
     func setViewProperties(){
@@ -67,7 +87,7 @@ class MosaicCollectionViewCell: UICollectionViewCell {
         
         btnUsername.titleLabel?.numberOfLines = 2
         btnUsername.titleLabel?.adjustsFontSizeToFitWidth = false
-
+        
         btnUsername.titleLabel?.lineBreakMode = .byWordWrapping
         
         btnProfileImage.imageView?.contentMode = .scaleAspectFill
@@ -76,7 +96,7 @@ class MosaicCollectionViewCell: UICollectionViewCell {
         btnProfileImage.layer.masksToBounds = false
         btnProfileImage.imageView?.layer.cornerRadius = btnProfileImage.frame.height / 2
         btnProfileImage.imageView?.clipsToBounds = true
-
+        
         title.layer.shadowRadius = 3
         title.layer.shadowColor = UIColor.black.cgColor
         title.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -96,7 +116,7 @@ class MosaicCollectionViewCell: UICollectionViewCell {
         for con in self.largeCellConstraints{
             con.isActive = true
         }
-
+        
     }
     
     func setSmallCellConstraints(){
@@ -110,6 +130,6 @@ class MosaicCollectionViewCell: UICollectionViewCell {
         for con in self.smallCellConstraints {
             con.isActive = true
         }
-
+        
     }
 }

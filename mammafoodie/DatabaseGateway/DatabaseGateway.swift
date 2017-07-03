@@ -378,7 +378,7 @@ extension DatabaseGateway {
             print(error)
             completion(false)
         }
-
+        
     }
     
 }
@@ -589,15 +589,15 @@ extension DatabaseGateway {
                 return
             }
             var comments: [MFComment] = []
-//            for key in rawList.keys {
-//                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
-//                    comments.append(self.createComment(from: rawComment))
-//                }
-//            }
+            //            for key in rawList.keys {
+            //                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
+            //                    comments.append(self.createComment(from: rawComment))
+            //                }
+            //            }
             
-//            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
-                comments.append(self.createComment(from: rawList))
-//            }
+            //            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
+            comments.append(self.createComment(from: rawList))
+            //            }
             
             completion(comments)
         }
@@ -707,5 +707,9 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     func getUserProfilePicturePath(for userId: String) -> URL? {
         return FirebaseReference.users.getImagePath(with: userId)
+    }
+    
+    func getMediaPath(for dishId: String) -> URL? {
+        return FirebaseReference.dishes.getImagePath(with: dishId)
     }
 }

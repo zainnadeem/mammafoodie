@@ -17,10 +17,9 @@ class LiveVideoMainPageInteractor: LiveVideoMainPageInteractorInput {
     // MARK: - Business logic
     
     func loadLiveVideos() {
-        loadLiveVideoWorker.callAPI { liveVideos in
+        self.loadLiveVideoWorker.getList { (liveVideos) in
             let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
-            output.presentLiveVideos(response)
-  
+            self.output.presentLiveVideos(response)
         }
     }
     

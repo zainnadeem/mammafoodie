@@ -32,15 +32,6 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
     
     @IBAction func populateNewsfeed(_ sender: Any) {
         
-//        let dData = DummyData.sharedInstance
-        
-//        dData.populateNewsfeed { (newsfeed) in
-//            
-//            
-//        }
-//        
-//        _ = dData.getUserForProfilePage()
-        
     }
    
     override func viewDidLoad() {
@@ -73,7 +64,7 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
         
         cell.setViewProperties()
-        cell.media = liveVideos.arrayOfLiveVideos[indexPath.row]
+        cell.dish = liveVideos.arrayOfLiveVideos[indexPath.row]
         
         //Arrange views depending on specific cells
         if indexPath.item % 3 != 0 {
@@ -89,7 +80,12 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return liveVideos.arrayOfLiveVideos.count
+        if self.liveVideos != nil {
+            return self.liveVideos.arrayOfLiveVideos.count
+        } else {
+            return 0
+        }
+        
     }
 }
 
