@@ -210,7 +210,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         }
                                         if ready {
                                             let user = MFUser.init()
-                                            user.id = FirebaseReference.user.generateAutoID()
+                                            user.id = FirebaseReference.users.generateAutoID()
                                             user.name = "Arjav"
 
                                             let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
@@ -220,7 +220,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                             dish.pricePerSlot = pricePerSlots
                                             dish.user = user
                                             dish.createdAt = Date.init()
-                                            dish.endedAt = dish.createdAt.addingTimeInterval(countDown)
+                                            dish.endTimestamp = dish.createdAt.addingTimeInterval(countDown)
                                             self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                         }
                                     } else {

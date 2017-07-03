@@ -43,7 +43,7 @@ class MenuItemTblCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    func setup(with media: MFMedia) {
+    func setup(with media: MFDish) {
 //        self.imgView.image = UIImage(named: media.cover_small!)!
 //        self.lblDishName.text = media.dish.name
 //        self.lblUsername.text =  media.user.name

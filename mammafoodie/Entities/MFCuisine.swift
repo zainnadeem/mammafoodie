@@ -14,9 +14,11 @@ class MFCuisine : Equatable {
         self.name = rawDict["name"] as! String
         if let url = rawDict["selectedImageURL"] as? String {
             self.imageURL = URL.init(string: url)
+        } else {
+//            self.imageURL = URL.init() self.generateImageURL()
         }
     }
-    
+
     init(id: String!, name: String!, isSelected: Bool) {
         self.id = id
         self.name = name
@@ -35,20 +37,21 @@ class MFCuisine : Equatable {
         return lhs.id == rhs.id
     }
     
-    func generateImageURL(for cuisine : Cuisine) -> String! {
-        let urlencodedID : String! = (cuisine.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+    func generateImageURL() -> String {
+        let urlencodedID : String = (cuisine.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
         let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/cuisines%2F\(urlencodedID!).png?alt=media"
         return string
     }
     
-    func getStoragePath(for cuisine : Cuisine) -> String! {
-        var urlencodedID : String! = ""
+    func getStoragePath() -> String! {
+        var urlencodedID : String = ""
         if let idEncoded = cuisine.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             urlencodedID = "\(idEncoded).png"
         }
         return "/cuisines/\(urlencodedID!)"
     }
     
+    /*
     func createCuisines() {
         var array = [Cuisine]()
         let american = UIImage.init(named: "american.png")!
@@ -93,5 +96,5 @@ class MFCuisine : Equatable {
             }
         }
     }
-    
+    */
 }

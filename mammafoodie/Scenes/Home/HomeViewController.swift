@@ -287,7 +287,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     func setupLiveVideoCollectionViewAdapter() {
-        self.liveVideosAdapter.createStaticData()
+        self.liveVideosAdapter.loadLiveVideos()
         self.liveVideosAdapter.conHeightCollectionView = self.conHeightClnLiveVideos
         self.liveVideosAdapter.setup(with: self.clnLiveVideos)
         self.liveVideosAdapter.didSelect = { (selectedLiveVideo, cellFrame) in
@@ -296,7 +296,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
                 // new. push go cook with live video selection
                 //                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
             } else {
-                selectedLiveVideo.accessMode = MediaAccessUserType.viewer
+                selectedLiveVideo.accessMode = MFDishMediaAccessMode.viewer
             }
             self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
@@ -307,17 +307,17 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     func setupVidupCollectionViewAdapter() {
-        self.vidupsAdapter.createStaticData()
+        self.vidupsAdapter.loadVidup()
         self.vidupsAdapter.conHeightCollectionView = self.conHeightClnVidups
         self.vidupsAdapter.setup(with: self.clnVidups)
         self.vidupsAdapter.didSelect = { (selectedVidup, cellFrame) in
             print("Selected vidup: \(selectedVidup.id)")
             if selectedVidup.id == "-1" {
                 // new. push go cook with vidup selection
-                selectedVidup.accessMode = MediaAccessUserType.owner
+                selectedVidup.accessMode = MFDishMediaAccessMode.owner
                 //                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
             } else {
-                selectedVidup.accessMode = MediaAccessUserType.viewer
+                selectedVidup.accessMode = MFDishMediaAccessMode.viewer
             }
             self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
             self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
@@ -378,12 +378,12 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     @IBAction func logout(){
         
-        let firebaseWorker = FirebaseLoginWorker()
+        let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
         
         firebaseWorker.signOut(){ errorMessage in
             
             if errorMessage != nil {
-                 print(errorMessage)
+                print(errorMessage)
             } else {
                 print("Logged out successfully")
                 self.navigationController?.popViewController(animated: true)

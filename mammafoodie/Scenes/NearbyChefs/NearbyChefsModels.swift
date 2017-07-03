@@ -1,5 +1,6 @@
 import UIKit
 import GoogleMaps
+import GoogleMapsCore
 
 class Marker : GMSMarker, GMUClusterItem {
     
