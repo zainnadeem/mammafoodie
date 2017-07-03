@@ -462,7 +462,7 @@ extension DatabaseGateway {
     func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.liveVideo, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > 0 {
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > 0 {
                     return true
                 }
                 return false
@@ -474,7 +474,7 @@ extension DatabaseGateway {
     func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endedAt?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
                     return true
                 }
                 return false
@@ -539,7 +539,7 @@ extension DatabaseGateway {
             }
         }
         
-        dish.endedAt = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
+        dish.endTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
         dish.id = rawDish["id"] as? String ?? ""
         dish.likesCount = rawDish["likesCount"] as? Double ?? 0
         

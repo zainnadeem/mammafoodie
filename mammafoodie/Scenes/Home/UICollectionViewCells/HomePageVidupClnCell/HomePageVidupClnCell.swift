@@ -66,7 +66,7 @@ class HomePageVidupClnCell: UICollectionViewCell {
         
         
         let createTimestamp: TimeInterval = vidup.createdAt?.timeIntervalSinceReferenceDate ?? 0
-        let endTimestamp: TimeInterval = vidup.endedAt?.timeIntervalSinceReferenceDate ?? 0
+        let endTimestamp: TimeInterval = vidup.endTimestamp?.timeIntervalSinceReferenceDate ?? 0
         if endTimestamp > 0 {
             self.circleView.setup()
             self.circleView.vidup = vidup

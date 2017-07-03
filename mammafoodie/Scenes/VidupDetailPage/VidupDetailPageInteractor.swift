@@ -47,8 +47,10 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
                 self.VidupTimerworker.delegate = self
                 if self.mediaPlaying ==  false {
                     self.mediaPlaying = true
-                self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
-                self.Vidupworker.getexpireTime(endedAt: (dishDetails?.endTimestamp)!)
+                    self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
+                    let timeLeft:Int = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
+                    self.VidupTimerworker.seconds = timeLeft
+                    self.VidupTimerworker.runTimer()
                 }
             }
         }

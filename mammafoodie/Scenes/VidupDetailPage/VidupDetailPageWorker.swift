@@ -95,21 +95,6 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
-    
-    
-    
-//    func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?,_ mediaInfo:MFMedia?)->()){
-//        DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
-//            
-//            if DishInfo != nil {
-//                DatabaseGateway.sharedInstance.getMediaWith(mediaID: (DishInfo?.mediaID)!, { (mediaDetails) in
-//                    completion(DishInfo, mediaDetails)
-//                })
-//            }
-//            
-//        }
-//    }
-    
     func GetDishLikeDetails(Id:String,completion:@escaping(_ likeCount:Int)->()){
         DatabaseGateway.sharedInstance.getDishLike(dishID: Id) { (LikeCount) in
             completion(LikeCount!)
@@ -135,14 +120,9 @@ class VidupDetailPageWorker:NSObject {
     }
     
 
-    func getexpireTime(endedAt:Date)->Int{
-        
+    func getexpireTime(endTimestamp:Date)->Int{
         var TimeLeft:Int = 0
-        
-        let CurrentTime = Date().timeIntervalSinceReferenceDate
-        
-//        TimeLeft = endedAt - CurrentTime
-        
+        TimeLeft = Int(endTimestamp.timeIntervalSinceReferenceDate)
         return TimeLeft
     }
     
