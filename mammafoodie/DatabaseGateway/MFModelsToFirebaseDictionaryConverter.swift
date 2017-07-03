@@ -59,7 +59,7 @@ class MFModelsToFirebaseDictionaryConverter {
         ]
         
         if dish.mediaType != MFDishMediaType.liveVideo {
-            rawDish["endTimestamp"] = dish.endedAt?.timeIntervalSinceReferenceDate
+            rawDish["endTimestamp"] = dish.endTimestamp?.timeIntervalSinceReferenceDate
         }
         
         return [dish.id : rawDish as AnyObject]
