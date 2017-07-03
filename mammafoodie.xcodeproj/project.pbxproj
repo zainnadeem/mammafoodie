@@ -372,8 +372,6 @@
 		2CFB9BBB1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */; };
 		2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */; };
 		2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */; };
-		2CFB9BC01EFA479900C08EB3 /* LiveVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */; };
-		2CFB9BC11EFA479900C08EB3 /* LiveVideo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */; };
 		2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */; };
 		2CFB9BC51EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */; };
 		2CFB9BC71EFA4CA600C08EB3 /* R5Streaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BC61EFA4CA600C08EB3 /* R5Streaming.framework */; };
@@ -718,7 +716,6 @@
 		2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageRouter.swift; sourceTree = "<group>"; };
 		2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageViewController.swift; sourceTree = "<group>"; };
 		2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageWorker.swift; sourceTree = "<group>"; };
-		2CFB9BBF1EFA479900C08EB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveVideo.storyboard; sourceTree = "<group>"; };
 		2CFB9BC31EFA47B300C08EB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VidupDetails.storyboard; sourceTree = "<group>"; };
 		2CFB9BC61EFA4CA600C08EB3 /* R5Streaming.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = R5Streaming.framework; sourceTree = "<group>"; };
 		2CFB9BC91EFA4D0700C08EB3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -803,7 +800,7 @@
 		BF4E1CAE1EF7FAD2001A6890 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BF4E1CAF1EF7FAEE001A6890 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BF4E1CB01EF7FAFB001A6890 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
-		BF5060D51EE81B9E00DB646F /* mammafoodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mammafoodie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5060D51EE81B9E00DB646F /* mamma foodie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mamma foodie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5060D81EE81B9E00DB646F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5060DD1EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF5060E21EE81B9E00DB646F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1314,7 +1311,6 @@
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
-				2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 			);
@@ -1648,7 +1644,7 @@
 		BF5060D61EE81B9E00DB646F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF5060D51EE81B9E00DB646F /* mammafoodie.app */,
+				BF5060D51EE81B9E00DB646F /* mamma foodie.app */,
 				2CB8BF071EF247A800DA78B3 /* mammafoodieTests.xctest */,
 			);
 			name = Products;
@@ -1867,7 +1863,7 @@
 			);
 			name = mammafoodie;
 			productName = mammafoodie;
-			productReference = BF5060D51EE81B9E00DB646F /* mammafoodie.app */;
+			productReference = BF5060D51EE81B9E00DB646F /* mamma foodie.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1920,7 +1916,6 @@
 				2C6979E01F07C95F00787DCC /* GoogleService-Info.plist in Resources */,
 				2C12BCBE1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
 				2C12BCD61EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
-				2CFB9BC11EFA479900C08EB3 /* LiveVideo.storyboard in Resources */,
 				2C12BCBA1EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				2C946EB51EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
 				2C6979E21F07C95F00787DCC /* MapStyle.json in Resources */,
@@ -1946,7 +1941,6 @@
 				BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */,
 				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
-				2CFB9BC01EFA479900C08EB3 /* LiveVideo.storyboard in Resources */,
 				2C12BCB91EF7D237007AF994 /* HomePageLiveVideoClnCell.xib in Resources */,
 				572E9AB01EFAB5DC007DE6D0 /* CuisineCollectionViewCell.xib in Resources */,
 				570ED4201F0684F000B41F0E /* ImageEditor.storyboard in Resources */,
@@ -2581,14 +2575,6 @@
 			name = NearbyChefs.storyboard;
 			sourceTree = "<group>";
 		};
-		2CFB9BBE1EFA479900C08EB3 /* LiveVideo.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CFB9BBF1EFA479900C08EB3 /* Base */,
-			);
-			name = LiveVideo.storyboard;
-			sourceTree = "<group>";
-		};
 		2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2782,6 +2768,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3K8C5C5YMF;
@@ -2792,8 +2779,8 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocookfinal;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
+				PRODUCT_NAME = "mamma foodie";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2805,6 +2792,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3K8C5C5YMF;
@@ -2815,8 +2803,8 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocookfinal;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
+				PRODUCT_NAME = "mamma foodie";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -2,6 +2,7 @@ import UIKit
 
 class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+
     func loadLiveVideos() {
         let worker: LiveVideoListWorker = LiveVideoListWorker()
         worker.getList { (dishes) in
