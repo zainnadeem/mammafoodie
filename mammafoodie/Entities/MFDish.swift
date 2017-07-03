@@ -53,7 +53,10 @@ class MFDish {
     var location : CLLocationCoordinate2D?
     var address : String = ""
     
-    var accessMode: MediaAccessUserType = .viewer
+    init() {
+        self.id = ""
+        self.name = ""
+    }
     
     init(id: String, user: MFUser, description: String, name: String) {
         self.id = id

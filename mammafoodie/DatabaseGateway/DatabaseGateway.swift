@@ -549,15 +549,12 @@ extension DatabaseGateway {
     
     func createDish(from rawDish: FirebaseDictionary) -> MFDish {
         let dish: MFDish = MFDish()
-        
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
         dish.createdAt = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
-            var cuisine: MFCuisine = MFCuisine()
-            cuisine.id = rawCuisine["id"] as? String ?? ""
-            cuisine.name = rawCuisine["name"] as? String ?? ""
+            var cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
             dish.cuisine = cuisine
         }
         

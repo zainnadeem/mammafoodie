@@ -78,7 +78,7 @@ class MFModelsToFirebaseDictionaryConverter {
             rawDish["endTimestamp"] = dish.endTimestamp?.timeIntervalSinceReferenceDate
         }
         if let location = dish.location {
-            dict["location"] = [
+            rawDish["location"] = [
                 "latitude" : location.latitude,
                 "longitude" : location.longitude,
                 "address" : dish.address
