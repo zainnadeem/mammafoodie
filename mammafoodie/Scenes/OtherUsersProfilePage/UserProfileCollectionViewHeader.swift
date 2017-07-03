@@ -149,8 +149,8 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         self.lblCookedCount.text = data.cookedDishes.keys.count.description
         self.lblFavouriteDishesCount.text = data.likedDishes.keys.count.description
         
-        if let profilePicURL = data.picture{
-            self.profilePicImageView.sd_setImage(with: URL(string: profilePicURL)!)
+        if let profilePicURL = data.picture,  let url = URL(string: profilePicURL){
+            self.profilePicImageView.sd_setImage(with: url)
         }
         
         

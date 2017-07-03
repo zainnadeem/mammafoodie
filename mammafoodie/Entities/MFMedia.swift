@@ -87,7 +87,7 @@ class MFMedia {
         self.endedAt = Date(fromString:endedDateString, format: .isoDateTimeSec)
         
         
-        let dishId = mediaDictionary["dishId"] as? String ?? ""
+          let dishId = mediaDictionary["dishId"] as? String ?? ""
 //        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
         self.numberOfViewers = mediaDictionary["numberOfViewers"] as? UInt ?? 0
         

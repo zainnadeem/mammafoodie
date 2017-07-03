@@ -20,19 +20,19 @@ class MFUser {
 //    var following: [MFUser:Date] = [:] // [userId:Date]
 //    var blocked: [MFUser:Date] = [:] // [userId:Date]
 //    
-    var socialAccountIds: [String:String] = [:] // [SocialAccountName:AccountId]
+//    var socialAccountIds: [String:String] = [:] // [SocialAccountName:AccountId]
     
     
     
-    var userActivity: [String:Bool] = [:]   //[MFNewsFeed.id : true]
-    var cookedDishes: [String:Bool] = [:] // dishId:Date
-    var boughtDishes: [String:Bool] = [:] // dishId:Date
-    var favoriteDishes: [String:Bool] = [:] // dishId:Date
-    var likedDishes: [String:Bool] = [:] // dishId:Date
-    
-    var followers: [String:Bool] = [:] // [userId:Date]
-    var following: [String:Bool] = [:] // [userId:Date]
-    var blocked: [String:Bool] = [:] // [userId:Date]
+//    var userActivity: [String:Bool] = [:]   //[MFNewsFeed.id : true]
+//    var cookedDishes: [String:Bool] = [:] // dishId:Date
+//    var boughtDishes: [String:Bool] = [:] // dishId:Date
+//    var favoriteDishes: [String:Bool] = [:] // dishId:Date
+//    var likedDishes: [String:Bool] = [:] // dishId:Date
+//    
+//    var followers: [String:Bool] = [:] // [userId:Date]
+//    var following: [String:Bool] = [:] // [userId:Date]
+//    var blocked: [String:Bool] = [:] // [userId:Date]
     
    
     init() {
@@ -50,15 +50,15 @@ class MFUser {
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
-        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
-        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
-        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
-        self.boughtDishes = Dictionary["boughtDishes"] as? [String:Bool] ?? [:]
-        self.favoriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
-        self.likedDishes = Dictionary["likedDished"] as? [String:Bool] ?? [:]
-        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
-        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
-        self.blocked = Dictionary["blocked"] as? [String:Bool] ?? [:]
+//        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
+//        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
+//        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
+//        self.boughtDishes = Dictionary["boughtDishes"] as? [String:Bool] ?? [:]
+//        self.favoriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
+//        self.likedDishes = Dictionary["likedDished"] as? [String:Bool] ?? [:]
+//        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
+//        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
+//        self.blocked = Dictionary["blocked"] as? [String:Bool] ?? [:]
     }
 
     init(id: String, name: String, picture:String, profileDescription: String) {

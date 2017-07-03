@@ -20,6 +20,8 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case cookedDishes = "CookedDishes"
+    case boughtDishes = "BoughtDishes"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -324,6 +326,57 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
+    
+    
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
+        
+        FirebaseReference.cookedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            var dishes = [MFDish]()
+            
+            for dishID in dishData.keys {
+                
+                self.getDishWith(dishID: dishID, { (dish) in
+                    if dish != nil {
+                      dishes.append(dish!)
+                    }
+                })
+            }
+            
+            completion(dishes)
+        })
+    }
+    
+    
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
+        
+        FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            var dishes = [MFDish]()
+            
+            for dishID in dishData.keys {
+                
+                self.getDishWith(dishID: dishID, { (dish) in
+                    if dish != nil {
+                        dishes.append(dish!)
+                    }
+                })
+            }
+            
+            completion(dishes)
+        })
+    }
+    
     
     
     func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){

@@ -42,6 +42,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         dishCollectionViewAdapter.delegate = self
         dishCollectionViewAdapter.profileType = profileType
         dishCollectionViewAdapter.collectionView = collectionView
+        dishCollectionViewAdapter.selectedIndexForProfile = .cooked
     }
     
     func loadUserProfileData(userID:String) {
