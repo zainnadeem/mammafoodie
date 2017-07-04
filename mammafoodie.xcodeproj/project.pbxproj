@@ -505,6 +505,8 @@
 		F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */; };
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
+		F0A980F01F0A3BAC00772BAA /* PagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A980EF1F0A3BAC00772BAA /* PagingViewController.swift */; };
+		F0B161B21EF7F55000D76FD8 /* TextViewPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -839,6 +841,8 @@
 		F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListWorker.swift; sourceTree = "<group>"; };
 		F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListAdapter.swift; sourceTree = "<group>"; };
+		F0A980EF1F0A3BAC00772BAA /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
+		F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewPlaceHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1233,6 +1237,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
+				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
@@ -1746,6 +1752,14 @@
 				F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */,
 			);
 			path = ChatList;
+			sourceTree = "<group>";
+		};
+		F0A980EE1F0A3B4E00772BAA /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				F0A980EF1F0A3BAC00772BAA /* PagingViewController.swift */,
+			);
+			name = OnBoarding;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -2365,6 +2379,7 @@
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
+				F0A980F01F0A3BAC00772BAA /* PagingViewController.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,

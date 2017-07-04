@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ew4-Ke-Kuk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="P9N-71-Oay">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,7 +14,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.ttf">
+        <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Light.ttf">
@@ -227,7 +227,7 @@
         <!--Request Dish View Controller-->
         <scene sceneID="Fdn-sv-7Hy">
             <objects>
-                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestDishViewController" id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zie-Xh-td4"/>
                         <viewControllerLayoutGuide type="bottom" id="sq6-sc-34F"/>
@@ -610,6 +610,58 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1226" y="1038"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="RFj-Cd-SiU">
+            <objects>
+                <viewController id="DQO-Iv-pda" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R0s-4K-W1S"/>
+                        <viewControllerLayoutGuide type="bottom" id="CaT-9q-2wv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gja-cq-KZb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefScreenShot" translatesAutoresizingMaskIntoConstraints="NO" id="o7Q-lm-BF0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="edY-IQ-QZc">
+                                <rect key="frame" x="124.5" y="434" width="71" height="37"/>
+                                <connections>
+                                    <action selector="pageButton:" destination="DQO-Iv-pda" eventType="valueChanged" id="3yX-0J-je6"/>
+                                </connections>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU9-2a-0Vo">
+                                <rect key="frame" x="113.5" y="476" width="93" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="16"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" red="1" green="0.38823529410000002" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yU9-2a-0Vo" firstAttribute="centerX" secondItem="gja-cq-KZb" secondAttribute="centerX" id="7Fy-Gi-kk7"/>
+                            <constraint firstItem="yU9-2a-0Vo" firstAttribute="top" secondItem="edY-IQ-QZc" secondAttribute="bottom" constant="5" id="EvH-BF-QRJ"/>
+                            <constraint firstAttribute="trailing" secondItem="o7Q-lm-BF0" secondAttribute="trailing" id="NDa-uP-j1Q"/>
+                            <constraint firstItem="CaT-9q-2wv" firstAttribute="top" secondItem="o7Q-lm-BF0" secondAttribute="bottom" id="Pbk-DJ-Spg"/>
+                            <constraint firstItem="o7Q-lm-BF0" firstAttribute="top" secondItem="gja-cq-KZb" secondAttribute="topMargin" id="WV1-oV-1QR"/>
+                            <constraint firstItem="o7Q-lm-BF0" firstAttribute="leading" secondItem="gja-cq-KZb" secondAttribute="leading" id="cLc-30-AKm"/>
+                            <constraint firstItem="CaT-9q-2wv" firstAttribute="top" secondItem="yU9-2a-0Vo" secondAttribute="bottom" constant="58" id="noH-et-D2i"/>
+                            <constraint firstItem="edY-IQ-QZc" firstAttribute="centerX" secondItem="yU9-2a-0Vo" secondAttribute="centerX" id="p0L-9m-Z2P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="o7Q-lm-BF0" id="am7-0o-cVu"/>
+                        <outlet property="pageController" destination="edY-IQ-QZc" id="3HN-IK-1Ej"/>
+                        <outlet property="startButtn" destination="yU9-2a-0Vo" id="EO7-i6-8ZM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xRh-1Z-hvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2133.75" y="892.6056338028169"/>
         </scene>
         <!--Chat List View Controller-->
         <scene sceneID="SyY-3L-zW0">
@@ -998,7 +1050,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6S7-g4-pG1">
-                                                            <rect key="frame" x="124.5" y="8" width="72" height="18"/>
+                                                            <rect key="frame" x="124" y="8" width="72" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="wsg-bU-Dgf"/>
                                                             </constraints>
@@ -1478,13 +1530,13 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="73.5" height="21.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="1129" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p61-Fj-Lar">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="19.5" height="21.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="39.5" height="21.5"/>
                                                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="16"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Dishes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSF-dv-ewJ">
-                                                                                <rect key="frame" x="24.5" y="0.0" width="49" height="21.5"/>
+                                                                                <rect key="frame" x="44.5" y="0.0" width="29" height="21.5"/>
                                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                                                 <color key="textColor" red="0.0" green="0.70980392160000005" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1753,6 +1805,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7v-3V-Lp0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4363.125" y="2301.7605633802818"/>
+        </scene>
+        <!--Paging View Controller-->
+        <scene sceneID="9dt-zB-KnH">
+            <objects>
+                <pageViewController storyboardIdentifier="PagingViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="P9N-71-Oay" customClass="PagingViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dcV-A0-f1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2621" y="6785"/>
         </scene>
         <!--Other Users Profile View Controller-->
         <scene sceneID="SOM-Be-FOo">
@@ -2180,6 +2240,7 @@
         <image name="Name" width="42" height="17"/>
         <image name="Profile Image" width="413" height="432"/>
         <image name="Settings" width="57" height="56"/>
+        <image name="chefScreenShot" width="310" height="465"/>
         <image name="emoji" width="34" height="35"/>
         <image name="selectuser" width="44" height="47"/>
         <image name="unselectpass" width="35" height="47"/>
