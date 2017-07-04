@@ -25,11 +25,14 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     
     let slotsPerRow = 4
     
+    let availableSlots = 25
+    
     func setUpCollectionView(){
         
         //Register cell
         collectionView!.register(SlotSelectionCollectionViewCell.self, forCellWithReuseIdentifier: SlotSelectionCollectionViewCell.reuseIdentifier)
         collectionView!.register(UINib(nibName: "SlotSelectionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SlotSelectionCollectionViewCell.reuseIdentifier)
+        collectionView?.showsVerticalScrollIndicator = false
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -93,18 +96,31 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return totalSlotsCount
+        return totalSlotsCount + (totalSlotsCount % slotsPerRow)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlotSelectionCollectionViewCell.reuseIdentifier, for: indexPath) as! SlotSelectionCollectionViewCell
        
+        let bookedSlots = totalSlotsCount - availableSlots
+        
+        if indexPath.item < bookedSlots{
+           cell.imageView.image = UIImage(named: "Food Bowl Unselected")
+            return cell
+        }
+        
+        
+        if indexPath.item >= totalSlotsCount{
+            cell.imageView.image = UIImage(named: "CloseWhite")
+            return cell
+        }
+        
+        
         if selectedCells[indexPath.item] != nil {
             cell.imageView.image = UIImage(named: "Food Bowl Selected")
         } else {
-            cell.imageView.image = UIImage(named: "Food Bowl Unselected")
+            cell.imageView.image = nil
         }
-        
         return cell
     }
     
@@ -126,6 +142,9 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard indexPath.item >= (totalSlotsCount - availableSlots) && indexPath.item < totalSlotsCount else {return}
+        
         let cell = collectionView.cellForItem(at: indexPath) as! SlotSelectionCollectionViewCell
         
     
@@ -137,8 +156,11 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+         guard indexPath.item >= (totalSlotsCount - availableSlots) && indexPath.item < totalSlotsCount else {return}
+        
         let cell = collectionView.cellForItem(at: indexPath) as! SlotSelectionCollectionViewCell
-        cell.imageView.image = UIImage(named: "Food Bowl Unselected")
+        cell.imageView.image = nil
         cell.isSelected = false
         
         selectedCells.removeValue(forKey: indexPath.item)
