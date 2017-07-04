@@ -505,6 +505,9 @@
 		F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */; };
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
+		F0A980F81F0A859400772BAA /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A980F61F0A859400772BAA /* FollowersListViewController.swift */; };
+		F0A980FE1F0A89CD00772BAA /* FollowersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */; };
+		F0A980FF1F0A89CD00772BAA /* FollowersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -839,6 +842,9 @@
 		F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListWorker.swift; sourceTree = "<group>"; };
 		F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListAdapter.swift; sourceTree = "<group>"; };
+		F0A980F61F0A859400772BAA /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableCell.swift; sourceTree = "<group>"; };
+		F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowersTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1233,6 +1239,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F0A980F51F0A850F00772BAA /* Followers */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
@@ -1748,6 +1755,16 @@
 			path = ChatList;
 			sourceTree = "<group>";
 		};
+		F0A980F51F0A850F00772BAA /* Followers */ = {
+			isa = PBXGroup;
+			children = (
+				F0A980F61F0A859400772BAA /* FollowersListViewController.swift */,
+				F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */,
+				F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */,
+			);
+			name = Followers;
+			sourceTree = "<group>";
+		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1906,6 +1923,7 @@
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
 				2C12BCCF1EF7F053007AF994 /* MenuCuisineSelectorClnCell.xib in Resources */,
 				2C12BCBD1EF7D237007AF994 /* HomePageVidupClnCell.xib in Resources */,
+				F0A980FF1F0A89CD00772BAA /* FollowersTableCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */,
@@ -2254,6 +2272,7 @@
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
 				BFC927491EF00A7E00602153 /* VidupMainPageRouter.swift in Sources */,
 				2CE22E8E1F0A46DE00B6E5B0 /* TextViewPlaceHolder.swift in Sources */,
+				F0A980F81F0A859400772BAA /* FollowersListViewController.swift in Sources */,
 				BFC9273F1EF00A7E00602153 /* PermissionsAlertInteractor.swift in Sources */,
 				2C9256CC1F0A1E560095E88B /* CommentsTableViewAdapter.swift in Sources */,
 				2CFB9BB21EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */,
@@ -2405,6 +2424,7 @@
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				2C6979C11F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */,
+				F0A980FE1F0A89CD00772BAA /* FollowersTableCell.swift in Sources */,
 				570ED40B1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift in Sources */,
 				570ED4141F0684F000B41F0E /* IC_CGPointExtension.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
