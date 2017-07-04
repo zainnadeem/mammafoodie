@@ -16,10 +16,18 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
     
     var collectionViewAdapter : SlotCollectionViewAdapter!
     
+    var boughtUsersCollectionViewAdapter:UsersBoughtCollectionViewAdapter!
+    
     var selectedSlots : Dictionary<String, Any>?
     //MARK: - Outlets
     
     @IBOutlet weak var collectionView:UICollectionView!
+    
+    @IBOutlet weak var usersBoughtCollectionView: UICollectionView!
+    
+    @IBOutlet weak var btnDone: UIButton!
+    
+    @IBOutlet weak var lblSlotsPickedCount: UILabel!
     
     // MARK: - Object lifecycle
     
@@ -38,18 +46,47 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         collectionViewAdapter = SlotCollectionViewAdapter()
         collectionViewAdapter.collectionView = self.collectionView
         
-//       let selectedCells = collectionViewAdapter.selectedCells
+        boughtUsersCollectionViewAdapter = UsersBoughtCollectionViewAdapter()
+        boughtUsersCollectionViewAdapter.collectionView = self.usersBoughtCollectionView
+        
+        
+        let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
+        let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
+        
+        
+        btnDone.applyGradient(colors: [color1, color2], direction: .leftToRight)
+        DispatchQueue.main.async {
+            self.btnDone.layer.cornerRadius = self.btnDone.frame.size.height/2
+            self.btnDone.clipsToBounds = true
+        }
         
     }
     
-    // MARK: - Event handling
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //        collectionView.reloadData()
+        collectionViewAdapter.addCollectionViewGrid()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        //        collectionViewAdapter.addCollectionViewGrid()
+    }
+    
+    
+    // MARK: - Event handling/
     
     func handlePan(_ sender:UIPanGestureRecognizer){
         output.handleSlotSelection(withPanGesture: sender, adapter: collectionViewAdapter)
     }
     
+    @IBAction func dismiss(){
+        self.dismiss(animated: true, completion: nil)
+    }
     
-    //MARK: - Input 
+    
+    //MARK: - Input
     func selectedSlots(_ slots: Dictionary<String, Any>){
         
     }
