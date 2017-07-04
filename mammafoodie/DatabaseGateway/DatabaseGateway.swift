@@ -678,3 +678,23 @@ extension DatabaseGateway {
         return FirebaseReference.users.getImagePath(with: userId)
     }
 }
+
+// Get Order Detail
+extension DatabaseGateway {
+    
+    func getordersWith(_ completion: @escaping ((_ order:MFOrder?)->Void)){
+        
+        FirebaseReference.orders.classReference.observeSingleEvent(of: .value, with: { (ordersDataSnapshot) in
+            guard let ordersData = ordersDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let order:MFOrder = MFOrder(from: ordersData)
+            completion(order)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
+    }
+}

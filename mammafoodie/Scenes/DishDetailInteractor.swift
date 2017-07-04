@@ -25,6 +25,7 @@ class DishDetailInteractor: DishDetailInteractorInput {
     
     var favoriteStatusWorker: CheckFavoriteStatusWorker!
     var favoritesTappedWorker: FavoritesTappedWorker!
+    var OrderCountWorker: orderCountWorker!
     
     func getDish(with id: String) {
         dishWorker = LoadDishWorker()
@@ -33,8 +34,15 @@ class DishDetailInteractor: DishDetailInteractorInput {
             let response = DishDetail.Dish.Response(dish: dish)
             self.output.presentDish(response)
             
+            if ((dish?.totalSlots)! - (dish?.availableSlots)!) == 0 {
+                
+            }else{
+                self.OrderCountWorker = orderCountWorker()
+                self.OrderCountWorker.getOrderCount(dishID: id) { (orderCount) in
+                    print(orderCount)
+                }
+            }
         }
-        
     }
     
     func likeButtonTapped(userId: String, dishId: String, selected: Bool) {
