@@ -97,7 +97,10 @@ class MFDish {
         self.user = MFUser() ; user.id = userID
         
         self.mediaURL = NSURL(string: dishDataDictionary["mediaURL"]  as? String ?? "") as URL?
-        self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: dishDataDictionary["endTimestamp"] as! TimeInterval)
+        if let endTime = dishDataDictionary["endTimestamp"] as? Double {
+            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endTime)
+        }
+        
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0

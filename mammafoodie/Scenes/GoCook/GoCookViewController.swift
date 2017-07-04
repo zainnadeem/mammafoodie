@@ -109,16 +109,21 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         switch self.selectedOption {
         case .liveVideo:
             dish.save { (error) in
-                self.showAlert(error?.localizedDescription, message: nil)
+                DispatchQueue.main.async {
+                    self.selectedOption = .unknown
+                    self.onStep1(self.btnStep1)
+                    self.step2VC.clearData()
+                    self.showAlert(error?.localizedDescription ?? "Dish Saved", message: nil)
+                }
             }
             
         case .picture:
             if let img = image {
                 DatabaseGateway.sharedInstance.save(image: img, at: dish.getStoragePath(), completion: { (downloadURL, error) in
-                    if let url = downloadURL {
-                        self.saveDish(dish, mediaURL: url)
-                    } else {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if let url = downloadURL {
+                            self.saveDish(dish, mediaURL: url)
+                        } else {
                             self.showAlert(error?.localizedDescription, message: nil)
                         }
                     }
@@ -128,10 +133,10 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         case .vidup:
             if let video = videoURL {
                 DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
-                    if let url = downloadURL {
-                        self.saveDish(dish, mediaURL: url)
-                    } else {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if let url = downloadURL {
+                            self.saveDish(dish, mediaURL: url)
+                        } else {
                             self.showAlert(error?.localizedDescription, message: nil)
                         }
                     }
@@ -147,14 +152,14 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         dish.mediaURL = mediaURL
         dish.save { (error) in
             DispatchQueue.main.async {
+                self.selectedOption = .unknown
+                self.onStep1(self.btnStep1)
+                self.step2VC.clearData()
                 if let er = error {
                     self.showAlert(er.localizedDescription, message: nil)
                 } else {
                     self.showAlert("Dish Saved", message: "")
                 }
-                self.selectedOption = .unknown
-                self.onStep1(self.btnStep1)
-                self.step2VC.clearData()
             }
         }
     }
