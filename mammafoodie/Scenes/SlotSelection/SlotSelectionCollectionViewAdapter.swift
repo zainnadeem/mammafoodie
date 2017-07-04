@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SlotCollectionAdapterDelegate{
+    func selectedSlotsCount(_ count:Int)
+}
+
 
 class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
@@ -17,7 +21,13 @@ class SlotCollectionViewAdapter: NSObject, UICollectionViewDataSource, UICollect
         }
     }
     
-    var selectedCells = [Int:Bool]()
+    var delegate:SlotCollectionAdapterDelegate!
+    
+    var selectedCells = [Int:Bool]() {
+        didSet{
+            delegate.selectedSlotsCount(selectedCells.keys.count)
+        }
+    }
     
     var totalSlotsCount : Int! = 30
     

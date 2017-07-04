@@ -15,6 +15,8 @@ struct CascadingViews {
         let limit = 3 //Max number of images to show in UI
         
         var imageViews = [UIView]()
+    
+    let bg:[UIColor] = [.red, .blue, .yellow, .green]
         
         for (index,user) in users.enumerated() {
             
@@ -29,12 +31,15 @@ struct CascadingViews {
             imageView.layer.cornerRadius = size/2
             imageView.clipsToBounds = true
             
+            imageView.backgroundColor = bg[index]
+            
             imageView.translatesAutoresizingMaskIntoConstraints = false
             
             imageView.widthAnchor.constraint(equalToConstant: size).isActive = true
             imageView.heightAnchor.constraint(equalToConstant: size).isActive = true
             
             imageViews.append(imageView)
+            
             
             if index == 2 && users.count > limit { //Only add first 3 images
                 
@@ -46,7 +51,8 @@ struct CascadingViews {
                 label.backgroundColor = .orange
                 label.layer.cornerRadius = size/2
                 label.clipsToBounds = true
-                label.font = UIFont.MontserratSemiBold(with: 14)
+                label.textAlignment = .right
+                label.font = UIFont.MontserratSemiBold(with: 16)
                 imageViews.append(label)
                 
                 break

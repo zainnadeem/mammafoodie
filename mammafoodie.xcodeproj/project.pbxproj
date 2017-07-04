@@ -34,6 +34,8 @@
 		113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */; };
 		113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113948D41F052A4900F98E74 /* UserProfile.storyboard */; };
 		114F34121F0BD202007F1D92 /* NestedImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F340D1F0B742A007F1D92 /* NestedImageViews.swift */; };
+		114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F34151F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift */; };
+		114F34181F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114F34161F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib */; };
 		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -568,6 +570,8 @@
 		113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewHeader.swift; sourceTree = "<group>"; };
 		113948D51F052A4900F98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
 		114F340D1F0B742A007F1D92 /* NestedImageViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedImageViews.swift; sourceTree = "<group>"; };
+		114F34151F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		114F34161F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlotSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
 		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
@@ -939,6 +943,15 @@
 				113139C91EF7BA2D000050D6 /* Montserrat-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		114F34141F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				114F34151F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift */,
+				114F34161F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib */,
+			);
+			path = SlotSelectionCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		118FB2AE1EEAC93300E5E6E5 /* SlotSelection */ = {
@@ -1744,6 +1757,7 @@
 				2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */,
 				57801F761EF8308C002E18EF /* CuisineSearchCollectionViewCell */,
 				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
+				114F34141F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell */,
 				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
 				113139D31EF7F4E5000050D6 /* DishCollectionViewCell.swift */,
 				113139D41EF7F4E5000050D6 /* DishCollectionViewCell.xib */,
@@ -1968,6 +1982,7 @@
 				570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
+				114F34181F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib in Resources */,
 				2C6979E11F07C95F00787DCC /* MapStyle.json in Resources */,
 				2CD37DB21F0992790058EFDF /* (null) in Resources */,
 				113139CD1EF7BA2D000050D6 /* Montserrat-ExtraLight.otf in Resources */,
@@ -2523,6 +2538,7 @@
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
+				114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */,
 				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SlotSelectionViewControllerInput {
-    func selectedSlots(_ slots: Dictionary<String, Any>)
+//    func selectedSlots(_ slots: Dictionary<String, Any>)
 }
 
 protocol SlotSelectionViewControllerOutput {
@@ -9,7 +9,7 @@ protocol SlotSelectionViewControllerOutput {
     func handleSlotSelection(withPanGesture sender:UIPanGestureRecognizer, adapter:SlotCollectionViewAdapter)
 }
 
-class SlotSelectionViewController: UIViewController, SlotSelectionViewControllerInput {
+class SlotSelectionViewController: UIViewController, SlotSelectionViewControllerInput,SlotCollectionAdapterDelegate {
     
     var output: SlotSelectionViewControllerOutput!
     var router: SlotSelectionRouter!
@@ -43,6 +43,7 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         self.view.addGestureRecognizer(pan)
         
         collectionViewAdapter = SlotCollectionViewAdapter()
+        collectionViewAdapter.delegate = self
         collectionViewAdapter.collectionView = self.collectionView
         
         let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
@@ -67,7 +68,7 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let stack = CascadingViews.imageViews(withUsers:[MFUser(),MFUser(),MFUser(),MFUser(),MFUser()], size:50)
+        let stack = CascadingViews.imageViews(withUsers:[MFUser(),MFUser(),MFUser(),MFUser(),MFUser()], size:35)
         self.friendsWhoBoughtContainerView.addSubview(stack)
         
         stack.centerXAnchor.constraint(equalTo: self.friendsWhoBoughtContainerView.centerXAnchor).isActive = true
@@ -92,11 +93,11 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    //MARK: - Input
-    func selectedSlots(_ slots: Dictionary<String, Any>){
-        
+    func selectedSlotsCount(_ count:Int){
+        lblSlotsPickedCount.text = "\(count) Slots Selected"
     }
+
+    
     
     
     // MARK: - Display logic
