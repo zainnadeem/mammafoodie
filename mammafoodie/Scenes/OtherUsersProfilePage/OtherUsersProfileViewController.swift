@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:Int)
@@ -6,9 +7,16 @@ protocol OtherUsersProfileViewControllerInput {
 
 protocol OtherUsersProfileViewControllerOutput {
     
-    func setUpDishCollectionView(_ collectionView:UICollectionView)
-    func loadDishCollectionViewForIndex(_ index:Int)
+    func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
+//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    func loadUserProfileData(userID:String)
 }
+
+enum ProfileType{
+    case ownProfile
+    case othersProfile
+}
+
 
 class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewControllerInput {
     
@@ -16,19 +24,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    //MARK: - IBOutlets
-    @IBOutlet weak var lblUserName:UILabel!
-    
-    @IBOutlet weak var lblProfileDescription:UILabel!
-    
-    @IBOutlet weak var lblDishesSold:UILabel!
-    
-    @IBOutlet weak var lblFollowers:UILabel!
-    
-    @IBOutlet weak var lblFollowing:UILabel!
-    
+    var profileType:ProfileType = .othersProfile
+
     @IBOutlet weak var collectionView:UICollectionView!
     
+    
+    var selectedIndexForProfile : SelectedIndexForProfile = .cooked
+    
+    let unSelectedMenuTextColor = UIColor(red: 83/255, green: 85/255, blue: 87/255, alpha: 1)
     
     // MARK: - Object lifecycle
     
@@ -42,10 +45,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        output.setUpDishCollectionView(self.collectionView)
-        output.loadDishCollectionViewForIndex(0) //Loads first segment data by default
+        output.setUpDishCollectionView(self.collectionView, self.profileType)
+        
+        if let user = Auth.auth().currentUser{
+            output.loadUserProfileData(userID: user.uid)
+        }
         
     }
+
     
     //MARK: - Input
     
@@ -56,18 +63,31 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     }
     
     
-    
     // MARK: - Event handling
     
-    @IBAction func segmentedControlDidChangeSelection(sender:UISegmentedControl){
+    
+    @IBAction func settingsButtonClicked(_ sender: UIButton) {
         
-       let index = sender.selectedSegmentIndex
-       output.loadDishCollectionViewForIndex(index)
         
     }
     
     
+    @IBAction func closeButtonClicked(_ sender: UIButton) {
+        
+        
+    }
+    
+    
+    @IBAction func followButtonClicked(_ sender: UIButton) {
+        
+        
+        
+    }
     
     // MARK: - Display logic
+    
+    @IBAction func btnDismissTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }

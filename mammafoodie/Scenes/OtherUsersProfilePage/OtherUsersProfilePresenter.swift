@@ -6,6 +6,7 @@ protocol OtherUsersProfilePresenterInput {
 
 protocol OtherUsersProfilePresenterOutput: class {
     func openDishPageWith(dishID:Int)
+    
 }
 
 class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
@@ -18,5 +19,4 @@ class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
     func openDishPageWith(dishID:Int){
         output.openDishPageWith(dishID: dishID)
     }
-    
 }

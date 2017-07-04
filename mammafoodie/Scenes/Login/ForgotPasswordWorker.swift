@@ -1,18 +1,19 @@
 import GoogleSignIn
 import Firebase
 
-class ForgotPasswordWorker {
+class ForgotPasswordWorker:HUDRenderer {
     
-    func callApI(email:String, completion: @escaping (_ success:Bool, _ errorMessage:String?)->()) {
+    func callApI(email:String, completion: @escaping (_ errorMessage:String?)->()) {
         
+        showActivityIndicator()
             Auth.auth().sendPasswordReset(withEmail: email) { error in
-                // Your code here
+                self.hideActivityIndicator()
                 if error != nil {
-                    completion(false, error!.localizedDescription)
+                    completion(error!.localizedDescription)
                 }
                 else {
-                    completion(true, nil)
-                    print(email)
+                    completion(nil)
+//                    print(email)
                 }
             }
         }

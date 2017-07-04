@@ -10,6 +10,12 @@ import UIKit
 
 class CommentsListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userCommentDate: UILabel!
+    @IBOutlet weak var comments: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

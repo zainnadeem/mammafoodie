@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DishCollectionViewCell" customModule="mammafoodie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="143" height="201"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="143" height="201"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T2D-JY-60g">
+                        <rect key="frame" x="0.0" y="0.0" width="143" height="201"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Views" translatesAutoresizingMaskIntoConstraints="NO" id="EDZ-5r-sBg">
+                        <rect key="frame" x="8" y="8" width="20" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="0b7-Kc-YWc"/>
+                            <constraint firstAttribute="width" constant="20" id="7sy-JI-Xxt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6,372" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIi-XA-Ocn">
+                        <rect key="frame" x="33" y="7" width="104" height="12"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HEALTHY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM4-Lb-ssI">
+                        <rect key="frame" x="8" y="161" width="46.5" height="12"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Veg" translatesAutoresizingMaskIntoConstraints="NO" id="5lE-OK-rcW">
+                        <rect key="frame" x="62.5" y="160.5" width="14" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="7po-UC-Y4r"/>
+                            <constraint firstAttribute="width" constant="14" id="Uzj-yY-d5q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fruit Salad" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pad-XS-LEr">
+                        <rect key="frame" x="8" y="177.5" width="129" height="18.5"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="bIi-XA-Ocn" firstAttribute="centerY" secondItem="EDZ-5r-sBg" secondAttribute="centerY" id="33L-KQ-P5R"/>
+                <constraint firstItem="T2D-JY-60g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8Tz-ly-87n"/>
+                <constraint firstItem="pad-XS-LEr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="BdT-bs-eV5"/>
+                <constraint firstItem="pad-XS-LEr" firstAttribute="top" secondItem="sM4-Lb-ssI" secondAttribute="bottom" constant="4.5" id="IBC-5Z-kfk"/>
+                <constraint firstAttribute="bottom" secondItem="T2D-JY-60g" secondAttribute="bottom" id="JI8-yW-skb"/>
+                <constraint firstAttribute="trailing" secondItem="pad-XS-LEr" secondAttribute="trailing" constant="6" id="N0f-JL-Qbn"/>
+                <constraint firstItem="T2D-JY-60g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Rg7-BB-jG3"/>
+                <constraint firstItem="bIi-XA-Ocn" firstAttribute="leading" secondItem="EDZ-5r-sBg" secondAttribute="trailing" constant="5" id="WQM-3p-hsZ"/>
+                <constraint firstItem="EDZ-5r-sBg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="c5z-xY-jVH"/>
+                <constraint firstAttribute="bottom" secondItem="pad-XS-LEr" secondAttribute="bottom" constant="5" id="haB-5s-CpT"/>
+                <constraint firstItem="5lE-OK-rcW" firstAttribute="centerY" secondItem="sM4-Lb-ssI" secondAttribute="centerY" id="j6H-sm-g8u"/>
+                <constraint firstItem="sM4-Lb-ssI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="jBN-1t-5CT"/>
+                <constraint firstItem="EDZ-5r-sBg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="jOB-be-syM"/>
+                <constraint firstAttribute="trailing" secondItem="bIi-XA-Ocn" secondAttribute="trailing" constant="6" id="lQe-lt-UBs"/>
+                <constraint firstAttribute="trailing" secondItem="T2D-JY-60g" secondAttribute="trailing" id="nST-bB-LHu"/>
+                <constraint firstItem="5lE-OK-rcW" firstAttribute="leading" secondItem="sM4-Lb-ssI" secondAttribute="trailing" constant="8" id="q5j-Ah-171"/>
+            </constraints>
+            <size key="customSize" width="143" height="201"/>
+            <connections>
+                <outlet property="dishImageView" destination="T2D-JY-60g" id="ERx-Rw-vG6"/>
+                <outlet property="lblDishName" destination="pad-XS-LEr" id="12w-pB-NJw"/>
+                <outlet property="lblDishTypeTag" destination="sM4-Lb-ssI" id="LDF-MY-wD4"/>
+                <outlet property="lblNumberOfViews" destination="bIi-XA-Ocn" id="n2q-3Z-fsW"/>
+                <outlet property="vegIndicatorImageView" destination="5lE-OK-rcW" id="onm-BI-Zdh"/>
+            </connections>
+            <point key="canvasLocation" x="111.5" y="-2.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Veg" width="14" height="13"/>
+        <image name="Views" width="49" height="31"/>
+    </resources>
+</document>
