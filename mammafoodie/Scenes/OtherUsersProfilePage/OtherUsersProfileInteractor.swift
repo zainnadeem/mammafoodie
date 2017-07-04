@@ -64,6 +64,15 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             self.dishCollectionViewAdapter.following = following
         }
         
+        worker.getCookedDishesForUser(userID: userID, { (cookedDishes) in
+            self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+        })
+        
+        worker.getBoughtDishesForUser(userID: userID, { (boughtDishes) in
+            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+            
+        })
+        
     }
     
     

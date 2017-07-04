@@ -200,6 +200,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         default:
             return
         }
+        
         self.updateHairLineMenuPosition()
         
         UIView.animate(withDuration: 0.27, animations: {
