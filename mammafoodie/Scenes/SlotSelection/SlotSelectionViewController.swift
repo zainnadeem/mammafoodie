@@ -16,14 +16,13 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
     
     var collectionViewAdapter : SlotCollectionViewAdapter!
     
-    var boughtUsersCollectionViewAdapter:UsersBoughtCollectionViewAdapter!
-    
     var selectedSlots : Dictionary<String, Any>?
     //MARK: - Outlets
     
     @IBOutlet weak var collectionView:UICollectionView!
     
-    @IBOutlet weak var usersBoughtCollectionView: UICollectionView!
+    @IBOutlet weak var friendsWhoBoughtContainerView: UIView!
+   
     
     @IBOutlet weak var btnDone: UIButton!
     
@@ -46,10 +45,6 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         collectionViewAdapter = SlotCollectionViewAdapter()
         collectionViewAdapter.collectionView = self.collectionView
         
-        boughtUsersCollectionViewAdapter = UsersBoughtCollectionViewAdapter()
-        boughtUsersCollectionViewAdapter.collectionView = self.usersBoughtCollectionView
-        
-        
         let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
         let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
         
@@ -66,6 +61,18 @@ class SlotSelectionViewController: UIViewController, SlotSelectionViewController
         super.viewDidAppear(animated)
         //        collectionView.reloadData()
         collectionViewAdapter.addCollectionViewGrid()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let stack = CascadingViews.imageViews(withUsers:[MFUser(),MFUser(),MFUser(),MFUser(),MFUser()], size:50)
+        self.friendsWhoBoughtContainerView.addSubview(stack)
+        
+        stack.centerXAnchor.constraint(equalTo: self.friendsWhoBoughtContainerView.centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: self.friendsWhoBoughtContainerView.centerYAnchor).isActive = true
+        
         
     }
     
