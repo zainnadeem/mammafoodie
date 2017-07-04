@@ -11,7 +11,10 @@ struct User {
 
 class ChatViewController: JSQMessagesViewController {
     
-    
+    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
+    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    let defaults = UserDefaults.standard
+
     var model = MFConversation1()
     var modelMsg = MFMessage1(with: "", messagetext: "", senderId: "")
 
@@ -47,6 +50,11 @@ extension ChatViewController {
     //senderbabbletable
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
        // print(messages)
+        
+        if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
+            return nil
+        }
+        
         let message = messages[indexPath.row]
         let messageUsername = message.senderDisplayName
         return NSAttributedString(string: messageUsername)
@@ -55,15 +63,47 @@ extension ChatViewController {
     
     //Height of table
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 15
+        if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
+            return 0.0
+        }
+        let currentMessage = self.messages[indexPath.item]
+        
+        if currentMessage.senderId == self.senderId {
+            return 0.0
+        }
+        
+        if indexPath.item - 1 > 0 {
+            let previousMessage = self.messages[indexPath.item - 1]
+            if previousMessage.senderId == currentMessage.senderId {
+                return 0.0
+            }
+        }
+        
+        return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
     //ImageData
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        return getAvatar()
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+
+        // messages to show
+        let msg = messages[indexPath.row]
+            if msg.senderId == senderId {
+                cell.textView.textColor = UIColor.white
+            }else{
+                cell.textView.textColor = UIColor.black
+            }
+            cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor ?? UIColor.white]
+            cell.textView.font = UIFont(name: "Montserrat", size: 12)
+            cell.textView.textAlignment = .center
+
+        return cell
+    }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let bubbleFactory = JSQMessagesBubbleImageFactory()
@@ -71,9 +111,9 @@ extension ChatViewController {
         let message = messages[indexPath.row]
         
         if currentUser.id == message.senderId {
-            return bubbleFactory?.outgoingMessagesBubbleImage(with: .green)
+            return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor(red: 255/255, green: 99/255, blue: 34/255, alpha: 1.0))
         } else {
-            return bubbleFactory?.incomingMessagesBubbleImage(with: .lightGray)
+            return bubbleFactory?.incomingMessagesBubbleImage(with: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0))
         }
     }
     
@@ -86,7 +126,25 @@ extension ChatViewController {
         let jsqMessageData = JSQMessage(senderId: mfMessageData.senderId, displayName: mfMessageData.senderDisplayName, text: mfMessageData.messageText )
         return jsqMessageData
     }
-}
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
+        if (indexPath.item % 3 == 0) {
+            let currentDate = Date()
+            return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: currentDate)
+        }
+        return nil
+    }
+    
+
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.item % 3 == 0 {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
+        return 0.0
+    }
+   
+  }
 
 extension ChatViewController {
     override func viewDidLoad() {

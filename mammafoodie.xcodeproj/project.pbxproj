@@ -505,6 +505,20 @@
 		F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */; };
 		F097D8D11EF3D8BA00FCF967 /* ChatListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */; };
 		F097D8D31EF3D91A00FCF967 /* ChatListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */; };
+		F0F6B63B1F0B63D300A74CB5 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B63A1F0B63D300A74CB5 /* NotificationViewController.swift */; };
+		F0F6B63E1F0B63F700A74CB5 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B63C1F0B63F700A74CB5 /* NotificationTableCell.swift */; };
+		F0F6B63F1F0B63F700A74CB5 /* NotificationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F6B63D1F0B63F700A74CB5 /* NotificationTableCell.xib */; };
+		F0F6B6431F0B6EA300A74CB5 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B6411F0B6EA300A74CB5 /* SettingsTableViewCell.swift */; };
+		F0F6B6441F0B6EA300A74CB5 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0F6B6421F0B6EA300A74CB5 /* SettingsTableViewCell.xib */; };
+		F0F6B6461F0B6EC300A74CB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B6451F0B6EC300A74CB5 /* SettingsViewController.swift */; };
+		F0F6B6501F0B7B6100A74CB5 /* RegisterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B6481F0B7B6100A74CB5 /* RegisterAdapter.swift */; };
+		F0F6B6511F0B7B6100A74CB5 /* RegisterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B6491F0B7B6100A74CB5 /* RegisterConfigurator.swift */; };
+		F0F6B6521F0B7B6100A74CB5 /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64A1F0B7B6100A74CB5 /* RegisterInteractor.swift */; };
+		F0F6B6531F0B7B6100A74CB5 /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64B1F0B7B6100A74CB5 /* RegisterModels.swift */; };
+		F0F6B6541F0B7B6100A74CB5 /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64C1F0B7B6100A74CB5 /* RegisterPresenter.swift */; };
+		F0F6B6551F0B7B6100A74CB5 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64D1F0B7B6100A74CB5 /* RegisterRouter.swift */; };
+		F0F6B6561F0B7B6100A74CB5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64E1F0B7B6100A74CB5 /* RegisterViewController.swift */; };
+		F0F6B6571F0B7B6100A74CB5 /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -839,6 +853,20 @@
 		F097D8C81EF3D8BA00FCF967 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListWorker.swift; sourceTree = "<group>"; };
 		F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListAdapter.swift; sourceTree = "<group>"; };
+		F0F6B63A1F0B63D300A74CB5 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F0F6B63C1F0B63F700A74CB5 /* NotificationTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableCell.swift; sourceTree = "<group>"; };
+		F0F6B63D1F0B63F700A74CB5 /* NotificationTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableCell.xib; sourceTree = "<group>"; };
+		F0F6B6411F0B6EA300A74CB5 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		F0F6B6421F0B6EA300A74CB5 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
+		F0F6B6451F0B6EC300A74CB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F0F6B6481F0B7B6100A74CB5 /* RegisterAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAdapter.swift; sourceTree = "<group>"; };
+		F0F6B6491F0B7B6100A74CB5 /* RegisterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterConfigurator.swift; sourceTree = "<group>"; };
+		F0F6B64A1F0B7B6100A74CB5 /* RegisterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
+		F0F6B64B1F0B7B6100A74CB5 /* RegisterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
+		F0F6B64C1F0B7B6100A74CB5 /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		F0F6B64D1F0B7B6100A74CB5 /* RegisterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		F0F6B64E1F0B7B6100A74CB5 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1233,6 +1261,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F0F6B6401F0B6E3D00A74CB5 /* Settings */,
+				F0F6B6391F0B634800A74CB5 /* Notification */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
@@ -1240,6 +1270,7 @@
 				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				2C12BC901EF7D237007AF994 /* Home */,
 				2CFB9B751EFA475100C08EB3 /* LiveVideo */,
+				F0F6B6471F0B7B6100A74CB5 /* Register */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
@@ -1748,6 +1779,41 @@
 			path = ChatList;
 			sourceTree = "<group>";
 		};
+		F0F6B6391F0B634800A74CB5 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				F0F6B63A1F0B63D300A74CB5 /* NotificationViewController.swift */,
+				F0F6B63C1F0B63F700A74CB5 /* NotificationTableCell.swift */,
+				F0F6B63D1F0B63F700A74CB5 /* NotificationTableCell.xib */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		F0F6B6401F0B6E3D00A74CB5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F0F6B6451F0B6EC300A74CB5 /* SettingsViewController.swift */,
+				F0F6B6411F0B6EA300A74CB5 /* SettingsTableViewCell.swift */,
+				F0F6B6421F0B6EA300A74CB5 /* SettingsTableViewCell.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F0F6B6471F0B7B6100A74CB5 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				F0F6B6481F0B7B6100A74CB5 /* RegisterAdapter.swift */,
+				F0F6B6491F0B7B6100A74CB5 /* RegisterConfigurator.swift */,
+				F0F6B64A1F0B7B6100A74CB5 /* RegisterInteractor.swift */,
+				F0F6B64B1F0B7B6100A74CB5 /* RegisterModels.swift */,
+				F0F6B64C1F0B7B6100A74CB5 /* RegisterPresenter.swift */,
+				F0F6B64D1F0B7B6100A74CB5 /* RegisterRouter.swift */,
+				F0F6B64E1F0B7B6100A74CB5 /* RegisterViewController.swift */,
+				F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1881,6 +1947,7 @@
 				2C9256C91F0A1E1C0095E88B /* CommentsView.xib in Resources */,
 				BF8EF63D1EF7FC820082B573 /* Montserrat-ExtraBold.ttf in Resources */,
 				BF8EF63E1EF7FC820082B573 /* Montserrat-Light.ttf in Resources */,
+				F0F6B63F1F0B63F700A74CB5 /* NotificationTableCell.xib in Resources */,
 				BF8EF63F1EF7FC820082B573 /* Montserrat-Bold.ttf in Resources */,
 				BFD80F631EF54ECD00223D21 /* Zain.storyboard in Resources */,
 				113139CF1EF7BA2D000050D6 /* Montserrat-Medium.otf in Resources */,
@@ -1911,6 +1978,7 @@
 				113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
+				F0F6B6441F0B6EA300A74CB5 /* SettingsTableViewCell.xib in Resources */,
 				57C948141F03781000DF5674 /* video.mp4 in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
@@ -2235,6 +2303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0F6B6501F0B7B6100A74CB5 /* RegisterAdapter.swift in Sources */,
 				BFB6112A1EF555A000601626 /* MosaicCollectionViewCell.swift in Sources */,
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */,
@@ -2310,6 +2379,7 @@
 				57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
+				F0F6B6561F0B7B6100A74CB5 /* RegisterViewController.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				2C6979B91F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
 				110FCE541EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift in Sources */,
@@ -2354,17 +2424,21 @@
 				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,
 				2CB8BF2C1EF25C1B00DA78B3 /* LoginViewController.swift in Sources */,
 				572E9A8A1EFAB4AF007DE6D0 /* GoCookModels.swift in Sources */,
+				F0F6B6461F0B6EC300A74CB5 /* SettingsViewController.swift in Sources */,
 				2CE22E8B1F0A421600B6E5B0 /* CommentsWorker.swift in Sources */,
 				2C6979BB1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				2C6979D71F07C95F00787DCC /* GMUPolygon.m in Sources */,
+				F0F6B63E1F0B63F700A74CB5 /* NotificationTableCell.swift in Sources */,
+				F0F6B6531F0B7B6100A74CB5 /* RegisterModels.swift in Sources */,
 				2CFB9B921EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
 				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
+				F0F6B6511F0B7B6100A74CB5 /* RegisterConfigurator.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
@@ -2374,6 +2448,7 @@
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
 				2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
+				F0F6B6431F0B6EA300A74CB5 /* SettingsTableViewCell.swift in Sources */,
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				BFC9273A1EF00A7E00602153 /* EnableCameraWorker.swift in Sources */,
 				BFC9273E1EF00A7E00602153 /* PermissionsAlertConfigurator.swift in Sources */,
@@ -2392,9 +2467,11 @@
 				2C6979BF1F07C95F00787DCC /* GMUStaticCluster.m in Sources */,
 				570ED40C1F0684F000B41F0E /* AKImageCropperScrollView.swift in Sources */,
 				F097D8CA1EF3D8BA00FCF967 /* ChatListConfigurator.swift in Sources */,
+				F0F6B6521F0B7B6100A74CB5 /* RegisterInteractor.swift in Sources */,
 				57DDD0B81EFC015B00C3BA21 /* GoCookStep2Models.swift in Sources */,
 				2CFB9BB81EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */,
 				57DDD0BA1EFC015B00C3BA21 /* GoCookStep2Router.swift in Sources */,
+				F0F6B6551F0B7B6100A74CB5 /* RegisterRouter.swift in Sources */,
 				2CFB9BB01EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
 				57DDD0B91EFC015B00C3BA21 /* GoCookStep2Presenter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
@@ -2420,6 +2497,7 @@
 				2C6979C91F07C95F00787DCC /* GMUKMLParser.m in Sources */,
 				BFC927351EF00A7E00602153 /* LiveVideoMainPageModels.swift in Sources */,
 				2C6979C51F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */,
+				F0F6B63B1F0B63D300A74CB5 /* NotificationViewController.swift in Sources */,
 				2CFB9B981EFA475100C08EB3 /* LiveVideoPublisherWorker.swift in Sources */,
 				2C946EB21EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */,
 				2C6979D51F07C95F00787DCC /* GMUPoint.m in Sources */,
@@ -2453,7 +2531,9 @@
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
+				F0F6B6541F0B7B6100A74CB5 /* RegisterPresenter.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
+				F0F6B6571F0B7B6100A74CB5 /* RegisterWorker.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
