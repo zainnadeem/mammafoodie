@@ -392,13 +392,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not a member yet?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwk-TT-evX">
-                                <rect key="frame" x="93.5" y="611.5" width="133" height="18.5"/>
+                                <rect key="frame" x="94" y="611.5" width="133" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sL-3L-Ga5">
-                                <rect key="frame" x="126" y="630" width="67" height="34"/>
+                                <rect key="frame" x="127" y="630" width="67" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.52549019607843139" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
@@ -771,7 +771,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXF-tw-BLQ">
-                                <rect key="frame" x="120" y="211" width="81" height="21.5"/>
+                                <rect key="frame" x="119.5" y="211" width="81" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1420,6 +1420,45 @@
             </objects>
             <point key="canvasLocation" x="1841" y="1887"/>
         </scene>
+        <!--Dishes Saved View Controller-->
+        <scene sceneID="fDt-tl-RXQ">
+            <objects>
+                <viewController id="V9g-GZ-2aF" customClass="DishesSavedViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EJI-gb-ZsS"/>
+                        <viewControllerLayoutGuide type="bottom" id="TJp-BS-3jj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vjs-Uh-trS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-W7-pUW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5ip-W7-pUW" firstAttribute="top" secondItem="Vjs-Uh-trS" secondAttribute="topMargin" id="0lB-Gt-rO6"/>
+                            <constraint firstAttribute="trailing" secondItem="5ip-W7-pUW" secondAttribute="trailing" id="hhP-Pp-KMF"/>
+                            <constraint firstItem="5ip-W7-pUW" firstAttribute="leading" secondItem="Vjs-Uh-trS" secondAttribute="leading" id="ht9-R1-zpN"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5ip-W7-pUW" secondAttribute="bottom" id="lZ7-Z5-d6n"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OVS-5w-vpT">
+                        <barButtonItem key="leftBarButtonItem" image="BackBtn" id="g4E-TM-dLc">
+                            <inset key="imageInsets" minX="0.0" minY="18" maxX="60" maxY="18"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dishesListTableView" destination="5ip-W7-pUW" id="g9X-aW-akU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lJI-z7-Cjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841.25" y="2899.6478873239439"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="87A-mN-EdQ">
             <objects>
@@ -1765,7 +1804,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7v-3V-Lp0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3366" y="2302"/>
+            <point key="canvasLocation" x="4363.125" y="2301.7605633802818"/>
         </scene>
         <!--Paging View Controller-->
         <scene sceneID="9dt-zB-KnH">
@@ -2162,8 +2201,27 @@
             </objects>
             <point key="canvasLocation" x="4757.6000000000004" y="1872.4137931034484"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h1l-tW-pbW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ew4-Ke-Kuk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vUn-wi-QFd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="V9g-GZ-2aF" kind="relationship" relationship="rootViewController" id="gGc-Lz-p35"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5mR-JP-Yk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="843.75" y="2899.6478873239439"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="BackBtn" width="98" height="58"/>
         <image name="Bitmap" width="68" height="68"/>
         <image name="CameraImage" width="45" height="34"/>
         <image name="Close" width="46" height="47"/>

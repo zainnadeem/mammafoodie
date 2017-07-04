@@ -33,7 +33,7 @@ class DishCollectionViewCell: UICollectionViewCell {
     
     func setUp(_ dishData:MFDish){
         
-        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id!) { (media) in
+        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id) { (media) in
             
             guard let media = media else {return}
             
