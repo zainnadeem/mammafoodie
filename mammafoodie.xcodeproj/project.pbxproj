@@ -519,6 +519,7 @@
 		F0F6B6551F0B7B6100A74CB5 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64D1F0B7B6100A74CB5 /* RegisterRouter.swift */; };
 		F0F6B6561F0B7B6100A74CB5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64E1F0B7B6100A74CB5 /* RegisterViewController.swift */; };
 		F0F6B6571F0B7B6100A74CB5 /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */; };
+		F0F6B65B1F0CC10A00A74CB5 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F6B65A1F0CC10A00A74CB5 /* PaymentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -867,6 +868,7 @@
 		F0F6B64D1F0B7B6100A74CB5 /* RegisterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
 		F0F6B64E1F0B7B6100A74CB5 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
+		F0F6B65A1F0CC10A00A74CB5 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1261,6 +1263,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F0F6B6591F0CC0E900A74CB5 /* Payment */,
 				F0F6B6401F0B6E3D00A74CB5 /* Settings */,
 				F0F6B6391F0B634800A74CB5 /* Notification */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
@@ -1812,6 +1815,14 @@
 				F0F6B64F1F0B7B6100A74CB5 /* RegisterWorker.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		F0F6B6591F0CC0E900A74CB5 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				F0F6B65A1F0CC10A00A74CB5 /* PaymentViewController.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		FA0FFFE83E7371F529687F8A /* Frameworks */ = {
@@ -2406,6 +2417,7 @@
 				118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */,
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
+				F0F6B65B1F0CC10A00A74CB5 /* PaymentViewController.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
