@@ -24,9 +24,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
-    
     var shapeLayer: CAShapeLayer!
-    
+    var KLCforgotPasswordPopup:KLCPopup?
     var activityIndicatorView:UIView?
     
     @IBOutlet weak var txtEmail: UITextField!
@@ -37,16 +36,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var loginButn: UIButton!
-    
-    
     @IBOutlet var forgotPasswordPopup: UIView!
-    
     @IBOutlet weak var txfForgotPassword: UITextField!
-    
     @IBOutlet weak var btnForgotPasswordSubmit: UIButton!
-    
-    var KLCforgotPasswordPopup:KLCPopup?
-    
     
     // MARK: - Object lifecycle
     override func awakeFromNib(){
@@ -97,7 +89,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     // MARK: - Event handling
-  
+    
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         self.router.openSafariVC(with: .privacyPolicy)
     }
@@ -105,8 +97,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBAction func btnTermsTapped(_ sender: Any) {
         self.router.openSafariVC(with: .terms)
     }
-
-
+    
+    
     @IBAction func forgotPasswordClicked(_ sender: UIButton) {
         
         
@@ -114,7 +106,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         forgotPasswordVC?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 40, height: 260)
         
         
-    KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+        KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
         
         KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 130) , in: self.view)
         
@@ -181,7 +173,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     
-        
+    
     @IBAction func logout(sender:UIButton){
         output.logout()
         
@@ -229,13 +221,13 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             return false
         }
         
-            return true
+        return true
     }
     
     
-
+    
     // MARK: - Inputs
-   
+    
     func viewControllerToPresent() -> UIViewController {
         return self
     }
@@ -244,36 +236,36 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         
         if let  currentUser = Auth.auth().currentUser{
-           print(currentUser.uid)
+            print(currentUser.uid)
             
-//            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
+            //            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
             
             
-//            let user = MFUser()
-//            
-//            
-//            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
-//                print("User created")
-//            })
+            //            let user = MFUser()
+            //
+            //
+            //            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
+            //                print("User created")
+            //            })
             
-//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
-//                if let user = user {
-//                    user.name = "nithin"
-//                    user.following.updateValue(true, forKey: "Dish1")
-//                    user.following.updateValue(true, forKey: "Dish2")
-                    
-                        //["Krishna":true, "sreeram":true]
-                   // user.cookedDishes = ["Dish3":true, "Dish4":true]
-                    //user.email = "nithintest@gmail.com"
-
-//                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
-//                        if errorMessage != nil {
-//                            print("Error updating profile")
-//                        }
-//                    })
-//                }
-//             
-//            })
+            //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
+            //                if let user = user {
+            //                    user.name = "nithin"
+            //                    user.following.updateValue(true, forKey: "Dish1")
+            //                    user.following.updateValue(true, forKey: "Dish2")
+            
+            //["Krishna":true, "sreeram":true]
+            // user.cookedDishes = ["Dish3":true, "Dish4":true]
+            //user.email = "nithintest@gmail.com"
+            
+            //                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
+            //                        if errorMessage != nil {
+            //                            print("Error updating profile")
+            //                        }
+            //                    })
+            //                }
+            //
+            //            })
             
             
             
@@ -300,9 +292,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     
     
-   
     
-
+    
+    
 }
 
 extension LoginViewController {
