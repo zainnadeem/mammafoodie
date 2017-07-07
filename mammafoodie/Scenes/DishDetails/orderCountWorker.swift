@@ -1,16 +1,14 @@
 import UIKit
 
-class orderCountWorker {
+class OrderCountWorker {
     
     
-    func getOrderCount(dishID:String, completion: @escaping (Int)->Void) {
+    func getOrderCount(dishID:String, completion: @escaping (Int?)->Void) {
         
-        DatabaseGateway.sharedInstance.getordersWith { (order) in
-            
-            print(order)
-            
-            
-        }
+//        DatabaseGateway.sharedInstance.getUsersWhoBoughtTheDish(dishID: dishID) { (userList) in
+//            completion(userList?.keys.count)
+//        }
+//        
         
     }
 }

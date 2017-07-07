@@ -22,6 +22,7 @@ enum FirebaseReference: String {
     case dishComments = "DishComments"
     case savedDishes = "DishSaved"
     case likedDishes = "DishLikes"
+//    case dishBoughtBy = "DishBoughtBy"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -373,6 +374,24 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
+    
+    
+//    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
+//        
+//        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+//            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+//                completion(nil)
+//                return
+//            }
+//            
+//            completion(userData)
+//        }) { (error) in
+//            print(error)
+//            completion(nil)
+//        }
+//        
+//    }
+    
 }
 
 //Mark: - Saved Dish
