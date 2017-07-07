@@ -35,9 +35,13 @@ class VidupMainPageViewController: UIViewController, VidupMainPageViewController
         self.vidupCollectionView.dataSource = self
         self.vidupCollectionView.delegate = self
         
-        let mosaicLayout = TRMosaicLayout()
-        self.vidupCollectionView.collectionViewLayout = mosaicLayout
-        mosaicLayout.delegate = self
+//        let mosaicLayout = TRMosaicLayout()
+//        self.vidupCollectionView.collectionViewLayout = mosaicLayout
+//        mosaicLayout.delegate = self
+        
+        let customLayout = CustomLayout()
+        self.vidupCollectionView.collectionViewLayout = customLayout
+        
     }
     
     func addVideosToVC(_ response: VidupMainPage.Response) {
@@ -51,7 +55,7 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionCell", for: indexPath) as! MosaicCollectionCell
         
         //Move to cell once object is established
         cell.media = self.vidups.arrayOfVidups[indexPath.row]
@@ -59,14 +63,22 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
         
 
         //Arrange views depending on specific cells
-        if indexPath.item % 3 != 0 {
-                cell.setSmallCellConstraints()
-                cell.btnNumberOfViews.isHidden = true
-        }else{
-                cell.setLargeCellContraints()
-                
-        }
+//        if indexPath.item % 3 != 0 {
+//                cell.setSmallCellConstraints()
+//                cell.btnNumberOfViews.isHidden = true
+//        }else{
+//                cell.setLargeCellContraints()
+//                
+//        }
        
+        let attribute = collectionView.collectionViewLayout.layoutAttributesForItem(at: indexPath)
+        
+        if attribute!.zIndex == 1 { //zIndex of bigCells are set to 1 in custom layout class
+            cell.setLargeCellContraints()
+        } else {
+            cell.setSmallCellConstraints()
+        }
+        
         return cell
     }
     
@@ -76,25 +88,25 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
 
 }
 
-extension VidupMainPageViewController: TRMosaicLayoutDelegate {
-    
-    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
-        // I recommend setting every third cell as .Big to get the best layout
-
-        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
-    }
-    
-    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
-    }
-    
-    func heightForSmallMosaicCell() -> CGFloat {
-        return smallCellSize
-        
-    }
-    
-}
-
+//extension VidupMainPageViewController: TRMosaicLayoutDelegate {
+//    
+//    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
+//        // I recommend setting every third cell as .Big to get the best layout
+//
+//        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
+//    }
+//    
+//    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+//    }
+//    
+//    func heightForSmallMosaicCell() -> CGFloat {
+//        return smallCellSize
+//        
+//    }
+//    
+//}
+//
 
 
 
