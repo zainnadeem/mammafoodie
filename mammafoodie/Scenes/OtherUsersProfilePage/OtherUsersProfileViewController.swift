@@ -46,7 +46,6 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         super.viewDidLoad()
         
         output.setUpDishCollectionView(self.collectionView, self.profileType)
-//        output.loadDishCollectionViewForIndex(.cooked) //Loads first segment data by default
         
         if let user = Auth.auth().currentUser{
             output.loadUserProfileData(userID: user.uid)

@@ -20,6 +20,15 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
+    case dishComments = "DishComments"
+    case savedDishes = "DishSaved"
+    case likedDishes = "DishLikes"
+//    case dishBoughtBy = "DishBoughtBy"
+    case cookedDishes = "CookedDishes"
+    case boughtDishes = "BoughtDishes"
+    case followers = "UserFollowers"
+    case following = "UserFollowing"
+    case userNewsFeed = "UserNewsFeed"
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
     
@@ -50,6 +59,7 @@ enum FirebaseReference: String {
         let path: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/\(classPath)%2F\(id).jpg?alt=media"
         return URL(string: path)
     }
+
 }
 
 struct DatabaseConnectionObserver {
@@ -308,6 +318,8 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
+    
+
 }
 
 //MARK: - Dish
@@ -336,7 +348,7 @@ extension DatabaseGateway {
                 return
             }
             
-            let dish:MFDish = MFDish(from: dishData)
+            let dish:MFDish = self.createDish(from: dishData)
             
             completion(dish)
         }) { (error) in
@@ -344,6 +356,35 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
+    
+    
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.cookedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(dishData)
+        })
+    }
+    
+    
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(dishData)
+        })
+    }
+    
     
     
     func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
@@ -359,7 +400,49 @@ extension DatabaseGateway {
             
         }
     }
+
     
+    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
+        
+        FirebaseReference.dishComments.classReference.child(dishID).observeSingleEvent(of: .value, with: {(commentsDataSnapshot) in
+            guard let commentsData = commentsDataSnapshot.value as? FirebaseDictionary else {
+                
+                completion(nil)
+                return
+            
+            }
+            var comments: [MFComment] = []
+            
+            for rawComment in commentsData {
+                let newComment = MFComment(from: rawComment.value as! [String : AnyObject])
+                comments.append(newComment)
+            }
+            
+            completion(comments)
+        
+        }) {(error) in
+            print(error)
+            completion(nil)
+        }
+    }
+    
+    
+//    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
+//        
+//        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+//            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+//                completion(nil)
+//                return
+//            }
+//            
+//            completion(userData)
+//        }) { (error) in
+//            print(error)
+//            completion(nil)
+//        }
+//        
+//    }
+
     func getDishLike(dishID:String, _ completion:@escaping (_ likeCount:Int?)->Void){
         
         let successClosure: FirebaseObserverSuccessClosure = { (dishLikeDataSnapshot) in
@@ -397,6 +480,56 @@ extension DatabaseGateway {
     }
     
 }
+
+//Mark: - Saved Dish
+
+extension DatabaseGateway {
+    
+    func checkSavedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
+        FirebaseReference.savedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                
+                completion(nil)
+                return
+            }
+            
+            if dishData[dishId] != nil {
+                completion(true)
+            }else{
+                completion(false)
+            }
+            
+        })
+    }
+}
+
+//Mark: - Liked Dish
+
+extension DatabaseGateway {
+    
+    func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
+        FirebaseReference.likedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                
+                completion(nil)
+                return
+            }
+            
+            if dishData[dishId] != nil {
+                completion(true)
+            }else{
+                completion(false)
+            }
+            
+        })
+    }
+}
+
+
+
+
 
 //MARK: - Media
 extension  DatabaseGateway {
@@ -729,9 +862,63 @@ extension DatabaseGateway {
     }
 }
 
+
+//get Followers and following list of an user
+extension DatabaseGateway{
+    
+    func getFollowersForUser(userID:String, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(followers)
+        })
+    }
+    
+    func getFollowingForUser(userID:String, _ completion:@escaping (_ following:[String:AnyObject]?)->Void){
+        
+        FirebaseReference.following.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let following = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(following)
+        })
+    }
+    
+    
+}
+
+
 // Get media paths
 extension DatabaseGateway {
     func getUserProfilePicturePath(for userId: String) -> URL? {
         return FirebaseReference.users.getImagePath(with: userId)
+    }
+}
+
+// Get Order Detail
+extension DatabaseGateway {
+    
+    func getordersWith(_ completion: @escaping ((_ order:MFOrder?)->Void)){
+        
+        FirebaseReference.orders.classReference.observeSingleEvent(of: .value, with: { (ordersDataSnapshot) in
+            guard let ordersData = ordersDataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let order:MFOrder = MFOrder(from: ordersData)
+            completion(order)
+        }) { (error) in
+            print(error)
+            completion(nil)
+        }
     }
 }

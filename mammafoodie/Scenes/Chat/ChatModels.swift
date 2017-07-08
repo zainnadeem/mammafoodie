@@ -10,5 +10,6 @@ struct Chat {
         }
         struct ViewModel {
         }
+
 }
 

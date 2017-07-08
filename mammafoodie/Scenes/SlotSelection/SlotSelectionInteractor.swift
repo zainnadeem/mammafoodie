@@ -6,7 +6,7 @@ protocol SlotSelectionInteractorInput {
 }
 
 protocol SlotSelectionInteractorOutput {
-    
+//    func selectedSlots(_ slots: Dictionary<String, Any>)
 }
 
 class SlotSelectionInteractor: SlotSelectionInteractorInput {

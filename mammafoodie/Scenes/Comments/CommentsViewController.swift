@@ -12,7 +12,9 @@ protocol CommentsViewControllerOutput {
 class CommentsViewController: UIViewController, CommentsViewControllerInput,CommentsAdapterDelegate {
     
     var commentsString = ""
-    lazy var commentsTableAdapter = CommentsTableAdapter()	
+    lazy var commentsTableAdapter = CommentsTableAdapter()
+    
+    var dishID: String!
 
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var heightTextView: NSLayoutConstraint!
