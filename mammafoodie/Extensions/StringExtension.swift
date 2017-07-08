@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     func calculateHeight(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {

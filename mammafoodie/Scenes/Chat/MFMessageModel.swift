@@ -18,11 +18,20 @@ struct MFMessage1 {
 //    var text : String = ""
 //    var date : String = ""
 
+    
     init(with senderDisplayName: String,  messagetext: String, senderId: String) {
 //        self.name = name
         self.messageText = messagetext
         self.senderId = senderId
     }
-    
 }
+func getAvatar() -> JSQMessagesAvatarImage{
+    let avatarAditya = JSQMessagesAvatarImageFactory.avatarImage(withPlaceholder: #imageLiteral(resourceName: "Bitmap"), diameter: 20)!//   (withUserInitials: "AS", backgroundColor: UIColor.jsq_messageBubbleGreen(), textColor: UIColor.white, font: UIFont.systemFont(ofSize: 12), diameter: 20)!
+    return avatarAditya
+}
+public enum Setting: String{
+    case removeSenderDisplayName = "Remove sender Display Name"
+    case removeAvatar = "Remove Avatars"
+}
+
 

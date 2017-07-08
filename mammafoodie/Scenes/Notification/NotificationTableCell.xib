@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="NotificationTableCell" customModule="mamma_foodie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="327" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-v6-Vtg">
+                        <rect key="frame" x="20" y="20" width="40" height="39.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="39.5" id="Arw-ah-YD7"/>
+                            <constraint firstAttribute="width" constant="40" id="mzi-pb-4SH"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crabcakes" translatesAutoresizingMaskIntoConstraints="NO" id="8X3-o7-8hd">
+                        <rect key="frame" x="267" y="20" width="40" height="39.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="F5I-RR-2mV"/>
+                            <constraint firstAttribute="height" constant="39.5" id="jgY-my-j9Q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dylan Bailey" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtv-tE-j0J">
+                        <rect key="frame" x="75" y="20" width="182" height="18.5"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="8X3-o7-8hd" secondAttribute="bottom" constant="20" id="6I9-Rx-ya9"/>
+                    <constraint firstAttribute="trailing" secondItem="8X3-o7-8hd" secondAttribute="trailing" constant="20" id="Kc1-oz-yoL"/>
+                    <constraint firstItem="8X3-o7-8hd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="OHU-tx-8fQ"/>
+                    <constraint firstItem="f7V-v6-Vtg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ty2-gF-CXs"/>
+                    <constraint firstItem="f7V-v6-Vtg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ddl-il-noG"/>
+                    <constraint firstAttribute="bottom" secondItem="f7V-v6-Vtg" secondAttribute="bottom" constant="20" id="gb2-dw-HRB"/>
+                    <constraint firstItem="Dtv-tE-j0J" firstAttribute="top" secondItem="f7V-v6-Vtg" secondAttribute="top" id="jHf-3j-z6U"/>
+                    <constraint firstItem="8X3-o7-8hd" firstAttribute="leading" secondItem="Dtv-tE-j0J" secondAttribute="trailing" constant="10" id="lpK-tM-L4m"/>
+                    <constraint firstItem="Dtv-tE-j0J" firstAttribute="leading" secondItem="f7V-v6-Vtg" secondAttribute="trailing" constant="15" id="sOK-5b-lZ5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="dishImage" destination="8X3-o7-8hd" id="cOC-kG-8X7"/>
+                <outlet property="notifyLabel" destination="Dtv-tE-j0J" id="anc-fv-QtN"/>
+                <outlet property="profileImage" destination="f7V-v6-Vtg" id="Xpw-xs-V7K"/>
+            </connections>
+            <point key="canvasLocation" x="44.5" y="72"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Bitmap" width="68" height="68"/>
+        <image name="Crabcakes" width="645" height="415"/>
+    </resources>
+</document>

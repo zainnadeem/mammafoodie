@@ -8,21 +8,16 @@
 
 import Foundation
 
-typealias FilterLoaded = ([CuisineFilter]?, Error?) -> Void
+typealias FilterLoaded = ([MFCuisine]?, Error?) -> Void
 
-struct CuisineFiltreWorker {
+struct CuisineFilterWorker {
     
-    func getCuisineFilters(_ completion:FilterLoaded) {
-        completion(self.generateFakeData(), nil)
-    }
-    
-    private func generateFakeData() -> [CuisineFilter] {
-        var filters = [CuisineFilter]()
-        for index in 0...3 {
-            filters.append(CuisineFilter(name: "Chinese", id: "12+\(index)", selectedImage: #imageLiteral(resourceName: "chinese_cuisine_selected"), unselectedImage: #imageLiteral(resourceName: "chinese_cuisine_unselected"), pin : #imageLiteral(resourceName: "chinese_pin")))
-            filters.append(CuisineFilter(name: "Indian", id: "3+\(index)", selectedImage: #imageLiteral(resourceName: "Indian_Cuisine_Selected"), unselectedImage: #imageLiteral(resourceName: "Indian_Cuisine_Unselected"), pin : #imageLiteral(resourceName: "pinIndian")))
-            filters.append(CuisineFilter(name: "Mexican", id: "13+\(index)", selectedImage: #imageLiteral(resourceName: "Mexican_selected"), unselectedImage: #imageLiteral(resourceName: "Mexican_unselected"), pin : #imageLiteral(resourceName: "pinMexican")))
+    func getCuisineFilters(_ completion:@escaping FilterLoaded) {
+        DatabaseGateway.sharedInstance.getCuisines { (cuisines) in
+            DispatchQueue.main.async {
+             completion(cuisines, nil)   
+            }
         }
-        return filters
     }
+    
 }

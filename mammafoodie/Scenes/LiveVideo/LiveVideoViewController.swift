@@ -20,16 +20,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var liveVideo: MFDish!
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
+    var viewCamera: UIView!
     
-    //    @IBOutlet weak var btnEndLive: UIButton!
-    //    @IBOutlet weak var lblVideoName: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var viewSlotDetails: UIView!
-    @IBOutlet weak var viewComments: UIView!
-    @IBOutlet weak var btnEmoji: UIButton!
-    @IBOutlet weak var btnLike: UIButton!
-    @IBOutlet weak var txtNewComment: UITextView!
-    @IBOutlet weak var tblComments: UITableView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var imgViewPlaceholder: UIImageView!
     @IBOutlet weak var viewVisualBlurEffect: UIVisualEffectView!
@@ -37,9 +31,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBOutlet weak var lblLiveVideoEndedMessage: UILabel!
     @IBOutlet weak var btnCloseLiveVideo: UIButton!
     @IBOutlet weak var viewLiveVideoEnded: UIView!
-    var viewCamera: UIView!
+    @IBOutlet weak var viewComments: CommentsView!
     
-    lazy var commentsAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     
     // MARK: - Object lifecycle
     
@@ -55,12 +48,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         self.viewLiveVideoEnded.isHidden = true
         self.imgViewPlaceholder.image = nil
-        //        self.viewVisualBlurEffect.isHidden = true
         
-        self.btnLike.imageView?.contentMode = .scaleAspectFit
-        self.btnEmoji.imageView?.contentMode = .scaleAspectFit
         self.btnClose.imageView?.contentMode = .scaleAspectFit
-        self.setupCommentsTableViewAdapter()
         
         for imgView in self.imgViewViewers {
             imgView.layer.cornerRadius = 12
@@ -76,11 +65,16 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        self.createTestLiveVideo()
+        
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
-            self.createTestLiveVideo()
-            self.output!.start(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.start(self.liveVideo)
+            #endif
         }
+        self.setupViewComments()
         
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
@@ -91,13 +85,21 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.viewComments.showLatestComment()
     }
     
     // Remove this while merging into the Development
     private func createTestLiveVideo() {
+        self.liveVideo = MFDish()
         self.liveVideo.id = "-KnmktPfRQq61M1iswq5"
         self.liveVideo.accessMode = MFDishMediaAccessMode.viewer // .owner
         self.liveVideo.mediaType = MFDishMediaType.liveVideo
+    }
+    
+    func setupViewComments() {
+        self.viewComments.dish = self.liveVideo
+        self.viewComments.load()
     }
     
     func updateShadowForButtonCloseLiveVideo() {
@@ -165,7 +167,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.output != nil {
-            self.output!.stop(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.stop(self.liveVideo)
+            #endif
         }
     }
     
@@ -220,13 +225,6 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             //            self.viewVisualBlurEffect.removeFromSuperview()
             //            self.imgViewPlaceholder.removeFromSuperview()
         }
-    }
-    
-    func setupCommentsTableViewAdapter() {
-        self.commentsAdapter.createStaticData()
-        self.commentsAdapter.setup(with: self.tblComments)
-        self.tblComments.reloadData()
-        self.tblComments.setContentOffset(CGPoint(x: 0, y: self.tblComments.contentSize.height-self.tblComments.frame.height), animated: false)
     }
     
     deinit {
