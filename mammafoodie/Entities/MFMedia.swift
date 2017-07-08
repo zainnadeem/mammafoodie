@@ -16,6 +16,19 @@ enum MediaAccessUserType {
 class MFMedia {
     var id: String!
     
+<<<<<<< HEAD
+//    var comments: [String:Bool] = [:] //MFComment id
+//    var contentID: String!
+//    var cover_large: String?
+//    var cover_small: String?
+//    var createdAt: String! //Date timestamp
+//    var endedAt: String! //Date timestamp
+//    var dishID: String! //MFDish id
+//    var likes: [String:Bool] = [:] //MFUser id
+    
+    var comments: [MFComment:Bool] = [:]
+    var contentId: String!
+=======
     //    var comments: [String:Bool] = [:] //MFComment id
     //    var contentID: String!
     //    var cover_large: String?
@@ -27,6 +40,7 @@ class MFMedia {
     
     var comments: [MFComment:Bool] = [:]
     //    var contentId: String!
+>>>>>>> Development
     var cover_large: URL?
     var cover_small: URL?
     var dealTime : Double = -1
@@ -37,7 +51,12 @@ class MFMedia {
     
     var numberOfViewers: UInt = 0
     var type: MFMediaType = .unknown
+<<<<<<< HEAD
+//    var chefID: String! //MFUser id
+    
+=======
     //    var chefID: String! //MFUser id
+>>>>>>> Development
     
     var accessMode: MediaAccessUserType = .viewer
     
@@ -49,10 +68,17 @@ class MFMedia {
         self.id = id
         self.cover_large = URL.init(string: cover_large)
         self.cover_small = URL.init(string: cover_small)
+<<<<<<< HEAD
+
+        self.createdAt = Date(fromString: createdAt, format: .isoDateTimeSec)
+        self.dish = dish
+//        self.chefID = chefID
+=======
         
         self.createdAt = Date(fromString: createdAt, format: .isoDateTimeSec)
         self.dish = dish
         //        self.chefID = chefID
+>>>>>>> Development
         self.type = type
         self.numberOfViewers = numberOfViewers
         
@@ -72,7 +98,11 @@ class MFMedia {
         }
         
         
+<<<<<<< HEAD
+        self.contentId = mediaDictionary["contentId"] as? String ?? ""
+=======
 //        self.contentId = mediaDictionary["contentId"] as? String ?? ""
+>>>>>>> Development
         
         
         
@@ -86,8 +116,13 @@ class MFMedia {
         self.endedAt = Date(fromString:endedDateString, format: .isoDateTimeSec)
         
         
+<<<<<<< HEAD
+          let dishId = mediaDictionary["dishId"] as? String ?? ""
+//        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
+=======
         let dishId = mediaDictionary["dishId"] as? String ?? ""
         //        self.likes = mediaDictionary["likes"] as? [String:Bool] ?? [:]
+>>>>>>> Development
         self.numberOfViewers = mediaDictionary["numberOfViewers"] as? UInt ?? 0
         
         let type = mediaDictionary["type"] as? String ?? ""
@@ -98,7 +133,11 @@ class MFMedia {
             self.type = .unknown
         }
         
+<<<<<<< HEAD
+//        self.chefID = mediaDictionary["chefID"] as? String ?? ""
+=======
         //        self.chefID = mediaDictionary["chefID"] as? String ?? ""
+>>>>>>> Development
     }
     class func createNewMedia(with type : MFMediaType) -> MFMedia {
         let media = MFMedia.init()

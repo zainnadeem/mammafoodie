@@ -21,10 +21,10 @@ enum MFDishMediaAccessMode {
 }
 
 class MFDish {
-
+    
     var id: String
     var name: String
-
+    
     var dishType : MFDishType!
     var user: MFUser!
     var description: String?
@@ -93,8 +93,11 @@ class MFDish {
         self.id = dishDataDictionary["id"] as? String ?? ""
         self.name = dishDataDictionary["name"] as? String ?? ""
         
-        let userID = dishDataDictionary["userID"]   as? String ?? ""
-        self.user = MFUser() ; user.id = userID
+        let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
+        self.user = MFUser() ;
+        
+        self.user.id = user["id"] as? String ?? ""
+        self.user.name = user["name"] as? String ?? ""
         
         self.mediaURL = NSURL(string: dishDataDictionary["mediaURL"]  as? String ?? "") as URL?
         if let endTime = dishDataDictionary["endTimestamp"] as? Double {
@@ -117,6 +120,13 @@ class MFDish {
         } else {
             self.dishType = .None
         }
+        
+        let urlString = dishDataDictionary["mediaURL"] as? String ?? ""
+        if let url = URL(string: urlString){
+            self.mediaURL = url
+        }
+        
+        self.numberOfViewers = dishDataDictionary["numberOfViews"] as? UInt ?? 0
         
         if let rawCuisine = dishDataDictionary["cuisine"] as? [String : AnyObject] {
             self.cuisine = MFCuisine.init(with: rawCuisine)
