@@ -3,6 +3,8 @@ import UIKit
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
     func showVideoId(_ liveVideo: MFDish)
+    func liveVideoClosed()
+    func streamUnpublished()
 }
 
 protocol LiveVideoViewControllerOutput {
@@ -18,22 +20,19 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var liveVideo: MFDish!
     var gradientLayerForUserInfo: CAGradientLayer!
     var gradientLayerForComments: CAGradientLayer!
+    var viewCamera: UIView!
     
-    //    @IBOutlet weak var btnEndLive: UIButton!
-    //    @IBOutlet weak var lblVideoName: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
     @IBOutlet weak var viewSlotDetails: UIView!
-    @IBOutlet weak var viewComments: UIView!
-    @IBOutlet weak var btnEmoji: UIButton!
-    @IBOutlet weak var btnLike: UIButton!
-    @IBOutlet weak var txtNewComment: UITextView!
-    @IBOutlet weak var tblComments: UITableView!
     @IBOutlet weak var btnClose: UIButton!
-    
+    @IBOutlet weak var imgViewPlaceholder: UIImageView!
+    @IBOutlet weak var viewVisualBlurEffect: UIVisualEffectView!
     @IBOutlet var imgViewViewers: [UIImageView]!
+    @IBOutlet weak var lblLiveVideoEndedMessage: UILabel!
+    @IBOutlet weak var btnCloseLiveVideo: UIButton!
+    @IBOutlet weak var viewLiveVideoEnded: UIView!
+    @IBOutlet weak var viewComments: CommentsView!
     
-    
-    lazy var commentsAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     
     // MARK: - Object lifecycle
     
@@ -46,16 +45,19 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.btnLike.imageView?.contentMode = .scaleAspectFit
-        self.btnEmoji.imageView?.contentMode = .scaleAspectFit
+        
+        self.viewLiveVideoEnded.isHidden = true
+        self.imgViewPlaceholder.image = nil
+        
         self.btnClose.imageView?.contentMode = .scaleAspectFit
-        self.setupCommentsTableViewAdapter()
         
         for imgView in self.imgViewViewers {
             imgView.layer.cornerRadius = 12
             imgView.layer.borderWidth = 1
             imgView.layer.borderColor = UIColor.white.cgColor
         }
+        
+        self.updateShadowForButtonCloseLiveVideo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,16 +65,48 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        self.createTestLiveVideo()
+        
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
-            self.output!.start(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.start(self.liveVideo)
+            #endif
         }
+        self.setupViewComments()
         
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
         self.updateDropShadowForViewUserInfo()
         self.updateDropShadowForViewComments()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.viewComments.showLatestComment()
+    }
+    
+    // Remove this while merging into the Development
+    private func createTestLiveVideo() {
+        self.liveVideo = MFDish()
+        self.liveVideo.id = "-KnmktPfRQq61M1iswq5"
+        self.liveVideo.accessMode = MFDishMediaAccessMode.viewer // .owner
+        self.liveVideo.mediaType = MFDishMediaType.liveVideo
+    }
+    
+    func setupViewComments() {
+        self.viewComments.dish = self.liveVideo
+        self.viewComments.load()
+    }
+    
+    func updateShadowForButtonCloseLiveVideo() {
+        let layer: CALayer = self.btnCloseLiveVideo.layer
+        layer.cornerRadius = 5
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
     }
     
     func updateDropShadowForViewUserInfo() {
@@ -133,7 +167,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.output != nil {
-            self.output!.stop(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.stop(self.liveVideo)
+            #endif
         }
     }
     
@@ -158,28 +195,53 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     // MARK: - Display logic
     
     func show(_ cameraView: UIView) {
-        self.view.insertSubview(cameraView, at: 0)
+        self.viewCamera = cameraView
+        
+        self.view.insertSubview(cameraView, aboveSubview: self.viewVisualBlurEffect)
         
         // align cameraView from the left and right
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
         // align cameraView from the top and bottom
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
+        
+        //        if self.liveVideo.accessMode == .viewer {
+        //            self.viewCamera.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+        //        }
+    }
+    
+    func streamUnpublished() {
+        self.viewLiveVideoEnded.isHidden = false
+        self.viewCamera.removeFromSuperview()
+    }
+    
+    func liveVideoClosed() {
+        // Closed
     }
     
     func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
-    }
-    
-    func setupCommentsTableViewAdapter() {
-        self.commentsAdapter.createStaticData()
-        self.commentsAdapter.setup(with: self.tblComments)
-        self.tblComments.reloadData()
-        self.tblComments.setContentOffset(CGPoint(x: 0, y: self.tblComments.contentSize.height-self.tblComments.frame.height), animated: false)
+        if liveVideo.id != nil {
+            //            self.viewVisualBlurEffect.removeFromSuperview()
+            //            self.imgViewPlaceholder.removeFromSuperview()
+        }
     }
     
     deinit {
         print("Deinit LiveVideoVC")
     }
     
+    @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.27, animations: {
+            let shouldHide = !self.viewUserInfo.isHidden
+            self.viewUserInfo.isHidden = shouldHide
+            self.viewComments.isHidden = shouldHide
+            self.gradientLayerForComments.isHidden = shouldHide
+            self.gradientLayerForUserInfo.isHidden = shouldHide
+        }) { (isFinished) in
+            if isFinished {
+                print("Animation finished btnShowHideExtrasTapped")
+            }
+        }
+    }
 }

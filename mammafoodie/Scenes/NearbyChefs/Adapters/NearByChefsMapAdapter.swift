@@ -34,19 +34,33 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         }
     }
     
+    func reloadSearchData() {
+        var markers = [Marker]()
+        for (index, dish) in self.searchResults.enumerated() {
+//            dish.location = CLLocationCoordinate2D.init(latitude: 40, longitude: 12 + (Double(index) * 0.12))
+            if let location = dish.location {
+                let marker = Marker.marker(with: dish.address, at: location, with: index)
+                marker.dishID = dish.id
+                markers.append(marker)
+            }
+        }
+        self.showMarkers(markers: markers)
+    }
+    
     func showMarkers(markers: [Marker]) {
         print("showing marker at location: \(String(describing: markers.first?.position))")
         if markers != nil {
-//            self.clusterManager.clearItems()
-            for marker in markers {
-                if !self.allMarks.contains(marker) {
-                    self.allMarks.append(marker)
-                    self.clusterManager.add(marker)
-                }
-            }
+            self.allMarks.removeAll()
+            self.allMarks.append(contentsOf: markers)
+            self.clusterManager.clearItems()
+            self.clusterManager.add(markers)
             self.clusterManager.cluster()
         }
         print("Total Pins: \(self.clusterManager.algorithm.allItems().count)")
+        let bounds = markers.reduce(GMSCoordinateBounds()) {
+            $0.includingCoordinate($1.position)
+        }
+        self.mapView.animate(with: .fit(bounds, withPadding: 30.0))
     }
     
     func showCurrentLocation(_ location: CLLocation?) {
@@ -55,7 +69,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             kCameraLongitude = currentLocation.coordinate.longitude
             let camera = GMSCameraPosition.camera(withLatitude: kCameraLatitude, longitude: kCameraLongitude, zoom: 12)
             self.mapView.animate(to: camera)
-            self.output.loadMarkers(at: currentLocation.coordinate)
+            
         } else {
             print("Location not found")
         }
@@ -74,13 +88,13 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-        marker.icon = self.selectedFilter?.pin
+        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
     }
     
-    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        kCameraLatitude = position.target.latitude
-        kCameraLongitude = position.target.longitude
-        self.output.loadMarkers(at: position.target)
-        print("idle At: \(position.target)")
-    }
+//    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+//        kCameraLatitude = position.target.latitude
+//        kCameraLongitude = position.target.longitude
+//        self.output.loadMarkers(at: position.target)
+//        print("idle At: \(position.target)")
+//    }
 }

@@ -2,15 +2,19 @@ import UIKit
 
 class GoCookStep2Worker {
     // MARK: - Business Logic
-
+    
 }
 
 typealias CuisinesLoaded = ([MFCuisine]?, Error?) -> Void
 
 class CuisineWorker {
     // MARK: - Business Logic
-    func getCuisines(_ completion:CuisinesLoaded) {
-        completion(self.generateFakeData(), nil)
+    func getCuisines(_ completion:@escaping CuisinesLoaded) {
+        DatabaseGateway.sharedInstance.getCuisines { (cuisines) in
+            DispatchQueue.main.async {
+                completion(cuisines, nil)
+            }
+        }
     }
     
     private func generateFakeData() -> [MFCuisine] {

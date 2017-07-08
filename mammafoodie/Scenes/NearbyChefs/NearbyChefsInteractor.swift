@@ -9,7 +9,7 @@ protocol NearbyChefsInteractorInput {
 protocol NearbyChefsInteractorOutput {
     func showMarkers(_ markers:[Marker])
     func setCurrentLocation(_ location: CLLocation?, error: Error?)
-    func showCuisineFilters(_ filters: [CuisineFilter]?, with error: Error?)
+    func showCuisineFilters(_ filters: [MFCuisine]?, with error: Error?)
 }
 
 class NearbyChefsInteractor: NearbyChefsInteractorInput {
@@ -37,7 +37,7 @@ class NearbyChefsInteractor: NearbyChefsInteractorInput {
     }
     
     func loadCuisines() {
-        let cuisineWorker = CuisineFiltreWorker()
+        let cuisineWorker = CuisineFilterWorker()
         cuisineWorker.getCuisineFilters { (cuisines, error) in
             self.output.showCuisineFilters(cuisines, with: error)
         }

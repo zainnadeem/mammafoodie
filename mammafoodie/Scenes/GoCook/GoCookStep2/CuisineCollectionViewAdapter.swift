@@ -12,13 +12,24 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     
     var cuisineCollectionView : UICollectionView!
     var cuisines : [MFCuisine] = [MFCuisine]()
-    var selectedCuisine: MFCuisine?
     var worker : CuisineWorker = CuisineWorker()
     
     func selectFilter(at indexPath: IndexPath) {
-        self.selectedCuisine = self.cuisines[indexPath.item]
         if let _ = self.cuisineCollectionView.cellForItem(at: indexPath) {
             self.cuisineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+        
+        let filter = self.cuisines[indexPath.item]
+        for cuisine in self.cuisines {
+            if filter == cuisine {
+                if cuisine.isSelected {
+                    cuisine.isSelected = false
+                } else {
+                    cuisine.isSelected = true
+                }
+            } else {
+                cuisine.isSelected = false
+            }
         }
         self.cuisineCollectionView.reloadData()
     }
@@ -51,13 +62,15 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuisineCollectionViewCell", for: indexPath) as! CuisineCollectionViewCell
         let filter = self.cuisines[indexPath.item]
-        if let selfilter = self.selectedCuisine {
-            cell.prepareCell(for: filter, is : (selfilter == filter))
+        if filter.isSelected {
+            cell.prepareCell(for: filter, is : true)
         } else {
             cell.prepareCell(for: filter, is : false)
         }
+        
         return cell
     }
     
@@ -66,10 +79,14 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let font  = UIFont.MontserratLight(with: 12)
+        var font : UIFont = CuisineCollectionViewCell.unselectedFont
         let cuisine = self.cuisines[indexPath.item]
+        if cuisine.isSelected {
+            font = CuisineCollectionViewCell.selectedFont
+        }
+        
         let height = 70
-        var width = cuisine.name.calculateWidth(withConstrainedHeight: 21, font: font!)
+        var width = cuisine.name.calculateWidth(withConstrainedHeight: 21, font: font)
         if width < 80 {
             width = 80
         }
@@ -90,15 +107,3 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
     }
     
 }
-
-struct Cuisine : Equatable {
-    let name : String!
-    let id : String!
-    let selectedImage : UIImage?
-    let unselectedImage : UIImage?
-    
-    static func ==(lhs: Cuisine, rhs : Cuisine) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
