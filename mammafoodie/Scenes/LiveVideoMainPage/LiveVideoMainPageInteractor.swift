@@ -12,15 +12,23 @@ protocol LiveVideoMainPageInteractorOutput {
 class LiveVideoMainPageInteractor: LiveVideoMainPageInteractorInput {
     
     var output: LiveVideoMainPageInteractorOutput!
-    let loadLiveVideoWorker = LoadLiveVideosWorker()
+//    let loadLiveVideoWorker = LoadLiveVideosWorker()
+    
+    let liveVideoListWorker = LiveVideoListWorker()
+    
     
     // MARK: - Business logic
     
     func loadLiveVideos() {
-        loadLiveVideoWorker.callAPI { liveVideos in
+//        loadLiveVideoWorker.callAPI { liveVideos in
+//            let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
+//            output.presentLiveVideos(response)
+//  
+//        }
+        
+        liveVideoListWorker.getList { (liveVideos) in
             let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
-            output.presentLiveVideos(response)
-  
+            self.output.presentLiveVideos(response)
         }
     }
     
