@@ -38,7 +38,7 @@ extension HUDRenderer {
         
         if delegate.activityIndicatorView == nil {
             
-            if let window = UIApplication.shared.keyWindow{
+            if let window = delegate.window{
                 
                 let bgView = UIView(frame: window.frame)
                 bgView.backgroundColor = .black

@@ -340,21 +340,38 @@ extension DatabaseGateway {
         })
     }
     
-    func getDishWith(dishID:String, _ completion:@escaping (_ dish:MFDish?)->Void){
+    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void){
         print(dishID)
-        FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+        
+        let successClosure:FirebaseObserverSuccessClosure = { (userDataSnapshot) in
+
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
             
             let dish:MFDish = self.createDish(from: dishData)
-            
             completion(dish)
-        }) { (error) in
+        }
+        
+        let cancelClosure:FirebaseObserverCancelClosure = { (error) in
             print(error)
             completion(nil)
         }
+        
+        switch frequency{
+        case .single:
+            
+            FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            
+        case .realtime:
+            
+            FirebaseReference.dishes.classReference.child(dishID).observe(.value, with: successClosure, withCancel: cancelClosure)
+        }
+        
+        
+        
+    
     }
     
     
@@ -509,10 +526,15 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
+        
+        print(userId)
+        print(dishId)
+        
+        
         FirebaseReference.likedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-                
+                print(dishSnapshot.value)
                 completion(nil)
                 return
             }

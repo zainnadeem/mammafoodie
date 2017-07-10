@@ -4,7 +4,7 @@ import JSQMessagesViewController
 
 
 
-struct User {
+struct UserChat {
      var id :String
      var name :String
 }
@@ -19,7 +19,7 @@ class ChatViewController: JSQMessagesViewController {
     var modelMsg = MFMessage1(with: "", messagetext: "", senderId: "")
 
     
-    var currentUser: User {
+    var currentUser: UserChat {
         return user1
     }
 
@@ -29,8 +29,8 @@ class ChatViewController: JSQMessagesViewController {
     var avatarDict = [String: JSQMessagesAvatarImage]()
     
     //ChatUsers
-    let user1 = User(id: "1", name: "Steve")
-    let user2 = User(id: "2", name: "siri")
+    let user1 = UserChat(id: "1", name: "Steve")
+    let user2 = UserChat(id: "2", name: "siri")
        
 }
 

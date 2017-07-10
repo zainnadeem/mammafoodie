@@ -39,6 +39,7 @@ class RequestDishViewController: UIViewController, RequestDishViewControllerInpu
         self.output.RequestDishes(dishName:self.dishNameTxt.text!,dishNo:self.dishNumberTxt.text!)
     }
     @IBAction func cancelRequest(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     // MARK: - Display logic
     @IBAction func chatBtn(_ sender: Any) {

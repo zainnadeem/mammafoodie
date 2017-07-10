@@ -53,6 +53,8 @@ class MFDish {
     var mediaURL: URL?
     var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
     
+    var coverPicURL:URL?
+    
     var likesCount : Double = 0
     var commentsCount : Double = 0
     

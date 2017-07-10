@@ -15,7 +15,7 @@ protocol DishDetailInteractorOutput {
      func presentFavoriteStatus(_ response: DishDetail.Favorite.Response)
 }
 
-class DishDetailInteractor: DishDetailInteractorInput {
+class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     
     var output: DishDetailInteractorOutput!
     var dishWorker: LoadDishWorker!
@@ -29,8 +29,11 @@ class DishDetailInteractor: DishDetailInteractorInput {
     
     func getDish(with id: String) {
         dishWorker = LoadDishWorker()
+        
+//        self.showActivityIndicator()
+        
         dishWorker.getDish(with: id) { (dish) in
-            
+//            self.hideActivityIndicator()
             let response = DishDetail.Dish.Response(dish: dish)
             self.output.presentDish(response)
             
@@ -65,7 +68,8 @@ class DishDetailInteractor: DishDetailInteractorInput {
     func checkLikeStatus(userId: String, dishId: String) {
         likeStatusWorker = CheckLikeStatusWorker()
         likeStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            
+            let response = DishDetail.Like.Response(status: status)
+            self.output.presentLikeStatus(response)
         }
     }
     
@@ -74,7 +78,8 @@ class DishDetailInteractor: DishDetailInteractorInput {
     func checkFavoritesStatus(userId: String, dishId: String) {
         favoriteStatusWorker = CheckFavoriteStatusWorker()
         favoriteStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            
+            let response = DishDetail.Favorite.Response(status: status)
+            self.output.presentFavoriteStatus(response)
         }
         
     }

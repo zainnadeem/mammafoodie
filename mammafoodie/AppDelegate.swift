@@ -17,15 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var window: UIWindow?
     var activityIndicatorView:UIView?
     
+    var currentUserFirebase:User? //Populate this when user logs in successfully
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         _ = DatabaseGateway.sharedInstance
         IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
-//        let currentUser = Auth.auth().currentUser
-////        let currentUser = Auth.auth().currentUser
-////
+        let currentUser = Auth.auth().currentUser
+        
+        currentUserFirebase = currentUser
+        
+//
 //        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
 //        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
 //        
