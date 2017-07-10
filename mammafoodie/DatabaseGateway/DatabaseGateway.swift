@@ -303,6 +303,7 @@ extension DatabaseGateway {
         
         FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+                let user: MFUser = MFUser()
                 completion(nil)
                 return
             }

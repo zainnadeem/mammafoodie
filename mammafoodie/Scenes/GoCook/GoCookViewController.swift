@@ -76,6 +76,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         self.output.prepareOptions()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let tmp = self.selectedOption
+        self.selectedOption = tmp
+    }
+    
     // MARK: - Event handling
     @IBAction func onVidUpTap(_ sender: UIButton) {
         self.selectedOption = .vidup

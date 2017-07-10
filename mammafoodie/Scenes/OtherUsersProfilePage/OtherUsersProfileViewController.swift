@@ -8,7 +8,7 @@ protocol OtherUsersProfileViewControllerInput {
 protocol OtherUsersProfileViewControllerOutput {
     
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
-//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
 }
 
@@ -25,7 +25,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
     var profileType:ProfileType = .othersProfile
-
+    
     @IBOutlet weak var collectionView:UICollectionView!
     
     
@@ -52,7 +52,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         }
         
     }
-
+    
     
     //MARK: - Input
     

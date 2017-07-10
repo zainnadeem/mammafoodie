@@ -14,7 +14,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     var delegate:DishesCollectionViewAdapterDelegate?
     
-     var profileType:ProfileType!
+    var profileType:ProfileType!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
@@ -81,33 +81,33 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     @IBOutlet weak var followingSegmentStackView: UIStackView!
     
-
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         let tapCooked = UITapGestureRecognizer(target: self, action: #selector(self.segmentedControlDidChangeSelection(sender:)))
         
-                let tapBought = UITapGestureRecognizer(target: self, action: #selector(self.segmentedControlDidChangeSelection(sender:)))
+        let tapBought = UITapGestureRecognizer(target: self, action: #selector(self.segmentedControlDidChangeSelection(sender:)))
         
-                let tapActivity = UITapGestureRecognizer(target: self, action: #selector(self.segmentedControlDidChangeSelection(sender:)))
+        let tapActivity = UITapGestureRecognizer(target: self, action: #selector(self.segmentedControlDidChangeSelection(sender:)))
         
-                cookedSegmentStackView.restorationIdentifier = "cooked"
-                boughtSegmentStackView.restorationIdentifier = "bought"
-                activitySegmentStackView.restorationIdentifier = "activity"
+        cookedSegmentStackView.restorationIdentifier = "cooked"
+        boughtSegmentStackView.restorationIdentifier = "bought"
+        activitySegmentStackView.restorationIdentifier = "activity"
         
-                cookedSegmentStackView.addGestureRecognizer(tapCooked)
-                boughtSegmentStackView.addGestureRecognizer(tapBought)
-                activitySegmentStackView.addGestureRecognizer(tapActivity)
+        cookedSegmentStackView.addGestureRecognizer(tapCooked)
+        boughtSegmentStackView.addGestureRecognizer(tapBought)
+        activitySegmentStackView.addGestureRecognizer(tapActivity)
         
-                btnFollow.layer.cornerRadius = btnFollow.frame.size.height/2
-                btnFollow.clipsToBounds = true
+        btnFollow.layer.cornerRadius = btnFollow.frame.size.height/2
+        btnFollow.clipsToBounds = true
         
-                menuSelectionHairlineView.layer.cornerRadius = menuSelectionHairlineView.frame.size.height/2
-                menuSelectionHairlineView.clipsToBounds = true
+        menuSelectionHairlineView.layer.cornerRadius = menuSelectionHairlineView.frame.size.height/2
+        menuSelectionHairlineView.clipsToBounds = true
         
-                profilePicImageView.layer.cornerRadius = 5
-                profilePicImageView.clipsToBounds  = true
+        profilePicImageView.layer.cornerRadius = 5
+        profilePicImageView.clipsToBounds  = true
         
         
         let tapFollowers = UITapGestureRecognizer(target: self, action: #selector(self.openFollowers(sender:)))
@@ -116,7 +116,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         
         followersSegmentStackView.addGestureRecognizer(tapFollowers)
         followingSegmentStackView.addGestureRecognizer(tapFollowing)
-    
+        
     }
     
     override func layoutSubviews() {
@@ -161,22 +161,27 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         self.lblFavouriteDishesCount.text = favouriteDishesCount
         self.lblBoughtCount.text = boughtDishesCount
         
-        
-        if let profilePicURL = data.picture,  let url = URL(string: profilePicURL){
-            self.profilePicImageView.sd_setImage(with: url)
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.id) {
+            self.profilePicImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.profilePicImageView.image = UIImage(named: "IconMammaFoodie")!
+                }
+            })
+        } else {
+            self.profilePicImageView.image = UIImage(named: "IconMammaFoodie")!
         }
         
         
         self.updateHairLineMenuPosition()
-
+        
     }
     
     
     
     //MARK: - Event Handling
     
- 
-     func segmentedControlDidChangeSelection(sender:UITapGestureRecognizer){
+    
+    func segmentedControlDidChangeSelection(sender:UITapGestureRecognizer){
         
         let senderView = sender.view!.restorationIdentifier!
         
@@ -218,25 +223,25 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     func updateHairLineMenuPosition(){
-
+        
         self.lblBoughtMenuHeader.textColor = unSelectedMenuTextColor
         self.lblCookedMenuHeader.textColor = unSelectedMenuTextColor
         self.lblActivityMenuHeader.textColor = unSelectedMenuTextColor
-
+        
         switch self.selectedIndexForProfile {
         case .cooked:
-
+            
             self.hairLineViewXConstraint?.constant = self.cookedSegmentStackView.center.x - 10
             self.lblCookedMenuHeader.textColor = .black
-
-
+            
+            
         case .bought:
-
+            
             self.hairLineViewXConstraint?.constant = self.boughtSegmentStackView.center.x - 10
             self.lblBoughtMenuHeader.textColor = .black
-
+            
         case .activity:
-
+            
             self.hairLineViewXConstraint?.constant = self.activitySegmentStackView.center.x - 10
             self.lblActivityMenuHeader.textColor = .black
             

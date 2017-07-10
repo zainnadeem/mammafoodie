@@ -14,12 +14,6 @@ class HomeRouter: HomeRouterInput {
         // NOTE: Teach the router which scenes it can communicate with
         if segue.identifier == "segueShowLiveVideoDetails" {
             //            (segue.destination as! LiveVideoViewController).liveVideo = sender as! MFDish
-        } else if segue.identifier == "segueShowLiveVideoList" {
-            
-        } else if segue.identifier == "segueShowVidupDetails" {
-            
-        } else if segue.identifier == "showVidupsList" {
-            
         } else if segue.identifier == "segueGoCook" {
             let navigationController: MFNavigationController = segue.destination as! MFNavigationController
             let goCookVC: GoCookViewController = navigationController.viewControllers.first as! GoCookViewController
