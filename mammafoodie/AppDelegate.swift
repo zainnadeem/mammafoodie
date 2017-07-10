@@ -24,24 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
         let currentUser = Auth.auth().currentUser
-//        let currentUser = Auth.auth().currentUser
-//
-        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
-        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
         
-        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        navigationController.viewControllers = [loginVC]
-        self.window?.rootViewController = navigationController
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController: MFNavigationController!
         
         if currentUser != nil { //User is already logged in, show home screen
-            
-            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-             loginVC.navigationController?.pushViewController(homeVC, animated: false)
+            navigationController = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
+        } else {
+            navigationController = storyBoard.instantiateViewController(withIdentifier: "navLogin") as! MFNavigationController
         }
         
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+        
         return true
-
+        
+    }
+    
+    class func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func setHomeViewController() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
+        self.window?.rootViewController = navigationController
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])

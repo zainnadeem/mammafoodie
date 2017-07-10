@@ -35,18 +35,18 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func loadActivities() {
-//        DummyData.sharedInstance.populateNewsfeed { (dummyData) in
-//            self.activity = dummyData
-//            self.tableView.reloadData()
-//        }
+        DummyData.sharedInstance.populateNewsfeed { (dummyData) in
+            self.activity = dummyData
+            self.tableView.reloadData()
+        }
     }
     
     func loadMenu(with cuisine: MFCuisine) {
-//        DummyData.sharedInstance.populateMenu(for: cuisine) { (dummyMenu) in
-//            self.selectedCuisine = cuisine
-//            self.menu = dummyMenu
-//            self.tableView.reloadData()
-//        }
+        DummyData.sharedInstance.populateMenu(for: cuisine) { (dummyMenu) in
+            self.selectedCuisine = cuisine
+            self.menu = dummyMenu
+            self.tableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

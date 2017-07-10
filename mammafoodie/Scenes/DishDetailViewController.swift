@@ -19,7 +19,7 @@ protocol DishDetailViewControllerOutput {
 }
 
 class DishDetailViewController: UIViewController, DishDetailViewControllerInput {
-
+    
     var output: DishDetailViewControllerOutput!
     var router: DishDetailRouter!
     
@@ -54,7 +54,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     //if only dish ID is passed
     var dishID: String?
     
-    //if dish object is passed 
+    //if dish object is passed
     var dishForView: DishDetail.Dish.Response?
     
     override func awakeFromNib() {
@@ -68,16 +68,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
     let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
     let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
     
-   
+    
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
         
-           }
+        
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
@@ -104,7 +104,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
         
         
-//        self.lblDistanceAway.text = "\((coordinate0.distance(from: coordinate1))/1000) Kms"
+        //        self.lblDistanceAway.text = "\((coordinate0.distance(from: coordinate1))/1000) Kms"
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
         
@@ -118,18 +118,18 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.clipsToBounds = true
         
-    
-        //set button 
-        if Date.init() > data.endedAt! {
+        
+        //set button
+        if Date.timeIntervalSinceReferenceDate > data.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 {
             self.btnRequest.setTitle("Buy now", for: .normal)
         } else {
             self.btnRequest.setTitle("request", for: .normal)
         }
         
-       
+        
         self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
         self.output.checkFavoritesStatus(userId: data.user.id, dishId: data.id)
-  
+        
     }
     
     
@@ -145,21 +145,21 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
             self.btnLikes.isSelected = true
         }
     }
-
+    
     func getDistanceAway(){
         
     }
     
-
+    
     @IBAction func commentsBtnTapped(_ sender: Any) {
         //route to comments
-        let destinationVC = CommentsViewController()
-   
-        if let response = self.dishForView {
-            destinationVC.dishID = response.dish?.id
-            self.present(destinationVC, animated: true, completion: nil)
-        }
- 
+        //        let destinationVC = CommentsViewController()
+        //
+        //        if let response = self.dishForView {
+        //            destinationVC.dishID = response.dish?.id
+        //            self.present(destinationVC, animated: true, completion: nil)
+        //        }
+        
     }
     
     @IBAction func likeBtnTapped(_ sender: Any) {

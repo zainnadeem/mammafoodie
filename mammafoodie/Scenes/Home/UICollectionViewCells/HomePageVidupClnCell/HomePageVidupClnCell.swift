@@ -33,6 +33,11 @@ class HomePageVidupClnCell: UICollectionViewCell {
     }
     
     func setup(with vidup: MFDish) {
+        self.layoutIfNeeded()
+        self.imgView.layer.cornerRadius = self.imgView.frame.width/2
+        self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
+        self.circleView.layer.cornerRadius = self.circleView.frame.width/2
+        
         self.vidup = vidup
         
         self.stopTimer()
@@ -60,12 +65,10 @@ class HomePageVidupClnCell: UICollectionViewCell {
             }
             self.circleView.isHidden = false
         }
-        self.imgView.layer.cornerRadius = self.imgView.frame.width/2
-        self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
-        self.circleView.layer.cornerRadius = self.circleView.frame.width/2
+
         
         
-        let createTimestamp: TimeInterval = vidup.createdAt?.timeIntervalSinceReferenceDate ?? 0
+        let createTimestamp: TimeInterval = vidup.createTimestamp?.timeIntervalSinceReferenceDate ?? 0
         let endTimestamp: TimeInterval = vidup.endTimestamp?.timeIntervalSinceReferenceDate ?? 0
         if endTimestamp > 0 {
             self.circleView.setup()

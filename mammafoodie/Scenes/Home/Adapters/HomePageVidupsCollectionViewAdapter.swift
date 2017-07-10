@@ -37,6 +37,10 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as! HomePageVidupClnCell).setup(with: self.list[indexPath.item])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.list.count
     }

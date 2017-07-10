@@ -40,8 +40,8 @@ class MFModelsToFirebaseDictionaryConverter {
                 "text": comment.text,
                 "createTimestamp": comment.createdAt.timeIntervalSinceReferenceDate,
                 "user": [
-                    "id": comment.user.id,
-                    "name": comment.user.name
+                    "id": comment.user!.id,
+                    "name": comment.user!.name
                 ]
                 ] as AnyObject
         ]
@@ -52,7 +52,7 @@ class MFModelsToFirebaseDictionaryConverter {
         
         var rawDish: [String:Any] = [
             "id" : dish.id,
-            "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+            "createTimestamp" : dish.createTimestamp.timeIntervalSinceReferenceDate,
             "user" : [
                 "id" : dish.user.id,
                 "name" : dish.user.name

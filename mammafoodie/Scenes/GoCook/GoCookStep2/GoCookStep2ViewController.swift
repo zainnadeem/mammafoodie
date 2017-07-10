@@ -221,10 +221,10 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                                     dish.totalSlots = totalSlots
                                                     dish.pricePerSlot = pricePerSlots
                                                     dish.user = user
-                                                    dish.createdAt = Date.init()
+                                                    dish.createTimestamp = Date.init()
                                                     dish.location = currentLocation.coordinate
                                                     dish.address = "MammaFoodie HQ"
-                                                    dish.endTimestamp = dish.createdAt.addingTimeInterval(countDown)
+                                                    dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
                                                     self.completion?(dish, self.selectedImage, self.selectedVideoPath)
                                                 } else {
                                                     self.showAlert("Location not Found", message: "Please make sure location service is enabled.")

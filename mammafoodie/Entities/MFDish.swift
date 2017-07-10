@@ -42,8 +42,7 @@ class MFDish {
     var tag:String!
 
     var createTimestamp: Date!
-    var endTimestamp: Date!
-    
+    var endTimestamp: Date?
 
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
@@ -55,9 +54,6 @@ class MFDish {
     
     var likesCount : Double = 0
     var commentsCount : Double = 0
-    
-    var createdAt: Date!
-    var endTimestamp: Date?
     
     var location : CLLocationCoordinate2D?
     var address : String = ""

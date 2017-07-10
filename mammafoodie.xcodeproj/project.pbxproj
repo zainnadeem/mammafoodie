@@ -33,11 +33,11 @@
 		113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948CF1F050C0E00F98E74 /* DateHelper.swift */; };
 		113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */; };
 		113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113948D41F052A4900F98E74 /* UserProfile.storyboard */; };
-		114F341F1F0CCD25007F1D92 /* MosaicCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F341D1F0CCD25007F1D92 /* MosaicCollectionCell.swift */; };
-		114F34221F0F6F8C007F1D92 /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F34211F0F6F8C007F1D92 /* CustomLayout.swift */; };
 		114F34121F0BD202007F1D92 /* NestedImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F340D1F0B742A007F1D92 /* NestedImageViews.swift */; };
 		114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F34151F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift */; };
 		114F34181F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114F34161F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib */; };
+		114F341F1F0CCD25007F1D92 /* MosaicCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F341D1F0CCD25007F1D92 /* MosaicCollectionCell.swift */; };
+		114F34221F0F6F8C007F1D92 /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F34211F0F6F8C007F1D92 /* CustomLayout.swift */; };
 		118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC927241EF00A7E00602153 /* VidupMainPageModels.swift */; };
 		118FB2B61EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		118FB2B71EEACA1200E5E6E5 /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
@@ -565,11 +565,11 @@
 		113948CF1F050C0E00F98E74 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewHeader.swift; sourceTree = "<group>"; };
 		113948D51F052A4900F98E74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserProfile.storyboard; sourceTree = "<group>"; };
-		114F341D1F0CCD25007F1D92 /* MosaicCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionCell.swift; sourceTree = "<group>"; };
-		114F34211F0F6F8C007F1D92 /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		114F340D1F0B742A007F1D92 /* NestedImageViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedImageViews.swift; sourceTree = "<group>"; };
 		114F34151F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		114F34161F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlotSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
+		114F341D1F0CCD25007F1D92 /* MosaicCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MosaicCollectionCell.swift; sourceTree = "<group>"; };
+		114F34211F0F6F8C007F1D92 /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionConfigurator.swift; sourceTree = "<group>"; };
 		118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionInteractor.swift; sourceTree = "<group>"; };
 		118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionModels.swift; sourceTree = "<group>"; };
@@ -826,15 +826,6 @@
 		BF5AD5D41F062B4B00827223 /* DishDetailRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDetailRouter.swift; sourceTree = "<group>"; };
 		BF5AD5D51F062B4B00827223 /* DishDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
 		BF5AD5DF1F07C8E600827223 /* LoadDishWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadDishWorker.swift; sourceTree = "<group>"; };
-		BFC927011EF00A7E00602153 /* CommentsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAdapter.swift; sourceTree = "<group>"; };
-		BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsConfigurator.swift; sourceTree = "<group>"; };
-		BFC927031EF00A7E00602153 /* CommentsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
-		BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsListTableViewCell.swift; sourceTree = "<group>"; };
-		BFC927051EF00A7E00602153 /* CommentsModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsModels.swift; sourceTree = "<group>"; };
-		BFC927061EF00A7E00602153 /* CommentsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsPresenter.swift; sourceTree = "<group>"; };
-		BFC927071EF00A7E00602153 /* CommentsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsRouter.swift; sourceTree = "<group>"; };
-		BFC927081EF00A7E00602153 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
-		BFC927091EF00A7E00602153 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
 		BFC9270E1EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageConfigurator.swift; sourceTree = "<group>"; };
 		BFC9270F1EF00A7E00602153 /* LiveVideoMainPageInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageInteractor.swift; sourceTree = "<group>"; };
 		BFC927101EF00A7E00602153 /* LiveVideoMainPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoMainPageModels.swift; sourceTree = "<group>"; };
@@ -1294,22 +1285,21 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BF5AD5DE1F062B5700827223 /* DishDetail */,
-				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
-				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
-				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
-				F0A980F51F0A850F00772BAA /* Followers */,
-				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
+				BF5AD5DE1F062B5700827223 /* DishDetail */,
+				F09720831F0A15D400DDA4FA /* DishesSaved */,
+				F0A980F51F0A850F00772BAA /* Followers */,
 				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				2C12BC901EF7D237007AF994 /* Home */,
 				2CFB9B751EFA475100C08EB3 /* LiveVideo */,
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
+				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
+				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
@@ -1734,23 +1724,6 @@
 			name = DishDetail;
 			sourceTree = "<group>";
 		};
-		BFC927001EF00A7E00602153 /* Comments */ = {
-			isa = PBXGroup;
-			children = (
-				BFC927011EF00A7E00602153 /* CommentsAdapter.swift */,
-				BFC927021EF00A7E00602153 /* CommentsConfigurator.swift */,
-				BFC927031EF00A7E00602153 /* CommentsInteractor.swift */,
-				BFC927041EF00A7E00602153 /* CommentsListTableViewCell.swift */,
-				BFC927051EF00A7E00602153 /* CommentsModels.swift */,
-				BFC927061EF00A7E00602153 /* CommentsPresenter.swift */,
-				BFC927071EF00A7E00602153 /* CommentsRouter.swift */,
-				BFC927081EF00A7E00602153 /* CommentsViewController.swift */,
-				BFC927091EF00A7E00602153 /* CommentsWorker.swift */,
-				F0B161B11EF7F55000D76FD8 /* TextViewPlaceHolder.swift */,
-			);
-			path = Comments;
-			sourceTree = "<group>";
-		};
 		BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1803,7 +1776,6 @@
 				2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */,
 				57801F791EF8308C002E18EF /* FeaturedMenuCollectionCell */,
 				114F34141F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell */,
-				BFC9274D1EF00B0700602153 /* MosaicCollectionViewCell.swift */,
 				113139D31EF7F4E5000050D6 /* DishCollectionViewCell.swift */,
 				113139D41EF7F4E5000050D6 /* DishCollectionViewCell.xib */,
 				113139D71EF80574000050D6 /* ActivityCollectionViewCell.swift */,
@@ -1966,7 +1938,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 3K8C5C5YMF;
+						DevelopmentTeam = ACV33259AJ;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -2082,7 +2054,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -2142,7 +2114,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -2394,7 +2366,6 @@
 				2C6979B51F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
 				BF4800AD1F092810005E47B1 /* LikeTappedWorker.swift in Sources */,
-				F0191A691F0386160081599A /* CommentsCustomTableViewCell.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
 				BF5AD5DC1F062B4B00827223 /* DishDetailViewController.swift in Sources */,
@@ -2558,7 +2529,6 @@
 				2C6979CD1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
 				572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
-				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				114F34121F0BD202007F1D92 /* NestedImageViews.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				2C6979C11F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */,
@@ -2599,7 +2569,6 @@
 				2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */,
-				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
@@ -2858,7 +2827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3K8C5C5YMF;
+				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2866,8 +2835,9 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.ios;
 				PRODUCT_NAME = "mamma foodie";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2882,7 +2852,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3K8C5C5YMF;
+				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2890,8 +2860,9 @@
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = aakar.mammafoodie.gocook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.ios;
 				PRODUCT_NAME = "mamma foodie";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Support/mammafoodie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

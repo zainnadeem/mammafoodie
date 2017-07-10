@@ -20,10 +20,8 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-    case dishComments = "DishComments"
     case savedDishes = "DishSaved"
-    case likedDishes = "DishLikes"
-//    case dishBoughtBy = "DishBoughtBy"
+    //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
     case followers = "UserFollowers"
@@ -59,7 +57,7 @@ enum FirebaseReference: String {
         let path: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/\(classPath)%2F\(id).jpg?alt=media"
         return URL(string: path)
     }
-
+    
 }
 
 struct DatabaseConnectionObserver {
@@ -319,7 +317,15 @@ extension DatabaseGateway {
         }
     }
     
-
+    func getLoggedInUser() -> MFUser? {
+        if let currentUser = Auth.auth().currentUser {
+            let user: MFUser = MFUser()
+            user.id = currentUser.uid
+            user.name = currentUser.displayName
+            return user
+        }
+        return nil
+    }
 }
 
 //MARK: - Dish
@@ -400,7 +406,7 @@ extension DatabaseGateway {
             
         }
     }
-
+    
     
     func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
         
@@ -409,7 +415,7 @@ extension DatabaseGateway {
                 
                 completion(nil)
                 return
-            
+                
             }
             var comments: [MFComment] = []
             
@@ -419,7 +425,7 @@ extension DatabaseGateway {
             }
             
             completion(comments)
-        
+            
         }) {(error) in
             print(error)
             completion(nil)
@@ -427,22 +433,22 @@ extension DatabaseGateway {
     }
     
     
-//    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
-//        
-//        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-//            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
-//                completion(nil)
-//                return
-//            }
-//            
-//            completion(userData)
-//        }) { (error) in
-//            print(error)
-//            completion(nil)
-//        }
-//        
-//    }
-
+    //    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
+    //
+    //        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+    //            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+    //                completion(nil)
+    //                return
+    //            }
+    //
+    //            completion(userData)
+    //        }) { (error) in
+    //            print(error)
+    //            completion(nil)
+    //        }
+    //
+    //    }
+    
     func getDishLike(dishID:String, _ completion:@escaping (_ likeCount:Int?)->Void){
         
         let successClosure: FirebaseObserverSuccessClosure = { (dishLikeDataSnapshot) in
@@ -476,7 +482,7 @@ extension DatabaseGateway {
             print(error)
             completion(false)
         }
-
+        
     }
     
 }
@@ -509,7 +515,7 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        FirebaseReference.likedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+        FirebaseReference.dishLikes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 
@@ -684,7 +690,7 @@ extension DatabaseGateway {
         let dish: MFDish = MFDish()
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
-        dish.createdAt = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
+        dish.createTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
             var cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
@@ -748,15 +754,15 @@ extension DatabaseGateway {
                 return
             }
             var comments: [MFComment] = []
-//            for key in rawList.keys {
-//                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
-//                    comments.append(self.createComment(from: rawComment))
-//                }
-//            }
+            //            for key in rawList.keys {
+            //                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
+            //                    comments.append(self.createComment(from: rawComment))
+            //                }
+            //            }
             
-//            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
-                comments.append(self.createComment(from: rawList))
-//            }
+            //            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
+            comments.append(self.createComment(from: rawList))
+            //            }
             
             completion(comments)
         }
