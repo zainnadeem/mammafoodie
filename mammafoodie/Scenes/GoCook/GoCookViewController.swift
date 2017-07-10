@@ -65,7 +65,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         super.viewDidLoad()
         for childVC in self.childViewControllers {
             if childVC is GoCookStep2ViewController {
-                self.step2VC = childVC as!GoCookStep2ViewController
+                self.step2VC = childVC as! GoCookStep2ViewController
                 self.step2VC.completion = { (dish, image, videoPathURL) in
                     DispatchQueue.main.async {
                         self.create(dish, image: image, videoURL: videoPathURL)
@@ -74,6 +74,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
         }
         self.output.prepareOptions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let tmp = self.selectedOption
+        self.selectedOption = tmp
     }
     
     // MARK: - Event handling
