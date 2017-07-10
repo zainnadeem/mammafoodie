@@ -42,27 +42,43 @@ class HomePageVidupClnCell: UICollectionViewCell {
         
         self.stopTimer()
         
-        self.viewForViewAll.isHidden = true
         if vidup.id == "-1" {
             // Option to create new vidup
             self.imgView.layer.borderWidth = 2
             self.imgAddIcon.isHidden = false
-            self.imgView.image = UIImage(named: "ProfilePicture21")!
+            
+            if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+                    self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                        if image == nil || error != nil {
+                            self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                        }
+                    })
+                } else {
+                    self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                }
+            } else {
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+            }
+            
             self.circleView.isHidden = true
             self.circleView.vidup = nil
             self.circleView.currentValue = 0
-        } else if vidup.id == "30" {
-            self.viewForViewAll.isHidden = false
-            self.circleView.isHidden = false
         } else {
             // Show existing vidup details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
+            
             if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
-                self.imgView.sd_setImage(with: url)
+                self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                    if image == nil || error != nil {
+                        self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                    }
+                })
             } else {
-                self.imgView.image = nil
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
             }
+            
             self.circleView.isHidden = false
         }
 
@@ -105,5 +121,13 @@ class HomePageVidupClnCell: UICollectionViewCell {
             self.timerCountdown!.invalidate()
             self.timerCountdown = nil
         }
+    }
+    
+    func showViewAll() {
+        self.viewForViewAll.isHidden = false
+    }
+    
+    func hideViewAll() {
+        self.viewForViewAll.isHidden = true
     }
 }

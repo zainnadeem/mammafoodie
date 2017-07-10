@@ -83,7 +83,7 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vidups.arrayOfVidups.count
+        return self.vidups.arrayOfVidups.count ?? 0
     }
 
 }

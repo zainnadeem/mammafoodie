@@ -25,12 +25,20 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
         
         let name: String = "HomePageVidupClnCell"
         self.collectionView.register(UINib(nibName: name, bundle: nil), forCellWithReuseIdentifier: name)
+        
+        self.list = [self.getFirstCellForCurrentUser()]
+        self.collectionView.reloadData()
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageVidupClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageVidupClnCell", for: indexPath) as! HomePageVidupClnCell
         cell.setup(with: self.list[indexPath.item])
+        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+            cell.showViewAll()
+        } else {
+            cell.hideViewAll()
+        }
         cell.vidupDidEnd = { (endedVidup) in
             self.remove(vidup: endedVidup)
         }
@@ -46,10 +54,10 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.list[indexPath.item] == self.list.last {
-            self.didSelectViewAll?()
+        let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+            self.didSelectViewAll?(theAttributes.frame)
         } else {
-            let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
             self.didSelect?(self.list[indexPath.item], theAttributes.frame)
         }
     }

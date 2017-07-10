@@ -33,9 +33,7 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
         self.layoutIfNeeded()
         self.imgView.layer.cornerRadius = self.imgView.frame.width/2
         self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
-        //        print("Making imageView circular: \(NSStringFromCGRect(self.imgView.frame))")
         
-        self.viewForViewAll.isHidden = true
         self.imgView.sd_cancelCurrentImageLoad()
         if liveVideo.id == "-1" {
             // Option to create new live video
@@ -55,8 +53,6 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             } else {
                 self.imgView.image = UIImage(named: "IconMammaFoodie")!
             }
-        } else if liveVideo.id == "30" {
-            self.viewForViewAll.isHidden = false
         } else {
             // Show existing live video details
             self.imgView.layer.borderWidth = 0
@@ -73,5 +69,13 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             }
         }
         
+    }
+    
+    func showViewAll() {
+        self.viewForViewAll.isHidden = false
+    }
+    
+    func hideViewAll() {
+        self.viewForViewAll.isHidden = true
     }
 }

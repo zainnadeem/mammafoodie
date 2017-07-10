@@ -8,15 +8,10 @@ enum HomePageTableViewMode {
 class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
-    
     var mode: HomePageTableViewMode = .activity
-    
     var sectionHeaderView: UIView?
-    
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
-    
-    var selectedCuisine: MFCuisine!
     
     func setup(with tableView: UITableView) {
         self.tableView = tableView
@@ -41,9 +36,8 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func loadMenu(with cuisine: MFCuisine) {
-        DummyData.sharedInstance.populateMenu(for: cuisine) { (dummyMenu) in
-            self.selectedCuisine = cuisine
+    func loadMenu() {
+        DummyData.sharedInstance.populateMenu { (dummyMenu) in
             self.menu = dummyMenu
             self.tableView.reloadData()
         }
@@ -78,11 +72,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.mode == .activity {
-            return 65
-        } else {
-            return 101
-        }
+        return 65
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

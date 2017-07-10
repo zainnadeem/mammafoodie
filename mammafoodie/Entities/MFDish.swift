@@ -70,6 +70,14 @@ class MFDish {
         self.name = name
     }
     
+    init(id: String, user: MFUser, description: String, name: String, cuisine: MFCuisine) {
+        self.id = id
+        self.user = user
+        self.description = description
+        self.name = name
+        self.cuisine = cuisine
+    }
+    
     init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
         self.id = id
         self.user = MFUser() ; user.id = userID

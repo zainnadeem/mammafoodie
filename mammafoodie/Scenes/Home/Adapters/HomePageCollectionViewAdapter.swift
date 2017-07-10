@@ -8,7 +8,7 @@ class HomePageCollectionViewAdapter: NSObject {
     var conHeightCollectionView: NSLayoutConstraint!
     
     var didSelect: ((_ dish: MFDish, _ cellFrame: CGRect)->Void)?
-    var didSelectViewAll: (()->Void)?
+    var didSelectViewAll: ((_ cellFrame: CGRect)->Void)?
     
     func getFirstCellForCurrentUser() -> MFDish {
         let dish: MFDish = MFDish()

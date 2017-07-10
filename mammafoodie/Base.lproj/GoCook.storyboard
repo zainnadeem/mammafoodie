@@ -26,7 +26,7 @@
         <!--Navigation Controller-->
         <scene sceneID="YBH-ch-I7P">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gub-GM-8Fs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navGoCook" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gub-GM-8Fs" customClass="MFNavigationController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="18S-Nt-xyW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -43,7 +43,7 @@
         <!--Go Cook-->
         <scene sceneID="Lx2-34-KL4">
             <objects>
-                <viewController storyboardIdentifier="GoCookViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2MW-g1-LyU" customClass="GoCookViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoCookViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2MW-g1-LyU" customClass="GoCookViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4ed-9Z-Nrd"/>
                         <viewControllerLayoutGuide type="bottom" id="Vxf-UZ-0UE"/>
@@ -271,7 +271,13 @@
                             <constraint firstItem="67b-Ul-fXQ" firstAttribute="leading" secondItem="Knq-63-lsa" secondAttribute="trailing" id="wm2-so-dSH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Go Cook" id="KUC-fG-pHh"/>
+                    <navigationItem key="navigationItem" title="Go Cook" id="KUC-fG-pHh">
+                        <barButtonItem key="leftBarButtonItem" image="BackBtn" id="e0b-xl-sQT">
+                            <connections>
+                                <action selector="btnBackTapped:" destination="2MW-g1-LyU" id="lS2-5B-Hin"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnLiveVideo" destination="ZMe-QB-Os2" id="bIJ-9K-ogU"/>
                         <outlet property="btnMenu" destination="coo-AJ-rpd" id="Eid-1J-Eef"/>
@@ -304,7 +310,7 @@
         <!--Go Cook Live Video Upload View Controller-->
         <scene sceneID="Gju-gf-jBC">
             <objects>
-                <viewController storyboardIdentifier="GoCookLiveVideoUploadViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2cG-GU-nnE" customClass="GoCookLiveVideoUploadViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoCookLiveVideoUploadViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2cG-GU-nnE" customClass="GoCookLiveVideoUploadViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i4j-nc-PRw"/>
                         <viewControllerLayoutGuide type="bottom" id="Tp9-Pa-2b1"/>
@@ -701,7 +707,7 @@
         <!--Go Cook Step2 View Controller-->
         <scene sceneID="ITA-0S-aUr">
             <objects>
-                <viewController storyboardIdentifier="GoCookStep2ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JXr-2X-DHg" customClass="GoCookStep2ViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoCookStep2ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JXr-2X-DHg" customClass="GoCookStep2ViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uL1-Gg-X7l"/>
                         <viewControllerLayoutGuide type="bottom" id="qhT-kb-oxe"/>
@@ -1498,7 +1504,7 @@
         <!--Go Cook Picture Upload View Controller-->
         <scene sceneID="Baq-dc-x3f">
             <objects>
-                <viewController storyboardIdentifier="GoCookPictureUploadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Oq-Eg-kpH" customClass="GoCookPictureUploadViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoCookPictureUploadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Oq-Eg-kpH" customClass="GoCookPictureUploadViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uo3-b5-fKf"/>
                         <viewControllerLayoutGuide type="bottom" id="kC7-ZE-uoX"/>
@@ -1996,7 +2002,7 @@
         <!--Go Cook Vidup Upload View Controller-->
         <scene sceneID="IaC-Ec-2NA">
             <objects>
-                <viewController storyboardIdentifier="GoCookVidupUploadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="erN-Fn-phO" customClass="GoCookVidupUploadViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoCookVidupUploadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="erN-Fn-phO" customClass="GoCookVidupUploadViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AVV-wa-Gvi"/>
                         <viewControllerLayoutGuide type="bottom" id="5Qz-wV-Fwl"/>
@@ -2568,6 +2574,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackBtn" width="27" height="16"/>
         <image name="Camera_Unselected" width="131" height="99"/>
         <image name="Camera_selected" width="131" height="99"/>
         <image name="Close" width="46" height="47"/>

@@ -163,4 +163,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
         }
     }
+    
+    @IBAction func btnBackTapped(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: { 
+            
+        })
+    }
+    
 }

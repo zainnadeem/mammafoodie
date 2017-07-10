@@ -9,7 +9,7 @@
 import UIKit
 
 class MosaicCollectionCell: UICollectionViewCell {
-
+    
     static let reuseIdentifier = "MosaicCollectionCell"
     
     @IBOutlet weak var title: UILabel!
@@ -35,31 +35,42 @@ class MosaicCollectionCell: UICollectionViewCell {
     
     
     func updateUI(){
-        
-        do {
-            if let coverURL = self.media.mediaURL {
-                screenShotImageView.sd_setImage(with: coverURL, placeholderImage: UIImage(named: "Image-1"))
-            }
-            
-//            screenShotImageView.image = UIImage(named: "Image-1")
-        } catch {
-            print(error.localizedDescription)
+        if let coverURL = self.media.mediaURL {
+            self.screenShotImageView.sd_setImage(with: coverURL, completed: { (image, error, cacheType, url) in
+                if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
+                    self.screenShotImageView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                        if image == nil || error != nil {
+                            self.screenShotImageView.image = nil
+                        }
+                    })
+                } else {
+                    self.screenShotImageView.image = nil
+                }
+            })
+        } else {
+            self.screenShotImageView.image = nil
         }
         
-        //        btnProfileImage.setImage(UIImage(named: self.media.user.picture!), for: .normal)
-        //        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
-        //
-        //        //need to figure out date
-        ////        btnTimeLeft.titleLabel?.text = String(self.media.e)
-        //        btnUsername.setTitle(self.media.user.name!, for: .normal)
-        //        self.title.text = self.media.dish.name!
-        //
-        //        if self.media.type == .liveVideo {
-        //            btnTimeLeft.isHidden = true
-        //
-        //        }else{
-        //            btnTimeLeft.isHidden = false
-        //        }
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
+            self.btnProfileImage.imageView?.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.btnProfileImage.setImage(UIImage(named: "IconMammaFoodie")!, for: .normal)
+                }
+            })
+        } else {
+            self.btnProfileImage.setImage(UIImage(named: "IconMammaFoodie")!, for: .normal)
+        }
+        
+        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
+        btnUsername.setTitle(self.media.user.name, for: .normal)
+        self.title.text = self.media.name
+        
+        if self.media.mediaType == .liveVideo {
+            btnTimeLeft.isHidden = true
+        }else{
+            btnTimeLeft.titleLabel?.text = self.media.endTimestamp?.toStringWithRelativeTime() ?? ""
+            btnTimeLeft.isHidden = false
+        }
         
     }
     
@@ -129,7 +140,7 @@ class MosaicCollectionCell: UICollectionViewCell {
         //        for con in self.largeCellConstraints{
         //            con.isActive = false
         //        }
-        //        
+        //
         //        for con in self.smallCellConstraints {
         //            con.isActive = true
         //        }
@@ -140,6 +151,6 @@ class MosaicCollectionCell: UICollectionViewCell {
         btnNumberOfViews.contentHorizontalAlignment = .left
         
     }
-
-
+    
+    
 }

@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 class MFComment {
-    var id: String!
-    var text: String!
+    var id: String = ""
+    var text: String = ""
     var createdAt: Date!
     var user: MFUser?
-    var username: String!
+    var username: String = ""
 
     
     init(text: String, username: String, userId: String) {
