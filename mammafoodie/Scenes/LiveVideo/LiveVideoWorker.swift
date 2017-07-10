@@ -30,19 +30,21 @@ class LiveVideoWorker {
     func publish(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.publish(with: liveVideo.id, { (newCameraView) in
             completion(newCameraView)
-            self.publishStreamToDatabase(liveVideo, completion)
+            //            self.publishStreamToDatabase(liveVideo, completion)
         })
     }
     
-    func publishStreamToDatabase(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
-        let worker: LiveVideoPublisherWorker = LiveVideoPublisherWorker()
-        worker.publishStream(with: liveVideo.id, { (liveVideo) in
-        })
-    }
+    //    func publishStreamToDatabase(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
+    //        let worker: LiveVideoPublisherWorker = LiveVideoPublisherWorker()
+    //        worker.publishStream(with: liveVideo.id, { (liveVideo) in
+    //        })
+    //    }
     
     func unpublishStreamFromDatabase(_ liveVideo: MFDish) {
-        let worker: LiveVideoPublisherWorker = LiveVideoPublisherWorker()
-        worker.unpublishStream(liveVideo)
+        liveVideo.endTimestamp = Date()
+        DatabaseGateway.sharedInstance.endLiveStream(liveVideo) {
+            
+        }
     }
     
     func subscribe(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {

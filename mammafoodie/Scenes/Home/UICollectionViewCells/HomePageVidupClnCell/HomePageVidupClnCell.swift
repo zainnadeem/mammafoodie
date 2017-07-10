@@ -108,7 +108,7 @@ class HomePageVidupClnCell: UICollectionViewCell {
                         self.vidupDidEnd?(self.vidup!)
                     }
                     
-                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
+//                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
                 })
             }
         } else {

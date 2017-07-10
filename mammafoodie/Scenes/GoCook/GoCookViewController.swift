@@ -22,6 +22,8 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var createdmedia : MFDish?
     
+    var dishCreated: ((MFDish)->Void)?
+    
     var selectedOption : MFDishMediaType = .unknown {
         didSet {
             self.output.selectOption(option: self.selectedOption)
@@ -117,9 +119,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             dish.save { (error) in
                 DispatchQueue.main.async {
                     self.selectedOption = .unknown
-                    self.onStep1(self.btnStep1)
                     self.step2VC.clearData()
-                    self.showAlert(error?.localizedDescription ?? "Dish Saved", message: nil)
+                    
+                    self.navigationController?.dismiss(animated: false, completion: {
+                        self.dishCreated?(dish)
+                    })
                 }
             }
             
@@ -159,19 +163,22 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         dish.save { (error) in
             DispatchQueue.main.async {
                 self.selectedOption = .unknown
-                self.onStep1(self.btnStep1)
+                //                self.onStep1(self.btnStep1)
                 self.step2VC.clearData()
                 if let er = error {
                     self.showAlert(er.localizedDescription, message: nil)
                 } else {
-                    self.showAlert("Dish Saved", message: "")
+                    // Success
+                    self.navigationController?.dismiss(animated: false, completion: {
+                        self.dishCreated?(dish)
+                    })
                 }
             }
         }
     }
     
     @IBAction func btnBackTapped(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: { 
+        self.navigationController?.dismiss(animated: true, completion: {
             
         })
     }

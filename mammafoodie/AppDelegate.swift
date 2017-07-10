@@ -51,6 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         self.window?.rootViewController = navigationController
     }
     
+    func setLoginViewController() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navLogin") as! MFNavigationController
+        self.window?.rootViewController = navigationController
+    }
+    
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String

@@ -25,13 +25,13 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.list.count
+        return min(self.limit, self.list.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageLiveVideoClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageLiveVideoClnCell", for: indexPath) as! HomePageLiveVideoClnCell
         cell.setup(with: self.list[indexPath.item])
-        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+        if self.isLastItem(indexPath.item) {
             cell.showViewAll()
         } else {
             cell.hideViewAll()
@@ -39,13 +39,13 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as! HomePageLiveVideoClnCell).setup(with: self.list[indexPath.item])
-    }
+    //    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    //        (cell as! HomePageLiveVideoClnCell).setup(with: self.list[indexPath.item])
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
-        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+        if self.isLastItem(indexPath.item) {
             self.didSelectViewAll?(theAttributes.frame)
         } else {
             self.didSelect?(self.list[indexPath.item], theAttributes.frame)

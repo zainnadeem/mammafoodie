@@ -241,44 +241,30 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     func showHomeScreen() {
-        
-        if let  currentUser = Auth.auth().currentUser {
-            
+        if let currentUser = Auth.auth().currentUser {
             AppDelegate.shared().setHomeViewController()
             
-            print(currentUser.uid)
+            let user: MFUser = MFUser()
+            user.id = currentUser.uid
+            user.name = currentUser.displayName
+            user.email = currentUser.email
             
-            //            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
-            
-            
-            //            let user = MFUser()
-            //
-            //
-            //            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
-            //                print("User created")
-            //            })
+            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
+                print("User created")
+            })
             
             //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
             //                if let user = user {
             //                    user.name = "nithin"
-            //                    user.following.updateValue(true, forKey: "Dish1")
-            //                    user.following.updateValue(true, forKey: "Dish2")
-            
-            //["Krishna":true, "sreeram":true]
-            // user.cookedDishes = ["Dish3":true, "Dish4":true]
-            //user.email = "nithintest@gmail.com"
-            
+            //                    user.email = "nithintest@gmail.com"
+            //
             //                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
             //                        if errorMessage != nil {
             //                            print("Error updating profile")
             //                        }
             //                    })
             //                }
-            //
             //            })
-            
-            
-            
         }
     }
     

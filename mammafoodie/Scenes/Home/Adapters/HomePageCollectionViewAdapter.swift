@@ -4,11 +4,19 @@ class HomePageCollectionViewAdapter: NSObject {
     
     var list: [MFDish] = []
     
+    var limit: Int = 21
     var collectionView: UICollectionView!
     var conHeightCollectionView: NSLayoutConstraint!
     
     var didSelect: ((_ dish: MFDish, _ cellFrame: CGRect)->Void)?
     var didSelectViewAll: ((_ cellFrame: CGRect)->Void)?
+    
+    func isLastItem(_ index: Int) -> Bool {
+        if self.list.count > self.limit && self.list[index] == self.list[self.limit-1] {
+            return true
+        }
+        return false
+    }
     
     func getFirstCellForCurrentUser() -> MFDish {
         let dish: MFDish = MFDish()
@@ -20,7 +28,7 @@ class HomePageCollectionViewAdapter: NSObject {
         let duration: Double = animated ? 0.27 : 0
         UIView.animate(withDuration: duration, animations: {
             let layout: UICollectionViewFlowLayout = self.getCollectionViewLayout(isExpanded: true)
-            let numberOfRows: CGFloat = ceil(CGFloat(Double(self.list.count+1)/5.0))
+            let numberOfRows: CGFloat = ceil(CGFloat(Double(min(self.list.count,self.limit)+1)/5.0))
             let newHeight = layout.minimumLineSpacing*(numberOfRows-1) + (layout.itemSize.height*numberOfRows) + layout.sectionInset.top + layout.sectionInset.bottom
             self.conHeightCollectionView.constant = newHeight
         })

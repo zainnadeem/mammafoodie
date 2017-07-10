@@ -4,7 +4,7 @@ protocol VidupDetailPagePresenterInput {
     func HideandUnhideViewInteractor()
     func DisplayTimeInteractor(Time:TimeInterval)
     func UserInfo(UserInfo:MFUser)
-     func DishInfo(DishInfo:MFDish)
+    func DishInfo(DishInfo:MFDish)
     func UpdateLikeStatusInteractor(Status:Bool)
 }
 
@@ -14,12 +14,12 @@ protocol VidupDetailPagePresenterOutput: class {
     func DisplayUserInfo(UserInfo:MFUser)
     func DisplayDishInfo(DishInfo:MFDish)
     func UpdateLikeStatus(Status:Bool)
-
+    
 }
 
 class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
-   
-
+    
+    
     weak var output: VidupDetailPagePresenterOutput!
     
     // MARK: - Presentation logic
@@ -47,7 +47,7 @@ class VidupDetailPagePresenter: VidupDetailPagePresenterInput {
     func DishInfo(DishInfo:MFDish){
         output.DisplayDishInfo(DishInfo: DishInfo)
     }
-
+    
     func UpdateLikeStatusInteractor(Status: Bool) {
         output.UpdateLikeStatus(Status: Status)
     }

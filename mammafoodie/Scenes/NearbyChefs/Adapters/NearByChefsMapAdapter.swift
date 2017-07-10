@@ -37,7 +37,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     func reloadSearchData() {
         var markers = [Marker]()
         for (index, dish) in self.searchResults.enumerated() {
-//            dish.location = CLLocationCoordinate2D.init(latitude: 40, longitude: 12 + (Double(index) * 0.12))
+            //            dish.location = CLLocationCoordinate2D.init(latitude: 40, longitude: 12 + (Double(index) * 0.12))
             if let location = dish.location {
                 let marker = Marker.marker(with: dish.address, at: location, with: index)
                 marker.dishID = dish.id
@@ -91,10 +91,10 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
     }
     
-//    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-//        kCameraLatitude = position.target.latitude
-//        kCameraLongitude = position.target.longitude
-//        self.output.loadMarkers(at: position.target)
-//        print("idle At: \(position.target)")
-//    }
+    //    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+    //        kCameraLatitude = position.target.latitude
+    //        kCameraLongitude = position.target.longitude
+    //        self.output.loadMarkers(at: position.target)
+    //        print("idle At: \(position.target)")
+    //    }
 }
