@@ -19,7 +19,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     var liveVideo: MFDish!
     var gradientLayerForUserInfo: CAGradientLayer!
-    var gradientLayerForComments: CAGradientLayer!
+//    var gradientLayerForComments: CAGradientLayer!
     var viewCamera: UIView!
     
     @IBOutlet weak var viewUserInfo: UIView!
@@ -122,18 +122,18 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         }
     }
     
-    func updateDropShadowForViewComments() {
-        if self.gradientLayerForComments == nil {
-            self.viewComments.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            self.gradientLayerForComments = CAGradientLayer()
-            let view: UIView = UIView(frame: self.viewComments.frame)
-            self.gradientLayerForComments.frame = view.frame
-            self.gradientLayerForComments.colors = self.colorsForCommentsInnerGradient()
-            self.gradientLayerForComments.startPoint = CGPoint(x: 0.5, y: 0)
-            self.gradientLayerForComments.endPoint = CGPoint(x: 0.5, y: 1)
-            self.viewComments.superview?.layer.insertSublayer(self.gradientLayerForComments, below: self.viewComments.layer)
-        }
-    }
+//    func updateDropShadowForViewComments() {
+//        if self.gradientLayerForComments == nil {
+//            self.viewComments.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+//            self.gradientLayerForComments = CAGradientLayer()
+//            let view: UIView = UIView(frame: self.viewComments.frame)
+//            self.gradientLayerForComments.frame = view.frame
+//            self.gradientLayerForComments.colors = self.colorsForCommentsInnerGradient()
+//            self.gradientLayerForComments.startPoint = CGPoint(x: 0.5, y: 0)
+//            self.gradientLayerForComments.endPoint = CGPoint(x: 0.5, y: 1)
+//            self.viewComments.superview?.layer.insertSublayer(self.gradientLayerForComments, below: self.viewComments.layer)
+//        }
+//    }
     
     func colorsForUserInfoInnerGradient() -> [CGColor] {
         return [
@@ -237,7 +237,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             let shouldHide = !self.viewUserInfo.isHidden
             self.viewUserInfo.isHidden = shouldHide
             self.viewComments.isHidden = shouldHide
-            self.gradientLayerForComments.isHidden = shouldHide
+//            self.gradientLayerForComments.isHidden = shouldHide
             self.gradientLayerForUserInfo.isHidden = shouldHide
         }) { (isFinished) in
             if isFinished {

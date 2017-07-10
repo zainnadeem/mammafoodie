@@ -314,12 +314,12 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
                 self.performSegue(withIdentifier: "segueGoCook", sender: MFDishMediaType.vidup)
             } else {
                 selectedVidup.accessMode = MFDishMediaAccessMode.viewer
-                self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+                self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
                 self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
             }
         }
         self.vidupsAdapter.didSelectViewAll = { (cellFrame) in
-            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
             self.performSegue(withIdentifier: "segueShowVidupsList", sender: nil)
         }
     }
