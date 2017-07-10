@@ -14,7 +14,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Bold.otf">
+        <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
         <array key="Montserrat-Light.ttf">
@@ -34,7 +34,7 @@
         <!--Comments View Controller-->
         <scene sceneID="aIE-yn-0oo">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M20-7N-sAU" customClass="CommentsViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M20-7N-sAU" customClass="CommentsViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ho4-gy-TMt"/>
                         <viewControllerLayoutGuide type="bottom" id="cAV-5d-at1"/>
@@ -47,7 +47,7 @@
                                 <rect key="frame" x="1" y="64" width="373" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentsList" rowHeight="160" id="raL-dG-dPp" customClass="CommentsListTableViewCell" customModule="mammafoodie" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentsList" rowHeight="160" id="raL-dG-dPp" customClass="CommentsListTableViewCell" customModule="mamma_foodie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="373" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="raL-dG-dPp" id="JFj-Ji-Di3">
@@ -209,7 +209,7 @@
         <!--Chat View Controller-->
         <scene sceneID="JUC-aD-Z9p">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="P5Z-xc-mWl" customClass="ChatViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="P5Z-xc-mWl" customClass="ChatViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N11-l4-jcW"/>
                         <viewControllerLayoutGuide type="bottom" id="tvy-My-YkO"/>
@@ -227,7 +227,7 @@
         <!--Request Dish View Controller-->
         <scene sceneID="Fdn-sv-7Hy">
             <objects>
-                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lOY-7g-u3c" customClass="RequestDishViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zie-Xh-td4"/>
                         <viewControllerLayoutGuide type="bottom" id="sq6-sc-34F"/>
@@ -284,7 +284,7 @@
                                     <segue destination="VYD-Kc-FPe" kind="show" id="i33-aS-fS9"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW6-Vl-UyK" customClass="CommentsView" customModule="mammafoodie" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW6-Vl-UyK" customClass="CommentsView" customModule="mamma_foodie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="486" width="414" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="fJs-eg-aSm"/>
@@ -321,7 +321,7 @@
         <!--Login View Controller-->
         <scene sceneID="c4W-YP-lut">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="cvY-Dy-9Qz" customClass="LoginViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="cvY-Dy-9Qz" customClass="LoginViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i9q-ez-2b4"/>
                         <viewControllerLayoutGuide type="bottom" id="GQO-IF-gkl"/>
@@ -398,7 +398,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sL-3L-Ga5">
-                                <rect key="frame" x="127" y="630" width="67" height="34"/>
+                                <rect key="frame" x="127.33333333333334" y="630" width="67.000000000000028" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.52549019607843139" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
@@ -614,7 +614,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="SyY-3L-zW0">
             <objects>
-                <viewController storyboardIdentifier="ChatListViewController" id="VYD-Kc-FPe" customClass="ChatListViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListViewController" id="VYD-Kc-FPe" customClass="ChatListViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r2Q-HK-MMv"/>
                         <viewControllerLayoutGuide type="bottom" id="HqL-re-du8"/>
@@ -695,7 +695,7 @@
         <!--Register View Controller-->
         <scene sceneID="lNt-GA-77M">
             <objects>
-                <viewController storyboardIdentifier="LoginRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lfz-O7-95b" customClass="RegisterViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginRegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lfz-O7-95b" customClass="RegisterViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IAT-RK-Amd"/>
                         <viewControllerLayoutGuide type="bottom" id="PPO-cp-lVf"/>
@@ -742,7 +742,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-vs-xIv">
-                                <rect key="frame" x="138.66666666666666" y="630" width="45" height="34"/>
+                                <rect key="frame" x="139" y="630" width="45" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="0.52549019610000003" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -918,7 +918,7 @@
         <!--Home View Controller-->
         <scene sceneID="Xdw-LQ-frf">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="1Bg-SB-ayu" customClass="HomeViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="1Bg-SB-ayu" customClass="HomeViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SUp-JC-qSL"/>
                         <viewControllerLayoutGuide type="bottom" id="7Op-ZN-Q56"/>
@@ -948,7 +948,7 @@
                                                     <rect key="frame" x="0.0" y="90.666666666666686" width="414" height="121.33333333333331"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vidups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m6-le-EF0">
-                                                            <rect key="frame" x="184.66666666666666" y="32" width="45" height="17.999999999999986"/>
+                                                            <rect key="frame" x="185" y="32" width="45" height="17.999999999999986"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="fEh-Zd-bdu"/>
                                                             </constraints>
@@ -998,7 +998,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="98.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6S7-g4-pG1">
-                                                            <rect key="frame" x="171.33333333333337" y="8" width="71.666666666666657" height="18"/>
+                                                            <rect key="frame" x="171.66666666666666" y="8" width="71.666666666666686" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="wsg-bU-Dgf"/>
                                                             </constraints>
@@ -1371,7 +1371,7 @@
         <!--Other Users Profile View Controller-->
         <scene sceneID="SOM-Be-FOo">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Kzu-JG-jqs" customClass="OtherUsersProfileViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Kzu-JG-jqs" customClass="OtherUsersProfileViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eia-Ic-TE6"/>
                         <viewControllerLayoutGuide type="bottom" id="VGt-4q-lrQ"/>
@@ -1390,7 +1390,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userHeaderView" id="1E1-vg-fAg" customClass="UserProfileCollectionViewHeader" customModule="mammafoodie" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userHeaderView" id="1E1-vg-fAg" customClass="UserProfileCollectionViewHeader" customModule="mamma_foodie" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="296" height="346"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -1723,7 +1723,7 @@
         <!--Favourite Dishes List-->
         <scene sceneID="YCJ-VE-JqV">
             <objects>
-                <viewController id="OaY-qR-XUc" customClass="FavouriteDishesList" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OaY-qR-XUc" customClass="FavouriteDishesList" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cm0-mg-0vs"/>
                         <viewControllerLayoutGuide type="bottom" id="ayn-10-77p"/>
@@ -1767,7 +1767,7 @@
         <!--Slot Selection View Controller-->
         <scene sceneID="Peq-Bq-4P2">
             <objects>
-                <viewController id="ktQ-JE-mxG" customClass="SlotSelectionViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ktQ-JE-mxG" customClass="SlotSelectionViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gcV-wa-fBI"/>
                         <viewControllerLayoutGuide type="bottom" id="FB5-xU-681"/>
@@ -1896,7 +1896,7 @@
         <image name="IconMenu" width="42" height="42"/>
         <image name="IconNotifications" width="16" height="21"/>
         <image name="IconUserProfile" width="16" height="21"/>
-        <image name="Liked" width="55" height="52"/>
+        <image name="Liked" width="56" height="52"/>
         <image name="Login" width="406" height="360"/>
         <image name="LogoMammaFoodie" width="85" height="74"/>
         <image name="Name" width="42" height="17"/>

@@ -105,7 +105,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         
         
 //        self.lblDistanceAway.text = "\((coordinate0.distance(from: coordinate1))/1000) Kms"
-        self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
+//        self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
+        
+        
+        if let urlString = data.user.picture, let url = URL.init(string: urlString) {
+            self.profileImageView.sd_setImage(with: url)
+        }
         
         
         self.dishImageView.sd_setImage(with: data.mediaURL)
@@ -120,11 +125,18 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
         
     
         //set button 
-        if Date.init() > data.endedAt! {
+        
+        if let endTimeStamp = data.endTimestamp ,Date() > endTimeStamp {
             self.btnRequest.setTitle("Buy now", for: .normal)
         } else {
-            self.btnRequest.setTitle("request", for: .normal)
+            self.btnRequest.setTitle("Request", for: .normal)
         }
+        
+//        if Date.init() > data.endTimestamp! {
+//            self.btnRequest.setTitle("Buy now", for: .normal)
+//        } else {
+//            self.btnRequest.setTitle("request", for: .normal)
+//        }
         
        
         self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
@@ -153,12 +165,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput 
 
     @IBAction func commentsBtnTapped(_ sender: Any) {
         //route to comments
-        let destinationVC = CommentsViewController()
+//        let destinationVC = CommentsViewController()
    
-        if let response = self.dishForView {
-            destinationVC.dishID = response.dish?.id
-            self.present(destinationVC, animated: true, completion: nil)
-        }
+//        if let response = self.dishForView {
+//            destinationVC.dishID = response.dish?.id
+//            self.present(destinationVC, animated: true, completion: nil)
+//        }
  
     }
     

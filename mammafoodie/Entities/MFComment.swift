@@ -5,7 +5,7 @@ class MFComment {
     var id: String!
     var text: String!
     var createdAt: Date!
-    var user: MFUser?
+    var user: MFUser!
     var username: String!
 
     

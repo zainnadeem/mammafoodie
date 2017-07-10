@@ -42,7 +42,7 @@ class MFDish {
     var tag:String!
 
     var createTimestamp: Date!
-    var endTimestamp: Date!
+//    var endTimestamp: Date!
     
 
     var preparationTime : Double!
