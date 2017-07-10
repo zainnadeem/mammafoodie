@@ -65,7 +65,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         super.viewDidLoad()
         for childVC in self.childViewControllers {
             if childVC is GoCookStep2ViewController {
-                self.step2VC = childVC as!GoCookStep2ViewController
+                self.step2VC = childVC as! GoCookStep2ViewController
                 self.step2VC.completion = { (dish, image, videoPathURL) in
                     DispatchQueue.main.async {
                         self.create(dish, image: image, videoURL: videoPathURL)
