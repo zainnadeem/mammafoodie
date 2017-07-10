@@ -65,7 +65,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        self.createTestLiveVideo()
+        //        self.createTestLiveVideo()
         
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
@@ -80,7 +80,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
         self.updateDropShadowForViewUserInfo()
-        self.updateDropShadowForViewComments()
+        //        self.updateDropShadowForViewComments()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -188,6 +188,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.output?.stop(self.liveVideo)
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }

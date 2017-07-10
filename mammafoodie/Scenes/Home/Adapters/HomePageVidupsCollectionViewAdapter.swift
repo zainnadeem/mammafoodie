@@ -34,7 +34,7 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageVidupClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageVidupClnCell", for: indexPath) as! HomePageVidupClnCell
         cell.setup(with: self.list[indexPath.item])
-        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+        if self.isLastItem(indexPath.item) {
             cell.showViewAll()
         } else {
             cell.hideViewAll()
@@ -45,17 +45,17 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as! HomePageVidupClnCell).setup(with: self.list[indexPath.item])
-    }
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        (cell as! HomePageVidupClnCell).setup(with: self.list[indexPath.item])
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.list.count
+        return min(self.limit, self.list.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
-        if self.list.count > 1 && self.list[indexPath.item] == self.list.last {
+        if self.isLastItem(indexPath.item) {
             self.didSelectViewAll?(theAttributes.frame)
         } else {
             self.didSelect?(self.list[indexPath.item], theAttributes.frame)
