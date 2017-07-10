@@ -382,6 +382,14 @@
 		2CFB9BD01EFA4D1B00C08EB3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BCF1EFA4D1B00C08EB3 /* libz.tbd */; };
 		2CFB9BD21EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */; };
 		2CFB9BD41EFA4D3700C08EB3 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */; };
+		2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB55C1F13F1F6005EF9DA /* RegisterAdapter.swift */; };
+		2CFEB5651F13F1F6005EF9DA /* RegisterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB55D1F13F1F6005EF9DA /* RegisterConfigurator.swift */; };
+		2CFEB5661F13F1F6005EF9DA /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB55E1F13F1F6005EF9DA /* RegisterInteractor.swift */; };
+		2CFEB5671F13F1F6005EF9DA /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB55F1F13F1F6005EF9DA /* RegisterModels.swift */; };
+		2CFEB5681F13F1F6005EF9DA /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB5601F13F1F6005EF9DA /* RegisterPresenter.swift */; };
+		2CFEB5691F13F1F6005EF9DA /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB5611F13F1F6005EF9DA /* RegisterRouter.swift */; };
+		2CFEB56A1F13F1F6005EF9DA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB5621F13F1F6005EF9DA /* RegisterViewController.swift */; };
+		2CFEB56B1F13F1F6005EF9DA /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFEB5631F13F1F6005EF9DA /* RegisterWorker.swift */; };
 		570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3ED1F0684F000B41F0E /* AKImageCropperOverlayView.swift */; };
 		570ED40B1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3EE1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift */; };
 		570ED40C1F0684F000B41F0E /* AKImageCropperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED3EF1F0684F000B41F0E /* AKImageCropperScrollView.swift */; };
@@ -736,6 +744,14 @@
 		2CFB9BCF1EFA4D1B00C08EB3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2CFB9BD11EFA4D2600C08EB3 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		2CFB9BD31EFA4D3700C08EB3 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		2CFEB55C1F13F1F6005EF9DA /* RegisterAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAdapter.swift; sourceTree = "<group>"; };
+		2CFEB55D1F13F1F6005EF9DA /* RegisterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterConfigurator.swift; sourceTree = "<group>"; };
+		2CFEB55E1F13F1F6005EF9DA /* RegisterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
+		2CFEB55F1F13F1F6005EF9DA /* RegisterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
+		2CFEB5601F13F1F6005EF9DA /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		2CFEB5611F13F1F6005EF9DA /* RegisterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		2CFEB5621F13F1F6005EF9DA /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		2CFEB5631F13F1F6005EF9DA /* RegisterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
 		570ED3ED1F0684F000B41F0E /* AKImageCropperOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayView.swift; sourceTree = "<group>"; };
 		570ED3EE1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayViewTouchState.swift; sourceTree = "<group>"; };
 		570ED3EF1F0684F000B41F0E /* AKImageCropperScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperScrollView.swift; sourceTree = "<group>"; };
@@ -1303,6 +1319,7 @@
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				2CFEB55B1F13F1F6005EF9DA /* Register */,
 				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
 				2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */,
@@ -1489,6 +1506,21 @@
 				2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */,
 			);
 			path = VidupDetailPage;
+			sourceTree = "<group>";
+		};
+		2CFEB55B1F13F1F6005EF9DA /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				2CFEB55C1F13F1F6005EF9DA /* RegisterAdapter.swift */,
+				2CFEB55D1F13F1F6005EF9DA /* RegisterConfigurator.swift */,
+				2CFEB55E1F13F1F6005EF9DA /* RegisterInteractor.swift */,
+				2CFEB55F1F13F1F6005EF9DA /* RegisterModels.swift */,
+				2CFEB5601F13F1F6005EF9DA /* RegisterPresenter.swift */,
+				2CFEB5611F13F1F6005EF9DA /* RegisterRouter.swift */,
+				2CFEB5621F13F1F6005EF9DA /* RegisterViewController.swift */,
+				2CFEB5631F13F1F6005EF9DA /* RegisterWorker.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		570ED3EB1F0684F000B41F0E /* ImageEditor */ = {
@@ -2412,8 +2444,10 @@
 				2CFB9BB61EFA477200C08EB3 /* VidupDetailPagePresenter.swift in Sources */,
 				2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
+				2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
+				2CFEB5661F13F1F6005EF9DA /* RegisterInteractor.swift in Sources */,
 				2C12BCAD1EF7D237007AF994 /* HomeModels.swift in Sources */,
 				2CA2B4AE1EF542D30076598C /* MFDishRequest.swift in Sources */,
 				2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */,
@@ -2441,6 +2475,7 @@
 				B6E81E621F0A9513000D2F06 /* orderCountWorker.swift in Sources */,
 				BF4800AF1F09282A005E47B1 /* FavoritesTappedWorker.swift in Sources */,
 				2CB8BF231EF25C1B00DA78B3 /* FacebookLoginWorker.swift in Sources */,
+				2CFEB56B1F13F1F6005EF9DA /* RegisterWorker.swift in Sources */,
 				113948D31F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C12BCC41EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				2C2FB2141F09140C004EEA0F /* LiveVideoListWorker.swift in Sources */,
@@ -2463,6 +2498,7 @@
 				110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */,
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
+				2CFEB5671F13F1F6005EF9DA /* RegisterModels.swift in Sources */,
 				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
@@ -2485,6 +2521,7 @@
 				2CE22E8B1F0A421600B6E5B0 /* CommentsWorker.swift in Sources */,
 				2C6979BB1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
+				2CFEB5651F13F1F6005EF9DA /* RegisterConfigurator.swift in Sources */,
 				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				2C6979D71F07C95F00787DCC /* GMUPolygon.m in Sources */,
@@ -2520,10 +2557,12 @@
 				2CA2B4B61EF542D30076598C /* MFMessage.swift in Sources */,
 				2C6979BD1F07C95F00787DCC /* GMUClusterManager.m in Sources */,
 				2C6979BF1F07C95F00787DCC /* GMUStaticCluster.m in Sources */,
+				2CFEB5691F13F1F6005EF9DA /* RegisterRouter.swift in Sources */,
 				570ED40C1F0684F000B41F0E /* AKImageCropperScrollView.swift in Sources */,
 				F097D8CA1EF3D8BA00FCF967 /* ChatListConfigurator.swift in Sources */,
 				57DDD0B81EFC015B00C3BA21 /* GoCookStep2Models.swift in Sources */,
 				2CFB9BB81EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */,
+				2CFEB5681F13F1F6005EF9DA /* RegisterPresenter.swift in Sources */,
 				57DDD0BA1EFC015B00C3BA21 /* GoCookStep2Router.swift in Sources */,
 				2CFB9BB01EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
 				57DDD0B91EFC015B00C3BA21 /* GoCookStep2Presenter.swift in Sources */,
@@ -2586,6 +2625,7 @@
 				570ED4221F0684F000B41F0E /* ImageEditorVC.swift in Sources */,
 				570ED4131F0684F000B41F0E /* IC_CGFloatExtension.swift in Sources */,
 				57DDD0BB1EFC015B00C3BA21 /* GoCookStep2ViewController.swift in Sources */,
+				2CFEB56A1F13F1F6005EF9DA /* RegisterViewController.swift in Sources */,
 				570ED4111F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationGrid.swift in Sources */,
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
