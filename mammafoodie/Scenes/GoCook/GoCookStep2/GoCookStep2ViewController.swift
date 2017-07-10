@@ -225,7 +225,10 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                                     dish.location = currentLocation.coordinate
                                                     dish.address = "MammaFoodie HQ"
                                                     dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
-                                                    self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                    DispatchQueue.main.async {
+                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                        self.clearData()
+                                                    }
                                                 } else {
                                                     self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
                                                 }
@@ -357,6 +360,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     // MARK: - Display logic
     func clearData() {
         self.output.clearData()
+        self.cuisinesAdapter.deselectAllCuisines()
         self.clearPreviews()
     }
     

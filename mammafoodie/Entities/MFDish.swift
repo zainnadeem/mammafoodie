@@ -116,8 +116,9 @@ class MFDish {
         let creationTimestamp = dishDataDictionary["createTimestamp"] as! TimeInterval
         self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
         
-        let endingTimestamp = dishDataDictionary["endTimestamp"] as! TimeInterval
-        self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        if let endingTimestamp = dishDataDictionary["endTimestamp"] as? TimeInterval {
+            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        }
         
         self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
 
