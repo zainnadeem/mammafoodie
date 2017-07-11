@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var window: UIWindow?
     var activityIndicatorView:UIView?
     
+    var uberAccessTokenHandler: ((_ accessToken:String?)->())?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         _ = DatabaseGateway.sharedInstance
         IQKeyboardManager.sharedManager().enable = true
@@ -40,12 +42,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
              loginVC.navigationController?.pushViewController(homeVC, animated: false)
         }
         
+        //To get access token
+//        UberRushDeliveryWorker.getAuthorizationcode{ token in
+//            print(token)
+//            
+//            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
+//                print(json["access_token"])
+//            }
+//        }
+        
         return true
 
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            
+            //For uber rush 
+            if url.scheme == "mammafoodie-uber" {
+                let urlString = url.relativeString
+                
+                print(urlString)
+                
+                if let codeRange = urlString.range(of: "code="){
+                    let authCode = urlString.substring(from: (codeRange.upperBound))
+                    print(authCode)
+                    uberAccessTokenHandler!(authCode)
+                    return true
+                } else {
+                    print("We could not get your authorization code from uber. Please try again.")
+                    uberAccessTokenHandler!(nil)
+                    return false
+                }
+            }
+            
+            
+            
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
             
             

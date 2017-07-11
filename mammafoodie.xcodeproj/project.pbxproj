@@ -16,6 +16,7 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -535,6 +536,7 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -902,6 +904,14 @@
 			path = OtherUsersProfilePage;
 			sourceTree = "<group>";
 		};
+		111E445A1F14DDC300C7A7F7 /* UberRushDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */,
+			);
+			path = UberRushDelivery;
+			sourceTree = "<group>";
+		};
 		113139C01EF7BA1C000050D6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1258,6 +1268,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
 				F0A980F51F0A850F00772BAA /* Followers */,
@@ -1881,7 +1892,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 3K8C5C5YMF;
+						DevelopmentTeam = FP4Y73NAAB;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -1996,7 +2007,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -2056,7 +2067,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -2463,7 +2474,6 @@
 				2C6979CD1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
 				572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */,
 				BFC927361EF00A7E00602153 /* LiveVideoMainPagePresenter.swift in Sources */,
-				BFC927301EF00A7E00602153 /* CommentsWorker.swift in Sources */,
 				114F34121F0BD202007F1D92 /* NestedImageViews.swift in Sources */,
 				2CB8BF281EF25C1B00DA78B3 /* LoginInteractor.swift in Sources */,
 				2C6979C11F07C95F00787DCC /* GMUDefaultClusterIconGenerator.m in Sources */,
@@ -2499,9 +2509,9 @@
 				2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */,
+				111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */,
-				F0191A6C1F03AAEB0081599A /* CommentsView.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
@@ -2759,7 +2769,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3K8C5C5YMF;
+				DEVELOPMENT_TEAM = FP4Y73NAAB;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2783,7 +2793,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3K8C5C5YMF;
+				DEVELOPMENT_TEAM = FP4Y73NAAB;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
