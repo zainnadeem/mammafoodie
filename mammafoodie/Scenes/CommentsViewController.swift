@@ -21,6 +21,8 @@ class CommentsViewController: UIViewController {
 
         commentsView.dish = self.dish
         commentsView.user = self.user
+        commentsView.btnEmoji.isHidden = true
+        commentsView.btnLike.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
