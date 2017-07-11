@@ -11,7 +11,7 @@ import Alamofire
 
 class UberRushDeliveryWorker:NSObject{
     
-    
+    //FIXME: - change it to prod url
     let uberBaseURL = "https://sandbox-api.uber.com/v1"
     
     var uberAccessToken = ""
