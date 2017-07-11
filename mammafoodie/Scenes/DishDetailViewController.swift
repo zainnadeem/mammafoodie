@@ -15,10 +15,10 @@ protocol DishDetailViewControllerOutput {
     
     func checkFavoritesStatus(userId: String, dishId: String)
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
-    
+    func stopObservingDish()
 }
 
-class DishDetailViewController: UIViewController, DishDetailViewControllerInput, HUDRenderer {
+class DishDetailViewController: UIViewController, DishDetailViewControllerInput,HUDRenderer {
 
     var output: DishDetailViewControllerOutput!
     var router: DishDetailRouter!
@@ -65,6 +65,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
@@ -72,9 +73,9 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     
-    //TODO: - Need to be changed
-    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
-    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
+//    //TODO: - Need to be changed
+//    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
+//    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
     
    
     
@@ -83,7 +84,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.output.getDish(with: "-Ko7jcz0kX1Kb1OValuf")
+        
         
         lblCurrentlyCooking.layer.cornerRadius = 8
         lblCurrentlyCooking.clipsToBounds = true
@@ -98,11 +99,29 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         return .lightContent
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.output.getDish(with: "-Kok-iYMp5RnpCYrt1eg")
+        
+        
+        if let dishID = self.dishID{
+            self.output.getDish(with: dishID)
+        }
+        
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.output.stopObservingDish()
+    }
     
     // MARK: - Event handling
     func displayDish(_ response: DishDetail.Dish.Response) {
         
         self.hideActivityIndicator()
+        
         guard let data = response.dish else { return }
         
         self.dishForView = response
@@ -124,12 +143,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
 
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
-        
-//        if let urlString = data.user.picture, let url = URL.init(string: urlString) {
-//            self.profileImageView.sd_setImage(with: url)
-//        }
-        
-        
         self.dishImageView.sd_setImage(with: data.generateCoverImageURL())
         
         //set profile imageview
@@ -144,15 +157,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         //set button
         if let endTimeStamp = data.endTimestamp ,Date().timeIntervalSinceReferenceDate > endTimeStamp.timeIntervalSinceReferenceDate {
             self.btnRequest.setTitle("Request", for: .normal)
+            self.lblCurrentlyCooking.isHidden = true
         } else {
             self.btnRequest.setTitle("Buy now", for: .normal)
+            self.lblCurrentlyCooking.isHidden = false
         }
         
-//        if Date.init() > data.endTimestamp! {
-//            self.btnRequest.setTitle("Buy now", for: .normal)
-//        } else {
-//            self.btnRequest.setTitle("request", for: .normal)
-//        }
         
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
             
@@ -169,7 +179,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     
     func displayFavoriteStatus(_ response: DishDetail.Favorite.Response) {
-//        print(response.status)
+
         if response.status == true {
             self.btnAddToFavorites.isSelected = true
         }else{
@@ -179,7 +189,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     
     func displayLikeStatus(_ response: DishDetail.Like.Response){
-//        print(response.status)
+
         if response.status == true {
             self.btnLikes.isSelected = true
         }else{
@@ -193,14 +203,22 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
 
     @IBAction func commentsBtnTapped(_ sender: Any) {
-        //route to comments
-//        let destinationVC = CommentsViewController()
-   
-//        if let response = self.dishForView {
-//            destinationVC.dishID = response.dish?.id
-//            self.present(destinationVC, animated: true, completion: nil)
-//        }
- 
+        
+        let commentsVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
+        commentsVC.dish = self.dishForView?.dish
+        
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+            
+        
+            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid) { user in
+                commentsVC.user = user
+                
+                self.present(commentsVC, animated: true, completion: nil)
+            }
+        }
+        
+        
+        
     }
     
     
@@ -264,11 +282,20 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         if button.currentTitle! == "Request"{
             let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "RequestDishViewController")
             self.present(vc, animated: true, completion: nil)
+        } else { //Buy now -- Open slots page
+            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
+            self.present(vc, animated: true, completion: nil)
         }
         
         
         
     }
+    
+    
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     
     func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (String?) -> Void) {

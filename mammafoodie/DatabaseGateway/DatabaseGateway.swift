@@ -340,7 +340,7 @@ extension DatabaseGateway {
         })
     }
     
-    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void){
+    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver?{
         print(dishID)
         
         let successClosure:FirebaseObserverSuccessClosure = { (userDataSnapshot) in
@@ -359,6 +359,10 @@ extension DatabaseGateway {
             completion(nil)
         }
         
+        
+        let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(dishID)
+        
         switch frequency{
         case .single:
             
@@ -366,11 +370,15 @@ extension DatabaseGateway {
             
         case .realtime:
             
-            FirebaseReference.dishes.classReference.child(dishID).observe(.value, with: successClosure, withCancel: cancelClosure)
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+
+            return observer
+            
         }
         
-        
-        
+        return nil
     
     }
     

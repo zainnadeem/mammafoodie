@@ -6,6 +6,7 @@ protocol DishDetailInteractorInput {
     func checkLikeStatus(userId: String, dishId: String)
     func checkFavoritesStatus(userId: String, dishId: String)
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
+    func stopObservingDish()
     
 }
 
@@ -18,7 +19,7 @@ protocol DishDetailInteractorOutput {
 class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     
     var output: DishDetailInteractorOutput!
-    var dishWorker: LoadDishWorker!
+    var dishWorker: LoadDishWorker = LoadDishWorker()
     
     var likeStatusWorker: CheckLikeStatusWorker!
     var likeTappedWorker: LikeTappedWorker!
@@ -28,7 +29,7 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     var orderCountWorker: OrderCountWorker!
     
     func getDish(with id: String) {
-        dishWorker = LoadDishWorker()
+//        dishWorker = LoadDishWorker()
         
 //        self.showActivityIndicator()
         
@@ -47,6 +48,10 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
 //            
 //            }
         }
+    }
+    
+    func stopObservingDish(){
+        dishWorker.stopObserving()
     }
     
     func likeButtonTapped(userId: String, dishId: String, selected: Bool) {

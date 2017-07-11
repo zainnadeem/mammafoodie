@@ -26,7 +26,9 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     
     func loadComments() {
         worker.load(for: self.dish) { (comments) in
+            print(comments.count)
             self.comments = comments
+            print(comments.count)
             self.reloadData()
         }
     }
