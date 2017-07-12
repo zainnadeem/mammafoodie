@@ -794,6 +794,27 @@ extension DatabaseGateway{
     }
     
     
+    func checkIfUser(withuserID:String, isFollowing userID:String, _ completion:@escaping (Bool)->Void){
+        
+        //If withUserID is in followers list of userID, return true
+        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+                guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                    completion(false)
+                    return
+                }
+                
+                if followers[withuserID] != nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+        
+            })
+        
+    }
+    
+    
 }
 
 

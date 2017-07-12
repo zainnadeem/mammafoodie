@@ -10,6 +10,7 @@ protocol OtherUsersProfileViewControllerOutput {
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
 //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
+    func toggleFollow(userID:String, shouldFollow:Bool)
 }
 
 enum ProfileType{
@@ -33,6 +34,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     let unSelectedMenuTextColor = UIColor(red: 83/255, green: 85/255, blue: 87/255, alpha: 1)
     
+    var userID:String?
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -48,7 +51,10 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         output.setUpDishCollectionView(self.collectionView, self.profileType)
         
         if let user = Auth.auth().currentUser{
-            output.loadUserProfileData(userID: user.uid)
+            
+            self.userID = user.uid
+            
+            output.loadUserProfileData(userID: self.userID!)
         }
         
     }
@@ -69,10 +75,12 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     @IBAction func settingsButtonClicked(_ sender: UIButton) {
         
         
+        
     }
     
     
     @IBAction func closeButtonClicked(_ sender: UIButton) {
+        
         
         
     }
@@ -80,7 +88,25 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
         
-        
+        switch sender.currentTitle!.lowercased(){
+            case "follow":
+                sender.setTitle("UnFollow", for: .normal)
+                output.toggleFollow(userID: self.userID!, shouldFollow: true)
+                
+                
+            break
+            
+            case "unfollow":
+                sender.setTitle("Follow", for: .normal)
+                output.toggleFollow(userID: self.userID!, shouldFollow: false)
+            break
+            
+            case "go cook":
+            break
+            
+        default:
+            break
+        }
         
     }
     

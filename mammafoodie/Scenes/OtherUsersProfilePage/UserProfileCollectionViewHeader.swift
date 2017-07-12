@@ -167,6 +167,21 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         }
         
         
+        if profileType == .othersProfile{
+        
+            if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+                 DatabaseGateway.sharedInstance.checkIfUser(withuserID: currentUser.uid, isFollowing: data.id, { (following) in
+                    
+                    if following{
+                        self.btnFollow.setTitle("UnFollow", for: .normal)
+                    } else {
+                        self.btnFollow.setTitle("Follow", for: .normal)
+                    }
+                    
+                 })
+            }
+        }
+        
         self.updateHairLineMenuPosition()
 
     }

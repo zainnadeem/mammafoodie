@@ -160,4 +160,49 @@ class OtherUsersProfileWorker {
         }
     }
     
+    
+    func toggleFollow(targetUser:String, currentUser:String, targetUserName:String, currentUserName:String, shouldFollow:Bool, _ completion:@escaping (_ success:Bool)->()){
+        
+        var urlString = ""
+        
+        if shouldFollow {
+            urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/followUser?firstUserId=\(currentUser)&secondUserId=\(targetUser)&firstUserFullname=\(currentUserName)&secondUserFullname=\(targetUserName)"
+        } else {
+            urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unfollowUser?firstUserId=\(currentUser)&secondUserId=\(targetUser)"
+        }
+        
+      
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
+
+        let url = URL(string: encodedString)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let config = URLSessionConfiguration.default
+
+        let session = URLSession(configuration: config)
+        session.dataTask(with: request) { (data, response, error) in
+            guard let response = response as? HTTPURLResponse else { print("there was an error");
+                
+                completion(false)
+                return }
+            
+            if response.statusCode != 200 {
+                print("There was an error with your request")
+                completion(false)
+            }
+            if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                if let responseDict = responseDict {
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
+            }.resume()
+        
+    }
+    
 }
