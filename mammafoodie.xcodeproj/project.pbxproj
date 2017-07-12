@@ -17,6 +17,7 @@
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
 		111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */; };
+		111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -537,6 +538,7 @@
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
+		111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesWorker.swift; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -912,6 +914,14 @@
 			path = UberRushDelivery;
 			sourceTree = "<group>";
 		};
+		111E445E1F16099900C7A7F7 /* PostmatesDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */,
+			);
+			path = PostmatesDelivery;
+			sourceTree = "<group>";
+		};
 		113139C01EF7BA1C000050D6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1268,6 +1278,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
@@ -2434,6 +2445,7 @@
 				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
+				111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
 				F0A980F01F0A3BAC00772BAA /* PagingViewController.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
