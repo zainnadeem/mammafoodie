@@ -16,6 +16,7 @@ protocol DishDetailViewControllerOutput {
     func checkFavoritesStatus(userId: String, dishId: String)
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
     func stopObservingDish()
+    func updateDishViewersCount(dishID:String, opened:Bool)
 }
 
 class DishDetailViewController: UIViewController, DishDetailViewControllerInput,HUDRenderer {
@@ -71,19 +72,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
         
     }
-    
-    
-//    //TODO: - Need to be changed
-//    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
-//    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
-    
-   
+
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
         lblCurrentlyCooking.layer.cornerRadius = 8
@@ -92,6 +86,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         lblLeftDishesCount.clipsToBounds = true
         
         self.showActivityIndicator()
+        
         
         }
     
@@ -102,19 +97,33 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.output.getDish(with: "-Kok-iYMp5RnpCYrt1eg")
-        
+//        self.output.getDish(with: "-Kok-iYMp5RnpCYrt1eg")
+        self.dishID = "-KoirmSdgfzq_00X7wKb"
         
         if let dishID = self.dishID{
             self.output.getDish(with: dishID)
+            self.output.updateDishViewersCount(dishID:dishID,opened: true)
+        }
+        
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+            
+            self.output.checkLikeStatus(userId: currentUser.uid, dishId: dishID!)
+            self.output.checkFavoritesStatus(userId: currentUser.uid , dishId: dishID!)
         }
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if let dishID = self.dishID{
+            self.output.stopObservingDish()
+        }
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.output.stopObservingDish()
+        if let dishID = self.dishID{
+        self.output.updateDishViewersCount(dishID:dishID,opened: false)
+        }
     }
     
     // MARK: - Event handling
@@ -169,9 +178,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             self.getDistanceBetweenUsers(userID1: currentUser.uid, userID2: data.user.id, { (distanceInKms) in
                  self.lblDistanceAway.text = distanceInKms
             })
-            
-            self.output.checkLikeStatus(userId: currentUser.uid, dishId: data.id)
-            self.output.checkFavoritesStatus(userId: currentUser.uid , dishId: data.id)
+
         }
         
   

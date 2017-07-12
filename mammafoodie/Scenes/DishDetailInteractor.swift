@@ -7,7 +7,7 @@ protocol DishDetailInteractorInput {
     func checkFavoritesStatus(userId: String, dishId: String)
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
     func stopObservingDish()
-    
+    func updateDishViewersCount(dishID:String, opened:Bool)
 }
 
 protocol DishDetailInteractorOutput {
@@ -90,6 +90,9 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     }
     
     
+    func updateDishViewersCount(dishID:String, opened: Bool) {
+        dishWorker.updateViewersforDish(dishID: dishID, opened: opened)
+    }
     
     
     

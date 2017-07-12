@@ -539,15 +539,15 @@ extension DatabaseGateway {
         print(dishId)
         
         
-        FirebaseReference.likedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+    FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
-            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+            guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value)
                 completion(nil)
                 return
             }
             
-            if dishData[dishId] != nil {
+            if userData[userId] != nil {
                 completion(true)
             }else{
                 completion(false)

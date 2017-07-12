@@ -15,18 +15,18 @@ protocol DishDetailPresenterOutput: class {
 }
 
 class DishDetailPresenter: DishDetailPresenterInput {
-    weak var output: DishDetailPresenterOutput!
+    weak var output: DishDetailPresenterOutput?
     
     func presentDish(_ response: DishDetail.Dish.Response) {
-        self.output.displayDish(response)
+        self.output?.displayDish(response)
     }
     
     func presentLikeStatus(_ response: DishDetail.Like.Response) {
-        self.output.displayLikeStatus(response)
+        self.output?.displayLikeStatus(response)
     }
     
     func presentFavoriteStatus(_ response: DishDetail.Favorite.Response) {
-    self.output.displayFavoriteStatus(response)
+    self.output?.displayFavoriteStatus(response)
     }
     // MARK: - Presentation logic
     
