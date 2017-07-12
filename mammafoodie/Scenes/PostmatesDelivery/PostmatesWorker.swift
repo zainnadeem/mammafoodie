@@ -102,8 +102,6 @@ class PostmatesWorker {
                 else { completion(nil, "Data Error") }
             }
             }.resume()
-        
-        
     }
     
     //Get details of ongoing delivery
