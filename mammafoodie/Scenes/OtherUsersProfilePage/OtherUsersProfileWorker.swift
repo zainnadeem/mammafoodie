@@ -97,11 +97,11 @@ class OtherUsersProfileWorker {
         }
     }
 
-    func getFollowersForUser(userID:String, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
         followersResponseCounter = 0
         
-        DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID) { (followers) in
+        DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID, frequency: frequency) { (followers) in
             
             
             guard followers != nil else {return}
@@ -129,11 +129,11 @@ class OtherUsersProfileWorker {
     }
     
     
-    func getFollowingForUser(userID:String, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
         followingResponseCounter = 0
         
-        DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID) { (following) in
+        DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
             
             
             guard following != nil else {return}

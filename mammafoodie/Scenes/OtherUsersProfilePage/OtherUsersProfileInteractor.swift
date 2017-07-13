@@ -11,6 +11,7 @@ protocol OtherUsersProfileInteractorInput {
 
 protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:Int)
+    func openFollowers(followers:Bool, userList:[MFUser])
 }
 
 ///Defined in OtherUsersProfileInteractor
@@ -147,6 +148,10 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
        output.openDishPageWith(dishID: dishID)
     
+    }
+    
+    func openFollowers(followers:Bool, userList:[MFUser]){
+        output.openFollowers(followers: followers, userList:userList)
     }
     
 }

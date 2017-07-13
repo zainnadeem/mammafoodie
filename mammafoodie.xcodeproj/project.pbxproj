@@ -18,6 +18,8 @@
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
 		111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */; };
 		111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */; };
+		112E88D01F179E5600150FE8 /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */; };
+		112E88D11F179E5600150FE8 /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -539,6 +541,8 @@
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
 		111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesWorker.swift; sourceTree = "<group>"; };
+		112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableCell.swift; sourceTree = "<group>"; };
+		112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableCell.xib; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -1814,6 +1818,8 @@
 				F0A980F61F0A859400772BAA /* FollowersListViewController.swift */,
 				F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */,
 				F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */,
+				112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */,
+				112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */,
 			);
 			name = Followers;
 			sourceTree = "<group>";
@@ -1993,6 +1999,7 @@
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				57C948141F03781000DF5674 /* video.mp4 in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
+				112E88D11F179E5600150FE8 /* FollowingTableCell.xib in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
@@ -2430,6 +2437,7 @@
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				F097D8CE1EF3D8BA00FCF967 /* ChatListRouter.swift in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
+				112E88D01F179E5600150FE8 /* FollowingTableCell.swift in Sources */,
 				2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
 				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,

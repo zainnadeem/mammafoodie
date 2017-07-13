@@ -20,6 +20,9 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     let unSelectedMenuTextColor = UIColor(red: 83/255, green: 85/255, blue: 87/255, alpha: 1)
     
+    var followers = [MFUser]()
+    var following = [MFUser]()
+    
     //MARK: - IBOutlets
     @IBOutlet weak var lblUserName:UILabel!
     
@@ -143,11 +146,14 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     
-    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String){
+    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String, followers:[MFUser]?, following:[MFUser]?){
         
         self.layoutIfNeeded()
         
         //Load Data
+        
+        self.followers = followers ?? []
+        self.following = following ?? []
         
         guard let data = data else {return}
         
@@ -225,11 +231,12 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     
     func openFollowers(sender:UITapGestureRecognizer){
-        
+    
+        delegate?.openFollowers(followers: true, userList:self.followers)
     }
     
     func openFollowing(sender:UITapGestureRecognizer){
-        
+        delegate?.openFollowers(followers: false, userList:self.following)
     }
     
     func updateHairLineMenuPosition(){

@@ -3,6 +3,7 @@ import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:Int)
+    func openFollowers(followers:Bool, userList:[MFUser])
 }
 
 protocol OtherUsersProfileViewControllerOutput {
@@ -68,6 +69,32 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
+    func openFollowers(followers:Bool, userList:[MFUser]){
+        
+        let followerNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowerNav") as!
+        UINavigationController
+        
+        let vc = followerNav.viewControllers.first as! FollowersListViewController
+        
+//        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
+        
+        if followers {
+            //show list of followers
+            vc.followers = true
+            
+        } else {
+            //show list of following
+            vc.followers = false
+        }
+//        vc.userList = userList
+        
+        vc.userID = self.userID!
+        
+        
+        self.present(followerNav, animated: true, completion: nil)
+        
+    }
+    
     
     // MARK: - Event handling
     
@@ -84,6 +111,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         
     }
+    
     
     
     @IBAction func followButtonClicked(_ sender: UIButton) {

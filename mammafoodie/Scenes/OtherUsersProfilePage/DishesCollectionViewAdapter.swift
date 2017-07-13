@@ -12,6 +12,7 @@ protocol DishesCollectionViewAdapterDelegate{
     
     func openDishPageWith(dishID:Int)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    func openFollowers(followers:Bool, userList:[MFUser])
 }
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -155,7 +156,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             view.delegate = self.delegate
             view.profileType = self.profileType
             
-            view.setUp(userData, followersCount: followers?.count.description ?? "0", followingCount: following?.count.description ?? "0", cookedDishesCount: cookedDishData?.count.description ?? "0", favouriteDishesCount: "0", boughtDishesCount: boughtDishData?.count.description ?? "0")
+            view.setUp(userData, followersCount: followers?.count.description ?? "0", followingCount: following?.count.description ?? "0", cookedDishesCount: cookedDishData?.count.description ?? "0", favouriteDishesCount: "0", boughtDishesCount: boughtDishData?.count.description ?? "0", followers: self.followers, following:self.following)
             
             reusableView = view
             reusableView.sizeToFit()

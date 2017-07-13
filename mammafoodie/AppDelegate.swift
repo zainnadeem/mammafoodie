@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var currentUserFirebase:User? //Populate this when user logs in successfully
     
+    var currentUser:MFUser?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         _ = DatabaseGateway.sharedInstance
         IQKeyboardManager.sharedManager().enable = true
@@ -41,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         self.window?.rootViewController = navigationController
         
         if currentUser != nil { //User is already logged in, show home screen
+            
+            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
+                self.currentUser = user
+            })
             
             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
              loginVC.navigationController?.pushViewController(homeVC, animated: false)
