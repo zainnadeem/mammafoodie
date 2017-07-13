@@ -21,7 +21,7 @@ enum FirebaseReference: String {
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
 //    case dishComments = "DishComments"
-    case savedDishes = "DishSaved"
+    case savedDishes = "SavedDishes"
     case likedDishes = "LikedDishes"
 //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
@@ -510,22 +510,54 @@ extension DatabaseGateway {
 
 extension DatabaseGateway {
     
-    func checkSavedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        FirebaseReference.savedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+//    func checkSavedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
+//        FirebaseReference.savedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+//            
+//            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+//                
+//                completion(nil)
+//                return
+//            }
+//            
+//            if dishData[dishId] != nil {
+//                completion(true)
+//            }else{
+//                completion(false)
+//            }
+//            
+//        })
+//    }
+//    
+    
+    func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool, _ completion:@escaping (_ success:Bool)->()){
+        
+        if shouldBookmark {
+            FirebaseReference.savedDishes.classReference.child(userID).updateChildValues([dishID:true])
             
-            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+        } else {
+            FirebaseReference.savedDishes.classReference.child(userID).child(dishID).removeValue()
+        }
+        
+    }
+    
+    
+    func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
+        FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+            
+                guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+    
+                    completion(false)
+                    return
+                }
+    
+                if dishData[dishID] != nil {
+                    completion(true)
+                }else{
+                    completion(false)
+                }
                 
-                completion(nil)
-                return
-            }
-            
-            if dishData[dishId] != nil {
-                completion(true)
-            }else{
-                completion(false)
-            }
-            
-        })
+            })
+        
     }
 }
 

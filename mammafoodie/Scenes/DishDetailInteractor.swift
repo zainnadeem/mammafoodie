@@ -64,8 +64,9 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool) {
         favoritesTappedWorker = FavoritesTappedWorker()
-        favoritesTappedWorker.favoritesTapped(userId: userId, dishID: dishId, selected: selected) {
-            
+        favoritesTappedWorker.favoritesTapped(userId: userId, dishID: dishId, selected: selected) { status in
+            let response = DishDetail.Favorite.Response(status: status)
+            self.output.presentFavoriteStatus(response)
         }
 
     }

@@ -105,10 +105,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             self.output.updateDishViewersCount(dishID:dishID,opened: true)
         }
         
-        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
             
-            self.output.checkLikeStatus(userId: currentUser.uid, dishId: dishID!)
-            self.output.checkFavoritesStatus(userId: currentUser.uid , dishId: dishID!)
+            self.output.checkLikeStatus(userId: currentUser.id, dishId: dishID!)
+            self.output.checkFavoritesStatus(userId: currentUser.id , dishId: dishID!)
         }
         
     }
@@ -173,9 +173,9 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         }
         
         
-        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
             
-            self.getDistanceBetweenUsers(userID1: currentUser.uid, userID2: data.user.id, { (distanceInKms) in
+            self.getDistanceBetweenUsers(userID1: currentUser.id, userID2: data.user.id, { (distanceInKms) in
                  self.lblDistanceAway.text = distanceInKms
             })
 
@@ -214,18 +214,13 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let commentsVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
         commentsVC.dish = self.dishForView?.dish
         
-        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+            commentsVC.user = currentUser
             
+            self.present(commentsVC, animated: true, completion: nil)
         
-            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid) { user in
-                commentsVC.user = user
-                
-                self.present(commentsVC, animated: true, completion: nil)
-            }
         }
-        
-        
-        
+       
     }
     
     
@@ -257,16 +252,19 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             btnLikes.isSelected = false
         }
         
-        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase{
-            self.output.likeButtonTapped(userId: currentUser.uid, dishId: dish.id, selected: self.btnLikes.isSelected)
+        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+            self.output.likeButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnLikes.isSelected)
         }
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         //add to users favorites
+        
         self.btnAddToFavorites.isSelected = !self.btnAddToFavorites.isSelected
         
-        //FIXME: - call api to add/delete favourites
+        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+            self.output.favoriteButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnAddToFavorites.isSelected)
+        }
         
     }
     
@@ -287,14 +285,13 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let button = sender as! UIButton
         
         if button.currentTitle! == "Request"{
-            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "RequestDishViewController")
+            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "RequestDishViewController") as! RequestDishViewController
+            vc.dish = self.dishForView?.dish
             self.present(vc, animated: true, completion: nil)
         } else { //Buy now -- Open slots page
             let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
             self.present(vc, animated: true, completion: nil)
         }
-        
-        
         
     }
     

@@ -1941,7 +1941,10 @@
                                                     <constraint firstAttribute="height" constant="22" id="auK-wg-gyU"/>
                                                     <constraint firstAttribute="width" constant="34" id="scK-Fu-TAf"/>
                                                 </constraints>
-                                                <state key="normal" image="Back_white"/>
+                                                <size key="titleShadowOffset" width="4" height="4"/>
+                                                <state key="normal" image="Back_white">
+                                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="backButtonTapped:" destination="bag-CL-aVm" eventType="touchUpInside" id="wvb-48-bMf"/>
                                                 </connections>
@@ -1952,7 +1955,10 @@
                                                     <constraint firstAttribute="height" constant="25" id="MlS-da-mKs"/>
                                                     <constraint firstAttribute="width" constant="20" id="gb3-py-hk4"/>
                                                 </constraints>
-                                                <state key="normal" image="Share"/>
+                                                <size key="titleShadowOffset" width="4" height="4"/>
+                                                <state key="normal" image="Share">
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="shareButtonTapped:" destination="bag-CL-aVm" eventType="touchUpInside" id="bv9-lP-hes"/>
                                                 </connections>
