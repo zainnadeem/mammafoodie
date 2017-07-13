@@ -103,6 +103,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.clnVidups.reloadData()
+        self.clnLiveVideos.reloadData()
     }
     
     override func viewDidLayoutSubviews() {

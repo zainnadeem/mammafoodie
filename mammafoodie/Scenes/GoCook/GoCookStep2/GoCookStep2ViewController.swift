@@ -237,7 +237,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
 
                                                   
                                                 } else {
-                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
+//                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
                                                 }
                                             })
                                         }

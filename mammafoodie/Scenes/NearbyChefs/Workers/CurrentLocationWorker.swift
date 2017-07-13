@@ -22,7 +22,7 @@ class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
         self.hasFoundLocation = false
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
+//        self.locationManager.requestLocation()
         self.locationManager.startUpdatingLocation()
     }
     
