@@ -11,7 +11,7 @@ import UIKit
 class LoginNewViewController: UIViewController, UITextFieldDelegate {
     
     var shapeLayer: CAShapeLayer!
-
+    
     @IBOutlet weak var passImageView: UIImageView!
     @IBOutlet weak var emailImageView: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
@@ -65,7 +65,7 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -96,7 +96,7 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
             PassTextChangeImage()
         }
     }
-
+    
     
     
     func emailTextChange() {
@@ -117,8 +117,8 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
             passImageView.image = UIImage(named: "Password")
         }
     }
-
-
+    
+    
 }
 
 

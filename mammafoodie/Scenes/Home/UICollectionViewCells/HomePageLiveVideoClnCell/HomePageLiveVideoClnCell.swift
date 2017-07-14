@@ -26,32 +26,56 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        self.imgView.layer.cornerRadius = self.imgView.frame.width/2
-        self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
         super.layoutSubviews()
     }
     
     func setup(with liveVideo: MFDish) {
-        self.viewForViewAll.isHidden = true
+        self.layoutIfNeeded()
+        self.imgView.layer.cornerRadius = self.imgView.frame.width/2
+        self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
+        
         self.imgView.sd_cancelCurrentImageLoad()
         if liveVideo.id == "-1" {
             // Option to create new live video
             self.imgView.layer.borderWidth = 2
             self.imgAddIcon.isHidden = false
-            self.imgView.image = UIImage(named: "ProfilePicture21")!
-        } else if liveVideo.id == "30" {
-            self.viewForViewAll.isHidden = false
+            
+            if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+                    self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                        if image == nil || error != nil {
+                            self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                        }
+                    })
+                } else {
+                    self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                }
+            } else {
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+            }
         } else {
             // Show existing live video details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
             
             if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: liveVideo.user.id) {
-                self.imgView.sd_setImage(with: url)
+                self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                    if image == nil || error != nil {
+                        self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                    }
+                })
             } else {
-                self.imgView.image = nil
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
             }
         }
         
+    }
+    
+    func showViewAll() {
+        self.viewForViewAll.isHidden = false
+    }
+    
+    func hideViewAll() {
+        self.viewForViewAll.isHidden = true
     }
 }

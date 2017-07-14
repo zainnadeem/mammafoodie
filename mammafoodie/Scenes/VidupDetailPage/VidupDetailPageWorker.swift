@@ -119,11 +119,9 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
-
-    func getexpireTime(endTimestamp:Date)->Int{
-        var TimeLeft:Int = 0
-        TimeLeft = Int(endTimestamp.timeIntervalSinceReferenceDate)
-        return TimeLeft
+    
+    func getexpireTime(endTimestamp:Date)->Double{
+        return endTimestamp.timeIntervalSinceReferenceDate
     }
     
     

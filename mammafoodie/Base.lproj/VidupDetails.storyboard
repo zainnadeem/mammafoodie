@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O03-uh-Su3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZoX-Xv-U15">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -329,7 +329,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4IS-c3-YVg" id="zUe-hJ-HND">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap" translatesAutoresizingMaskIntoConstraints="NO" id="pC9-wQ-waE">
@@ -340,13 +340,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dylan Andrews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ID-gX-PjO">
-                                                    <rect key="frame" x="82.999999999999986" y="20" width="127.66666666666664" height="22.666666666666664"/>
+                                                    <rect key="frame" x="83" y="20" width="114" height="20"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made This for a BBQ today and it was amazing.Bought 2 Madiera cakes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8L-h5-Qn4">
-                                                    <rect key="frame" x="83" y="96.666666666666657" width="269" height="54.999999999999972"/>
+                                                    <rect key="frame" x="83" y="116.66666666666666" width="269" height="34.999999999999972"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -484,7 +484,7 @@
         <!--Dish Details View Controller-->
         <scene sceneID="Ol1-30-qst">
             <objects>
-                <viewController id="ZoX-Xv-U15" customClass="DishDetailsViewController" customModule="mammafoodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZoX-Xv-U15" customClass="DishDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xlc-Kp-5mA"/>
                         <viewControllerLayoutGuide type="bottom" id="HgA-Tt-5dJ"/>
@@ -703,13 +703,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HgA-Tt-5dJ" firstAttribute="top" secondItem="ec5-J1-u6w" secondAttribute="bottom" id="40h-14-Ryr"/>
                             <constraint firstItem="ec5-J1-u6w" firstAttribute="top" secondItem="n7q-fj-xVU" secondAttribute="bottom" id="5Js-eJ-Mmv"/>
                             <constraint firstItem="n7q-fj-xVU" firstAttribute="leading" secondItem="klZ-oy-QBj" secondAttribute="leading" id="U5R-jS-fwp"/>
                             <constraint firstItem="ec5-J1-u6w" firstAttribute="leading" secondItem="klZ-oy-QBj" secondAttribute="leading" id="fRj-nh-JVO"/>
-                            <constraint firstItem="HgA-Tt-5dJ" firstAttribute="top" secondItem="ec5-J1-u6w" secondAttribute="bottom" id="g95-AW-J16"/>
                             <constraint firstAttribute="trailing" secondItem="ec5-J1-u6w" secondAttribute="trailing" id="nrq-ZR-5kz"/>
                             <constraint firstAttribute="trailing" secondItem="n7q-fj-xVU" secondAttribute="trailing" id="sWO-3o-vTE"/>
-                            <constraint firstItem="n7q-fj-xVU" firstAttribute="top" secondItem="xlc-Kp-5mA" secondAttribute="bottom" id="yh4-lf-FMI"/>
+                            <constraint firstItem="n7q-fj-xVU" firstAttribute="top" secondItem="xlc-Kp-5mA" secondAttribute="bottom" id="snN-00-beS"/>
                         </constraints>
                     </view>
                 </viewController>

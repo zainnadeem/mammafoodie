@@ -41,6 +41,11 @@ class MFOrder {
     var deliveryOption: MFDeliveryOption?
     var paymentMethod: MFPaymentMethod!
     var paymentDetails: MFPaymentDetails?
+    
+    init(from orderDataDictionary:[String:AnyObject]){
+        var Dishid = orderDataDictionary["dishId"] as? String ?? ""
+        var quantity = orderDataDictionary["quantity"] as? String ?? ""
+    }
 }
 
 extension MFOrder: Hashable {

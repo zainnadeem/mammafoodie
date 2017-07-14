@@ -30,28 +30,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
         let currentUser = Auth.auth().currentUser
-//        let currentUser = Auth.auth().currentUser
-        
         currentUserFirebase = currentUser
-//
+
         let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
-        let navigationController = storyBoard.instantiateInitialViewController() as! UINavigationController
+        let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
         let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         
-        navigationController.viewControllers = [loginVC]
-        self.window?.rootViewController = navigationController
-        
         if currentUser != nil { //User is already logged in, show home screen
-            
             DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
                 self.currentUser = user
             })
-            
             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-             loginVC.navigationController?.pushViewController(homeVC, animated: false)
+            loginVC.navigationController?.pushViewController(homeVC, animated: false)
         }
-        
+
         //To get access token
 //        UberRushDeliveryWorker.getAuthorizationcode{ token in
 //            print(token)
@@ -60,9 +53,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //                print(json["access_token"])
 //            }
 //        }
-        
+      
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+  
         return true
-
+        
+    }
+    
+    class func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func setHomeViewController() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
+        self.window?.rootViewController = navigationController
+    }
+    
+    func setLoginViewController() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navLogin") as! MFNavigationController
+        self.window?.rootViewController = navigationController
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])

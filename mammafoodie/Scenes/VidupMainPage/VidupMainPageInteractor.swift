@@ -11,13 +11,21 @@ protocol VidupMainPageInteractorOutput {
 class VidupMainPageInteractor: VidupMainPageInteractorInput {
     
     var output: VidupMainPageInteractorOutput!
-    var worker = LoadVidupsWorker()
+//    var worker = LoadVidupsWorker()
+    
+    var liveVideoListWorker = LiveVideoListWorker()
     
     // MARK: - Business logic
     func loadVidups() {
-        worker.callAPI { vidups in
+//        worker.callAPI { vidups in
+//            let response = VidupMainPage.Response(arrayOfVidups: vidups)
+//            self.output.presentVidups(response)
+//        }
+        
+        liveVideoListWorker.getList { (vidups) in
             let response = VidupMainPage.Response(arrayOfVidups: vidups)
             self.output.presentVidups(response)
         }
+        
     }
 }

@@ -48,7 +48,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
                 if self.mediaPlaying ==  false {
                     self.mediaPlaying = true
                     self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
-                    let timeLeft:Int = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
+                    let timeLeft:Double = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
                     self.VidupTimerworker.seconds = timeLeft
                     self.VidupTimerworker.runTimer()
                 }
@@ -57,25 +57,25 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
         
         
         /*
-        self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
-            if Dishdetails != nil {
-                self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
-                self.VidupTimerworker.delegate = self
-                self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.generateVidUpVideoURL())!)
-                if Int((MediaDetails?.dealTime)!) > 0 {
-                    
-                    var timeLeft:Int = self.Vidupworker.getexpireTime(endedAt: (MediaDetails?.endedAt)!)
-                    
-                    if timeLeft < 0 {
-                        timeLeft = 0
-                    }
-                    
-                    self.VidupTimerworker.seconds = timeLeft
-                    self.VidupTimerworker.runTimer()
-                }
-            }
-        }
-        */
+         self.Vidupworker.GetDishInfo(Id: dish_id) { (Dishdetails,MediaDetails) in
+         if Dishdetails != nil {
+         self.output.DishInfo(DishInfo: Dishdetails!,MediaInfo: MediaDetails!)
+         self.VidupTimerworker.delegate = self
+         self.Vidupworker.PlayVideo(MediaURL: (MediaDetails?.generateVidUpVideoURL())!)
+         if Int((MediaDetails?.dealTime)!) > 0 {
+         
+         var timeLeft:Int = self.Vidupworker.getexpireTime(endedAt: (MediaDetails?.endedAt)!)
+         
+         if timeLeft < 0 {
+         timeLeft = 0
+         }
+         
+         self.VidupTimerworker.seconds = timeLeft
+         self.VidupTimerworker.runTimer()
+         }
+         }
+         }
+         */
         
         Vidupworker.GetlikeStatus(Id: user_id, DishId: dish_id) { (status) in
             self.output.UpdateLikeStatusInteractor(Status: status)

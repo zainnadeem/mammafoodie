@@ -34,6 +34,17 @@ class CuisineCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollec
         self.cuisineCollectionView.reloadData()
     }
     
+    func deselectAllCuisines() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        if let _ = self.cuisineCollectionView.cellForItem(at: indexPath) {
+            self.cuisineCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+        for cuisine in self.cuisines {
+            cuisine.isSelected = false
+        }
+        self.cuisineCollectionView.reloadData()
+    }
+    
     func showCuisines(_ cuisines: [MFCuisine]) {
         self.cuisines = cuisines
         self.cuisineCollectionView.reloadData()
