@@ -50,6 +50,7 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		11D0A2AE1F14AC64006B7FFD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D0A2AD1F14AC64006B7FFD /* CommentsViewController.swift */; };
 		1F627773E6040FB7977171E0 /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
 		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
@@ -594,6 +595,7 @@
 		118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionRouter.swift; sourceTree = "<group>"; };
 		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
+		11D0A2AD1F14AC64006B7FFD /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1328,6 +1330,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BF5AD5DE1F062B5700827223 /* DishDetail */,
 				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
@@ -1786,6 +1789,7 @@
 				BF5AD5D31F062B4B00827223 /* DishDetailPresenter.swift */,
 				BF5AD5D41F062B4B00827223 /* DishDetailRouter.swift */,
 				BF5AD5D51F062B4B00827223 /* DishDetailViewController.swift */,
+				11D0A2AD1F14AC64006B7FFD /* CommentsViewController.swift */,
 				BF4800AB1F0923AD005E47B1 /* Workers */,
 			);
 			name = DishDetail;
@@ -2642,6 +2646,7 @@
 				570ED41C1F0684F000B41F0E /* Image.swift in Sources */,
 				2C12BCA91EF7D237007AF994 /* HomeConfigurator.swift in Sources */,
 				BFC927331EF00A7E00602153 /* LiveVideoMainPageConfigurator.swift in Sources */,
+				11D0A2AE1F14AC64006B7FFD /* CommentsViewController.swift in Sources */,
 				2CFB9B8C1EFA475100C08EB3 /* LiveVideoModels.swift in Sources */,
 				570ED4171F0684F000B41F0E /* CropVC.swift in Sources */,
 				570ED40F1F0684F000B41F0E /* AKImageCropperOverlayViewConfigurationCorner.swift in Sources */,

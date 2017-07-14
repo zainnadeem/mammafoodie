@@ -6,7 +6,11 @@ class CommentsView: UIView {
     var list: [MFComment] = []
     var tableViewAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     var initialHeightOfTextView: CGFloat = 0
-    var dish: MFDish!
+    var dish: MFDish! {
+        didSet{
+            self.load()
+        }
+    }
     var user: MFUser!
     let maxAllowedHeightOfTextView: CGFloat = 100
     
@@ -30,14 +34,14 @@ class CommentsView: UIView {
         //        self.dish.id = "-KnmktPfRQq61M1iswq5"
         
         // For demo only
-        self.user = MFUser()
-        self.user.id = "-Ko25iOEH_Erg-7B3UQb"
-        self.user.name = "Arjav"
+//        self.user = MFUser()
+//        self.user.id = "-Ko25iOEH_Erg-7B3UQb"
+//        self.user.name = "Arjav"
     }
     
     func load() {
         self.tableViewAdapter.dish = self.dish
-        self.tableViewAdapter.comments = self.list
+//        self.tableViewAdapter.comments = self.list
         self.tableViewAdapter.setup(with: self.tableView)
     }
     
@@ -64,6 +68,8 @@ class CommentsView: UIView {
     func xibSetup() {
         self.view = loadViewFromNib()
         
+        
+        
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         self.addSubview(self.view)
         
@@ -75,6 +81,7 @@ class CommentsView: UIView {
         
         // align self.view from the top and bottom
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.view]));
+        
     }
     
     func loadViewFromNib() -> UIView {
@@ -131,17 +138,19 @@ extension CommentsView: UITextViewDelegate {
             comment.text = textView.text!
             comment.createdAt = Date()
             comment.user = self.user
-            //            self.list.append(comment)
+//                        self.list.append(comment)
             //            self.requestingToPostNewComment?(comment)
+            
+            
             
             let worker = CommentsWorker()
             worker.post(comment, on: self.dish, {
                 print("Comment posted")
-                //                self.tableViewAdapter.reloadData()
+//                self.tableViewAdapter.loadComments()
             })
             
             self.textView.text = ""
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             self.setInitialHeightForTextView()
             
             return false

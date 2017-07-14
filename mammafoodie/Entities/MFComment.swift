@@ -5,9 +5,8 @@ class MFComment {
     var id: String = ""
     var text: String = ""
     var createdAt: Date!
-    var user: MFUser?
-    var username: String = ""
-
+    var user: MFUser!
+    var username: String!
     
     init(text: String, username: String, userId: String) {
         self.text = text

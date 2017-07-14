@@ -31,44 +31,46 @@ extension HUDRenderer {
     }
     
     func showActivityIndicator(){
-        
-        self.hideActivityIndicator()
-        
-        let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        
-        if delegate.activityIndicatorView == nil {
+   
+            self.hideActivityIndicator()
             
-            if let window = UIApplication.shared.keyWindow{
+            let delegate = (UIApplication.shared.delegate as! AppDelegate)
+            
+            if delegate.activityIndicatorView == nil {
                 
-                let bgView = UIView(frame: window.frame)
-                bgView.backgroundColor = .black
-                bgView.alpha = 0.5
-                
-                let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-                activityIndicator.center = window.center
-                bgView.addSubview(activityIndicator)
-                
-                delegate.activityIndicatorView = bgView
-                
-                activityIndicator.startAnimating()
-                
-                window.addSubview(delegate.activityIndicatorView!)
+                if let window = delegate.window{
+                    
+                    let bgView = UIView(frame: window.frame)
+                    bgView.backgroundColor = .black
+                    bgView.alpha = 0.5
+                    
+                    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+                    activityIndicator.center = window.center
+                    bgView.addSubview(activityIndicator)
+                    
+                    delegate.activityIndicatorView = bgView
+                    
+                    activityIndicator.startAnimating()
+                    
+                    window.addSubview(delegate.activityIndicatorView!)
+                    
+                    window.bringSubview(toFront: delegate.activityIndicatorView!)
+                    
+                }
                 
             }
-            
-        }
-        
     }
     
     func hideActivityIndicator() {
-        let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        if delegate.activityIndicatorView != nil {
-            delegate.activityIndicatorView?.removeFromSuperview()
-            delegate.activityIndicatorView = nil
-        }
+   
+      
+            let delegate = (UIApplication.shared.delegate as! AppDelegate)
+            if delegate.activityIndicatorView != nil {
+                delegate.activityIndicatorView?.removeFromSuperview()
+                delegate.activityIndicatorView = nil
+            }
         
     }
-
 }
 
 

@@ -6,7 +6,8 @@ protocol DishDetailInteractorInput {
     func checkLikeStatus(userId: String, dishId: String)
     func checkFavoritesStatus(userId: String, dishId: String)
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
-    
+    func stopObservingDish()
+    func updateDishViewersCount(dishID:String, opened:Bool)
 }
 
 protocol DishDetailInteractorOutput {
@@ -15,10 +16,10 @@ protocol DishDetailInteractorOutput {
      func presentFavoriteStatus(_ response: DishDetail.Favorite.Response)
 }
 
-class DishDetailInteractor: DishDetailInteractorInput {
+class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     
     var output: DishDetailInteractorOutput!
-    var dishWorker: LoadDishWorker!
+    var dishWorker: LoadDishWorker = LoadDishWorker()
     
     var likeStatusWorker: CheckLikeStatusWorker!
     var likeTappedWorker: LikeTappedWorker!
@@ -28,9 +29,12 @@ class DishDetailInteractor: DishDetailInteractorInput {
     var orderCountWorker: OrderCountWorker!
     
     func getDish(with id: String) {
-        dishWorker = LoadDishWorker()
+//        dishWorker = LoadDishWorker()
+        
+//        self.showActivityIndicator()
+        
         dishWorker.getDish(with: id) { (dish) in
-            
+//            self.hideActivityIndicator()
             let response = DishDetail.Dish.Response(dish: dish)
             self.output.presentDish(response)
             
@@ -46,6 +50,10 @@ class DishDetailInteractor: DishDetailInteractorInput {
         }
     }
     
+    func stopObservingDish(){
+        dishWorker.stopObserving()
+    }
+    
     func likeButtonTapped(userId: String, dishId: String, selected: Bool) {
         likeTappedWorker = LikeTappedWorker()
         likeTappedWorker.likeTapped(userId: userId, dishID: dishId, selected: selected) { 
@@ -56,8 +64,9 @@ class DishDetailInteractor: DishDetailInteractorInput {
     
     func favoriteButtonTapped(userId: String, dishId: String, selected: Bool) {
         favoritesTappedWorker = FavoritesTappedWorker()
-        favoritesTappedWorker.favoritesTapped(userId: userId, dishID: dishId, selected: selected) {
-            
+        favoritesTappedWorker.favoritesTapped(userId: userId, dishID: dishId, selected: selected) { status in
+            let response = DishDetail.Favorite.Response(status: status)
+            self.output.presentFavoriteStatus(response)
         }
 
     }
@@ -65,7 +74,8 @@ class DishDetailInteractor: DishDetailInteractorInput {
     func checkLikeStatus(userId: String, dishId: String) {
         likeStatusWorker = CheckLikeStatusWorker()
         likeStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            
+            let response = DishDetail.Like.Response(status: status)
+            self.output.presentLikeStatus(response)
         }
     }
     
@@ -74,12 +84,16 @@ class DishDetailInteractor: DishDetailInteractorInput {
     func checkFavoritesStatus(userId: String, dishId: String) {
         favoriteStatusWorker = CheckFavoriteStatusWorker()
         favoriteStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            
+            let response = DishDetail.Favorite.Response(status: status)
+            self.output.presentFavoriteStatus(response)
         }
         
     }
     
     
+    func updateDishViewersCount(dishID:String, opened: Bool) {
+        dishWorker.updateViewersforDish(dishID: dishID, opened: opened)
+    }
     
     
     
