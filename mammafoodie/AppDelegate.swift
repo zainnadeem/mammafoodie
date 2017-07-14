@@ -53,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //            }
 //        }
       
+        
+        //Register for Push Notifications
+        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
+        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
+        
+        
+
+        application.registerUserNotificationSettings(pushNotificationSettings)
+        application.registerForRemoteNotifications()
+        
+        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
   
@@ -109,6 +120,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation) || GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
             
     }
+    
+    
+    //PushNotification delegates
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print(userInfo)
+    }
+    
     
     func applicationWillResignActive(_ application: UIApplication) {
         

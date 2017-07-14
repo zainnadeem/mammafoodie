@@ -51,6 +51,7 @@
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
 		11D0A2AE1F14AC64006B7FFD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D0A2AD1F14AC64006B7FFD /* CommentsViewController.swift */; };
+		11F5C6501F18D5AE00F7F45C /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C64F1F18D5AE00F7F45C /* MFUserAddress.swift */; };
 		1F627773E6040FB7977171E0 /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
 		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
@@ -596,6 +597,7 @@
 		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
 		11D0A2AD1F14AC64006B7FFD /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		11F5C64F1F18D5AE00F7F45C /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1330,13 +1332,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BF5AD5DE1F062B5700827223 /* DishDetail */,
 				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
-				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
-				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
-				F0A980F51F0A850F00772BAA /* Followers */,
-				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
@@ -1409,6 +1406,7 @@
 		2CB8BEA11EF246F800DA78B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				11F5C64F1F18D5AE00F7F45C /* MFUserAddress.swift */,
 				2CA2B4961EF542D30076598C /* MFActivity.swift */,
 				2CA2B4971EF542D30076598C /* MFComment.swift */,
 				2CA2B4981EF542D30076598C /* MFConversation.swift */,
@@ -2016,7 +2014,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2543,6 +2541,7 @@
 				BFC927421EF00A7E00602153 /* PermissionsAlertRouter.swift in Sources */,
 				BFC9273C1EF00A7E00602153 /* EnableMicrophoneWorker.swift in Sources */,
 				2CFEB5671F13F1F6005EF9DA /* RegisterModels.swift in Sources */,
+				11F5C6501F18D5AE00F7F45C /* MFUserAddress.swift in Sources */,
 				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
@@ -2918,6 +2917,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
@@ -2943,6 +2943,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
