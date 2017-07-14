@@ -5,7 +5,7 @@ protocol RegisterViewControllerInput {
 }
 
 protocol RegisterViewControllerOutput {
-//    func RegisterAdapterTextSetup(_ textFeild:UITextField)
+    //    func RegisterAdapterTextSetup(_ textFeild:UITextField)
     func updateShadow()
     func register(name: String, email: String, password: String)
 }
@@ -28,12 +28,10 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     
     @IBOutlet weak var viewPasswordIcon: UIView!
     @IBOutlet weak var viewEmailIcon: UIView!
-
+    
     @IBOutlet weak var nameTextField: UITextField!
     
     lazy var RegisterAdapterTextfeild = RegisterAdapter()
-    
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,8 +55,7 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         registerBtnSetup()
         self.RegisterAdapterTextfeild.setupTextfeildView()
         output.updateShadow()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -69,30 +66,25 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         registerBtn.clipsToBounds = true
     }
     
-   
     // MARK: - Event handling
     
     // MARK: - Display logic
     
-       func showAlert(alertController: UIAlertController) {
+    func showAlert(alertController: UIAlertController) {
         self.present(alertController, animated: true, completion: nil)
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.registerBtn.applyGradient(colors: [gradientStartColor, gradientEndColor])
     }
     
-    
     @IBAction func registerBtn(_ sender: Any) {
-        
-        guard validateCredentials() && isValidEmail(emailStr: emailTextFeild.text!) else {return
+        guard validateCredentials() && isValidEmail(emailStr: emailTextFeild.text!) else {
+            return
         }
         output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
     }
-    
-    
     
     func validateCredentials() -> Bool{
         guard (emailTextFeild.text != nil && passTextFeild.text != nil && nameTextField.text != ""), !emailTextFeild.text!.isEmpty, !passTextFeild.text!.isEmpty, !nameTextField.text!.isEmpty else {
@@ -123,7 +115,6 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         
         return true
     }
-
     
     func navigateHomePage() {
         let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
@@ -131,10 +122,10 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         self.navigationController?.pushViewController(destViewController, animated: true)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        updateShadow()
-//    }
-
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        updateShadow()
+    //    }
+    
     
 }

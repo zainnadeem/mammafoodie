@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 protocol RegisterInteractorInput {
     func updateShadow()
@@ -17,9 +18,9 @@ class RegisterInteractor: RegisterInteractorInput {
     var worker: RegisterWorker!
     var firebaseworker = FirebaseLoginWorker()
     var model : MFUser!
+    
     // MARK: - Business logic
-    func updateShadow()
-    {
+    func updateShadow() {
         output.updateShadow()
     }
     
@@ -31,7 +32,14 @@ class RegisterInteractor: RegisterInteractorInput {
             
             if errorMessage == nil {
                // print(self.model)
-                self.model = MFUser(id: "", name: name, picture:"", profileDescription: "", email:email)
+                
+                let user: MFUser = MFUser()
+                user.id = Auth.auth().currentUser!.uid
+                user.name = name
+                user.email = email
+                
+                self.model = user
+                
                 DatabaseGateway.sharedInstance.createUserEntity(with:self.model) {newModel in
                     print(self.model)
                 }

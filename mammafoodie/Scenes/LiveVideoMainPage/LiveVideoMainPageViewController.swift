@@ -1,5 +1,5 @@
 import UIKit
-import TRMosaicLayout
+//import TRMosaicLayout
 
 protocol LiveVideoMainPageViewControllerInput {
     func displayLiveVideos(_ response: LiveVideoMainPage.Response)
@@ -49,9 +49,18 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
         self.liveVideoCollectionView.dataSource = self
         self.output.loadLiveVideos()
         
-        let mosaicLayout = TRMosaicLayout()
-        self.liveVideoCollectionView.collectionViewLayout = mosaicLayout
-        mosaicLayout.delegate = self
+//        let mosaicLayout = TRMosaicLayout()
+//        self.liveVideoCollectionView.collectionViewLayout = mosaicLayout
+//        mosaicLayout.delegate = self
+        
+//        liveVideoCollectionView.register(UINib(nibName: "MosaicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: MosaicCollectionCell.reuseIdentifier)
+//        liveVideoCollectionView.register(MosaicCollectionCell.self, forCellWithReuseIdentifier: MosaicCollectionCell.reuseIdentifier)
+        
+        
+        let customLayout = CustomLayout()
+        self.liveVideoCollectionView.collectionViewLayout = customLayout
+        
+        liveVideos = LiveVideoMainPage.Response()
         
     }
     
@@ -70,18 +79,28 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionViewCell", for: indexPath) as! MosaicCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MosaicCollectionCell", for: indexPath) as! MosaicCollectionCell
         
         cell.setViewProperties()
         cell.media = liveVideos.arrayOfLiveVideos[indexPath.row]
         
         //Arrange views depending on specific cells
-        if indexPath.item % 3 != 0 {
-            cell.setSmallCellConstraints()
-
-        }else{
+//        if indexPath.item % 3 != 0 {
+//            cell.setSmallCellConstraints()
+//            
+//            
+//
+//        }else{
+//            cell.setLargeCellContraints()
+//            
+//        }
+        
+        let attribute = collectionView.collectionViewLayout.layoutAttributesForItem(at: indexPath)
+        
+        if attribute!.zIndex == 1 {
             cell.setLargeCellContraints()
-            
+        } else {
+            cell.setSmallCellConstraints()
         }
         
         return cell
@@ -91,24 +110,35 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return liveVideos.arrayOfLiveVideos.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    
+        
+            return UICollectionReusableView()
+    }
+    
 }
 
-// Mark: - Mosaic CollectionView Flow Layout
-extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {
-    
-    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
-        
-        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
-    }
-    
-    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
-    }
-    
-    func heightForSmallMosaicCell() -> CGFloat {
-        return 200
-    }
-    
-}
+//// Mark: - Mosaic CollectionView Flow Layout
+//extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {
+//    
+//    func collectionView(_ collectionView:UICollectionView, mosaicCellSizeTypeAtIndexPath indexPath:IndexPath) -> TRMosaicCellType {
+//        
+////        if indexPath.item > 5{
+////            return TRMosaicCellType.small
+////        }
+//        
+//        return indexPath.item % 3 == 0 ? TRMosaicCellType.big : TRMosaicCellType.small
+//    }
+//    
+//    func collectionView(_ collectionView:UICollectionView, layout collectionViewLayout: TRMosaicLayout, insetAtSection:Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+//    }
+//    
+//    func heightForSmallMosaicCell() -> CGFloat {
+//        return 200
+//    }
+//    
+//}
 
 

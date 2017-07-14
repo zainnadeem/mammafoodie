@@ -212,22 +212,32 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         if ready {
                                             self.locationWorker.getCurrentLocation({ (location, error) in
                                                 if let currentLocation = location {
-                                                    let user = MFUser.init()
-                                                    user.id = FirebaseReference.users.generateAutoID()
-                                                    user.name = "Arjav"
+                                                    
+                                                    let user = DatabaseGateway.sharedInstance.getLoggedInUser()
+                                                    
                                                     let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
                                                     dish.preparationTime = preparationTime
                                                     dish.availableSlots = totalSlots
                                                     dish.totalSlots = totalSlots
                                                     dish.pricePerSlot = pricePerSlots
                                                     dish.user = user
-                                                    dish.createdAt = Date.init()
+                                                    dish.createTimestamp = Date.init()
                                                     dish.location = currentLocation.coordinate
                                                     dish.address = "MammaFoodie HQ"
-                                                    dish.endTimestamp = dish.createdAt.addingTimeInterval(countDown)
-                                                    self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+
+                                                    if dish.mediaType != .liveVideo {
+                                                        dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
+                                                    }
+                                                  
+                                                    DispatchQueue.main.async {
+                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                        self.clearData()
+                                                    }
+                                                    
+
+                                                  
                                                 } else {
-                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
+//                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
                                                 }
                                             })
                                         }
@@ -357,6 +367,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     // MARK: - Display logic
     func clearData() {
         self.output.clearData()
+        self.cuisinesAdapter.deselectAllCuisines()
         self.clearPreviews()
     }
     

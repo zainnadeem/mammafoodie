@@ -33,39 +33,58 @@ class HomePageVidupClnCell: UICollectionViewCell {
     }
     
     func setup(with vidup: MFDish) {
-        self.vidup = vidup
-        
-        self.stopTimer()
-        
-        self.viewForViewAll.isHidden = true
-        if vidup.id == "-1" {
-            // Option to create new vidup
-            self.imgView.layer.borderWidth = 2
-            self.imgAddIcon.isHidden = false
-            self.imgView.image = UIImage(named: "ProfilePicture21")!
-            self.circleView.isHidden = true
-            self.circleView.vidup = nil
-            self.circleView.currentValue = 0
-        } else if vidup.id == "30" {
-            self.viewForViewAll.isHidden = false
-            self.circleView.isHidden = false
-        } else {
-            // Show existing vidup details
-            self.imgView.layer.borderWidth = 0
-            self.imgAddIcon.isHidden = true
-            if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
-                self.imgView.sd_setImage(with: url)
-            } else {
-                self.imgView.image = nil
-            }
-            self.circleView.isHidden = false
-        }
+        self.layoutIfNeeded()
         self.imgView.layer.cornerRadius = self.imgView.frame.width/2
         self.viewForViewAll.layer.cornerRadius = self.viewForViewAll.frame.width/2
         self.circleView.layer.cornerRadius = self.circleView.frame.width/2
         
+        self.vidup = vidup
         
-        let createTimestamp: TimeInterval = vidup.createdAt?.timeIntervalSinceReferenceDate ?? 0
+        self.stopTimer()
+        
+        if vidup.id == "-1" {
+            // Option to create new vidup
+            self.imgView.layer.borderWidth = 2
+            self.imgAddIcon.isHidden = false
+            
+            if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+                    self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                        if image == nil || error != nil {
+                            self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                        }
+                    })
+                } else {
+                    self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                }
+            } else {
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+            }
+            
+            self.circleView.isHidden = true
+            self.circleView.vidup = nil
+            self.circleView.currentValue = 0
+        } else {
+            // Show existing vidup details
+            self.imgView.layer.borderWidth = 0
+            self.imgAddIcon.isHidden = true
+            
+            if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
+                self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                    if image == nil || error != nil {
+                        self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                    }
+                })
+            } else {
+                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+            }
+            
+            self.circleView.isHidden = false
+        }
+
+        
+        
+        let createTimestamp: TimeInterval = vidup.createTimestamp?.timeIntervalSinceReferenceDate ?? 0
         let endTimestamp: TimeInterval = vidup.endTimestamp?.timeIntervalSinceReferenceDate ?? 0
         if endTimestamp > 0 {
             self.circleView.setup()
@@ -89,7 +108,7 @@ class HomePageVidupClnCell: UICollectionViewCell {
                         self.vidupDidEnd?(self.vidup!)
                     }
                     
-                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
+//                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
                 })
             }
         } else {
@@ -102,5 +121,13 @@ class HomePageVidupClnCell: UICollectionViewCell {
             self.timerCountdown!.invalidate()
             self.timerCountdown = nil
         }
+    }
+    
+    func showViewAll() {
+        self.viewForViewAll.isHidden = false
+    }
+    
+    func hideViewAll() {
+        self.viewForViewAll.isHidden = true
     }
 }

@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     // MARK: - Event handling
-  
+    
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         self.router.openSafariVC(with: .privacyPolicy)
     }
@@ -105,8 +105,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBAction func btnTermsTapped(_ sender: Any) {
         self.router.openSafariVC(with: .terms)
     }
-
-
+    
+    
     @IBAction func forgotPasswordClicked(_ sender: UIButton) {
         
         
@@ -114,7 +114,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         forgotPasswordVC?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 40, height: 260)
         
         
-    KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+        KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
         
         KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 130) , in: self.view)
         
@@ -181,7 +181,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     
-        
+    
     @IBAction func logout(sender:UIButton){
         output.logout()
         
@@ -229,59 +229,43 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             return false
         }
         
-            return true
+        return true
     }
     
     
-
+    
     // MARK: - Inputs
-   
+    
     func viewControllerToPresent() -> UIViewController {
         return self
     }
     
     func showHomeScreen() {
-        
-        
-        if let  currentUser = Auth.auth().currentUser{
-           print(currentUser.uid)
+        if let currentUser = Auth.auth().currentUser {
+            AppDelegate.shared().setHomeViewController()
             
-//            let user = MFUser(id: currentUser.uid, name: currentUser.displayName ?? "", picture: currentUser.photoURL?.absoluteString ?? "", profileDescription: "User signed up with id \(currentUser.uid)", email:"nithintest@gmail.com")
+            let user: MFUser = MFUser()
+            user.id = currentUser.uid
+            user.name = currentUser.displayName
+            user.email = currentUser.email
             
+            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
+                print("User created")
+            })
             
-//            let user = MFUser()
-//            
-//            
-//            DatabaseGateway.sharedInstance.createUserEntity(with: user, {
-//                print("User created")
-//            })
-            
-//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
-//                if let user = user {
-//                    user.name = "nithin"
-//                    user.following.updateValue(true, forKey: "Dish1")
-//                    user.following.updateValue(true, forKey: "Dish2")
-                    
-                        //["Krishna":true, "sreeram":true]
-                   // user.cookedDishes = ["Dish3":true, "Dish4":true]
-                    //user.email = "nithintest@gmail.com"
-
-//                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
-//                        if errorMessage != nil {
-//                            print("Error updating profile")
-//                        }
-//                    })
-//                }
-//             
-//            })
-            
-            
-            
+            //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
+            //                if let user = user {
+            //                    user.name = "nithin"
+            //                    user.email = "nithintest@gmail.com"
+            //
+            //                    DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (errorMessage) in
+            //                        if errorMessage != nil {
+            //                            print("Error updating profile")
+            //                        }
+            //                    })
+            //                }
+            //            })
         }
-        
-        let homeVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.navigationController?.pushViewController(homeVC, animated: true)
-        
     }
     
     
@@ -300,9 +284,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     
     
-   
     
-
+    
+    
 }
 
 extension LoginViewController {

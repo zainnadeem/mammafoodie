@@ -9,7 +9,7 @@ protocol OtherUsersProfileViewControllerInput {
 protocol OtherUsersProfileViewControllerOutput {
     
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
-//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
     func toggleFollow(userID:String, shouldFollow:Bool)
 }
@@ -26,8 +26,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    var profileType:ProfileType = .othersProfile
-
+    var profileType:ProfileType = .ownProfile // .othersProfile
+    
     @IBOutlet weak var collectionView:UICollectionView!
     
     
@@ -59,7 +59,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         }
         
     }
-
+    
     
     //MARK: - Input
     
@@ -100,9 +100,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     
     @IBAction func settingsButtonClicked(_ sender: UIButton) {
-        
-        
-        
+        AppDelegate.shared().setLoginViewController()
+        let worker = FirebaseLoginWorker()
+        worker.signOut { (errorMessage) in
+            
+        }
     }
     
     
@@ -144,4 +146,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func btnLogoutTapped(_ sender: UIButton) {
+        AppDelegate.shared().setLoginViewController()
+        let worker = FirebaseLoginWorker()
+        worker.signOut { (errorMessage) in
+            
+        }
+    }
 }

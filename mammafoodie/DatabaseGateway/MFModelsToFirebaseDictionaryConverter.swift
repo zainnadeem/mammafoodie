@@ -40,8 +40,8 @@ class MFModelsToFirebaseDictionaryConverter {
                 "text": comment.text,
                 "createTimestamp": comment.createdAt.timeIntervalSinceReferenceDate,
                 "user": [
-                    "id": comment.user.id,
-                    "name": comment.user.name
+                    "id": comment.user!.id,
+                    "name": comment.user!.name
                 ]
                 ] as AnyObject
         ]
@@ -50,9 +50,11 @@ class MFModelsToFirebaseDictionaryConverter {
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
         
+        let createDate: Date = dish.createTimestamp ?? Date()
+        
         var rawDish: [String:Any] = [
             "id" : dish.id,
-            "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+            "createTimestamp" : createDate.timeIntervalSinceReferenceDate,
             "user" : [
                 "id" : dish.user.id,
                 "name" : dish.user.name
@@ -74,8 +76,8 @@ class MFModelsToFirebaseDictionaryConverter {
             ]
         ]
         
-        if dish.mediaType != MFDishMediaType.liveVideo {
-            rawDish["endTimestamp"] = dish.endTimestamp?.timeIntervalSinceReferenceDate
+        if dish.endTimestamp != nil {
+            rawDish["endTimestamp"] = dish.endTimestamp!.timeIntervalSinceReferenceDate
         }
         if let location = dish.location {
             rawDish["location"] = [
