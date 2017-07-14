@@ -58,6 +58,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.responseCounterCooked == dishDataDictionary!.keys.count{
+                        self.responseCounterCooked = 0
                         completion(dishes)
                     }
                     
@@ -89,6 +90,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.responseCounterBought == dishDataDictionary!.keys.count{
+                        self.responseCounterBought = 0
                         completion(dishes)
                     }
                 })
@@ -119,6 +121,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.followersResponseCounter == followers!.keys.count{
+                        self.followersResponseCounter = 0
                         completion(users)
                     }
                     
@@ -151,6 +154,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.followingResponseCounter == following!.keys.count{
+                        self.followingResponseCounter = 0
                         completion(users)
                     }
                     

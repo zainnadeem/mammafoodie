@@ -31,7 +31,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         
         followersTblView?.register(UINib(nibName: following, bundle: nil), forCellReuseIdentifier: following)
         
-        followersTblView?.rowHeight = UITableViewAutomaticDimension
+//        followersTblView?.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = false
         
         let worker = OtherUsersProfileWorker()
