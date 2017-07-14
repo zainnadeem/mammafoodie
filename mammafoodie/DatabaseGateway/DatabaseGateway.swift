@@ -873,30 +873,95 @@ extension DatabaseGateway {
 //get Followers and following list of an user
 extension DatabaseGateway{
     
-    func getFollowersForUser(userID:String, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void){
+    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void) -> DatabaseConnectionObserver?{
         
-        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            
-            guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let followers = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+
+            completion(followers)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([:])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.followers.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
+        }
+        return nil
+        
+        
+    }
+    
+    func getFollowingForUser(userID:String,frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ following:[String:AnyObject]?)->Void)-> DatabaseConnectionObserver?{
+
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let followers = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
             
             completion(followers)
-        })
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([:])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.following.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
+        }
+        return nil
+
+        
     }
     
-    func getFollowingForUser(userID:String, _ completion:@escaping (_ following:[String:AnyObject]?)->Void){
+    
+    func checkIfUser(withuserID:String, isFollowing userID:String, _ completion:@escaping (Bool)->Void){
         
-        FirebaseReference.following.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+        //If withUserID is in followers list of userID, return true
+        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
-            guard let following = dataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
-                return
-            }
-            
-            completion(following)
-        })
+                guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                    completion(false)
+                    return
+                }
+                
+                if followers[withuserID] != nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+        
+            })
+        
     }
     
     

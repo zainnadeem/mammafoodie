@@ -4,10 +4,14 @@ protocol OtherUsersProfileInteractorInput {
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
 //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
+    
+    func toggleFollow(userID:String, shouldFollow:Bool)
+    
 }
 
 protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:Int)
+    func openFollowers(followers:Bool, userList:[MFUser])
 }
 
 ///Defined in OtherUsersProfileInteractor
@@ -124,7 +128,19 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
     }
     
-    
+    func toggleFollow(userID:String, shouldFollow:Bool){
+        
+        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase else {return}
+        
+        worker.toggleFollow(targetUser: userID, currentUser: currentUser.uid, targetUserName: self.user!.name, currentUserName: "Current username", shouldFollow: shouldFollow) { (success) in
+            
+            if success {
+                print("follow toggled")
+            }
+            
+        }
+        
+    }
     
     //MARK: - DishesCollectionViewAdapterDelegate 
     
@@ -132,6 +148,10 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
        output.openDishPageWith(dishID: dishID)
     
+    }
+    
+    func openFollowers(followers:Bool, userList:[MFUser]){
+        output.openFollowers(followers: followers, userList:userList)
     }
     
 }

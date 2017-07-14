@@ -1,17 +1,17 @@
 //
-//  FollowersTableCell.swift
+//  FollowingTableCell.swift
 //  mammafoodie
 //
-//  Created by Sireesha V on 7/3/17.
+//  Created by GoodWorkLabs on 13/07/17.
 //  Copyright © 2017 Zain Nadeem. All rights reserved.
 //
 
 import UIKit
 
-class FollowersTableCell: UITableViewCell {
+class FollowingTableCell: UITableViewCell {
 
     @IBOutlet weak var userProfile: UIImageView!
-   
+    
     @IBOutlet weak var nameLbl: UILabel!
     
     @IBOutlet weak var Lable2: UILabel!
@@ -27,20 +27,13 @@ class FollowersTableCell: UITableViewCell {
         self.followButtn.layer.cornerRadius = self.followButtn.frame.height/2
         self.followButtn.layer.borderWidth = 1
         self.followButtn.layer.borderColor = #colorLiteral(red: 1, green: 0.5998461843, blue: 0.206497252, alpha: 1).cgColor
-        self.followButtn.clipsToBounds = true
         
-        let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
-        let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
-        
-        
-            followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
-        
-        followButtn.addTarget(self, action: #selector(follow(sender:)), for: .touchUpInside)
+        followButtn.addTarget(self, action: #selector(unfollow(sender:)), for: .touchUpInside)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -52,11 +45,11 @@ class FollowersTableCell: UITableViewCell {
         self.user = user
     }
     
-    func follow(sender:UIButton){
+    func unfollow(sender:UIButton){
         let worker = OtherUsersProfileWorker()
         let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
         
-        worker.toggleFollow(targetUser: self.user!.id, currentUser: currentUser!.id, targetUserName: user!.name, currentUserName: currentUser!.name, shouldFollow: true) { (status) in
+        worker.toggleFollow(targetUser: self.user!.id, currentUser: currentUser!.id, targetUserName: user!.name, currentUserName: currentUser!.name, shouldFollow: false) { (status) in
             print(status)
         }
     }

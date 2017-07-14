@@ -16,6 +16,10 @@
 		110FCE581EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */; };
 		110FCE591EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */; };
 		110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */; };
+		111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */; };
+		111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */; };
+		112E88D01F179E5600150FE8 /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */; };
+		112E88D11F179E5600150FE8 /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */; };
 		113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */; };
 		113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */; };
 		113139CC1EF7BA2D000050D6 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */; };
@@ -557,6 +561,10 @@
 		110FCE511EEEAEC9008B6F2D /* OtherUsersProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileViewController.swift; sourceTree = "<group>"; };
 		110FCE521EEEAEC9008B6F2D /* OtherUsersProfileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUsersProfileWorker.swift; sourceTree = "<group>"; };
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
+		111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesWorker.swift; sourceTree = "<group>"; };
+		112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableCell.swift; sourceTree = "<group>"; };
+		112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableCell.xib; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -948,6 +956,22 @@
 			path = OtherUsersProfilePage;
 			sourceTree = "<group>";
 		};
+		111E445A1F14DDC300C7A7F7 /* UberRushDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */,
+			);
+			path = UberRushDelivery;
+			sourceTree = "<group>";
+		};
+		111E445E1F16099900C7A7F7 /* PostmatesDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */,
+			);
+			path = PostmatesDelivery;
+			sourceTree = "<group>";
+		};
 		113139C01EF7BA1C000050D6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1328,12 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
+				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
+				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
+				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
+				F0A980F51F0A850F00772BAA /* Followers */,
+				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
@@ -1886,6 +1916,8 @@
 				F0A980F61F0A859400772BAA /* FollowersListViewController.swift */,
 				F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */,
 				F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */,
+				112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */,
+				112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */,
 			);
 			name = Followers;
 			sourceTree = "<group>";
@@ -2071,6 +2103,7 @@
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				57C948141F03781000DF5674 /* video.mp4 in Resources */,
 				2CB8BE9F1EF246DB00DA78B3 /* NearbyChefs.storyboard in Resources */,
+				112E88D11F179E5600150FE8 /* FollowingTableCell.xib in Resources */,
 				113139CB1EF7BA2D000050D6 /* Montserrat-Bold.otf in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
@@ -2096,7 +2129,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -2156,7 +2189,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -2518,6 +2551,7 @@
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				F097D8CE1EF3D8BA00FCF967 /* ChatListRouter.swift in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
+				112E88D01F179E5600150FE8 /* FollowingTableCell.swift in Sources */,
 				2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
 				114F341F1F0CCD25007F1D92 /* MosaicCollectionCell.swift in Sources */,
@@ -2536,6 +2570,7 @@
 				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
+				111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
 				F0A980F01F0A3BAC00772BAA /* PagingViewController.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
@@ -2617,6 +2652,7 @@
 				2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */,
 				2C6979CB1F07C95F00787DCC /* GMUFeature.m in Sources */,
+				111E445C1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift in Sources */,
 				2C8001291EF9094E005026CE /* ActivityTblCell.swift in Sources */,
 				114F34171F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.swift in Sources */,
 				5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */,
