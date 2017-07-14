@@ -28,7 +28,7 @@ class MFDish {
     var dishType : MFDishType!
     var user: MFUser!
     var username: String!
-
+    
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
@@ -40,11 +40,10 @@ class MFDish {
     
     var boughtOrders: [String:Date] = [:] //MFOrder id
     var tag:String!
-
-    var createTimestamp: Date!
-//    var endTimestamp: Date!
     
-
+    var createTimestamp: Date!
+    var endTimestamp: Date?
+    
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
     var cuisine: MFCuisine!
@@ -57,9 +56,6 @@ class MFDish {
     
     var likesCount : Double = 0
     var commentsCount : Double = 0
-    
-    var createdAt: Date!
-    var endTimestamp: Date?
     
     var location : CLLocationCoordinate2D?
     var address : String = ""
@@ -74,6 +70,14 @@ class MFDish {
         //        self.user = user
         self.description = description
         self.name = name
+    }
+    
+    init(id: String, user: MFUser, description: String, name: String, cuisine: MFCuisine) {
+        self.id = id
+        self.user = user
+        self.description = description
+        self.name = name
+        self.cuisine = cuisine
     }
     
     init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
@@ -103,7 +107,7 @@ class MFDish {
     init(from dishDataDictionary:[String:AnyObject]) {
         self.id = dishDataDictionary["id"] as? String ?? ""
         self.name = dishDataDictionary["name"] as? String ?? ""
-
+        
         if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
             self.user = MFUser(from: userDict)
         }
@@ -111,14 +115,15 @@ class MFDish {
         self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
         self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
         
-        let creationTimestamp = dishDataDictionary["createTimestamp"] as! TimeInterval
+        let creationTimestamp: TimeInterval = dishDataDictionary["createTimestamp"] as! TimeInterval
         self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
         
-        let endingTimestamp = dishDataDictionary["endTimestamp"] as! TimeInterval
-        self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        if let endingTimestamp: TimeInterval = dishDataDictionary["endTimestamp"] as? TimeInterval {
+            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        }
         
         self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
-
+        
         let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
         self.user = MFUser() ;
         

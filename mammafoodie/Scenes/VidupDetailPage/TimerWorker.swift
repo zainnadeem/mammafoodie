@@ -10,7 +10,7 @@ import Foundation
 
 class TimerWorker {
     
-    var seconds: Int = 0
+    var seconds: Double = 0
     var timer: Timer?
     var delegate: Interactordelegate?
     

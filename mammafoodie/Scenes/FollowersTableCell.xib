@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -37,7 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQE-2N-Pev">
-                        <rect key="frame" x="85" y="43" width="27.5" height="22.5"/>
+                        <rect key="frame" x="85" y="43" width="158" height="23"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -48,21 +49,22 @@
                             <constraint firstAttribute="width" constant="110" id="zF8-Uh-JdT"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
-                        <state key="normal" title="Unfollow">
-                            <color key="titleColor" red="1" green="0.52549019610000003" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="Follow">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iM2-Jt-UCg" firstAttribute="leading" secondItem="lQE-2N-Pev" secondAttribute="trailing" constant="8" id="NQD-R0-v25"/>
                     <constraint firstAttribute="trailing" secondItem="iM2-Jt-UCg" secondAttribute="trailing" constant="20" id="Qp9-lh-EQi"/>
                     <constraint firstItem="lQE-2N-Pev" firstAttribute="top" secondItem="po3-OH-hj1" secondAttribute="bottom" constant="8" id="Qxq-jd-1c4"/>
                     <constraint firstItem="po3-OH-hj1" firstAttribute="top" secondItem="MD3-tK-7vE" secondAttribute="top" id="Tx5-57-umH"/>
-                    <constraint firstAttribute="bottom" secondItem="MD3-tK-7vE" secondAttribute="bottom" constant="15" id="amj-Vk-Zdq"/>
                     <constraint firstAttribute="bottom" secondItem="iM2-Jt-UCg" secondAttribute="bottom" constant="20" id="dLy-6Z-ct9"/>
                     <constraint firstItem="po3-OH-hj1" firstAttribute="leading" secondItem="MD3-tK-7vE" secondAttribute="trailing" constant="15" id="dfY-mY-HCi"/>
                     <constraint firstItem="iM2-Jt-UCg" firstAttribute="top" secondItem="lPW-mB-Vdq" secondAttribute="top" constant="20" id="qSg-Lg-v9X"/>
                     <constraint firstItem="MD3-tK-7vE" firstAttribute="top" secondItem="lPW-mB-Vdq" secondAttribute="top" constant="15" id="ql8-Do-i1P"/>
                     <constraint firstItem="MD3-tK-7vE" firstAttribute="leading" secondItem="lPW-mB-Vdq" secondAttribute="leading" constant="20" id="t1y-NO-BfE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lQE-2N-Pev" secondAttribute="bottom" constant="5.5" id="tM3-yd-1pO"/>
                     <constraint firstItem="lQE-2N-Pev" firstAttribute="leading" secondItem="po3-OH-hj1" secondAttribute="leading" id="yqL-Lg-yMI"/>
                 </constraints>
             </tableViewCellContentView>

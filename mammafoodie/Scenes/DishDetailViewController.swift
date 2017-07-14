@@ -61,7 +61,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     //if only dish ID is passed
     var dishID: String?
     
-    //if dish object is passed 
+    //if dish object is passed
     var dishForView: DishDetail.Dish.Response?
     
     
@@ -73,6 +73,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
     }
 
+  
+    //TODO: - Need to be changed
+    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
+    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
     
     // MARK: - View lifecycle
     
@@ -87,8 +91,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.showActivityIndicator()
         
-        
-        }
+   }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
@@ -149,6 +152,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.lblLeftDishesCount.text = data.availableSlots.description + " Left"
         
+        //        self.lblDistanceAway.text = "\((coordinate0.distance(from: coordinate1))/1000) Kms"
 
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
@@ -181,7 +185,9 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
 
         }
         
-  
+        self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
+        self.output.checkFavoritesStatus(userId: data.user.id, dishId: data.id)
+        
     }
     
     
@@ -203,12 +209,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             self.btnLikes.isSelected = false
         }
     }
-
+    
     func getDistanceAway(){
         
     }
     
-
+    
     @IBAction func commentsBtnTapped(_ sender: Any) {
         
         let commentsVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController

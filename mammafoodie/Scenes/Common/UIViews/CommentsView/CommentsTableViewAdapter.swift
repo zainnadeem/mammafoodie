@@ -52,8 +52,9 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     }
     
     func scrollToBottom() {
-        self.tableView.scrollToRow(at: IndexPath.init(item: self.comments.count-1, section: 0), at: UITableViewScrollPosition.top, animated: true)
-//        self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentSize.height-self.tableView.frame.height), animated: false)
+        if self.comments.count > 0 {
+            self.tableView.scrollToRow(at: IndexPath.init(item: self.comments.count-1, section: 0), at: UITableViewScrollPosition.top, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

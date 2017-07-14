@@ -44,10 +44,27 @@ class MenuItemTblCell: UITableViewCell {
     }
     
     func setup(with media: MFDish) {
-//        self.imgView.image = UIImage(named: media.cover_small!)!
-//        self.lblDishName.text = media.dish.name
-//        self.lblUsername.text =  media.user.name
-//        self.imgViewProfilePicture.image = UIImage(named: media.user.picture!)!
+        
+        self.imgView.sd_cancelCurrentImageLoad()
+        if let url = media.mediaURL {
+            self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                
+            })
+        }
+        
+        self.lblDishName.text = media.name
+        self.lblUsername.text =  media.user.name
+        
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: media.user.id) {
+            self.imgViewProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.imgViewProfilePicture.image = UIImage(named: "IconMammaFoodie")!
+                }
+            })
+        } else {
+            self.imgViewProfilePicture.image = UIImage(named: "IconMammaFoodie")!
+        }
+        
     }
     
     func cellWillDisplay() {

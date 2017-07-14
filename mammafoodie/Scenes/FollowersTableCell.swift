@@ -17,6 +17,8 @@ class FollowersTableCell: UITableViewCell {
     @IBOutlet weak var Lable2: UILabel!
     @IBOutlet weak var followButtn: UIButton!
     
+    var user:MFUser?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,12 +27,38 @@ class FollowersTableCell: UITableViewCell {
         self.followButtn.layer.cornerRadius = self.followButtn.frame.height/2
         self.followButtn.layer.borderWidth = 1
         self.followButtn.layer.borderColor = #colorLiteral(red: 1, green: 0.5998461843, blue: 0.206497252, alpha: 1).cgColor
+        self.followButtn.clipsToBounds = true
+        
+        let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
+        let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
+        
+        
+            followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
+        
+        followButtn.addTarget(self, action: #selector(follow(sender:)), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setUp(user:MFUser){
+        
+        self.userProfile.sd_setImage(with: user.generateProfilePictureURL())
+        self.nameLbl.text = user.name
+        self.Lable2.text = user.profileDescription
+        self.user = user
+    }
+    
+    func follow(sender:UIButton){
+        let worker = OtherUsersProfileWorker()
+        let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
+        
+        worker.toggleFollow(targetUser: self.user!.id, currentUser: currentUser!.id, targetUserName: user!.name, currentUserName: currentUser!.name, shouldFollow: true) { (status) in
+            print(status)
+        }
     }
     
 }

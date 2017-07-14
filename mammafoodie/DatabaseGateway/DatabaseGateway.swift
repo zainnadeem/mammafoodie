@@ -33,7 +33,7 @@ enum FirebaseReference: String {
     case dishLikes = "DishLikes"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
-    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
+    //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -59,7 +59,7 @@ enum FirebaseReference: String {
         let path: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/\(classPath)%2F\(id).jpg?alt=media"
         return URL(string: path)
     }
-
+    
 }
 
 struct DatabaseConnectionObserver {
@@ -99,83 +99,80 @@ class DatabaseGateway {
 // MARK: - Live streams
 extension DatabaseGateway {
     
-    func getLiveStream(with id: String, _ completion: @escaping ((MFDish?)->Void)) {
-        FirebaseReference.tempLiveVideosStreamNames.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
-            guard let liveStreamName = streamNameDataSnapshot.value as? String else {
-                completion(nil)
-                return
-            }
-            let liveStream: MFDish? = self.createLiveStreamModel(from: liveStreamName, id: id)
-            completion(liveStream)
-        }) { (error) in
-            print(error)
-            completion(nil)
-        }
-    }
+    //    func getLiveStream(with id: String, _ completion: @escaping ((MFDish?)->Void)) {
+    //        FirebaseReference.tempLiveVideosStreamNames.get(with: id).observeSingleEvent(of: .value, with: { (streamNameDataSnapshot) in
+    //            guard let liveStreamName = streamNameDataSnapshot.value as? String else {
+    //                completion(nil)
+    //                return
+    //            }
+    //            let liveStream: MFDish? = self.createLiveStreamModel(from: liveStreamName, id: id)
+    //            completion(liveStream)
+    //        }) { (error) in
+    //            print(error)
+    //            completion(nil)
+    //        }
+    //    }
     
-    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFDish])->Void) {
-        
-        let successClosure: FirebaseObserverSuccessClosure = { (streamNamesDataSnapshot) in
-            guard let rawLiveStreams: FirebaseDictionary = streamNamesDataSnapshot.value as? FirebaseDictionary else {
-                completion([])
-                return
-            }
-            var liveStreams: [MFDish] = []
-            for rawLiveStreamKey in rawLiveStreams.keys {
-                guard let liveStreamName = rawLiveStreams[rawLiveStreamKey] as? String else {
-                    continue
-                }
-                guard let liveStream: MFDish = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
-                    continue
-                }
-                liveStreams.append(liveStream)
-            }
-            completion(liveStreams)
-        }
-        
-        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
-            print(error)
-            completion([])
-        }
-        
-        switch frequency {
-        case .realtime:
-            FirebaseReference.tempLiveVideosStreamNames.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
-        default:
-            FirebaseReference.tempLiveVideosStreamNames.classReference.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
-        }
-    }
+    //    func getLiveStreams(frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([MFDish])->Void) {
+    //
+    //        let successClosure: FirebaseObserverSuccessClosure = { (streamNamesDataSnapshot) in
+    //            guard let rawLiveStreams: FirebaseDictionary = streamNamesDataSnapshot.value as? FirebaseDictionary else {
+    //                completion([])
+    //                return
+    //            }
+    //            var liveStreams: [MFDish] = []
+    //            for rawLiveStreamKey in rawLiveStreams.keys {
+    //                guard let liveStreamName = rawLiveStreams[rawLiveStreamKey] as? String else {
+    //                    continue
+    //                }
+    //                guard let liveStream: MFDish = self.createLiveStreamModel(from: liveStreamName, id: rawLiveStreamKey) else {
+    //                    continue
+    //                }
+    //                liveStreams.append(liveStream)
+    //            }
+    //            completion(liveStreams)
+    //        }
+    //
+    //        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+    //            print(error)
+    //            completion([])
+    //        }
+    //
+    //        switch frequency {
+    //        case .realtime:
+    //            FirebaseReference.tempLiveVideosStreamNames.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+    //        default:
+    //            FirebaseReference.tempLiveVideosStreamNames.classReference.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+    //        }
+    //    }
     
-    func createLiveStreamModel(from streamName: String, id: String) -> MFDish? {
-        let liveStream: MFDish = MFDish()
-        liveStream.id = id
-        //        liveStream.contentId = streamName
-        return liveStream
-    }
+    //    func createLiveStreamModel(from streamName: String, id: String) -> MFDish? {
+    //        let liveStream: MFDish = MFDish()
+    //        liveStream.id = id
+    //        //        liveStream.contentId = streamName
+    //        return liveStream
+    //    }
     
-    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFDish?)->Void)) {
-        let liveStream: MFDish = MFDish()
-        liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
-        //        liveStream.contentId = name
-        let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
-        
-        FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
-            if error != nil {
-                print(error!)
-            } else {
-                
-            }
-            completion(liveStream)
-        })
-    }
+    //    func publishNewLiveStream(with name: String, _ completion: @escaping ((MFDish?)->Void)) {
+    //        let liveStream: MFDish = MFDish()
+    //        liveStream.id = FirebaseReference.tempLiveVideosStreamNames.generateAutoID()
+    //        //        liveStream.contentId = name
+    //        let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
+    //
+    //        FirebaseReference.tempLiveVideosStreamNames.classReference.updateChildValues(rawLiveStream, withCompletionBlock: { (error, databaseReference) in
+    //            if error != nil {
+    //                print(error!)
+    //            } else {
+    //
+    //            }
+    //            completion(liveStream)
+    //        })
+    //    }
     
-    func unpublishLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
-        FirebaseReference.tempLiveVideosStreamNames.get(with: liveStream.id).removeValue { (error, databaseReference) in
-            if error != nil {
-                print(error!)
-            } else {
-                
-            }
+    func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
+        var rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
+        rawLiveStream = rawLiveStream[liveStream.id] as! FirebaseDictionary
+        FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
             completion()
         }
     }
@@ -305,6 +302,7 @@ extension DatabaseGateway {
         
         FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+                let user: MFUser = MFUser()
                 completion(nil)
                 return
             }
@@ -319,7 +317,15 @@ extension DatabaseGateway {
         }
     }
     
-
+    func getLoggedInUser() -> MFUser? {
+        if let currentUser = Auth.auth().currentUser {
+            let user: MFUser = MFUser()
+            user.id = currentUser.uid
+            user.name = currentUser.displayName
+            return user
+        }
+        return nil
+    }
 }
 
 //MARK: - Dish
@@ -425,7 +431,7 @@ extension DatabaseGateway {
             
         }
     }
-
+    
     
     func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
         
@@ -434,7 +440,7 @@ extension DatabaseGateway {
                 
                 completion(nil)
                 return
-            
+                
             }
             var comments: [MFComment] = []
             
@@ -444,7 +450,7 @@ extension DatabaseGateway {
             }
             
             completion(comments)
-        
+            
         }) {(error) in
             print(error)
             completion(nil)
@@ -452,22 +458,22 @@ extension DatabaseGateway {
     }
     
     
-//    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
-//        
-//        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-//            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
-//                completion(nil)
-//                return
-//            }
-//            
-//            completion(userData)
-//        }) { (error) in
-//            print(error)
-//            completion(nil)
-//        }
-//        
-//    }
-
+    //    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
+    //
+    //        FirebaseReference.dishBoughtBy.classReference.child(dishID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
+    //            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+    //                completion(nil)
+    //                return
+    //            }
+    //
+    //            completion(userData)
+    //        }) { (error) in
+    //            print(error)
+    //            completion(nil)
+    //        }
+    //
+    //    }
+    
     func getDishLike(dishID:String, _ completion:@escaping (_ likeCount:Int?)->Void){
         
         let successClosure: FirebaseObserverSuccessClosure = { (dishLikeDataSnapshot) in
@@ -501,7 +507,7 @@ extension DatabaseGateway {
             print(error)
             completion(false)
         }
-
+        
     }
     
 }
@@ -566,13 +572,11 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        
+      
         print(userId)
         print(dishId)
         
-        
-    FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-            
+    FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in            
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value)
                 completion(nil)
@@ -687,7 +691,7 @@ extension DatabaseGateway {
     func getLiveVideos(_ completion: @escaping ((_ liveVideos: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.liveVideo, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > 0 {
+                if dish.endTimestamp == nil {
                     return true
                 }
                 return false
@@ -746,10 +750,10 @@ extension DatabaseGateway {
         let dish: MFDish = MFDish()
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
-        dish.createdAt = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
+        dish.createTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
-            var cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
+            let cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
             dish.cuisine = cuisine
         }
         
@@ -761,7 +765,10 @@ extension DatabaseGateway {
             }
         }
         
-        dish.endTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["endTimestamp"] as? TimeInterval ?? 0)
+        if let timeinterval = rawDish["endTimestamp"] as? TimeInterval {
+            dish.endTimestamp = Date(timeIntervalSinceReferenceDate: timeinterval)
+        }
+        
         dish.id = rawDish["id"] as? String ?? ""
         dish.likesCount = rawDish["likesCount"] as? Double ?? 0
         
@@ -810,15 +817,15 @@ extension DatabaseGateway {
                 return
             }
             var comments: [MFComment] = []
-//            for key in rawList.keys {
-//                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
-//                    comments.append(self.createComment(from: rawComment))
-//                }
-//            }
+            //            for key in rawList.keys {
+            //                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
+            //                    comments.append(self.createComment(from: rawComment))
+            //                }
+            //            }
             
-//            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
-                comments.append(self.createComment(from: rawList))
-//            }
+            //            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
+            comments.append(self.createComment(from: rawList))
+            //            }
             
             completion(comments)
         }
@@ -928,30 +935,95 @@ extension DatabaseGateway {
 //get Followers and following list of an user
 extension DatabaseGateway{
     
-    func getFollowersForUser(userID:String, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void){
+    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ followers:[String:AnyObject]?)->Void) -> DatabaseConnectionObserver?{
         
-        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            
-            guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let followers = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+
+            completion(followers)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([:])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.followers.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
+        }
+        return nil
+        
+        
+    }
+    
+    func getFollowingForUser(userID:String,frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ following:[String:AnyObject]?)->Void)-> DatabaseConnectionObserver?{
+
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let followers = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
             
             completion(followers)
-        })
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([:])
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.following.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
+        }
+        return nil
+
+        
     }
     
-    func getFollowingForUser(userID:String, _ completion:@escaping (_ following:[String:AnyObject]?)->Void){
+    
+    func checkIfUser(withuserID:String, isFollowing userID:String, _ completion:@escaping (Bool)->Void){
         
-        FirebaseReference.following.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+        //If withUserID is in followers list of userID, return true
+        FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
-            guard let following = dataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
-                return
-            }
-            
-            completion(following)
-        })
+                guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                    completion(false)
+                    return
+                }
+                
+                if followers[withuserID] != nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+        
+            })
+        
     }
     
     

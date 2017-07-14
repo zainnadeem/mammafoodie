@@ -30,7 +30,7 @@ class FirebaseLoginWorker:HUDRenderer {
                 completion(nil)
             }
         }
-
+        
     }
     
     
@@ -58,7 +58,7 @@ class FirebaseLoginWorker:HUDRenderer {
             }
         }
     }
-
+    
     ///Logs in to firebase with given Auth provider credentials and calls back with a status and an errorMessage if any.
     
     func login(with Credentials:AuthCredential, completion : @escaping (_ errorMessage:String?) -> ()) {
@@ -118,7 +118,7 @@ class FirebaseLoginWorker:HUDRenderer {
         
         user?.reauthenticate(with: Credential, completion: { (error) in
             if let error = error{
-               completion(error.localizedDescription)
+                completion(error.localizedDescription)
             } else {
                 completion(nil)
             }
@@ -153,5 +153,5 @@ class FirebaseLoginWorker:HUDRenderer {
         }
         
     }
-
+    
 }

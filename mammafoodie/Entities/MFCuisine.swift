@@ -2,12 +2,15 @@ import Foundation
 import UIKit
 
 class MFCuisine : Equatable {
-    var id: String
-    var name: String
+    var id: String = ""
+    var name: String = ""
     var isSelected: Bool = false
     var imageURL : URL?
     var selectedImage : UIImage?
     var unselectedImage : UIImage?
+    
+    init() {
+    }
     
     init(with rawDict : [String : AnyObject]) {
         self.id = rawDict["id"] as! String

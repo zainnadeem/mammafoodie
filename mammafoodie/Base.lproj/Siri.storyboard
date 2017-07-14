@@ -17,7 +17,7 @@
         <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
-        <array key="Montserrat-Light.ttf">
+        <array key="Montserrat-Light.otf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Medium.otf">
@@ -276,6 +276,20 @@
                                     <action selector="sendRequestBtn:" destination="lOY-7g-u3c" eventType="touchUpInside" id="4mi-2I-IYE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39b-36-gUi">
+                                <rect key="frame" x="191" y="353" width="33" height="30"/>
+                                <state key="normal" title="Chat"/>
+                                <connections>
+                                    <action selector="chatBtn:" destination="lOY-7g-u3c" eventType="touchUpInside" id="J6d-Ix-O9W"/>
+                                    <segue destination="VYD-Kc-FPe" kind="show" id="i33-aS-fS9"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nW6-Vl-UyK" customClass="CommentsView" customModule="mamma_foodie" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="486" width="414" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="fJs-eg-aSm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1596247874" green="0.18885522960000001" blue="0.3117293793" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -308,11 +322,11 @@
                         <viewControllerLayoutGuide type="bottom" id="GQO-IF-gkl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zHZ-cg-Bfv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="680"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLb-Qi-maR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="26"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="28"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login" translatesAutoresizingMaskIntoConstraints="NO" id="UNJ-6V-H9O">
@@ -322,7 +336,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tV4-YG-g04">
-                                <rect key="frame" x="0.0" y="185" width="320" height="34"/>
+                                <rect key="frame" x="0.0" y="195" width="414" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyA-Mp-2mq">
@@ -335,7 +349,7 @@
                                 <rect key="frame" x="36" y="328" width="248" height="68"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselectpass" translatesAutoresizingMaskIntoConstraints="NO" id="9U5-kU-F6Z">
-                                        <rect key="frame" x="20" y="24" width="16" height="18"/>
+                                        <rect key="frame" x="20" y="27" width="16" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="V6M-4R-Obc"/>
                                             <constraint firstAttribute="width" constant="16" id="fyI-uq-OOn"/>
@@ -379,7 +393,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sL-3L-Ga5">
-                                <rect key="frame" x="127" y="630" width="67" height="34"/>
+                                <rect key="frame" x="127.33333333333334" y="630" width="67.000000000000028" height="34"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.52549019607843139" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
@@ -392,13 +406,13 @@
                                 <rect key="frame" x="36" y="257" width="248" height="68"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HBv-2b-kt2">
-                                        <rect key="frame" x="56" y="0.0" width="182" height="68"/>
+                                        <rect key="frame" x="56" y="0.0" width="268" height="73"/>
                                         <color key="textColor" red="0.60784313729999995" green="0.59999999999999998" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselectuser" translatesAutoresizingMaskIntoConstraints="NO" id="bDs-jC-ZKw">
-                                        <rect key="frame" x="20" y="25" width="16" height="16"/>
+                                        <rect key="frame" x="20" y="28" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="16" id="A2i-lc-zvo"/>
                                             <constraint firstAttribute="height" constant="16" id="DpO-fV-p9e"/>
@@ -439,7 +453,7 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjk-tg-4Wh">
-                                <rect key="frame" x="0.0" y="664" width="320" height="16"/>
+                                <rect key="frame" x="0.0" y="719" width="414" height="17"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5Z-bz-Zbo">
@@ -508,8 +522,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vdb-OQ-iHx"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="680"/>
                     <connections>
                         <outlet property="btnForgotPasswordSubmit" destination="IWp-dq-lMh" id="71e-Vg-hZr"/>
                         <outlet property="emailImageView" destination="bDs-jC-ZKw" id="HBj-a5-dTV"/>
@@ -642,7 +654,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="epq-Tf-e8v" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="phO-CO-Bbc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="phO-CO-Bbc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -660,7 +672,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N1X-e0-rjH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="M42-Kp-WHj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M42-Kp-WHj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -682,7 +694,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PPO-cp-lVf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bAv-gZ-tjG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="680"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7o-k6-bow">
@@ -765,7 +777,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HtZ-JV-gdf">
-                                <rect key="frame" x="219" y="213" width="65" height="65"/>
+                                <rect key="frame" x="313" y="213" width="65" height="65"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselectuser" translatesAutoresizingMaskIntoConstraints="NO" id="NDW-MA-8YI">
                                         <rect key="frame" x="25" y="25" width="16" height="16"/>
@@ -789,7 +801,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKK-HD-2xU">
-                                <rect key="frame" x="24" y="545" width="65" height="65"/>
+                                <rect key="frame" x="24" y="601" width="65" height="65"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselectpass" translatesAutoresizingMaskIntoConstraints="NO" id="JPL-RE-1M0">
                                         <rect key="frame" x="25" y="24" width="16" height="18"/>
@@ -806,7 +818,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7U-Km-4U3">
-                                <rect key="frame" x="0.0" y="664" width="320" height="16"/>
+                                <rect key="frame" x="0.0" y="719" width="414" height="17"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -883,7 +895,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7ny-K3-5pH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ok3-8l-SEP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ok3-8l-SEP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1510,8 +1522,8 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-Eg-vEX">
-                                                    <rect key="frame" x="0.0" y="221" width="296" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwf-Eg-vEX">
+                                                    <rect key="frame" x="0.0" y="220.66666666666663" width="296" height="0.33333333333334281"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                     <color key="textColor" red="0.32549019610000002" green="0.33333333329999998" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1524,7 +1536,6 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" title="Follow"/>
                                                     <connections>
                                                         <action selector="followButtonClicked:" destination="Kzu-JG-jqs" eventType="touchUpInside" id="arb-4g-F6O"/>
                                                         <segue destination="bag-CL-aVm" kind="presentation" id="1LS-KL-wvE"/>
@@ -1700,6 +1711,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beG-En-fvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3045" y="1887"/>
+        </scene>
+        <!--Followers List View Controller-->
+        <scene sceneID="WXI-8h-uLE">
+            <objects>
+                <viewController storyboardIdentifier="FollowersListViewController" id="SMk-4b-hZB" customClass="FollowersListViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GCS-fd-9vp"/>
+                        <viewControllerLayoutGuide type="bottom" id="ajW-7Y-QkN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Me-Ux-ei2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mbS-3L-prT">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mbS-3L-prT" firstAttribute="top" secondItem="GCS-fd-9vp" secondAttribute="bottom" id="1IQ-7n-MJI"/>
+                            <constraint firstItem="ajW-7Y-QkN" firstAttribute="top" secondItem="mbS-3L-prT" secondAttribute="bottom" id="Asx-rH-SUS"/>
+                            <constraint firstItem="mbS-3L-prT" firstAttribute="leading" secondItem="9Me-Ux-ei2" secondAttribute="leading" id="Y0i-tP-37G"/>
+                            <constraint firstAttribute="trailing" secondItem="mbS-3L-prT" secondAttribute="trailing" id="dWJ-6Y-Ff7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="47X-F7-PRI">
+                        <barButtonItem key="leftBarButtonItem" image="BackBtn" id="EN7-Wx-Fcb">
+                            <inset key="imageInsets" minX="0.0" minY="18" maxX="60" maxY="18"/>
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="backButtonTapped:" destination="SMk-4b-hZB" id="Qsb-gM-ZsW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="followersTblView" destination="mbS-3L-prT" id="12i-mY-cx8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SyG-ia-5vt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3981.1594202898555" y="2556.521739130435"/>
         </scene>
         <!--Favourite Dishes List-->
         <scene sceneID="YCJ-VE-JqV">
@@ -2303,6 +2356,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2N0-58-Ui1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3911" y="1887"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="50Q-Oj-vLA">
+            <objects>
+                <navigationController storyboardIdentifier="FollowerNav" automaticallyAdjustsScrollViewInsets="NO" id="xBV-it-QRL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="15D-u7-8aM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SMk-4b-hZB" kind="relationship" relationship="rootViewController" id="Sgs-eN-nXq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="72D-BE-Z2L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3073.913043478261" y="2556.521739130435"/>
         </scene>
     </scenes>
     <resources>

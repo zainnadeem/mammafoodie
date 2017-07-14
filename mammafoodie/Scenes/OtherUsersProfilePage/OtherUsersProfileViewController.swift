@@ -3,13 +3,15 @@ import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:Int)
+    func openFollowers(followers:Bool, userList:[MFUser])
 }
 
 protocol OtherUsersProfileViewControllerOutput {
     
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
-//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
+    func toggleFollow(userID:String, shouldFollow:Bool)
 }
 
 enum ProfileType{
@@ -24,14 +26,16 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    var profileType:ProfileType = .othersProfile
-
+    var profileType:ProfileType = .ownProfile // .othersProfile
+    
     @IBOutlet weak var collectionView:UICollectionView!
     
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
     let unSelectedMenuTextColor = UIColor(red: 83/255, green: 85/255, blue: 87/255, alpha: 1)
+    
+    var userID:String?
     
     // MARK: - Object lifecycle
     
@@ -48,11 +52,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         output.setUpDishCollectionView(self.collectionView, self.profileType)
         
         if let user = Auth.auth().currentUser{
-            output.loadUserProfileData(userID: user.uid)
+            
+            self.userID = user.uid
+            
+            output.loadUserProfileData(userID: self.userID!)
         }
         
     }
-
+    
     
     //MARK: - Input
     
@@ -62,25 +69,74 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
+    func openFollowers(followers:Bool, userList:[MFUser]){
+        
+        let followerNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowerNav") as!
+        UINavigationController
+        
+        let vc = followerNav.viewControllers.first as! FollowersListViewController
+        
+//        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
+        
+        if followers {
+            //show list of followers
+            vc.followers = true
+            
+        } else {
+            //show list of following
+            vc.followers = false
+        }
+//        vc.userList = userList
+        
+        vc.userID = self.userID!
+        
+        
+        self.present(followerNav, animated: true, completion: nil)
+        
+    }
+    
     
     // MARK: - Event handling
     
     
     @IBAction func settingsButtonClicked(_ sender: UIButton) {
-        
-        
+        AppDelegate.shared().setLoginViewController()
+        let worker = FirebaseLoginWorker()
+        worker.signOut { (errorMessage) in
+            
+        }
     }
     
     
     @IBAction func closeButtonClicked(_ sender: UIButton) {
         
         
+        
     }
+    
     
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
         
-        
+        switch sender.currentTitle!.lowercased(){
+            case "follow":
+                sender.setTitle("UnFollow", for: .normal)
+                output.toggleFollow(userID: self.userID!, shouldFollow: true)
+                
+                
+            break
+            
+            case "unfollow":
+                sender.setTitle("Follow", for: .normal)
+                output.toggleFollow(userID: self.userID!, shouldFollow: false)
+            break
+            
+            case "go cook":
+            break
+            
+        default:
+            break
+        }
         
     }
     
@@ -90,4 +146,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func btnLogoutTapped(_ sender: UIButton) {
+        AppDelegate.shared().setLoginViewController()
+        let worker = FirebaseLoginWorker()
+        worker.signOut { (errorMessage) in
+            
+        }
+    }
 }

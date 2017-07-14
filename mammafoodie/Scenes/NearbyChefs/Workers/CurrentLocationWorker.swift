@@ -14,14 +14,15 @@ typealias FoundLoation = (CLLocation?, Error?) -> Void
 class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
     
     var foundLocation : FoundLoation!
-    
+    private var hasFoundLocation : Bool = false
     var locationManager: CLLocationManager = CLLocationManager.init()
     
     func getCurrentLocation(_ completion: @escaping FoundLoation) {
         self.foundLocation = completion
+        self.hasFoundLocation = false
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
+//        self.locationManager.requestLocation()
         self.locationManager.startUpdatingLocation()
     }
     
@@ -42,7 +43,9 @@ class CurrentLocationWorker : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.count > 0 {
+        if locations.count > 0 &&
+            !self.hasFoundLocation {
+            self.hasFoundLocation = true
             self.locationManager.stopUpdatingLocation()
             self.foundLocation(locations.first, nil)
         }
