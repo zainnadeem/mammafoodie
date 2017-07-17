@@ -4,6 +4,7 @@ import FirebaseAuth
 protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:Int)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
 }
 
 protocol OtherUsersProfileViewControllerOutput {
@@ -67,6 +68,15 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         //Initiate segue and pass it to router in prepare for segue
         
+    }
+    
+    func openFavouriteDishes(){
+        let favouriteNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FavouriteDishNav") as! UINavigationController
+        
+        let vc = favouriteNav.viewControllers.first as! FavouriteDishesList
+        vc.userID = self.userID!
+        
+        self.present(favouriteNav, animated: true, completion: nil)
     }
     
     func openFollowers(followers:Bool, userList:[MFUser]){
@@ -153,4 +163,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             
         }
     }
+    
+    
+ 
+    
 }

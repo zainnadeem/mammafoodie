@@ -29,4 +29,26 @@ class NotificationTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setUp(notification:MFNotification){
+        
+        let imageURL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: notification.participantUserID)
+        
+        if let url = imageURL {
+            profileImageView.sd_setImage(with: url)
+        }
+        
+        lblNotificationText.attributedText = notification.attributedString
+        
+        
+        if let dishID = notification.dishID{
+            let dishImageURl = FirebaseReference.dishes.getImagePath(with: dishID)
+            
+            if let url = dishImageURl{
+                dishImageView.sd_setImage(with: url)
+            }
+        }
+        
+        
+    }
+    
 }

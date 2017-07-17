@@ -20,7 +20,7 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-    case savedDishes = "DishSaved"
+    case savedDishes = "SavedDishes"
     //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
@@ -29,6 +29,7 @@ enum FirebaseReference: String {
     case userNewsFeed = "UserNewsFeed"
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
+    case notificationsForUser = "NotificationsForUser"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -506,6 +507,23 @@ extension DatabaseGateway {
             
         })
     }
+    
+    
+    func getSavedDishesForUser(userID:String, _ completion:@escaping ([String:AnyObject]?)->()) {
+        
+        FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+            
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+                
+                completion([:])
+                return
+            }
+            
+                completion(dishData)
+        
+            })
+    }
+    
 }
 
 //Mark: - Liked Dish
@@ -994,3 +1012,41 @@ extension DatabaseGateway {
         }
     }
 }
+
+//Get Notifications for Users
+
+extension DatabaseGateway{
+    
+    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?)->()){
+        
+        FirebaseReference.notificationsForUser.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            
+            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(notificationData)
+            
+        })
+    }
+    
+    
+    func getNotification(notificationID:String, completion:@escaping (MFNotification?)->()) {
+        
+        FirebaseReference.notifications.classReference.child(notificationID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let notification:MFNotification = MFNotification(from:notificationData)
+            completion(notification)
+        })
+        
+    }
+    
+}
+

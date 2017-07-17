@@ -117,8 +117,11 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         
         let tapFollowing = UITapGestureRecognizer(target: self, action: #selector(self.openFollowing(sender:)))
         
+        let tapFavourite = UITapGestureRecognizer(target: self, action: #selector(self.openFavouriteDishes(sender:)))
+        
         followersSegmentStackView.addGestureRecognizer(tapFollowers)
         followingSegmentStackView.addGestureRecognizer(tapFollowing)
+        favouriteDishesStackView.addGestureRecognizer(tapFavourite)
         
     }
     
@@ -242,6 +245,10 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     func openFollowing(sender:UITapGestureRecognizer){
         delegate?.openFollowers(followers: false, userList:self.following)
+    }
+    
+    func openFavouriteDishes(sender:UITapGestureRecognizer){
+        delegate?.openFavouriteDishes()
     }
     
     func updateHairLineMenuPosition(){

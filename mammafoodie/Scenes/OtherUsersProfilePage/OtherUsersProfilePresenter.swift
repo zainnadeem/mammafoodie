@@ -3,11 +3,13 @@ import UIKit
 protocol OtherUsersProfilePresenterInput {
     func openDishPageWith(dishID:Int)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
 }
 
 protocol OtherUsersProfilePresenterOutput: class {
     func openDishPageWith(dishID:Int)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
     
 }
 
@@ -24,5 +26,9 @@ class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
     
     func openFollowers(followers: Bool, userList:[MFUser]) {
         output.openFollowers(followers: followers, userList:userList)
+    }
+    
+    func openFavouriteDishes(){
+        output.openFavouriteDishes()
     }
 }

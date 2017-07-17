@@ -13,6 +13,7 @@ protocol DishesCollectionViewAdapterDelegate{
     func openDishPageWith(dishID:Int)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
 }
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

@@ -50,6 +50,9 @@
 		118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */; };
 		118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */; };
 		118FB2BC1EEACA1200E5E6E5 /* SlotSelectionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */; };
+		11AE87621F1C9EBA00B788BA /* MFNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87611F1C9EBA00B788BA /* MFNotification.swift */; };
+		11AE87641F1CBE6600B788BA /* NotificationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87631F1CBE6600B788BA /* NotificationWorker.swift */; };
+		11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87661F1CD86100B788BA /* FavouriteDishesList.swift */; };
 		11F5C6531F18E7DB00F7F45C /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6521F18E7DB00F7F45C /* MFUserAddress.swift */; };
 		11F5C6561F18F58000F7F45C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6541F18F58000F7F45C /* NotificationTableViewCell.swift */; };
 		11F5C6571F18F58000F7F45C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F5C6551F18F58000F7F45C /* NotificationTableViewCell.xib */; };
@@ -598,6 +601,9 @@
 		118FB2B31EEACA1200E5E6E5 /* SlotSelectionRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionRouter.swift; sourceTree = "<group>"; };
 		118FB2B41EEACA1200E5E6E5 /* SlotSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionViewController.swift; sourceTree = "<group>"; };
 		118FB2B51EEACA1200E5E6E5 /* SlotSelectionWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotSelectionWorker.swift; sourceTree = "<group>"; };
+		11AE87611F1C9EBA00B788BA /* MFNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNotification.swift; sourceTree = "<group>"; };
+		11AE87631F1CBE6600B788BA /* NotificationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWorker.swift; sourceTree = "<group>"; };
+		11AE87661F1CD86100B788BA /* FavouriteDishesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteDishesList.swift; sourceTree = "<group>"; };
 		11F5C6521F18E7DB00F7F45C /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
 		11F5C6541F18F58000F7F45C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		11F5C6551F18F58000F7F45C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -951,6 +957,7 @@
 		110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				11AE87651F1CD86100B788BA /* FavouriteDishesList */,
 				113948D21F051ACF00F98E74 /* UserProfileCollectionViewHeader.swift */,
 				110FCE4C1EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift */,
 				110FCE4D1EEEAEC9008B6F2D /* OtherUsersProfileInteractor.swift */,
@@ -1023,10 +1030,19 @@
 			path = SlotSelection;
 			sourceTree = "<group>";
 		};
+		11AE87651F1CD86100B788BA /* FavouriteDishesList */ = {
+			isa = PBXGroup;
+			children = (
+				11AE87661F1CD86100B788BA /* FavouriteDishesList.swift */,
+			);
+			path = FavouriteDishesList;
+			sourceTree = "<group>";
+		};
 		11F5C6581F18F96500F7F45C /* NotificationPage */ = {
 			isa = PBXGroup;
 			children = (
 				11F5C6591F18F97F00F7F45C /* NotificationViewController.swift */,
+				11AE87631F1CBE6600B788BA /* NotificationWorker.swift */,
 			);
 			path = NotificationPage;
 			sourceTree = "<group>";
@@ -1432,6 +1448,7 @@
 				2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */,
 				2CA2B4A21EF542D30076598C /* MFUser.swift */,
 				2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */,
+				11AE87611F1C9EBA00B788BA /* MFNotification.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2584,6 +2601,7 @@
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
 				2CFEB5651F13F1F6005EF9DA /* RegisterConfigurator.swift in Sources */,
 				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
+				11AE87621F1C9EBA00B788BA /* MFNotification.swift in Sources */,
 				BFC927481EF00A7E00602153 /* VidupMainPagePresenter.swift in Sources */,
 				2C6979D71F07C95F00787DCC /* GMUPolygon.m in Sources */,
 				2CFB9B921EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
@@ -2596,6 +2614,7 @@
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
+				11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */,
 				2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
@@ -2693,6 +2712,7 @@
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
+				11AE87641F1CBE6600B788BA /* NotificationWorker.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,

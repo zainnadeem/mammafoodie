@@ -15,7 +15,15 @@ class NotificationViewController: UIViewController {
     
     let reuseIdentifier = "NotificationCell"
     
+    lazy var worker = NotificationWorker()
     
+    var userID:String!
+    
+    var notifications = [MFNotification](){
+        didSet{
+            notificationTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,20 @@ class NotificationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.worker.getNotificationForUser(userID: userID) { (notifications) in
+            
+            if let notifications = notifications{
+                self.notifications = notifications
+            }
+            
+        }
+        
+    }
+    
+
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -41,8 +63,12 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let user = userList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationTableViewCell
         
+        let notif = notifications[indexPath.row]
+        
+        cell.setUp(notification: notif)
+        return cell
         
     }
     
@@ -55,11 +81,11 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList.count
+        return notifications.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+   
 }

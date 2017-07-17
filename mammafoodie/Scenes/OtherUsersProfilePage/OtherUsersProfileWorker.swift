@@ -10,6 +10,8 @@ class OtherUsersProfileWorker {
     
     var followingResponseCounter = 0
     
+    var responseCounterSaved = 0
+    
     // MARK: - Business Logic
     
     func getUserDataWith(userID:String, completion: @escaping (MFUser?)->Void){
@@ -43,7 +45,9 @@ class OtherUsersProfileWorker {
             
              print(dishDataDictionary)
             
-            guard dishDataDictionary != nil else {return}
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
             
             var dishes = [MFDish]()
             
@@ -76,7 +80,9 @@ class OtherUsersProfileWorker {
             
             print(dishDataDictionary)
             
-            guard dishDataDictionary != nil else {return}
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
             
             var dishes = [MFDish]()
             
@@ -98,6 +104,42 @@ class OtherUsersProfileWorker {
             
         }
     }
+    
+    
+    func getSavedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void) {
+        
+        responseCounterSaved = 0
+        
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
+            
+            
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
+            
+            var dishes = [MFDish]()
+            
+            for dishID in dishDataDictionary!.keys {
+                
+                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
+                    self.responseCounterSaved += 1
+                    
+                    if dish != nil {
+                        dishes.append(dish!)
+                    }
+                    
+                    if self.responseCounterSaved == dishDataDictionary!.keys.count{
+                        self.responseCounterSaved = 0
+                        completion(dishes)
+                    }
+                })
+            }
+
+            
+        }
+        
+    }
+    
 
     func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
@@ -106,7 +148,9 @@ class OtherUsersProfileWorker {
         DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID, frequency: frequency) { (followers) in
             
             
-            guard followers != nil else {return}
+            guard followers != nil else {
+                completion([])
+                return}
             
             var users = [MFUser]()
             
@@ -139,7 +183,9 @@ class OtherUsersProfileWorker {
         DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
             
             
-            guard following != nil else {return}
+            guard following != nil else {
+                completion([])
+                return}
             
             var users = [MFUser]()
             
