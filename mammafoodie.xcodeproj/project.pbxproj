@@ -103,6 +103,8 @@
 		2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6832E041F052E4200ECE835 /* TimerWorker.swift */; };
+		2C5007F71F1CBD2200A82921 /* StripeGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007F61F1CBD2200A82921 /* StripeGateway.swift */; };
+		2C5007FA1F1CBDBA00A82921 /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007F91F1CBDBA00A82921 /* MFUserAddress.swift */; };
 		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65170B1F135CDE00717B82 /* DummyData.swift */; };
@@ -624,6 +626,8 @@
 		2C252E301F023E1900AC914F /* CircleTransitionDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransitionDismissAnimator.swift; sourceTree = "<group>"; };
 		2C2FB2131F09140C004EEA0F /* LiveVideoListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoListWorker.swift; sourceTree = "<group>"; };
 		2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupsListWorker.swift; sourceTree = "<group>"; };
+		2C5007F61F1CBD2200A82921 /* StripeGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeGateway.swift; sourceTree = "<group>"; };
+		2C5007F91F1CBDBA00A82921 /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
 		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
 		2C65170B1F135CDE00717B82 /* DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		2C6979771F07C95F00787DCC /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
@@ -1138,6 +1142,14 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		2C5007F51F1CBD1C00A82921 /* StripeGateway */ = {
+			isa = PBXGroup;
+			children = (
+				2C5007F61F1CBD2200A82921 /* StripeGateway.swift */,
+			);
+			path = StripeGateway;
+			sourceTree = "<group>";
+		};
 		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,13 +1342,8 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BF5AD5DE1F062B5700827223 /* DishDetail */,
 				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
-				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
-				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
-				F0A980F51F0A850F00772BAA /* Followers */,
-				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
@@ -1421,6 +1428,7 @@
 				2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */,
 				2CA2B4A21EF542D30076598C /* MFUser.swift */,
 				2C12BCDA1EF8060E007AF994 /* MFCuisine.swift */,
+				2C5007F91F1CBDBA00A82921 /* MFUserAddress.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1767,6 +1775,7 @@
 				113948CA1F05082400F98E74 /* HUDProtocols.swift */,
 				BF5060D81EE81B9E00DB646F /* AppDelegate.swift */,
 				2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */,
+				2C5007F51F1CBD1C00A82921 /* StripeGateway */,
 				BFC9274B1EF00B0700602153 /* Cells */,
 				2CB8BE981EF2467500DA78B3 /* DatabaseGateway */,
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
@@ -2133,7 +2142,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -2193,7 +2202,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -2431,6 +2440,7 @@
 			files = (
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
 				F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */,
+				2C5007FA1F1CBDBA00A82921 /* MFUserAddress.swift in Sources */,
 				F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */,
 				572E9A9C1EFAB4AF007DE6D0 /* GoCookWorker.swift in Sources */,
 				570ED4151F0684F000B41F0E /* IC_CGSizeExtensions.swift in Sources */,
@@ -2505,6 +2515,7 @@
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
+				2C5007F71F1CBD2200A82921 /* StripeGateway.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
 				57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
