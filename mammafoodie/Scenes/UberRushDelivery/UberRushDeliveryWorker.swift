@@ -47,8 +47,8 @@ class UberRushDeliveryWorker:NSObject{
         ]
         let pickupContact: [String: Any] = [
             "email"         : chef.email,
-            "first_name"    : chef.firstName,
-            "last_name"     : chef.lastName,
+            "first_name"    : chef.name,
+            "last_name"     : chef.name,
             "phone"         : [ "number" : chef.phone, "sms_enabled" : false]
         ]
         
@@ -64,8 +64,8 @@ class UberRushDeliveryWorker:NSObject{
         ]
         let dropoffContact: [String: Any] = [
             "email"         : purchasingUser.email,
-            "first_name"    : purchasingUser.firstName,
-            "last_name"     : purchasingUser.lastName,
+            "first_name"    : purchasingUser.name,
+            "last_name"     : purchasingUser.name,
             "phone"         : [ "number" : purchasingUser.phone, "sms_enabled" : false]
         ]
         

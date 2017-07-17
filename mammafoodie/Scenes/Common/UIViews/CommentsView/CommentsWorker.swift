@@ -16,14 +16,14 @@ class CommentsWorker {
     }
     
     func post(_ comment: MFComment, on dish: MFDish, _ completion: @escaping (()->Void)) {
-//        DatabaseGateway.sharedInstance.postComment(comment, on: dish) {
-//            completion()
-//        }
+        //        DatabaseGateway.sharedInstance.postComment(comment, on: dish) {
+        //            completion()
+        //        }
         
         
-       var urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/commentOnDish"
-    
-        let params = "dishId=\(dish.id)&userId=\(comment.user.id!)&userFullname=\(comment.user.name ?? "")&comment=\(comment.text!)"
+        let urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/commentOnDish"
+        
+        let params = "dishId=\(dish.id)&userId=\(comment.user.id!)&userFullname=\(comment.user.name ?? "")&comment=\(comment.text)"
         
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
@@ -47,11 +47,11 @@ class CommentsWorker {
             }
             if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                 if let responseDict = responseDict {
-                   print(responseDict)
+                    print(responseDict)
                 }
                 else { print("error") }
             }
             }.resume()
-     
+        
     }
 }

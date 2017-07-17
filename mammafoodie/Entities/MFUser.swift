@@ -9,6 +9,7 @@ class MFUser {
     var picture: String?
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
+    var phone: String = ""
 //    
 //    var userActivity: [MFNewsFeed:Date] = [:]
 //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
