@@ -103,8 +103,9 @@
 		2C2FB2171F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C2FB2181F091FDE004EEA0F /* VidupsListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */; };
 		2C4BABF81F0619F9006A44C4 /* TimerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6832E041F052E4200ECE835 /* TimerWorker.swift */; };
-		2C5007F71F1CBD2200A82921 /* StripeGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007F61F1CBD2200A82921 /* StripeGateway.swift */; };
 		2C5007FA1F1CBDBA00A82921 /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007F91F1CBDBA00A82921 /* MFUserAddress.swift */; };
+		2C5007FE1F1CC8BC00A82921 /* StripeGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007FD1F1CC8BC00A82921 /* StripeGatewayTests.swift */; };
+		2C5007FF1F1CCB8800A82921 /* StripeGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5007F61F1CBD2200A82921 /* StripeGateway.swift */; };
 		2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */; };
 		2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65170B1F135CDE00717B82 /* DummyData.swift */; };
@@ -628,6 +629,7 @@
 		2C2FB2161F091FDE004EEA0F /* VidupsListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupsListWorker.swift; sourceTree = "<group>"; };
 		2C5007F61F1CBD2200A82921 /* StripeGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeGateway.swift; sourceTree = "<group>"; };
 		2C5007F91F1CBDBA00A82921 /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
+		2C5007FD1F1CC8BC00A82921 /* StripeGatewayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeGatewayTests.swift; sourceTree = "<group>"; };
 		2C5E8B011EFD11D8009F24F5 /* MFNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNavigationController.swift; sourceTree = "<group>"; };
 		2C65170B1F135CDE00717B82 /* DummyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		2C6979771F07C95F00787DCC /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
@@ -1150,6 +1152,14 @@
 			path = StripeGateway;
 			sourceTree = "<group>";
 		};
+		2C5007FC1F1CC8A600A82921 /* StripeGateway */ = {
+			isa = PBXGroup;
+			children = (
+				2C5007FD1F1CC8BC00A82921 /* StripeGatewayTests.swift */,
+			);
+			path = StripeGateway;
+			sourceTree = "<group>";
+		};
 		2C5E8B001EFD11D8009F24F5 /* MFNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1436,6 +1446,7 @@
 		2CB8BF081EF247A800DA78B3 /* mammafoodieTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C5007FC1F1CC8A600A82921 /* StripeGateway */,
 				2CB8BF131EF2486D00DA78B3 /* DatabaseGateway */,
 				2CB8BF151EF2486D00DA78B3 /* Entities */,
 				2CB8BF0B1EF247A900DA78B3 /* Info.plist */,
@@ -2423,6 +2434,7 @@
 				2C6979571F07C88E00787DCC /* VidupMainPageConfigurator.swift in Sources */,
 				2C6979CA1F07C95F00787DCC /* GMUKMLParser.m in Sources */,
 				2C6979181F07C88D00787DCC /* LiveVideoMainPageInteractor.swift in Sources */,
+				2C5007FE1F1CC8BC00A82921 /* StripeGatewayTests.swift in Sources */,
 				2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2C6978E11F07C82700787DCC /* LoginModels.swift in Sources */,
 				2C6979221F07C88D00787DCC /* LoginConfigurator.swift in Sources */,
@@ -2515,7 +2527,6 @@
 				110FCE5B1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift in Sources */,
 				110FCE4A1EEE9502008B6F2D /* SlotSelectionCollectionViewAdapter.swift in Sources */,
 				572E9AA81EFAB515007DE6D0 /* UIFontExtension.swift in Sources */,
-				2C5007F71F1CBD2200A82921 /* StripeGateway.swift in Sources */,
 				F00F526D1EF2729D009DDAB1 /* MFMessageModel.swift in Sources */,
 				57C948161F03D9A300DF5674 /* UIViewControllerExtension.swift in Sources */,
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
@@ -2636,6 +2647,7 @@
 				570ED40B1F0684F000B41F0E /* AKImageCropperOverlayViewTouchState.swift in Sources */,
 				570ED4141F0684F000B41F0E /* IC_CGPointExtension.swift in Sources */,
 				114F34221F0F6F8C007F1D92 /* CustomLayout.swift in Sources */,
+				2C5007FF1F1CCB8800A82921 /* StripeGateway.swift in Sources */,
 				BFC927391EF00A7E00602153 /* LoadLiveVideosWorker.swift in Sources */,
 				BFC9273B1EF00A7E00602153 /* EnableLocationWorker.swift in Sources */,
 				57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */,

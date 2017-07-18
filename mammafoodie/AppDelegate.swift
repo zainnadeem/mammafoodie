@@ -23,6 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         _ = DatabaseGateway.sharedInstance
+        _ = StripeGateway.shared
+        
+        // Testing
+        StripeGateway.shared.createCharge()
+        
+        
+        
+        
         IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
@@ -31,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         currentUserFirebase = currentUser
       
-        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
         let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
