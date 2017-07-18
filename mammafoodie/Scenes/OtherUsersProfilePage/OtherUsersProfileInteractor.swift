@@ -10,7 +10,7 @@ protocol OtherUsersProfileInteractorInput {
 }
 
 protocol OtherUsersProfileInteractorOutput {
-    func openDishPageWith(dishID:Int)
+    func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
 }
@@ -77,6 +77,11 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             self.dishCollectionViewAdapter.boughtDishData = boughtDishes
             
         })
+        
+        worker.getSavedDishesCountFor(userID: userID) { (count) in
+            print(count)
+            self.dishCollectionViewAdapter.savedDishDataCount = count
+        }
         
     }
     
@@ -145,7 +150,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     //MARK: - DishesCollectionViewAdapterDelegate 
     
-    func openDishPageWith(dishID:Int){
+    func openDishPageWith(dishID:String){
         
        output.openDishPageWith(dishID: dishID)
     

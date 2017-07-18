@@ -30,6 +30,8 @@ enum FirebaseReference: String {
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
     case notificationsForUser = "NotificationsForUser"
+    case userAddress = "UserAddress"
+    case address = "Address"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -1047,6 +1049,37 @@ extension DatabaseGateway{
         })
         
     }
+    
+}
+
+
+extension DatabaseGateway {
+    
+    func getAddressForUser(userID:String, _ completion:@escaping ([String:AnyObject]?)->()){
+        FirebaseReference.userAddress.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            
+            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(notificationData)
+        })
+    }
+    
+    
+    func getAddress(addressID:String,_ completion:@escaping (MFUserAddress?)->()) {
+        FirebaseReference.address.classReference.child(addressID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            guard let addressData = dataSnapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            let address:MFUserAddress = MFUserAddress(from:addressData)
+            completion(address)
+        })
+    }
+    
     
 }
 

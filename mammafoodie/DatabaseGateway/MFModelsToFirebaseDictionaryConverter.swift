@@ -120,8 +120,8 @@ class MFModelsToFirebaseDictionaryConverter {
                 "id"                : user.id as AnyObject,
                 "name"              : user.name as AnyObject,
                 "email"             : user.email as AnyObject,
-                "address"           : user.address as AnyObject,
-                "addressLocation"   : user.addressLocation as AnyObject,
+//                "address"           : user.address as AnyObject,
+//                "addressLocation"   : user.addressLocation as AnyObject,
                 "picture"           : user.picture as AnyObject,
                 "dishesSoldCount"   : user.dishesSoldCount as AnyObject,
                 "profileDescription": user.profileDescription as AnyObject

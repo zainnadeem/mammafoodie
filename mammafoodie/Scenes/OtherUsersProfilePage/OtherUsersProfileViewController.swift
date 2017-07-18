@@ -2,7 +2,7 @@ import UIKit
 import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
-    func openDishPageWith(dishID:Int)
+    func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
 }
@@ -64,9 +64,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     //MARK: - Input
     
-    func openDishPageWith(dishID:Int){
+    func openDishPageWith(dishID:String){
         
         //Initiate segue and pass it to router in prepare for segue
+        
+        let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        dishVC.dishID = dishID
+        
+        self.present(dishVC, animated: true, completion: nil)
         
     }
     

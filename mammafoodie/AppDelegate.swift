@@ -32,18 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let currentUser = Auth.auth().currentUser
         currentUserFirebase = currentUser
 
-        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
-        let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
-        
-        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        if currentUser != nil { //User is already logged in, show home screen
-            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
-                self.currentUser = user
-            })
-            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            loginVC.navigationController?.pushViewController(homeVC, animated: false)
-        }
+//        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
+//        let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
+//        
+//        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        
+//        if currentUser != nil { //User is already logged in, show home screen
+//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
+//                self.currentUser = user
+//            })
+//            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+//            loginVC.navigationController?.pushViewController(homeVC, animated: false)
+//        }
 
         //To get access token
 //        UberRushDeliveryWorker.getAuthorizationcode{ token in
@@ -54,8 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //            }
 //        }
       
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
   
         return true
         

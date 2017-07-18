@@ -53,6 +53,10 @@
 		11AE87621F1C9EBA00B788BA /* MFNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87611F1C9EBA00B788BA /* MFNotification.swift */; };
 		11AE87641F1CBE6600B788BA /* NotificationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87631F1CBE6600B788BA /* NotificationWorker.swift */; };
 		11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE87661F1CD86100B788BA /* FavouriteDishesList.swift */; };
+		11ECCEFE1F1E0BCA00ADF481 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ECCEFD1F1E0BCA00ADF481 /* EditProfileViewController.swift */; };
+		11ECCF001F1E111C00ADF481 /* AddressDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11ECCEFF1F1E111C00ADF481 /* AddressDisplayView.xib */; };
+		11ECCF021F1E130C00ADF481 /* AddressDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ECCF011F1E130C00ADF481 /* AddressDisplayView.swift */; };
+		11ECCF081F1E27EF00ADF481 /* EditProfileworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ECCF071F1E27EF00ADF481 /* EditProfileworker.swift */; };
 		11F5C6531F18E7DB00F7F45C /* MFUserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6521F18E7DB00F7F45C /* MFUserAddress.swift */; };
 		11F5C6561F18F58000F7F45C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6541F18F58000F7F45C /* NotificationTableViewCell.swift */; };
 		11F5C6571F18F58000F7F45C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F5C6551F18F58000F7F45C /* NotificationTableViewCell.xib */; };
@@ -604,6 +608,10 @@
 		11AE87611F1C9EBA00B788BA /* MFNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFNotification.swift; sourceTree = "<group>"; };
 		11AE87631F1CBE6600B788BA /* NotificationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWorker.swift; sourceTree = "<group>"; };
 		11AE87661F1CD86100B788BA /* FavouriteDishesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteDishesList.swift; sourceTree = "<group>"; };
+		11ECCEFD1F1E0BCA00ADF481 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		11ECCEFF1F1E111C00ADF481 /* AddressDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressDisplayView.xib; sourceTree = "<group>"; };
+		11ECCF011F1E130C00ADF481 /* AddressDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressDisplayView.swift; sourceTree = "<group>"; };
+		11ECCF071F1E27EF00ADF481 /* EditProfileworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileworker.swift; sourceTree = "<group>"; };
 		11F5C6521F18E7DB00F7F45C /* MFUserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFUserAddress.swift; sourceTree = "<group>"; };
 		11F5C6541F18F58000F7F45C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		11F5C6551F18F58000F7F45C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -1038,6 +1046,17 @@
 			path = FavouriteDishesList;
 			sourceTree = "<group>";
 		};
+		11ECCEFC1F1E0B0200ADF481 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				11ECCEFD1F1E0BCA00ADF481 /* EditProfileViewController.swift */,
+				11ECCEFF1F1E111C00ADF481 /* AddressDisplayView.xib */,
+				11ECCF011F1E130C00ADF481 /* AddressDisplayView.swift */,
+				11ECCF071F1E27EF00ADF481 /* EditProfileworker.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 		11F5C6581F18F96500F7F45C /* NotificationPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1376,6 +1395,7 @@
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
 				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
+				11ECCEFC1F1E0B0200ADF481 /* EditProfile */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
@@ -2116,6 +2136,7 @@
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CD37DB11F0992790058EFDF /* (null) in Resources */,
+				11ECCF001F1E111C00ADF481 /* AddressDisplayView.xib in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
 				570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */,
@@ -2493,6 +2514,7 @@
 				572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */,
 				2C12BCB11EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				F09720851F0A162200DDA4FA /* DishesSavedViewController.swift in Sources */,
+				11ECCEFE1F1E0BCA00ADF481 /* EditProfileViewController.swift in Sources */,
 				5732C0D01EE92A9600E2A61E /* NearbyChefsRouter.swift in Sources */,
 				570ED41F1F0684F000B41F0E /* ImageCollectionViewAdapter.swift in Sources */,
 				2C12BCD31EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
@@ -2517,6 +2539,7 @@
 				2CA2B4BA1EF542D30076598C /* MFOrder.swift in Sources */,
 				2CFB9BB61EFA477200C08EB3 /* VidupDetailPagePresenter.swift in Sources */,
 				2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */,
+				11ECCF081F1E27EF00ADF481 /* EditProfileworker.swift in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
@@ -2577,6 +2600,7 @@
 				2CA2B4AA1EF542D30076598C /* MFConversation.swift in Sources */,
 				BFC927461EF00A7E00602153 /* VidupMainPageInteractor.swift in Sources */,
 				2CA2B4BE1EF542D30076598C /* MFUser.swift in Sources */,
+				11ECCF021F1E130C00ADF481 /* AddressDisplayView.swift in Sources */,
 				2CFB9B961EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2CA2B4AC1EF542D30076598C /* MFDish.swift in Sources */,
 				2CB8BF2A1EF25C1B00DA78B3 /* LoginPresenter.swift in Sources */,

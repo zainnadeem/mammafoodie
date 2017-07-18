@@ -149,7 +149,7 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     }
     
     
-    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String, followers:[MFUser]?, following:[MFUser]?){
+    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String, followers:[MFUser]?, following:[MFUser]?, savedDishCount: Int){
         
         self.layoutIfNeeded()
         
@@ -157,6 +157,9 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         
         self.followers = followers ?? []
         self.following = following ?? []
+        
+        print(savedDishCount.description)
+        self.lblFavouriteDishesCount.text = savedDishCount.description
         
         guard let data = data else {return}
         

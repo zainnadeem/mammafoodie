@@ -21,6 +21,8 @@ class FavouriteDishesList : UIViewController, UICollectionViewDataSource, UIColl
     }
     lazy var worker = OtherUsersProfileWorker()
     
+    lazy var storyBoard = UIStoryboard(name: "DishDetail", bundle: nil)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +37,6 @@ class FavouriteDishesList : UIViewController, UICollectionViewDataSource, UIColl
         
         
     }
-    
-    
     
     
     @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
@@ -88,6 +88,11 @@ class FavouriteDishesList : UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        delegate?.openDishPageWith(dishID: indexPath.item)
+        
+       let dishVC = storyBoard.instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        dishVC.dishID = dataSource[indexPath.item].id
+       self.present(dishVC, animated: true, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

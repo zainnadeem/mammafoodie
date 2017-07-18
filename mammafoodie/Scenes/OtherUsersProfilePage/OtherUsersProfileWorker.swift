@@ -140,6 +140,19 @@ class OtherUsersProfileWorker {
         
     }
     
+    
+    func getSavedDishesCountFor(userID:String, _ completion:@escaping (Int)->()){
+        
+         DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
+            
+            if dishDataDictionary == nil {
+                completion(0)
+            } else {
+                completion(dishDataDictionary!.keys.count)
+            }
+        }
+        
+    }
 
     func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
