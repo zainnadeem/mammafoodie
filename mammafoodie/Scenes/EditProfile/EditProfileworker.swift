@@ -55,4 +55,49 @@ class EditProfileworker {
     
     }
     
+    func createAddressForUser(userID:String, address:MFUserAddress, _ completion:@escaping (_ status:Bool)->()){
+        
+        DatabaseGateway.sharedInstance.createAddress(userID: userID, address: address) { (id) in
+            if id != nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+        
+    }
+    
+    
+    func updateAddress(addressID:String, address:MFUserAddress,_ completion:@escaping (_ status:Bool)->()){
+        DatabaseGateway.sharedInstance.updateAddress(addressID: addressID, address: address) { (status) in
+            completion(status)
+        }
+    }
+    
+    func updateUser(user:MFUser, _ completion:@escaping (_ status:Bool)->()){
+        DatabaseGateway.sharedInstance.updateUserEntity(with: user) { (error) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
+    
+    func uploadProfileImage(userID:String, image:UIImage, _ completion:@escaping (_ status:Bool)->()){
+        
+             DatabaseGateway.sharedInstance.uploadProfileImage(userID: userID, image: image) { (url, error) in
+                
+                if error != nil {
+                    completion(false)
+                } else if url != nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+        }
+        
+    }
+    
 }

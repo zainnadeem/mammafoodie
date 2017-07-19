@@ -124,7 +124,8 @@ class MFModelsToFirebaseDictionaryConverter {
 //                "addressLocation"   : user.addressLocation as AnyObject,
                 "picture"           : user.picture as AnyObject,
                 "dishesSoldCount"   : user.dishesSoldCount as AnyObject,
-                "profileDescription": user.profileDescription as AnyObject
+                "profileDescription": user.profileDescription as AnyObject,
+                "phone"             : user.phone as AnyObject
 //                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
 //                "userActivity"      : user.userActivity as AnyObject,
 //                "cookedDishes"      : user.cookedDishes as AnyObject,
@@ -137,5 +138,24 @@ class MFModelsToFirebaseDictionaryConverter {
                 
                 ] as AnyObject
         ]
+    }
+    
+    
+    class func dictionary(from address:MFUserAddress) -> FirebaseDictionary{
+        
+        return  [
+                
+                "id"            :   address.id as AnyObject,
+                "address"       :   address.address as AnyObject,
+                "address_2"     :   address.address_2 as AnyObject,
+                "city"          :   address.city as AnyObject,
+                "country"       :   address.country  as AnyObject,
+                "state"         :   address.state as AnyObject,
+                "postalCode"    :   address.postalCode as AnyObject,
+                "latitude"      :   address.latitude as AnyObject,
+                "longitude"     :   address.longitude as AnyObject,
+                "phone"         :   address.phone   as AnyObject
+            ]
+        
     }
 }

@@ -1080,6 +1080,58 @@ extension DatabaseGateway {
         })
     }
     
+    func createAddress(userID: String, address:MFUserAddress, _ completion :@escaping (_ addressID:String?)->()){
+        
+        var newModel = address
+        let id = FirebaseReference.address.generateAutoID()
+        newModel.id = id
+        
+        let rawAddress: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+        
+        
+        let childUpdates = ["\(FirebaseReference.address.rawValue)/\(id)/":rawAddress, "/\(FirebaseReference.userAddress.rawValue)/\(userID)/\(id)/":true] as [AnyHashable : Any]
+        
+        print(childUpdates)
+        
+        let databaseRef = Database.database().reference()
+        
+        databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
+            
+            if error != nil {
+                completion(nil)
+            } else {
+                completion(id)
+            }
+        }
+        
+    }
+    
+    func updateAddress(addressID:String, address:MFUserAddress,_ completion:@escaping (_ status:Bool)->()){
+        
+        var address = address
+        address.id = addressID
+
+        let rawAddress:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: address)
+
+        FirebaseReference.address.classReference.child(addressID).updateChildValues(rawAddress){
+            (error, databaseReference) in
+            
+            if error != nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+        
+    }
+    
+    func uploadProfileImage(userID:String, image:UIImage, _ completion : @escaping (URL?, Error?) -> Void){
+        
+            let path = "users/\(userID).jpg"
+            
+            self.save(image: image, at: path, completion: completion)
+
+    }
     
 }
 
