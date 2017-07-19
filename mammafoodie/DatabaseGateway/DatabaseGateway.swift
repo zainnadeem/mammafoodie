@@ -4,6 +4,8 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
+import Alamofire
+
 enum FirebaseReference: String {
     
     case media = "Media"
@@ -20,10 +22,11 @@ enum FirebaseReference: String {
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-//    case dishComments = "DishComments"
+    case stripeCustomers = "stripe_customers"
+    //    case dishComments = "DishComments"
     case savedDishes = "SavedDishes"
     case likedDishes = "LikedDishes"
-//    case dishBoughtBy = "DishBoughtBy"
+    //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
     case followers = "UserFollowers"
@@ -350,7 +353,7 @@ extension DatabaseGateway {
         print(dishID)
         
         let successClosure:FirebaseObserverSuccessClosure = { (userDataSnapshot) in
-
+            
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
@@ -379,13 +382,13 @@ extension DatabaseGateway {
             var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
             observer.databaseReference = databaseReference
             observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
-
+            
             return observer
             
         }
         
         return nil
-    
+        
     }
     
     
@@ -516,24 +519,24 @@ extension DatabaseGateway {
 
 extension DatabaseGateway {
     
-//    func checkSavedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-//        FirebaseReference.savedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-//            
-//            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-//                
-//                completion(nil)
-//                return
-//            }
-//            
-//            if dishData[dishId] != nil {
-//                completion(true)
-//            }else{
-//                completion(false)
-//            }
-//            
-//        })
-//    }
-//    
+    //    func checkSavedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
+    //        FirebaseReference.savedDishes.classReference.child(userId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
+    //
+    //            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
+    //
+    //                completion(nil)
+    //                return
+    //            }
+    //
+    //            if dishData[dishId] != nil {
+    //                completion(true)
+    //            }else{
+    //                completion(false)
+    //            }
+    //
+    //        })
+    //    }
+    //
     
     func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool, _ completion:@escaping (_ success:Bool)->()){
         
@@ -550,19 +553,19 @@ extension DatabaseGateway {
     func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
-                guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-    
-                    completion(false)
-                    return
-                }
-    
-                if dishData[dishID] != nil {
-                    completion(true)
-                }else{
-                    completion(false)
-                }
+            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 
-            })
+                completion(false)
+                return
+            }
+            
+            if dishData[dishID] != nil {
+                completion(true)
+            }else{
+                completion(false)
+            }
+            
+        })
         
     }
 }
@@ -572,11 +575,11 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-      
+        
         print(userId)
         print(dishId)
         
-    FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in            
+        FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value)
                 completion(nil)
@@ -943,7 +946,7 @@ extension DatabaseGateway{
                 completion(nil)
                 return
             }
-
+            
             completion(followers)
         }
         
@@ -971,7 +974,7 @@ extension DatabaseGateway{
     }
     
     func getFollowingForUser(userID:String,frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ following:[String:AnyObject]?)->Void)-> DatabaseConnectionObserver?{
-
+        
         
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
             guard let followers = snapshot.value as? FirebaseDictionary else {
@@ -1001,7 +1004,7 @@ extension DatabaseGateway{
             return nil
         }
         return nil
-
+        
         
     }
     
@@ -1011,18 +1014,18 @@ extension DatabaseGateway{
         //If withUserID is in followers list of userID, return true
         FirebaseReference.followers.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
             
-                guard let followers = dataSnapshot.value as? FirebaseDictionary else {
-                    completion(false)
-                    return
-                }
-                
-                if followers[withuserID] != nil {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-        
-            })
+            guard let followers = dataSnapshot.value as? FirebaseDictionary else {
+                completion(false)
+                return
+            }
+            
+            if followers[withuserID] != nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
+            
+        })
         
     }
     
@@ -1053,6 +1056,95 @@ extension DatabaseGateway {
         }) { (error) in
             print(error)
             completion(nil)
+        }
+    }
+}
+
+
+extension DatabaseGateway {
+    
+    func addToken(_ token: String, completion: @escaping ((String,Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
+        let pushId = ref.childByAutoId().key
+        
+        let token = [ "token": token as Any]
+        
+        ref.child(pushId).updateChildValues(token) { (error, databaseRef) in
+//            completion(error)
+            print(databaseRef)
+            databaseRef.parent?.observe(DataEventType.childChanged, with: { (snapshot) in
+                print(snapshot.value)
+                if let cardDetails = snapshot.value as? [String:Any] {
+                    if let id = cardDetails["id"] as? String {
+                        completion(id, nil)
+                    } else {
+                        print("nooooo")
+                    }
+                } else {
+                    print("Noooo")
+                }
+            })
+        }
+    }
+    
+    func getPaymentSources(for userId: String, completion: @escaping (([String:AnyObject]?)->Void)) {
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
+        ref.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            guard let sources: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(sources)
+        })
+    }
+    
+    func createCharge(_ amount: Double, source: String, completion: @escaping ((Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
+        let pushId = ref.childByAutoId().key
+        
+        let charge = [ "amount": amount as Any, "source": source]
+        
+        ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
+            completion(error)
+        }
+    }
+    
+    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
+        let parameters = [
+            "userId": userId,
+            "amountToAdd": newBalance
+        ] as Parameters
+        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
+            print(response)
+            completion(nil)
+        }
+    }
+    
+    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
+        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
+        let parameters = [
+            "fromUserId": fromUserId,
+            "toUserId": toUserId,
+            "amount": amount
+            ] as Parameters
+        Alamofire.request(url, parameters: parameters).responseString { (response) in
+            if let responseString = response.result.value {
+                if responseString.lowercased() == "success" {
+                    completion(true)
+                } else if responseString.lowercased() == "insufficient balance" {
+                    completion(false)
+                } else {
+                    print("Nooo")
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
         }
     }
 }
