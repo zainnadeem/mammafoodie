@@ -4,6 +4,8 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
+import Alamofire
+
 enum FirebaseReference: String {
     
     case media = "Media"
@@ -1061,27 +1063,88 @@ extension DatabaseGateway {
 
 extension DatabaseGateway {
     
-    func addToken(_ token: String, completion: @escaping (()->Void)) {
-        let userId = self.getLoggedInUser()!.id
-        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child("zQo6BUNYfGe2RDRs2tnDpH8H3iE2").child("sources")
+    func addToken(_ token: String, completion: @escaping ((String,Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
         let pushId = ref.childByAutoId().key
         
         let token = [ "token": token as Any]
         
         ref.child(pushId).updateChildValues(token) { (error, databaseRef) in
-            completion()
+//            completion(error)
+            print(databaseRef)
+            databaseRef.parent?.observe(DataEventType.childChanged, with: { (snapshot) in
+                print(snapshot.value)
+                if let cardDetails = snapshot.value as? [String:Any] {
+                    if let id = cardDetails["id"] as? String {
+                        completion(id, nil)
+                    } else {
+                        print("nooooo")
+                    }
+                } else {
+                    print("Noooo")
+                }
+            })
         }
     }
     
-    func createCharge(_ amount: Double, source: String, completion: @escaping (()->Void)) {
-        let userId = self.getLoggedInUser()!.id
-        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child("zQo6BUNYfGe2RDRs2tnDpH8H3iE2").child("charges")
+    func getPaymentSources(for userId: String, completion: @escaping (([String:AnyObject]?)->Void)) {
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
+        ref.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            guard let sources: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(sources)
+        })
+    }
+    
+    func createCharge(_ amount: Double, source: String, completion: @escaping ((Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
         
-        let charge = [ "amount": amount as Any, "source": "card_1AgX5lJwxdjMNYNIwwyS3Io5"]
+        let charge = [ "amount": amount as Any, "source": source]
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
-            completion()
+            completion(error)
+        }
+    }
+    
+    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
+        let userId: String = self.getLoggedInUser()!.id
+        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
+        let parameters = [
+            "userId": userId,
+            "amountToAdd": newBalance
+        ] as Parameters
+        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
+            print(response)
+            completion(nil)
+        }
+    }
+    
+    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
+        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
+        let parameters = [
+            "fromUserId": fromUserId,
+            "toUserId": toUserId,
+            "amount": amount
+            ] as Parameters
+        Alamofire.request(url, parameters: parameters).responseString { (response) in
+            if let responseString = response.result.value {
+                if responseString.lowercased() == "success" {
+                    completion(true)
+                } else if responseString.lowercased() == "insufficient balance" {
+                    completion(false)
+                } else {
+                    print("Nooo")
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
         }
     }
 }

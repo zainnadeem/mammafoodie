@@ -11,39 +11,96 @@ import Stripe
 
 class StripeGateway {
     
-    static let shared = StripeGateway()
+    static let shared: StripeGateway = StripeGateway()
     
-    init() {
-        STPPaymentConfiguration.shared().publishableKey = "pk_test_TsSjdg0sGrs3PxJxoPQpjYM5"
+    // Akshit's Test key
+    let stripeTestKeyFromAkshitAccount: String = "pk_test_TsSjdg0sGrs3PxJxoPQpjYM5"
+    
+    private init() {
+        STPPaymentConfiguration.shared().publishableKey = self.stripeTestKeyFromAkshitAccount
     }
     
-    func addPaymentMethod() {
+    func addPaymentMethod(number: String, expMonth: UInt, expYear: UInt, cvc: String, completion: @escaping ((String?, Error?)->Void)) {
         let cardParams = STPCardParams()
-        cardParams.number = "4242424242424242"
-        cardParams.expMonth = 10
-        cardParams.expYear = 2018
-        cardParams.cvc = "123"
+        cardParams.number = number
+        cardParams.expMonth = expMonth
+        cardParams.expYear = expYear
+        cardParams.cvc = cvc
         STPAPIClient.shared().createToken(withCard: cardParams) { (token, error) in
             if let error = error {
                 // Show the error to the user
                 print(error)
+                completion(nil, error)
             } else if let token = token {
-                self.submitTokenToBackend(token, completion: { (error) in
+                self.submitTokenToBackend(token, completion: { (cardId, error) in
                     print(error ?? "")
+                    completion(cardId, error)
                 })
             }
         }
     }
     
-    func createCharge() {
-        DatabaseGateway.sharedInstance.createCharge(1000, source: "") { 
+    func createCharge(amount: Double, sourceId: String, completion: @escaping ((Error?)->Void)) {
+        DatabaseGateway.sharedInstance.createCharge(amount*100, source: sourceId) { (error) in
             print("Charged")
+            completion(error)
+            if error == nil {
+                // Transaction success. Add the amount in the digital wallet
+                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
+                    
+                })
+            }
         }
     }
     
-    func submitTokenToBackend(_ token: STPToken, completion: @escaping ((Error?)->Void)) {
-        DatabaseGateway.sharedInstance.addToken(token.tokenId) { 
-            completion(nil)
+    func submitTokenToBackend(_ token: STPToken, completion: @escaping ((String, Error?)->Void)) {
+        DatabaseGateway.sharedInstance.addToken(token.tokenId) { (cardId, error) in
+            completion(cardId, error)
         }
+    }
+    
+    
+    func getPaymentSources(for userId: String, completion: @escaping (([STPCard])->Void)) {
+        DatabaseGateway.sharedInstance.getPaymentSources(for: userId) { (rawSources) in
+            var sources: [STPCard] = []
+            if let rawSources = rawSources {
+                for rawSourceId in rawSources.keys {
+                    if let rawSource = rawSources[rawSourceId] as? [String:AnyObject] {
+                        if let card: STPCard = self.getStripeCard(from: rawSource) {
+                            sources.append(card)
+                        }
+                    }
+                }
+            }
+            completion(sources)
+        }
+    }
+    
+    private func getStripeCard(from rawSource: [String:AnyObject]) -> STPCard? {
+        guard let cardId = rawSource["id"] as? String else {
+            return nil
+        }
+        
+        guard let brandString = rawSource["brand"] as? String else {
+            return nil
+        }
+        
+        guard let last4 = rawSource["last4"] as? String else {
+            return nil
+        }
+        
+        guard let expMonth = rawSource["expMonth"] as? UInt else {
+            return nil
+        }
+        
+        guard let expYear = rawSource["expYear"] as? UInt else {
+            return nil
+        }
+        
+        guard let fundingString = rawSource["funding"] as? String else {
+            return nil
+        }
+        
+        return STPCard(id: cardId, brand: STPCard.brand(from: brandString), last4: last4, expMonth: expMonth, expYear: expYear, funding: STPCard.funding(from: fundingString))
     }
 }

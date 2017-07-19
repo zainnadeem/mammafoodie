@@ -22,11 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         _ = DatabaseGateway.sharedInstance
         _ = StripeGateway.shared
         
         // Testing
-        StripeGateway.shared.createCharge()
+        DatabaseGateway.sharedInstance.getPaymentSources(for: "zQo6BUNYfGe2RDRs2tnDpH8H3iE2") { (rawSources) in
+            print(rawSources)
+            print("")
+        }
         
         
         

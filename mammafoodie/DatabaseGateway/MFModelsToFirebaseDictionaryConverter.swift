@@ -115,27 +115,52 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
+        var userInfo: [String:AnyObject] = [
+            :
+            //                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
+            //                "userActivity"      : user.userActivity as AnyObject,
+            //                "cookedDishes"      : user.cookedDishes as AnyObject,
+            //                "boughtDishes"      : user.boughtDishes as AnyObject,
+            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+            //                "likedDishes"       : user.likedDishes as AnyObject,
+            //                "followers"         : user.followers as AnyObject,
+            //                "following"         : user.following as AnyObject,
+            //                "blocked"           : user.blocked as AnyObject
+            
+        ]
+        
+        if let id = user.id {
+            userInfo["id"] = id as AnyObject
+        }
+        
+        if let name = user.name {
+            userInfo["name"] = name as AnyObject
+        }
+        
+        if let email = user.email {
+            userInfo["email"] = email as AnyObject
+        }
+        
+        if let address = user.address {
+            userInfo["address"] = address as AnyObject
+        }
+        
+        if let addressLocation = user.addressLocation {
+            userInfo["addressLocation"] = addressLocation as AnyObject
+        }
+        
+        if let picture = user.picture {
+            userInfo["picture"] = picture as AnyObject
+        }
+        
+        userInfo["dishesSoldCount"] = user.dishesSoldCount as AnyObject
+        
+        if let profileDescription = user.profileDescription {
+            userInfo["profileDescription"] = profileDescription as AnyObject
+        }
+        
         return [
-            user.id : [
-                "id"                : user.id as AnyObject,
-                "name"              : user.name as AnyObject,
-                "email"             : user.email as AnyObject,
-                "address"           : user.address as AnyObject,
-                "addressLocation"   : user.addressLocation as AnyObject,
-                "picture"           : user.picture as AnyObject,
-                "dishesSoldCount"   : user.dishesSoldCount as AnyObject,
-                "profileDescription": user.profileDescription as AnyObject
-//                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
-//                "userActivity"      : user.userActivity as AnyObject,
-//                "cookedDishes"      : user.cookedDishes as AnyObject,
-//                "boughtDishes"      : user.boughtDishes as AnyObject,
-//                "favouriteDishes"   : user.favoriteDishes as AnyObject,
-//                "likedDishes"       : user.likedDishes as AnyObject,
-//                "followers"         : user.followers as AnyObject,
-//                "following"         : user.following as AnyObject,
-//                "blocked"           : user.blocked as AnyObject
-                
-                ] as AnyObject
+            user.id : userInfo as AnyObject
         ]
     }
 }
