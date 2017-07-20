@@ -28,12 +28,14 @@ class ChatViewController: JSQMessagesViewController {
     //ChatUsers
     let user1 = User(id: "1", name: "Steve")
     let user2 = User(id: "2", name: "siri")
-       
+    
+
 }
 
 
 
 extension ChatViewController {
+    
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         print(senderId)
@@ -53,10 +55,10 @@ extension ChatViewController {
     }
 
     
-    //Height of table
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 15
-    }
+//    //Height of table
+//    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+//        return 15
+//    }
     
     //ImageData
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
@@ -66,14 +68,16 @@ extension ChatViewController {
     
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let bubbleFactory = JSQMessagesBubbleImageFactory()
+        let bubbleFactory = JSQMessagesBubbleImageFactory(bubble: UIImage(named:"Bubble"), capInsets: UIEdgeInsetsMake(0, 0, 0, 0))
         
         let message = messages[indexPath.row]
         
         if currentUser.id == message.senderId {
-            return bubbleFactory?.outgoingMessagesBubbleImage(with: .green)
+            
+            return bubbleFactory?.outgoingMessagesBubbleImage(with: .lightGray)
+        
         } else {
-            return bubbleFactory?.incomingMessagesBubbleImage(with: .lightGray)
+            return bubbleFactory?.incomingMessagesBubbleImage(with: .gray)
         }
     }
     
@@ -86,6 +90,49 @@ extension ChatViewController {
         let jsqMessageData = JSQMessage(senderId: mfMessageData.senderId, displayName: mfMessageData.senderDisplayName, text: mfMessageData.messageText )
         return jsqMessageData
     }
+    
+  
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        let message = messages[indexPath.item]
+        
+        if message.senderId == currentUser.id {
+            cell.textView?.textColor = UIColor.white
+            
+            let colorTop =  UIColor(red: 255.0/255.0, green: 149.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor
+            let colorBottom = UIColor(red: 255.0/255.0, green: 94.0/255.0, blue: 58.0/255.0, alpha: 1.0).cgColor
+            
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [ colorTop, colorBottom]
+            gradientLayer.locations = [ 0.0, 0.5]
+            gradientLayer.frame = cell.bounds
+            
+            
+            
+            
+            cell.clipsToBounds = true
+            
+            let path = UIBezierPath(roundedRect:cell.messageBubbleImageView.bounds,
+                                    byRoundingCorners:[  .topLeft],
+                                    cornerRadii: CGSize(width: 10, height:  10))
+            
+            let maskLayer = CAShapeLayer()
+            
+            maskLayer.path = path.cgPath
+            cell.messageBubbleImageView.layer.mask = maskLayer
+            
+            
+            cell.messageBubbleImageView.clipsToBounds = true
+            cell.messageBubbleImageView.layer.insertSublayer(gradientLayer, at: 0)
+            
+        } else {
+            cell.textView?.textColor = UIColor.black
+        }
+        return cell
+    }
+    
+    
 }
 
 extension ChatViewController {
@@ -101,6 +148,9 @@ extension ChatViewController {
        
         //Hiding attach Image
         self.inputToolbar.contentView.leftBarButtonItem = nil
+        
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
     }
     
     func ChatAPI() {
