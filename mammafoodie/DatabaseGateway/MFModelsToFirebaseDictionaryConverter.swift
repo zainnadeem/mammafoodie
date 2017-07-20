@@ -104,13 +104,14 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
     class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
-        return [
-            message.messageid : [
+        return  [
+                "id": message.id as AnyObject,
                 "messageText": message.messageText as AnyObject,
-                "conversationId": message.conversationId as AnyObject,
+//                "conversationId": message.conversationId as AnyObject,
                 "senderId": message.senderId as AnyObject,
-                "receiverId": message.receiverId as AnyObject
-                ] as AnyObject
+                "dateTime": message.dateTime as AnyObject,
+                "senderDisplayName": message.senderDisplayName as AnyObject
+//                "receiverId": message.receiverId as AnyObject
         ]
     }
     

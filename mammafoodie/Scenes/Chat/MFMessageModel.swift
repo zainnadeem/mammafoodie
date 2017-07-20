@@ -4,14 +4,15 @@ import Foundation
 import JSQMessagesViewController
 
 struct MFMessage1 {
+    var id:String = ""
     var senderId : String = ""
     var messageText : String = ""
-    var messageid : String = ""
+//    var messageid : String = ""
     var conversationId : String = ""
-    var receiverId : String = ""
-    var datetime : String?
-    var SenderCopyDeleted : Bool?
-    var ReceiverCopyDeleted : Bool?
+//    var receiverId : String = ""
+    var dateTime : String = ""
+//    var SenderCopyDeleted : Bool?
+//    var ReceiverCopyDeleted : Bool?
     var senderDisplayName:String = ""
     
 //    var displayName : String = ""
@@ -20,9 +21,10 @@ struct MFMessage1 {
 
     
     init(with senderDisplayName: String,  messagetext: String, senderId: String) {
-//        self.name = name
+        self.senderDisplayName = senderDisplayName
         self.messageText = messagetext
         self.senderId = senderId
+        self.dateTime = Date.timeIntervalSinceReferenceDate.description
     }
 }
 func getAvatar() -> JSQMessagesAvatarImage{

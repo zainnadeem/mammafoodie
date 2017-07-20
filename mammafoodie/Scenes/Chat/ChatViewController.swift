@@ -15,23 +15,22 @@ class ChatViewController: JSQMessagesViewController {
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
     let defaults = UserDefaults.standard
 
-    var model = MFConversation1()
-    var modelMsg = MFMessage1(with: "", messagetext: "", senderId: "")
+    var otherUserID:String!
+    var otherUserImage:UIImage!
 
     
-    var currentUser: UserChat {
-        return user1
-    }
-
+    var threadID:String!
     
     // MARK: - Object lifecycle
     var messages = [MFMessage1]()
-    var avatarDict = [String: JSQMessagesAvatarImage]()
+
+    var currentUser:MFUser!
     
-    //ChatUsers
-    let user1 = UserChat(id: "1", name: "Steve")
-    let user2 = UserChat(id: "2", name: "siri")
-       
+    let bubbleFactory = JSQMessagesBubbleImageFactory(bubble: UIImage(named:"Bubble"), capInsets:UIEdgeInsetsMake(0, 0, 0, 0))
+    
+    let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
+    let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
+    
 }
 
 
@@ -39,12 +38,21 @@ class ChatViewController: JSQMessagesViewController {
 extension ChatViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        print(senderId)
+        
+        //Call api
+        
         let message = MFMessage1(with: senderDisplayName, messagetext: text, senderId: senderId)
         messages.append(message)
-        // print(messages)
+        
+        print(message)
+        
+        DatabaseGateway.sharedInstance.createMessage(with: message, conversationID: "-KpV9qbi0Nekw9YTCwV2") { (status) in
+            print(status)
+        }
+        
+        
         finishSendingMessage()
-        ChatAPI()
+//        ChatAPI()
     }
     
     //senderbabbletable
@@ -62,31 +70,36 @@ extension ChatViewController {
 
     
     //Height of table
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
-            return 0.0
-        }
-        let currentMessage = self.messages[indexPath.item]
-        
-        if currentMessage.senderId == self.senderId {
-            return 0.0
-        }
-        
-        if indexPath.item - 1 > 0 {
-            let previousMessage = self.messages[indexPath.item - 1]
-            if previousMessage.senderId == currentMessage.senderId {
-                return 0.0
-            }
-        }
-        
-        return kJSQMessagesCollectionViewCellLabelHeightDefault
-    }
+//    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+//        if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
+//            return 0.0
+//        }
+//        let currentMessage = self.messages[indexPath.item]
+//        
+//        if currentMessage.senderId == self.senderId {
+//            return 0.0
+//        }
+//        
+//        if indexPath.item - 1 > 0 {
+//            let previousMessage = self.messages[indexPath.item - 1]
+//            if previousMessage.senderId == currentMessage.senderId {
+//                return 0.0
+//            }
+//        }
+//        
+//        return kJSQMessagesCollectionViewCellLabelHeightDefault
+//    }
     
     //ImageData
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return getAvatar()
+        
+        if messages[indexPath.item].senderId == self.senderId{
+            return nil //No Avatar image for current user
+        } else {
+            return getAvatar()
+        }
     }
-    
+
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
@@ -95,6 +108,10 @@ extension ChatViewController {
         let msg = messages[indexPath.row]
             if msg.senderId == senderId {
                 cell.textView.textColor = UIColor.white
+                
+                cell.messageBubbleImageView.applyGradient(colors: [color1, color2], direction: .leftToRight)
+                
+                
             }else{
                 cell.textView.textColor = UIColor.black
             }
@@ -106,11 +123,11 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let bubbleFactory = JSQMessagesBubbleImageFactory()
+        
         
         let message = messages[indexPath.row]
         
-        if currentUser.id == message.senderId {
+        if self.senderId == message.senderId {
             return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor(red: 255/255, green: 99/255, blue: 34/255, alpha: 1.0))
         } else {
             return bubbleFactory?.incomingMessagesBubbleImage(with: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0))
@@ -122,8 +139,11 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        
         let mfMessageData = messages[indexPath.row]
+        
         let jsqMessageData = JSQMessage(senderId: mfMessageData.senderId, displayName: mfMessageData.senderDisplayName, text: mfMessageData.messageText )
+        
         return jsqMessageData
     }
     
@@ -151,11 +171,28 @@ extension ChatViewController {
         super.viewDidLoad()
         // tell JSQMessagesViewController
         // who is the current user
-        self.senderId = currentUser.id
-       // print(senderId)
-        //print(currentUser.id)
-        self.senderDisplayName = currentUser.name
-        self.messages = getMessages()
+        
+        if let currentUser = AppDelegate.shared().currentUser {
+            self.currentUser = currentUser
+            self.senderId = currentUser.id
+            self.senderDisplayName = currentUser.name
+        }
+        
+        self.senderId = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
+        self.senderDisplayName = "Test"
+        
+        let user2 = "-Ko7jcz0kX1Kb1OValue"
+        
+        
+        DatabaseGateway.sharedInstance.createConversation(dateTime: Date.timeIntervalSinceReferenceDate.description, user1: self.senderId, user2: user2) { (status) in
+            print(status)
+        }
+        
+        
+        //Hiding avatar image for current user
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        
+//        self.messages = getMessages()
        
         //Hiding attach Image
         self.inputToolbar.contentView.leftBarButtonItem = nil
@@ -172,14 +209,14 @@ extension ChatViewController {
     func callAPI(completion: @escaping ([MFMessage1]) -> Void) {
         
         //        let video = Message(name: "1")
-        DatabaseGateway.sharedInstance.createConversation(with:model) {newModel in
-            print(self.model)
-        }
-        DatabaseGateway.sharedInstance.createMessage(with: modelMsg) {_ in
-            //print(self.modelMsg)
-            completion([self.modelMsg])
-            
-        }
+//        DatabaseGateway.sharedInstance.createConversation(with:model) {newModel in
+//            print(self.model)
+//        }
+//        DatabaseGateway.sharedInstance.createMessage(with: modelMsg) {_ in
+//            //print(self.modelMsg)
+//            completion([self.modelMsg])
+//            
+//        }
     }
 
 }
@@ -187,15 +224,13 @@ extension ChatViewController {
 
 extension ChatViewController {
     
-    func getMessages() -> [MFMessage1] {
+    func getMessages(forConversation conversationID:String) -> [MFMessage1] {
         var messages = [MFMessage1]()
         
-        let message1 = MFMessage1(with: "Steve", messagetext: "Hey how are you?", senderId: "1")
-        let message2 = MFMessage1(with: "siri", messagetext: "Iam Fine.", senderId: "2")
+        
        
-        messages.append(message1)
-        messages.append(message2)
-//        print(messages)
+        //get messages for threadID
+
         return messages
     }
 }

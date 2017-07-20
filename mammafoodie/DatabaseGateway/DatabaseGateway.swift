@@ -32,6 +32,8 @@ enum FirebaseReference: String {
     case notificationsForUser = "NotificationsForUser"
     case userAddress = "UserAddress"
     case address = "Address"
+    case userConversations = "UserConversations"
+    case conversationLookup = "ConversationLookup"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -237,39 +239,81 @@ extension DatabaseGateway {
 // MARK: - Conversation
 extension DatabaseGateway {
     
-    func createConversation(with model: MFConversation1, _ completion: @escaping ((_ chatData:MFConversation1)->Void)) {
-        var newModel = model
-        newModel.id = FirebaseReference.conversations.generateAutoID()
-        
-        let currentDate = Date()
-        let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
-        newModel.createdAt = dateString
-        
-        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
-        FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
-            completion(newModel)
-        }
-    }
+//    func createConversation(with model: MFConversation1, _ completion: @escaping ((_ chatData:MFConversation1)->Void)) {
+//        var newModel = model
+//        newModel.id = FirebaseReference.conversations.generateAutoID()
+//        
+//        let currentDate = Date()
+//        let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
+//        newModel.createdAt = dateString
+//        
+//        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
+//        FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
+//            completion(newModel)
+//        }
+//    }
 }
 
 // MARK: - Messages
 extension DatabaseGateway {
     
-    func createMessage(with model: MFMessage1, _ completion: @escaping (()->Void)) {
+    func createMessage(with model: MFMessage1, conversationID:String, _ completion: @escaping ((_ status:Bool)->Void)) {
         
-        var newModel = model
-        newModel.messageid = FirebaseReference.messages.generateAutoID()
+        var newMessage = model
         
-        let currentDate = Date()
-        let dateString = FirebaseReference.messages.dateConvertion(with: currentDate)
-        newModel.datetime = dateString
         
-        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
-        FirebaseReference.messages.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
-            completion()
+       let newMessageID = FirebaseReference.messages.generateAutoID()
+        
+         newMessage.id = newMessageID
+        
+        let rawMessage: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newMessage)
+        
+        FirebaseReference.messages.classReference.child(conversationID).child(newMessageID).updateChildValues(rawMessage) { (error, databaseReference) in
+            if error != nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+            
         }
         
     }
+    
+    func createConversation(dateTime:String, user1:String, user2:String, _ completion: @escaping ((_ status:Bool)->Void)){
+        
+        let newConversationID = FirebaseReference.conversations.generateAutoID()
+        
+        let metaData = ["dateTime":dateTime, "user1":user1, "user2":user2]
+        
+        
+        
+        let childUpdates = [
+            
+            "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
+            
+            "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
+            
+            "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true,
+            
+            "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":"\(user2)"
+            
+            ] as [AnyHashable : Any]
+        
+//        print(childUpdates)
+        
+        let databaseRef = Database.database().reference()
+        
+        databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
+            
+            if error != nil{
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+
+    }
+    
 }
 
 
