@@ -347,7 +347,6 @@
 		2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE479401EF97256003D0F9F /* UIViewExtension.swift */; };
 		2CE479471EF97312003D0F9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF5060DC1EE81B9E00DB646F /* Main.storyboard */; };
-		2CE479481EF97312003D0F9F /* Siri.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03B6EBB1EED276000985F62 /* Siri.storyboard */; };
 		2CE479491EF97313003D0F9F /* DatabaseGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF141EF2486D00DA78B3 /* DatabaseGatewayTests.swift */; };
 		2CE4794A1EF97313003D0F9F /* mammafoodieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8BF091EF247A900DA78B3 /* mammafoodieTests.swift */; };
 		2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */; };
@@ -914,7 +913,6 @@
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
 		F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNewViewController.swift; sourceTree = "<group>"; };
-		F03B6EBC1EED276000985F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = mammafoodie/Base.lproj/Siri.storyboard; sourceTree = "<group>"; };
 		F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishConfigurator.swift; path = RequestDish/RequestDishConfigurator.swift; sourceTree = "<group>"; };
 		F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishInteractor.swift; path = RequestDish/RequestDishInteractor.swift; sourceTree = "<group>"; };
 		F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishModels.swift; path = RequestDish/RequestDishModels.swift; sourceTree = "<group>"; };
@@ -1451,7 +1449,6 @@
 				BF5060E11EE81B9E00DB646F /* LaunchScreen.storyboard */,
 				BF5060DC1EE81B9E00DB646F /* Main.storyboard */,
 				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
-				F03B6EBB1EED276000985F62 /* Siri.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 			);
@@ -2139,7 +2136,6 @@
 				113139D61EF7F4E5000050D6 /* DishCollectionViewCell.xib in Resources */,
 				570ED4211F0684F000B41F0E /* ImageEditor.xcassets in Resources */,
 				BF5060E31EE81B9E00DB646F /* LaunchScreen.storyboard in Resources */,
-				2CE479481EF97312003D0F9F /* Siri.storyboard in Resources */,
 				2CE479471EF97312003D0F9F /* Main.storyboard in Resources */,
 				BFD80F601EF542BB00223D21 /* Assets.xcassets in Resources */,
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
@@ -2830,15 +2826,6 @@
 				BFD80F621EF54ECD00223D21 /* Base */,
 			);
 			name = Zain.storyboard;
-			sourceTree = "<group>";
-		};
-		F03B6EBB1EED276000985F62 /* Siri.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F03B6EBC1EED276000985F62 /* Base */,
-			);
-			name = Siri.storyboard;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
