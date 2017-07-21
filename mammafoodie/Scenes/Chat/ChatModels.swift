@@ -5,7 +5,7 @@ struct Chat {
         struct Request {
         }
         struct Response {
-            var arrayOfLiveChat = [MFMessage1]()
+            var arrayOfLiveChat = [MFMessage]()
 
         }
         struct ViewModel {

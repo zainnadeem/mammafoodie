@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         let currentUser = Auth.auth().currentUser
 
+
         currentUserFirebase = currentUser
       
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -56,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             loginVC.navigationController?.pushViewController(homeVC, animated: false)
         }
 
+
         //To get access token
 //        UberRushDeliveryWorker.getAuthorizationcode{ token in
 //            print(token)
@@ -65,8 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //            }
 //        }
       
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
   
         return true
         
@@ -80,6 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
         self.window?.rootViewController = navigationController
+        
+        let worker = OtherUsersProfileWorker()
+        worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
+            self.currentUser = user
+        }
+        
     }
     
     func setLoginViewController() {

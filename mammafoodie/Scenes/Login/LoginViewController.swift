@@ -243,15 +243,15 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func showHomeScreen() {
         if let currentUser = Auth.auth().currentUser {
             AppDelegate.shared().setHomeViewController()
-            
-            let user: MFUser = MFUser()
-            user.id = currentUser.uid
-            user.name = currentUser.displayName
-            user.email = currentUser.email
-            
-            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
-                print("User created")
-            })
+//            
+//            let user: MFUser = MFUser()
+//            user.id = currentUser.uid
+//            user.name = currentUser.displayName
+//            user.email = currentUser.email
+//            
+//            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
+//                print("User created")
+//            })
             
             //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
             //                if let user = user {

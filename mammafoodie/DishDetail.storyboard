@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Light.otf">
+        <array key="Montserrat-Light.ttf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Medium.otf">
@@ -25,7 +25,7 @@
         <!--Dish Detail View Controller-->
         <scene sceneID="6p8-zD-ISE">
             <objects>
-                <viewController id="fWQ-tx-STI" customClass="DishDetailViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DishDetailViewController" id="fWQ-tx-STI" customClass="DishDetailViewController" customModule="mamma_foodie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KYX-dy-bnV"/>
                         <viewControllerLayoutGuide type="bottom" id="akG-T7-g7H"/>

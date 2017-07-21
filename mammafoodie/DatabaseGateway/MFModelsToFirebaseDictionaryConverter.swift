@@ -89,28 +89,17 @@ class MFModelsToFirebaseDictionaryConverter {
         return [dish.id : rawDish as AnyObject]
     }
     
-    class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
-        var dishRequestId: String = ""
-        
-        if conversation.dishRequestId != nil  {
-            dishRequestId = conversation.dishRequestId!
-        }
-        return [
-            conversation.id! : [
-                "dishRequestId" : dishRequestId as AnyObject,
-                "createdAt": conversation.createdAt as AnyObject
-                ] as AnyObject
-        ]
-    }
     
-    class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
-        return [
-            message.messageid : [
+    
+    class func dictionary(from message: MFMessage) -> FirebaseDictionary {
+        return  [
+                "id": message.id as AnyObject,
                 "messageText": message.messageText as AnyObject,
-                "conversationId": message.conversationId as AnyObject,
+//                "conversationId": message.conversationId as AnyObject,
                 "senderId": message.senderId as AnyObject,
-                "receiverId": message.receiverId as AnyObject
-                ] as AnyObject
+                "dateTime": message.dateTime as AnyObject,
+                "senderDisplayName": message.senderDisplayName as AnyObject
+//                "receiverId": message.receiverId as AnyObject
         ]
     }
     
@@ -158,9 +147,33 @@ class MFModelsToFirebaseDictionaryConverter {
         if let profileDescription = user.profileDescription {
             userInfo["profileDescription"] = profileDescription as AnyObject
         }
+      
+        if let phone = user.phone {
+          userInfo["phone"] = phone as AnyObject
+        }
         
         return [
+
             user.id : userInfo as AnyObject
         ]
+    }
+    
+    
+    class func dictionary(from address:MFUserAddress) -> FirebaseDictionary{
+        
+        return  [
+                
+                "id"            :   address.id as AnyObject,
+                "address"       :   address.address as AnyObject,
+                "address_2"     :   address.address_2 as AnyObject,
+                "city"          :   address.city as AnyObject,
+                "country"       :   address.country  as AnyObject,
+                "state"         :   address.state as AnyObject,
+                "postalCode"    :   address.postalCode as AnyObject,
+                "latitude"      :   address.latitude as AnyObject,
+                "longitude"     :   address.longitude as AnyObject,
+                "phone"         :   address.phone   as AnyObject
+            ]
+        
     }
 }
