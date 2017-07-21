@@ -1241,7 +1241,10 @@ extension DatabaseGateway {
     func getAddress(addressID:String,_ completion:@escaping (MFUserAddress?)->()) {
         FirebaseReference.address.classReference.child(addressID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
             guard let addressData = dataSnapshot.value as? FirebaseDictionary else {
-           let address:MFUserAddress = MFUserAddress(from:addressData)
+               completion(nil)
+                return
+            }
+            let address:MFUserAddress = MFUserAddress(from:addressData)
             completion(address)
         })
     }

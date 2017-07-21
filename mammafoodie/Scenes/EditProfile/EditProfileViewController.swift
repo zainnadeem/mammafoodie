@@ -259,7 +259,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
          user?.name = self.txfName.text
          user?.email = self.txfEmailID.text
-         user?.phone = self.txfMobileNumber.text
+         user?.phone = self.txfMobileNumber.text!
          user?.profileDescription = self.txvProfileDescription.text
         
         

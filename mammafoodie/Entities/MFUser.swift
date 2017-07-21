@@ -4,8 +4,8 @@ class MFUser {
     var id: String!
     var name: String!
     var email: String!
-//    var address: String?
-//    var addressLocation: String?
+    var address: String?
+    var addressLocation: String?
 //    var addressID:String?
     var picture: String?
     var dishesSoldCount: UInt = 0
@@ -49,8 +49,8 @@ class MFUser {
         self.id = Dictionary["id"] as? String ?? ""
         self.name = Dictionary["name"] as? String ?? ""
         self.picture = Dictionary["picture"] as? String ?? ""
-//        self.address = Dictionary["addressID"] as? String ?? ""
-//        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
+        self.address = Dictionary["addressID"] as? String ?? ""
+        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""

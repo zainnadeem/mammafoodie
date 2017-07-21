@@ -70,7 +70,7 @@ class UberRushDeliveryWorker:NSObject{
 
             "last_name"     : purchasingUser.name,
             "phone"         : [ "number" : purchasingUser.phone, "sms_enabled" : false]
-        ]
+        ] as [String : Any]
 
         
         self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]

@@ -148,9 +148,9 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["profileDescription"] = profileDescription as AnyObject
         }
       
-        if let phone = user.phone {
-          userInfo["phone"] = phone as AnyObject
-        }
+        
+          userInfo["phone"] = user.phone as AnyObject
+        
         
         return [
 
