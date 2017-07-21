@@ -33,7 +33,7 @@ enum FirebaseReference: String {
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
-    case conversationLookup = "ConversationLookup"
+    //case conversationLookup = "ConversationLookup"
     
     // temporary class for LiveVideoDemo. We will need to delete this later on
     //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
@@ -236,28 +236,13 @@ extension DatabaseGateway {
     }
 }
 
-// MARK: - Conversation
-extension DatabaseGateway {
-    
-//    func createConversation(with model: MFConversation1, _ completion: @escaping ((_ chatData:MFConversation1)->Void)) {
-//        var newModel = model
-//        newModel.id = FirebaseReference.conversations.generateAutoID()
-//        
-//        let currentDate = Date()
-//        let dateString = FirebaseReference.conversations.dateConvertion(with: currentDate)
-//        newModel.createdAt = dateString
-//        
-//        let rawConversation: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
-//        FirebaseReference.conversations.classReference.updateChildValues(rawConversation) { (error, databaseReference) in
-//            completion(newModel)
-//        }
-//    }
-}
 
-// MARK: - Messages
+
+
+// MARK: - Messages and Conversation
 extension DatabaseGateway {
     
-    func createMessage(with model: MFMessage1, conversationID:String, _ completion: @escaping ((_ status:Bool)->Void)) {
+    func createMessage(with model: MFMessage, conversationID:String, _ completion: @escaping ((_ status:Bool)->Void)) {
         
         var newMessage = model
         
@@ -279,11 +264,11 @@ extension DatabaseGateway {
         
     }
     
-    func createConversation(dateTime:String, user1:String, user2:String, _ completion: @escaping ((_ status:Bool)->Void)){
+    func createConversation(createdAt:String, user1:String, user2:String, user1Name:String, user2Name:String, _ completion: @escaping ((_ status:Bool)->Void)){
         
         let newConversationID = FirebaseReference.conversations.generateAutoID()
         
-        let metaData = ["dateTime":dateTime, "user1":user1, "user2":user2]
+        let metaData = ["id": newConversationID,"createdAt":createdAt, "user1":user1, "user2":user2, "user1Name":user1Name, "user2Name":user2Name]
         
         
         
@@ -293,9 +278,9 @@ extension DatabaseGateway {
             
             "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
             
-            "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true,
+            "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
             
-            "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":"\(user2)"
+           // "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":["user2":user2,"conversationID":newConversationID]
             
             ] as [AnyHashable : Any]
         
@@ -312,6 +297,79 @@ extension DatabaseGateway {
             }
         }
 
+    }
+    
+    
+    func getConversations(forUser userID:String, _ completion : @escaping (MFConversation?)->())->DatabaseConnectionObserver?{
+        
+        var observer = DatabaseConnectionObserver()
+        observer.databaseReference = FirebaseReference.userConversations.classReference
+        
+        observer.observerId =  FirebaseReference.userConversations.classReference.child(userID).observe(.childAdded, with: { (conversationData) in
+            
+            //print(messageData)
+            print(conversationData.key)
+            
+            self.getConversation(with: conversationData.key, { (conversationDictionary) in
+                
+                if conversationDictionary != nil {
+                
+                    let conversation = MFConversation(from: conversationDictionary!)
+                    
+                    completion(conversation)
+                }
+            })
+           
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        return observer
+        
+    }
+    
+    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()){
+        
+        FirebaseReference.conversations.classReference.child(conversationID).observeSingleEvent(of: .value, with: { (conversation) in
+            
+            guard let conversationDictionary = conversation.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            
+            completion(conversationDictionary)
+            
+            
+        })
+    }
+    
+    
+    
+    func getMessages(forConversation conversationID:String, _ completion:@escaping (MFMessage?)->()) -> DatabaseConnectionObserver? {
+
+        var observer = DatabaseConnectionObserver()
+        observer.databaseReference = FirebaseReference.messages.classReference
+        
+      observer.observerId =  FirebaseReference.messages.classReference.child(conversationID).observe(.childAdded, with: { (messageData) in
+        
+        //print(messageData)
+            
+        guard let messagesDictionary = messageData.value as? FirebaseDictionary else {
+            completion(nil)
+            return
+        }
+        
+        let message = MFMessage(from: messagesDictionary)
+        
+        completion(message)
+        
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        return observer
+        
     }
     
 }

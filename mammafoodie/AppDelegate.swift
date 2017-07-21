@@ -69,6 +69,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
         self.window?.rootViewController = navigationController
+        
+        let worker = OtherUsersProfileWorker()
+        worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
+            self.currentUser = user
+        }
+        
     }
     
     func setLoginViewController() {

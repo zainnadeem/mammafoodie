@@ -89,21 +89,9 @@ class MFModelsToFirebaseDictionaryConverter {
         return [dish.id : rawDish as AnyObject]
     }
     
-    class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
-        var dishRequestId: String = ""
-        
-        if conversation.dishRequestId != nil  {
-            dishRequestId = conversation.dishRequestId!
-        }
-        return [
-            conversation.id! : [
-                "dishRequestId" : dishRequestId as AnyObject,
-                "createdAt": conversation.createdAt as AnyObject
-                ] as AnyObject
-        ]
-    }
     
-    class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
+    
+    class func dictionary(from message: MFMessage) -> FirebaseDictionary {
         return  [
                 "id": message.id as AnyObject,
                 "messageText": message.messageText as AnyObject,

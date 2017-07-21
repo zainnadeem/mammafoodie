@@ -129,6 +129,25 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
+    @IBAction func chatButtonClicked(_ sender: UIButton) {
+        
+        let chatnav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "ChatListNav") as! UINavigationController
+
+        let chatList = chatnav.viewControllers.first as! ChatListViewController
+        chatList.currentUser = AppDelegate.shared().currentUser!
+        
+        self.present(chatnav, animated: true, completion: nil)
+        
+        //To create a new conversation, assing the createChatWithUser property of chatVC with a user with who to create a new chat
+        /*
+        let worker = OtherUsersProfileWorker()
+        worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
+            chatList.createChatWithUser = user
+            self.present(chatnav, animated: true, completion: nil)
+        }
+        */
+        
+    }
     
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
