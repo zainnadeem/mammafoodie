@@ -45,12 +45,14 @@ class UberRushDeliveryWorker:NSObject{
             "latitude"      : pickup.latitude,
             "longitude"     : pickup.longitude
         ]
-        let pickupContact = [
-            "email"         : chef.email ,
-            "first_name"    : chef.name ,
-            "last_name"     : "",
-            "phone"         : [ "number" : pickup.phone, "sms_enabled" : false]
-        ] as [String : Any]
+
+        let pickupContact: [String: Any] = [
+            "email"         : chef.email,
+            "first_name"    : chef.name,
+            "last_name"     : chef.name,
+            "phone"         : [ "number" : chef.phone, "sms_enabled" : false]
+        ]
+
         
         let dropoffLocation = [
             "address"       : dropoff.address,
@@ -65,9 +67,11 @@ class UberRushDeliveryWorker:NSObject{
         let dropoffContact = [
             "email"         : purchasingUser.email,
             "first_name"    : purchasingUser.name,
-            "last_name"     : "",
-            "phone"         : [ "number" : dropoff.phone, "sms_enabled" : false]
-        ] as [String : Any]
+
+            "last_name"     : purchasingUser.name,
+            "phone"         : [ "number" : purchasingUser.phone, "sms_enabled" : false]
+        ]
+
         
         self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]
         

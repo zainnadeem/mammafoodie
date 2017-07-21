@@ -18,7 +18,7 @@ class CommentTblCell: UITableViewCell {
     }
     
     func setup(with comment: MFComment) {
-        let username: String = comment.username
+        let username: String = comment.user.name
         let comment: String = comment.text
         
         let usernameFont: UIFont = UIFont(name: "Montserrat-Regular", size: 11.5)!

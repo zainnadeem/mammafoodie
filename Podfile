@@ -30,6 +30,8 @@ target 'mammafoodie' do
     pod 'KLCPopup'
     pod 'SDWebImage', '~>3.8'
 
+    pod 'Stripe'
+
     target 'mammafoodieTests' do
         pod 'Firebase/Core'
         pod 'Firebase/Database'

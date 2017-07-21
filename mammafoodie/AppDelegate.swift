@@ -17,33 +17,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var window: UIWindow?
     var activityIndicatorView:UIView?
     
+    var currentUserFirebase:User? //Populate this when user logs in successfully
+    var currentUser:MFUser? //Populate this when user logs in successfully and after signup
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     
-    var currentUserFirebase:User? //Populate this when user logs in successfully
-    
-    var currentUser:MFUser?
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         _ = DatabaseGateway.sharedInstance
+        _ = StripeGateway.shared
+        
+        // Testing
+        DatabaseGateway.sharedInstance.getPaymentSources(for: "zQo6BUNYfGe2RDRs2tnDpH8H3iE2") { (rawSources) in
+            print(rawSources)
+            print("")
+        }
+        
+        
+        
+        
         IQKeyboardManager.sharedManager().enable = true
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
         let currentUser = Auth.auth().currentUser
-        currentUserFirebase = currentUser
 
-//        let storyBoard = UIStoryboard(name: "Siri", bundle: nil)
-//        let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
-//        
-//        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//        
-//        if currentUser != nil { //User is already logged in, show home screen
-//            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
-//                self.currentUser = user
-//            })
-//            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//            loginVC.navigationController?.pushViewController(homeVC, animated: false)
-//        }
+
+        currentUserFirebase = currentUser
+      
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
+        
+        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        
+        if currentUser != nil { //User is already logged in, show home screen
+             DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
+                self.currentUser = user
+             })
+            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            loginVC.navigationController?.pushViewController(homeVC, animated: false)
+        }
+
 
         //To get access token
 //        UberRushDeliveryWorker.getAuthorizationcode{ token in
