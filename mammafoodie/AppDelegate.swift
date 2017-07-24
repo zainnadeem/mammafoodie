@@ -59,13 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         
         //Register for Push Notifications
-        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
-        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        
-        
-        
-        application.registerUserNotificationSettings(pushNotificationSettings)
-        application.registerForRemoteNotifications()
+//        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
+//        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
+//        application.registerUserNotificationSettings(pushNotificationSettings)
+//        application.registerForRemoteNotifications()
 
         //To get access token
 //        UberRushDeliveryWorker.getAuthorizationcode{ token in

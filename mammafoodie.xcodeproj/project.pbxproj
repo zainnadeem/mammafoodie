@@ -435,6 +435,10 @@
 		570ED4201F0684F000B41F0E /* ImageEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 570ED4071F0684F000B41F0E /* ImageEditor.storyboard */; };
 		570ED4211F0684F000B41F0E /* ImageEditor.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 570ED4081F0684F000B41F0E /* ImageEditor.xcassets */; };
 		570ED4221F0684F000B41F0E /* ImageEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570ED4091F0684F000B41F0E /* ImageEditorVC.swift */; };
+		57150C261F25E2DE0008B7FB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57150C231F25E2DE0008B7FB /* SettingsTableViewCell.swift */; };
+		57150C271F25E2DE0008B7FB /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57150C241F25E2DE0008B7FB /* SettingsTableViewCell.xib */; };
+		57150C281F25E2DE0008B7FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57150C251F25E2DE0008B7FB /* SettingsViewController.swift */; };
+		57150C2B1F25E3320008B7FB /* Arjav.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57150C291F25E3310008B7FB /* Arjav.storyboard */; };
 		571A66ED1EF935F300D47766 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */; };
 		572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */; };
 		572E9A801EFAB4AF007DE6D0 /* GoCookInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */; };
@@ -819,6 +823,10 @@
 		570ED4071F0684F000B41F0E /* ImageEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageEditor.storyboard; sourceTree = "<group>"; };
 		570ED4081F0684F000B41F0E /* ImageEditor.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageEditor.xcassets; sourceTree = "<group>"; };
 		570ED4091F0684F000B41F0E /* ImageEditorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEditorVC.swift; sourceTree = "<group>"; };
+		57150C231F25E2DE0008B7FB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		57150C241F25E2DE0008B7FB /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
+		57150C251F25E2DE0008B7FB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		57150C2A1F25E3320008B7FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Arjav.storyboard; sourceTree = "<group>"; };
 		571A66EC1EF935F300D47766 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Users/arjav/Library/Developer/Xcode/DerivedData/mammafoodie-gpocchshqbxkdievjanonfykbjhl/Build/Products/Debug-iphonesimulator/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookConfigurator.swift; sourceTree = "<group>"; };
 		572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookInteractor.swift; sourceTree = "<group>"; };
@@ -1397,14 +1405,12 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				11F5C6581F18F96500F7F45C /* NotificationPage */,
-				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
-				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
 				BF5AD5DE1F062B5700827223 /* DishDetail */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
+				11ECCEFC1F1E0B0200ADF481 /* EditProfile */,
 				F0A980F51F0A850F00772BAA /* Followers */,
 				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				2C12BC901EF7D237007AF994 /* Home */,
@@ -1412,14 +1418,17 @@
 				BFC9270D1EF00A7E00602153 /* LiveVideoMainPage */,
 				2CB528E01EE9164D00218609 /* Login */,
 				5732C0C41EE92A9600E2A61E /* NearbyChefs */,
+				11F5C6581F18F96500F7F45C /* NotificationPage */,
 				F0A980EE1F0A3B4E00772BAA /* OnBoarding */,
-				11ECCEFC1F1E0B0200ADF481 /* EditProfile */,
 				110FCE4B1EEEAE8F008B6F2D /* OtherUsersProfilePage */,
 				F0F6B65D1F0D2BBE00A74CB5 /* Payment */,
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
+				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				2CFEB55B1F13F1F6005EF9DA /* Register */,
 				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
+				57150C221F25E2DE0008B7FB /* Settings */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
+				111E445A1F14DDC300C7A7F7 /* UberRushDelivery */,
 				2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
 			);
@@ -1466,6 +1475,7 @@
 				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
+				57150C291F25E3310008B7FB /* Arjav.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1693,6 +1703,16 @@
 				570ED4051F0684F000B41F0E /* ImageCollectionCell.xib */,
 			);
 			path = ImageCollectionCell;
+			sourceTree = "<group>";
+		};
+		57150C221F25E2DE0008B7FB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				57150C231F25E2DE0008B7FB /* SettingsTableViewCell.swift */,
+				57150C241F25E2DE0008B7FB /* SettingsTableViewCell.xib */,
+				57150C251F25E2DE0008B7FB /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		572E9A5B1EFAB4AF007DE6D0 /* GoCook */ = {
@@ -2082,7 +2102,6 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = ACV33259AJ;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -2160,6 +2179,7 @@
 				1194D6FD1F21DE4900EA494C /* ChatListTableViewCell.xib in Resources */,
 				11ECCF001F1E111C00ADF481 /* AddressDisplayView.xib in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
+				57150C271F25E2DE0008B7FB /* SettingsTableViewCell.xib in Resources */,
 				113139DA1EF80574000050D6 /* ActivityCollectionViewCell.xib in Resources */,
 				570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
@@ -2175,6 +2195,7 @@
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
 				113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */,
+				57150C2B1F25E3320008B7FB /* Arjav.storyboard in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
 				57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */,
 				57C948141F03781000DF5674 /* video.mp4 in Resources */,
@@ -2207,7 +2228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		48B52E102DA98665DBB437FF /* [CP] Embed Pods Frameworks */ = {
@@ -2267,7 +2288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E2B09A6B3C179C7410A14F8C /* [CP] Embed Pods Frameworks */ = {
@@ -2555,6 +2576,7 @@
 				2CFB9B861EFA475100C08EB3 /* LiveVideoGateway.swift in Sources */,
 				570ED41D1F0684F000B41F0E /* ImageCollectionCell.swift in Sources */,
 				572E9A9D1EFAB4AF007DE6D0 /* MediaPicker.swift in Sources */,
+				57150C281F25E2DE0008B7FB /* SettingsViewController.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				2CD37DB01F0992790058EFDF /* (null) in Sources */,
 				2C6979C31F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */,
@@ -2565,6 +2587,7 @@
 				11ECCF081F1E27EF00ADF481 /* EditProfileworker.swift in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
 				2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */,
+				57150C261F25E2DE0008B7FB /* SettingsTableViewCell.swift in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
 				110FCE551EEEAEC9008B6F2D /* OtherUsersProfileModels.swift in Sources */,
 				2CFEB5661F13F1F6005EF9DA /* RegisterInteractor.swift in Sources */,
@@ -2824,6 +2847,14 @@
 			name = VidupDetails.storyboard;
 			sourceTree = "<group>";
 		};
+		57150C291F25E3310008B7FB /* Arjav.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57150C2A1F25E3320008B7FB /* Base */,
+			);
+			name = Arjav.storyboard;
+			sourceTree = "<group>";
+		};
 		572E9A9E1EFAB4BC007DE6D0 /* GoCook.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3004,7 +3035,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ACV33259AJ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3030,7 +3061,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ACV33259AJ;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
