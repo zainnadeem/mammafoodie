@@ -65,6 +65,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AppDelegate.shared().updateToken()
+        
         self.addArc(to: self.btnExpandLiveVideosView)
         self.addArc(to: self.btnExpandVidupsView)
         

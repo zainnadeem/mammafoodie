@@ -249,9 +249,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             user.name = currentUser.displayName
             user.email = currentUser.email
             
-            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
-                print("User created")
-            })
+            //            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
+            //                print("User created")
+            //            })
             
             //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
             //                if let user = user {
@@ -278,15 +278,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             self.passImageView.image = UIImage(named: "passselect")
         }
     }
-    
-    
+
     //Routing
-    
-    
-    
-    
-    
-    
 }
 
 extension LoginViewController {
