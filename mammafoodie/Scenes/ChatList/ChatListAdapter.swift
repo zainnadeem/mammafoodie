@@ -3,20 +3,27 @@ import UIKit
 
 protocol ChatListViewAdapterDelegate{
     
-    func chatListPage(View:UIViewController)
+    func chatListPage(conversation:MFConversation)
     
 }
 
 
 class ChatListAdapter:NSObject, UITableViewDelegate,UITableViewDataSource {
     
-    var chatListArray = ["Siri","Steve","Sony"]
+    var chatListArray = [MFConversation](){
+        didSet{
+            chatTableView?.reloadData()
+        }
+    }
+    var currentUser:String!
     
     var chatTableView:UITableView? {
         didSet{
             chatTableView?.delegate = self
             chatTableView?.dataSource = self
-            chatTableView?.rowHeight = UITableViewAutomaticDimension
+            
+            
+            //chatTableView?.rowHeight = UITableViewAutomaticDimension
             chatTableView?.estimatedRowHeight = 44
         }
     }
@@ -35,19 +42,47 @@ class ChatListAdapter:NSObject, UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "chatlist", for: indexPath)
-        cell.textLabel?.numberOfLines = 3
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        //        cell.textLabel?.text = commentsArray[indexPath.row].textContent
-        cell.textLabel?.text = chatListArray[indexPath.row]
-       // cell.imageView?.image =
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatListTableViewCell
+    
+        let conversation = chatListArray[indexPath.row]
+        
+        cell.setup(conversation:conversation, currentUserID: self.currentUser)
+        
+        /*
+        if conversation.user1 == self.currentUser {
+            cell.textLabel!.text = conversation.user2Name
+            let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: conversation.user2)
+            if let url = url{
+                cell.imageView!.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie")!)
+            }
+        } else {
+            cell.textLabel!.text = conversation.user1Name
+            let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: conversation.user1)
+            if let url = url{
+                cell.imageView!.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie")!)
+            }
+        }
+
+ */
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.00001
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
 
-        let mainStoryboard:UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
-        let destViewController = mainStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        delegate?.chatListPage(View: destViewController)
+        
+        delegate?.chatListPage(conversation:chatListArray[indexPath.row])
     }
 }

@@ -2,8 +2,9 @@ import UIKit
 import FirebaseAuth
 
 protocol OtherUsersProfileViewControllerInput {
-    func openDishPageWith(dishID:Int)
+    func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
 }
 
 protocol OtherUsersProfileViewControllerOutput {
@@ -38,14 +39,12 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var userID:String?
     
     // MARK: - Object lifecycle
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         OtherUsersProfileConfigurator.sharedInstance.configure(viewController: self)
     }
     
     // MARK: - View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,16 +59,29 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    
     //MARK: - Input
     
-    func openDishPageWith(dishID:Int){
+    func openDishPageWith(dishID:String) {
         
         //Initiate segue and pass it to router in prepare for segue
         
+        let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        dishVC.dishID = dishID
+        
+        self.present(dishVC, animated: true, completion: nil)
+        
     }
     
-    func openFollowers(followers:Bool, userList:[MFUser]){
+    func openFavouriteDishes() {
+        let favouriteNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FavouriteDishNav") as! UINavigationController
+        
+        let vc = favouriteNav.viewControllers.first as! FavouriteDishesList
+        vc.userID = self.userID!
+        
+        self.present(favouriteNav, animated: true, completion: nil)
+    }
+    
+    func openFollowers(followers:Bool, userList:[MFUser]) {
         
         let followerNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowerNav") as!
         UINavigationController
@@ -95,18 +107,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    
     // MARK: - Event handling
     
-    
     @IBAction func settingsButtonClicked(_ sender: UIButton) {
-        AppDelegate.shared().setLoginViewController()
-        let worker = FirebaseLoginWorker()
-        worker.signOut { (errorMessage) in
-            
-        }
+        
     }
-    
     
     @IBAction func closeButtonClicked(_ sender: UIButton) {
         
@@ -114,7 +119,25 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    
+    @IBAction func chatButtonClicked(_ sender: UIButton) {
+        
+        let chatnav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "ChatListNav") as! UINavigationController
+
+        let chatList = chatnav.viewControllers.first as! ChatListViewController
+        chatList.currentUser = AppDelegate.shared().currentUser!
+        
+        self.present(chatnav, animated: true, completion: nil)
+        
+        //To create a new conversation, assing the createChatWithUser property of chatVC with a user with who to create a new chat
+        /*
+        let worker = OtherUsersProfileWorker()
+        worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
+            chatList.createChatWithUser = user
+            self.present(chatnav, animated: true, completion: nil)
+        }
+        */
+        
+    }
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
         
@@ -140,8 +163,6 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    // MARK: - Display logic
-    
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -153,4 +174,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             
         }
     }
+    
+    
+    // MARK: - Display logic
+    
 }

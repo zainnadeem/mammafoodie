@@ -10,9 +10,10 @@ import UIKit
 
 protocol DishesCollectionViewAdapterDelegate{
     
-    func openDishPageWith(dishID:Int)
+    func openDishPageWith(dishID:String)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func openFollowers(followers:Bool, userList:[MFUser])
+    func openFavouriteDishes()
 }
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -66,6 +67,12 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
     var following:[MFUser]?{
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
+    
+    var savedDishDataCount:Int?{
         didSet{
             collectionView?.reloadData()
         }
@@ -156,7 +163,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             view.delegate = self.delegate
             view.profileType = self.profileType
             
-            view.setUp(userData, followersCount: followers?.count.description ?? "0", followingCount: following?.count.description ?? "0", cookedDishesCount: cookedDishData?.count.description ?? "0", favouriteDishesCount: "0", boughtDishesCount: boughtDishData?.count.description ?? "0", followers: self.followers, following:self.following)
+            view.setUp(userData, followersCount: followers?.count.description ?? "0", followingCount: following?.count.description ?? "0", cookedDishesCount: cookedDishData?.count.description ?? "0", favouriteDishesCount: "0", boughtDishesCount: boughtDishData?.count.description ?? "0", followers: self.followers, following:self.following, savedDishCount:savedDishDataCount ?? 0 )
             
             reusableView = view
             reusableView.sizeToFit()
@@ -198,7 +205,16 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.openDishPageWith(dishID: indexPath.item)
+        
+        if selectedIndexForProfile == .cooked {
+            let dish = cookedDishData![indexPath.item]
+            delegate?.openDishPageWith(dishID: dish.id)
+        } else if selectedIndexForProfile == .bought {
+            let dish = boughtDishData![indexPath.item]
+            delegate?.openDishPageWith(dishID: dish.id)
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

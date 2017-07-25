@@ -6,10 +6,13 @@ class MFUser {
     var email: String!
     var address: String?
     var addressLocation: String?
+//    var addressID:String?
     var picture: String?
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
+
     var phone: String = ""
+
 //    
 //    var userActivity: [MFNewsFeed:Date] = [:]
 //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
@@ -46,11 +49,13 @@ class MFUser {
         self.id = Dictionary["id"] as? String ?? ""
         self.name = Dictionary["name"] as? String ?? ""
         self.picture = Dictionary["picture"] as? String ?? ""
-        self.address = Dictionary["address"] as? String ?? ""
+        self.address = Dictionary["addressID"] as? String ?? ""
         self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
+        self.phone = Dictionary["phone"] as? String ?? ""
+        
 //        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
 //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
 //        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]

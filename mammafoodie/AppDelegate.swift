@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         
         let currentUser = Auth.auth().currentUser
-        
+
         currentUserFirebase = currentUser
         
         StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
@@ -65,22 +65,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
             loginVC.navigationController?.pushViewController(homeVC, animated: false)
         }
+
         
+        //Register for Push Notifications
+//        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
+//        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
+//        application.registerUserNotificationSettings(pushNotificationSettings)
+//        application.registerForRemoteNotifications()
+
         //To get access token
-        //        UberRushDeliveryWorker.getAuthorizationcode{ token in
-        //            print(token)
-        //
-        //            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
-        //                print(json["access_token"])
-        //            }
-        //        }
-        
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
-        
-        self.askPermissionForRemoteNotifications(with: application)
-        self.updateToken()
-        
+//        UberRushDeliveryWorker.getAuthorizationcode{ token in
+//            print(token)
+//            
+//            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
+//                print(json["access_token"])
+//            }
+//        }
+      
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
+  
         return true
     }
     
@@ -122,6 +126,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController: MFNavigationController! = storyBoard.instantiateViewController(withIdentifier: "navHome") as! MFNavigationController
         self.window?.rootViewController = navigationController
+        
+        let worker = OtherUsersProfileWorker()
+        worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
+            self.currentUser = user
+        }
+        
     }
     
     func setLoginViewController() {
@@ -162,6 +172,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             
             return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation) || GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
             
+    }
+    
+    //PushNotification delegates
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+        
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print(userInfo)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
