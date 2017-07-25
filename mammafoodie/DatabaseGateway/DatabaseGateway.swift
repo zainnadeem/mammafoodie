@@ -436,6 +436,13 @@ extension DatabaseGateway {
         }
         return nil
     }
+    
+    func setDeviceToken(_ token: String, for userId: String, _ completion: @escaping ((Error?)->Void)) {
+        let deviceToken = ["deviceToken":token] as! FirebaseDictionary
+        FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
+            completion(error)
+        }
+    }
 }
 
 //MARK: - Dish
@@ -454,6 +461,23 @@ extension DatabaseGateway {
             }
             completion(allDishes)
         })
+    }
+    
+    func getDishViewers(id: String, _ completion: @escaping (_ numberOfViewers: UInt)->Void) -> DatabaseConnectionObserver {
+        let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference.child(id)
+        var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+        observer.databaseReference = databaseReference
+        observer.observerId = databaseReference.observe(DataEventType.childChanged, with: { (snapshot) in
+            if snapshot.key == "numberOfViewers" {
+                let count = snapshot.value as? UInt ?? 0
+                print(count)
+                completion(count)
+            }
+        }) { (error) in
+            print("error: \(error)")
+            print("")
+        }
+        return observer
     }
     
     func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver?{
@@ -482,7 +506,7 @@ extension DatabaseGateway {
         switch frequency{
         case .single:
             
-            FirebaseReference.dishes.classReference.child(dishID).observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            databaseReference.child(dishID).observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             
         case .realtime:
             
@@ -878,6 +902,9 @@ extension DatabaseGateway {
         dish.availableSlots = rawDish["availableSlots"] as? UInt ?? 0
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
         dish.createTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
+        
+        dish.numberOfViewers = rawDish["numberOfViewers"] as? UInt ?? 0
+        dish.nonUniqueViewersCount = rawDish["nonUniqueViewersCount"] as? UInt ?? 0
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {
             let cuisine: MFCuisine = MFCuisine.init(with: rawCuisine)
@@ -1298,14 +1325,15 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func addToken(_ token: String, completion: @escaping ((String,Error?)->Void)) {
-        let userId: String = self.getLoggedInUser()!.id
+        let userId: String = "eSd3qbFf5leM4g6j2oVej7ZeEGA3" // self.getLoggedInUser()!.id
+        
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
         let pushId = ref.childByAutoId().key
         
         let token = [ "token": token as Any]
         
         ref.child(pushId).updateChildValues(token) { (error, databaseRef) in
-//            completion(error)
+            //            completion(error)
             print(databaseRef)
             databaseRef.parent?.observe(DataEventType.childChanged, with: { (snapshot) in
                 print(snapshot.value)
@@ -1334,12 +1362,12 @@ extension DatabaseGateway {
         })
     }
     
-    func createCharge(_ amount: Double, source: String, completion: @escaping ((Error?)->Void)) {
-        let userId: String = self.getLoggedInUser()!.id
+    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, completion: @escaping ((Error?)->Void)) {
+        let userId: String = fromUserId
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
         
-        let charge = [ "amount": amount as Any, "source": source]
+        let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId]
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
             completion(error)
@@ -1352,7 +1380,7 @@ extension DatabaseGateway {
         let parameters = [
             "userId": userId,
             "amountToAdd": newBalance
-        ] as Parameters
+            ] as Parameters
         Alamofire.request(url, parameters: parameters).responseJSON { (response) in
             print(response)
             completion(nil)

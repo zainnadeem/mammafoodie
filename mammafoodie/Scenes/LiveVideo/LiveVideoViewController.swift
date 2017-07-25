@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
@@ -17,12 +18,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
     
+    var countObserver: DatabaseConnectionObserver?
     var liveVideo: MFDish!
-    var gradientLayerForUserInfo: CAGradientLayer!
+    //    var gradientLayerForUserInfo: CAGradientLayer!
     //    var gradientLayerForComments: CAGradientLayer!
     var viewCamera: UIView!
     
+    @IBOutlet weak var imgViewProfilePicture: UIImageView!
+    @IBOutlet weak var lblUserFullname: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
+    @IBOutlet weak var lblDishName: UILabel!
+    @IBOutlet weak var lblNumberOfViewers: UILabel!
     @IBOutlet weak var viewSlotDetails: UIView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var imgViewPlaceholder: UIImageView!
@@ -63,6 +69,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
+            self.lblNumberOfViewers.text = "\(count)"
+        }
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         //        self.createTestLiveVideo()
@@ -79,22 +89,34 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
-        self.updateDropShadowForViewUserInfo()
+        //        self.updateDropShadowForViewUserInfo()
         //        self.updateDropShadowForViewComments()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.viewComments.showLatestComment()
     }
     
-    // Remove this while merging into the Development
-    private func createTestLiveVideo() {
-        self.liveVideo = MFDish()
-        self.liveVideo.id = "-KnmktPfRQq61M1iswq5"
-        self.liveVideo.accessMode = MFDishMediaAccessMode.viewer // .owner
-        self.liveVideo.mediaType = MFDishMediaType.liveVideo
+    func loadDish() {
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id) { (dish) in
+            self.liveVideo = dish
+            self.lblDishName.text = dish?.name ?? ""
+            self.showUserInfo()
+        }
+    }
+    
+    func showUserInfo() {
+        if let userId = self.liveVideo.user.id {
+            DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
+                self.lblUserFullname.text = user?.name ?? ""
+                if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
+                    self.imgViewProfilePicture.sd_setImage(with: url)
+                } else {
+                    self.imgViewProfilePicture.image = nil
+                }
+            }
+        }
     }
     
     func setupViewComments() {
@@ -109,18 +131,18 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         layer.borderColor = UIColor.white.cgColor
     }
     
-    func updateDropShadowForViewUserInfo() {
-        if self.gradientLayerForUserInfo == nil {
-            self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            self.gradientLayerForUserInfo = CAGradientLayer()
-            let view: UIView = UIView(frame: self.viewUserInfo.frame)
-            self.gradientLayerForUserInfo.frame = view.frame
-            self.gradientLayerForUserInfo.colors = self.colorsForUserInfoInnerGradient()
-            self.gradientLayerForUserInfo.startPoint = CGPoint(x: 0.5, y: 0.5)
-            self.gradientLayerForUserInfo.endPoint = CGPoint(x: 0.5, y: 1)
-            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayerForUserInfo, below: self.viewUserInfo.layer)
-        }
-    }
+    //    func updateDropShadowForViewUserInfo() {
+    //        if self.gradientLayerForUserInfo == nil {
+    //            self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+    //            self.gradientLayerForUserInfo = CAGradientLayer()
+    //            let view: UIView = UIView(frame: self.viewUserInfo.frame)
+    //            self.gradientLayerForUserInfo.frame = view.frame
+    //            self.gradientLayerForUserInfo.colors = self.colorsForUserInfoInnerGradient()
+    //            self.gradientLayerForUserInfo.startPoint = CGPoint(x: 0.5, y: 0.5)
+    //            self.gradientLayerForUserInfo.endPoint = CGPoint(x: 0.5, y: 1)
+    //            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayerForUserInfo, below: self.viewUserInfo.layer)
+    //        }
+    //    }
     
     //    func updateDropShadowForViewComments() {
     //        if self.gradientLayerForComments == nil {
@@ -172,6 +194,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 self.output!.stop(self.liveVideo)
             #endif
         }
+        self.countObserver?.stop()
+        self.countObserver = nil
     }
     
     // MARK: - Event handling
@@ -238,7 +262,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             self.viewUserInfo.isHidden = shouldHide
             self.viewComments.isHidden = shouldHide
             //            self.gradientLayerForComments.isHidden = shouldHide
-            self.gradientLayerForUserInfo.isHidden = shouldHide
+            //            self.gradientLayerForUserInfo.isHidden = shouldHide
         }) { (isFinished) in
             if isFinished {
                 print("Animation finished btnShowHideExtrasTapped")
