@@ -47,9 +47,9 @@ class StripeGateway {
             completion(error)
             if error == nil {
                 // Transaction success. Add the amount in the digital wallet
-                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
-                    
-                })
+//                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
+//                    
+//                })
             }
         }
     }
@@ -78,6 +78,10 @@ class StripeGateway {
     }
     
     private func getStripeCard(from rawSource: [String:AnyObject]) -> STPCard? {
+        guard let objectType = rawSource["object"] as? String else {
+            return nil
+        }
+        
         guard let cardId = rawSource["id"] as? String else {
             return nil
         }
@@ -90,11 +94,11 @@ class StripeGateway {
             return nil
         }
         
-        guard let expMonth = rawSource["expMonth"] as? UInt else {
+        guard let expMonth = rawSource["exp_month"] as? UInt else {
             return nil
         }
         
-        guard let expYear = rawSource["expYear"] as? UInt else {
+        guard let expYear = rawSource["exp_year"] as? UInt else {
             return nil
         }
         

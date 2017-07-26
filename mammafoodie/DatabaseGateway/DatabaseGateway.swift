@@ -1354,7 +1354,6 @@ extension DatabaseGateway {
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
         ref.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             guard let sources: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
-
                 completion(nil)
                 return
             }
