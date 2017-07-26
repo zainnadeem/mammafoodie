@@ -8,98 +8,122 @@
 
 import Foundation
 import UIKit
-import GoogleMaps
 
-protocol NearbyChefsSearchAdapterResult {
-    func didSelect(cusine: CuisineLocation)
-}
+typealias NearbyChefsSearchAdapterResult = ([MFDish]) -> Void
 
-class NearbyChefsSearchAdapter : NSObject, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
     
-    var searchConrtoller : UISearchController!
-    var viewContainer : UIView!
-    
-    var resultsController = UITableViewController.init(style: .plain)
-    var results = [CuisineLocation]()
-    
-    var adapterResult : NearbyChefsSearchAdapterResult
-    
+    var results : [MFDish] = [MFDish]()
+    var cuisineFilter : MFCuisine?
+    var adapterResult : NearbyChefsSearchAdapterResult?
     var currentLocation : CLLocationCoordinate2D?
     
-    init(with result: NearbyChefsSearchAdapterResult) {
-        self.adapterResult = result
+    var textField : UITextField!
+    
+    override init() {
+        
     }
     
-    func setupSearchBar(in view: UIView) {
-        self.viewContainer = view
-        
-        self.searchConrtoller = UISearchController.init(searchResultsController: self.resultsController)
-        self.searchConrtoller.delegate = self
-        self.searchConrtoller.dimsBackgroundDuringPresentation = true
-        self.searchConrtoller.searchBar.placeholder = "Search Here..."
-        self.searchConrtoller.searchResultsUpdater = self
-        self.searchConrtoller.isActive = true
-        
-        self.resultsController.tableView.delegate = self
-        self.resultsController.tableView.dataSource = self
-        
-        self.viewContainer.addSubview(self.searchConrtoller.searchBar)
-        
-        results.append(CuisineLocation.init(name: "Indian", coordinate: CLLocationCoordinate2D.init(latitude: 122.1, longitude: 21212.1)))
-        results.append(CuisineLocation.init(name: "Italian", coordinate: CLLocationCoordinate2D.init(latitude: 122.13, longitude: 21212.1)))
-        results.append(CuisineLocation.init(name: "Chinese", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
-        results.append(CuisineLocation.init(name: "Arabic", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
-        results.append(CuisineLocation.init(name: "Afghani", coordinate: CLLocationCoordinate2D.init(latitude: 122.11221, longitude: 21212.1)))
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchString = searchController.searchBar.text {
-            if !searchString.isEmpty {
-                self.searchFor(cuisineName: searchString)
+    func filter(for cuisine : MFCuisine?) {
+        self.cuisineFilter = cuisine
+        if let searctText = self.textField.text {
+            if !searctText.isEmpty {
+                self.searchText(searctText, { (dishes) in
+                    DispatchQueue.main.async {
+                        if let resultFound = dishes {
+                            self.results = resultFound
+                            self.adapterResult?(resultFound)
+                        } else {
+                            self.results.removeAll()
+                            self.adapterResult?(self.results)
+                        }
+                    }
+                })
+            } else {
+                if let filter = self.cuisineFilter {
+                    DatabaseGateway.sharedInstance.getAllDish { (dishes) in
+                        DispatchQueue.main.async {
+                            if let filtered = self.filter(dishes: dishes, by: filter) {
+                                self.results = filtered
+                                self.adapterResult?(self.results)
+                            } else {
+                                self.results.removeAll()
+                                self.adapterResult?(self.results)
+                            }
+                        }
+                    }
+                } else {
+                    self.results.removeAll()
+                    self.adapterResult?(self.results)
+                }
             }
         }
     }
     
-    func searchFor(cuisineName: String) {
-        print("searching \(String(describing: cuisineName))")
-    }
-}
-
-extension NearbyChefsSearchAdapter : UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func prepare(with textField : UITextField) {
+        self.textField = textField
+        self.textField.delegate = self
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "CuisineLocationResultCell")
-        let cuisine = self.results[indexPath.row]
-        cell.textLabel?.text = cuisine.name
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
-        return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.searchConrtoller.searchBar.resignFirstResponder()
-        let cuisine = self.results[indexPath.row]
-        self.searchConrtoller.searchBar.text = ""
-        self.adapterResult.didSelect(cusine: cuisine)
-        self.searchConrtoller.dismiss(animated: true) {
-            print("selected cuisine is : \(cuisine.name)")
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if let searchText = textField.text {
+            if !searchText.isEmpty {
+                self.searchText(searchText, { (searchResult) in
+                    DispatchQueue.main.async {
+                        if let resultFound = searchResult {
+                            self.results = resultFound
+                            self.adapterResult?(resultFound)
+                        } else {
+                            self.results.removeAll()
+                            self.adapterResult?(self.results)
+                        }
+                    }
+                })
+            }
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
+    func filter(dishes : [MFDish], by text : String!) -> [MFDish]? {
+        let filtered = dishes.filter({ (dish) -> Bool in
+            return (dish.name.lowercased().range(of:text.lowercased()) != nil)
+        })
+        
+        return filtered
+    }
+    
+    func filter(dishes : [MFDish], by cuisine : MFCuisine) -> [MFDish]? {
+        let filtered = dishes.filter({ (dish) -> Bool in
+            return dish.cuisine == cuisine
+        })
+        return filtered
+    }
+    
+    func searchText(_ text : String!, _ completion : @escaping ([MFDish]?) -> Void ) {
+        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
+            if let filtered = self.filter(dishes: dishes, by: text) {
+                if let filter = self.cuisineFilter {
+                    if let filteredCuisine = self.filter(dishes: filtered, by: filter) {
+                        completion(filteredCuisine)
+                    } else {
+                        completion(nil)
+                    }
+                } else {
+                    completion(filtered)
+                }
+            } else {
+                completion(nil)
+            }
         }
     }
-}
-
-struct CuisineLocation {
-    let name: String
-    let coordinate : CLLocationCoordinate2D
     
 }

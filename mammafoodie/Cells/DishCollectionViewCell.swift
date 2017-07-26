@@ -35,11 +35,19 @@ class DishCollectionViewCell: UICollectionViewCell {
     
     func setUp(_ dishData:MFDish){
         
-        
         self.lblDishName.text = dishData.name
         self.lblDishTypeTag.text = dishData.tag
         
         if  dishData.dishType != nil {
+            
+            DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id) { (media) in
+                
+                guard let media = media else {return}
+                
+                self.lblDishName.text = dishData.name
+                self.lblDishTypeTag.text = dishData.tag
+                
+            }
             
             switch dishData.dishType! {
                 
@@ -49,17 +57,15 @@ class DishCollectionViewCell: UICollectionViewCell {
                 
             }
             
-        }
-        
-        self.lblDishTypeTag.text = "Healthy"
-        self.lblNumberOfViews.text = dishData.numberOfViewers.description
-        
-        if let picURL = dishData.mediaURL {
+            self.lblDishTypeTag.text = "Healthy"
+            self.lblNumberOfViews.text = dishData.numberOfViewers.description
             
-            print(picURL.absoluteString)
-            
-            self.dishImageView.sd_setImage(with: picURL)
+            if let picURL = dishData.mediaURL {
+                
+                print(picURL.absoluteString)
+                
+                self.dishImageView.sd_setImage(with: picURL)
+            }
         }
     }
-    
 }

@@ -1,8 +1,12 @@
 import UIKit
+import SDWebImage
+import Firebase
 
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
     func showVideoId(_ liveVideo: MFDish)
+    func liveVideoClosed()
+    func streamUnpublished()
 }
 
 protocol LiveVideoViewControllerOutput {
@@ -15,25 +19,27 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
     
+    var countObserver: DatabaseConnectionObserver?
     var liveVideo: MFDish!
-    var gradientLayerForUserInfo: CAGradientLayer!
-    var gradientLayerForComments: CAGradientLayer!
+    //    var gradientLayerForUserInfo: CAGradientLayer!
+    //    var gradientLayerForComments: CAGradientLayer!
+    var viewCamera: UIView!
     
-    //    @IBOutlet weak var btnEndLive: UIButton!
-    //    @IBOutlet weak var lblVideoName: UILabel!
+    @IBOutlet weak var imgViewProfilePicture: UIImageView!
+    @IBOutlet weak var lblUserFullname: UILabel!
     @IBOutlet weak var viewUserInfo: UIView!
+    @IBOutlet weak var lblDishName: UILabel!
+    @IBOutlet weak var lblNumberOfViewers: UILabel!
     @IBOutlet weak var viewSlotDetails: UIView!
-    @IBOutlet weak var viewComments: UIView!
-    @IBOutlet weak var btnEmoji: UIButton!
-    @IBOutlet weak var btnLike: UIButton!
-    @IBOutlet weak var txtNewComment: UITextView!
-    @IBOutlet weak var tblComments: UITableView!
     @IBOutlet weak var btnClose: UIButton!
-    
+    @IBOutlet weak var imgViewPlaceholder: UIImageView!
+    @IBOutlet weak var viewVisualBlurEffect: UIVisualEffectView!
     @IBOutlet var imgViewViewers: [UIImageView]!
+    @IBOutlet weak var lblLiveVideoEndedMessage: UILabel!
+    @IBOutlet weak var btnCloseLiveVideo: UIButton!
+    @IBOutlet weak var viewLiveVideoEnded: UIView!
+    @IBOutlet weak var viewComments: CommentsView!
     
-    
-    lazy var commentsAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
     
     // MARK: - Object lifecycle
     
@@ -46,60 +52,111 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.btnLike.imageView?.contentMode = .scaleAspectFit
-        self.btnEmoji.imageView?.contentMode = .scaleAspectFit
+        
+        self.viewLiveVideoEnded.isHidden = true
+        self.imgViewPlaceholder.image = nil
+        
         self.btnClose.imageView?.contentMode = .scaleAspectFit
-        self.setupCommentsTableViewAdapter()
         
         for imgView in self.imgViewViewers {
             imgView.layer.cornerRadius = 12
             imgView.layer.borderWidth = 1
             imgView.layer.borderColor = UIColor.white.cgColor
         }
+        
+        self.updateShadowForButtonCloseLiveVideo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
+            self.lblNumberOfViewers.text = "\(count)"
+        }
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        //        self.createTestLiveVideo()
         
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
-            self.output!.start(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.start(self.liveVideo)
+            #endif
         }
+        self.setupViewComments()
         
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
-        self.updateDropShadowForViewUserInfo()
-        self.updateDropShadowForViewComments()
+        //        self.updateDropShadowForViewUserInfo()
+        //        self.updateDropShadowForViewComments()
     }
     
-    func updateDropShadowForViewUserInfo() {
-        if self.gradientLayerForUserInfo == nil {
-            self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            self.gradientLayerForUserInfo = CAGradientLayer()
-            let view: UIView = UIView(frame: self.viewUserInfo.frame)
-            self.gradientLayerForUserInfo.frame = view.frame
-            self.gradientLayerForUserInfo.colors = self.colorsForUserInfoInnerGradient()
-            self.gradientLayerForUserInfo.startPoint = CGPoint(x: 0.5, y: 0.5)
-            self.gradientLayerForUserInfo.endPoint = CGPoint(x: 0.5, y: 1)
-            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayerForUserInfo, below: self.viewUserInfo.layer)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewComments.showLatestComment()
+    }
+    
+    func loadDish() {
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id) { (dish) in
+            self.liveVideo = dish
+            self.lblDishName.text = dish?.name ?? ""
+            self.showUserInfo()
         }
     }
     
-    func updateDropShadowForViewComments() {
-        if self.gradientLayerForComments == nil {
-            self.viewComments.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            self.gradientLayerForComments = CAGradientLayer()
-            let view: UIView = UIView(frame: self.viewComments.frame)
-            self.gradientLayerForComments.frame = view.frame
-            self.gradientLayerForComments.colors = self.colorsForCommentsInnerGradient()
-            self.gradientLayerForComments.startPoint = CGPoint(x: 0.5, y: 0)
-            self.gradientLayerForComments.endPoint = CGPoint(x: 0.5, y: 1)
-            self.viewComments.superview?.layer.insertSublayer(self.gradientLayerForComments, below: self.viewComments.layer)
+    func showUserInfo() {
+        if let userId = self.liveVideo.user.id {
+            DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
+                self.lblUserFullname.text = user?.name ?? ""
+                if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
+                    self.imgViewProfilePicture.sd_setImage(with: url)
+                } else {
+                    self.imgViewProfilePicture.image = nil
+                }
+            }
         }
     }
+    
+    func setupViewComments() {
+        self.viewComments.dish = self.liveVideo
+        self.viewComments.load()
+    }
+    
+    func updateShadowForButtonCloseLiveVideo() {
+        let layer: CALayer = self.btnCloseLiveVideo.layer
+        layer.cornerRadius = 5
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
+    }
+    
+    //    func updateDropShadowForViewUserInfo() {
+    //        if self.gradientLayerForUserInfo == nil {
+    //            self.viewUserInfo.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+    //            self.gradientLayerForUserInfo = CAGradientLayer()
+    //            let view: UIView = UIView(frame: self.viewUserInfo.frame)
+    //            self.gradientLayerForUserInfo.frame = view.frame
+    //            self.gradientLayerForUserInfo.colors = self.colorsForUserInfoInnerGradient()
+    //            self.gradientLayerForUserInfo.startPoint = CGPoint(x: 0.5, y: 0.5)
+    //            self.gradientLayerForUserInfo.endPoint = CGPoint(x: 0.5, y: 1)
+    //            self.viewUserInfo.superview?.layer.insertSublayer(self.gradientLayerForUserInfo, below: self.viewUserInfo.layer)
+    //        }
+    //    }
+    
+    //    func updateDropShadowForViewComments() {
+    //        if self.gradientLayerForComments == nil {
+    //            self.viewComments.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+    //            self.gradientLayerForComments = CAGradientLayer()
+    //            let view: UIView = UIView(frame: self.viewComments.frame)
+    //            self.gradientLayerForComments.frame = view.frame
+    //            self.gradientLayerForComments.colors = self.colorsForCommentsInnerGradient()
+    //            self.gradientLayerForComments.startPoint = CGPoint(x: 0.5, y: 0)
+    //            self.gradientLayerForComments.endPoint = CGPoint(x: 0.5, y: 1)
+    //            self.viewComments.superview?.layer.insertSublayer(self.gradientLayerForComments, below: self.viewComments.layer)
+    //        }
+    //    }
     
     func colorsForUserInfoInnerGradient() -> [CGColor] {
         return [
@@ -133,8 +190,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.output != nil {
-            self.output!.stop(self.liveVideo)
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.stop(self.liveVideo)
+            #endif
         }
+        self.countObserver?.stop()
+        self.countObserver = nil
     }
     
     // MARK: - Event handling
@@ -151,6 +213,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.output?.stop(self.liveVideo)
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
@@ -158,28 +221,74 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     // MARK: - Display logic
     
     func show(_ cameraView: UIView) {
-        self.view.insertSubview(cameraView, at: 0)
+        self.viewCamera = cameraView
+        
+        self.view.insertSubview(cameraView, aboveSubview: self.viewVisualBlurEffect)
         
         // align cameraView from the left and right
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
         // align cameraView from the top and bottom
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
+        
+        //        if self.liveVideo.accessMode == .viewer {
+        //            self.viewCamera.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+        //        }
+    }
+    
+    func streamUnpublished() {
+        self.viewLiveVideoEnded.isHidden = false
+        self.viewCamera.removeFromSuperview()
+    }
+    
+    func liveVideoClosed() {
+        // Closed
     }
     
     func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
-    }
-    
-    func setupCommentsTableViewAdapter() {
-        self.commentsAdapter.createStaticData()
-        self.commentsAdapter.setup(with: self.tblComments)
-        self.tblComments.reloadData()
-        self.tblComments.setContentOffset(CGPoint(x: 0, y: self.tblComments.contentSize.height-self.tblComments.frame.height), animated: false)
+        if liveVideo.id != nil {
+            //            self.viewVisualBlurEffect.removeFromSuperview()
+            //            self.imgViewPlaceholder.removeFromSuperview()
+        }
     }
     
     deinit {
         print("Deinit LiveVideoVC")
     }
     
+    @IBAction func onTip(_ sender: UIButton) {
+        if let current = Auth.auth().currentUser {
+            let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
+                
+            }))
+            self.present(alert, animated: true, completion: { 
+                
+            })
+        }
+    }
+    
+    @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.27, animations: {
+            let shouldHide = !self.viewUserInfo.isHidden
+            self.viewUserInfo.isHidden = shouldHide
+            self.viewComments.isHidden = shouldHide
+            //            self.gradientLayerForComments.isHidden = shouldHide
+            //            self.gradientLayerForUserInfo.isHidden = shouldHide
+        }) { (isFinished) in
+            if isFinished {
+                print("Animation finished btnShowHideExtrasTapped")
+            }
+        }
+    }
 }

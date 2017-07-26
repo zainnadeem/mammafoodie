@@ -54,6 +54,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var mediaPicker : MediaPicker?
     var completion : GoCookCompletion?
     
+    let locationWorker = CurrentLocationWorker()
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewContainer: UIView!
     
@@ -98,11 +100,9 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBOutlet weak var btnPostDish: UIButton!
     
-    
     @IBOutlet weak var conVerticalViewPictureContainer_lblPrepareTime: NSLayoutConstraint!
     @IBOutlet weak var conVerticalCuisineClnView_lblPrepareTime: NSLayoutConstraint!
     @IBOutlet weak var conVerticalViewVideoContainer_lblPreparationTime: NSLayoutConstraint!
-    
     
     @IBOutlet weak var btnClosePicturePreview: UIButton!
     @IBOutlet weak var btnPicturePreview: UIButton!
@@ -115,6 +115,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBOutlet var previewButtons: [UIButton]!
     @IBOutlet var previewCloseButtons: [UIButton]!
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -170,7 +171,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         if let dishName = self.txtTitle.text {
             if !dishName.isEmpty {
                 if self.selectedDiet != .None {
-                    if let cuisine = self.cuisinesAdapter.selectedCuisine {
+                    if let cuisine = self.getSelectedCuisine() {
                         if let textPreparationTime = self.txtPreparationTime.text {
                             if !textPreparationTime.isEmpty {
                                 let preparationTime : Double = self.pickerPreparationTime.countDownDuration
@@ -209,19 +210,36 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                             ready = false
                                         }
                                         if ready {
-                                            let user = MFUser.init()
-                                            user.id = FirebaseReference.users.generateAutoID()
-                                            user.name = "Arjav"
+                                            self.locationWorker.getCurrentLocation({ (location, error) in
+                                                if let currentLocation = location {
+                                                    
+                                                    let user = DatabaseGateway.sharedInstance.getLoggedInUser()
+                                                    
+                                                    let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
+                                                    dish.preparationTime = preparationTime
+                                                    dish.availableSlots = totalSlots
+                                                    dish.totalSlots = totalSlots
+                                                    dish.pricePerSlot = pricePerSlots
+                                                    dish.user = user
+                                                    dish.createTimestamp = Date.init()
+                                                    dish.location = currentLocation.coordinate
+                                                    dish.address = "MammaFoodie HQ"
 
-                                            let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
-                                            dish.preparationTime = preparationTime
-                                            dish.availableSlots = totalSlots
-                                            dish.totalSlots = totalSlots
-                                            dish.pricePerSlot = pricePerSlots
-                                            dish.user = user
-                                            dish.createdAt = Date.init()
-                                            dish.endedAt = dish.createdAt.addingTimeInterval(countDown)
-                                            self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                    if dish.mediaType != .liveVideo {
+                                                        dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
+                                                    }
+                                                  
+                                                    DispatchQueue.main.async {
+                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                        self.clearData()
+                                                    }
+                                                    
+
+                                                  
+                                                } else {
+//                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
+                                                }
+                                            })
                                         }
                                     } else {
                                         self.showAlert("Required!", message: "Please enter price per servings.")
@@ -349,6 +367,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     // MARK: - Display logic
     func clearData() {
         self.output.clearData()
+        self.cuisinesAdapter.deselectAllCuisines()
         self.clearPreviews()
     }
     
@@ -393,6 +412,16 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         self.btnCloseVideoShootPreview.isHidden = true
         self.btnCloseVideoUploadPreview.isHidden = true
         self.btnVideoUploadPreview.isHidden = true
+    }
+    
+    func getSelectedCuisine() -> MFCuisine? {
+        for cuisine in  self.cuisinesAdapter.cuisines {
+            if cuisine.isSelected {
+                return cuisine
+            }
+        }
+        
+        return nil
     }
 }
 

@@ -30,7 +30,6 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         self.viewController?.txtPreparationTime.text = ""
         self.viewController?.textViewDescription.text = ""
         self.viewController?.selectedDiet = .None
-        self.viewController?.cuisinesAdapter.selectedCuisine = nil
         self.viewController?.cuisineCollectionView.reloadData()
         self.selectDiet(.None)
         self.selectMediaUploadType(.None)
@@ -49,6 +48,10 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
             }
         }
         
+        if let cuisine = self.viewController?.getSelectedCuisine() {
+            cuisine.isSelected = false
+            self.viewController?.cuisineCollectionView.reloadData()
+        }
         self.viewController?.viewPictureUploadCamera.layer.cornerRadius = 5.0
         self.viewController?.viewPictureUploadCamera.clipsToBounds = true
         
@@ -60,7 +63,8 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
         
         self.viewController?.textViewDescription.layer.cornerRadius = 5.0
         self.viewController?.textViewDescription.clipsToBounds = true
-        
+        self.viewController?.lblServingsCount.text = "0"
+        self.viewController?.numberOfServings = 0
         self.viewController?.txtDealDuration.inputView = self.viewController?.pickerDealDuration
         
         self.viewController?.btnMinus.imageView?.contentMode = . scaleAspectFit
@@ -112,6 +116,9 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
             self.deselect(self.viewController?.btnDietNonVeg)
             
         default:
+            self.deselect(self.viewController?.btnDietVegan)
+            self.deselect(self.viewController?.btnDietVeg)
+            self.deselect(self.viewController?.btnDietNonVeg)
             break
         }
     }

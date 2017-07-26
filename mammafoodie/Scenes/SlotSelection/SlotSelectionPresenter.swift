@@ -1,11 +1,11 @@
 import UIKit
 
 protocol SlotSelectionPresenterInput {
-    func selectedSlots(_ slots: Dictionary<String, Any>)
+//    func selectedSlots(_ slots: Dictionary<String, Any>)
 }
 
 protocol SlotSelectionPresenterOutput: class {
-    func selectedSlots(_ slots: Dictionary<String, Any>)
+//    func selectedSlots(_ slots: Dictionary<String, Any>)
 }
 
 class SlotSelectionPresenter: SlotSelectionPresenterInput {
@@ -14,7 +14,7 @@ class SlotSelectionPresenter: SlotSelectionPresenterInput {
     // MARK: - Presentation logic
     
     func selectedSlots(_ slots: Dictionary<String, Any>){
-        output.selectedSlots(slots)
+//        output.selectedSlots(slots)
     }
     
 }

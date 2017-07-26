@@ -38,7 +38,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet weak var viewMenuIcon: UIView!
     @IBOutlet weak var clnCuisineList: UICollectionView!
     @IBOutlet weak var viewSwitchMode: UIView!
-    @IBOutlet weak var viewCuisineSelectionIndicator: UIView!
     @IBOutlet weak var conLeadingViewCuisineSelectionIndicator: NSLayoutConstraint!
     @IBOutlet weak var viewOptionActivity: UIView!
     @IBOutlet weak var viewOptionMenu: UIView!
@@ -66,6 +65,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AppDelegate.shared().updateToken()
+        
         self.addArc(to: self.btnExpandLiveVideosView)
         self.addArc(to: self.btnExpandVidupsView)
         
@@ -73,13 +75,11 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         
         self.setupLiveVideoCollectionViewAdapter()
         self.setupVidupCollectionViewAdapter()
-        self.setupCuisinesCollectionViewAdapter()
         self.setupTableViewAdapter()
         
         self.viewMenuIcon.layer.cornerRadius = 5
         self.viewActivityIcon.layer.cornerRadius = 5
         self.viewSwitchMode.layer.cornerRadius = 5
-        self.viewCuisineSelectionIndicator.layer.cornerRadius = 2
         
         self.viewActivityIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         self.viewMenuIcon.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
@@ -106,8 +106,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.clnLiveVideos.reloadData()
+        
         self.clnVidups.reloadData()
+        self.clnLiveVideos.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -176,7 +177,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             })
             self.screenMode = .menu
             self.tableViewAdapter.mode = .menu
-            self.tableViewAdapter.loadMenu(with: self.cuisineListAdapter.selectedCuisine)
+            self.tableViewAdapter.loadMenu()
             self.btnSwitchMode.isSelected = true
         }
     }
@@ -294,15 +295,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             print("Selected live video: \(selectedLiveVideo.id)")
             if selectedLiveVideo.id == "-1" {
                 // new. push go cook with live video selection
-                //                self.performSegue(withIdentifier: "showGoCookForLiveVideo", sender: nil)
+                self.performSegue(withIdentifier: "segueGoCook", sender: MFDishMediaType.liveVideo)
             } else {
                 selectedLiveVideo.accessMode = MFDishMediaAccessMode.viewer
+                self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+                self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
             }
-            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
-            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
         }
-        self.liveVideosAdapter.didSelectViewAll = {
-            self.performSegue(withIdentifier: "showLiveVideoList", sender: nil)
+        self.liveVideosAdapter.didSelectViewAll = { (cellFrame) in
+            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowLiveVideoList", sender: nil)
         }
     }
     
@@ -315,35 +317,23 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             if selectedVidup.id == "-1" {
                 // new. push go cook with vidup selection
                 selectedVidup.accessMode = MFDishMediaAccessMode.owner
-                //                self.performSegue(withIdentifier: "showGoCookForVidup", sender: nil)
+                self.performSegue(withIdentifier: "segueGoCook", sender: MFDishMediaType.vidup)
             } else {
                 selectedVidup.accessMode = MFDishMediaAccessMode.viewer
+                self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
+                self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
             }
-            self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
-            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
         }
-        self.vidupsAdapter.didSelectViewAll = {
-            print("DidSelectAll Vidup")
-            self.performSegue(withIdentifier: "showVidupsList", sender: nil)
+        self.vidupsAdapter.didSelectViewAll = { (cellFrame) in
+            self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
+            self.performSegue(withIdentifier: "segueShowVidupsList", sender: nil)
         }
     }
     
     func setupTableViewAdapter() {
-        self.tableViewAdapter.selectedCuisine = self.cuisineListAdapter.selectedCuisine
         self.tableViewAdapter.setup(with: self.tblList)
         self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
-    }
-    
-    func setupCuisinesCollectionViewAdapter() {
-        self.cuisineListAdapter.createStaticData()
-        self.cuisineListAdapter.selectionIndicatorView = self.viewCuisineSelectionIndicator
-        self.cuisineListAdapter.conLeadingViewSelectionIndicator = self.conLeadingViewCuisineSelectionIndicator
-        self.cuisineListAdapter.setup(with: self.clnCuisineList)
-        
-        self.cuisineListAdapter.didSelectCuisine = { (selectedCuisine) in
-            print("Cuisine selected: \(selectedCuisine.name)")
-            self.tableViewAdapter.loadMenu(with: selectedCuisine)
-        }
+        self.tableViewAdapter.loadMenu()
     }
     
     func updateTableHeaderViewHeight() {
@@ -375,6 +365,15 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         button.layer.mask = circleShape
     }
     
+    func openDishDetails(_ dish: MFDish) {
+        self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
+        dish.accessMode = .owner
+        if dish.mediaType == .liveVideo {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        } else if dish.mediaType == .vidup {
+            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
+        }
+    }
     
     @IBAction func logout(){
         

@@ -4,7 +4,8 @@ protocol VidupDetailPageViewControllerInput {
     func HideandUnhideView()
     func DisplayTime(Time:String)
     func DisplayUserInfo(UserInfo:MFUser)
-    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFDish)
+    func DisplayDishInfo(DishInfo:MFDish)
+    func UpdateLikeStatus(Status:Bool)
 }
 
 protocol VidupDetailPageViewControllerOutput {
@@ -27,8 +28,8 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     //TODO: - VidUp URL and Expire Time.
     var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
-    var DishId:String = "KnmktPhvbyk0EAfUWd7"
-    
+    var DishId:String = "-Ko25iOEH_Erg-7B3UQc1"
+
     
     
     //MARK: - IBOutlet
@@ -60,6 +61,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Adding Tap Gesture for Comments label
         let commenttap = UITapGestureRecognizer(target: self, action: #selector(commentbtnClicked(_:)))
@@ -72,7 +74,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         gradient.colors = [UIColor.darkGray.cgColor, UIColor.clear.cgColor]
         lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
         
-        lv_slotView.addGradienBorder(colors: [gradientStartColor,gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
+        lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
         output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId)
     }
@@ -111,6 +113,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     }
     
     @IBAction func closebtnClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
         print("Close Clicked")
     }
     
@@ -141,10 +144,16 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         }
     }
     
-    func DisplayDishInfo(DishInfo:MFDish,MediaInfo:MFDish) {
-        lbl_dishName.text = DishInfo.name!
+    func DisplayDishInfo(DishInfo:MFDish) {
+        lbl_dishName.text = DishInfo.name
         lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
-        lbl_viewCount.text = "\(MediaInfo.numberOfViewers)"
+        lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
+        lbl_Like.text = "\(Int(DishInfo.likesCount))"
+    }
+    
+    
+    func UpdateLikeStatus(Status:Bool) {
+        lbtn_like.isSelected = Status
     }
     
     func animateLike(){

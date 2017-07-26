@@ -82,12 +82,24 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
+    func GetlikeStatus(Id:String,DishId:String,completion:@escaping(_ likeStatus:Bool)->()){
+        DatabaseGateway.sharedInstance.getLikeStatus(dishID: DishId, user_Id: Id, { (Status) in
+            completion(Status!)
+        })
+    }
+    
     func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?)->()){
+        
         DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
             completion(DishInfo)
         }
     }
     
+    func GetDishLikeDetails(Id:String,completion:@escaping(_ likeCount:Int)->()){
+        DatabaseGateway.sharedInstance.getDishLike(dishID: Id) { (LikeCount) in
+            completion(LikeCount!)
+        }
+    }
     
     func likeDish(Id:String,DishId:String){
         let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/likeDish?dishId=\(DishId)&userId=\(Id)"
@@ -106,4 +118,11 @@ class VidupDetailPageWorker:NSObject {
                 print(response.result.error ?? "")
         }
     }
+    
+    
+    func getexpireTime(endTimestamp:Date)->Double{
+        return endTimestamp.timeIntervalSinceReferenceDate
+    }
+    
+    
 }

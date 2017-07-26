@@ -13,30 +13,48 @@ class MFModelsToFirebaseDictionaryConverter {
     typealias FirebaseDictionary = [String:AnyObject]
     
     // Need to update this
-//    class func dictionary(from media: MFDish) -> FirebaseDictionary {
-//        return [
-//            media.id: [
-//                "id" : media.id,
-//                "user" : [
-//                    "id" : media.user.id,
-//                    "name" : media.user.name
-//                ],
-//                "type" : media.type.rawValue,
-//                "cover_small" : media.cover_small?.absoluteString ?? "",
-//                "cover_large" : media.cover_large?.absoluteString ?? "",
-//                "media_url" : media.mediaURL?.absoluteString ?? "",
-//                "dishId" : media.dish.id,
-//                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
-//                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
-//                ] as AnyObject
-//        ]
-//    }
+    //    class func dictionary(from media: MFDish) -> FirebaseDictionary {
+    //        return [
+    //            media.id: [
+    //                "id" : media.id,
+    //                "user" : [
+    //                    "id" : media.user.id,
+    //                    "name" : media.user.name
+    //                ],
+    //                "type" : media.type.rawValue,
+    //                "cover_small" : media.cover_small?.absoluteString ?? "",
+    //                "cover_large" : media.cover_large?.absoluteString ?? "",
+    //                "media_url" : media.mediaURL?.absoluteString ?? "",
+    //                "dishId" : media.dish.id,
+    //                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
+    //                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
+    //                ] as AnyObject
+    //        ]
+    //    }
+    
+    class func dictionary(from comment: MFComment) -> FirebaseDictionary {
+        comment.id = FirebaseReference.dishComments.generateAutoID()
+        let raw: FirebaseDictionary = [
+            comment.id: [
+                "id": comment.id,
+                "text": comment.text,
+                "createTimestamp": comment.createdAt.timeIntervalSinceReferenceDate,
+                "user": [
+                    "id": comment.user!.id,
+                    "name": comment.user!.name
+                ]
+                ] as AnyObject
+        ]
+        return raw
+    }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
         
+        let createDate: Date = dish.createTimestamp ?? Date()
+        
         var rawDish: [String:Any] = [
             "id" : dish.id,
-            "createTimestamp" : dish.createdAt.timeIntervalSinceReferenceDate,
+            "createTimestamp" : createDate.timeIntervalSinceReferenceDate,
             "user" : [
                 "id" : dish.user.id,
                 "name" : dish.user.name
@@ -58,115 +76,104 @@ class MFModelsToFirebaseDictionaryConverter {
             ]
         ]
         
-        if dish.mediaType != MFDishMediaType.liveVideo {
-            rawDish["endTimestamp"] = dish.endedAt?.timeIntervalSinceReferenceDate
+        if dish.endTimestamp != nil {
+            rawDish["endTimestamp"] = dish.endTimestamp!.timeIntervalSinceReferenceDate
         }
-        
+        if let location = dish.location {
+            rawDish["location"] = [
+                "latitude" : location.latitude,
+                "longitude" : location.longitude,
+                "address" : dish.address
+                ] as AnyObject
+        }
         return [dish.id : rawDish as AnyObject]
     }
     
-    class func dictionary(from conversation: MFConversation1) -> FirebaseDictionary {
-        var dishRequestId: String = ""
-        
-        if conversation.dishRequestId != nil  {
-            dishRequestId = conversation.dishRequestId!
-        }
-        return [
-            conversation.id! : [
-                "dishRequestId" : dishRequestId as AnyObject,
-                "createdAt": conversation.createdAt as AnyObject
-                ] as AnyObject
-        ]
-    }
     
-    class func dictionary(from message: MFMessage1) -> FirebaseDictionary {
-        return [
-            message.messageid : [
+    
+    class func dictionary(from message: MFMessage) -> FirebaseDictionary {
+        return  [
+                "id": message.id as AnyObject,
                 "messageText": message.messageText as AnyObject,
-                "conversationId": message.conversationId as AnyObject,
+//                "conversationId": message.conversationId as AnyObject,
                 "senderId": message.senderId as AnyObject,
-                "receiverId": message.receiverId as AnyObject
-                ] as AnyObject
+                "dateTime": message.dateTime as AnyObject,
+                "senderDisplayName": message.senderDisplayName as AnyObject
+//                "receiverId": message.receiverId as AnyObject
         ]
     }
-    
-    
-    
-    
-    //    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
-    //
-    //        return [
-    //
-    //            dish.id : [
-    //                "id"            : dish.id as AnyObject,
-    //                "name"          : dish.name as AnyObject,
-    //                "chefID"        : dish.chefID as AnyObject,
-    //                "mediaID"       : dish.mediaID as AnyObject,
-    //                "description"   : dish.description as AnyObject,
-    //                "totalSlots"    : dish.totalSlots as AnyObject,
-    //                "availableSlots": dish.availableSlots as AnyObject,
-    //                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
-    //                "boughtOrders"  : dish.boughtOrders as AnyObject,
-    //                "cuisineID"     : dish.cuisineID as AnyObject,
-    //                "tag"           : dish.tag as AnyObject,
-    //                "dishType"      : dish.dishType?.rawValue as? AnyObject
-    //            ] as AnyObject
-    //        ]
-    //    }
-    
     
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
+        var userInfo: [String:AnyObject] = [
+            :
+            //                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
+            //                "userActivity"      : user.userActivity as AnyObject,
+            //                "cookedDishes"      : user.cookedDishes as AnyObject,
+            //                "boughtDishes"      : user.boughtDishes as AnyObject,
+            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+            //                "likedDishes"       : user.likedDishes as AnyObject,
+            //                "followers"         : user.followers as AnyObject,
+            //                "following"         : user.following as AnyObject,
+            //                "blocked"           : user.blocked as AnyObject
+            
+        ]
+        
+        if let id = user.id {
+            userInfo["id"] = id as AnyObject
+        }
+        
+        if let name = user.name {
+            userInfo["name"] = name as AnyObject
+        }
+        
+        if let email = user.email {
+            userInfo["email"] = email as AnyObject
+        }
+        
+        if let address = user.address {
+            userInfo["address"] = address as AnyObject
+        }
+        
+        if let addressLocation = user.addressLocation {
+            userInfo["addressLocation"] = addressLocation as AnyObject
+        }
+        
+        if let picture = user.picture {
+            userInfo["picture"] = picture as AnyObject
+        }
+        
+        userInfo["dishesSoldCount"] = user.dishesSoldCount as AnyObject
+        
+        if let profileDescription = user.profileDescription {
+            userInfo["profileDescription"] = profileDescription as AnyObject
+        }
+      
+        
+          userInfo["phone"] = user.phone as AnyObject
+        
+        
         return [
-            user.id : [
-                "id"                : user.id as AnyObject,
-                "name"              : user.name as AnyObject,
-                "email"             : user.email as AnyObject,
-                "address"           : user.address as AnyObject,
-                "addressLocation"   : user.addressLocation as AnyObject,
-                "picture"           : user.picture as AnyObject,
-                "dishesSoldCount"   : user.dishesSoldCount as AnyObject,
-                "profileDescription": user.profileDescription as AnyObject
-//                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
-//                "userActivity"      : user.userActivity as AnyObject,
-//                "cookedDishes"      : user.cookedDishes as AnyObject,
-//                "boughtDishes"      : user.boughtDishes as AnyObject,
-//                "favouriteDishes"   : user.favoriteDishes as AnyObject,
-//                "likedDishes"       : user.likedDishes as AnyObject,
-//                "followers"         : user.followers as AnyObject,
-//                "following"         : user.following as AnyObject,
-//                "blocked"           : user.blocked as AnyObject
-                
-                ] as AnyObject
+
+            user.id : userInfo as AnyObject
         ]
     }
     
     
-    //    class func dictionary(from dish:MFDish) -> FirebaseDictionary {
-    //
-    //        return [
-    //
-    //            dish.id : [
-    //                "id"            : dish.id as AnyObject,
-    //                "name"          : dish.name as AnyObject,
-    //                "chefID"        : dish.chefID as AnyObject,
-    //                "mediaID"       : dish.mediaID as AnyObject,
-    //                "description"   : dish.description as AnyObject,
-    //                "totalSlots"    : dish.totalSlots as AnyObject,
-    //                "availableSlots": dish.availableSlots as AnyObject,
-    //                "pricePerSlot"  : dish.pricePerSlot as AnyObject,
-    //                "boughtOrders"  : dish.boughtOrders as AnyObject,
-    //                "cuisineID"     : dish.cuisineID as AnyObject,
-    //                "tag"           : dish.tag as AnyObject
-    //                ] as AnyObject
-    //        ]
-    //    }
-    
-    
-    //    class func dictionary(from media: MFMedia) -> FirebaseDictionary{
-    //       return [
-    //            media.accessMode = .owner as AnyObject
-    //        ]
-    //    }
-    //    
-    
+    class func dictionary(from address:MFUserAddress) -> FirebaseDictionary{
+        
+        return  [
+                
+                "id"            :   address.id as AnyObject,
+                "address"       :   address.address as AnyObject,
+                "address_2"     :   address.address_2 as AnyObject,
+                "city"          :   address.city as AnyObject,
+                "country"       :   address.country  as AnyObject,
+                "state"         :   address.state as AnyObject,
+                "postalCode"    :   address.postalCode as AnyObject,
+                "latitude"      :   address.latitude as AnyObject,
+                "longitude"     :   address.longitude as AnyObject,
+                "phone"         :   address.phone   as AnyObject
+            ]
+        
+    }
 }

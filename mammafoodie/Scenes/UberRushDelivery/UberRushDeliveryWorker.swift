@@ -11,23 +11,24 @@ import Alamofire
 
 class UberRushDeliveryWorker:NSObject{
     
-    
+    //FIXME: - change it to prod url
     let uberBaseURL = "https://sandbox-api.uber.com/v1"
     
     var uberAccessToken = ""
 
    
-    var params: [String: Any]
+    var params: [String: Any]!
     var purchasingUser: MFUser!
     
-    var headers: HTTPHeaders
+    var headers: HTTPHeaders!
     
     static let uberClientID = "89wveeSBo4AfC6doK4YgbtCWYs4kw_ue"
     static let uberClientSecret = "2Hkd-O8-cePVfxQgn2ISdku-ztoGJfMzsdcCC1Ug"
     static let uberUrlScheme = "mammafoodie-uber://oauth"
     
-    var order: [MFDish]
+    var order: [MFDish]!
     
+ 
     
     init(pickup: MFUserAddress, dropoff: MFUserAddress, chef: MFUser, purchasingUser: MFUser, order:[MFDish]) {
         
@@ -44,12 +45,14 @@ class UberRushDeliveryWorker:NSObject{
             "latitude"      : pickup.latitude,
             "longitude"     : pickup.longitude
         ]
+
         let pickupContact: [String: Any] = [
             "email"         : chef.email,
-            "first_name"    : chef.firstName,
-            "last_name"     : chef.lastName,
+            "first_name"    : chef.name,
+            "last_name"     : chef.name,
             "phone"         : [ "number" : chef.phone, "sms_enabled" : false]
         ]
+
         
         let dropoffLocation = [
             "address"       : dropoff.address,
@@ -61,12 +64,14 @@ class UberRushDeliveryWorker:NSObject{
             "latitude"      : pickup.latitude,
             "longitude"     : pickup.longitude
         ]
-        let dropoffContact: [String: Any] = [
+        let dropoffContact = [
             "email"         : purchasingUser.email,
-            "first_name"    : purchasingUser.firstName,
-            "last_name"     : purchasingUser.lastName,
+            "first_name"    : purchasingUser.name,
+
+            "last_name"     : purchasingUser.name,
             "phone"         : [ "number" : purchasingUser.phone, "sms_enabled" : false]
-        ]
+        ] as [String : Any]
+
         
         self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]
         
@@ -86,7 +91,7 @@ class UberRushDeliveryWorker:NSObject{
         let urlString = "\(uberBaseURL)/deliveries/quote"
         
         Alamofire.request(urlString, method: .post, parameters: self.params, encoding: JSONEncoding.default, headers: self.headers).responseJSON { (response) in
-            print("Status code: \(response.response?.statusCode)")
+            print("Status code: \(String(describing: response.response?.statusCode))")
             if response.response?.statusCode != 201 {
                 print(" There was an error")
                 completion(nil)
@@ -111,7 +116,7 @@ class UberRushDeliveryWorker:NSObject{
         for dish in self.order {
             let item: [String : Any] = [
                 "currency_code" : "USD",
-                "price"         : dish.price,
+                "price"         : dish.pricePerSlot,
                 "quantity"      : 1,
                 "title"         : dish.name
             ]
@@ -168,7 +173,7 @@ class UberRushDeliveryWorker:NSObject{
     }
     
     //Gets the auth code if user accepts
-    class func getAuthorizationcode(completion:@escaping (_ accessToken:String) -> ()){
+    class func getAuthorizationcode(completion:@escaping (_ accessToken:String?) -> ()){
         
         (UIApplication.shared.delegate as! AppDelegate).uberAccessTokenHandler = completion
         

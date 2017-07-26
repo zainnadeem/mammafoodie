@@ -1,12 +1,12 @@
 import UIKit
 
 protocol RequestDishPresenterInput {
-    func RequestDishes(dishName:String,dishNo:String)
+     func dishRequestCompletion(success:Bool,message:String)
 
 }
 
 protocol RequestDishPresenterOutput: class {
-    
+    func dishRequestCompletion(success:Bool,message:String)
 }
 
 class RequestDishPresenter: RequestDishPresenterInput {
@@ -14,10 +14,7 @@ class RequestDishPresenter: RequestDishPresenterInput {
     
     // MARK: - Presentation logic
     
-    func RequestDishes(dishName:String,dishNo:String)
-    {
-        print(dishName)
-        print(dishNo)
+    func dishRequestCompletion(success:Bool,message:String){
+        self.output.dishRequestCompletion(success: success, message: message)
     }
-    
 }

@@ -5,7 +5,7 @@ import MapKit
 protocol NearbyChefsViewControllerInput {
     func showMarkers(markers: [Marker])
     func showCurrentLocation(_ location: CLLocation?)
-    func showCuisines(_ cuisines:[CuisineFilter])
+    func showCuisines(_ cuisines:[MFCuisine])
 }
 
 protocol NearbyChefsViewControllerOutput {
@@ -19,7 +19,7 @@ var kCameraLongitude : CLLocationDegrees = 0.0
 
 let MFThemeColorBlue = UIColor(red: 0.09, green: 0.17, blue: 0.27, alpha: 1)
 
-class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInput, NearbyChefsSearchAdapterResult {
+class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInput {
     
     var output: NearbyChefsViewControllerOutput!
     var router: NearbyChefsRouter!
@@ -31,8 +31,9 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     var searchAdapter: NearbyChefsSearchAdapter!
     var featuredMenuAdapter : FeaturedMenuCollectionViewAdapter!
     
-    var cuisineFilters = [CuisineFilter]()
-    var selectedFilter : CuisineFilter?
+    var cuisineFilters = [MFCuisine]()
+    
+    var searchResults : [MFDish]! = [MFDish]()
     
     var swipGesture : UISwipeGestureRecognizer!
     
@@ -82,16 +83,36 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         self.setupSearchTextField()
         self.featuredMenuAdapter = FeaturedMenuCollectionViewAdapter()
         self.featuredMenuAdapter.prepareCollectionView(self.featuredMenuCollectionView)
+        
+        self.searchAdapter = NearbyChefsSearchAdapter()
+        self.searchAdapter.prepare(with : self.txtSearch)
+        self.searchAdapter.adapterResult = { (dishes) in
+            print("Found Dishes: \(dishes)")
+            DispatchQueue.main.async {
+                if dishes.count < 0 {
+                    self.showAlert("No Results Found", message: nil)
+                }
+                self.searchResults.removeAll()
+                self.searchResults.append(contentsOf: dishes)
+                self.reloadSearchData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.output.getCurrentLocation()
-//        self.featuredMenuCollectionView.reloadData()
+        self.featuredMenuCollectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.featuredMenuCollectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.featuredMenuCollectionView.reloadData()
     }
     
     func setupSearchTextField() {
@@ -107,9 +128,6 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     // MARK: - Event handling
-    func didSelect(cusine: CuisineLocation) {
-        print("Selected Cuisine: \(cusine.name)")
-    }
     
     // MARK: - Display logic
     func showError(error:Error) {
@@ -123,9 +141,16 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     @IBAction func onHideFeaturedMenu(_ sender: UIButton) {
-        let bottom = self.conBottomFeaturedMenuCollectionView.constant
-        let height = self.conHeightFeaturedMenuCollectionView.constant
-        self.showFeaturedMenu((bottom == height * -1))
+        let alert = UIAlertController(title: "No Featured Menu Found!", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true) {
+            
+        }
+        //        let bottom = self.conBottomFeaturedMenuCollectionView.constant
+        //        let height = self.conHeightFeaturedMenuCollectionView.constant
+        //        self.showFeaturedMenu((bottom == height * -1))
     }
     
     func showFeaturedMenu(_ show : Bool) {
@@ -147,7 +172,9 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) { 
+            
+        }
     }
 }
 

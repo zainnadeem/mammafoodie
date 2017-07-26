@@ -10,6 +10,8 @@ class OtherUsersProfileWorker {
     
     var followingResponseCounter = 0
     
+    var responseCounterSaved = 0
+    
     // MARK: - Business Logic
     
     func getUserDataWith(userID:String, completion: @escaping (MFUser?)->Void){
@@ -43,7 +45,9 @@ class OtherUsersProfileWorker {
             
              print(dishDataDictionary)
             
-            guard dishDataDictionary != nil else {return}
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
             
             var dishes = [MFDish]()
             
@@ -58,6 +62,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.responseCounterCooked == dishDataDictionary!.keys.count{
+                        self.responseCounterCooked = 0
                         completion(dishes)
                     }
                     
@@ -75,7 +80,9 @@ class OtherUsersProfileWorker {
             
             print(dishDataDictionary)
             
-            guard dishDataDictionary != nil else {return}
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
             
             var dishes = [MFDish]()
             
@@ -89,6 +96,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.responseCounterBought == dishDataDictionary!.keys.count{
+                        self.responseCounterBought = 0
                         completion(dishes)
                     }
                 })
@@ -96,15 +104,66 @@ class OtherUsersProfileWorker {
             
         }
     }
+    
+    
+    func getSavedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void) {
+        
+        responseCounterSaved = 0
+        
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
+            
+            
+            guard dishDataDictionary != nil else {
+                completion([])
+                return}
+            
+            var dishes = [MFDish]()
+            
+            for dishID in dishDataDictionary!.keys {
+                
+                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
+                    self.responseCounterSaved += 1
+                    
+                    if dish != nil {
+                        dishes.append(dish!)
+                    }
+                    
+                    if self.responseCounterSaved == dishDataDictionary!.keys.count{
+                        self.responseCounterSaved = 0
+                        completion(dishes)
+                    }
+                })
+            }
 
-    func getFollowersForUser(userID:String, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+            
+        }
+        
+    }
+    
+    
+    func getSavedDishesCountFor(userID:String, _ completion:@escaping (Int)->()){
+        
+         DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
+            
+            if dishDataDictionary == nil {
+                completion(0)
+            } else {
+                completion(dishDataDictionary!.keys.count)
+            }
+        }
+        
+    }
+
+    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
         followersResponseCounter = 0
         
-        DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID) { (followers) in
+        DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID, frequency: frequency) { (followers) in
             
             
-            guard followers != nil else {return}
+            guard followers != nil else {
+                completion([])
+                return}
             
             var users = [MFUser]()
             
@@ -119,6 +178,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.followersResponseCounter == followers!.keys.count{
+                        self.followersResponseCounter = 0
                         completion(users)
                     }
                     
@@ -129,14 +189,16 @@ class OtherUsersProfileWorker {
     }
     
     
-    func getFollowingForUser(userID:String, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
         followingResponseCounter = 0
         
-        DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID) { (following) in
+        DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
             
             
-            guard following != nil else {return}
+            guard following != nil else {
+                completion([])
+                return}
             
             var users = [MFUser]()
             
@@ -151,6 +213,7 @@ class OtherUsersProfileWorker {
                     }
                     
                     if self.followingResponseCounter == following!.keys.count{
+                        self.followingResponseCounter = 0
                         completion(users)
                     }
                     
@@ -158,6 +221,51 @@ class OtherUsersProfileWorker {
             }
             
         }
+    }
+    
+    
+    func toggleFollow(targetUser:String, currentUser:String, targetUserName:String, currentUserName:String, shouldFollow:Bool, _ completion:@escaping (_ success:Bool)->()){
+        
+        var urlString = ""
+        
+        if shouldFollow {
+            urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/followUser?firstUserId=\(currentUser)&secondUserId=\(targetUser)&firstUserFullname=\(currentUserName)&secondUserFullname=\(targetUserName)"
+        } else {
+            urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unfollowUser?firstUserId=\(currentUser)&secondUserId=\(targetUser)"
+        }
+        
+      
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
+
+        let url = URL(string: encodedString)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let config = URLSessionConfiguration.default
+
+        let session = URLSession(configuration: config)
+        session.dataTask(with: request) { (data, response, error) in
+            guard let response = response as? HTTPURLResponse else { print("there was an error");
+                
+                completion(false)
+                return }
+            
+            if response.statusCode != 200 {
+                print("There was an error with your request")
+                completion(false)
+            }
+            if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                if let responseDict = responseDict {
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
+            }.resume()
+        
     }
     
 }

@@ -1,7 +1,5 @@
-
-
 import Foundation
-
+import MapKit
 
 enum MFDishMediaType : String {
     case liveVideo = "liveVideo"
@@ -23,19 +21,29 @@ enum MFDishMediaAccessMode {
 }
 
 class MFDish {
-    var id: String!
-    var name: String!
+    
+    var id: String
+    var name: String
+    
     var dishType : MFDishType!
     var user: MFUser!
+    var username: String!
+    
     var description: String?
     var totalSlots: UInt = 0
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
     var numberOfViewers: UInt = 0
+    var nonUniqueViewersCount: UInt = 0
+    
+    var numberOfComments: UInt = 0
+    var numberOfLikes: UInt = 0
     
     var boughtOrders: [String:Date] = [:] //MFOrder id
-    var cuisineID: String! //MFCusine id
     var tag:String!
+    
+    var createTimestamp: Date!
+    var endTimestamp: Date?
     
     var preparationTime : Double!
     var boughtBy: [MFOrder:Date] = [:]
@@ -45,29 +53,40 @@ class MFDish {
     var mediaURL: URL?
     var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
     
+    var coverPicURL:URL?
+    
     var likesCount : Double = 0
     var commentsCount : Double = 0
     
-    var createdAt: Date!
-    var endedAt: Date?
+    var location : CLLocationCoordinate2D?
+    var address : String = ""
     
-    init() {}
+    init() {
+        self.id = ""
+        self.name = ""
+    }
     
-    init(id: String, user: MFUser, description: String, name: String) {
+    init(id: String, description: String, name: String) {
         self.id = id
         //        self.user = user
         self.description = description
         self.name = name
     }
     
-    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
+    init(id: String, user: MFUser, description: String, name: String, cuisine: MFCuisine) {
         self.id = id
-        
-        self.user = MFUser() ; user.id = userID
-        
+        self.user = user
         self.description = description
         self.name = name
-        self.cuisineID = cuisineID
+        self.cuisine = cuisine
+    }
+    
+    init(id: String, name: String, userID: String, description: String,  cuisineID:String, totalSlots:UInt, availableSlots:UInt, pricePerSlot:Double, boughtOrders:[String:Date], mediaID:String, tag:String, dishType:MFDishType) {
+        self.id = id
+        self.user = MFUser() ; user.id = userID
+        self.description = description
+        self.name = name
+        self.cuisine = MFCuisine.init(with: ["id" : cuisineID as AnyObject])
         self.totalSlots = totalSlots
         self.availableSlots = availableSlots
         self.pricePerSlot = pricePerSlot
@@ -86,9 +105,25 @@ class MFDish {
         self.mediaType = mediaType
     }
     
-    init(from dishDataDictionary:[String:AnyObject]){
+    init(from dishDataDictionary:[String:AnyObject]) {
         self.id = dishDataDictionary["id"] as? String ?? ""
         self.name = dishDataDictionary["name"] as? String ?? ""
+        
+        if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
+            self.user = MFUser(from: userDict)
+        }
+        
+        self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
+        self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
+        
+        let creationTimestamp: TimeInterval = dishDataDictionary["createTimestamp"] as! TimeInterval
+        self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
+        
+        if let endingTimestamp: TimeInterval = dishDataDictionary["endTimestamp"] as? TimeInterval {
+            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+        }
+        
+        self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
         
         let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
         self.user = MFUser() ;
@@ -96,12 +131,17 @@ class MFDish {
         self.user.id = user["id"] as? String ?? ""
         self.user.name = user["name"] as? String ?? ""
         
+        if let endTime = dishDataDictionary["endTimestamp"] as? Double {
+            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endTime)
+        }
+        
         self.description = dishDataDictionary["description"]  as? String ?? ""
         self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
         self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
         self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
         self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
-        self.cuisineID = dishDataDictionary["cuisineID"] as? String ?? ""
+        
+        self.tag = dishDataDictionary["tag"] as? String ?? ""
         self.tag = dishDataDictionary["tag"] as? String ?? ""
         
         let dishType = dishDataDictionary["dishType"] as? String ?? ""
@@ -113,12 +153,22 @@ class MFDish {
         }
         
         let urlString = dishDataDictionary["mediaURL"] as? String ?? ""
-        
         if let url = URL(string: urlString){
             self.mediaURL = url
         }
         
         self.numberOfViewers = dishDataDictionary["numberOfViews"] as? UInt ?? 0
+        
+        if let rawCuisine = dishDataDictionary["cuisine"] as? [String : AnyObject] {
+            self.cuisine = MFCuisine.init(with: rawCuisine)
+        }
+        
+        if let rawLocation = dishDataDictionary["location"] as? [String : AnyObject] {
+            let lat = rawLocation["latitude"] as! CLLocationDegrees
+            let lon = rawLocation["longitude"] as! CLLocationDegrees
+            self.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
+            self.address = rawLocation["address"] as? String ?? ""
+        }
         
     }
     
@@ -141,13 +191,13 @@ class MFDish {
     
     func generateCoverImageURL() -> URL {
         let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
         return URL.init(string: string)!
     }
     
     func generateCoverThumbImageURL() -> URL {
         let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dish%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
+        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
         return URL.init(string: string)!
     }
     
