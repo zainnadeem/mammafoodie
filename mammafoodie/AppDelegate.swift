@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var activityIndicatorView:UIView?
     let gcmMessageIDKey = "gcm.message_id"
     
-    var currentUserFirebase:User? //Populate this when user logs in successfully
-    var currentUser:MFUser? //Populate this when user logs in successfully and after signup
+    var currentUserFirebase : User? //Populate this when user logs in successfully
+    var currentUser : MFUser? //Populate this when user logs in successfully and after signup
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -33,18 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
+        //        StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
+        //            print("Test")
+        //        })
         
-        let currentUser = Auth.auth().currentUser
-
-        currentUserFirebase = currentUser
-        
-//        StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
-//            print("Test")
-//        })
-        
-//        StripeGateway.shared.addPaymentMethod(number: "4000 0000 0000 0077", expMonth: 10, expYear: 2020, cvc: "111", completion: { (string, error) in
-//            print("Done")
-//        });
+        //        StripeGateway.shared.addPaymentMethod(number: "4000 0000 0000 0077", expMonth: 10, expYear: 2020, cvc: "111", completion: { (string, error) in
+        //            print("Done")
+        //        });
         
         //        StripeGateway.shared.createCharge(amount: 100, sourceId: "tok_1AihULJwxdjMNYNIXFZx0wLa", completion: { (error) in
         //            print("Done")
@@ -52,39 +47,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         //
         
         
-        
+        let currentUser = Auth.auth().currentUser
+        self.currentUserFirebase = currentUser
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
-        let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        if currentUser != nil { //User is already logged in, show home screen
-            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
-                self.currentUser = user
-            })
-            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            loginVC.navigationController?.pushViewController(homeVC, animated: false)
+        if let loginVC = navigationController.viewControllers.first as? LoginViewController {
+            if currentUser != nil {
+                //User is already logged in, show home screen
+                DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
+                    self.currentUser = user
+                })
+                let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                loginVC.navigationController?.pushViewController(homeVC, animated: false)
+            }
         }
-
-        
-        //Register for Push Notifications
-//        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
-//        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
-//        application.registerUserNotificationSettings(pushNotificationSettings)
-//        application.registerForRemoteNotifications()
-
-        //To get access token
-//        UberRushDeliveryWorker.getAuthorizationcode{ token in
-//            print(token)
-//            
-//            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
-//                print(json["access_token"])
-//            }
-//        }
-      
 //        self.window?.rootViewController = navigationController
 //        self.window?.makeKeyAndVisible()
-  
+        
+        //Register for Push Notifications
+        //        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
+        //        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
+        //        application.registerUserNotificationSettings(pushNotificationSettings)
+        //        application.registerForRemoteNotifications()
+        
+        //To get access token
+        //        UberRushDeliveryWorker.getAuthorizationcode{ token in
+        //            print(token)
+        //
+        //            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
+        //                print(json["access_token"])
+        //            }
+        //        }
+        
         return true
     }
     

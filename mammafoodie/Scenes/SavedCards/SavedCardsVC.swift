@@ -101,7 +101,6 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         })
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.cards.count;
     }
