@@ -8,9 +8,11 @@
 //
 
 import UIKit
+import Alamofire
+import Firebase
+import MBProgressHUD
 
-typealias BankDetailsViewControllerCompletion = (BankDetails?) -> Void
-
+typealias BankDetailsViewControllerCompletion = (Bool) -> Void
 class BankDetailsViewController: UIViewController {
     
     @IBOutlet weak var txtAccountHolderName: UITextField!
@@ -65,22 +67,49 @@ class BankDetailsViewController: UIViewController {
      */
     
     @IBAction func onAddAccountTap(_ sender: UIButton) {
-        self.completion?(nil)
-        self.dismiss(animated: true) {
-            
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/addExternalBankAccount") {
+            if let currentUser = Auth.auth().currentUser {
+                let parameters : Parameters = [
+                    "accountHolderName" : self.txtAccountHolderName.text!,
+                    "routingNumber" : self.txtRoutingNumber.text!,
+                    "accountNumber" : self.txtAccountNumber.text!,
+                    "userId": currentUser.uid
+                ]
+                Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
+                    if let responseData = response.data {
+                        let resp = String.init(data: responseData, encoding: String.Encoding.utf8)
+                        DispatchQueue.main.async {
+                            hud.hide(animated: true)
+                            if resp?.lowercased() == "success" {
+                                self.completion?(true)
+                                self.showAlert("Successful!", message: "")
+                            } else {
+                                self.completion?(false)
+                                self.showAlert("Failed!", message: "")
+                            }
+                        }
+                        print(resp ?? "No Response")
+                    } else {
+                        hud.hide(animated: true)
+                        self.completion?(false)
+                        self.showAlert("Failed!", message: "")
+                    }
+                })
+            }
+        } else {
+            hud.hide(animated: true)
+            self.completion?(false)
+            self.dismiss(animated: true) {
+                
+            }
         }
     }
     
     @IBAction func onCancelTap(_ sender: UIButton) {
-        self.completion?(nil)
+        self.completion?(false)
         self.dismiss(animated: true) {
             
         }
     }
-}
-
-struct BankDetails {
-    let accountNumber : String
-    let accountHolderName : String
-    let routingNumber : String
 }

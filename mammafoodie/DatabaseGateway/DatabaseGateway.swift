@@ -1325,7 +1325,7 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func addToken(_ token: String, completion: @escaping ((String,Error?)->Void)) {
-        let userId: String = "eSd3qbFf5leM4g6j2oVej7ZeEGA3" // self.getLoggedInUser()!.id
+        let userId: String = self.getLoggedInUser()!.id
         
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
         let pushId = ref.childByAutoId().key

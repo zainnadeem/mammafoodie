@@ -33,6 +33,8 @@ target 'mammafoodie' do
 
     pod 'Stripe'
 
+pod 'MBProgressHUD'
+
     target 'mammafoodieTests' do
         pod 'Firebase/Core'
         pod 'Firebase/Database'

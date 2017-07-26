@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import Firebase
 
 class WalletViewController: UIViewController {
     
@@ -16,8 +18,11 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var btnSendMoneyToBank: UIButton!
     @IBOutlet weak var lblWalletBalanceTitle: UILabel!
     @IBOutlet weak var lblWalletBalance: UILabel!
+    @IBOutlet weak var lblPendingBalance: UILabel!
     
     @IBOutlet weak var tblTransactions: UITableView!
+    
+    var transactions : [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,8 @@ class WalletViewController: UIViewController {
         self.setWalletAmount(0)
         self.btnAddToWallet.isHidden = true
         self.tblTransactions.reloadData()
+        
+        self.getCurrentBalance()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,11 +61,47 @@ class WalletViewController: UIViewController {
      }
      */
     
-    func setWalletAmount(_ amount : Double) {
+    func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
         let formatter = NumberFormatter.init()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "USD"
+        formatter.locale = Locale(identifier: "en_US")
         self.lblWalletBalance.text = formatter.string(from: amount as NSNumber)
+        self.lblPendingBalance.text = "Pending : \(formatter.string(from: amount as NSNumber) ?? "$0")"
+    }
+    
+    func getCurrentBalance() {
+        if let currentUser = Auth.auth().currentUser {
+            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let account = snapshot.value as? [String : Any] {
+                    if let charges = account["charges"] as? [String : [String : Any]] {
+                        for (key, value) in charges {
+                            if let amount = value["amount"] as? Double {
+                                self.transactions.append("\(amount)")
+                            }
+                        }
+                        DispatchQueue.main.async {
+                            self.tblTransactions.reloadData()
+                        }
+                    }
+                    
+                    if let accountID = account["account_id"] as? String {
+                        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/retreiveBalance") {
+                            let params : Parameters = ["accountId" : accountID]
+                            Alamofire.request(url, method: .get, parameters: params).responseJSON(completionHandler: { (response) in
+                                if let jsonResponse = response.result.value as? [String : Any] {
+                                    if let available = jsonResponse["available"] as? Double {
+                                        self.setWalletAmount(available, (jsonResponse["pending"] as? Double) ?? 0)
+                                    }
+                                    print(jsonResponse)
+                                } else {
+                                    print(response)
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        }
     }
     
     // MARK: - Actions
@@ -68,12 +111,25 @@ class WalletViewController: UIViewController {
     }
     
     @IBAction func onSendMoneyToBank(_ sender: UIButton) {
-        StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
-            
+        if let currentUser = Auth.auth().currentUser {
+            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let stripeAccount = snapshot.value as? [String : Any] {
+                    if let externalAccounts = stripeAccount["externalAccounts"] {
+                        
+                    } else {
+                        DispatchQueue.main.async {
+                            StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
+//                                DispatchQueue.main.async {
+//                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
+//                                        
+//                                    }
+//                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
-//        BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-//            
-//        }
     }
     
     @IBAction func onBackTap(_ sender: UIBarButtonItem) {
@@ -83,20 +139,20 @@ class WalletViewController: UIViewController {
 
 extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : WalletTransactionsTblCell = tableView.dequeueReusableCell(withIdentifier: "WalletTransactionsTblCell", for: indexPath) as! WalletTransactionsTblCell
-        
+        cell.lblAction.text = "Amount : \(self.transactions[indexPath.row])"
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }

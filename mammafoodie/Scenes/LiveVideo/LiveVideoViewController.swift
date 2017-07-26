@@ -1,5 +1,6 @@
 import UIKit
 import SDWebImage
+import Firebase
 
 protocol LiveVideoViewControllerInput {
     func show(_ cameraView: UIView)
@@ -254,6 +255,27 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     deinit {
         print("Deinit LiveVideoVC")
+    }
+    
+    @IBAction func onTip(_ sender: UIButton) {
+        if let current = Auth.auth().currentUser {
+            let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
+                SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.uid)
+            }))
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
+                
+            }))
+            self.present(alert, animated: true, completion: { 
+                
+            })
+        }
     }
     
     @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {

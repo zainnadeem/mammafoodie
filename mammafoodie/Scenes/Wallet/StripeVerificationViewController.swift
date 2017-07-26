@@ -9,6 +9,8 @@
 import UIKit
 import MobileCoreServices
 import Alamofire
+import Firebase
+import MBProgressHUD
 
 typealias StripeVerificationCompletion = (Bool) -> Void
 
@@ -82,6 +84,7 @@ class StripeVerificationViewController: UIViewController {
      */
     
     func uploadDocumentToStripe(_ documentImage : UIImage, completion : @escaping (String?) -> Void) {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         self.isDocumentUploaded = false
         let headers: HTTPHeaders = ["Authorization" : "Bearer sk_test_ILoBhJpbX4bmuygd0NQs23V5"]
         if let url = URL.init(string: "https://uploads.stripe.com/v1/files"),
@@ -91,22 +94,26 @@ class StripeVerificationViewController: UIViewController {
                 formData.append(purpose, withName: "purpose")
                 formData.append(imageData, withName: "file", fileName: "image", mimeType: "image/png")
             }, to: url, headers : headers) { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        print(response.result)
-                        if let jsonResponse = response.result.value as? [String : Any] {
-                            completion((jsonResponse["id"] as? String) ?? nil)
-                        } else {
-                            completion(nil)
+                DispatchQueue.main.async {
+                    hud.hide(animated: true)
+                    switch result {
+                    case .success(let upload, _, _):
+                        upload.responseJSON { response in
+                            print(response.result)
+                            if let jsonResponse = response.result.value as? [String : Any] {
+                                completion((jsonResponse["id"] as? String) ?? nil)
+                            } else {
+                                completion(nil)
+                            }
                         }
+                    case .failure(let encodingError):
+                        print(encodingError)
+                        completion(nil)
                     }
-                case .failure(let encodingError):
-                    print(encodingError)
-                    completion(nil)
                 }
             }
         } else {
+            hud.hide(animated: true)
             completion(nil)
             print("This should not happen")
         }
@@ -144,8 +151,10 @@ class StripeVerificationViewController: UIViewController {
     }
     
     @IBAction func onSubmiTap(_ sender: UIButton) {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         if self.isDocumentUploaded  {
-            if let docID = self.documentID {
+            if let docID = self.documentID,
+                let currentUser = Auth.auth().currentUser {
                 if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/verifyStripeAccount") {
                     let date = self.pickerDOB.date
                     let parameters : Parameters = [
@@ -160,18 +169,38 @@ class StripeVerificationViewController: UIViewController {
                         "postal_code" : self.txtPostalCode.text!,
                         "state" : self.txtState.text!,
                         "ssn_last_4" : self.txtSSN.text!,
-                        "userId": "oNi1R4X6KdOS5DSLXtAQa62eD553",
+                        "userId": currentUser.uid,
                         "documentId": docID
                     ]
                     Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
-                        let resp = String.init(data: response.data!, encoding: String.Encoding.utf8)
-                        print(response)
+                        if let responseData = response.data {
+                            let resp = String.init(data: responseData, encoding: String.Encoding.utf8)
+                            DispatchQueue.main.async {
+                                hud.hide(animated: true)
+                                if resp?.lowercased() == "success" {
+                                    self.finished(true)
+                                    self.showAlert("Verification successful!", message: "")
+                                } else {
+                                    self.finished(false)
+                                    self.showAlert("Verification Failed!", message: "")
+                                }
+                            }
+                            print(resp ?? "No Response")
+                        } else {
+                            hud.hide(animated: true)
+                            self.finished(false)
+                            self.showAlert("Verification Failed!", message: "")
+                        }
                     })
+                } else {
+                    hud.hide(animated: true)
                 }
             } else {
+                hud.hide(animated: true)
                 self.showAlert("Error!", message: "File uploading failed!!")
             }
         } else {
+            hud.hide(animated: true)
             self.showAlert("Upload Document first!", message: "")
         }
     }

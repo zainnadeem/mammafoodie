@@ -60,7 +60,6 @@ class StripeGateway {
         }
     }
     
-    
     func getPaymentSources(for userId: String, completion: @escaping (([STPCard])->Void)) {
         DatabaseGateway.sharedInstance.getPaymentSources(for: userId) { (rawSources) in
             var sources: [STPCard] = []

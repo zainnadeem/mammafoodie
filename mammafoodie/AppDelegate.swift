@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 loginVC.navigationController?.pushViewController(homeVC, animated: false)
             }
         }
-//        self.window?.rootViewController = navigationController
-//        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
         
         //Register for Push Notifications
         //        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]

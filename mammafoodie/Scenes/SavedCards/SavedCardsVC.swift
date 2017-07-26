@@ -8,12 +8,15 @@
 
 import UIKit
 import Stripe
+import MBProgressHUD
 
 class SavedCardsVC: UIViewController {
     
     var cards: [STPCard] = []
-    let currentLoggedInUser: String = "eSd3qbFf5leM4g6j2oVej7ZeEGA3"
-    let toUser: String = "oNi1R4X6KdOS5DSLXtAQa62eD553"
+    var currentLoggedInUser: String = "luuN75SiCHMWenXTngLlPLeW48a2"
+    var toUser: String = ""
+    
+    var amount : Double = 0
     
     @IBOutlet weak var clnCards: UICollectionView!
     @IBOutlet weak var conTopViewAddNewCard: NSLayoutConstraint!
@@ -37,6 +40,21 @@ class SavedCardsVC: UIViewController {
         })
     }
     
+    class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String) {
+        let story = UIStoryboard.init(name: "Akshit", bundle: nil)
+        if let savedCards = story.instantiateViewController(withIdentifier: "SavedCardsVC") as? SavedCardsVC {
+            savedCards.amount = amount
+            savedCards.toUser = "Yf5bvIiNSMTxBYK6zSajlFYoXw42"
+            savedCards.currentLoggedInUser = from
+            savedCards.modalPresentationStyle = .overFullScreen
+            savedCards.modalPresentationCapturesStatusBarAppearance = true
+            savedCards.modalTransitionStyle = .crossDissolve
+            vc.present(savedCards, animated: true, completion: {
+                
+            })
+        }
+    }
+    
     @IBAction func btnPayTapped(_ sender: UIButton) {
         guard let cardNumber: String = self.cardTextField.cardNumber else {
             return
@@ -46,6 +64,7 @@ class SavedCardsVC: UIViewController {
             return
         }
         
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         StripeGateway.shared.addPaymentMethod(number: cardNumber, expMonth: self.cardTextField.expirationMonth, expYear: self.cardTextField.expirationYear, cvc: cvc) { (cardId, error) in
             if let error = error {
                 print(error)
@@ -55,11 +74,17 @@ class SavedCardsVC: UIViewController {
                     self.view.layoutIfNeeded();
                 }
                 if let cardId = cardId {
-                    StripeGateway.shared.createCharge(amount: 1.11, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
+                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
                         if let error = error {
                             print(error)
                         } else {
                             print("Charge created")
+                        }
+                        DispatchQueue.main.async {
+                            hud.hide(animated: true)
+                            self.dismiss(animated: true, completion: {
+                                
+                            })
                         }
                     })
                 } else {
@@ -92,11 +117,18 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card: STPCard = self.cards[indexPath.item]
-        StripeGateway.shared.createCharge(amount: 1.11, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
             if let error = error {
                 print(error)
             } else {
                 print("Charge created")
+            }
+            DispatchQueue.main.async {
+                hud.hide(animated: true)
+                self.dismiss(animated: true, completion: {
+                    
+                })
             }
         })
     }
