@@ -38,9 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         currentUserFirebase = currentUser
         
-        StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
-            print("Test")
-        })
+//        StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
+//            print("Test")
+//        })
         
 //        StripeGateway.shared.addPaymentMethod(number: "4000 0000 0000 0077", expMonth: 10, expYear: 2020, cvc: "111", completion: { (string, error) in
 //            print("Done")

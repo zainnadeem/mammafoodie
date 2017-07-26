@@ -68,6 +68,9 @@
 		11F5C6571F18F58000F7F45C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F5C6551F18F58000F7F45C /* NotificationTableViewCell.xib */; };
 		11F5C65A1F18F97F00F7F45C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6591F18F97F00F7F45C /* NotificationViewController.swift */; };
 		1F627773E6040FB7977171E0 /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
+		2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D8E301F281C4300842ECD /* SavedCardsVC.swift */; };
+		2C0D8E351F281C5B00842ECD /* SavedCardClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D8E331F281C5B00842ECD /* SavedCardClnCell.swift */; };
+		2C0D8E361F281C5B00842ECD /* SavedCardClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0D8E341F281C5B00842ECD /* SavedCardClnCell.xib */; };
 		2C12BCA31EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA41EF7D237007AF994 /* HomePageCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */; };
 		2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */; };
@@ -633,6 +636,9 @@
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C0D8E301F281C4300842ECD /* SavedCardsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsVC.swift; sourceTree = "<group>"; };
+		2C0D8E331F281C5B00842ECD /* SavedCardClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardClnCell.swift; sourceTree = "<group>"; };
+		2C0D8E341F281C5B00842ECD /* SavedCardClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedCardClnCell.xib; sourceTree = "<group>"; };
 		2C12BC921EF7D237007AF994 /* HomePageCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BC931EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageLiveVideoCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		2C12BC941EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageVidupsCollectionViewAdapter.swift; sourceTree = "<group>"; };
@@ -1095,6 +1101,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2C0D8E2F1F281C1E00842ECD /* SavedCards */ = {
+			isa = PBXGroup;
+			children = (
+				2C0D8E321F281C5100842ECD /* SavedCardClnCell */,
+				2C0D8E301F281C4300842ECD /* SavedCardsVC.swift */,
+			);
+			path = SavedCards;
+			sourceTree = "<group>";
+		};
+		2C0D8E321F281C5100842ECD /* SavedCardClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C0D8E331F281C5B00842ECD /* SavedCardClnCell.swift */,
+				2C0D8E341F281C5B00842ECD /* SavedCardClnCell.xib */,
+			);
+			path = SavedCardClnCell;
+			sourceTree = "<group>";
+		};
 		2C12BC901EF7D237007AF994 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1405,6 +1429,7 @@
 		2CB528DF1EE9164D00218609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2C0D8E2F1F281C1E00842ECD /* SavedCards */,
 				F00F525B1EF2729D009DDAB1 /* Chat */,
 				F097D8C11EF3D8BA00FCF967 /* ChatList */,
 				2C12BCC61EF7F01E007AF994 /* Common */,
@@ -2102,6 +2127,7 @@
 					};
 					BF5060D41EE81B9E00DB646F = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = ACV33259AJ;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -2194,6 +2220,7 @@
 				F0A980FF1F0A89CD00772BAA /* FollowersTableCell.xib in Resources */,
 				113139D21EF7BA2D000050D6 /* Montserrat-Thin.otf in Resources */,
 				113139D11EF7BA2D000050D6 /* Montserrat-SemiBold.otf in Resources */,
+				2C0D8E361F281C5B00842ECD /* SavedCardClnCell.xib in Resources */,
 				113948D61F052A4900F98E74 /* UserProfile.storyboard in Resources */,
 				57150C2B1F25E3320008B7FB /* Arjav.storyboard in Resources */,
 				2C12BCC11EF7D338007AF994 /* Akshit.storyboard in Resources */,
@@ -2774,6 +2801,7 @@
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
 				F0F6B65F1F0D2BBE00A74CB5 /* PaymentViewController.swift in Sources */,
+				2C0D8E351F281C5B00842ECD /* SavedCardClnCell.swift in Sources */,
 				570ED40D1F0684F000B41F0E /* AKImageCropperView.swift in Sources */,
 				2CFB9B901EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
 				2C6979B71F07C95F00787DCC /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
@@ -2788,6 +2816,7 @@
 				11AE87641F1CBE6600B788BA /* NotificationWorker.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
+				2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
 				BF5AD5D91F062B4B00827223 /* DishDetailModels.swift in Sources */,
@@ -3035,7 +3064,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3061,7 +3090,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "mammafoodie/mamma foodie.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ACV33259AJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
