@@ -278,15 +278,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             self.passImageView.image = UIImage(named: "passselect")
         }
     }
-    
-    
+
     //Routing
-    
-    
-    
-    
-    
-    
 }
 
 extension LoginViewController {

@@ -34,6 +34,7 @@ class MFDish {
     var availableSlots: UInt = 0
     var pricePerSlot: Double = 0
     var numberOfViewers: UInt = 0
+    var nonUniqueViewersCount: UInt = 0
     
     var numberOfComments: UInt = 0
     var numberOfLikes: UInt = 0

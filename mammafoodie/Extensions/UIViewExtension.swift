@@ -63,6 +63,7 @@ extension UIView {
     }
     
     func addGradienBorder(colors:[UIColor] , direction : GradientDirection = .topToBottom, borderWidth width : CGFloat = 1.0, animated : Bool = true) {
+        self.removeGradient()
         let gradientLayer = CAGradientLayer()
         
         if self.clipsToBounds {

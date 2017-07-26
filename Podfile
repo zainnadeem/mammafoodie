@@ -6,6 +6,7 @@ target 'mammafoodie' do
     use_frameworks!
     
     pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
@@ -31,6 +32,8 @@ target 'mammafoodie' do
     pod 'SDWebImage', '~>3.8'
 
     pod 'Stripe'
+
+pod 'MBProgressHUD'
 
     target 'mammafoodieTests' do
         pod 'Firebase/Core'
