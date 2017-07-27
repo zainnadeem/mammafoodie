@@ -33,21 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
-        //        StripeGateway.shared.createCharge(amount: 1, sourceId: "card_1AiwVjEpXe8xLhlBaH8K9cxA", fromUserId: "eSd3qbFf5leM4g6j2oVej7ZeEGA3", toUserId: "oNi1R4X6KdOS5DSLXtAQa62eD553", completion: { (error) in
-        //            print("Test")
-        //        })
-        
-        //        StripeGateway.shared.addPaymentMethod(number: "4000 0000 0000 0077", expMonth: 10, expYear: 2020, cvc: "111", completion: { (string, error) in
-        //            print("Done")
-        //        });
-        
-        //        StripeGateway.shared.createCharge(amount: 100, sourceId: "tok_1AihULJwxdjMNYNIXFZx0wLa", completion: { (error) in
-        //            print("Done")
-        //        })
-        //
-        
-        
         let currentUser = Auth.auth().currentUser
+        
         self.currentUserFirebase = currentUser
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
@@ -64,21 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
-        
-        //Register for Push Notifications
-        //        let notificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
-        //        let pushNotificationSettings =   UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        //        application.registerUserNotificationSettings(pushNotificationSettings)
-        //        application.registerForRemoteNotifications()
-        
-        //To get access token
-        //        UberRushDeliveryWorker.getAuthorizationcode{ token in
-        //            print(token)
-        //
-        //            UberRushDeliveryWorker.getAccessToken(authorizationCode:token!){ json in
-        //                print(json["access_token"])
-        //            }
-        //        }
         
         return true
     }
@@ -137,13 +109,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
-            
             //For uber rush
             if url.scheme == "mammafoodie-uber" {
                 let urlString = url.relativeString
-                
                 print(urlString)
-                
                 if let codeRange = urlString.range(of: "code="){
                     let authCode = urlString.substring(from: (codeRange.upperBound))
                     print(authCode)
@@ -155,18 +124,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                     return false
                 }
             }
-            
-            
-            
             let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
-            
-            
             let source = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String
             let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
-            
-            
             return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation) || GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
-            
     }
     
     //PushNotification delegates

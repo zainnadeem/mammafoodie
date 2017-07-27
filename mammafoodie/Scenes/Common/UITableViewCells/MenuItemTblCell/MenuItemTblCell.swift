@@ -68,8 +68,8 @@ class MenuItemTblCell: UITableViewCell {
     }
     
     func cellWillDisplay() {
-        self.updateDropShadowForViewContainer()
-        self.updateInnerShadowOnRightEndOfImageview()
+//        self.updateDropShadowForViewContainer()
+//        self.updateInnerShadowOnRightEndOfImageview()
         self.addGradientInOrderNowButton()
     }
     

@@ -156,6 +156,22 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         }
     }
     
+    @IBAction func logout() {
+        let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
+        firebaseWorker.signOut(){ errorMessage in
+            if errorMessage != nil {
+                print(errorMessage)
+            } else {
+                print("Logged out successfully")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    @IBAction func onGoCookTap(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "segueGoCook", sender: nil)
+    }
+    
     func switchToActivityMode() {
         if self.screenMode == .menu {
             UIView.animate(withDuration: 0.27, animations: {
@@ -372,22 +388,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
         } else if dish.mediaType == .vidup {
             self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
-        }
-    }
-    
-    @IBAction func logout(){
-        
-        let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
-        
-        firebaseWorker.signOut(){ errorMessage in
-            
-            if errorMessage != nil {
-                print(errorMessage)
-            } else {
-                print("Logged out successfully")
-                self.navigationController?.popViewController(animated: true)
-            }
-            
         }
     }
     

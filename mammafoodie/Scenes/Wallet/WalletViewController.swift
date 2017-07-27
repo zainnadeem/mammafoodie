@@ -28,8 +28,9 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
-        //        self.tblTransactions.tableHeaderView = self.viewTableHeader
+//        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
+    
         self.viewHeaderWrapper.layer.cornerRadius = 5.0
         self.viewHeaderWrapper.clipsToBounds = true
         self.tblTransactions.rowHeight = 64
@@ -132,9 +133,6 @@ class WalletViewController: UIViewController {
         }
     }
     
-    @IBAction func onBackTap(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
-    }
 }
 
 extension WalletViewController : UITableViewDataSource, UITableViewDelegate {

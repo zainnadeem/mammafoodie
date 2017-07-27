@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BWg-Zc-W2K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2rO-ud-uZg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,9 +24,10 @@
         <scene sceneID="IvH-4O-gJI">
             <objects>
                 <navigationController storyboardIdentifier="NavSettings" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2rO-ud-uZg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="j7l-cV-Spa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" backIndicatorImage="BackBtn" backIndicatorTransitionMaskImage="BackBtn" id="j7l-cV-Spa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,6 +71,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="e9t-xk-Smo">
+                        <barButtonItem key="backBarButtonItem" title=" " id="dpT-wb-WJt"/>
                         <barButtonItem key="leftBarButtonItem" image="BackBtn" id="hwW-5E-M1B">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -80,6 +82,7 @@
                     <connections>
                         <outlet property="settingTblView" destination="hfv-AD-A9x" id="xzl-ly-vr5"/>
                         <segue destination="BWg-Zc-W2K" kind="show" identifier="segueShowWalletViewController" id="6hb-xi-IR8"/>
+                        <segue destination="Cuo-Vs-hhW" kind="show" identifier="segueShowEdiProfileVC" id="1qg-SQ-fcA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSF-CJ-LZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,7 +113,7 @@
                                             <rect key="frame" x="16" y="20" width="343" height="128"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fs0-ba-W0w">
-                                                    <rect key="frame" x="120.5" y="10" width="103.5" height="30"/>
+                                                    <rect key="frame" x="120" y="10" width="103.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="oSo-bN-ObK"/>
                                                     </constraints>
@@ -197,14 +200,7 @@
                             <constraint firstAttribute="trailing" secondItem="oBM-hV-zdy" secondAttribute="trailing" id="fxm-nN-jwb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Wallet" id="EHR-i8-WEW">
-                        <barButtonItem key="leftBarButtonItem" image="BackBtn" id="pnJ-hu-cL8">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onBackTap:" destination="BWg-Zc-W2K" id="ILu-mm-hmB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My Wallet" id="EHR-i8-WEW"/>
                     <connections>
                         <outlet property="btnAddToWallet" destination="iIH-vN-Ctk" id="iel-1R-f4y"/>
                         <outlet property="btnSendMoneyToBank" destination="jka-gu-uHD" id="dVh-7i-TEe"/>
@@ -219,6 +215,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVx-cN-7LI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="45"/>
+        </scene>
+        <!--EditProfileViewController-->
+        <scene sceneID="d4F-kM-sH3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Siri" referencedIdentifier="EditProfileViewController" id="Cuo-Vs-hhW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ry1-rn-z8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-471" y="522"/>
         </scene>
         <!--Bank Details View Controller-->
         <scene sceneID="XtT-RM-qsa">

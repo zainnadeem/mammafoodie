@@ -1216,37 +1216,26 @@ extension DatabaseGateway {
 
 extension DatabaseGateway{
     
-    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?)->()){
-        
+    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?) -> Void) {
         FirebaseReference.notificationsForUser.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            
-            
             guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(notificationData)
-            
         })
     }
     
-    
     func getNotification(notificationID:String, completion:@escaping (MFNotification?)->()) {
-        
         FirebaseReference.notifications.classReference.child(notificationID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            
             guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             let notification:MFNotification = MFNotification(from:notificationData)
             completion(notification)
         })
-        
     }
-    
 }
 
 
@@ -1263,8 +1252,7 @@ extension DatabaseGateway {
             completion(notificationData)
         })
     }
-    
-    
+
     func getAddress(addressID:String,_ completion:@escaping (MFUserAddress?)->()) {
         FirebaseReference.address.classReference.child(addressID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
             guard let addressData = dataSnapshot.value as? FirebaseDictionary else {
@@ -1408,11 +1396,8 @@ extension DatabaseGateway {
     }
     
     func uploadProfileImage(userID:String, image:UIImage, _ completion : @escaping (URL?, Error?) -> Void){
-        
             let path = "users/\(userID).jpg"
-            
             self.save(image: image, at: path, completion: completion)
-
     }
     
 }

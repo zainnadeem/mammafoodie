@@ -31,7 +31,6 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     @IBOutlet weak var collectionView:UICollectionView!
     
-    
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
     let unSelectedMenuTextColor = UIColor(red: 83/255, green: 85/255, blue: 87/255, alpha: 1)
@@ -48,15 +47,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        output.setUpDishCollectionView(self.collectionView, self.profileType)
-        
+        self.output.setUpDishCollectionView(self.collectionView, self.profileType)
         if let user = Auth.auth().currentUser{
-            
             self.userID = user.uid
-            
-            output.loadUserProfileData(userID: self.userID!)
+            self.output.loadUserProfileData(userID: self.userID!)
         }
-        
     }
     
     //MARK: - Input

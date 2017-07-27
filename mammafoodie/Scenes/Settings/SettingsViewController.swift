@@ -35,6 +35,27 @@ class SettingsViewController: UIViewController {
             
         })
     }
+    
+    func perormAction(for indexPath : IndexPath) {
+        switch self.listArray[indexPath.row].id {
+        case 0:
+            self.performSegue(withIdentifier: "segueShowEdiProfileVC", sender: self)
+            break
+            
+        case 1:
+            self.performSegue(withIdentifier: "segueShowWalletViewController", sender: self)
+            
+        case 5:
+            AppDelegate.shared().setLoginViewController()
+            let worker = FirebaseLoginWorker()
+            worker.signOut { (errorMessage) in
+                
+            }
+            
+        default:
+            break
+        }
+    }
 }
 
 extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
@@ -55,23 +76,7 @@ extension SettingsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch self.listArray[indexPath.row].id {
-        case 0:
-            break
-            
-        case 1:
-            self.performSegue(withIdentifier: "segueShowWalletViewController", sender: self)
-            
-        case 5:
-            AppDelegate.shared().setLoginViewController()
-            let worker = FirebaseLoginWorker()
-            worker.signOut { (errorMessage) in
-                
-            }
-            
-        default:
-            break
-        }
+        self.perormAction(for: indexPath)
     }
 }
 

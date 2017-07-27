@@ -1,5 +1,7 @@
 import UIKit
 
+typealias EmojiTappedClosure = ((UIButton) -> Void)
+
 class CommentsView: UIView {
     
     var view: UIView!
@@ -11,6 +13,9 @@ class CommentsView: UIView {
             self.load()
         }
     }
+    
+    var emojiTapped : EmojiTappedClosure?
+    
     var user: MFUser!
     let maxAllowedHeightOfTextView: CGFloat = 100
     
@@ -82,6 +87,10 @@ class CommentsView: UIView {
         // align self.view from the top and bottom
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": self.view]));
         
+    }
+    
+    @IBAction func onEmojiTap(_ sender: UIButton) {
+        self.emojiTapped?(sender)
     }
     
     func loadViewFromNib() -> UIView {

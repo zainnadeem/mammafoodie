@@ -85,10 +85,8 @@ class EditProfileworker {
     }
     
     
-    func uploadProfileImage(userID:String, image:UIImage, _ completion:@escaping (_ status:Bool)->()){
-        
+    func uploadProfileImage(userID:String, image:UIImage, _ completion:@escaping (_ status:Bool)->()) {
              DatabaseGateway.sharedInstance.uploadProfileImage(userID: userID, image: image) { (url, error) in
-                
                 if error != nil {
                     completion(false)
                 } else if url != nil {
@@ -97,7 +95,6 @@ class EditProfileworker {
                     completion(false)
                 }
         }
-        
     }
     
 }

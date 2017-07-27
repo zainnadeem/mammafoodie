@@ -2,7 +2,7 @@ import UIKit
 
 protocol OtherUsersProfileInteractorInput {
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
-//    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
+    //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
     
     func toggleFollow(userID:String, shouldFollow:Bool)
@@ -57,8 +57,9 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             self.user = user
             self.dishCollectionViewAdapter.userData = user
             self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
-            self.hideActivityIndicator()
-            
+            DispatchQueue.main.async {
+                self.hideActivityIndicator()
+            }
         }
         
         worker.getFollowersForUser(userID: userID) { (followers) in
@@ -87,9 +88,6 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile){
-        
-        
-        
         guard let user = self.user else {return}
         
         self.showActivityIndicator()
@@ -106,24 +104,24 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             
         case .bought:
             
-          worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
-            self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
-            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
-
-          })
+            worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
+                self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
+                self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+                
+            })
             
             
         case .activity:
             
             var activities = [MFNewsFeed]()
             
-//            for newsFeedID in user.userActivity.keys{
-//                worker.getActivityWith(newsFeedID: newsFeedID, completion: { (newsFeed) in
-//                    if newsFeed != nil {
-//                        activities.append(newsFeed!)
-//                    }
-//                })
-//            }
+            //            for newsFeedID in user.userActivity.keys{
+            //                worker.getActivityWith(newsFeedID: newsFeedID, completion: { (newsFeed) in
+            //                    if newsFeed != nil {
+            //                        activities.append(newsFeed!)
+            //                    }
+            //                })
+            //            }
             
             dishCollectionViewAdapter.selectedIndexForProfile = .activity
             dishCollectionViewAdapter.activityData = activities
@@ -148,12 +146,12 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
     }
     
-    //MARK: - DishesCollectionViewAdapterDelegate 
+    //MARK: - DishesCollectionViewAdapterDelegate
     
     func openDishPageWith(dishID:String){
         
-       output.openDishPageWith(dishID: dishID)
-    
+        output.openDishPageWith(dishID: dishID)
+        
     }
     
     func openFavouriteDishes(){
