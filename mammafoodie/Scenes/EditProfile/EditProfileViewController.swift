@@ -8,6 +8,7 @@
 
 import UIKit
 import KLCPopup
+import MBProgressHUD
 
 class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRenderer , UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -51,13 +52,17 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
     var addingNewAddress:Bool!
     
     var KLCforgotPasswordPopup:KLCPopup?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userID = AppDelegate.shared().currentUserFirebase?.uid
+        if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.userID = user.id
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
         
-        worker.getUserDataWith(userID: self.userID) { (user) in
+        self.worker.getUserDataWith(userID: self.userID) { (user) in
             self.user = user
             self.txfName.text = user?.name
             self.txfEmailID.text = user?.email
@@ -68,31 +73,19 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.userID){
             self.profilePicImageView.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie"))
         }
-        
 
-        //SetBack button image
-        let backImage = UIImage(named:"BackBtn")?.withRenderingMode(.alwaysOriginal)
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
         
-        self.navigationController?.navigationBar.backIndicatorImage = backImage
-        
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        
-        
-        getUserAddress()
-        
-        
+        self.getUserAddress()
         self.btnSave.layer.cornerRadius = btnSave.frame.size.height/2
-        btnSave.clipsToBounds = true
-        
+        self.btnSave.clipsToBounds = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -140,7 +133,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
     }
     
-
+    
     @IBAction func addNewAddressTapped(_ sender: UIButton) {
         
         
@@ -150,7 +143,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         addressEditVC.delegate = self
         
         self.navigationController?.pushViewController(addressEditVC, animated: true)
-
+        
     }
     
     //Edit address delegate
@@ -162,7 +155,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
                 
                 worker.createAddressForUser(userID: self.userID, address: address) { (status) in
                     
-                //Remove all stackviews except its header
+                    //Remove all stackviews except its header
                     for subview in self.addressStackView.subviews where subview.tag != -1{
                         self.addressStackView.removeArrangedSubview(subview)
                         subview.removeFromSuperview()
@@ -171,7 +164,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
                 }
                 
             } else { // edit existing address
-
+                
                 
                 worker.updateAddress(addressID: address.id, address: address, { (status) in
                     for subview in self.addressStackView.subviews where subview.tag != -1 {
@@ -210,8 +203,8 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 135) , in: self.view)
         
         
-//        txfForgotPassword.text = txtEmail.text
-//        txfForgotPassword.becomeFirstResponder()
+        //        txfForgotPassword.text = txtEmail.text
+        //        txfForgotPassword.becomeFirstResponder()
         
     }
     
@@ -240,7 +233,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
         worker.updatePassword(with: credential) { (errorMessage) in
             
-           self.hideActivityIndicator()
+            self.hideActivityIndicator()
             self.KLCforgotPasswordPopup?.dismiss(true)
             
             if errorMessage != nil {
@@ -253,28 +246,19 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
     
     
     @IBAction func saveTapped(_ sender: UIButton) {
-        
-        
-        showActivityIndicator()
-        
-         user?.name = self.txfName.text
-         user?.email = self.txfEmailID.text
-         user?.phone = self.txfMobileNumber.text!
-         user?.profileDescription = self.txvProfileDescription.text
-        
-        
-        worker.updateUser(user: self.user!) { (status) in
-            self.hideActivityIndicator()
-            
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.user?.name = self.txfName.text
+        self.user?.email = self.txfEmailID.text
+        self.user?.phone = self.txfMobileNumber.text!
+        self.user?.profileDescription = self.txvProfileDescription.text
+        self.worker.updateUser(user: self.user!) { (status) in
+            hud.hide(animated: true)
             if status {
-                self.showAlert(message: "Profile updated successfully")
+                self.showAlert("Profile Updated!", message: "")
             } else {
-                self.showAlert(message: "Something went wrong. Please try again.")
+                self.showAlert("Error!", message: "Something went wrong. Please try again.")
             }
-            
         }
-        
-        
     }
     
     //MARK: - Edit photo
@@ -295,12 +279,11 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
     
-    func openCamera()
-    {
+    func openCamera() {
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
         {
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera
@@ -315,8 +298,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         }
     }
     
-    func openGallery()
-    {
+    func openGallery() {
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true, completion: nil)
@@ -339,5 +321,5 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
         picker.dismiss(animated: true, completion: nil)
     }
-
+    
 }

@@ -38,6 +38,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var loginButn: UIButton!
     
+    @IBOutlet weak var btnLoginWithFB: UIButton!
+    @IBOutlet weak var btnLoginWithGoogle: UIButton!
     
     @IBOutlet var forgotPasswordPopup: UIView!
     
@@ -78,6 +80,9 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         self.forgotPasswordPopup.layer.cornerRadius = 3
         self.forgotPasswordPopup.clipsToBounds = true
+        
+        self.btnLoginWithFB.imageView?.contentMode = .scaleAspectFit
+        self.btnLoginWithGoogle.imageView?.contentMode = .scaleAspectFit
         
     }
     

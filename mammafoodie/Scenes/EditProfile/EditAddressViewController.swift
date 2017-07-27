@@ -51,8 +51,6 @@ class EditAddressViewController: UIViewController , CLLocationManagerDelegate, H
         
         self.title = "Edit Address"
         
-//        self.navigationItem.backBarButtonItem?.setBackButtonBackgroundImage(UIImage(named:"goCookBack"), for: .normal, barMetrics: .default)
-        
         //Populate address for editing if any
         if let address = self.address {
             

@@ -24,12 +24,14 @@ class HomeRouter: HomeRouterInput {
             goCookVC.dishCreated = { (newDish) in
                 self.viewController.openDishDetails(newDish)
             }
-            if (sender as! MFDishMediaType) == MFDishMediaType.liveVideo {
-                // live video
-                goCookVC.selectedOption = .liveVideo
-            } else if (sender as! MFDishMediaType) == MFDishMediaType.vidup {
-                // vidup
-                goCookVC.selectedOption = .vidup
+            if let dishType = sender as? MFDishMediaType {
+                if dishType == MFDishMediaType.liveVideo {
+                    // live video
+                    goCookVC.selectedOption = .liveVideo
+                } else if (sender as! MFDishMediaType) == MFDishMediaType.vidup {
+                    // vidup
+                    goCookVC.selectedOption = .vidup
+                }
             }
         }
     }

@@ -86,7 +86,26 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             #endif
         }
         self.setupViewComments()
-        
+        self.viewComments.emojiTapped = { (emojiButton) in
+            if let current = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
+                    SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.id)
+                }))
+                alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
+                    SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.id)
+                }))
+                alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
+                    SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.id)
+                }))
+                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
+                    
+                }))
+                self.present(alert, animated: true, completion: {
+                    
+                })
+            }
+        }
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
         
@@ -255,27 +274,6 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     deinit {
         print("Deinit LiveVideoVC")
-    }
-    
-    @IBAction func onTip(_ sender: UIButton) {
-        if let current = Auth.auth().currentUser {
-            let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
-                SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.uid)
-            }))
-            alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
-                SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.uid)
-            }))
-            alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
-                SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.uid)
-            }))
-            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
-                
-            }))
-            self.present(alert, animated: true, completion: { 
-                
-            })
-        }
     }
     
     @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {

@@ -1,4 +1,5 @@
 import UIKit
+import MBProgressHUD
 
 protocol GoCookViewControllerInput {
     
@@ -17,6 +18,8 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     var output: GoCookViewControllerOutput!
     var router: GoCookRouter!
+    
+    var hud = MBProgressHUD.init()
     
     var step2VC : GoCookStep2ViewController!
     
@@ -114,13 +117,14 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     // MARK: - Display logic
     func create(_ dish : MFDish, image : UIImage?, videoURL :  URL?) {
         dish.mediaType = self.selectedOption
+        self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         switch self.selectedOption {
         case .liveVideo:
             dish.save { (error) in
                 DispatchQueue.main.async {
                     self.selectedOption = .unknown
                     self.step2VC.clearData()
-                    
+                    self.hud.hide(animated: true)
                     self.navigationController?.dismiss(animated: false, completion: {
                         self.dishCreated?(dish)
                     })
@@ -131,12 +135,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             if let img = image {
                 DatabaseGateway.sharedInstance.save(image: img, at: dish.getStoragePath(), completion: { (downloadURL, error) in
                     DispatchQueue.main.async {
-                        if let url = downloadURL {
-                            self.saveDish(dish, mediaURL: url)
-                        } else {
-                            self.showAlert(error?.localizedDescription, message: nil)
-                        }
+                        self.saveDish(dish, mediaURL: downloadURL, error : error)
                     }
+                })
+            } else {
+                self.hud.hide(animated: true)
+                self.navigationController?.dismiss(animated: false, completion: {
                 })
             }
             
@@ -144,36 +148,47 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             if let video = videoURL {
                 DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
                     DispatchQueue.main.async {
-                        if let url = downloadURL {
-                            self.saveDish(dish, mediaURL: url)
-                        } else {
-                            self.showAlert(error?.localizedDescription, message: nil)
-                        }
+                        self.saveDish(dish, mediaURL: downloadURL, error: error)
                     }
+                })
+            } else {
+                self.hud.hide(animated: true)
+                self.navigationController?.dismiss(animated: false, completion: {
                 })
             }
             
         default:
-            break
+            self.hud.hide(animated: true)
+            self.navigationController?.dismiss(animated: false, completion: {
+            })
+            
         }
     }
     
-    func saveDish(_ dish : MFDish, mediaURL : URL) {
-        dish.mediaURL = mediaURL
-        dish.save { (error) in
-            DispatchQueue.main.async {
-                self.selectedOption = .unknown
-                //                self.onStep1(self.btnStep1)
-                self.step2VC.clearData()
-                if let er = error {
-                    self.showAlert(er.localizedDescription, message: nil)
-                } else {
-                    // Success
-                    self.navigationController?.dismiss(animated: false, completion: {
-                        self.dishCreated?(dish)
-                    })
+    func saveDish(_ dish : MFDish, mediaURL : URL?, error : Error?) {
+        if let url = mediaURL {
+            dish.mediaURL = url
+            dish.save { (errorFound) in
+                DispatchQueue.main.async {
+                    self.hud.hide(animated: true)
+                    self.selectedOption = .unknown
+                    //                self.onStep1(self.btnStep1)
+                    self.step2VC.clearData()
+                    if let er = errorFound {
+                        self.showAlert(er.localizedDescription, message: nil)
+                    } else {
+                        // Success
+                        self.navigationController?.dismiss(animated: false, completion: {
+                            self.dishCreated?(dish)
+                        })
+                    }
                 }
             }
+        } else {
+            self.hud.hide(animated: true)
+            self.showAlert(error?.localizedDescription, message: nil)
+            self.navigationController?.dismiss(animated: false, completion: {
+            })
         }
     }
     

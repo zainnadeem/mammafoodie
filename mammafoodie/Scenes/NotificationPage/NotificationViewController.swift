@@ -9,16 +9,12 @@
 import UIKit
 
 class NotificationViewController: UIViewController {
-
     
     @IBOutlet weak var notificationTableView:UITableView!
     
     let reuseIdentifier = "NotificationCell"
-    
     lazy var worker = NotificationWorker()
-    
     var userID:String!
-    
     var notifications = [MFNotification](){
         didSet{
             notificationTableView.reloadData()
@@ -27,30 +23,27 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         
-         notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.userID = user.id
+            self.worker.getNotificationForUser(userID: userID) { (notifications) in
+                if let notifications = notifications{
+                    self.notifications = notifications
+                }
+            }
+        } else {
+            self.navigationController?.dismiss(animated: true, completion: {
+                
+            })
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.worker.getNotificationForUser(userID: userID) { (notifications) in
-            
-            if let notifications = notifications{
-                self.notifications = notifications
-            }
-            
-        }
-        
-    }
-    
-
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -59,17 +52,13 @@ class NotificationViewController: UIViewController {
 
 
 extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationTableViewCell
-        
         let notif = notifications[indexPath.row]
-        
         cell.setUp(notification: notif)
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -87,5 +76,5 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-   
+    
 }
