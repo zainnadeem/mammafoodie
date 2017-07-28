@@ -28,8 +28,11 @@ class PostmatesWorker {
             encodedSandboxKey = authorizationValue()
         }
         
-        let parameters = "pickup_address=\(pickupAddress.address+","+pickupAddress.city+","+pickupAddress.state+","+pickupAddress.postalCode)&dropoff_address=\(dropOffAddress.address+","+dropOffAddress.city+","+dropOffAddress.state+","+dropOffAddress.postalCode)"
+        let parameters = "pickup_address=\(pickupAddress.address),\(pickupAddress.city),\(pickupAddress.state),\(pickupAddress.postalCode)&dropoff_address=\(dropOffAddress.address),\(dropOffAddress.city),\(dropOffAddress.state),\(dropOffAddress.postalCode)"
         
+        
+//        let parameters = "pickup_address=\(pickupAddress.address+","+pickupAddress.city+","+pickupAddress.state+","+pickupAddress.postalCode)&dropoff_address=\(dropOffAddress.address+","+dropOffAddress.city+","+dropOffAddress.state+","+dropOffAddress.postalCode)"
+//
         let urlString = "\(BaseUrl)/customers/\(customer_id)/delivery_quotes"
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
@@ -69,8 +72,10 @@ class PostmatesWorker {
     func createDelivery(pickupAddress:MFUserAddress,dropOffAddress:MFUserAddress,delivery_quoteid:String,itemDescription:String,pickUpPlaceName:String,pickUpPhone:String,pickUpNotes:String = "", dropOffPlaceName:String,dropOffPhone:String, dropOffNotes:String = "", completion:@escaping (_ response:[String:Any]?, _ errorMessage:String?)->Void){
         
         
-        let parameters = "quote_id=\(delivery_quoteid)&manifest=\(itemDescription)&pickup_name=\(pickUpPlaceName)&pickup_address=\(pickupAddress.address+","+pickupAddress.city+","+pickupAddress.state+","+pickupAddress.postalCode)&pickup_phone_number=\(pickUpPhone)&pickup_notes=\(pickUpNotes)&dropoff_name=\(dropOffPlaceName)&dropoff_address=\(dropOffAddress.address+","+dropOffAddress.city+","+dropOffAddress.state+","+dropOffAddress.postalCode)&dropoff_phone_number=\(dropOffPhone)&dropoff_notes=\(dropOffNotes)"
+        let parameters = "quote_id=\(delivery_quoteid)&manifest=\(itemDescription)&pickup_name=\(pickUpPlaceName)&pickup_address=\(pickupAddress.address),\(pickupAddress.city),\(pickupAddress.state),\(pickupAddress.postalCode)&pickup_phone_number=\(pickUpPhone)&pickup_notes=\(pickUpNotes)&dropoff_name=\(dropOffPlaceName)&dropoff_address=\(dropOffAddress.address),\(dropOffAddress.city),\(dropOffAddress.state),\(dropOffAddress.postalCode)&dropoff_phone_number=\(dropOffPhone)&dropoff_notes=\(dropOffNotes)"
         
+//        let parameters = "quote_id=\(delivery_quoteid)&manifest=\(itemDescription)&pickup_name=\(pickUpPlaceName)&pickup_address=\(pickupAddress.address+","+pickupAddress.city+","+pickupAddress.state+","+pickupAddress.postalCode)&pickup_phone_number=\(pickUpPhone)&pickup_notes=\(pickUpNotes)&dropoff_name=\(dropOffPlaceName)&dropoff_address=\(dropOffAddress.address+","+dropOffAddress.city+","+dropOffAddress.state+","+dropOffAddress.postalCode)&dropoff_phone_number=\(dropOffPhone)&dropoff_notes=\(dropOffNotes)"
+//
 //        print(parameters)
         
         

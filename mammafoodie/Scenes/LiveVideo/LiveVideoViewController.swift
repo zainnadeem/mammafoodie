@@ -40,6 +40,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBOutlet weak var viewLiveVideoEnded: UIView!
     @IBOutlet weak var viewComments: CommentsView!
     
+    @IBOutlet weak var lblSlotsCount: UILabel!
     
     // MARK: - Object lifecycle
     
@@ -56,6 +57,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.viewLiveVideoEnded.isHidden = true
         self.imgViewPlaceholder.image = nil
         
+        self.imgViewProfilePicture.clipsToBounds = true
+        self.imgViewProfilePicture.contentMode = .scaleAspectFill
+        self.imgViewProfilePicture.layer.cornerRadius = 20
+        
         self.btnClose.imageView?.contentMode = .scaleAspectFit
         
         for imgView in self.imgViewViewers {
@@ -65,6 +70,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         }
         
         self.updateShadowForButtonCloseLiveVideo()
+        
+        self.loadDish()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,9 +127,16 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     func loadDish() {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id) { (dish) in
-            self.liveVideo = dish
-            self.lblDishName.text = dish?.name ?? ""
-            self.showUserInfo()
+            DispatchQueue.main.async {
+                if let dish = dish {
+                    self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
+                    self.liveVideo = dish
+                    self.lblDishName.text = dish.name
+                    self.showUserInfo()
+                } else {
+                    self.btnCloseTapped(self.btnClose)
+                }
+            }
         }
     }
     
@@ -233,8 +247,11 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         self.output?.stop(self.liveVideo)
-        self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+        if self.presentingViewController != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     // MARK: - Display logic
@@ -274,6 +291,15 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     deinit {
         print("Deinit LiveVideoVC")
+    }
+    
+    @IBAction func onSlotsTap(_ sender: UIButton) {
+        if self.liveVideo.totalSlots > 0 &&
+            self.liveVideo.availableSlots > 0 {
+            self.performSegue(withIdentifier: "seguePresentPaymentViewController", sender: self)
+        } else {
+            self.showAlert("Sorry!", message: "No slots available!")
+        }
     }
     
     @IBAction func btnShowHideExtrasTapped(_ sender: UIButton) {

@@ -19,7 +19,9 @@ class CommentsWorker {
         //        DatabaseGateway.sharedInstance.postComment(comment, on: dish) {
         //            completion()
         //        }
-        
+        guard let user = comment.user else {
+            return
+        }
         
         let urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/commentOnDish"
         
