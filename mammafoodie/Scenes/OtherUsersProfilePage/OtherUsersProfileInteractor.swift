@@ -52,6 +52,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     func loadUserProfileData(userID:String) {
         self.showActivityIndicator()
+        
         worker.getUserDataWith(userID: userID) { (user) in
             
             self.user = user

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class UserProfileCollectionViewHeader:UICollectionReusableView{
+class UserProfileCollectionViewHeader:UICollectionReusableView, UIGestureRecognizerDelegate{
     
     
     var delegate:DishesCollectionViewAdapterDelegate?
@@ -84,7 +84,9 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     @IBOutlet weak var followingSegmentStackView: UIStackView!
     
+    @IBOutlet weak var allFollowersLabel: UILabel!
     
+    @IBOutlet weak var allFollowingLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -119,8 +121,19 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         
         let tapFavourite = UITapGestureRecognizer(target: self, action: #selector(self.openFavouriteDishes(sender:)))
         
-        followersSegmentStackView.addGestureRecognizer(tapFollowers)
-        followingSegmentStackView.addGestureRecognizer(tapFollowing)
+        lblFollowers.addGestureRecognizer(tapFollowers)
+        allFollowersLabel.addGestureRecognizer(tapFollowers)
+        allFollowersLabel.isUserInteractionEnabled = true
+        lblFollowers.isUserInteractionEnabled = true
+        tapFollowers.delegate = self
+        
+        allFollowingLabel.addGestureRecognizer(tapFollowing)
+        lblFollowing.addGestureRecognizer(tapFollowing)
+        allFollowingLabel.isUserInteractionEnabled = true
+        lblFollowing.isUserInteractionEnabled = true
+        tapFollowing.delegate = self
+
+        
         favouriteDishesStackView.addGestureRecognizer(tapFavourite)
         
     }

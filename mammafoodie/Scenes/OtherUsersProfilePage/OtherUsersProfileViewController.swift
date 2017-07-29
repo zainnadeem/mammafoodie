@@ -150,12 +150,26 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             break
             
             case "go cook":
+              self.performSegue(withIdentifier: "GoCookSegue", sender: self)
+                
+                
+                
             break
             
         default:
             break
         }
         
+    }
+    
+    func openDishDetails(_ dish: MFDish) {
+//        self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
+        dish.accessMode = .owner
+        if dish.mediaType == .liveVideo {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        } else if dish.mediaType == .vidup {
+            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
+        }
     }
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
