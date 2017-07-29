@@ -474,6 +474,8 @@
 		57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */; };
 		57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */; };
 		57801F7F1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */; };
+		5790CC4C1F2CD68D007070C1 /* AddCardClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5790CC4A1F2CD68D007070C1 /* AddCardClnCell.swift */; };
+		5790CC4D1F2CD68D007070C1 /* AddCardClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5790CC4B1F2CD68D007070C1 /* AddCardClnCell.xib */; };
 		57A7177D1F285ABA00BC6239 /* BankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A7177B1F285ABA00BC6239 /* BankDetailsViewController.swift */; };
 		57A7177E1F285ABA00BC6239 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A7177C1F285ABA00BC6239 /* WalletViewController.swift */; };
 		57A717821F285AEB00BC6239 /* WalletTransactionsTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A717801F285AEB00BC6239 /* WalletTransactionsTblCell.swift */; };
@@ -871,6 +873,8 @@
 		57801F741EF8305E002E18EF /* CuisineFiltreWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineFiltreWorker.swift; sourceTree = "<group>"; };
 		57801F7A1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionCell.swift; sourceTree = "<group>"; };
 		57801F7B1EF8308C002E18EF /* FeaturedMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturedMenuCollectionCell.xib; sourceTree = "<group>"; };
+		5790CC4A1F2CD68D007070C1 /* AddCardClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardClnCell.swift; sourceTree = "<group>"; };
+		5790CC4B1F2CD68D007070C1 /* AddCardClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCardClnCell.xib; sourceTree = "<group>"; };
 		57A7177B1F285ABA00BC6239 /* BankDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankDetailsViewController.swift; sourceTree = "<group>"; };
 		57A7177C1F285ABA00BC6239 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		57A717801F285AEB00BC6239 /* WalletTransactionsTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTransactionsTblCell.swift; sourceTree = "<group>"; };
@@ -1832,6 +1836,15 @@
 			path = FeaturedMenuCollectionCell;
 			sourceTree = "<group>";
 		};
+		5790CC491F2CD67D007070C1 /* AddCardClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				5790CC4A1F2CD68D007070C1 /* AddCardClnCell.swift */,
+				5790CC4B1F2CD68D007070C1 /* AddCardClnCell.xib */,
+			);
+			path = AddCardClnCell;
+			sourceTree = "<group>";
+		};
 		57A7177A1F285ABA00BC6239 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1985,6 +1998,7 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5790CC491F2CD67D007070C1 /* AddCardClnCell */,
 				113139D71EF80574000050D6 /* ActivityCollectionViewCell.swift */,
 				113139D81EF80574000050D6 /* ActivityCollectionViewCell.xib */,
 				2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */,
@@ -2265,6 +2279,7 @@
 				1194D7001F22652A00EA494C /* Siri.storyboard in Resources */,
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
+				5790CC4D1F2CD68D007070C1 /* AddCardClnCell.xib in Resources */,
 				2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
@@ -2778,6 +2793,7 @@
 				2CFB9BB01EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
 				57DDD0B91EFC015B00C3BA21 /* GoCookStep2Presenter.swift in Sources */,
 				BFC927401EF00A7E00602153 /* PermissionsAlertModels.swift in Sources */,
+				5790CC4C1F2CD68D007070C1 /* AddCardClnCell.swift in Sources */,
 				F097D8CB1EF3D8BA00FCF967 /* ChatListInteractor.swift in Sources */,
 				2CFB9BB41EFA477200C08EB3 /* VidupDetailPageModels.swift in Sources */,
 				2C6979CD1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,

@@ -3,13 +3,10 @@ import UIKit
 class SlotSelectionWorker: NSObject {
     // MARK: - Business Logic
     
-    func handleSlotSelection(withPanGesture sender:UIPanGestureRecognizer, adapter:SlotCollectionViewAdapter){
-        
-        guard let collectionView = adapter.collectionView else {return}
+    func handleSlotSelection(withPanGesture sender : UIPanGestureRecognizer, adapter : SlotCollectionViewAdapter, collectionView : UICollectionView){
         
         let touchX = sender.location(in: collectionView).x
         let touchY = sender.location(in: collectionView).y
-        
         
         for cell in collectionView.visibleCells{
             

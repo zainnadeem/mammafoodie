@@ -289,6 +289,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         }
     }
     
+    func purchase(slots : UInt) {
+        self.performSegue(withIdentifier: "segueShowPaymentViewController", sender: slots)
+    }
+    
     deinit {
         print("Deinit LiveVideoVC")
     }
@@ -296,7 +300,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBAction func onSlotsTap(_ sender: UIButton) {
         if self.liveVideo.totalSlots > 0 &&
             self.liveVideo.availableSlots > 0 {
-            self.performSegue(withIdentifier: "seguePresentPaymentViewController", sender: self)
+            self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: self)
         } else {
             self.showAlert("Sorry!", message: "No slots available!")
         }
