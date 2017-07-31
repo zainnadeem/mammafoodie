@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
         let currentUser = Auth.auth().currentUser
-        
         self.currentUserFirebase = currentUser
+        
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         

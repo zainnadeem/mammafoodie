@@ -10,6 +10,8 @@ import UIKit
 
 class AddCardClnCell: UICollectionViewCell {
 
+    @IBOutlet weak var viewGradientBack: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

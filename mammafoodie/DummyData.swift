@@ -56,7 +56,7 @@ class DummyData {
         let newsfeedObjects = [newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5]
         
         for object in newsfeedObjects {
-            print(object.attributedString)
+            print(object.attributedString ?? "")
         }
         
         completion([newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5])

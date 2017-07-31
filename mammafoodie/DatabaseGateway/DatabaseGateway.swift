@@ -1317,21 +1317,21 @@ extension DatabaseGateway {
         
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("sources")
         let pushId = ref.childByAutoId().key
-        
         let token = [ "token": token as Any]
         
         ref.child(pushId).updateChildValues(token) { (error, databaseRef) in
-            //            completion(error)
             print(databaseRef)
             databaseRef.parent?.observe(DataEventType.childChanged, with: { (snapshot) in
-                print(snapshot.value)
-                if let cardDetails = snapshot.value as? [String:Any] {
+                print(snapshot.value ?? "")
+                    if let cardDetails = snapshot.value as? [String:Any] {
                     if let id = cardDetails["id"] as? String {
                         completion(id, nil)
                     } else {
+                        completion("", error)
                         print("nooooo")
                     }
                 } else {
+                    completion("", error)
                     print("Noooo")
                 }
             })

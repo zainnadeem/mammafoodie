@@ -72,12 +72,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="e9t-xk-Smo">
                         <barButtonItem key="backBarButtonItem" title=" " id="dpT-wb-WJt"/>
-                        <barButtonItem key="leftBarButtonItem" image="BackBtn" id="hwW-5E-M1B">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onBackTap:" destination="Yde-dn-1SP" id="9G6-3q-J9X"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="settingTblView" destination="hfv-AD-A9x" id="xzl-ly-vr5"/>
@@ -113,7 +107,7 @@
                                             <rect key="frame" x="16" y="20" width="343" height="128"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fs0-ba-W0w">
-                                                    <rect key="frame" x="120" y="10" width="103.5" height="30"/>
+                                                    <rect key="frame" x="120.5" y="10" width="103.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="oSo-bN-ObK"/>
                                                     </constraints>

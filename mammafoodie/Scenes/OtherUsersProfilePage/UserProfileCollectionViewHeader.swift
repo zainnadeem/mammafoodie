@@ -9,12 +9,11 @@
 import UIKit
 
 
-class UserProfileCollectionViewHeader:UICollectionReusableView{
-    
+class UserProfileCollectionViewHeader : UICollectionReusableView {
     
     var delegate:DishesCollectionViewAdapterDelegate?
     
-    var profileType:ProfileType!
+    var profileType : ProfileType!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
@@ -76,8 +75,6 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
     
     @IBOutlet weak var lblActivityMenuHeader: UILabel!
     
-    @IBOutlet weak var btnSettings: UIButton!
-    
     @IBOutlet weak var favouriteDishesStackView: UIStackView!
     
     @IBOutlet weak var followersSegmentStackView: UIStackView!
@@ -130,18 +127,15 @@ class UserProfileCollectionViewHeader:UICollectionReusableView{
         let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
         let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
         
-        if profileType == .othersProfile{
-            btnFollow.applyGradient(colors: [color1, color2], direction: .leftToRight)
-            btnSettings.isHidden = true
-            
+        if profileType == .othersProfile {
+            self.btnFollow.applyGradient(colors: [color1, color2], direction: .leftToRight)
             favouriteDishesStackView.isHidden = true //Hide favourite dishes in others profile page
             
         } else {
             //Own profile
             let greenColor = UIColor(red: 0, green: 0.74, blue: 0.22, alpha: 1)
-            btnFollow.backgroundColor = greenColor
-            btnFollow.setTitle("Go Cook", for: .normal)
-            btnSettings.isHidden = false
+            self.btnFollow.backgroundColor = greenColor
+            self.btnFollow.setTitle("Go Cook", for: .normal)
             favouriteDishesStackView.isHidden = false
         }
         

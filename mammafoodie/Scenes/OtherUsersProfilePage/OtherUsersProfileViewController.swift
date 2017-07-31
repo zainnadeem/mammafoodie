@@ -29,6 +29,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     var profileType:ProfileType = .ownProfile // .othersProfile
     
+    @IBOutlet weak var btnBack: UIBarButtonItem!
+    @IBOutlet weak var btnSettings: UIBarButtonItem!
     @IBOutlet weak var collectionView:UICollectionView!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
@@ -48,10 +50,20 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         super.viewDidLoad()
         
         self.output.setUpDishCollectionView(self.collectionView, self.profileType)
-        if let user = Auth.auth().currentUser{
+        if self.profileType == .ownProfile {
+            let settingsBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
+            self.navigationItem.rightBarButtonItem = settingsBtn
+        }
+        
+        if let user = Auth.auth().currentUser {
             self.userID = user.uid
             self.output.loadUserProfileData(userID: self.userID!)
+        } else {
+            self.navigationController?.dismiss(animated: true, completion: {
+                
+            })
         }
+        
     }
     
     //MARK: - Input
@@ -104,14 +116,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     // MARK: - Event handling
     
-    @IBAction func settingsButtonClicked(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func closeButtonClicked(_ sender: UIButton) {
-        
-        
-        
+    func onSettingsTap(_ sender : UIBarButtonItem) {
+        self.performSegue(withIdentifier: "segueShowSettingsViewController", sender: self)
     }
     
     @IBAction func chatButtonClicked(_ sender: UIButton) {
@@ -158,8 +164,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
     }
     
-    @IBAction func btnDismissTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func onBackTap(_ sender: UIBarButtonItem) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func btnLogoutTapped(_ sender: UIButton) {

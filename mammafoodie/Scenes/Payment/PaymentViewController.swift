@@ -25,6 +25,10 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var btnDelivery: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     
+    @IBOutlet weak var addCartTextField: STPPaymentCardTextField!
+    @IBOutlet weak var viewAddCard: UIView!
+    @IBOutlet weak var btnAddCard: UIButton!
+    
     var cards: [STPCard] = []
     var slotsToBePurchased : UInt = 0
     var dish : MFDish!
@@ -32,11 +36,11 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.dish == nil {
-            self.navigationController?.popViewController(animated: true)
-            return
-        }
-        
+        //        if self.dish == nil {
+        //            self.navigationController?.popViewController(animated: true)
+        //            return
+        //        }
+        self.dummyData()
         self.paymentCollectionView.delegate = self
         self.paymentCollectionView.dataSource = self
         
@@ -62,8 +66,14 @@ class PaymentViewController: UIViewController {
         self.btnConfirm.isHidden = true
         self.paymentCollectionView.register(UINib.init(nibName: "SavedCardClnCell", bundle: nil), forCellWithReuseIdentifier: "SavedCardClnCell")
         self.paymentCollectionView.register(UINib.init(nibName: "AddCardClnCell", bundle: nil), forCellWithReuseIdentifier: "AddCardClnCell")
-        self.getSavedCards()
-        self.updateUI()
+        
+        self.btnAddCard.layer.cornerRadius = 5.0
+        self.btnAddCard.clipsToBounds = true
+        self.btnAddCard.backgroundColor = .clear
+        self.btnAddCard.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
+        
+        //        self.getSavedCards()
+        //        self.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,11 +87,23 @@ class PaymentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func dummyData() {
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: "-KqAIpk0MFsdCn1sVogc") { (dishFound) in
+            if let dishFound = dishFound {
+                DispatchQueue.main.async {
+                    self.dish = dishFound
+                    self.slotsToBePurchased = self.dish.availableSlots
+                    self.updateUI()
+                    self.getSavedCards()
+                }
+            }
+        }
+    }
+    
     func updateUI() {
         self.imgViewDish.sd_setImage(with: self.dish.generateCoverThumbImageURL())
         self.lblDishName.text = self.dish.name
         self.lblSlotsCount.text = "\(self.slotsToBePurchased)"
-        
     }
     
     func getSavedCards() {
@@ -90,6 +112,46 @@ class PaymentViewController: UIViewController {
                 self.cards = cards
                 self.paymentCollectionView.reloadData()
             })
+        }
+    }
+    
+    func showAddCardView(_ show : Bool) {
+        UIView.animate(withDuration: 0.27) {
+            if show {
+                self.view.bringSubview(toFront: self.viewAddCard)
+                self.viewAddCard.alpha = 1
+                self.addCartTextField.becomeFirstResponder()
+            } else {
+                self.viewAddCard.alpha = 0
+                self.view.sendSubview(toBack: self.viewAddCard)
+                self.addCartTextField.resignFirstResponder()
+            }
+        }
+    }
+    
+    @IBAction func onAddCardTap(_ sender: UIButton) {
+        self.showAddCardView(false)
+        guard let cardNumber: String = self.addCartTextField.cardNumber else {
+            return
+        }
+        
+        guard let cvc = self.addCartTextField.cvc else {
+            return
+        }
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        StripeGateway.shared.addPaymentMethod(number: cardNumber, expMonth: self.addCartTextField.expirationMonth,
+                                              expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
+            DispatchQueue.main.async {
+                self.addCartTextField.clear()
+                hud.hide(animated: true)
+                if let error = error {
+                    self.showAlert(error.localizedDescription, message: "")
+                } else {
+                    self.showAlert("Success!", message: "Card saved.")
+                    self.getSavedCards()
+                }
+            }
         }
     }
     
@@ -146,6 +208,10 @@ class PaymentViewController: UIViewController {
     @IBAction func onAddAnotherAddress(_ sender: UIButton) {
         
     }
+    
+    @IBAction func onCancelTap(_ sender: UIButton) {
+        self.showAddCardView(false)
+    }
 }
 
 extension PaymentViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -161,9 +227,14 @@ extension PaymentViewController : UICollectionViewDelegate, UICollectionViewData
             return cell
         } else {
             let cell : AddCardClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCardClnCell", for: indexPath) as! AddCardClnCell
-            cell.addGradienBorder(colors: [gradientStartColor, gradientEndColor])
-            
+            cell.viewGradientBack.layer.cornerRadius = 5.0
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let addCardcell = cell as? AddCardClnCell {
+            addCardcell.viewGradientBack.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight, borderWidth: 1.0, animated: true)
         }
     }
     
@@ -171,7 +242,7 @@ extension PaymentViewController : UICollectionViewDelegate, UICollectionViewData
         if indexPath.section == 0 {
             let card: STPCard = self.cards[indexPath.item]
         } else {
-            
+            self.showAddCardView(true)
         }
     }
     
@@ -183,8 +254,11 @@ extension PaymentViewController : UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = collectionView.frame.width
-        return CGSize(width: width, height: width * 0.5)
+        var size = collectionView.frame.size
+        size.width = size.width * 0.95
+        size.height = size.height * 0.95
+        
+        return size
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -44,17 +44,17 @@ class ActivityTblCell: UITableViewCell {
     
     private func getEmojiCharacter(for cuisineId: String) -> UIImage {
         if cuisineId == "1" {
-            return #imageLiteral(resourceName: "EmojiChineseFemale")
+            return #imageLiteral(resourceName: "BeefTower")
         } else if cuisineId == "2" {
-            return #imageLiteral(resourceName: "EmojiItalian")
+            return #imageLiteral(resourceName: "coleslawBurger")
         } else if cuisineId == "3" {
-            return #imageLiteral(resourceName: "EmojiMexican")
+            return #imageLiteral(resourceName: "Crabcakes")
         } else if cuisineId == "4" {
-            return #imageLiteral(resourceName: "EmojiJapanese")
+            return #imageLiteral(resourceName: "GoatCheeseCanape")
         } else if cuisineId == "5" {
-            return #imageLiteral(resourceName: "EmojiSardarji")
+            return #imageLiteral(resourceName: "guac&chips")
         }
-        return #imageLiteral(resourceName: "EmojiChineseMale")
+        return #imageLiteral(resourceName: "BeefTower")
     }
     
     func updateShadow() {
