@@ -62,7 +62,7 @@ extension UIView {
         }
     }
     
-    func addGradienBorder(colors:[UIColor] , direction : GradientDirection = .topToBottom, borderWidth width : CGFloat = 1.0, animated : Bool = true) {
+    func addGradienBorder(colors:[UIColor] , direction : GradientDirection = .topToBottom, borderWidth width : CGFloat = 1.0, animated : Bool = true, animationDuration : CFTimeInterval = 0.27) {
         self.removeGradient()
         let gradientLayer = CAGradientLayer()
         
@@ -89,7 +89,7 @@ extension UIView {
             let fadeAnimation = CABasicAnimation(keyPath: "opacity")
             fadeAnimation.fromValue = 0
             fadeAnimation.toValue = 1.0
-            fadeAnimation.duration = 0.27
+            fadeAnimation.duration = animationDuration
             fadeAnimation.repeatCount = 1
             
             gradientLayer.opacity = 1.0

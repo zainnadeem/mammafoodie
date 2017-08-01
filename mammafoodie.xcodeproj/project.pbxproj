@@ -467,6 +467,12 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		577F10351F308F350082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
+		577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
+		577F10381F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */; };
+		577F10391F309BD70082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */; };
+		577F103D1F309E150082EBF8 /* InfiniteClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F103B1F309E150082EBF8 /* InfiniteClnCell.swift */; };
+		577F103E1F309E150082EBF8 /* InfiniteClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577F103C1F309E150082EBF8 /* InfiniteClnCell.xib */; };
 		57801F671EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */; };
 		57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */; };
 		57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */; };
@@ -866,6 +872,10 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		577F10341F308F350082EBF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		577F103B1F309E150082EBF8 /* InfiniteClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteClnCell.swift; sourceTree = "<group>"; };
+		577F103C1F309E150082EBF8 /* InfiniteClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfiniteClnCell.xib; sourceTree = "<group>"; };
 		57801F631EF823F9002E18EF /* FeaturedMenuCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedMenuCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		57801F641EF823F9002E18EF /* NearByChefsMapAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByChefsMapAdapter.swift; sourceTree = "<group>"; };
 		57801F651EF823F9002E18EF /* NearbyChefsSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsSearchAdapter.swift; sourceTree = "<group>"; };
@@ -1471,6 +1481,7 @@
 				2CFB9BA81EFA477200C08EB3 /* VidupDetailPage */,
 				BFC927201EF00A7E00602153 /* VidupMainPage */,
 				57A7177A1F285ABA00BC6239 /* Wallet */,
+				577F10331F308F260082EBF8 /* Welcome */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1804,6 +1815,25 @@
 				5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		577F10331F308F260082EBF8 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				577F103A1F309E030082EBF8 /* InfiniteClnCell */,
+				577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */,
+				577F10341F308F350082EBF8 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		577F103A1F309E030082EBF8 /* InfiniteClnCell */ = {
+			isa = PBXGroup;
+			children = (
+				577F103B1F309E150082EBF8 /* InfiniteClnCell.swift */,
+				577F103C1F309E150082EBF8 /* InfiniteClnCell.xib */,
+			);
+			path = InfiniteClnCell;
 			sourceTree = "<group>";
 		};
 		57801F611EF823F9002E18EF /* Adapters */ = {
@@ -2280,6 +2310,7 @@
 				2CFB9B731EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
 				5790CC4D1F2CD68D007070C1 /* AddCardClnCell.xib in Resources */,
+				577F103E1F309E150082EBF8 /* InfiniteClnCell.xib in Resources */,
 				2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
@@ -2491,6 +2522,7 @@
 				2C69794E1F07C88E00787DCC /* SlotSelectionConfigurator.swift in Sources */,
 				2C6979261F07C88D00787DCC /* LoginNewViewController.swift in Sources */,
 				2CA2B4AF1EF542D30076598C /* MFDishRequest.swift in Sources */,
+				577F10391F309BD70082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */,
 				2C69792B1F07C88D00787DCC /* NearbyChefsConfigurator.swift in Sources */,
 				2C6979441F07C88D00787DCC /* PermissionsAlertPresenter.swift in Sources */,
 				2C9256CD1F0A1E560095E88B /* CommentsTableViewAdapter.swift in Sources */,
@@ -2528,6 +2560,7 @@
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C6979341F07C88D00787DCC /* UserProfileCollectionViewHeader.swift in Sources */,
 				2C6979DC1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */,
+				577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */,
 				2C6979521F07C88E00787DCC /* SlotSelectionRouter.swift in Sources */,
 				2C6979351F07C88D00787DCC /* OtherUsersProfileConfigurator.swift in Sources */,
 				2C12BCA61EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
@@ -2744,6 +2777,7 @@
 				2CE22E8B1F0A421600B6E5B0 /* CommentsWorker.swift in Sources */,
 				2C6979BB1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
 				BFC927441EF00A7E00602153 /* LoadVidupsWorker.swift in Sources */,
+				577F10351F308F350082EBF8 /* WelcomeViewController.swift in Sources */,
 				2CFEB5651F13F1F6005EF9DA /* RegisterConfigurator.swift in Sources */,
 				572E9AAF1EFAB5DC007DE6D0 /* CuisineCollectionViewCell.swift in Sources */,
 				11AE87621F1C9EBA00B788BA /* MFNotification.swift in Sources */,
@@ -2759,6 +2793,7 @@
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
 				F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */,
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
+				577F103D1F309E150082EBF8 /* InfiniteClnCell.swift in Sources */,
 				11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */,
 				2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
@@ -2851,6 +2886,7 @@
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
 				F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
+				577F10381F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
 				F0F6B65F1F0D2BBE00A74CB5 /* PaymentViewController.swift in Sources */,
 				2C0D8E351F281C5B00842ECD /* SavedCardClnCell.swift in Sources */,

@@ -13,7 +13,7 @@ import MBProgressHUD
 class SavedCardsVC: UIViewController {
     
     var cards: [STPCard] = []
-    var currentLoggedInUser: String = "luuN75SiCHMWenXTngLlPLeW48a2"
+    var currentLoggedInUser: String = DatabaseGateway.sharedInstance.getLoggedInUser()?.id ?? "luuN75SiCHMWenXTngLlPLeW48a2"
     var toUser: String = ""
     
     var amount : Double = 0

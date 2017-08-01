@@ -39,14 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
-        if let loginVC = navigationController.viewControllers.first as? LoginViewController {
+        if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
             if currentUser != nil {
                 //User is already logged in, show home screen
                 DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
                     self.currentUser = user
                 })
                 let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                loginVC.navigationController?.pushViewController(homeVC, animated: false)
+                welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
             }
         }
         self.window?.rootViewController = navigationController
