@@ -13,13 +13,10 @@ class LoginRouter: LoginRouterInput {
     // MARK: - Navigation
     
     func openSegue(_ segue: UIStoryboardSegue) {
-        
-               guard let identifier = segue.identifier else {
-//                    assertionFailure("Segue had no identifier")
-                    return
-                }
-      
-        
+        guard let identifier = segue.identifier else {
+            //                    assertionFailure("Segue had no identifier")
+            return
+        }
     }
     
     // Mark: - Privacy Policy

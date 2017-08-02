@@ -9,23 +9,41 @@
 import UIKit
 
 class InfiniteCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    var scrollTimer = Timer()
-    var height:CGFloat=0.0
     
+    private var scrollTimer = Timer()
+    private var height:CGFloat = 0.0
     
-    let infiniteCollectionView: UICollectionView
+    private let totalCount : Int = 62
+    
+    private let infiniteCollectionView: UICollectionView
     
     init(with collectionView: UICollectionView) {
         self.infiniteCollectionView = collectionView
         self.infiniteCollectionView.register(UINib.init(nibName: "InfiniteClnCell", bundle: nil), forCellWithReuseIdentifier: "InfiniteClnCell")
+        self.infiniteCollectionView.isUserInteractionEnabled = false
     }
     
     func startScrolling() {
         self.infiniteCollectionView.delegate = self
         self.infiniteCollectionView.dataSource = self
-        
         self.infiniteCollectionView.reloadData()
+        
+        self.scrollTimer = Timer.scheduledTimer(timeInterval: 0.09, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+    }
+    
+    func imageAtIndexPath(_ indexPath : IndexPath) -> UIImage {
+        var count = indexPath.item
+        if count > (self.totalCount / 2) - 1 {
+            count = self.totalCount - 1 - count
+        }
+        if count < 0 {
+            count = 0
+        }
+        return UIImage.init(named: "WelcomeImage\(count)")!
+    }
+    
+    func stopScrolling() {
+        self.scrollTimer.invalidate()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -33,12 +51,12 @@ class InfiniteCollectionViewAdapter: NSObject, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return self.totalCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfiniteClnCell", for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfiniteClnCell", for: indexPath) as! InfiniteClnCell
+        cell.imageView.image = self.imageAtIndexPath(indexPath)
         return cell
     }
     
@@ -49,10 +67,9 @@ class InfiniteCollectionViewAdapter: NSObject, UICollectionViewDelegate, UIColle
         
         width = (width / 2) - 10
         if width < 100 {
-           width = 100
+            width = 100
         }
         height = width * 1.1
-        
         
         return CGSize(width: width, height: height)
     }
@@ -69,56 +86,32 @@ class InfiniteCollectionViewAdapter: NSObject, UICollectionViewDelegate, UIColle
         return UIEdgeInsetsMake(5, 5, 5, 5)
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        configAutoscrollTimer()
+    private func onTimer() {
+        self.autoScroll()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(true)
+    @objc private func autoScroll() {
+        let initailPoint = CGPoint(x: 0, y: self.height)
         
-        deconfigAutoscrollTimer()
-    }
-    
-    func configAutoscrollTimer() {
-        
-        timr=Timer.scheduledTimer(timeInterval: 0.03, target: self, selector: #selector(dashboard_ViewController.autoScrollView), userInfo: nil, repeats: true)
-    }
-    
-    func deconfigAutoscrollTimer() {
-        timr.invalidate()
-        
-    }
-    
-    func onTimer() {
-        autoScrollView()
-    }
-    
-    func autoScrollView() {
-        
-        let initailPoint = CGPoint(x: w,y :0)
-        
-        if __CGPointEqualToPoint(initailPoint, ticker.contentOffset)
-        {
-            if w<collection_view.contentSize.width
-            {
-                w += 0.5
+        if let lastCellFrame = self.infiniteCollectionView.layoutAttributesForItem(at: IndexPath.init(item: (self.infiniteCollectionView.numberOfItems(inSection: 0) - 1) , section: 0))?.frame {
+            
+            let maxY = lastCellFrame.origin.y + lastCellFrame.size.height
+            if __CGPointEqualToPoint(initailPoint, self.infiniteCollectionView.contentOffset) {
+                if self.height >= self.infiniteCollectionView.contentSize.height {
+                    self.height = 0
+                } else {
+                    //                self.height = -self.infiniteCollectionView.frame.size.height
+                    self.height += 2
+//                    print("Height: \(self.height) --- Content Offset: \(self.infiniteCollectionView.contentOffset)")
+                }
+                let offsetPoint = CGPoint(x: 0, y: self.height)
+                self.infiniteCollectionView.contentOffset = offsetPoint
+            } else {
+                self.height = self.infiniteCollectionView.contentOffset.y
+//                print("Positive Height: \(self.height) --- Content Offset: \(self.infiniteCollectionView.contentOffset)")
             }
-            else
-            {
-                w = -self.view.frame.size.width
-            }
-            
-            let offsetPoint = CGPoint(x: w,y :0)
-            
-            collection_view.contentOffset=offsetPoint
-            
-        }
-        else
-        {
-            w=collection_view.contentOffset.x
+        } else {
+            print("Some critical issue")
         }
     }
 }

@@ -208,8 +208,6 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
     }
     
-    
-    
     @IBAction func resetPasswordSaveButtonTapped(_ sender: UIButton) {
         
         
@@ -243,7 +241,6 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
         
     }
-    
     
     @IBAction func saveTapped(_ sender: UIButton) {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -281,7 +278,6 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         self.present(alert, animated: true, completion: nil)
         
     }
-    
     
     func openCamera() {
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))

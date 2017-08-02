@@ -83,7 +83,7 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         guard validateCredentials() && isValidEmail(emailStr: emailTextFeild.text!) else {
             return
         }
-        output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
+        self.output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
     }
     
     func validateCredentials() -> Bool{
@@ -117,9 +117,7 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     }
     
     func navigateHomePage() {
-        let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let destViewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.navigationController?.pushViewController(destViewController, animated: true)
+        AppDelegate.shared().setHomeViewController()
     }
     
     //    override func viewWillAppear(_ animated: Bool) {

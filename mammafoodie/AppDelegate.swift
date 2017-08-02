@@ -167,6 +167,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
     }
     
+    func resizeImage(image: UIImage, imageName: String) {
+        let newWidth: CGFloat = 400
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize.init(width: newWidth, height: newHeight))
+        image.draw(in: CGRect.init(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let documentsPath = NSTemporaryDirectory()
+        let destinationPath = documentsPath.appending("\(imageName).jpg")
+        do {
+            try UIImageJPEGRepresentation(newImage!, 0.9)!.write(to: URL.init(fileURLWithPath: destinationPath))
+        } catch {
+            print(error)
+        }
+        print("filePath: \(destinationPath)")
+    }
+    
 }
 
 extension AppDelegate : MessagingDelegate {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MFUserAddress:CustomStringConvertible{
+struct MFUserAddress: CustomStringConvertible{
     
     var id:String!
     var address:String!
@@ -35,12 +35,12 @@ struct MFUserAddress:CustomStringConvertible{
         self.phone = dictionary["phone"] as? String ?? ""
     }
     
-    init(){
+    init() {
         
     }
     
     var description: String {
-        return "\(self.address ?? ""),\(self.address_2 ?? ""),\(self.city ?? ""),\(self.state ?? ""),\(self.country ?? ""), Ph:\(self.phone ?? "")"
+        return "\(self.address ?? ""),\(self.address_2 ?? ""),\(self.city ?? ""),\(self.state ?? ""),\(self.country ?? "")"
     }
     
 }

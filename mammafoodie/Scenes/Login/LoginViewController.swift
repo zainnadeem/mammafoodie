@@ -88,7 +88,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateShadow()
+        self.updateShadow()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -124,8 +124,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 130) , in: self.view)
         
         
-        txfForgotPassword.text = txtEmail.text
-        txfForgotPassword.becomeFirstResponder()
+        self.txfForgotPassword.text = txtEmail.text
+        self.txfForgotPassword.becomeFirstResponder()
         
         
     }
@@ -248,15 +248,15 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     func showHomeScreen() {
         if let currentUser = Auth.auth().currentUser {
             AppDelegate.shared().setHomeViewController()
-//            
-//            let user: MFUser = MFUser()
-//            user.id = currentUser.uid
-//            user.name = currentUser.displayName
-//            user.email = currentUser.email
-//            
-//            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
-//                print("User created")
-//            })
+            //
+            //            let user: MFUser = MFUser()
+            //            user.id = currentUser.uid
+            //            user.name = currentUser.displayName
+            //            user.email = currentUser.email
+            //
+            //            DatabaseGateway.sharedInstance.createUserEntity(with: user, { _ in
+            //                print("User created")
+            //            })
             
             //            DatabaseGateway.sharedInstance.getUserWith(userID: currentUser.uid, { (user) in
             //                if let user = user {
@@ -283,7 +283,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             self.passImageView.image = UIImage(named: "passselect")
         }
     }
-
+    
     //Routing
 }
 

@@ -37,7 +37,6 @@ class WelcomeViewController: UIViewController {
         self.btnRegister.layer.cornerRadius = 5.0
         
         self.infiniteCollectionViewAdapter = InfiniteCollectionViewAdapter.init(with: self.collectionViewImages)
-        self.infiniteCollectionViewAdapter.startScrolling()
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,8 +46,18 @@ class WelcomeViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         self.btnLearnMore.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.infiniteCollectionViewAdapter.startScrolling()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.infiniteCollectionViewAdapter.stopScrolling()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,11 +101,11 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func onLoginTap(_ sender: UIButton) {
-        
+        self.performSegue(withIdentifier: "seguePresentLogin", sender: self)
     }
     
     @IBAction func onRegisterTap(_ sender: UIButton) {
-        
+        self.performSegue(withIdentifier: "seguePresentRegister", sender: self)
     }
     
     @IBAction func onTermsTap(_ sender: UIButton) {

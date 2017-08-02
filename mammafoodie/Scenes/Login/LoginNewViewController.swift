@@ -41,8 +41,7 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         emailTextField.delegate = self
     }
-    
-    
+
     func updateShadow() {
         if self.shapeLayer == nil {
             self.view.layoutIfNeeded()
@@ -64,8 +63,6 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -76,15 +73,11 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
         updateShadow()
     }
     
-    
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.loginButn.applyGradient(colors: [gradientStartColor, gradientEndColor])
     }
-    
-    
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if emailTextField == textField {
@@ -96,8 +89,6 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
             PassTextChangeImage()
         }
     }
-    
-    
     
     func emailTextChange() {
         if emailTextField.text == "" {
@@ -117,7 +108,6 @@ class LoginNewViewController: UIViewController, UITextFieldDelegate {
             passImageView.image = UIImage(named: "Password")
         }
     }
-    
     
 }
 

@@ -17,7 +17,7 @@ class LoginPresenter: LoginPresenterInput ,HUDRenderer{
     weak var output: LoginPresenterOutput!
     
     // MARK: - Presentation logic
-
+    
     func forgotpasswordCompletion(errorMessage:String?){
         
         var message = ""
@@ -31,7 +31,7 @@ class LoginPresenter: LoginPresenterInput ,HUDRenderer{
             title = "Success"
         }
         
-        showAlert(title: title, message: message, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+        self.showAlert(title: title, message: message, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
         
     }
     
@@ -39,7 +39,7 @@ class LoginPresenter: LoginPresenterInput ,HUDRenderer{
         
         if let errorMessage = errorMessage{
             
-             showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+            self.showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
             
         } else {
             self.output.showHomeScreen()
@@ -50,7 +50,7 @@ class LoginPresenter: LoginPresenterInput ,HUDRenderer{
     func loginCompletion(errorMessage:String?){
         
         if let errorMessage = errorMessage{
-           showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+            showAlert(title: "Error", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
         } else {
             self.output.showHomeScreen()
         }
@@ -69,7 +69,7 @@ class LoginPresenter: LoginPresenterInput ,HUDRenderer{
             msg = "Logged out successfully"
         }
         
-       showAlert(title: title, message: msg, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
+        showAlert(title: title, message: msg, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
     }
     
     

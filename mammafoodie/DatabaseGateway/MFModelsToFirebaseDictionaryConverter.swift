@@ -89,34 +89,33 @@ class MFModelsToFirebaseDictionaryConverter {
         return [dish.id : rawDish as AnyObject]
     }
     
-    
-    
     class func dictionary(from message: MFMessage) -> FirebaseDictionary {
         return  [
-                "id": message.id as AnyObject,
-                "messageText": message.messageText as AnyObject,
-//                "conversationId": message.conversationId as AnyObject,
-                "senderId": message.senderId as AnyObject,
-                "dateTime": message.dateTime as AnyObject,
-                "senderDisplayName": message.senderDisplayName as AnyObject
-//                "receiverId": message.receiverId as AnyObject
+            "id": message.id as AnyObject,
+            "messageText": message.messageText as AnyObject,
+            //                "conversationId": message.conversationId as AnyObject,
+            "senderId": message.senderId as AnyObject,
+            "dateTime": message.dateTime as AnyObject,
+            "senderDisplayName": message.senderDisplayName as AnyObject
+            //                "receiverId": message.receiverId as AnyObject
         ]
     }
     
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
-        var userInfo: [String:AnyObject] = [
-            :
-            //                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
-            //                "userActivity"      : user.userActivity as AnyObject,
-            //                "cookedDishes"      : user.cookedDishes as AnyObject,
-            //                "boughtDishes"      : user.boughtDishes as AnyObject,
-            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
-            //                "likedDishes"       : user.likedDishes as AnyObject,
-            //                "followers"         : user.followers as AnyObject,
-            //                "following"         : user.following as AnyObject,
-            //                "blocked"           : user.blocked as AnyObject
-            
-        ]
+        //        var userInfo: [String:AnyObject] = [
+        //            :
+        //            //                "socialAccountIDs"  : user.socialAccountIds as AnyObject,
+        //            //                "userActivity"      : user.userActivity as AnyObject,
+        //            //                "cookedDishes"      : user.cookedDishes as AnyObject,
+        //            //                "boughtDishes"      : user.boughtDishes as AnyObject,
+        //            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+        //            //                "likedDishes"       : user.likedDishes as AnyObject,
+        //            //                "followers"         : user.followers as AnyObject,
+        //            //                "following"         : user.following as AnyObject,
+        //            //                "blocked"           : user.blocked as AnyObject
+        //
+        //        ]
+        var userInfo =  [String:AnyObject]()
         
         if let id = user.id {
             userInfo["id"] = id as AnyObject
@@ -147,33 +146,25 @@ class MFModelsToFirebaseDictionaryConverter {
         if let profileDescription = user.profileDescription {
             userInfo["profileDescription"] = profileDescription as AnyObject
         }
-      
         
-          userInfo["phone"] = user.phone as AnyObject
-        
-        
+        userInfo["phone"] = user.phone as AnyObject
         return [
-
             user.id : userInfo as AnyObject
         ]
     }
     
-    
     class func dictionary(from address:MFUserAddress) -> FirebaseDictionary{
         
-        return  [
-                
-                "id"            :   address.id as AnyObject,
-                "address"       :   address.address as AnyObject,
-                "address_2"     :   address.address_2 as AnyObject,
-                "city"          :   address.city as AnyObject,
-                "country"       :   address.country  as AnyObject,
-                "state"         :   address.state as AnyObject,
-                "postalCode"    :   address.postalCode as AnyObject,
-                "latitude"      :   address.latitude as AnyObject,
-                "longitude"     :   address.longitude as AnyObject,
-                "phone"         :   address.phone   as AnyObject
-            ]
+        return  [ "id"            :   address.id as AnyObject,
+                  "address"       :   address.address as AnyObject,
+                  "address_2"     :   address.address_2 as AnyObject,
+                  "city"          :   address.city as AnyObject,
+                  "country"       :   address.country  as AnyObject,
+                  "state"         :   address.state as AnyObject,
+                  "postalCode"    :   address.postalCode as AnyObject,
+                  "latitude"      :   address.latitude as AnyObject,
+                  "longitude"     :   address.longitude as AnyObject,
+                  "phone"         :   address.phone   as AnyObject ]
         
     }
 }

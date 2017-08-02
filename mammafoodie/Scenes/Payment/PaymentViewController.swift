@@ -14,10 +14,11 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var deliveryText: UILabel!
     @IBOutlet weak var choosedeliveryText: UILabel!
     @IBOutlet weak var delveryaddTextField: UITextField!
-    @IBOutlet weak var pickTime: UILabel!
+    
+    @IBOutlet var pickerPickupTime: UIDatePicker!
     @IBOutlet weak var imgViewDish: UIImageView!
     
-    @IBOutlet weak var btnSaveCardTick: UIButton!
+    @IBOutlet weak var txtPickupTime: UITextField!
     @IBOutlet weak var lblDishName: UILabel!
     @IBOutlet weak var lblSlotsCount: UILabel!
     @IBOutlet weak var btnAddAnotherAddress: UIButton!
@@ -72,6 +73,9 @@ class PaymentViewController: UIViewController {
         self.btnAddCard.backgroundColor = .clear
         self.btnAddCard.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
         
+        self.txtPickupTime.inputView = self.pickerPickupTime
+        self.txtPickupTime.delegate = self
+        self.pickerPickupTime.maximumDate = Date.init().dateFor(.tomorrow)
         //        self.getSavedCards()
         //        self.updateUI()
     }
@@ -85,6 +89,14 @@ class PaymentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueShowEditAddressVC" {
+            if let addressVC = segue.destination as? EditAddressViewController {
+               addressVC.delegate = self
+            }
+        }
     }
     
     func dummyData() {
@@ -129,6 +141,10 @@ class PaymentViewController: UIViewController {
         }
     }
     
+    func setPickupTime() {
+//        self.pickerPickupTime.date.time
+    }
+    
     @IBAction func onAddCardTap(_ sender: UIButton) {
         self.showAddCardView(false)
         guard let cardNumber: String = self.addCartTextField.cardNumber else {
@@ -162,9 +178,10 @@ class PaymentViewController: UIViewController {
         self.addressView.isHidden = false
         self.btnConfirm.isHidden = false
         self.deliveryText.text! = "Chefs Address"
+        self.delveryaddTextField.text = self.dish.address
         self.choosedeliveryText.text! = "Pick up time"
         self.delveryaddTextField.layer.backgroundColor = UIColor.clear.cgColor
-        self.delveryaddTextField.isUserInteractionEnabled = false
+        self.delveryaddTextField.isEnabled = false
         self.pickTime.isHidden = false
         self.uberButton.isHidden = true
         self.postmateButton.isHidden = true
@@ -173,13 +190,11 @@ class PaymentViewController: UIViewController {
     @IBAction func deliveryAddress(_ sender: Any) {
         
         self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
-        
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        
         self.pickTime.isHidden = true
         self.uberButton.isHidden = false
         self.postmateButton.isHidden = false
-        
+        self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.address?.description ?? ""
         self.addressView.isHidden = false
         self.btnConfirm.isHidden = false
         self.deliveryText.text! = "Delivery Address"
@@ -188,7 +203,6 @@ class PaymentViewController: UIViewController {
         self.delveryaddTextField.layer.cornerRadius = 5
         self.delveryaddTextField.layer.borderColor = UIColor.clear.cgColor
         self.delveryaddTextField.layer.backgroundColor = #colorLiteral(red: 0.9782952666, green: 0.9755677581, blue: 0.9876046777, alpha: 1).cgColor
-        
     }
     
     @IBAction func uberButnActn(_ sender: Any) {
@@ -201,20 +215,61 @@ class PaymentViewController: UIViewController {
         self.uberButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
     }
     
-    @IBAction func onSaveCard(_ sender: UIButton) {
-        
-    }
-    
     @IBAction func onAddAnotherAddress(_ sender: UIButton) {
-        
+        self.performSegue(withIdentifier: "segueShowEditAddressVC", sender: self)
     }
     
     @IBAction func onCancelTap(_ sender: UIButton) {
         self.showAddCardView(false)
     }
+    
+    @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
+        if let card = self.cards.first,
+            let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            StripeGateway.shared.createCharge(amount: (self.dish.pricePerSlot * Double(self.slotsToBePurchased)), sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { error in
+                DispatchQueue.main.async {
+                    hud.hide(animated: true)
+                    if let error = error {
+                        self.showAlert("Error!", message: error.localizedDescription)
+                    } else {
+                        self.showAlert("Done!", message: "")
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            })
+        } else {
+            self.showAlert("No Card Found!", message: "Please add credit card before confirming purchase.")
+        }
+    }
+    
+    @IBAction func onPickupTimeChange(_ sender: UIDatePicker) {
+        self.setPickupTime()
+    }
 }
 
-extension PaymentViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PaymentViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == self.txtPickupTime {
+            self.setPickupTime()
+        }
+    }
+}
+
+extension PaymentViewController: EditAddressDelegate {
+    func editedAddress(address: MFUserAddress?) {
+        self.delveryaddTextField.text = address?.description
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
+            let userAddress = address {
+            currentUser.address = userAddress.description
+            DatabaseGateway.sharedInstance.updateUserEntity(with: currentUser, { (errorString) in
+                
+            })
+        }
+    }
+}
+
+extension PaymentViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
