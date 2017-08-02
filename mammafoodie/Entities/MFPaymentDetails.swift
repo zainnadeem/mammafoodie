@@ -2,7 +2,7 @@ import Foundation
 
 class MFPaymentDetails {
     var id: String!
-    var order: MFOrder!
+    weak var order: MFOrder!
     var deliveryCharge: Double = 0
     var tax: Double = 0
     var mammafoodieCharge: Double = 0

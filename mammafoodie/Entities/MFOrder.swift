@@ -1,18 +1,18 @@
 import Foundation
 
-enum MFOrderStatus {
-    case pending
-    case beingPrepared
-    case ready
-    case cancelled
-    case inTransit
-    case delivered
-    case pickedUp
+enum MFOrderStatus: String {
+    case pending = "pending"
+    case beingPrepared = "beingPrepared"
+    case ready = "ready"
+    case cancelled = "cancelled"
+    case inTransit = "inTransit"
+    case delivered = "delivered"
+    case pickedUP = "pickedUP"
 }
 
-enum MFShippingMethod {
-    case pickup
-    case delivery
+enum MFShippingMethod: String {
+    case pickup = "pickUP"
+    case delivery = "delivery"
 }
 
 struct MFShippingAddress {
@@ -25,8 +25,8 @@ enum MFDeliveryOption: String {
     case postmate = "Postmate"
 }
 
-enum MFPaymentMethod {
-    case stripe
+enum MFPaymentMethod: String {
+    case stripe = "stripe"
 }
 
 class MFOrder {
@@ -40,11 +40,21 @@ class MFOrder {
     var shippingAddress: MFShippingAddress!
     var deliveryOption: MFDeliveryOption?
     var paymentMethod: MFPaymentMethod!
-    var paymentDetails: MFPaymentDetails?
+    var paymentDetails: MFPaymentDetails!
     
-    init(from orderDataDictionary:[String:AnyObject]){
+    init(from orderDataDictionary:[String:AnyObject]) {
         var Dishid = orderDataDictionary["dishId"] as? String ?? ""
         var quantity = orderDataDictionary["quantity"] as? String ?? ""
+    }
+    
+    init(with quantity: UInt, buyer: MFUser, dish: MFDish, paymentDetails: MFPaymentDetails, paymentMethod: MFPaymentMethod) {
+        self.id = FirebaseReference.orders.generateAutoID()
+        self.dish = dish
+        self.boughtBy = buyer
+        self.status = .pending
+        self.createdAt = Date.init()
+        self.paymentDetails = paymentDetails
+        self.paymentMethod = paymentMethod
     }
 }
 

@@ -75,7 +75,7 @@ class WalletViewController: UIViewController {
             FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let account = snapshot.value as? [String : Any] {
                     if let charges = account["charges"] as? [String : [String : Any]] {
-                        for (key, value) in charges {
+                        for (_, value) in charges {
                             if let amount = value["amount"] as? Double {
                                 self.transactions.append("\(amount)")
                             }

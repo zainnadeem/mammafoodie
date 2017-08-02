@@ -1190,15 +1190,18 @@ extension DatabaseGateway {
 // Get Order Detail
 extension DatabaseGateway {
     
-    func getordersWith(_ completion: @escaping ((_ order:MFOrder?)->Void)){
-        
+    func createOrder(_ order: MFOrder, completion: @escaping ((Error?) -> Void)) {
+        let rawOrder = MFModelsToFirebaseDictionaryConverter.dictionary(from: order)
+        FirebaseReference.orders.classReference.child(order.id).setValue(rawOrder)
+    }
+    
+    func getordersWith(_ completion: @escaping ((_ order:MFOrder?) -> Void)){
         FirebaseReference.orders.classReference.observeSingleEvent(of: .value, with: { (ordersDataSnapshot) in
             guard let ordersData = ordersDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
-            let order:MFOrder = MFOrder(from: ordersData)
+            let order: MFOrder = MFOrder(from: ordersData)
             completion(order)
         }) { (error) in
             print(error)

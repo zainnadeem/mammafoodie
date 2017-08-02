@@ -46,7 +46,7 @@ class MFDish {
     var endTimestamp: Date?
     
     var preparationTime : Double!
-    var boughtBy: [MFOrder:Date] = [:]
+    var boughtBy: [MFOrder: Date] = [:]
     var cuisine: MFCuisine!
     
     var mediaType: MFDishMediaType = MFDishMediaType.unknown

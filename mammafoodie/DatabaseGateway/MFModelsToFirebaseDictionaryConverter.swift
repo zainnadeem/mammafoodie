@@ -32,6 +32,38 @@ class MFModelsToFirebaseDictionaryConverter {
     //        ]
     //    }
     
+    class func dictionary(from order: MFOrder) -> FirebaseDictionary {
+        var raw: FirebaseDictionary = [
+            "id": order.id as AnyObject,
+            "dish": [
+                "id": order.dish.id,
+                "name": order.dish.name,
+                "createdBy": order.dish.user.name
+                ] as AnyObject,
+            "quantity": order.quantity as AnyObject,
+            "boughtBy" : [
+                "id": order.boughtBy.id,
+                "name": order.boughtBy.name
+                ] as AnyObject,
+            "status": order.status.rawValue as AnyObject,
+            "createdAt": order.createdAt.timeIntervalSinceReferenceDate as AnyObject,
+            "shippingMethod": order.shippingMethod.rawValue as AnyObject,
+            "shippingAddress": [
+                "address": order.shippingAddress.address,
+                "location": order.shippingAddress.location
+                ] as AnyObject,
+            "paymentMethod": order.paymentMethod.rawValue as AnyObject,
+            "paymentDetails": [
+                "id": order.paymentDetails.id,
+                "totalCharge": order.paymentDetails.totalCharge,
+                ] as AnyObject
+        ]
+        if let delivery = order.deliveryOption {
+            raw["deliveryOption"] = delivery.rawValue as AnyObject
+        }
+        return raw
+    }
+    
     class func dictionary(from comment: MFComment) -> FirebaseDictionary {
         comment.id = FirebaseReference.dishComments.generateAutoID()
         let raw: FirebaseDictionary = [

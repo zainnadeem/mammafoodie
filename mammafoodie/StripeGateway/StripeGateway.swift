@@ -44,12 +44,11 @@ class StripeGateway {
     func createCharge(amount: Double, sourceId: String, fromUserId: String, toUserId: String, completion: @escaping ((Error?)->Void)) {
         DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId) { (error) in
             print("Charged")
-            completion(error)
             if error == nil {
                 // Transaction success. Add the amount in the digital wallet
-//                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
-//                    
-//                })
+                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
+                    completion(error)
+                })
             }
         }
     }

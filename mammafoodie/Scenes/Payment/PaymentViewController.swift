@@ -31,6 +31,8 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var btnAddCard: UIButton!
     
     var cards: [STPCard] = []
+    var selectedCardIndex: IndexPath?
+    
     var slotsToBePurchased : UInt = 0
     var dish : MFDish!
     
@@ -94,7 +96,7 @@ class PaymentViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueShowEditAddressVC" {
             if let addressVC = segue.destination as? EditAddressViewController {
-               addressVC.delegate = self
+                addressVC.delegate = self
             }
         }
     }
@@ -142,7 +144,7 @@ class PaymentViewController: UIViewController {
     }
     
     func setPickupTime() {
-//        self.pickerPickupTime.date.time
+        self.txtPickupTime.text = self.pickerPickupTime.date.toString(format: .custom("hh:mm aa"))
     }
     
     @IBAction func onAddCardTap(_ sender: UIButton) {
@@ -158,16 +160,16 @@ class PaymentViewController: UIViewController {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         StripeGateway.shared.addPaymentMethod(number: cardNumber, expMonth: self.addCartTextField.expirationMonth,
                                               expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
-            DispatchQueue.main.async {
-                self.addCartTextField.clear()
-                hud.hide(animated: true)
-                if let error = error {
-                    self.showAlert(error.localizedDescription, message: "")
-                } else {
-                    self.showAlert("Success!", message: "Card saved.")
-                    self.getSavedCards()
-                }
-            }
+                                                DispatchQueue.main.async {
+                                                    self.addCartTextField.clear()
+                                                    hud.hide(animated: true)
+                                                    if let error = error {
+                                                        self.showAlert(error.localizedDescription, message: "")
+                                                    } else {
+                                                        self.showAlert("Success!", message: "Card saved.")
+                                                        self.getSavedCards()
+                                                    }
+                                                }
         }
     }
     
@@ -182,7 +184,7 @@ class PaymentViewController: UIViewController {
         self.choosedeliveryText.text! = "Pick up time"
         self.delveryaddTextField.layer.backgroundColor = UIColor.clear.cgColor
         self.delveryaddTextField.isEnabled = false
-        self.pickTime.isHidden = false
+        self.txtPickupTime.isHidden = false
         self.uberButton.isHidden = true
         self.postmateButton.isHidden = true
     }
@@ -191,7 +193,7 @@ class PaymentViewController: UIViewController {
         
         self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        self.pickTime.isHidden = true
+        self.txtPickupTime.isHidden = true
         self.uberButton.isHidden = false
         self.postmateButton.isHidden = false
         self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.address?.description ?? ""
@@ -224,17 +226,25 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
-        if let card = self.cards.first,
+        if let selectedIndex = self.selectedCardIndex,
             let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            let card = self.cards[selectedIndex.item]
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             StripeGateway.shared.createCharge(amount: (self.dish.pricePerSlot * Double(self.slotsToBePurchased)), sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { error in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)
                     if let error = error {
-                        self.showAlert("Error!", message: error.localizedDescription)
+                        self.showAlert("Error!", message: error.localizedDescription, actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
+                            DispatchQueue.main.async {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        })
                     } else {
-                        self.showAlert("Done!", message: "")
-                        self.navigationController?.popViewController(animated: true)
+                        self.showAlert("Done!", message: "", actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
+                            DispatchQueue.main.async {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        })
                     }
                 }
             })
@@ -279,6 +289,15 @@ extension PaymentViewController: UICollectionViewDelegate, UICollectionViewDataS
         if indexPath.section == 0 {
             let cell: SavedCardClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedCardClnCell", for: indexPath) as! SavedCardClnCell
             cell.set(card: self.cards[indexPath.item])
+            if let selected = self.selectedCardIndex {
+                if selected == indexPath {
+                    cell.viewContent.backgroundColor = #colorLiteral(red: 1, green: 0.4765078425, blue: 0.1705591381, alpha: 1)
+                } else {
+                    cell.viewContent.backgroundColor = #colorLiteral(red: 0.2217648923, green: 0.2565669715, blue: 0.2926280499, alpha: 1)
+                }
+            } else {
+                cell.viewContent.backgroundColor = #colorLiteral(red: 0.2217648923, green: 0.2565669715, blue: 0.2926280499, alpha: 1)
+            }
             return cell
         } else {
             let cell : AddCardClnCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCardClnCell", for: indexPath) as! AddCardClnCell
@@ -295,7 +314,8 @@ extension PaymentViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let card: STPCard = self.cards[indexPath.item]
+            self.selectedCardIndex = indexPath
+            collectionView.reloadData()
         } else {
             self.showAddCardView(true)
         }

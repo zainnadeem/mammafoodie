@@ -35,7 +35,7 @@ class WelcomeViewController: UIViewController {
         
         self.btnLogin.layer.cornerRadius = 5.0
         self.btnRegister.layer.cornerRadius = 5.0
-        
+        self.imageViewMammaFoodie.clipsToBounds = true
         self.infiniteCollectionViewAdapter = InfiniteCollectionViewAdapter.init(with: self.collectionViewImages)
     }
     
