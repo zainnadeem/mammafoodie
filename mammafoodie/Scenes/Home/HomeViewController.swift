@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     var startCircleFrame: CGRect = .zero
     
+    @IBOutlet weak var viewTableViewBackground: UILabel!
     @IBOutlet weak var tblList: UITableView!
     @IBOutlet weak var viewLiveVideos: UIView!
     @IBOutlet weak var clnLiveVideos: UICollectionView!
@@ -347,9 +348,12 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     func setupTableViewAdapter() {
-        self.tableViewAdapter.setup(with: self.tblList)
-        self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
-        self.tableViewAdapter.loadMenu()
+        self.tblList.backgroundView = self.viewTableViewBackground
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.tableViewAdapter.setup(with: self.tblList, user: currentUser)
+            self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
+            self.tableViewAdapter.loadMenu()
+        }
     }
     
     func updateTableHeaderViewHeight() {

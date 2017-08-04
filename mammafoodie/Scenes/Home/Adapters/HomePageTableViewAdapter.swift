@@ -12,27 +12,32 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     var sectionHeaderView: UIView?
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
+    private var currentUser: MFUser!
     
-    func setup(with tableView: UITableView) {
+    func setup(with tableView: UITableView, user: MFUser) {
+        self.currentUser = user
         self.tableView = tableView
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 270
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 270
         
         let name: String = "MenuItemTblCell"
-        tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+        self.tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
         
         let name1: String = "ActivityTblCell"
-        tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
+        self.tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
         
         self.loadActivities()
     }
     
     func loadActivities() {
-        DummyData.sharedInstance.populateNewsfeed { (dummyData) in
-            self.activity = dummyData
-            self.tableView.reloadData()
+        DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
+                self.activity = feeds
+                self.tableView.backgroundView?.isHidden = (feeds.count > 0)
+                self.tableView.reloadData()
+            }
         }
     }
     

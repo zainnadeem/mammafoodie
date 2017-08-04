@@ -12,26 +12,6 @@ class MFModelsToFirebaseDictionaryConverter {
     
     typealias FirebaseDictionary = [String:AnyObject]
     
-    // Need to update this
-    //    class func dictionary(from media: MFDish) -> FirebaseDictionary {
-    //        return [
-    //            media.id: [
-    //                "id" : media.id,
-    //                "user" : [
-    //                    "id" : media.user.id,
-    //                    "name" : media.user.name
-    //                ],
-    //                "type" : media.type.rawValue,
-    //                "cover_small" : media.cover_small?.absoluteString ?? "",
-    //                "cover_large" : media.cover_large?.absoluteString ?? "",
-    //                "media_url" : media.mediaURL?.absoluteString ?? "",
-    //                "dishId" : media.dish.id,
-    //                "createdAt" : media.createdAt.timeIntervalSinceReferenceDate,
-    //                "endedAt" : media.createdAt.timeIntervalSinceReferenceDate
-    //                ] as AnyObject
-    //        ]
-    //    }
-    
     class func dictionary(from order: MFOrder) -> FirebaseDictionary {
         var raw: FirebaseDictionary = [
             "id": order.id as AnyObject,
@@ -64,26 +44,49 @@ class MFModelsToFirebaseDictionaryConverter {
         return raw
     }
     
-    class func dictionary(from comment: MFComment) -> FirebaseDictionary {
-        comment.id = FirebaseReference.dishComments.generateAutoID()
-        let raw: FirebaseDictionary = [
-            comment.id: [
-                "id": comment.id,
-                "text": comment.text,
-                "createTimestamp": comment.createdAt.timeIntervalSinceReferenceDate,
-                "user": [
-                    "id": comment.user!.id,
-                    "name": comment.user!.name
-                ]
-                ] as AnyObject
+    class func dictionary(from newsFeed: MFNewsFeed) -> FirebaseDictionary {
+        let raw = [
+            "id" : newsFeed.id,
+            "actionUserID": newsFeed.actionUser.id,
+            "actionUserName": newsFeed.actionUser.name,
+            "participantUserID" : newsFeed.participantUser.id,
+            "participantUserName": newsFeed.participantUser.name,
+            "redirectID": newsFeed.redirectID,
+            "redirectPath": newsFeed.redirectPath.rawValue,
+            "activity": newsFeed.activity.rawValue,
+            "text": "",
+            "mediaURL": newsFeed.mediaURL?.absoluteString ?? "",
+            "likes": newsFeed.likes,
+            "createdAt": newsFeed.createdAt.timeIntervalSinceReferenceDate
         ]
-        return raw
+        var comments = [[String: AnyObject]]()
+        for comment in newsFeed.comments {
+            comments.append(MFModelsToFirebaseDictionaryConverter.dictionary(from: comment))
+        }
+        if comments.count > 0 {
+            raw["comments"] = comments
+        }
+        
+        return [newsFeed.id: raw as AnyObject]
+    }
+    
+    class func dictionary(from comment: MFComment) -> FirebaseDictionary {
+        let raw = [
+            "id": comment.id,
+            "text": comment.text,
+            "createdAt": comment.createdAt.timeIntervalSinceReferenceDate,
+            "refrenceID": comment.refrenceID,
+            "user": [
+                "id": comment.user!.id,
+                "name": comment.user!.name
+            ]
+        ]
+        
+        return [comment.id: raw as AnyObject]
     }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
-        
         let createDate: Date = dish.createTimestamp ?? Date()
-        
         var rawDish: [String:Any] = [
             "id" : dish.id,
             "createTimestamp" : createDate.timeIntervalSinceReferenceDate,
@@ -118,7 +121,7 @@ class MFModelsToFirebaseDictionaryConverter {
                 "address" : dish.address
                 ] as AnyObject
         }
-        return [dish.id : rawDish as AnyObject]
+        return [dish.id: rawDish as AnyObject]
     }
     
     class func dictionary(from message: MFMessage) -> FirebaseDictionary {

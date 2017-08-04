@@ -185,6 +185,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         print("filePath: \(destinationPath)")
     }
     
+    func createNewsFeed(_ activity: MFActivity) {
+        
+        let feed = MFNewsFeed.init()
+        feed.id = FirebaseReference.newsFeed.generateAutoID()
+        feed.actionUserID = "JnE33sBUoycQdMjBnvuS5tgTlH22"
+        feed.participantUserID = "KahfX5tZuUaQOYD1y8WYkBXdmmX2"
+        feed.activity = .followed
+        feed.redirectID = "KahfX5tZuUaQOYD1y8WYkBXdmmX2"
+        feed.redirectPath = .user
+    }
+    
 }
 
 extension AppDelegate : MessagingDelegate {

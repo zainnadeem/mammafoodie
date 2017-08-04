@@ -18,6 +18,7 @@ enum FirebaseReference: String {
     case orders = "Orders"
     case paymentDetails = "PaymentDetails"
     case comments = "Comments"
+    case newsFeedComments = "NewsFeedComments"
     case notifications = "Notifications"
     case newsFeed = "NewsFeed"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
