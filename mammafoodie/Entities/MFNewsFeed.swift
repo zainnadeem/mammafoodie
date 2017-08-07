@@ -29,13 +29,15 @@ struct MFNewsFeed {
     var likes: [String: Bool] = [String: Bool]()
     var comments: [MFComment] = [MFComment]()
     
-    init(id: String, actionUser: MFUser, participantUser: MFUser, activity: MFActivityType, text: String) {
-        self.id = id
+    init(with actionUser: MFUser, participantUser: MFUser, activity: MFActivityType, text: String, redirectID: String) {
+        self.id = FirebaseReference.newsFeed.generateAutoID()
         self.actionUser = actionUser
         self.participantUser = participantUser
         self.text = text
         self.activity = activity
         self.createdAt = Date.init()
+        self.redirectID = redirectID
+        
         switch self.activity {
         case .bought, .liked, .started:
             self.redirectPath =  MFNewsFeedRedirectPath.dish
@@ -57,6 +59,8 @@ struct MFNewsFeed {
         self.participantUser.id = dictionary["participantUserID"] as? String ?? ""
         self.participantUser.name = dictionary["participantUserName"] as? String ?? ""
         
+        self.text = dictionary["text"] as? String ?? ""
+        
         self.createdAt = Date.init(timeIntervalSinceReferenceDate: (dictionary["createdAt"] as? Double) ?? 0)
         
         self.redirectID = dictionary["redirectID"] as? String ?? ""
@@ -74,7 +78,7 @@ struct MFNewsFeed {
         
         self.likes = dictionary["likes"] as? [String: Bool] ?? [:]
         if let commentsArray = dictionary["comments"] as? [String: [String: AnyObject]] {
-            for (commentID, commentDict) in commentsArray {
+            for (_, commentDict) in commentsArray {
                 let comment = MFComment.init(from: commentDict)
                 self.comments.append(comment)
             }

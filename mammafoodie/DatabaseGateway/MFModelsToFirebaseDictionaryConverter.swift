@@ -45,7 +45,7 @@ class MFModelsToFirebaseDictionaryConverter {
     }
     
     class func dictionary(from newsFeed: MFNewsFeed) -> FirebaseDictionary {
-        let raw = [
+        var raw: FirebaseDictionary = [
             "id" : newsFeed.id,
             "actionUserID": newsFeed.actionUser.id,
             "actionUserName": newsFeed.actionUser.name,
@@ -58,70 +58,69 @@ class MFModelsToFirebaseDictionaryConverter {
             "mediaURL": newsFeed.mediaURL?.absoluteString ?? "",
             "likes": newsFeed.likes,
             "createdAt": newsFeed.createdAt.timeIntervalSinceReferenceDate
-        ]
+            ] as [String : AnyObject]
         var comments = [[String: AnyObject]]()
         for comment in newsFeed.comments {
-            comments.append(MFModelsToFirebaseDictionaryConverter.dictionary(from: comment))
+            comments.append([comment.id: MFModelsToFirebaseDictionaryConverter.dictionary(from: comment)] as FirebaseDictionary)
         }
         if comments.count > 0 {
-            raw["comments"] = comments
+            raw["comments"] = comments as AnyObject
         }
-        
-        return [newsFeed.id: raw as AnyObject]
+        return raw
     }
     
     class func dictionary(from comment: MFComment) -> FirebaseDictionary {
-        let raw = [
-            "id": comment.id,
-            "text": comment.text,
-            "createdAt": comment.createdAt.timeIntervalSinceReferenceDate,
-            "refrenceID": comment.refrenceID,
+        let raw: FirebaseDictionary = [
+            "id": comment.id as AnyObject,
+            "text": comment.text as AnyObject,
+            "createdAt": comment.createdAt.timeIntervalSinceReferenceDate as AnyObject,
+            "refrenceID": comment.refrenceID as AnyObject,
             "user": [
-                "id": comment.user!.id,
-                "name": comment.user!.name
-            ]
+                "id": comment.user!.id as AnyObject,
+                "name": comment.user!.name as AnyObject
+                ] as AnyObject
         ]
         
-        return [comment.id: raw as AnyObject]
+        return raw
     }
     
     class func dictionary(from dish: MFDish) -> FirebaseDictionary {
         let createDate: Date = dish.createTimestamp ?? Date()
-        var rawDish: [String:Any] = [
-            "id" : dish.id,
-            "createTimestamp" : createDate.timeIntervalSinceReferenceDate,
+        var rawDish: FirebaseDictionary = [
+            "id" : dish.id as AnyObject,
+            "createTimestamp" : createDate.timeIntervalSinceReferenceDate as AnyObject,
             "user" : [
-                "id" : dish.user.id,
-                "name" : dish.user.name
-            ],
-            "mediaType": dish.mediaType.rawValue,
-            "name" : dish.name,
-            "likesCount" : dish.likesCount,
-            "commentsCount" : dish.commentsCount,
-            "description" : dish.description ?? "",
-            "mediaURL" : dish.mediaURL?.absoluteString ?? "",
-            "totalSlots" : dish.totalSlots,
-            "pricePerSlot" : dish.pricePerSlot,
-            "availableSlots" : dish.totalSlots,
-            "dishType" : dish.dishType.rawValue,
-            "preparationTime" : dish.preparationTime,
+                "id" : dish.user.id as AnyObject,
+                "name" : dish.user.name as AnyObject
+            ] as AnyObject,
+            "mediaType": dish.mediaType.rawValue as AnyObject,
+            "name" : dish.name as AnyObject,
+            "likesCount" : dish.likesCount as AnyObject,
+            "commentsCount" : dish.commentsCount as AnyObject,
+            "description" : dish.description as AnyObject ?? "" as AnyObject,
+            "mediaURL" : dish.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject,
+            "totalSlots" : dish.totalSlots as AnyObject,
+            "pricePerSlot" : dish.pricePerSlot as AnyObject,
+            "availableSlots" : dish.totalSlots as AnyObject,
+            "dishType" : dish.dishType.rawValue as AnyObject,
+            "preparationTime" : dish.preparationTime as AnyObject,
             "cuisine" : [
-                "id" : dish.cuisine.id,
-                "name" : dish.cuisine.name
-            ]
+                "id" : dish.cuisine.id as AnyObject,
+                "name" : dish.cuisine.name as AnyObject
+            ] as AnyObject
         ]
         
-        if dish.endTimestamp != nil {
-            rawDish["endTimestamp"] = dish.endTimestamp!.timeIntervalSinceReferenceDate
+        if let timeStamp = dish.endTimestamp {
+            rawDish["endTimestamp"] = timeStamp.timeIntervalSinceReferenceDate as AnyObject
         }
         if let location = dish.location {
             rawDish["location"] = [
-                "latitude" : location.latitude,
-                "longitude" : location.longitude,
-                "address" : dish.address
+                "latitude" : location.latitude as AnyObject,
+                "longitude" : location.longitude as AnyObject,
+                "address" : dish.address as AnyObject
                 ] as AnyObject
         }
-        return [dish.id: rawDish as AnyObject]
+        return rawDish
     }
     
     class func dictionary(from message: MFMessage) -> FirebaseDictionary {
@@ -133,7 +132,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "dateTime": message.dateTime as AnyObject,
             "senderDisplayName": message.senderDisplayName as AnyObject
             //                "receiverId": message.receiverId as AnyObject
-        ]
+            ] as FirebaseDictionary
     }
     
     class func dictionary(from user: MFUser) -> FirebaseDictionary {
@@ -150,7 +149,7 @@ class MFModelsToFirebaseDictionaryConverter {
         //            //                "blocked"           : user.blocked as AnyObject
         //
         //        ]
-        var userInfo =  [String:AnyObject]()
+        var userInfo = FirebaseDictionary()
         
         if let id = user.id {
             userInfo["id"] = id as AnyObject
@@ -183,23 +182,20 @@ class MFModelsToFirebaseDictionaryConverter {
         }
         
         userInfo["phone"] = user.phone as AnyObject
-        return [
-            user.id : userInfo as AnyObject
-        ]
+        return userInfo
     }
     
     class func dictionary(from address:MFUserAddress) -> FirebaseDictionary{
-        
-        return  [ "id"            :   address.id as AnyObject,
-                  "address"       :   address.address as AnyObject,
-                  "address_2"     :   address.address_2 as AnyObject,
-                  "city"          :   address.city as AnyObject,
-                  "country"       :   address.country  as AnyObject,
-                  "state"         :   address.state as AnyObject,
-                  "postalCode"    :   address.postalCode as AnyObject,
-                  "latitude"      :   address.latitude as AnyObject,
-                  "longitude"     :   address.longitude as AnyObject,
-                  "phone"         :   address.phone   as AnyObject ]
-        
+        return  [
+            "id": address.id as AnyObject,
+            "address": address.address as AnyObject,
+            "address_2": address.address_2 as AnyObject,
+            "city": address.city as AnyObject,
+            "country": address.country  as AnyObject,
+            "state": address.state as AnyObject,
+            "postalCode": address.postalCode as AnyObject,
+            "latitude": address.latitude as AnyObject,
+            "longitude": address.longitude as AnyObject,
+            "phone": address.phone as AnyObject ] as FirebaseDictionary
     }
 }

@@ -39,14 +39,14 @@ class CommentsView: UIView {
         //        self.dish.id = "-KnmktPfRQq61M1iswq5"
         
         // For demo only
-//        self.user = MFUser()
-//        self.user.id = "-Ko25iOEH_Erg-7B3UQb"
-//        self.user.name = "Arjav"
+        //        self.user = MFUser()
+        //        self.user.id = "-Ko25iOEH_Erg-7B3UQb"
+        //        self.user.name = "Arjav"
     }
     
     func load() {
         self.tableViewAdapter.dish = self.dish
-//        self.tableViewAdapter.comments = self.list
+        //        self.tableViewAdapter.comments = self.list
         self.tableViewAdapter.setup(with: self.tableView)
     }
     
@@ -143,11 +143,8 @@ extension CommentsView: UITextViewDelegate {
                 return false
             }
             
-            let comment: MFComment = MFComment()
-            comment.text = textView.text!
-            comment.createdAt = Date()
-            comment.user = self.user
-//                        self.list.append(comment)
+            let comment: MFComment = MFComment.init(with: textView.text!, user: self.user, refrence: self.dish.id)
+            //                        self.list.append(comment)
             //            self.requestingToPostNewComment?(comment)
             
             
@@ -155,11 +152,11 @@ extension CommentsView: UITextViewDelegate {
             let worker = CommentsWorker()
             worker.post(comment, on: self.dish, {
                 print("Comment posted")
-//                self.tableViewAdapter.loadComments()
+                //                self.tableViewAdapter.loadComments()
             })
             
             self.textView.text = ""
-//            self.tableView.reloadData()
+            //            self.tableView.reloadData()
             self.setInitialHeightForTextView()
             
             return false

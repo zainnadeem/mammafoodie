@@ -49,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
             }
         }
+        
+//        self.createNewsFeed()
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
@@ -185,15 +187,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         print("filePath: \(destinationPath)")
     }
     
-    func createNewsFeed(_ activity: MFActivity) {
+    func createNewsFeed() {
+        var feeds = [MFNewsFeed]()
+        let actionUser = MFUser.init(id: "JnE33sBUoycQdMjBnvuS5tgTlH22", name: "Arjav Lad", picture: "", profileDescription: "")
+        let participantUser = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
-        let feed = MFNewsFeed.init()
-        feed.id = FirebaseReference.newsFeed.generateAutoID()
-        feed.actionUserID = "JnE33sBUoycQdMjBnvuS5tgTlH22"
-        feed.participantUserID = "KahfX5tZuUaQOYD1y8WYkBXdmmX2"
-        feed.activity = .followed
-        feed.redirectID = "KahfX5tZuUaQOYD1y8WYkBXdmmX2"
-        feed.redirectPath = .user
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+        _ = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser1 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser2 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser3 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser4 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser5 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser6 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser7 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser8 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser9 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser10 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser11 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+//        let participantUser12 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        
+        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
+        
+        for feed in feeds {
+            DatabaseGateway.sharedInstance.save(feed) { (error) in
+                print(error?.localizedDescription ?? "No Error")
+            }
+        }
     }
     
 }

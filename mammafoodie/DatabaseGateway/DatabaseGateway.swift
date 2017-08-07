@@ -182,7 +182,6 @@ extension DatabaseGateway {
     
     func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
         var rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
-        rawLiveStream = rawLiveStream[liveStream.id] as! FirebaseDictionary
         FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
             completion()
         }
@@ -251,83 +250,53 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func createMessage(with model: MFMessage, conversationID:String, _ completion: @escaping ((_ status:Bool)->Void)) {
-        
         var newMessage = model
-        
-        
         let newMessageID = FirebaseReference.messages.generateAutoID()
-        
         newMessage.id = newMessageID
-        
         let rawMessage: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newMessage)
-        
         FirebaseReference.messages.classReference.child(conversationID).child(newMessageID).updateChildValues(rawMessage) { (error, databaseReference) in
             if error != nil {
                 completion(false)
             } else {
                 completion(true)
             }
-            
         }
-        
     }
     
     func createConversation(createdAt:String, user1:String, user2:String, user1Name:String, user2Name:String, _ completion: @escaping ((_ status:Bool)->Void)){
-        
         let newConversationID = FirebaseReference.conversations.generateAutoID()
-        
         let metaData = ["id": newConversationID,"createdAt":createdAt, "user1":user1, "user2":user2, "user1Name":user1Name, "user2Name":user2Name]
-        
-        
-        
         let childUpdates = [
-            
             "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
-            
             "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
-            
             "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
-            
             // "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":["user2":user2,"conversationID":newConversationID]
-            
             ] as [AnyHashable : Any]
-        
         //        print(childUpdates)
         
         let databaseRef = Database.database().reference()
-        
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
-            
             if error != nil{
                 completion(false)
             } else {
                 completion(true)
             }
         }
-        
     }
     
     
     func getConversations(forUser userID:String, _ completion : @escaping (MFConversation?)->())->DatabaseConnectionObserver?{
-        
         var observer = DatabaseConnectionObserver()
         observer.databaseReference = FirebaseReference.userConversations.classReference
-        
         observer.observerId =  FirebaseReference.userConversations.classReference.child(userID).observe(.childAdded, with: { (conversationData) in
-            
             //print(messageData)
             print(conversationData.key)
-            
             self.getConversation(with: conversationData.key, { (conversationDictionary) in
-                
                 if conversationDictionary != nil {
-                    
                     let conversation = MFConversation(from: conversationDictionary!)
-                    
                     completion(conversation)
                 }
             })
-            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -336,48 +305,32 @@ extension DatabaseGateway {
         
     }
     
-    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()){
-        
+    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()) {
         FirebaseReference.conversations.classReference.child(conversationID).observeSingleEvent(of: .value, with: { (conversation) in
-            
             guard let conversationDictionary = conversation.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(conversationDictionary)
-            
-            
         })
     }
     
-    
-    
     func getMessages(forConversation conversationID:String, _ completion:@escaping (MFMessage?)->()) -> DatabaseConnectionObserver? {
-        
         var observer = DatabaseConnectionObserver()
         observer.databaseReference = FirebaseReference.messages.classReference
-        
         observer.observerId =  FirebaseReference.messages.classReference.child(conversationID).observe(.childAdded, with: { (messageData) in
-            
             //print(messageData)
-            
             guard let messagesDictionary = messageData.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             let message = MFMessage(from: messagesDictionary)
-            
             completion(message)
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }
         
         return observer
-        
     }
     
 }
@@ -390,7 +343,7 @@ extension DatabaseGateway {
         
         let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         
-        FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUsers) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
@@ -399,8 +352,7 @@ extension DatabaseGateway {
         
         let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let id :String = "\(model.id!)"
-        let userProfileData = rawUserData[id] as! FirebaseDictionary
-        FirebaseReference.users.classReference.child(model.id!).updateChildValues(userProfileData) { (error, databaseReference) in
+        FirebaseReference.users.classReference.child(model.id!).updateChildValues(rawUserData) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
@@ -409,7 +361,6 @@ extension DatabaseGateway {
         
         FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
-                let user: MFUser = MFUser()
                 completion(nil)
                 return
             }
@@ -435,7 +386,7 @@ extension DatabaseGateway {
     }
     
     func setDeviceToken(_ token: String, for userId: String, _ completion: @escaping ((Error?)->Void)) {
-        let deviceToken = ["deviceToken":token] as! FirebaseDictionary
+        let deviceToken = ["deviceToken":token] as FirebaseDictionary
         FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
             completion(error)
         }
@@ -551,11 +502,8 @@ extension DatabaseGateway {
     
     func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
         
-        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        
+        let userProfileData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let id :String = "\(model.id)"
-        let userProfileData = rawUserData[id] as! FirebaseDictionary
-        
         FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
             
             completion(error?.localizedDescription)
@@ -677,7 +625,6 @@ extension DatabaseGateway {
         
     }
     
-    
     func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
@@ -741,10 +688,6 @@ extension DatabaseGateway {
     }
 }
 
-
-
-
-
 //MARK: - Media
 extension  DatabaseGateway {
     
@@ -774,8 +717,8 @@ extension DatabaseGateway {
                 completion([])
                 return
             }
-            let newsFeed: MFNewsFeed? = self.createNewsFeedModel(from: rawNewsFeed)
-            completion([newsFeed!])
+            let newsFeed: MFNewsFeed = self.createNewsFeedModel(from: rawNewsFeed)
+            completion([newsFeed])
         }
         
         let cancelClosure: FirebaseObserverCancelClosure = { (error) in
@@ -786,8 +729,14 @@ extension DatabaseGateway {
         FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
     }
     
+    func save(_ newsFeed: MFNewsFeed, completion: @escaping ((Error?) -> Void)) {
+        FirebaseReference.newsFeed.classReference.child(newsFeed.actionUser.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
+            completion(error)
+        }
+    }
+    
     func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
-        var feed: MFNewsFeed = MFNewsFeed()
+        var feed: MFNewsFeed = MFNewsFeed.init(from: raw)
         return feed
     }
 }
@@ -952,7 +901,7 @@ extension DatabaseGateway {
     
     func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
         let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
-        FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
+        FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }
     }
@@ -1001,18 +950,7 @@ extension DatabaseGateway {
     }
     
     func createComment(from rawComment: FirebaseDictionary) -> MFComment {
-        let comment: MFComment = MFComment()
-        comment.id = rawComment["id"] as? String ?? ""
-        comment.text = rawComment["text"] as? String ?? ""
-        
-        if let timeInterval: TimeInterval = rawComment["createTimestamp"] as? TimeInterval {
-            comment.createdAt = Date(timeIntervalSinceReferenceDate: timeInterval)
-        }
-        
-        if let rawUser: FirebaseDictionary = rawComment["user"] as? FirebaseDictionary {
-            comment.user = self.createUser(from: rawUser)
-        }
-        
+        let comment: MFComment = MFComment.init(from: rawComment)
         return comment
     }
     
@@ -1025,7 +963,7 @@ extension DatabaseGateway {
     
     func postComment(_ comment: MFComment, on dish: MFDish, _ completion: @escaping (()->Void)) {
         let rawComment: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: comment)
-        FirebaseReference.dishComments.get(with: dish.id).updateChildValues(rawComment) { (error, databaseReference) in
+        FirebaseReference.dishComments.get(with: dish.id).child(comment.id).updateChildValues(rawComment) { (error, databaseReference) in
             completion()
         }
     }
@@ -1035,7 +973,7 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     func saveMedia(_ media : MFDish, completion : @escaping (Error?) -> Void) {
         let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
-        FirebaseReference.media.classReference.updateChildValues(mediaDict) { (error, ref) in
+        FirebaseReference.media.classReference.child(media.id).updateChildValues(mediaDict) { (error, ref) in
             completion(error)
         }
     }
@@ -1271,8 +1209,6 @@ extension DatabaseGateway {
         newModel.id = id
         
         let rawAddress: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
-        
-        
         let childUpdates = ["\(FirebaseReference.address.rawValue)/\(id)/":rawAddress, "/\(FirebaseReference.userAddress.rawValue)/\(userID)/\(id)/":true] as [AnyHashable : Any]
         
         print(childUpdates)
