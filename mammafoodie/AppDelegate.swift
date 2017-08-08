@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             }
         }
         
-//        self.createNewsFeed()
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
@@ -189,8 +188,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func createNewsFeed() {
         var feeds = [MFNewsFeed]()
-        let actionUser = MFUser.init(id: "JnE33sBUoycQdMjBnvuS5tgTlH22", name: "Arjav Lad", picture: "", profileDescription: "")
-        let participantUser = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        let actionUser = MFUser.init(id: "sXFOH3QceiPdAbLUflTXrW46yag2", name: "Arjav Lad", picture: "", profileDescription: "")
+        let participantUser = MFUser.init(id: "MUIqXL7Q7dcmwuwYIJuJdR1jmh53", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         

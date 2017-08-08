@@ -25,7 +25,6 @@ struct MFNewsFeed {
     var activity: MFActivityType = .none
     var createdAt: Date
     var mediaURL: URL?
-    var attributedString: NSMutableAttributedString?
     var likes: [String: Bool] = [String: Bool]()
     var comments: [MFComment] = [MFComment]()
     
@@ -84,6 +83,7 @@ struct MFNewsFeed {
             }
         }
     }
+
 }
 
 extension MFNewsFeed: Hashable {

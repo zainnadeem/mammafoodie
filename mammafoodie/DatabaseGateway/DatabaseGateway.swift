@@ -713,12 +713,15 @@ extension DatabaseGateway {
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
-            guard let rawNewsFeed: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+            guard let rawNewsFeed = snapshot.value as? [String: [String: AnyObject]] else {
                 completion([])
                 return
             }
-            let newsFeed: MFNewsFeed = self.createNewsFeedModel(from: rawNewsFeed)
-            completion([newsFeed])
+            var feeds = [MFNewsFeed]()
+            for (_, newsFeedData) in rawNewsFeed {
+                feeds.append(self.createNewsFeedModel(from: newsFeedData))
+            }
+            completion(feeds)
         }
         
         let cancelClosure: FirebaseObserverCancelClosure = { (error) in
@@ -726,17 +729,17 @@ extension DatabaseGateway {
             completion([])
         }
         
-        FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+        FirebaseReference.newsFeed.classReference.child(userId).observe(.value, with: successClosure, withCancel: cancelClosure)
     }
     
     func save(_ newsFeed: MFNewsFeed, completion: @escaping ((Error?) -> Void)) {
-        FirebaseReference.newsFeed.classReference.child(newsFeed.actionUser.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
+        FirebaseReference.newsFeed.classReference.child(newsFeed.actionUser.id).child(newsFeed.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
             completion(error)
         }
     }
     
     func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
-        var feed: MFNewsFeed = MFNewsFeed.init(from: raw)
+        let feed: MFNewsFeed = MFNewsFeed.init(from: raw)
         return feed
     }
 }

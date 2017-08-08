@@ -53,7 +53,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     func setup(_ activityData:MFNewsFeed){
        
-        self.lblActivityDescription.attributedText = activityData.attributedString
+        self.lblActivityDescription.text = activityData.text
         self.lblTimeStamp.text = "2 mins ago."
         self.lblLikesCount.text = "12"
         self.lblCommentsCount.text = "23"

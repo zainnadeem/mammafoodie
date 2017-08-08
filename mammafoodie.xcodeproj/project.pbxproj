@@ -500,6 +500,8 @@
 		57DDD0BC1EFC015B00C3BA21 /* GoCookStep2Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */; };
 		57EC4ADF1F28827D00BD736D /* StripeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC4ADE1F28827D00BD736D /* StripeVerificationViewController.swift */; };
 		57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
+		57FDAF8F1F39FDFD0049B7A5 /* UIlabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */; };
+		57FDAF901F39FDFD0049B7A5 /* UIlabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */; };
 		6D4201A590A1F95E913F3A42 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5ED13300F95FC8736042FF /* Pods_mammafoodie.framework */; };
 		B6E81E621F0A9513000D2F06 /* orderCountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E81E611F0A9513000D2F06 /* orderCountWorker.swift */; };
 		BF4800A81F09237F005E47B1 /* CheckLikeStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800A71F09237F005E47B1 /* CheckLikeStatusWorker.swift */; };
@@ -901,6 +903,7 @@
 		57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoCookStep2Worker.swift; sourceTree = "<group>"; };
 		57EC4ADE1F28827D00BD736D /* StripeVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeVerificationViewController.swift; sourceTree = "<group>"; };
 		57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
+		57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIlabelExtension.swift; sourceTree = "<group>"; };
 		7EC67241EBB9432A18D278A9 /* Pods-mammafoodie-mammafoodieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6832E041F052E4200ECE835 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
 		B6E81E611F0A9513000D2F06 /* orderCountWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = orderCountWorker.swift; path = DishDetails/orderCountWorker.swift; sourceTree = "<group>"; };
@@ -1599,6 +1602,7 @@
 				572E9AA51EFAB515007DE6D0 /* UITextFieldExtension.swift */,
 				57C948151F03D9A300DF5674 /* UIViewControllerExtension.swift */,
 				2CE479401EF97256003D0F9F /* UIViewExtension.swift */,
+				57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2422,6 +2426,7 @@
 				F00F52701EF277CF009DDAB1 /* DatabaseGateway.swift in Sources */,
 				2C5E8B031EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2C6978F51F07C85700787DCC /* GoCookStep2ViewController.swift in Sources */,
+				57FDAF901F39FDFD0049B7A5 /* UIlabelExtension.swift in Sources */,
 				2C6979531F07C88E00787DCC /* SlotSelectionViewController.swift in Sources */,
 				2C6979081F07C88D00787DCC /* ChatListViewController.swift in Sources */,
 				2C6978DF1F07C7B800787DCC /* HUDProtocols.swift in Sources */,
@@ -2640,6 +2645,7 @@
 				2C12BCB31EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				BF5AD5DB1F062B4B00827223 /* DishDetailRouter.swift in Sources */,
 				113139D51EF7F4E5000050D6 /* DishCollectionViewCell.swift in Sources */,
+				57FDAF8F1F39FDFD0049B7A5 /* UIlabelExtension.swift in Sources */,
 				118FB2B81EEACA1200E5E6E5 /* SlotSelectionModels.swift in Sources */,
 				118FB2BA1EEACA1200E5E6E5 /* SlotSelectionRouter.swift in Sources */,
 				113948D01F050C0E00F98E74 /* DateHelper.swift in Sources */,

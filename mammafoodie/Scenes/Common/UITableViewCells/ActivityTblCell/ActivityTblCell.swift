@@ -16,8 +16,10 @@ class ActivityTblCell: UITableViewCell {
     @IBOutlet weak var btnShare: UIButton!
     @IBOutlet weak var imgProfilePicture: UIImageView!
     @IBOutlet weak var imgCharacterEmoji: UIImageView!
-    @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var conWidthImgCharacterEmoji: NSLayoutConstraint!
+    
+    @IBOutlet weak var lblActivity: UILabel!
+    @IBOutlet weak var btnTime: UIButton!
     
     var shapeLayer: CAShapeLayer!
     
@@ -27,19 +29,40 @@ class ActivityTblCell: UITableViewCell {
         self.btnComments.imageView?.contentMode = .scaleAspectFit
         self.btnShare.imageView?.contentMode = .scaleAspectFit
         self.viewContainer.layer.cornerRadius = 8
+        self.btnTime.imageView?.contentMode = .scaleAspectFit
     }
     
     func setup(with newsFeed: MFNewsFeed) {
-        self.lblText.attributedText = newsFeed.attributedString
-        //        switch newsFeed.activityID.type {
-        //        case .none:
-        //            self.imgCharacterEmoji.image = nil
-        //            self.conWidthImgCharacterEmoji.constant = 0
-        //        default:
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
+            self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+                }
+            })
+        } else {
+            self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+        }
         
-        self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
-        self.conWidthImgCharacterEmoji.constant = 64
-        //        }
+        var actionUserName = NSAttributedString.init(string: newsFeed.actionUser.name, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
+        var activityAction = NSAttributedString.init(string: "", attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)])
+        var relevantItem = NSAttributedString.init(string: "", attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
+        switch newsFeed.activity {
+        case .bought:
+            break
+        case .followed:
+            break
+        case .liked:
+            break
+        case .started:
+            break
+        case .tipped:
+            break
+        default:
+            break
+        }
+//        self.lblActivity.attributedText = actionUserName + activityAction + relevantItem
+        self.imgCharacterEmoji.image = nil
+        self.conWidthImgCharacterEmoji.constant = 0
     }
     
     private func getEmojiCharacter(for cuisineId: String) -> UIImage {
