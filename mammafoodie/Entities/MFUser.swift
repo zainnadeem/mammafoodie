@@ -1,7 +1,7 @@
 import Foundation
 
 class MFUser {
-    var id: String!
+    var id: String
     var name: String!
     var email: String!
     var address: String?
@@ -40,7 +40,7 @@ class MFUser {
     
     
     init() {
-        
+        self.id = ""
     }
     
     

@@ -34,5 +34,4 @@ NewsFeed
 			"createdAt": <timeStamp>
 			}
 		}
-
 }

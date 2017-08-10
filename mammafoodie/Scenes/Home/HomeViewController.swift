@@ -350,9 +350,44 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     func setupTableViewAdapter() {
         self.tblList.backgroundView = self.viewTableViewBackground
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-            self.tableViewAdapter.setup(with: self.tblList, user: currentUser)
+            self.tableViewAdapter.setup(with: self.tblList, user: currentUser, { (path, id) in
+                DispatchQueue.main.async {
+                    self.openScreen(for: path, id: id)
+                }
+            })
             self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
             self.tableViewAdapter.loadMenu()
+        }
+    }
+    
+    func openScreen(for path: String, id: String) {
+        switch path {
+        case FirebaseReference.users.rawValue:
+            var type: ProfileType = .othersProfile
+            if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                if currentUser.id == id {
+                    type = .ownProfile
+                }
+            }
+            self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, id))
+            
+        case FirebaseReference.dishes.rawValue:
+            self.openDish(with: id)
+            
+        default:
+            break
+        }
+    }
+    
+    func openDish(with id: String) {
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
+            if let dish = dish {
+                if let _ = dish.endTimestamp {
+                    self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
+                } else {
+                    self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+                }
+            }
         }
     }
     

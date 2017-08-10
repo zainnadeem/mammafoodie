@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Light.otf">
+        <array key="Montserrat-Light.ttf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Regular.otf">
@@ -36,14 +36,14 @@
                                     <constraint firstAttribute="width" constant="30" id="uPT-sr-6G2"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-3X-M9M">
-                                <rect key="frame" x="43" y="16" width="43" height="21.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJs-3X-M9M" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="43" y="16" width="341" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOS-yr-tas">
-                                <rect key="frame" x="43" y="37.5" width="91" height="21"/>
+                                <rect key="frame" x="43" y="37.5" width="92" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Uty-Wz-Xm4"/>
                                 </constraints>
@@ -122,7 +122,7 @@
                             <constraint firstItem="GFr-58-dcs" firstAttribute="leading" secondItem="45l-za-bLI" secondAttribute="trailing" constant="8" id="9YM-hW-EHu"/>
                             <constraint firstItem="45l-za-bLI" firstAttribute="top" secondItem="PhJ-QC-o3y" secondAttribute="top" id="Agr-xf-6RS"/>
                             <constraint firstItem="GFr-58-dcs" firstAttribute="top" secondItem="45l-za-bLI" secondAttribute="top" id="BdJ-cJ-U68"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AJs-3X-M9M" secondAttribute="trailing" constant="8" id="F5n-5D-IJ5"/>
+                            <constraint firstAttribute="trailing" secondItem="AJs-3X-M9M" secondAttribute="trailing" constant="8" id="F5n-5D-IJ5"/>
                             <constraint firstItem="PhJ-QC-o3y" firstAttribute="top" secondItem="752-vy-59a" secondAttribute="bottom" id="IEk-KQ-9Lz"/>
                             <constraint firstItem="AJs-3X-M9M" firstAttribute="leading" secondItem="HOS-yr-tas" secondAttribute="leading" id="KCR-61-Xpd"/>
                             <constraint firstItem="AJs-3X-M9M" firstAttribute="bottom" secondItem="HOS-yr-tas" secondAttribute="top" id="Xy5-bJ-A6O"/>

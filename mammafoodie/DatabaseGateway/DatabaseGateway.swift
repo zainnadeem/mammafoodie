@@ -21,6 +21,7 @@ enum FirebaseReference: String {
     case newsFeedComments = "NewsFeedComments"
     case notifications = "Notifications"
     case newsFeed = "NewsFeed"
+    case newsFeedAll = "NewsFeed_All"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
     
@@ -181,7 +182,7 @@ extension DatabaseGateway {
     //    }
     
     func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
-        var rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
+        let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
             completion()
         }
@@ -351,8 +352,8 @@ extension DatabaseGateway {
     func updateUserEntity(with model:MFUser, _ completion: @escaping ((String?)->Void)) {
         
         let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        let id :String = "\(model.id!)"
-        FirebaseReference.users.classReference.child(model.id!).updateChildValues(rawUserData) { (error, databaseReference) in
+        let _ :String = "\(model.id)"
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUserData) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
@@ -503,7 +504,7 @@ extension DatabaseGateway {
     func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
         
         let userProfileData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        let id :String = "\(model.id)"
+        let _ :String = "\(model.id)"
         FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
             
             completion(error?.localizedDescription)
@@ -673,7 +674,7 @@ extension DatabaseGateway {
         
         FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
-                print(dishSnapshot.value)
+                print(dishSnapshot.value ?? "")
                 completion(nil)
                 return
             }
@@ -713,13 +714,17 @@ extension DatabaseGateway {
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
-            guard let rawNewsFeed = snapshot.value as? [String: [String: AnyObject]] else {
+            guard let rawNewsFeed = snapshot.value as? [String: Bool] else {
                 completion([])
                 return
             }
             var feeds = [MFNewsFeed]()
-            for (_, newsFeedData) in rawNewsFeed {
-                feeds.append(self.createNewsFeedModel(from: newsFeedData))
+            for (key, show) in rawNewsFeed {
+                if show {
+                    FirebaseReference.newsFeedAll.classReference.child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                    })
+                }
             }
             completion(feeds)
         }
@@ -733,7 +738,7 @@ extension DatabaseGateway {
     }
     
     func save(_ newsFeed: MFNewsFeed, completion: @escaping ((Error?) -> Void)) {
-        FirebaseReference.newsFeed.classReference.child(newsFeed.actionUser.id).child(newsFeed.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
+        FirebaseReference.newsFeedAll.classReference.child(newsFeed.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
             completion(error)
         }
     }
@@ -1057,8 +1062,6 @@ extension DatabaseGateway{
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             return nil
         }
-        return nil
-        
         
     }
     
@@ -1092,8 +1095,6 @@ extension DatabaseGateway{
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             return nil
         }
-        return nil
-        
         
     }
     
@@ -1295,39 +1296,39 @@ extension DatabaseGateway {
         }
     }
     
-    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
-        let userId: String = self.getLoggedInUser()!.id
-        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
-        let parameters = [
-            "userId": userId,
-            "amountToAdd": newBalance
-            ] as Parameters
-        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
-            print(response)
-            completion(nil)
-        }
-    }
+//    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
+//        let userId: String = self.getLoggedInUser()!.id
+//        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
+//        let parameters = [
+//            "userId": userId,
+//            "amountToAdd": newBalance
+//            ] as Parameters
+//        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
+//            print(response)
+//            completion(nil)
+//        }
+//    }
     
-    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
-        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
-        let parameters = [
-            "fromUserId": fromUserId,
-            "toUserId": toUserId,
-            "amount": amount
-            ] as Parameters
-        Alamofire.request(url, parameters: parameters).responseString { (response) in
-            if let responseString = response.result.value {
-                if responseString.lowercased() == "success" {
-                    completion(true)
-                } else if responseString.lowercased() == "insufficient balance" {
-                    completion(false)
-                } else {
-                    print("Nooo")
-                    completion(false)
-                }
-            }
-        }
-    }
+//    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
+//        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
+//        let parameters = [
+//            "fromUserId": fromUserId,
+//            "toUserId": toUserId,
+//            "amount": amount
+//            ] as Parameters
+//        Alamofire.request(url, parameters: parameters).responseString { (response) in
+//            if let responseString = response.result.value {
+//                if responseString.lowercased() == "success" {
+//                    completion(true)
+//                } else if responseString.lowercased() == "insufficient balance" {
+//                    completion(false)
+//                } else {
+//                    print("Nooo")
+//                    completion(false)
+//                }
+//            }
+//        }
+//    }
     
     func uploadProfileImage(userID:String, image:UIImage, _ completion : @escaping (URL?, Error?) -> Void){
         let path = "users/\(userID).jpg"

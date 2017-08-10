@@ -141,14 +141,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func showUserInfo() {
-        if let userId = self.liveVideo.user.id {
-            DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
-                self.lblUserFullname.text = user?.name ?? ""
-                if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
-                    self.imgViewProfilePicture.sd_setImage(with: url)
-                } else {
-                    self.imgViewProfilePicture.image = nil
-                }
+        let userId = self.liveVideo.user.id
+        DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
+            self.lblUserFullname.text = user?.name ?? ""
+            if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
+                self.imgViewProfilePicture.sd_setImage(with: url)
+            } else {
+                self.imgViewProfilePicture.image = nil
             }
         }
     }

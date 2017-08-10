@@ -46,16 +46,16 @@ class MFModelsToFirebaseDictionaryConverter {
     
     class func dictionary(from newsFeed: MFNewsFeed) -> FirebaseDictionary {
         var raw: FirebaseDictionary = [
-            "id" : newsFeed.id,
-            "actionUserID": newsFeed.actionUser.id,
-            "actionUserName": newsFeed.actionUser.name,
-            "participantUserID" : newsFeed.participantUser.id,
-            "participantUserName": newsFeed.participantUser.name,
-            "redirectID": newsFeed.redirectID,
-            "redirectPath": newsFeed.redirectPath.rawValue,
-            "activity": newsFeed.activity.rawValue,
+            "id" : newsFeed.id as AnyObject,
+            "actionUserID": newsFeed.actionUser.id as AnyObject,
+            "actionUserName": newsFeed.actionUser.name as AnyObject,
+            "participantUserID" : newsFeed.participantUser.id as AnyObject,
+            "participantUserName": newsFeed.participantUser.name as AnyObject,
+            "redirectID": newsFeed.redirectID as AnyObject,
+            "redirectPath": newsFeed.activity.path.rawValue as AnyObject,
+            "activity": newsFeed.activity.rawValue as AnyObject,
             "text": "",
-            "mediaURL": newsFeed.mediaURL?.absoluteString ?? "",
+            "mediaURL": newsFeed.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject,
             "likes": newsFeed.likes,
             "createdAt": newsFeed.createdAt.timeIntervalSinceReferenceDate
             ] as [String : AnyObject]
@@ -92,13 +92,13 @@ class MFModelsToFirebaseDictionaryConverter {
             "user" : [
                 "id" : dish.user.id as AnyObject,
                 "name" : dish.user.name as AnyObject
-            ] as AnyObject,
+                ] as AnyObject,
             "mediaType": dish.mediaType.rawValue as AnyObject,
             "name" : dish.name as AnyObject,
             "likesCount" : dish.likesCount as AnyObject,
             "commentsCount" : dish.commentsCount as AnyObject,
-            "description" : dish.description as AnyObject ?? "" as AnyObject,
-            "mediaURL" : dish.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject,
+            "description" : dish.description as AnyObject,
+            "mediaURL" : dish.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject ,
             "totalSlots" : dish.totalSlots as AnyObject,
             "pricePerSlot" : dish.pricePerSlot as AnyObject,
             "availableSlots" : dish.totalSlots as AnyObject,
@@ -107,7 +107,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "cuisine" : [
                 "id" : dish.cuisine.id as AnyObject,
                 "name" : dish.cuisine.name as AnyObject
-            ] as AnyObject
+                ] as AnyObject
         ]
         
         if let timeStamp = dish.endTimestamp {
@@ -151,9 +151,7 @@ class MFModelsToFirebaseDictionaryConverter {
         //        ]
         var userInfo = FirebaseDictionary()
         
-        if let id = user.id {
-            userInfo["id"] = id as AnyObject
-        }
+        userInfo["id"] = user.id as AnyObject
         
         if let name = user.name {
             userInfo["name"] = name as AnyObject

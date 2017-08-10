@@ -27,7 +27,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    var profileType:ProfileType = .ownProfile // .othersProfile
+    var profileType: ProfileType = .ownProfile // .othersProfile
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
     @IBOutlet weak var btnSettings: UIBarButtonItem!
@@ -51,19 +51,23 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         self.output.setUpDishCollectionView(self.collectionView, self.profileType)
         if self.profileType == .ownProfile {
+            if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                self.userID = user.id
+            } else {
+                self.navigationController?.dismiss(animated: true, completion: { 
+                    
+                })
+            }
             let settingsBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
             self.navigationItem.rightBarButtonItem = settingsBtn
         }
         
-        if let user = Auth.auth().currentUser {
-            self.userID = user.uid
-            self.output.loadUserProfileData(userID: self.userID!)
+        if let user = self.userID {
+            self.output.loadUserProfileData(userID: user)
         } else {
             self.navigationController?.dismiss(animated: true, completion: {
-                
             })
         }
-        
     }
     
     //MARK: - Input

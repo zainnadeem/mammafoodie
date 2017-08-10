@@ -1,11 +1,5 @@
 import Foundation
 
-enum MFNewsFeedRedirectPath: String {
-    case dish = "Dishes"
-    case user = "Users"
-    case unknown
-}
-
 enum MFActivityType: String {
     case liked = "liked"
     case bought = "bought"
@@ -13,6 +7,44 @@ enum MFActivityType: String {
     case followed = "followed"
     case started = "started"
     case none = "none"
+    
+    var text: String {
+        switch self {
+        case .bought:
+            return "bought"
+            
+        case .followed:
+            return "started following"
+            
+        case .liked:
+            return "liked"
+            
+        case .started:
+            return "started live video"
+            
+        case .tipped:
+            return "has tipped"
+            
+        default:
+            return ""
+        }
+    }
+    
+    var path: FirebaseReference {
+        switch self {
+        case .bought,
+             .liked,
+             .started:
+            return FirebaseReference.dishes
+            
+        case .followed,
+             .tipped:
+            return FirebaseReference.users
+            
+        default:
+            return FirebaseReference.users
+        }
+    }
 }
 
 struct MFNewsFeed {
@@ -20,7 +52,6 @@ struct MFNewsFeed {
     var actionUser: MFUser
     var participantUser: MFUser
     var redirectID: String
-    var redirectPath: MFNewsFeedRedirectPath = .unknown
     var text: String
     var activity: MFActivityType = .none
     var createdAt: Date
@@ -36,15 +67,6 @@ struct MFNewsFeed {
         self.activity = activity
         self.createdAt = Date.init()
         self.redirectID = redirectID
-        
-        switch self.activity {
-        case .bought, .liked, .started:
-            self.redirectPath =  MFNewsFeedRedirectPath.dish
-        case .followed, .tipped:
-            self.redirectPath = .user
-        default:
-            self.redirectPath = .unknown
-        }
     }
     
     init(from dictionary:[String: AnyObject]) {
@@ -61,14 +83,7 @@ struct MFNewsFeed {
         self.text = dictionary["text"] as? String ?? ""
         
         self.createdAt = Date.init(timeIntervalSinceReferenceDate: (dictionary["createdAt"] as? Double) ?? 0)
-        
         self.redirectID = dictionary["redirectID"] as? String ?? ""
-        if let redirectPath = dictionary["redirectPath"] as? String,
-            let pathEnum = MFNewsFeedRedirectPath(rawValue:redirectPath) {
-            self.redirectPath = pathEnum
-        } else {
-            self.redirectPath = .unknown
-        }
         
         if let act = dictionary["activity"] as? String,
             let actEnum = MFActivityType.init(rawValue: act) {
@@ -83,7 +98,7 @@ struct MFNewsFeed {
             }
         }
     }
-
+    
 }
 
 extension MFNewsFeed: Hashable {
