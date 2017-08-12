@@ -36,6 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let currentUser = Auth.auth().currentUser
         self.currentUserFirebase = currentUser
         
+        if let userId = currentUser?.uid {
+            DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
+                self.currentUser = loggedInUser
+            }
+        }
+        
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         

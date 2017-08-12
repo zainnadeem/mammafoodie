@@ -378,10 +378,11 @@ extension DatabaseGateway {
     
     func getLoggedInUser() -> MFUser? {
         if let currentUser = Auth.auth().currentUser {
-            let user: MFUser = MFUser()
-            user.id = currentUser.uid
-            user.name = currentUser.displayName
-            return user
+//            let user: MFUser = MFUser()
+//            user.id = currentUser.uid
+//            user.name = currentUser.displayName
+            return AppDelegate.shared().currentUser
+//            return user
         }
         return nil
     }
