@@ -6,6 +6,10 @@ enum MFActivityType: String {
     case tipped = "tipped"
     case followed = "followed"
     case started = "started"
+    case requested = "requested"
+    case purchased = "purchased"
+    case watching = "watching"
+    case uploaded = "uploaded"
     case none = "none"
     
     var text: String {
@@ -25,6 +29,18 @@ enum MFActivityType: String {
         case .tipped:
             return "has tipped"
             
+        case .requested:
+            return "has requested"
+            
+        case .purchased:
+            return "has purchased"
+            
+        case .watching:
+            return "is watching"
+            
+        case .uploaded:
+            return "has uploaded"
+            
         default:
             return ""
         }
@@ -34,14 +50,18 @@ enum MFActivityType: String {
         switch self {
         case .bought,
              .liked,
-             .started:
+             .started,
+             .requested,
+             .purchased,
+             .watching,
+             .uploaded:
             return FirebaseReference.dishes
             
         case .followed,
              .tipped:
             return FirebaseReference.users
             
-        default:
+        case .none:
             return FirebaseReference.users
         }
     }
@@ -82,10 +102,13 @@ struct MFNewsFeed {
         
         self.text = dictionary["text"] as? String ?? ""
         
-        self.createdAt = Date.init(timeIntervalSinceReferenceDate: (dictionary["createdAt"] as? Double) ?? 0)
+        self.createdAt = Date.init(timeIntervalSinceReferenceDate: (dictionary["timestamp"] as? Double) ?? 0)
         self.redirectID = dictionary["redirectID"] as? String ?? ""
         
         if let act = dictionary["activity"] as? String,
+            let actEnum = MFActivityType.init(rawValue: act) {
+            self.activity = actEnum
+        } else if let act = dictionary["activityName"] as? String,
             let actEnum = MFActivityType.init(rawValue: act) {
             self.activity = actEnum
         }

@@ -33,12 +33,16 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         self.btnShare.imageView?.contentMode = .scaleAspectFit
         self.viewContainer.layer.cornerRadius = 8
         self.btnTime.imageView?.contentMode = .scaleAspectFit
-                self.lblActivity.linkAttributes = [NSForegroundColorAttributeName: UIColor.black,
-                                                   NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleNone.rawValue as Int) ]
+        self.lblActivity.linkAttributes = [NSForegroundColorAttributeName: UIColor.black,
+                                           NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleNone.rawValue as Int) ]
+        self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
     }
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblActivity.delegate = self
+        self.imgCharacterEmoji.image = nil
+        self.conWidthImgCharacterEmoji.constant = 0
+        
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
                 if image == nil || error != nil {
@@ -53,7 +57,32 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         let activityAction = NSAttributedString.init(string: newsFeed.activity.text, attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)!])
         
-        let relevantItem = NSAttributedString.init(string: " " + newsFeed.participantUser.name, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
+        var relevantText: String = ""
+        
+        switch newsFeed.activity {
+        case .bought,
+             .liked,
+             .requested,
+             .purchased:
+            relevantText = "a dish."
+            
+        case .uploaded:
+            relevantText = "a vidup."
+            
+        case .started,
+             .watching:
+            relevantText = "a live video."
+            
+        case .followed,
+             .tipped:
+            relevantText = newsFeed.participantUser.name
+            
+        case .none:
+            self.lblActivity.setText("")
+            return
+        }
+        
+        let relevantItem = NSAttributedString.init(string: " " + relevantText, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
         
         let wholeText = NSMutableAttributedString.init()
         wholeText.append(actionUserName)
@@ -66,9 +95,6 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
         self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
-        
-        self.imgCharacterEmoji.image = nil
-        self.conWidthImgCharacterEmoji.constant = 0
     }
     
     func updateShadow() {
@@ -101,7 +127,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
             let id = url.host {
             self.openURL?(path, id)
         } else {
-            print("Incorrect URL")
+            print("Incorrect URL: \(url.absoluteString)")
         }
     }
     

@@ -712,29 +712,49 @@ extension  DatabaseGateway {
 // MARK: - News Feed
 extension DatabaseGateway {
     
-    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
-            guard let rawNewsFeed = snapshot.value as? [String: Bool] else {
+            guard let rawNewsFeed = snapshot.value as? [String: Double] else {
                 completion([])
                 return
             }
             var feeds = [MFNewsFeed]()
-            for (key, show) in rawNewsFeed {
-                if show {
-                    FirebaseReference.newsFeedAll.classReference.child(key).observeSingleEvent(of: .value, with: { (snapshot) in
-                        
-                    })
-                }
+            let requestGroup = DispatchGroup.init()
+            for (id, _) in rawNewsFeed.sorted(by: { ($0.value > $1.value)}) {
+                requestGroup.enter()
+                self.getNewsFeed(with: id, { (feed) in
+                    if let f = feed {
+                        feeds.append(f)
+                    }
+                    requestGroup.leave()
+                })
             }
-            completion(feeds)
+            requestGroup.notify(queue: .main, execute: {
+                completion(feeds)
+            })
+            
         }
         
         let cancelClosure: FirebaseObserverCancelClosure = { (error) in
             print(error)
-            completion([])
+            DispatchQueue.main.async {
+                completion([])
+            }
         }
         
         FirebaseReference.newsFeed.classReference.child(userId).observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func getNewsFeed(with newsFeedID: String, _ completion: @escaping ((MFNewsFeed?) -> Void)) {
+        FirebaseReference.newsFeedAll.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (snapshot) in
+            DispatchQueue.main.async {
+                if let data = snapshot.value as? [String: AnyObject] {
+                    completion(MFNewsFeed.init(from: data))
+                } else {
+                    completion(nil)
+                }
+            }
+        })
     }
     
     func save(_ newsFeed: MFNewsFeed, completion: @escaping ((Error?) -> Void)) {
@@ -747,29 +767,6 @@ extension DatabaseGateway {
         let feed: MFNewsFeed = MFNewsFeed.init(from: raw)
         return feed
     }
-}
-
-//MARK: NewsFeed
-
-extension DatabaseGateway {
-    
-    func getNewsFeedWith(newsFeedID:String, _ completion:@escaping (_ activity:MFNewsFeed?)->Void ) {
-        
-        FirebaseReference.newsFeed.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-            guard let newsFeedData = userDataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
-                return
-            }
-            let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
-            
-            completion(newsFeed)
-        }) { (error) in
-            print(error)
-            completion(nil)
-        }
-        
-    }
-    
 }
 
 // MARK: - Media
@@ -1296,39 +1293,39 @@ extension DatabaseGateway {
         }
     }
     
-//    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
-//        let userId: String = self.getLoggedInUser()!.id
-//        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
-//        let parameters = [
-//            "userId": userId,
-//            "amountToAdd": newBalance
-//            ] as Parameters
-//        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
-//            print(response)
-//            completion(nil)
-//        }
-//    }
+    //    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
+    //        let userId: String = self.getLoggedInUser()!.id
+    //        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
+    //        let parameters = [
+    //            "userId": userId,
+    //            "amountToAdd": newBalance
+    //            ] as Parameters
+    //        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
+    //            print(response)
+    //            completion(nil)
+    //        }
+    //    }
     
-//    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
-//        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
-//        let parameters = [
-//            "fromUserId": fromUserId,
-//            "toUserId": toUserId,
-//            "amount": amount
-//            ] as Parameters
-//        Alamofire.request(url, parameters: parameters).responseString { (response) in
-//            if let responseString = response.result.value {
-//                if responseString.lowercased() == "success" {
-//                    completion(true)
-//                } else if responseString.lowercased() == "insufficient balance" {
-//                    completion(false)
-//                } else {
-//                    print("Nooo")
-//                    completion(false)
-//                }
-//            }
-//        }
-//    }
+    //    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
+    //        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
+    //        let parameters = [
+    //            "fromUserId": fromUserId,
+    //            "toUserId": toUserId,
+    //            "amount": amount
+    //            ] as Parameters
+    //        Alamofire.request(url, parameters: parameters).responseString { (response) in
+    //            if let responseString = response.result.value {
+    //                if responseString.lowercased() == "success" {
+    //                    completion(true)
+    //                } else if responseString.lowercased() == "insufficient balance" {
+    //                    completion(false)
+    //                } else {
+    //                    print("Nooo")
+    //                    completion(false)
+    //                }
+    //            }
+    //        }
+    //    }
     
     func uploadProfileImage(userID:String, image:UIImage, _ completion : @escaping (URL?, Error?) -> Void){
         let path = "users/\(userID).jpg"
@@ -1336,7 +1333,3 @@ extension DatabaseGateway {
     }
     
 }
-
-
-
-

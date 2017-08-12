@@ -29,13 +29,11 @@ class OtherUsersProfileWorker {
         
     }
     
-    func getActivityWith(newsFeedID:String, completion: @escaping (MFNewsFeed?)->Void){
-        
-        DatabaseGateway.sharedInstance.getNewsFeedWith(newsFeedID: newsFeedID) { (newsFeed) in
+    func getActivityWith(newsFeedID:String, completion: @escaping (MFNewsFeed?) -> Void) {
+        DatabaseGateway.sharedInstance.getNewsFeed(with: newsFeedID) { (newsFeed) in
             completion(newsFeed)
         }
     }
-    
     
     func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
         
@@ -43,7 +41,7 @@ class OtherUsersProfileWorker {
         
         DatabaseGateway.sharedInstance.getCookedDishesForUser(userID: userID) { (dishDataDictionary) in
             
-             print(dishDataDictionary)
+            print(dishDataDictionary)
             
             guard dishDataDictionary != nil else {
                 completion([])
@@ -53,7 +51,7 @@ class OtherUsersProfileWorker {
             
             for dishID in dishDataDictionary!.keys {
                 
-                 DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
+                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
                     print(dish?.name)
                     self.responseCounterCooked += 1
                     
@@ -134,7 +132,7 @@ class OtherUsersProfileWorker {
                     }
                 })
             }
-
+            
             
         }
         
@@ -143,7 +141,7 @@ class OtherUsersProfileWorker {
     
     func getSavedDishesCountFor(userID:String, _ completion:@escaping (Int)->()){
         
-         DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
             
             if dishDataDictionary == nil {
                 completion(0)
@@ -153,7 +151,7 @@ class OtherUsersProfileWorker {
         }
         
     }
-
+    
     func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
         
         followersResponseCounter = 0
@@ -234,15 +232,15 @@ class OtherUsersProfileWorker {
             urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unfollowUser?firstUserId=\(currentUser)&secondUserId=\(targetUser)"
         }
         
-      
+        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
-
+        
         let url = URL(string: encodedString)
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
         
         let config = URLSessionConfiguration.default
-
+        
         let session = URLSession(configuration: config)
         session.dataTask(with: request) { (data, response, error) in
             guard let response = response as? HTTPURLResponse else { print("there was an error");

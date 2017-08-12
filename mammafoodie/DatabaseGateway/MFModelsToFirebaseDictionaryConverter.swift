@@ -57,7 +57,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "text": "",
             "mediaURL": newsFeed.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject,
             "likes": newsFeed.likes,
-            "createdAt": newsFeed.createdAt.timeIntervalSinceReferenceDate
+            "timestamp": newsFeed.createdAt.timeIntervalSinceReferenceDate
             ] as [String : AnyObject]
         var comments = [[String: AnyObject]]()
         for comment in newsFeed.comments {
@@ -98,7 +98,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "likesCount" : dish.likesCount as AnyObject,
             "commentsCount" : dish.commentsCount as AnyObject,
             "description" : dish.description as AnyObject,
-            "mediaURL" : dish.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject ,
+            "mediaURL" : dish.mediaURL?.absoluteString as? AnyObject ?? "" as AnyObject ,
             "totalSlots" : dish.totalSlots as AnyObject,
             "pricePerSlot" : dish.pricePerSlot as AnyObject,
             "availableSlots" : dish.totalSlots as AnyObject,

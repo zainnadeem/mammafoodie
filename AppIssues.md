@@ -14,24 +14,10 @@ NewsFeed
 	"participantUserID" : <userID>,
 	"participantUserName": <userName>,
 	"redirectID": <id>,
+	"redirectName": <nameOfObject>
 	"redirectPath": <classPath>,
 	"activity": <activityName>,
 	"text": "",
 	"createdAt": <timeStamp>,
-	"mediaURL": <mediaURL>,
-	"likes": {
-		<userID>: <bool>
-	},
-	"comments" : {
-		<commentsID>: {
-			"id": <commentsID>,
-			"user": {
-				"id": <userID>,
-				"name": <userName>
-			},
-			"refrenceID": <refrenceID>,
-			"text": "",
-			"createdAt": <timeStamp>
-			}
-		}
+	"mediaURL": <mediaURL>
 }
