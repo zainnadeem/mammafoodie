@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MFUserAddress: CustomStringConvertible{
+struct MFUserAddress: CustomStringConvertible {
     
     var id:String!
     var address:String!
@@ -27,12 +27,12 @@ struct MFUserAddress: CustomStringConvertible{
         self.address = dictionary["address"] as? String ?? ""
         self.address_2 = dictionary["address_2"] as? String ?? ""
         self.city = dictionary["city"]  as? String ?? ""
-        self.country = dictionary["country"] as? String ?? "US"
         self.state = dictionary["state"] as? String ?? ""
         self.postalCode = dictionary["postalCode"] as? String ?? ""
         self.latitude = dictionary["latitude"] as? String ?? ""
         self.longitude = dictionary["longitude"] as? String ?? ""
         self.phone = dictionary["phone"] as? String ?? ""
+        self.country = "US"
     }
     
     init() {
@@ -40,7 +40,26 @@ struct MFUserAddress: CustomStringConvertible{
     }
     
     var description: String {
-        return "\(self.address ?? ""),\(self.address_2 ?? ""),\(self.city ?? ""),\(self.state ?? ""),\(self.country ?? "")"
+        var components: [String] = []
+        if self.address != nil {
+            components.append(self.address!)
+        }
+        if self.address_2 != nil {
+            components.append(self.address_2!)
+        }
+        if self.city != nil {
+            components.append(self.city!)
+        }
+        if self.postalCode != nil {
+            components.append(self.postalCode!)
+        }
+        if self.state != nil {
+            components.append(self.state!)
+        }
+        if self.country != nil {
+            components.append(self.country!)
+        }
+        return components.joined(separator: ", ")
     }
     
 }

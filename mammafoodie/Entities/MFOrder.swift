@@ -21,8 +21,8 @@ struct MFShippingAddress {
 }
 
 enum MFDeliveryOption: String {
-    case uberRush = "UberRush"
-    case postmate = "Postmate"
+    case uberEATS = "UberEATS"
+    case postmates = "Postmates"
 }
 
 enum MFPaymentMethod: String {
@@ -47,7 +47,7 @@ class MFOrder {
         var quantity = orderDataDictionary["quantity"] as? String ?? ""
     }
     
-    init(with quantity: UInt, buyer: MFUser, dish: MFDish, paymentDetails: MFPaymentDetails, paymentMethod: MFPaymentMethod) {
+    init(quantity: UInt, buyer: MFUser, dish: MFDish, paymentDetails: MFPaymentDetails, paymentMethod: MFPaymentMethod) {
         self.id = FirebaseReference.orders.generateAutoID()
         self.dish = dish
         self.boughtBy = buyer

@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         _ = StripeGateway.shared
         
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 30
+        
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
@@ -119,10 +121,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             //For uber rush
             if url.scheme == "mammafoodie-uber" {
                 let urlString = url.relativeString
-                print(urlString)
+                print("Uber URL: \(urlString)")
                 if let codeRange = urlString.range(of: "code="){
                     let authCode = urlString.substring(from: (codeRange.upperBound))
-                    print(authCode)
+                    print("Uber AuthCode: \(authCode)")
                     uberAccessTokenHandler!(authCode)
                     return true
                 } else {
@@ -203,51 +205,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser1 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser1 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser2 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser2 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser3 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser3 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser4 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser4 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser5 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser5 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser6 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser6 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser7 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser7 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser8 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser8 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser9 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser9 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser10 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser10 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser11 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser11 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         
-//        let participantUser12 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
+        //        let participantUser12 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
         
         feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
         

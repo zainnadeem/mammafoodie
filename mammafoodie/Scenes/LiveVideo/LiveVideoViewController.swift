@@ -89,7 +89,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-                self.output!.start(self.liveVideo)
+//                self.output!.start(self.liveVideo)
             #endif
         }
         self.setupViewComments()

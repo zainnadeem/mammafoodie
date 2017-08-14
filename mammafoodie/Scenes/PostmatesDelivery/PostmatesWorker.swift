@@ -22,7 +22,7 @@ class PostmatesWorker {
     
     //MARK: - CheckforDelivery
     
-    func checkforDeliveryAndQuote(pickupAddress:MFUserAddress,dropOffAddress:MFUserAddress,completion:@escaping (_ status:Bool,_ response:[String:Any]?, _ errorMessage:String?)->Void){
+    func checkforDeliveryAndQuote(pickupAddress:MFUserAddress,dropOffAddress:MFUserAddress,completion:@escaping (_ status:Bool,_ response:[String:Any]?, _ errorMessage:String?)->Void) {
         
         if encodedSandboxKey == nil || encodedSandboxKey == ""{
             encodedSandboxKey = authorizationValue()

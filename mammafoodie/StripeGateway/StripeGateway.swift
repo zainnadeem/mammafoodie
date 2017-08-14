@@ -45,10 +45,9 @@ class StripeGateway {
         DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId) { (error) in
             print("Charged")
             if error == nil {
-                // Transaction success. Add the amount in the digital wallet
-//                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
-//                    completion(error)
-//                })
+                completion(nil)
+            } else {
+                completion(error)
             }
         }
     }

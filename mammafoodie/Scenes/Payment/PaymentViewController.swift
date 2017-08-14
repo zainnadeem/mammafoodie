@@ -14,6 +14,8 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var deliveryText: UILabel!
     @IBOutlet weak var choosedeliveryText: UILabel!
     @IBOutlet weak var delveryaddTextField: UITextField!
+    @IBOutlet weak var lblDeliveryCharge: UILabel!
+    @IBOutlet weak var txtPhoneNumber: UITextField!
     
     @IBOutlet var pickerPickupTime: UIDatePicker!
     @IBOutlet weak var imgViewDish: UIImageView!
@@ -30,11 +32,20 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var btnAddCard: UIButton!
     
+    var deliveryMethod: MFDeliveryOption?
+    
     var cards: [STPCard] = []
     var selectedCardIndex: IndexPath?
     
     var slotsToBePurchased : UInt = 0
     var dish : MFDish!
+    
+    var uberWorker: UberRushDeliveryWorker?
+    var uberAccessToken: String?
+    var uberQuoteId: String?
+    
+    var postmatesWorker: PostmatesWorker?
+    var deliveryCharge: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +54,7 @@ class PaymentViewController: UIViewController {
         //            self.navigationController?.popViewController(animated: true)
         //            return
         //        }
-        self.dummyData()
+        //        self.dummyData()
         self.paymentCollectionView.delegate = self
         self.paymentCollectionView.dataSource = self
         
@@ -78,8 +89,65 @@ class PaymentViewController: UIViewController {
         self.txtPickupTime.inputView = self.pickerPickupTime
         self.txtPickupTime.delegate = self
         self.pickerPickupTime.maximumDate = Date.init().dateFor(.tomorrow)
-        //        self.getSavedCards()
+        self.getSavedCards()
         //        self.updateUI()
+        
+        self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone ?? ""
+    }
+    
+    func updateDeliveryCharge() {
+        if self.deliveryMethod == nil {
+            return
+        }
+        
+        guard let currentUserAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            return
+        }
+        
+        guard let dropoffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            return
+        }
+        
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        
+        DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
+            if let dishUser = dishUser {
+                if self.deliveryMethod == MFDeliveryOption.uberEATS {
+                    
+                    self.loadUberAccessToken({ (token) in
+                        self.uberWorker = UberRushDeliveryWorker(pickup: currentUserAddress, dropoff: dropoffAddress, chef: dishUser, purchasingUser: currentUser, order: [self.dish], accessToken: token)
+                        self.uberWorker!.getDeliveryQuote(completion: { response in
+                            print(response)
+                            self.uberQuoteId = response?["quote_id"] as? String ?? ""
+                            let fees: Double = response?["fee"] as? Double ?? 0
+                            self.lblDeliveryCharge.text = "Delivery charges: $\(fees)"
+                            self.deliveryCharge = fees
+                        })
+                    })
+                } else if self.deliveryMethod == MFDeliveryOption.postmates {
+                    
+                }
+            }
+        })
+    }
+    
+    func loadUberAccessToken(_ completion: @escaping (String)->Void) {
+        if self.uberAccessToken == nil {
+            UberRushDeliveryWorker.getAuthorizationcode { (authCode) in
+                if let authCode = authCode {
+                    UberRushDeliveryWorker.getAccessToken(authorizationCode: authCode, completion: { (data) in
+                        let accessToken: String? = data?["access_token"] as? String
+                        print("Uber accessToken: \(accessToken)")
+                        self.uberAccessToken = accessToken
+                        completion(self.uberAccessToken!)
+                    })
+                }
+            }
+        } else {
+            completion(self.uberAccessToken!)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,23 +164,24 @@ class PaymentViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueShowEditAddressVC" {
             if let addressVC = segue.destination as? EditAddressViewController {
+                addressVC.address = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails
                 addressVC.delegate = self
             }
         }
     }
     
-    func dummyData() {
-        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: "-KqAIpk0MFsdCn1sVogc") { (dishFound) in
-            if let dishFound = dishFound {
-                DispatchQueue.main.async {
-                    self.dish = dishFound
-                    self.slotsToBePurchased = self.dish.availableSlots
-                    self.updateUI()
-                    self.getSavedCards()
-                }
-            }
-        }
-    }
+    //    func dummyData() {
+    //        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: "-KqAIpk0MFsdCn1sVogc") { (dishFound) in
+    //            if let dishFound = dishFound {
+    //                DispatchQueue.main.async {
+    //                    self.dish = dishFound
+    //                    self.slotsToBePurchased = self.dish.availableSlots
+    //                    self.updateUI()
+    //                    self.getSavedCards()
+    //                }
+    //            }
+    //        }
+    //    }
     
     func updateUI() {
         self.imgViewDish.sd_setImage(with: self.dish.generateCoverThumbImageURL())
@@ -158,23 +227,23 @@ class PaymentViewController: UIViewController {
         }
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        StripeGateway.shared.addPaymentMethod(number: cardNumber, expMonth: self.addCartTextField.expirationMonth,
-                                              expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
-                                                DispatchQueue.main.async {
-                                                    self.addCartTextField.clear()
-                                                    hud.hide(animated: true)
-                                                    if let error = error {
-                                                        self.showAlert(error.localizedDescription, message: "")
-                                                    } else {
-                                                        self.showAlert("Success!", message: "Card saved.")
-                                                        self.getSavedCards()
-                                                    }
-                                                }
+        StripeGateway.shared.addPaymentMethod(number: cardNumber,expMonth: self.addCartTextField.expirationMonth, expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
+            DispatchQueue.main.async {
+                self.addCartTextField.clear()
+                hud.hide(animated: true)
+                if let error = error {
+                    self.showAlert(error.localizedDescription, message: "")
+                } else {
+                    self.showAlert("Success!", message: "Card saved.")
+                    self.getSavedCards()
+                }
+            }
         }
     }
     
     @IBAction func pickupAddress(_ sender: Any) {
         
+        self.lblDeliveryCharge.isHidden = true
         self.pickButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
         self.addressView.isHidden = false
@@ -191,12 +260,13 @@ class PaymentViewController: UIViewController {
     
     @IBAction func deliveryAddress(_ sender: Any) {
         
+        self.lblDeliveryCharge.isHidden = false
         self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
         self.txtPickupTime.isHidden = true
         self.uberButton.isHidden = false
         self.postmateButton.isHidden = false
-        self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.address?.description ?? ""
+        self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails?.description ?? ""
         self.addressView.isHidden = false
         self.btnConfirm.isHidden = false
         self.deliveryText.text! = "Delivery Address"
@@ -208,11 +278,15 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func uberButnActn(_ sender: Any) {
+        self.deliveryMethod = MFDeliveryOption.uberEATS
+        self.updateDeliveryCharge()
         self.uberButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
         self.postmateButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
     }
     
     @IBAction func postButnActn(_ sender: Any) {
+        self.deliveryMethod = MFDeliveryOption.postmates
+        self.updateDeliveryCharge()
         self.postmateButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
         self.uberButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
     }
@@ -226,11 +300,20 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
+        guard let currentUserPhoneNumber = self.txtPhoneNumber.text else {
+            self.showAlert("Error", message: "Please add your phone number confirming purchase.")
+            return
+        }
+        
         if let selectedIndex = self.selectedCardIndex,
             let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            
             let card = self.cards[selectedIndex.item]
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            StripeGateway.shared.createCharge(amount: (self.dish.pricePerSlot * Double(self.slotsToBePurchased)), sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { error in
+            
+            let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
+            
+            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { error in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)
                     if let error = error {
@@ -240,17 +323,49 @@ class PaymentViewController: UIViewController {
                             }
                         })
                     } else {
-                        self.showAlert("Done!", message: "", actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
-                            DispatchQueue.main.async {
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                        })
+                        // Charge was successful. Create a order object here
+                        
+                        if self.deliveryMethod == MFDeliveryOption.uberEATS {
+                            // Create uber delivery
+                            self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
+                                if let deliveryId = deliveryId {
+                                    self.uberWorker!.assignVehicleToDelivery(deliveryId: deliveryId, completion: { bool in
+                                        self.orderCompletedMessage()
+                                    })
+                                } else {
+                                    // Failed
+                                }
+                            })
+                        }
                     }
                 }
             })
         } else {
             self.showAlert("No Card Found!", message: "Please add credit card before confirming purchase.")
         }
+    }
+    
+    func addOrderToFirebase() {
+        
+        
+        let order: MFOrder = MFOrder.init(quantity: self.slotsToBePurchased,
+                                          buyer: currentUser,
+                                          dish: self.dish,
+                                          paymentDetails: <#T##MFPaymentDetails#>,
+                                          paymentMethod: <#T##MFPaymentMethod#>)
+        
+        DatabaseGateway.sharedInstance.createOrder(order, completion: { (error) in
+            
+        })
+    }
+    
+    func orderCompletedMessage() {
+        self.showAlert("Done!", message: "", actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        
     }
     
     @IBAction func onPickupTimeChange(_ sender: UIDatePicker) {
@@ -272,6 +387,7 @@ extension PaymentViewController: EditAddressDelegate {
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
             let userAddress = address {
             currentUser.address = userAddress.description
+            currentUser.addressDetails = userAddress
             DatabaseGateway.sharedInstance.updateUserEntity(with: currentUser, { (errorString) in
                 
             })
