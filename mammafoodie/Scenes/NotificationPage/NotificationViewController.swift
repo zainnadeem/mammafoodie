@@ -10,26 +10,32 @@ import UIKit
 
 class NotificationViewController: UIViewController {
     
-    @IBOutlet weak var notificationTableView:UITableView!
+    @IBOutlet weak var notificationTableView: UITableView!
     
     let reuseIdentifier = "NotificationCell"
-    lazy var worker = NotificationWorker()
-    var userID:String!
-    var notifications = [MFNotification](){
+    
+    var userID: String!
+    
+    var notifications = [MFNotification]() {
         didSet{
-            notificationTableView.reloadData()
+            self.notificationTableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.notificationTableView.delegate = self
+        self.notificationTableView.dataSource = self
+        self.notificationTableView.rowHeight = UITableViewAutomaticDimension
+        self.notificationTableView.estimatedRowHeight = 60
         
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
-            self.worker.getNotificationForUser(userID: userID) { (notifications) in
-                if let notifications = notifications{
-                    self.notifications = notifications
+            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:userID) { (nots) in
+                DispatchQueue.main.async {
+                    self.notifications = nots
                 }
             }
         } else {
@@ -52,17 +58,13 @@ class NotificationViewController: UIViewController {
 
 
 extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NotificationTableViewCell
-        let notif = notifications[indexPath.row]
+        let notif = self.notifications[indexPath.row]
         cell.setUp(notification: notif)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -70,7 +72,7 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        return self.notifications.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

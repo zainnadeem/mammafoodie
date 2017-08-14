@@ -76,15 +76,24 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
+        self.viewWillAppearCode()
+        
+        self.viewSlotDetails.layer.cornerRadius = 15
+        self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewComments.showLatestComment()
+    }
+    
+    func viewWillAppearCode() {
         self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
             self.lblNumberOfViewers.text = "\(count)"
         }
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        //        self.createTestLiveVideo()
-        
+
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
@@ -92,6 +101,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 self.output!.start(self.liveVideo)
             #endif
         }
+        
         self.setupViewComments()
         self.viewComments.emojiTapped = { (emojiButton) in
             if let current = DatabaseGateway.sharedInstance.getLoggedInUser() {
@@ -113,16 +123,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 })
             }
         }
-        self.viewSlotDetails.layer.cornerRadius = 15
-        self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
-        
-        //        self.updateDropShadowForViewUserInfo()
-        //        self.updateDropShadowForViewComments()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.viewComments.showLatestComment()
+
     }
     
     func loadDish() {
@@ -138,6 +139,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 }
             }
         }
+    }
+    
+    func load(new liveVideo: MFDish) {
+        self.output?.stop(self.liveVideo)
+        self.liveVideo = liveVideo
+        self.loadDish()
+        self.viewWillAppearCode()
     }
     
     func showUserInfo() {
@@ -246,7 +254,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         self.output?.stop(self.liveVideo)
-        if self.presentingViewController != nil {
+        if self.presentingViewController != nil ||
+            self.navigationController?.presentingViewController != nil {
             self.dismiss(animated: true, completion: nil)
         } else {
             self.navigationController?.popViewController(animated: true)

@@ -9,7 +9,7 @@ protocol VidupDetailPageViewControllerInput {
 }
 
 protocol VidupDetailPageViewControllerOutput {
-    func setupMediaPlayer(view:UIView,user_id:String,dish_id: String)
+    func setupMediaPlayer(view: UIView, user_id: String, dish_id: String, dish: MFDish?)
     func resetViewBounds(view:UIView)
     func stopTimer()
     func dishLiked(user_id:String,dish_id: String)
@@ -27,10 +27,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
     //TODO: - VidUp URL and Expire Time.
-    var userId:String = "Ki1ChCPqXuTBlMA485OPVAbjK6C2"
-    var DishId:String = "-Ko25iOEH_Erg-7B3UQc1"
-
+    var userId:String = ""
+    var DishId:String = ""
     
+    var dish: MFDish?
     
     //MARK: - IBOutlet
     
@@ -72,11 +72,11 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         let gradient = CAGradientLayer()
         gradient.frame = lv_ProfileDetails.bounds
         gradient.colors = [UIColor.darkGray.cgColor, UIColor.clear.cgColor]
-        lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
+        self.lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
         
-        lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
+        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
-        output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId)
+        self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,10 +85,11 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     }
     
     override func viewWillLayoutSubviews() {
-        output.resetViewBounds(view: lv_Mediaview)
+        super.viewWillLayoutSubviews()
+        self.output.resetViewBounds(view: lv_Mediaview)
     }
     
-    override var prefersStatusBarHidden: Bool{
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
@@ -113,12 +114,15 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     }
     
     @IBAction func closebtnClicked(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-        print("Close Clicked")
+        if self.presentingViewController != nil ||
+            self.navigationController?.presentingViewController != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     // MARK: - Display logic
-    
     func HideandUnhideView(){
         if lv_Comments.isHidden == true {
             lv_Comments.isHidden = false
@@ -150,7 +154,6 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
         lbl_Like.text = "\(Int(DishInfo.likesCount))"
     }
-    
     
     func UpdateLikeStatus(Status:Bool) {
         lbtn_like.isSelected = Status
@@ -189,6 +192,13 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         
         path.addCurve(to: endpoint, controlPoint1: cp1, controlPoint2: cp2)
         return path
+    }
+    
+    func load(new vidup: MFDish) {
+        self.userId = vidup.user.id
+        self.DishId = vidup.id
+        self.dish = vidup
+        self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
     }
     
 }

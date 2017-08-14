@@ -6,7 +6,7 @@ protocol Interactordelegate {
 }
 
 protocol VidupDetailPageInteractorInput {
-    func setupMediaPlayer(view:UIView,user_id:String,dish_id: String)
+    func setupMediaPlayer(view: UIView, user_id: String, dish_id: String, dish: MFDish?)
     func resetViewBounds(view:UIView)
     func stopTimer()
     func dishLiked(user_id:String,dish_id: String)
@@ -32,25 +32,43 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     
     // MARK: - Business logic
     
-    func setupMediaPlayer(view:UIView,user_id:String,dish_id: String){
+    func setupMediaPlayer(view: UIView, user_id: String, dish_id: String, dish: MFDish?) {
         //Setup the media player
         Vidupworker.delegate = self
         Vidupworker.SetupMediaPlayer(view: view)
         
-        Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
-            self.output.UserInfo(UserInfo: Userdetails)
-        }
-        
-        Vidupworker.GetDishInfo(Id: dish_id) { (dishDetails) in
-            if dishDetails != nil{
-                self.output.DishInfo(DishInfo: dishDetails!)
-                self.VidupTimerworker.delegate = self
-                if self.mediaPlaying ==  false {
-                    self.mediaPlaying = true
-                    self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
-                    let timeLeft:Double = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
+        if let dishDetails = dish {
+            Vidupworker.GetUserDetails(Id: dishDetails.user.id) { (Userdetails) in
+                self.output.UserInfo(UserInfo: Userdetails)
+            }
+            self.output.DishInfo(DishInfo: dishDetails)
+            self.VidupTimerworker.delegate = self
+            if self.mediaPlaying ==  false {
+                self.mediaPlaying = true
+                if let mediaURL = dishDetails.mediaURL {
+                    self.Vidupworker.PlayVideo(MediaURL: mediaURL)
+                }
+                if let endTimestamp = dishDetails.endTimestamp {
+                    let timeLeft: Double = self.Vidupworker.getexpireTime(endTimestamp: endTimestamp)
                     self.VidupTimerworker.seconds = timeLeft
                     self.VidupTimerworker.runTimer()
+                }
+            }
+        } else {
+            Vidupworker.GetUserDetails(Id: user_id) { (Userdetails) in
+                self.output.UserInfo(UserInfo: Userdetails)
+            }
+            Vidupworker.GetDishInfo(Id: dish_id) { (dishDetails) in
+                if dishDetails != nil{
+                    self.output.DishInfo(DishInfo: dishDetails!)
+                    self.VidupTimerworker.delegate = self
+                    if self.mediaPlaying ==  false {
+                        self.mediaPlaying = true
+                        self.Vidupworker.PlayVideo(MediaURL: (dishDetails?.mediaURL)!)
+                        let timeLeft:Double = self.Vidupworker.getexpireTime(endTimestamp: (dishDetails?.endTimestamp)!)
+                        self.VidupTimerworker.seconds = timeLeft
+                        self.VidupTimerworker.runTimer()
+                    }
                 }
             }
         }

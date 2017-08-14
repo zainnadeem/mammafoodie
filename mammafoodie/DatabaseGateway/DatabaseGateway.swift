@@ -24,13 +24,9 @@ enum FirebaseReference: String {
     case newsFeedAll = "NewsFeed_All"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-    
     case stripeCustomers = "stripe_customers"
-    //    case dishComments = "DishComments"
     case savedDishes = "SavedDishes"
     case likedDishes = "LikedDishes"
-    
-    //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
     case followers = "UserFollowers"
@@ -38,14 +34,9 @@ enum FirebaseReference: String {
     case userNewsFeed = "UserNewsFeed"
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
-    case notificationsForUser = "NotificationsForUser"
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
-    //case conversationLookup = "ConversationLookup"
-    
-    // temporary class for LiveVideoDemo. We will need to delete this later on
-    //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -1156,13 +1147,18 @@ extension DatabaseGateway {
 
 extension DatabaseGateway{
     
-    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?) -> Void) {
-        FirebaseReference.notificationsForUser.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
+    func getNotificationsForUser(userID:String, completion:@escaping ([MFNotification]) -> Void) {
+        FirebaseReference.notifications.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            var notifications = [MFNotification]()
+            guard let notificationData = dataSnapshot.value as? [String: [String: AnyObject]] else {
+                completion(notifications)
                 return
             }
-            completion(notificationData)
+            
+            for (_, notDict) in notificationData {
+                notifications.append(MFNotification(from: notDict))
+            }
+            completion(notifications)
         })
     }
     

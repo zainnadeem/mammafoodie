@@ -34,8 +34,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func loadActivities() {
-//         self.currentUser.id
-        DatabaseGateway.sharedInstance.getNewsFeed(for:"OPjJ40CSXjZkqKKmQcaVZWa2Nk03") { (feeds) in
+        DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
                 self.activity = feeds
                 self.tableView.backgroundView?.isHidden = (feeds.count > 0)
                 self.tableView.reloadData()

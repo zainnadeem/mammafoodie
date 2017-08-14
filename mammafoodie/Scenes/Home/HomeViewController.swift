@@ -139,7 +139,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
-        
         let shouldResetContentOffset: Bool = self.tblList.contentOffset.y > self.viewLiveVideoAndVidups.frame.height
         let newContentOffset: CGPoint = CGPoint(x: 0, y: self.viewLiveVideoAndVidups.frame.height)
         

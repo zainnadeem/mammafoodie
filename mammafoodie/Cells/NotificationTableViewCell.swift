@@ -31,24 +31,17 @@ class NotificationTableViewCell: UITableViewCell {
     
     func setUp(notification:MFNotification){
         
-        let imageURL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: notification.participantUserID)
-        
-        if let url = imageURL {
-            profileImageView.sd_setImage(with: url)
+        if let imageURL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: notification.participantUserID) {
+            self.profileImageView.sd_setImage(with: imageURL)
         }
         
-        lblNotificationText.attributedText = notification.attributedString
-        
-        
-        if let dishID = notification.dishID{
+        self.lblNotificationText.text = notification.text
+        if let dishID = notification.dishID {
             let dishImageURl = FirebaseReference.dishes.getImagePath(with: dishID)
-            
             if let url = dishImageURl{
                 dishImageView.sd_setImage(with: url)
             }
         }
-        
-        
     }
     
 }

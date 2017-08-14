@@ -12,6 +12,7 @@ import GoogleMaps
 import IQKeyboardManagerSwift
 import UserNotifications
 import FirebaseMessaging
+import MBProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -36,38 +37,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let currentUser = Auth.auth().currentUser
         self.currentUserFirebase = currentUser
         
-        if let userId = currentUser?.uid {
-            DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
-                self.currentUser = loggedInUser
-            }
-        }
-        
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
-        if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
-            if currentUser != nil {
-                //User is already logged in, show home screen
-                DatabaseGateway.sharedInstance.getUserWith(userID: currentUser!.uid, { (user) in
-                    self.currentUser = user
-                })
-                let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
-            }
+        if let _ = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+            print("Launch With options")
         }
         
+        if let userId = currentUser?.uid {
+            if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
+                let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
+                DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
+                    DispatchQueue.main.async {
+                        self.currentUser = loggedInUser
+                        hud.hide(animated: true)
+                        if self.currentUser != nil {
+                            let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+                            welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
+                            if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+                                self.handleNotification(userInfo, showAlert: false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
+        
+        self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
         return true
     }
     
+    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
+        let newID = FirebaseReference.notifications.generateAutoID()
+        FirebaseReference.notifications.classReference.child(id).updateChildValues([
+            newID : [
+                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
+                "participantUserId": id,
+                "plainText": "VidUp Test!",
+                "redirectId": "-KrUd41c4lXHO_KRBAx5",
+                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
+                "redirectPath": "Dishes",
+                "text": "VidUp Test!",
+                "timestamp": 522861129.399
+            ]])
+    }
+    
     func updateToken() {
         if let token = InstanceID.instanceID().token() {
-            print("APNs token: \(token)")
             if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 DatabaseGateway.sharedInstance.setDeviceToken(token, for: currentUser.id, { (error) in
-                    print("Token updated")
+                    print("Token: \(token)\n Updated for user: \(currentUser.id)")
                 })
             }
         }
@@ -137,21 +159,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             return FacebookLoginWorker.openURL(url, application: application, source: source, annotation: annotation) || GmailLoginWorker.canApplicationOpenURL(url, sourceApplication: sourceApplication)
     }
     
-    //PushNotification delegates
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print(deviceTokenString)
-        
+        print("Deivce Token:" + deviceTokenString)
+        self.updateToken()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        print(userInfo)
+        print("Deivce Token:" + error.localizedDescription)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -192,69 +207,133 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         print("filePath: \(destinationPath)")
     }
     
-    func createNewsFeed() {
-        var feeds = [MFNewsFeed]()
-        let actionUser = MFUser.init(id: "sXFOH3QceiPdAbLUflTXrW46yag2", name: "Arjav Lad", picture: "", profileDescription: "")
-        let participantUser = MFUser.init(id: "MUIqXL7Q7dcmwuwYIJuJdR1jmh53", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-        _ = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser1 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser2 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser3 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser4 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser5 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser6 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser7 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser8 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser9 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser10 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser11 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-//        let participantUser12 = MFUser.init(id: "637ul29k2Bd8eA5AxCrJeE1MjGj1", name: "Are", picture: "", profileDescription: "")
-        
-        feeds.append(MFNewsFeed.init(with: actionUser, participantUser: participantUser, activity: .followed, text: "Arjav Lad started following Are", redirectID: participantUser.id))
-        
-        for feed in feeds {
-            DatabaseGateway.sharedInstance.save(feed) { (error) in
-                print(error?.localizedDescription ?? "No Error")
+    func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
+        if let _ = self.currentUser,
+            let redirectID = userInfo["redirectId"] as? String,
+            let redirectPathString = userInfo["redirectPath"] as? String,
+            let redirectpath = FirebaseReference(rawValue: redirectPathString) {
+            let appState = UIApplication.shared.applicationState
+            print("App State: \(appState.rawValue)")
+            
+            func handleRequest() {
+                switch redirectpath {
+                case .users:
+                    var type: ProfileType = .othersProfile
+                    if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                        if currentUser.id == redirectID {
+                            type = .ownProfile
+                        }
+                    }
+                    self.showUserProfile(with: type, userid: redirectID)
+                    
+                case .dishes:
+                    self.openDish(with: redirectID)
+                    
+                default:
+                    print("Redirect Path not Handled")
+                    print("\nNot Handled notification: \(userInfo)\n")
+                }
             }
+            if showAlert &&
+               appState == .active {
+                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
+                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
+                        DispatchQueue.main.async {
+                            handleRequest()
+                        }
+                    }, cancelActionHandler: { (action) in
+                        
+                    })
+                } else {
+                    print("Notification text is wrong: \(userInfo)")
+                }
+            } else {
+                handleRequest()
+            }
+        } else {
+            print("\nNot Handled notification: \(userInfo)\n")
+        }
+    }
+    
+    func openDish(with id: String) {
+        let story = UIStoryboard.init(name: "Main", bundle: nil)
+        func open(dish: MFDish) {
+            if let _ = dish.endTimestamp {
+                //Vidup
+                if let currentVC = self.getCurrentViewController() as? VidupDetailPageViewController {
+                    currentVC.load(new: dish)
+                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "VidupDetailPageViewController") as? VidupDetailPageViewController {
+                    vidupDetailVC.DishId = dish.id
+                    vidupDetailVC.userId = dish.user.id
+                    vidupDetailVC.dish = dish
+                    present(vidupDetailVC)
+                }
+            } else {
+                //Live Video
+                if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
+                    currentVC.load(new: dish)
+                } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
+                    liveVideoVC.liveVideo = dish
+                    present(liveVideoVC)
+                }
+            }
+        }
+        
+        func present(_ vc: UIViewController) {
+            let nav = UINavigationController.init(rootViewController: vc)
+            nav.setNavigationBarHidden(true, animated: false)
+            self.checkAndPresent(vc: nav)
+        }
+        
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
+            if let dish = dish {
+                DispatchQueue.main.async {
+                    open(dish: dish)
+                }
+            }
+        }
+    }
+    
+    func getCurrentViewController() -> UIViewController {
+        if let presented = self.window?.rootViewController?.presentedViewController {
+            if let nav = presented as? UINavigationController {
+                if let last = nav.viewControllers.last {
+                    return last
+                }
+            }
+            return presented
+        } else if let nav = self.window!.rootViewController as? UINavigationController {
+            if let last = nav.viewControllers.last {
+                return last
+            }
+        }
+        return self.window!.rootViewController!
+    }
+    
+    func showUserProfile(with type: ProfileType, userid: String) {
+        let story = UIStoryboard.init(name: "Main", bundle: nil)
+        if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
+            if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
+                profileVC.profileType = type
+                profileVC.userID = userid
+                self.checkAndPresent(vc: nav)
+            }
+        }
+    }
+    
+    func checkAndPresent(vc: UIViewController) {
+        if let presented = self.window?.rootViewController?.presentedViewController {
+            if presented is UIAlertController {
+                print("Presenting Alert!!")
+            } else {
+                presented.present(vc, animated: true, completion: {
+                    
+                })
+            }
+        } else {
+            self.window?.rootViewController?.present(vc, animated: true, completion: {
+                
+            })
         }
     }
     
@@ -280,43 +359,22 @@ extension AppDelegate : MessagingDelegate {
     // [END ios_10_data_message]
 }
 
-// [START ios_10_message_handling]
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print(userInfo)
-        
-        // Change this to your preferred presentation option
+        self.handleNotification(notification.request.content.userInfo)
+        print("Will Present")
         completionHandler([])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print(userInfo)
-        
+        self.handleNotification(response.notification.request.content.userInfo)
+        print("Did Receive")
         completionHandler()
     }
 }
-// [END ios_10_message_handling]

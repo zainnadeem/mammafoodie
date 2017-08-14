@@ -16,6 +16,7 @@ class HomeRouter: HomeRouterInput {
             (segue.destination as! LiveVideoViewController).liveVideo = sender as! MFDish
         } else if segue.identifier == "segueShowVidupDetails" {
             (segue.destination as! VidupDetailPageViewController).DishId = (sender as! MFDish).id
+            (segue.destination as! VidupDetailPageViewController).dish = sender as? MFDish
             (segue.destination as! VidupDetailPageViewController).userId = (sender as! MFDish).user.id
         } else if segue.identifier == "segueGoCook" {
             let navigationController: MFNavigationController = segue.destination as! MFNavigationController
