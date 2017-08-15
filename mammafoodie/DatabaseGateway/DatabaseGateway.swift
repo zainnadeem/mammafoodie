@@ -24,13 +24,9 @@ enum FirebaseReference: String {
     case newsFeedAll = "NewsFeed_All"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-    
     case stripeCustomers = "stripe_customers"
-    //    case dishComments = "DishComments"
     case savedDishes = "SavedDishes"
     case likedDishes = "LikedDishes"
-    
-    //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
     case followers = "UserFollowers"
@@ -38,14 +34,9 @@ enum FirebaseReference: String {
     case userNewsFeed = "UserNewsFeed"
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
-    case notificationsForUser = "NotificationsForUser"
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
-    //case conversationLookup = "ConversationLookup"
-    
-    // temporary class for LiveVideoDemo. We will need to delete this later on
-    //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -341,31 +332,26 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
-        
         let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        
         FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUsers) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
-    
-    func updateUserEntity(with model:MFUser, _ completion: @escaping ((String?)->Void)) {
-         
-        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        let _ :String = "\(model.id)"
+ 
+    func updateUserEntity(with model: MFUser, _ completion: @escaping ((String?)->Void)) {
+        let rawUserData: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        let _ : String = "\(model.id)"
         FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUserData) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
     
     func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
-        
         FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             let user:MFUser = MFUser(from: userData)
             user.id = userID
             
@@ -1168,13 +1154,18 @@ extension DatabaseGateway {
 
 extension DatabaseGateway{
     
-    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?) -> Void) {
-        FirebaseReference.notificationsForUser.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
+    func getNotificationsForUser(userID:String, completion:@escaping ([MFNotification]) -> Void) {
+        FirebaseReference.notifications.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            var notifications = [MFNotification]()
+            guard let notificationData = dataSnapshot.value as? [String: [String: AnyObject]] else {
+                completion(notifications)
                 return
             }
-            completion(notificationData)
+            
+            for (_, notDict) in notificationData {
+                notifications.append(MFNotification(from: notDict))
+            }
+            completion(notifications)
         })
     }
     

@@ -19,39 +19,31 @@ protocol LoginViewControllerOutput {
 }
 
 class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariViewControllerDelegate, UITextFieldDelegate {
+    
     var output: LoginViewControllerOutput!
     var router: LoginRouter!
     
     let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
-    
     var shapeLayer: CAShapeLayer!
-    
+    var KLCforgotPasswordPopup:KLCPopup?
     var activityIndicatorView:UIView?
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-    
     @IBOutlet weak var passImageView: UIImageView!
     @IBOutlet weak var emailImageView: UIImageView!
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var loginButn: UIButton!
-    
     @IBOutlet weak var btnLoginWithFB: UIButton!
     @IBOutlet weak var btnLoginWithGoogle: UIButton!
-    
     @IBOutlet var forgotPasswordPopup: UIView!
-    
     @IBOutlet weak var txfForgotPassword: UITextField!
-    
     @IBOutlet weak var btnForgotPasswordSubmit: UIButton!
     
-    var KLCforgotPasswordPopup:KLCPopup?
-    
-    
     // MARK: - Object lifecycle
-    override func awakeFromNib(){
+    override func awakeFromNib() {
         super.awakeFromNib()
         LoginConfigurator.sharedInstance.configure(viewController: self)
     }
@@ -64,18 +56,16 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        //        logoutGmailButn()
-        //        forgotPasswordButn()
         
         self.loginButn.layer.cornerRadius = 23
         self.loginButn.clipsToBounds = true
-        userView.layer.cornerRadius = 5
-        userView.layer.borderWidth = 1
-        userView.layer.borderColor = UIColor.clear.cgColor
+        self.userView.layer.cornerRadius = 5
+        self.userView.layer.borderWidth = 1
+        self.userView.layer.borderColor = UIColor.clear.cgColor
         
-        passwordView.layer.cornerRadius = 5
-        passwordView.layer.borderWidth = 1
-        passwordView.layer.borderColor = UIColor.clear.cgColor
+        self.passwordView.layer.cornerRadius = 5
+        self.passwordView.layer.borderWidth = 1
+        self.passwordView.layer.borderColor = UIColor.clear.cgColor
         self.txtPassword.delegate = self
         self.txtEmail.delegate = self
         
@@ -87,7 +77,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         
         self.btnLoginWithFB.imageView?.contentMode = .scaleAspectFit
         self.btnLoginWithGoogle.imageView?.contentMode = .scaleAspectFit
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +95,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     // MARK: - Event handling
-    
     @IBAction func btnPrivacyTapped(_ sender: Any) {
         self.router.openSafariVC(with: .privacyPolicy)
     }
@@ -115,36 +103,22 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         self.router.openSafariVC(with: .terms)
     }
     
-    
     @IBAction func forgotPasswordClicked(_ sender: UIButton) {
-        
-        
         let forgotPasswordVC = self.forgotPasswordPopup
         forgotPasswordVC?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width - 40, height: 260)
         
-        
         KLCforgotPasswordPopup = KLCPopup.init(contentView: forgotPasswordVC, showType: .bounceInFromTop , dismissType: .bounceOutToTop , maskType: .dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
-        
         KLCforgotPasswordPopup?.show(atCenter:CGPoint(x: self.view.center.x, y: self.view.center.y - 130) , in: self.view)
-        
         
         self.txfForgotPassword.text = txtEmail.text
         self.txfForgotPassword.becomeFirstResponder()
-        
-        
     }
-    
     
     @IBAction func forgotPasswordSubmitButtonClicked(_ sender: UIButton) {
-        
-        
         guard self.txfForgotPassword.text != nil && self.txfForgotPassword.text != "" else {return}
-        
-        output.forgotpasswordWorker(email: self.txfForgotPassword.text!)
-        
+        self.output.forgotpasswordWorker(email: self.txfForgotPassword.text!)
         KLCforgotPasswordPopup?.dismiss(true)
     }
-    
     
     func updateShadow() {
         if self.shapeLayer == nil {
@@ -167,50 +141,33 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         }
     }
     
-    
     //FireBase SignUP
-    
-    @IBAction func signUpWithFireBase(sender:UIButton){
-        
-        guard validateCredentials() else {return}
-        
+    @IBAction func signUpWithFireBase(sender: UIButton) {
+        guard validateCredentials() else { return }
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
-        output.signUpWith(credentials: credentials)
-        
-        
+        self.output.signUpWith(credentials: credentials)
     }
     
-    @IBAction func loginWithFireBase(sender:UIButton){
-        
+    @IBAction func loginWithFireBase(sender: UIButton) {
         guard validateCredentials() && isValidEmail(emailStr: txtEmail.text!) else {return}
-        
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.loginWith(credentials: credentials)
-        
     }
     
-    
-    
-    @IBAction func logout(sender:UIButton){
-        output.logout()
-        
+    @IBAction func logout(sender: UIButton) {
+        self.output.logout()
     }
-    
     
     @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
         self.output.loginWithFacebook()
-        
     }
     
     @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
         self.output.loginWithGoogle()
     }
     
-    
-    
     //Validations
-    
-    func validateCredentials() -> Bool{
+    func validateCredentials() -> Bool {
         guard (txtEmail.text != nil && txtPassword.text != nil), !txtEmail.text!.isEmpty, !txtPassword.text!.isEmpty else {
             
             let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
@@ -219,7 +176,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
             self.present(alertController, animated: true, completion: nil)
             return false
         }
-        
         return true
     }
     
@@ -241,10 +197,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         return true
     }
     
-    
-    
     // MARK: - Inputs
-    
     func viewControllerToPresent() -> UIViewController {
         return self
     }
@@ -279,7 +232,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         if textField == self.txtEmail {
             self.emailImageView.image = UIImage(named: "selectuser")
         }
@@ -288,7 +240,6 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         }
     }
     
-    //Routing
 }
 
 extension LoginViewController {
