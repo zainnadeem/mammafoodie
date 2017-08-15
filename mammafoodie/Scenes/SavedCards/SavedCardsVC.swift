@@ -74,7 +74,7 @@ class SavedCardsVC: UIViewController {
                     self.view.layoutIfNeeded();
                 }
                 if let cardId = cardId {
-                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
+                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { (chargeId, error) in
                         if let error = error {
                             print(error)
                         } else {
@@ -118,7 +118,7 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card: STPCard = self.cards[indexPath.item]
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { error in
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { (chargeId, error) in
             if let error = error {
                 print(error)
             } else {

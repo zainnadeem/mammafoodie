@@ -3,8 +3,21 @@ import Foundation
 class MFUser {
     var id: String
     var name: String!
+    
+    var firstName: String {
+        return self.name.components(separatedBy: " ").first ?? ""
+    }
+    var lastName: String {
+        let components = self.name.components(separatedBy: " ")
+        if components.count > 1 {
+            return components.last ?? ""
+        }
+        return ""
+    }
+    
     var email: String!
     var address: String?
+    var addressDetails: MFUserAddress?
     var addressLocation: String?
     //    var addressID:String?
     var picture: String?
@@ -50,6 +63,11 @@ class MFUser {
         self.name = Dictionary["name"] as? String ?? ""
         self.picture = Dictionary["picture"] as? String ?? ""
         self.address = Dictionary["address"] as? String ?? ""
+        
+        if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
+            self.addressDetails = self.getAddressDetails(from: rawAddress)
+        }
+        
         self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
@@ -80,6 +98,22 @@ class MFUser {
         self.picture = picture
         self.profileDescription = profileDescription
         self.email = email
+    }
+    
+    func getAddressDetails(from rawAddress: [String:AnyObject]) -> MFUserAddress {
+        var address: MFUserAddress = MFUserAddress()
+        
+        address.id = rawAddress["id"] as? String ?? ""
+        address.address = rawAddress["address"] as? String ?? ""
+        address.address_2 = rawAddress["address_2"] as? String ?? ""
+        address.city = rawAddress["city"]  as? String ?? ""
+        address.state = rawAddress["state"] as? String ?? ""
+        address.postalCode = rawAddress["postalCode"] as? String ?? ""
+        address.latitude = rawAddress["latitude"] as? String ?? ""
+        address.longitude = rawAddress["longitude"] as? String ?? ""
+        address.country = "US"
+        
+        return address
     }
     
     func generateProfilePictureURL() -> URL {

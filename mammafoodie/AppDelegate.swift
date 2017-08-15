@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         _ = StripeGateway.shared
         
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 30
+        
         FacebookLoginWorker.setup(application: application, with: launchOptions)
         GMSServices.provideAPIKey("AIzaSyClBLZVKux95EUwkJ2fBIgybRvxQb57nBM")
         
@@ -141,10 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             //For uber rush
             if url.scheme == "mammafoodie-uber" {
                 let urlString = url.relativeString
-                print(urlString)
+                print("Uber URL: \(urlString)")
                 if let codeRange = urlString.range(of: "code="){
                     let authCode = urlString.substring(from: (codeRange.upperBound))
-                    print(authCode)
+                    print("Uber AuthCode: \(authCode)")
                     uberAccessTokenHandler!(authCode)
                     return true
                 } else {
@@ -206,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
         print("filePath: \(destinationPath)")
     }
-    
+   
     func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
         if let _ = self.currentUser,
             let redirectID = userInfo["redirectId"] as? String,

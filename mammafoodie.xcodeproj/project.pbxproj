@@ -3164,6 +3164,7 @@
 					"$(PROJECT_DIR)/Support",
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.ios;
@@ -3191,6 +3192,7 @@
 					"$(PROJECT_DIR)/Support",
 				);
 				INFOPLIST_FILE = mammafoodie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mammafoodie.ios;
 				PRODUCT_NAME = "mamma foodie";

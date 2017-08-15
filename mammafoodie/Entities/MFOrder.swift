@@ -15,14 +15,14 @@ enum MFShippingMethod: String {
     case delivery = "delivery"
 }
 
-struct MFShippingAddress {
-    var address: String!
-    var location: String!
-}
+//struct MFShippingAddress {
+//    var address: String!
+//    var location: String!
+//}
 
 enum MFDeliveryOption: String {
-    case uberRush = "UberRush"
-    case postmate = "Postmate"
+    case uberEATS = "UberEATS"
+    case postmates = "Postmates"
 }
 
 enum MFPaymentMethod: String {
@@ -37,25 +37,26 @@ class MFOrder {
     var status: MFOrderStatus = .pending
     var createdAt: Date!
     var shippingMethod: MFShippingMethod!
-    var shippingAddress: MFShippingAddress!
+    var shippingAddress: MFUserAddress!
+    var deliveryId: String?
     var deliveryOption: MFDeliveryOption?
     var paymentMethod: MFPaymentMethod!
     var paymentDetails: MFPaymentDetails!
     
-    init(from orderDataDictionary:[String:AnyObject]) {
-        var Dishid = orderDataDictionary["dishId"] as? String ?? ""
-        var quantity = orderDataDictionary["quantity"] as? String ?? ""
-    }
+//    init(from orderDataDictionary:[String:AnyObject]) {
+//        var Dishid = orderDataDictionary["dishId"] as? String ?? ""
+//        var quantity = orderDataDictionary["quantity"] as? String ?? ""
+//    }
     
-    init(with quantity: UInt, buyer: MFUser, dish: MFDish, paymentDetails: MFPaymentDetails, paymentMethod: MFPaymentMethod) {
-        self.id = FirebaseReference.orders.generateAutoID()
-        self.dish = dish
-        self.boughtBy = buyer
-        self.status = .pending
-        self.createdAt = Date.init()
-        self.paymentDetails = paymentDetails
-        self.paymentMethod = paymentMethod
-    }
+//    init(quantity: UInt, buyer: MFUser, dish: MFDish, paymentDetails: MFPaymentDetails, paymentMethod: MFPaymentMethod) {
+//        self.id = FirebaseReference.orders.generateAutoID()
+//        self.dish = dish
+//        self.boughtBy = buyer
+//        self.status = .pending
+//        self.createdAt = Date.init()
+//        self.paymentDetails = paymentDetails
+//        self.paymentMethod = paymentMethod
+//    }
 }
 
 extension MFOrder: Hashable {

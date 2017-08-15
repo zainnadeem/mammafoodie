@@ -29,7 +29,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "createdAt": order.createdAt.timeIntervalSinceReferenceDate as AnyObject,
             "shippingMethod": order.shippingMethod.rawValue as AnyObject,
             "shippingAddress": [
-                "address": order.shippingAddress.address,
+                "address": order.shippingAddress.description,
                 "location": order.shippingAddress.location
                 ] as AnyObject,
             "paymentMethod": order.paymentMethod.rawValue as AnyObject,
@@ -38,6 +38,9 @@ class MFModelsToFirebaseDictionaryConverter {
                 "totalCharge": order.paymentDetails.totalCharge,
                 ] as AnyObject
         ]
+        if let deliveryId = order.deliveryId {
+            raw["deliveryId"] = deliveryId as AnyObject
+        }
         if let delivery = order.deliveryOption {
             raw["deliveryOption"] = delivery.rawValue as AnyObject
         }
@@ -163,6 +166,19 @@ class MFModelsToFirebaseDictionaryConverter {
         
         if let address = user.address {
             userInfo["address"] = address as AnyObject
+        }
+        
+        if let addressDetailsTemp = user.addressDetails {
+            var addressDetails: [String:AnyObject] = [:]
+            addressDetails["address"] = addressDetailsTemp.address as AnyObject
+            addressDetails["address_2"] = addressDetailsTemp.address_2 as AnyObject
+            addressDetails["city"] = addressDetailsTemp.city as AnyObject
+            addressDetails["state"] = addressDetailsTemp.state as AnyObject
+            addressDetails["postalCode"] = addressDetailsTemp.postalCode as AnyObject
+            addressDetails["latitude"] = addressDetailsTemp.latitude as AnyObject
+            addressDetails["longitude"] = addressDetailsTemp.longitude as AnyObject
+            
+            userInfo["addressDetails"] = addressDetails as AnyObject
         }
         
         if let addressLocation = user.addressLocation {
