@@ -120,13 +120,11 @@ class MenuItemTblCell: UITableViewCell {
         self.btnOrderNow.applyGradient(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1), #colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)], direction: .leftToRight)
     }
     
-    
     @IBAction func btnOptionsTapped(_ sender: UIButton) {
         
     }
     
     @IBAction func btnBookmarkTapped(_ sender: UIButton) {
     }
-    
     
 }

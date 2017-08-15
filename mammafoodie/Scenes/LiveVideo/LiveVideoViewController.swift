@@ -129,6 +129,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func loadDish() {
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterItemID: self.liveVideo.id as NSObject,
+            AnalyticsParameterItemName: "liveVideo" as NSObject,
+            AnalyticsParameterContentType: "LiveVideoView" as NSObject
+            ])
+        
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
