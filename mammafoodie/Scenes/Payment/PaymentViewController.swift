@@ -16,6 +16,9 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var delveryaddTextField: UITextField!
     @IBOutlet weak var lblDeliveryCharge: UILabel!
     @IBOutlet weak var txtPhoneNumber: UITextField!
+    @IBOutlet weak var lblPhoneNumber: UILabel!
+    @IBOutlet var conTopLblChooseDeliveryTypeToDeliveryAddress: NSLayoutConstraint!
+    @IBOutlet var conTopLblChooseDeliveryTypeToPhoneNumber: NSLayoutConstraint!
     
     @IBOutlet var pickerPickupTime: UIDatePicker!
     @IBOutlet weak var imgViewDish: UIImageView!
@@ -100,11 +103,7 @@ class PaymentViewController: UIViewController {
             return
         }
         
-        guard let currentUserAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
-            return
-        }
-        
-        guard let dropoffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+        guard let dropOffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
             return
         }
         
@@ -114,12 +113,16 @@ class PaymentViewController: UIViewController {
         
         DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
             if let dishUser = dishUser {
+                
+                guard let pickupAddress = dishUser.addressDetails else {
+                    return
+                }
+                
                 if self.deliveryMethod == MFDeliveryOption.uberEATS {
-                    
                     self.loadUberAccessToken({ (token) in
-                        self.uberWorker = UberRushDeliveryWorker(pickup: currentUserAddress, dropoff: dropoffAddress, chef: dishUser, purchasingUser: currentUser, order: [self.dish], accessToken: token)
+                        self.uberWorker = UberRushDeliveryWorker(pickup: pickupAddress, dropoff: dropOffAddress, chef: dishUser, purchasingUser: currentUser, order: [self.dish], accessToken: token)
                         self.uberWorker!.getDeliveryQuote(completion: { response in
-                            print(response)
+                            print("Delivery quote response: \(response)")
                             self.uberQuoteId = response?["quote_id"] as? String ?? ""
                             let fees: Double = response?["fee"] as? Double ?? 0
                             self.lblDeliveryCharge.text = "Delivery charges: $\(fees)"
@@ -127,7 +130,12 @@ class PaymentViewController: UIViewController {
                         })
                     })
                 } else if self.deliveryMethod == MFDeliveryOption.postmates {
-                    
+//                    if self.postmatesWorker == nil {
+//                        self.postmatesWorker = PostmatesWorker()
+//                    }
+//                    self.postmatesWorker?.checkforDeliveryAndQuote(pickupAddress: pickupAddress, dropOffAddress: dropoffAddress, completion: { (status, response, errorMessage) in
+//                        print("")
+//                    })
                 }
             }
         })
@@ -139,7 +147,7 @@ class PaymentViewController: UIViewController {
                 if let authCode = authCode {
                     UberRushDeliveryWorker.getAccessToken(authorizationCode: authCode, completion: { (data) in
                         let accessToken: String? = data?["access_token"] as? String
-                        print("Uber accessToken: \(accessToken)")
+                        print("Uber accessToken: \(accessToken ?? "N.A")")
                         self.uberAccessToken = accessToken
                         completion(self.uberAccessToken!)
                     })
@@ -243,6 +251,11 @@ class PaymentViewController: UIViewController {
     
     @IBAction func pickupAddress(_ sender: Any) {
         
+        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
+        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
+        self.view.layoutIfNeeded()
+        
+        self.deliveryMethod = nil
         self.lblDeliveryCharge.isHidden = true
         self.pickButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
@@ -256,10 +269,18 @@ class PaymentViewController: UIViewController {
         self.txtPickupTime.isHidden = false
         self.uberButton.isHidden = true
         self.postmateButton.isHidden = true
+        self.txtPhoneNumber.isHidden = true
+        self.lblPhoneNumber.isHidden = true
     }
     
     @IBAction func deliveryAddress(_ sender: Any) {
         
+        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
+        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
+        self.view.layoutIfNeeded()
+        
+        self.lblPhoneNumber.isHidden = false
+        self.txtPhoneNumber.isHidden = false
         self.lblDeliveryCharge.isHidden = false
         self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
         self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
@@ -313,7 +334,7 @@ class PaymentViewController: UIViewController {
             
             let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
             
-            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { error in
+            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, completion: { (chargeId, error) in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)
                     if let error = error {
@@ -329,13 +350,16 @@ class PaymentViewController: UIViewController {
                             // Create uber delivery
                             self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
                                 if let deliveryId = deliveryId {
-                                    self.uberWorker!.assignVehicleToDelivery(deliveryId: deliveryId, completion: { bool in
-                                        self.orderCompletedMessage()
-                                    })
+                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
                                 } else {
                                     // Failed
                                 }
                             })
+                        } else if self.deliveryMethod == MFDeliveryOption.postmates {
+                            
+                        } else {
+                            // Pickup
+                            self.addOrderToFirebase(deliveryId: nil, chargeId: chargeId)
                         }
                     }
                 }
@@ -345,17 +369,44 @@ class PaymentViewController: UIViewController {
         }
     }
     
-    func addOrderToFirebase() {
+    func addOrderToFirebase(deliveryId: String?, chargeId: String) {
         
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
         
-        let order: MFOrder = MFOrder.init(quantity: self.slotsToBePurchased,
-                                          buyer: currentUser,
-                                          dish: self.dish,
-                                          paymentDetails: <#T##MFPaymentDetails#>,
-                                          paymentMethod: <#T##MFPaymentMethod#>)
+        let paymentMethod: MFPaymentMethod = MFPaymentMethod.stripe
+        
+        let paymentDetails: MFPaymentDetails = MFPaymentDetails()
+        paymentDetails.id = chargeId
+        paymentDetails.deliveryCharge = self.deliveryCharge
+        paymentDetails.totalCharge = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
+        
+        let order: MFOrder = MFOrder()
+        order.quantity = self.slotsToBePurchased
+        order.boughtBy = currentUser
+        order.dish = self.dish
+        order.paymentDetails = paymentDetails
+        order.paymentMethod = paymentMethod
+        order.deliveryId = deliveryId
+        
+        if self.deliveryMethod != nil {
+            order.shippingMethod = MFShippingMethod.delivery
+        } else {
+            order.shippingMethod = MFShippingMethod.pickup
+        }
+        
+        order.createdAt = Date()
+        
+        guard let currentUserAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            return
+        }
+        order.shippingAddress = currentUserAddress
+        order.deliveryOption = self.deliveryMethod
         
         DatabaseGateway.sharedInstance.createOrder(order, completion: { (error) in
-            
+            print("order registered")
+            self.orderCompletedMessage()
         })
     }
     

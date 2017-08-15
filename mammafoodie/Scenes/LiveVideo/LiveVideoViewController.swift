@@ -42,6 +42,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBOutlet weak var lblSlotsCount: UILabel!
     
+    var observer: DatabaseConnectionObserver?
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -89,7 +91,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-//                self.output!.start(self.liveVideo)
+                //                self.output!.start(self.liveVideo)
             #endif
         }
         self.setupViewComments()
@@ -126,13 +128,22 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func loadDish() {
-        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id) { (dish) in
+        self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
                     self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
                     self.liveVideo = dish
                     self.lblDishName.text = dish.name
                     self.showUserInfo()
+                    
+                    
+                    if let location = dish.location {
+                        if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
+                            self.viewSlotDetails.isHidden = true
+                        }
+                    } else {
+                        self.viewSlotDetails.isHidden = true
+                    }
                 } else {
                     self.btnCloseTapped(self.btnClose)
                 }

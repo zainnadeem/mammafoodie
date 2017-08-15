@@ -4,8 +4,8 @@ class MFPaymentDetails {
     var id: String!
     weak var order: MFOrder!
     var deliveryCharge: Double = 0
-    var tax: Double = 0
-    var mammafoodieCharge: Double = 0
+//    var tax: Double = 0
+//    var mammafoodieCharge: Double = 0
     var totalCharge: Double = 0
 }
 

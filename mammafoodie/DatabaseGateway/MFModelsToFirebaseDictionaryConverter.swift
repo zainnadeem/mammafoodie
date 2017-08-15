@@ -29,7 +29,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "createdAt": order.createdAt.timeIntervalSinceReferenceDate as AnyObject,
             "shippingMethod": order.shippingMethod.rawValue as AnyObject,
             "shippingAddress": [
-                "address": order.shippingAddress.address,
+                "address": order.shippingAddress.description,
                 "location": order.shippingAddress.location
                 ] as AnyObject,
             "paymentMethod": order.paymentMethod.rawValue as AnyObject,
@@ -38,6 +38,9 @@ class MFModelsToFirebaseDictionaryConverter {
                 "totalCharge": order.paymentDetails.totalCharge,
                 ] as AnyObject
         ]
+        if let deliveryId = order.deliveryId {
+            raw["deliveryId"] = deliveryId as AnyObject
+        }
         if let delivery = order.deliveryOption {
             raw["deliveryOption"] = delivery.rawValue as AnyObject
         }

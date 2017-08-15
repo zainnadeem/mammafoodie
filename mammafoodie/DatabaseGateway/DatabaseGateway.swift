@@ -350,7 +350,7 @@ extension DatabaseGateway {
     }
     
     func updateUserEntity(with model:MFUser, _ completion: @escaping ((String?)->Void)) {
-        
+         
         let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let _ :String = "\(model.id)"
         FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUserData) { (error, databaseReference) in
@@ -902,6 +902,15 @@ extension DatabaseGateway {
             dish.user = user
         }
         
+        if let rawLocation = rawDish["location"] as? [String : AnyObject] {
+            if let lat = rawLocation["latitude"] as? CLLocationDegrees,
+                let lon = rawLocation["longitude"] as? CLLocationDegrees {
+
+                dish.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
+                dish.address = rawLocation["address"] as? String ?? ""
+            }
+        }
+        
         return dish
     }
     
@@ -1132,8 +1141,11 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func createOrder(_ order: MFOrder, completion: @escaping ((Error?) -> Void)) {
-        let rawOrder = MFModelsToFirebaseDictionaryConverter.dictionary(from: order)
-        FirebaseReference.orders.classReference.child(order.id).setValue(rawOrder)
+        order.id = FirebaseReference.orders.classReference.childByAutoId().key
+        let rawOrder: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: order)
+        FirebaseReference.orders.classReference.child(order.id).setValue(rawOrder) { (error, databaseRef) in
+            completion(error)
+        }
     }
     
     func getordersWith(_ completion: @escaping ((_ order:MFOrder?) -> Void)){
@@ -1142,7 +1154,7 @@ extension DatabaseGateway {
                 completion(nil)
                 return
             }
-            let order: MFOrder = MFOrder(from: ordersData)
+            let order: MFOrder = MFOrder()
             completion(order)
         }) { (error) in
             print(error)
@@ -1282,7 +1294,7 @@ extension DatabaseGateway {
         })
     }
     
-    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, completion: @escaping ((Error?)->Void)) {
+    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, completion: @escaping ((String, Error?)->Void)) {
         let userId: String = fromUserId
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
@@ -1290,7 +1302,7 @@ extension DatabaseGateway {
         let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId]
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
-            completion(error)
+            completion(pushId, error)
         }
     }
     

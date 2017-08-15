@@ -21,6 +21,18 @@ struct MFUserAddress: CustomStringConvertible {
     var longitude:String!
     var phone:String!
     
+    var location: String {
+        guard let lat = self.latitude else {
+            return ""
+        }
+        
+        guard let long = self.longitude else {
+            return ""
+        }
+        
+        return "\(lat),\(long)"
+    }
+    
     init(from dictionary:[String:AnyObject]){
         
         self.id = dictionary["id"] as? String ?? ""
