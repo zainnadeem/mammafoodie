@@ -53,13 +53,12 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     func setup(_ activityData:MFNewsFeed){
        
-        self.lblActivityDescription.attributedText = activityData.attributedString
+        self.lblActivityDescription.text = activityData.text
         self.lblTimeStamp.text = "2 mins ago."
         self.lblLikesCount.text = "12"
         self.lblCommentsCount.text = "23"
         
-        DatabaseGateway.sharedInstance.getUserWith(userID: activityData.actionUserID) { (user) in
-            
+        DatabaseGateway.sharedInstance.getUserWith(userID: activityData.actionUser.id) { (user) in
             guard let user = user else {return}
             let picURL = user.picture!
             self.profilePicImageView.sd_setImage(with: URL(string: picURL)!)

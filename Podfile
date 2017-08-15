@@ -19,6 +19,8 @@ target 'mammafoodie' do
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     
+    pod 'TTTAttributedLabel'
+    
     pod 'JSQMessagesViewController'
     pod 'IQKeyboardManagerSwift'
     

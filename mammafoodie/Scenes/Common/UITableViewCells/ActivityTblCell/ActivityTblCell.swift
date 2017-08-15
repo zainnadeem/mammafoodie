@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class ActivityTblCell: UITableViewCell {
+class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var btnLike: UIButton!
@@ -16,10 +17,14 @@ class ActivityTblCell: UITableViewCell {
     @IBOutlet weak var btnShare: UIButton!
     @IBOutlet weak var imgProfilePicture: UIImageView!
     @IBOutlet weak var imgCharacterEmoji: UIImageView!
-    @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var conWidthImgCharacterEmoji: NSLayoutConstraint!
     
+    @IBOutlet weak var lblActivity: TTTAttributedLabel!
+    @IBOutlet weak var btnTime: UIButton!
+    
     var shapeLayer: CAShapeLayer!
+    
+    var openURL: ((String, String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,34 +32,69 @@ class ActivityTblCell: UITableViewCell {
         self.btnComments.imageView?.contentMode = .scaleAspectFit
         self.btnShare.imageView?.contentMode = .scaleAspectFit
         self.viewContainer.layer.cornerRadius = 8
+        self.btnTime.imageView?.contentMode = .scaleAspectFit
+        self.lblActivity.linkAttributes = [NSForegroundColorAttributeName: UIColor.black,
+                                           NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleNone.rawValue as Int) ]
+        self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
     }
     
     func setup(with newsFeed: MFNewsFeed) {
-        self.lblText.attributedText = newsFeed.attributedString
-//        switch newsFeed.activityID.type {
-//        case .none:
-//            self.imgCharacterEmoji.image = nil
-//            self.conWidthImgCharacterEmoji.constant = 0
-//        default:
+        self.lblActivity.delegate = self
+        self.imgCharacterEmoji.image = nil
+        self.conWidthImgCharacterEmoji.constant = 0
         
-            self.imgCharacterEmoji.image = self.getEmojiCharacter(for: newsFeed.id)
-            self.conWidthImgCharacterEmoji.constant = 64
-//        }
-    }
-    
-    private func getEmojiCharacter(for cuisineId: String) -> UIImage {
-        if cuisineId == "1" {
-            return #imageLiteral(resourceName: "BeefTower")
-        } else if cuisineId == "2" {
-            return #imageLiteral(resourceName: "coleslawBurger")
-        } else if cuisineId == "3" {
-            return #imageLiteral(resourceName: "Crabcakes")
-        } else if cuisineId == "4" {
-            return #imageLiteral(resourceName: "GoatCheeseCanape")
-        } else if cuisineId == "5" {
-            return #imageLiteral(resourceName: "guac&chips")
+        if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
+            self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+                if image == nil || error != nil {
+                    self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+                }
+            })
+        } else {
+            self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
         }
-        return #imageLiteral(resourceName: "BeefTower")
+        
+        let actionUserName = NSAttributedString.init(string: newsFeed.actionUser.name + " ", attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
+        
+        let activityAction = NSAttributedString.init(string: newsFeed.activity.text, attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)!])
+        
+        var relevantText: String = ""
+        
+        switch newsFeed.activity {
+        case .bought,
+             .liked,
+             .requested,
+             .purchased:
+            relevantText = "a dish."
+            
+        case .uploaded:
+            relevantText = "a vidup."
+            
+        case .started,
+             .watching:
+            relevantText = "a live video."
+            
+        case .followed,
+             .tipped:
+            relevantText = newsFeed.participantUser.name
+            
+        case .none:
+            self.lblActivity.setText("")
+            return
+        }
+        
+        let relevantItem = NSAttributedString.init(string: " " + relevantText, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
+        
+        let wholeText = NSMutableAttributedString.init()
+        wholeText.append(actionUserName)
+        wholeText.append(activityAction)
+        wholeText.append(relevantItem)
+        
+        self.lblActivity.attributedText = wholeText
+        let rangeActionUser = (self.lblActivity.attributedText.string as NSString).range(of: actionUserName.string)
+        let rangeRelevantItem = (self.lblActivity.attributedText.string as NSString).range(of: relevantItem.string)
+        
+        self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
+        self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
     }
     
     func updateShadow() {
@@ -80,6 +120,15 @@ class ActivityTblCell: UITableViewCell {
     
     @IBAction func btnLikeTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+    }
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if let path = url.scheme,
+            let id = url.host {
+            self.openURL?(path, id)
+        } else {
+            print("Incorrect URL: \(url.absoluteString)")
+        }
     }
     
 }

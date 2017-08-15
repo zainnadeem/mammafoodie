@@ -2,34 +2,30 @@ import Foundation
 import UIKit
 
 class MFComment {
-    var id: String = ""
-    var text: String = ""
+    var id: String!
+    var text: String!
     var createdAt: Date!
     var user: MFUser!
-    var username: String!
+    var refrenceID: String!
     
-    init(text: String, username: String, userId: String) {
+    init(with text: String, user: MFUser, refrence: String) {
+        self.id = FirebaseReference.newsFeedComments.generateAutoID()
         self.text = text
-        
-        let user: MFUser = MFUser()
-        user.name = username
-        user.id = userId
         self.user = user
+        self.refrenceID = refrence
+        self.createdAt = Date.init()
     }
     
-    init(){
-        
-    }
-    
-    init(from commentDictionary:[String:AnyObject]) {
-        
+    init(from commentDictionary: [String: AnyObject]) {
         self.id = commentDictionary["id"] as? String ?? ""
+        if let userComment = commentDictionary["user"] as? [String: AnyObject] {
+            self.user = MFUser.init(from: userComment)
+        }
+        self.refrenceID = commentDictionary["refrenceID"] as? String ?? ""
         self.text = commentDictionary["text"] as? String ?? ""
-        let createdDateString = commentDictionary["createdAt"] as? String ?? ""
-        self.createdAt = Date(fromString:createdDateString, format: .isoDateTimeSec)
-        
+        let timeStamp: TimeInterval = commentDictionary["createdAt"] as? Double ?? 0
+        self.createdAt = Date.init(timeIntervalSinceReferenceDate: timeStamp)
     }
-  
 }
 
 extension MFComment: Hashable {

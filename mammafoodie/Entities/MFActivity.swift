@@ -1,11 +1,3 @@
-enum MFActivityType:String {
-    case liked
-    case bought
-    case tipped
-    case followed
-    case started
-    case none
-}
 
 struct MFActivity {
     var id: String!
@@ -24,7 +16,7 @@ struct MFActivity {
         
         let type = dictionary["type"]  as? String ?? ""
         
-        if let type = MFActivityType(rawValue:type){
+        if let type = MFActivityType(rawValue:type) {
             self.type  = type
         } else {
             self.type = .none

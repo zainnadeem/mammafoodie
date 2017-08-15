@@ -41,25 +41,26 @@ class DummyData {
     
     
     func populateNewsfeed(completion: ([MFNewsFeed]) -> Void){
-        let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.user1.name + " liked"), right: self.bold(text: user2.name + "'s " + " dish"))
-        let newsText2  = combineAttributedStrings(left: self.addUnderline(text: self.user3.name + " started following"), right: self.bold(text: user4.name))
-        let newsText3  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " is"), right: self.bold(text: "Live "))
-        let newsText4  = combineAttributedStrings(left: self.addUnderline(text: self.user7.name + " tipped"), right: self.bold(text: self.user8.name))
-        let newsText5  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " bought"), right: self.bold(text: user6.name + "'s " + " dish"))
+//        let newsText1  = combineAttributedStrings(left: self.addUnderline(text: self.user1.name + " liked"), right: self.bold(text: user2.name + "'s " + " dish"))
+//        let newsText2  = combineAttributedStrings(left: self.addUnderline(text: self.user3.name + " started following"), right: self.bold(text: user4.name))
+//        let newsText3  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " is"), right: self.bold(text: "Live "))
+//        let newsText4  = combineAttributedStrings(left: self.addUnderline(text: self.user7.name + " tipped"), right: self.bold(text: self.user8.name))
+//        let newsText5  = combineAttributedStrings(left: self.addUnderline(text: self.user5.name + " bought"), right: self.bold(text: user6.name + "'s " + " dish"))
+//        
+//        let newsfeed1 = MFNewsFeed(id: "1", actionUserId: user1.id, participantUserId: user2.id, activity: .liked, text: newsText1)
+//        let newsfeed2 = MFNewsFeed(id: "2", actionUserId: user3.id, participantUserId: user4.id, activity: .followed, text: newsText2)
+//        let newsfeed3 = MFNewsFeed(id: "3", actionUserId: user5.id, participantUserId: user5.id, activity: .started, text: newsText3)
+//        let newsfeed4 = MFNewsFeed(id: "4", actionUserId: user7.id, participantUserId: user8.id, activity: .tipped, text: newsText4)
+//        let newsfeed5 = MFNewsFeed(id: "5", actionUserId: user9.id, participantUserId: user1.id, activity: .bought, text: newsText5)
         
-        let newsfeed1 = MFNewsFeed(id: "1", actionUserId: user1.id, participantUserId: user2.id, activity: MFActivity(id:"", name:"", type: .liked), text: newsText1)
-        let newsfeed2 = MFNewsFeed(id: "2", actionUserId: user3.id, participantUserId: user4.id, activity: MFActivity(id:"", name:"", type: .followed), text: newsText2)
-        let newsfeed3 = MFNewsFeed(id: "3", actionUserId: user5.id, participantUserId: user5.id, activity: MFActivity(id:"", name:"", type: .none), text: newsText3)
-        let newsfeed4 = MFNewsFeed(id: "4", actionUserId: user7.id, participantUserId: user8.id, activity: MFActivity(id:"", name:"", type: .tipped), text: newsText4)
-        let newsfeed5 = MFNewsFeed(id: "5", actionUserId: user9.id, participantUserId: user1.id, activity: MFActivity(id:"", name:"", type: .bought), text: newsText5)
+        let newsfeedObjects = [MFNewsFeed]()
+//        [newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5]
         
-        let newsfeedObjects = [newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5]
+//        for object in newsfeedObjects {
+//            print(object.attributedString ?? "")
+//        }
         
-        for object in newsfeedObjects {
-            print(object.attributedString ?? "")
-        }
-        
-        completion([newsfeed1, newsfeed2, newsfeed3, newsfeed4, newsfeed5])
+        completion(newsfeedObjects)
     }
     
     

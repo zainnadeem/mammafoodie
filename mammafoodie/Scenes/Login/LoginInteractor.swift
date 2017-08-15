@@ -11,7 +11,6 @@ protocol LoginInteractorInput {
 }
 
 protocol LoginInteractorOutput {
-    
     func signUpCompletion(errorMessage:String?)
     func loginCompletion(errorMessage:String?)
     func forgotpasswordCompletion(errorMessage:String?)
@@ -21,22 +20,18 @@ protocol LoginInteractorOutput {
 
 class LoginInteractor: NSObject, LoginInteractorInput {
     
-    
     var output: LoginInteractorOutput!
     lazy var gmailWorker = GmailLoginWorker()
-    
     lazy var forgotPassWorker = ForgotPasswordWorker()
     
-    
     //Passing Email From View
-    func forgotpasswordWorker(email: String){
+    func forgotpasswordWorker(email: String) {
         print(email)
         forgotPassWorker.callApI(email: email) { (errorMessage) in
             //print(email)
-            
             self.output.forgotpasswordCompletion(errorMessage:errorMessage)
-            
         }
+        
     }
     
     // MARK: - Business logic
@@ -45,8 +40,7 @@ class LoginInteractor: NSObject, LoginInteractorInput {
     //MARK: - Input
     
     //Firebase Signup and Login
-    func signUpWith(credentials:Login.Credentials){
-        
+    func signUpWith(credentials:Login.Credentials) {
         let fireBaseLoginWorker = FirebaseLoginWorker()
         fireBaseLoginWorker.signUp(with: credentials) { (errorMessage) in
             self.output.signUpCompletion(errorMessage: errorMessage)
@@ -65,64 +59,81 @@ class LoginInteractor: NSObject, LoginInteractorInput {
     func loginWithFacebook() {
         let facebookLoginWorker = FacebookLoginWorker()
         facebookLoginWorker.viewController = self.output.viewControllerToPresent()
-        facebookLoginWorker.login { (errorMessage, authCredential) in
-            
+        facebookLoginWorker.login { (errorMessage, authCredential, email, name) in
             if let error = errorMessage {
-                
                 self.output.loginCompletion(errorMessage: error)
-                
-            } else if let authCredential = authCredential{
-               
-                
+            } else if let authCredential = authCredential {
                 //If facebook login is successful, login to firebase using facebook auth credential
                 let fireBaseLoginWorker = FirebaseLoginWorker()
                 fireBaseLoginWorker.login(with: authCredential, completion: { (errorMessage) in
-                    
-                    if let error = errorMessage{
+                    if let error = errorMessage {
                         self.output.loginCompletion(errorMessage: error)
                     } else {
-                        self.output.loginCompletion(errorMessage: nil) //Login Successful
+                        if let user = AppDelegate.shared().currentUser,
+                            let email = email,
+                            let name = name {
+                            if user.name == "" ||
+                                user.name.isEmpty {
+                                user.name = name
+                            }
+                            if user.email == "" ||
+                                user.email.isEmpty {
+                                user.email = email
+                            }
+                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+                                DispatchQueue.main.async {
+                                    self.output.loginCompletion(errorMessage: nil) //Login Successful
+                                }
+                            })
+                        } else {
+                            self.output.loginCompletion(errorMessage: "Login Failed!")
+                        }
                     }
-                    
                 })
-                
             }
-        }
-    }
-
-    //Google Login
-    func loginWithGoogle() {
-        
-        self.gmailWorker.viewController = self.output.viewControllerToPresent()
-        self.gmailWorker.signIn { (errorMessage, authCredential) in
-            
-            if let error = errorMessage {
-                
-                self.output.loginCompletion(errorMessage: error)
-                
-            } else if let authCredential = authCredential{
-                
-                
-                //If facebook login is successful, login to firebase using gmail auth credential
-                let fireBaseLoginWorker = FirebaseLoginWorker()
-                fireBaseLoginWorker.login(with: authCredential, completion: { (errorMessage) in
-                    
-                    if let error = errorMessage{
-                        self.output.loginCompletion(errorMessage: error)
-                    } else {
-                        self.output.loginCompletion(errorMessage: nil) //Login Successful
-                    }
-                    
-                })
-                
-            }
-            
         }
         
     }
     
-   
-
+    //Google Login
+    func loginWithGoogle() {
+        self.gmailWorker.viewController = self.output.viewControllerToPresent()
+        self.gmailWorker.signIn { (errorMessage, authCredential, email, name) in
+            if let error = errorMessage {
+                self.output.loginCompletion(errorMessage: error)
+            } else if let authCredential = authCredential {
+                //If facebook login is successful, login to firebase using gmail auth credential
+                let fireBaseLoginWorker = FirebaseLoginWorker()
+                fireBaseLoginWorker.login(with: authCredential, completion: { (errorMessage) in
+                    if let error = errorMessage{
+                        self.output.loginCompletion(errorMessage: error)
+                    } else {
+                        if let user = AppDelegate.shared().currentUser,
+                            let email = email,
+                            let name = name {
+                            if user.name == "" ||
+                                user.name.isEmpty {
+                                user.name = name
+                            }
+                            if user.email == "" ||
+                                user.email.isEmpty {
+                                user.email = email
+                            }
+                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+                                DispatchQueue.main.async {
+                                    self.output.loginCompletion(errorMessage: nil) //Login Successful
+                                }
+                            })
+                        } else {
+                            self.output.loginCompletion(errorMessage: "Login Failed!")
+                        }
+                    }
+                })
+            }
+        }
+        
+    }
+    
     //logout
     func logout() {
         let fireBaseLoginWorker = FirebaseLoginWorker()
@@ -131,23 +142,5 @@ class LoginInteractor: NSObject, LoginInteractorInput {
         }
         
     }
-
-    
-//    func logout(with email: String, password: String) {
-//        let worker: LoginWorker! = LoginWorker()
-//        worker.logout(with: email, password: password, completion: {
-//            self.output.logoutSuccess()
-//        })
-//    }
-//    func logoutWithFacebook(){
-//        let worker = FacebookLoginWorker()
-//        worker.logout()
-//    }
-//
-//    
-//    func logoutWithGoogle(){
-//        self.gmailWorker.signout()
-//    }
-    
     
 }

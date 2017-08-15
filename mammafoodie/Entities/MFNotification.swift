@@ -32,10 +32,26 @@ struct MFNotification {
     }
     
     init(from dictionary:[String:AnyObject]){
-        
+        /*
+         actionUserId:
+         "luuN75SiCHMWenXTngLlPLeW48a2"
+         participantUserId:
+         "Yf5bvIiNSMTxBYK6zSajlFYoXw42"
+         plainText:
+         "VidUp Test!"
+         redirectId:
+         "-KrUd41c4lXHO_KRBAx5"
+         redirectPath:
+         "Dishes"
+         text: 
+         "VidUp Test!"
+         timestamp: 
+         522861129.399
+
+ */
         self.id = dictionary["id"] as? String ?? ""
-        self.participantUserID = dictionary["participantUserID"] as? String ?? ""
-        self.dishID = dictionary["dishID"] as? String ?? nil
+        self.participantUserID = dictionary["participantUserId"] as? String ?? ""
+        self.dishID = dictionary["redirectId"] as? String ?? nil
         self.activityID = dictionary["activityID"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
         
@@ -44,11 +60,7 @@ struct MFNotification {
         
         self.liked = dictionary["liked"] as? [String:Bool] ?? [:]
         self.comments = dictionary["comments"] as? [String:Bool] ?? [:]
-        
-        
     }
-    
-    
 }
 
 extension MFNotification: Hashable {

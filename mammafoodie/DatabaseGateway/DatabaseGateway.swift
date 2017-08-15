@@ -18,17 +18,15 @@ enum FirebaseReference: String {
     case orders = "Orders"
     case paymentDetails = "PaymentDetails"
     case comments = "Comments"
+    case newsFeedComments = "NewsFeedComments"
     case notifications = "Notifications"
     case newsFeed = "NewsFeed"
+    case newsFeedAll = "NewsFeed_All"
     case liveVideoGatewayAccountDetails = "LiveVideoGatewayAccountDetails"
     case users = "Users"
-    
     case stripeCustomers = "stripe_customers"
-    //    case dishComments = "DishComments"
     case savedDishes = "SavedDishes"
     case likedDishes = "LikedDishes"
-    
-    //    case dishBoughtBy = "DishBoughtBy"
     case cookedDishes = "CookedDishes"
     case boughtDishes = "BoughtDishes"
     case followers = "UserFollowers"
@@ -36,14 +34,9 @@ enum FirebaseReference: String {
     case userNewsFeed = "UserNewsFeed"
     case cuisines = "Cuisines"
     case dishLikes = "DishLikes"
-    case notificationsForUser = "NotificationsForUser"
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
-    //case conversationLookup = "ConversationLookup"
-    
-    // temporary class for LiveVideoDemo. We will need to delete this later on
-    //    case tempLiveVideosStreamNames = "TempLiveVideosStreamNames"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -180,8 +173,7 @@ extension DatabaseGateway {
     //    }
     
     func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
-        var rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
-        rawLiveStream = rawLiveStream[liveStream.id] as! FirebaseDictionary
+        let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
             completion()
         }
@@ -250,83 +242,53 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func createMessage(with model: MFMessage, conversationID:String, _ completion: @escaping ((_ status:Bool)->Void)) {
-        
         var newMessage = model
-        
-        
         let newMessageID = FirebaseReference.messages.generateAutoID()
-        
         newMessage.id = newMessageID
-        
         let rawMessage: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newMessage)
-        
         FirebaseReference.messages.classReference.child(conversationID).child(newMessageID).updateChildValues(rawMessage) { (error, databaseReference) in
             if error != nil {
                 completion(false)
             } else {
                 completion(true)
             }
-            
         }
-        
     }
     
     func createConversation(createdAt:String, user1:String, user2:String, user1Name:String, user2Name:String, _ completion: @escaping ((_ status:Bool)->Void)){
-        
         let newConversationID = FirebaseReference.conversations.generateAutoID()
-        
         let metaData = ["id": newConversationID,"createdAt":createdAt, "user1":user1, "user2":user2, "user1Name":user1Name, "user2Name":user2Name]
-        
-        
-        
         let childUpdates = [
-            
             "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
-            
             "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
-            
             "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
-            
             // "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":["user2":user2,"conversationID":newConversationID]
-            
             ] as [AnyHashable : Any]
-        
         //        print(childUpdates)
         
         let databaseRef = Database.database().reference()
-        
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
-            
             if error != nil{
                 completion(false)
             } else {
                 completion(true)
             }
         }
-        
     }
     
     
     func getConversations(forUser userID:String, _ completion : @escaping (MFConversation?)->())->DatabaseConnectionObserver?{
-        
         var observer = DatabaseConnectionObserver()
         observer.databaseReference = FirebaseReference.userConversations.classReference
-        
         observer.observerId =  FirebaseReference.userConversations.classReference.child(userID).observe(.childAdded, with: { (conversationData) in
-            
             //print(messageData)
             print(conversationData.key)
-            
             self.getConversation(with: conversationData.key, { (conversationDictionary) in
-                
                 if conversationDictionary != nil {
-                    
                     let conversation = MFConversation(from: conversationDictionary!)
-                    
                     completion(conversation)
                 }
             })
-            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -335,48 +297,32 @@ extension DatabaseGateway {
         
     }
     
-    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()){
-        
+    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()) {
         FirebaseReference.conversations.classReference.child(conversationID).observeSingleEvent(of: .value, with: { (conversation) in
-            
             guard let conversationDictionary = conversation.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(conversationDictionary)
-            
-            
         })
     }
     
-    
-    
     func getMessages(forConversation conversationID:String, _ completion:@escaping (MFMessage?)->()) -> DatabaseConnectionObserver? {
-        
         var observer = DatabaseConnectionObserver()
         observer.databaseReference = FirebaseReference.messages.classReference
-        
         observer.observerId =  FirebaseReference.messages.classReference.child(conversationID).observe(.childAdded, with: { (messageData) in
-            
             //print(messageData)
-            
             guard let messagesDictionary = messageData.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             let message = MFMessage(from: messagesDictionary)
-            
             completion(message)
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }
         
         return observer
-        
     }
     
 }
@@ -386,33 +332,26 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
-        
         let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        
-        FirebaseReference.users.classReference.updateChildValues(rawUsers) { (error, databaseReference) in
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUsers) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
     
-    func updateUserEntity(with model:MFUser, _ completion: @escaping ((String?)->Void)) {
-        
-        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        let id :String = "\(model.id!)"
-        let userProfileData = rawUserData[id] as! FirebaseDictionary
-        FirebaseReference.users.classReference.child(model.id!).updateChildValues(userProfileData) { (error, databaseReference) in
+    func updateUserEntity(with model: MFUser, _ completion: @escaping ((String?)->Void)) {
+        let rawUserData: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        let _ : String = "\(model.id)"
+        FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUserData) { (error, databaseReference) in
             completion(error?.localizedDescription)
         }
     }
     
     func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
-        
         FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
-                let user: MFUser = MFUser()
                 completion(nil)
                 return
             }
-            
             let user:MFUser = MFUser(from: userData)
             user.id = userID
             
@@ -425,16 +364,17 @@ extension DatabaseGateway {
     
     func getLoggedInUser() -> MFUser? {
         if let currentUser = Auth.auth().currentUser {
-            let user: MFUser = MFUser()
-            user.id = currentUser.uid
-            user.name = currentUser.displayName
-            return user
+//            let user: MFUser = MFUser()
+//            user.id = currentUser.uid
+//            user.name = currentUser.displayName
+            return AppDelegate.shared().currentUser
+//            return user
         }
         return nil
     }
     
     func setDeviceToken(_ token: String, for userId: String, _ completion: @escaping ((Error?)->Void)) {
-        let deviceToken = ["deviceToken":token] as! FirebaseDictionary
+        let deviceToken = ["deviceToken":token] as FirebaseDictionary
         FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
             completion(error)
         }
@@ -550,11 +490,8 @@ extension DatabaseGateway {
     
     func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
         
-        let rawUserData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
-        
-        let id :String = "\(model.id)"
-        let userProfileData = rawUserData[id] as! FirebaseDictionary
-        
+        let userProfileData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
+        let _ :String = "\(model.id)"
         FirebaseReference.users.classReference.child(model.id).updateChildValues(userProfileData) { (error, databaseReference) in
             
             completion(error?.localizedDescription)
@@ -676,7 +613,6 @@ extension DatabaseGateway {
         
     }
     
-    
     func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             
@@ -725,7 +661,7 @@ extension DatabaseGateway {
         
         FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
-                print(dishSnapshot.value)
+                print(dishSnapshot.value ?? "")
                 completion(nil)
                 return
             }
@@ -739,10 +675,6 @@ extension DatabaseGateway {
         })
     }
 }
-
-
-
-
 
 //MARK: - Media
 extension  DatabaseGateway {
@@ -767,51 +699,61 @@ extension  DatabaseGateway {
 // MARK: - News Feed
 extension DatabaseGateway {
     
-    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+    func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
-            guard let rawNewsFeed: FirebaseDictionary = snapshot.value as? FirebaseDictionary else {
+            guard let rawNewsFeed = snapshot.value as? [String: Double] else {
                 completion([])
                 return
             }
-            let newsFeed: MFNewsFeed? = self.createNewsFeedModel(from: rawNewsFeed)
-            completion([newsFeed!])
+            var feeds = [MFNewsFeed]()
+            let requestGroup = DispatchGroup.init()
+            for (id, _) in rawNewsFeed.sorted(by: { ($0.value > $1.value)}) {
+                requestGroup.enter()
+                self.getNewsFeed(with: id, { (feed) in
+                    if let f = feed {
+                        feeds.append(f)
+                    }
+                    requestGroup.leave()
+                })
+            }
+            requestGroup.notify(queue: .main, execute: {
+                completion(feeds)
+            })
+            
         }
         
         let cancelClosure: FirebaseObserverCancelClosure = { (error) in
             print(error)
-            completion([])
+            DispatchQueue.main.async {
+                completion([])
+            }
         }
         
-        FirebaseReference.newsFeed.classReference.observe(.value, with: successClosure, withCancel: cancelClosure)
+        FirebaseReference.newsFeed.classReference.child(userId).observe(.value, with: successClosure, withCancel: cancelClosure)
+    }
+    
+    func getNewsFeed(with newsFeedID: String, _ completion: @escaping ((MFNewsFeed?) -> Void)) {
+        FirebaseReference.newsFeedAll.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (snapshot) in
+            DispatchQueue.main.async {
+                if let data = snapshot.value as? [String: AnyObject] {
+                    completion(MFNewsFeed.init(from: data))
+                } else {
+                    completion(nil)
+                }
+            }
+        })
+    }
+    
+    func save(_ newsFeed: MFNewsFeed, completion: @escaping ((Error?) -> Void)) {
+        FirebaseReference.newsFeedAll.classReference.child(newsFeed.id).updateChildValues(MFModelsToFirebaseDictionaryConverter.dictionary(from: newsFeed)) { (error, ref) in
+            completion(error)
+        }
     }
     
     func createNewsFeedModel(from raw: FirebaseDictionary) -> MFNewsFeed {
-        var feed: MFNewsFeed = MFNewsFeed()
+        let feed: MFNewsFeed = MFNewsFeed.init(from: raw)
         return feed
     }
-}
-
-//MARK: NewsFeed
-
-extension DatabaseGateway {
-    
-    func getNewsFeedWith(newsFeedID:String, _ completion:@escaping (_ activity:MFNewsFeed?)->Void ) {
-        
-        FirebaseReference.newsFeed.classReference.child(newsFeedID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-            guard let newsFeedData = userDataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
-                return
-            }
-            let newsFeed:MFNewsFeed = MFNewsFeed(from: newsFeedData)
-            
-            completion(newsFeed)
-        }) { (error) in
-            print(error)
-            completion(nil)
-        }
-        
-    }
-    
 }
 
 // MARK: - Media
@@ -951,7 +893,7 @@ extension DatabaseGateway {
     
     func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
         let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
-        FirebaseReference.dishes.classReference.updateChildValues(dishDict) { (error, ref) in
+        FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }
     }
@@ -1000,18 +942,7 @@ extension DatabaseGateway {
     }
     
     func createComment(from rawComment: FirebaseDictionary) -> MFComment {
-        let comment: MFComment = MFComment()
-        comment.id = rawComment["id"] as? String ?? ""
-        comment.text = rawComment["text"] as? String ?? ""
-        
-        if let timeInterval: TimeInterval = rawComment["createTimestamp"] as? TimeInterval {
-            comment.createdAt = Date(timeIntervalSinceReferenceDate: timeInterval)
-        }
-        
-        if let rawUser: FirebaseDictionary = rawComment["user"] as? FirebaseDictionary {
-            comment.user = self.createUser(from: rawUser)
-        }
-        
+        let comment: MFComment = MFComment.init(from: rawComment)
         return comment
     }
     
@@ -1024,7 +955,7 @@ extension DatabaseGateway {
     
     func postComment(_ comment: MFComment, on dish: MFDish, _ completion: @escaping (()->Void)) {
         let rawComment: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: comment)
-        FirebaseReference.dishComments.get(with: dish.id).updateChildValues(rawComment) { (error, databaseReference) in
+        FirebaseReference.dishComments.get(with: dish.id).child(comment.id).updateChildValues(rawComment) { (error, databaseReference) in
             completion()
         }
     }
@@ -1034,7 +965,7 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     func saveMedia(_ media : MFDish, completion : @escaping (Error?) -> Void) {
         let mediaDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: media)
-        FirebaseReference.media.classReference.updateChildValues(mediaDict) { (error, ref) in
+        FirebaseReference.media.classReference.child(media.id).updateChildValues(mediaDict) { (error, ref) in
             completion(error)
         }
     }
@@ -1115,8 +1046,6 @@ extension DatabaseGateway{
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             return nil
         }
-        return nil
-        
         
     }
     
@@ -1150,8 +1079,6 @@ extension DatabaseGateway{
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             return nil
         }
-        return nil
-        
         
     }
     
@@ -1215,13 +1142,18 @@ extension DatabaseGateway {
 
 extension DatabaseGateway{
     
-    func getNotificationsForUser(userID:String, completion:@escaping ([String:AnyObject]?) -> Void) {
-        FirebaseReference.notificationsForUser.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
-            guard let notificationData = dataSnapshot.value as? FirebaseDictionary else {
-                completion(nil)
+    func getNotificationsForUser(userID:String, completion:@escaping ([MFNotification]) -> Void) {
+        FirebaseReference.notifications.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+            var notifications = [MFNotification]()
+            guard let notificationData = dataSnapshot.value as? [String: [String: AnyObject]] else {
+                completion(notifications)
                 return
             }
-            completion(notificationData)
+            
+            for (_, notDict) in notificationData {
+                notifications.append(MFNotification(from: notDict))
+            }
+            completion(notifications)
         })
     }
     
@@ -1270,8 +1202,6 @@ extension DatabaseGateway {
         newModel.id = id
         
         let rawAddress: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: newModel)
-        
-        
         let childUpdates = ["\(FirebaseReference.address.rawValue)/\(id)/":rawAddress, "/\(FirebaseReference.userAddress.rawValue)/\(userID)/\(id)/":true] as [AnyHashable : Any]
         
         print(childUpdates)
@@ -1355,39 +1285,39 @@ extension DatabaseGateway {
         }
     }
     
-    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
-        let userId: String = self.getLoggedInUser()!.id
-        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
-        let parameters = [
-            "userId": userId,
-            "amountToAdd": newBalance
-            ] as Parameters
-        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
-            print(response)
-            completion(nil)
-        }
-    }
+    //    func updateWalletBalance(with newBalance: Double, completion: @escaping ((Error?)->Void)) {
+    //        let userId: String = self.getLoggedInUser()!.id
+    //        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/updateWalletBalance"
+    //        let parameters = [
+    //            "userId": userId,
+    //            "amountToAdd": newBalance
+    //            ] as Parameters
+    //        Alamofire.request(url, parameters: parameters).responseJSON { (response) in
+    //            print(response)
+    //            completion(nil)
+    //        }
+    //    }
     
-    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
-        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
-        let parameters = [
-            "fromUserId": fromUserId,
-            "toUserId": toUserId,
-            "amount": amount
-            ] as Parameters
-        Alamofire.request(url, parameters: parameters).responseString { (response) in
-            if let responseString = response.result.value {
-                if responseString.lowercased() == "success" {
-                    completion(true)
-                } else if responseString.lowercased() == "insufficient balance" {
-                    completion(false)
-                } else {
-                    print("Nooo")
-                    completion(false)
-                }
-            }
-        }
-    }
+    //    func transfer(amount: Double, from fromUserId: String, to toUserId: String, completion: @escaping ((Bool)->Void)) {
+    //        let url = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/transferBalance"
+    //        let parameters = [
+    //            "fromUserId": fromUserId,
+    //            "toUserId": toUserId,
+    //            "amount": amount
+    //            ] as Parameters
+    //        Alamofire.request(url, parameters: parameters).responseString { (response) in
+    //            if let responseString = response.result.value {
+    //                if responseString.lowercased() == "success" {
+    //                    completion(true)
+    //                } else if responseString.lowercased() == "insufficient balance" {
+    //                    completion(false)
+    //                } else {
+    //                    print("Nooo")
+    //                    completion(false)
+    //                }
+    //            }
+    //        }
+    //    }
     
     func uploadProfileImage(userID:String, image:UIImage, _ completion : @escaping (URL?, Error?) -> Void){
         let path = "users/\(userID).jpg"
@@ -1395,7 +1325,3 @@ extension DatabaseGateway {
     }
     
 }
-
-
-
-

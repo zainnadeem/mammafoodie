@@ -13,26 +13,31 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
     
-    func setup(with tableView: UITableView) {
+    private var openURL: ((String, String) -> Void)?
+    private var currentUser: MFUser!
+    
+    func setup(with tableView: UITableView, user: MFUser, _ completion: ((String, String) -> Void)?) {
+        self.currentUser = user
         self.tableView = tableView
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 270
-        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 270
+        self.openURL = completion
         let name: String = "MenuItemTblCell"
-        tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+        self.tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
         
         let name1: String = "ActivityTblCell"
-        tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
+        self.tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
         
         self.loadActivities()
     }
     
     func loadActivities() {
-        DummyData.sharedInstance.populateNewsfeed { (dummyData) in
-            self.activity = dummyData
-            self.tableView.reloadData()
+        DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
+                self.activity = feeds
+                self.tableView.backgroundView?.isHidden = (feeds.count > 0)
+                self.tableView.reloadData()
         }
     }
     
@@ -47,6 +52,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         if self.mode == .activity {
             let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
             cell.setup(with: self.activity[indexPath.item])
+            cell.openURL = self.openURL
             return cell
         } else {
             let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell

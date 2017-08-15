@@ -3,26 +3,27 @@ import GoogleSignIn
 import Firebase
 
 class GmailLoginWorker: NSObject {
-   
+    
     weak var viewController: UIViewController!
-
-   fileprivate var signInCompletionHandler : ((_ errorMessage:String?, _ authCredential:AuthCredential?)->())!
+    
+    fileprivate var signInCompletionHandler : ((_ errorMessage: String?, _ authCredential: AuthCredential?, _ email: String?, _ name: String?)->())!
     
     private func setup() {
         //Gmail Details
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
         GIDSignIn.sharedInstance().delegate = self
     }
     
-   private func signin() {
+    private func signin() {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
     }
     
-    func signIn(completion:@escaping (_ errorMessage:String?, _ authCredential:AuthCredential?)->()){
+    func signIn(completion:@escaping (_ errorMessage: String?, _ authCredential: AuthCredential?, _ email: String?, _ name: String?)->()) {
         self.signInCompletionHandler = completion
-        setup()
-        signin()
+        self.setup()
+        self.signin()
     }
     
     func signout(){
@@ -41,22 +42,20 @@ class GmailLoginWorker: NSObject {
 }
 
 extension GmailLoginWorker: GIDSignInDelegate {
-    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
         if let error = error {
-            signInCompletionHandler(error.localizedDescription, nil)
+            self.signInCompletionHandler(error.localizedDescription, nil, nil, nil)
             return
         }
         
         guard let authentication = user.authentication else {
-           signInCompletionHandler("Unable to login with Gmail. Please try again", nil)
-           return
+            self.signInCompletionHandler("Unable to login with Gmail. Please try again", nil, nil, nil)
+            return
         }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        
-        signInCompletionHandler(nil,credential) // Pass credential back to Interactor
+        self.signInCompletionHandler(nil, credential, user.profile.email, user.profile.name)
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

@@ -42,7 +42,7 @@ class DishCollectionViewCell: UICollectionViewCell {
             
             DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id) { (media) in
                 
-                guard let media = media else {return}
+                guard media != nil else {return}
                 
                 self.lblDishName.text = dishData.name
                 self.lblDishTypeTag.text = dishData.tag

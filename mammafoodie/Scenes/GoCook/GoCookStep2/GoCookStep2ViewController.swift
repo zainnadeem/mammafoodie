@@ -212,32 +212,31 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                         if ready {
                                             self.locationWorker.getCurrentLocation({ (location, error) in
                                                 if let currentLocation = location {
-                                                    
-                                                    let user = DatabaseGateway.sharedInstance.getLoggedInUser()
-                                                    
-                                                    let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
-                                                    dish.preparationTime = preparationTime
-                                                    dish.availableSlots = totalSlots
-                                                    dish.totalSlots = totalSlots
-                                                    dish.pricePerSlot = pricePerSlots
-                                                    dish.user = user
-                                                    dish.createTimestamp = Date.init()
-                                                    dish.location = currentLocation.coordinate
-                                                    dish.address = "MammaFoodie HQ"
-
-                                                    if dish.mediaType != .liveVideo {
-                                                        dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
+                                                    if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                                                        let dish = MFDish(name: dishName, description: self.textViewDescription.text, cuisine: cuisine, dishType: self.selectedDiet, mediaType: self.selectedOption)
+                                                        dish.preparationTime = preparationTime
+                                                        dish.availableSlots = totalSlots
+                                                        dish.totalSlots = totalSlots
+                                                        dish.pricePerSlot = pricePerSlots
+                                                        dish.user = user
+                                                        dish.createTimestamp = Date.init()
+                                                        dish.location = currentLocation.coordinate
+                                                        dish.address = ""
+                                                        
+                                                        if dish.mediaType != .liveVideo {
+                                                            dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
+                                                        }
+                                                        
+                                                        DispatchQueue.main.async {
+                                                            self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                            self.clearData()
+                                                        }
+                                                    } else {
+                                                        self.showAlert("User not Found", message: "")
                                                     }
-                                                  
-                                                    DispatchQueue.main.async {
-                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
-                                                        self.clearData()
-                                                    }
-                                                    
-
-                                                  
                                                 } else {
-//                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
+                                                    print("Location not Found")
+                                                    //                                                    self.showAlert("Location not Found", message: "Please make sure location service is enabled.")
                                                 }
                                             })
                                         }

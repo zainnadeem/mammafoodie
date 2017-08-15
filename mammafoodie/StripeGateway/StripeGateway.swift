@@ -46,9 +46,9 @@ class StripeGateway {
             print("Charged")
             if error == nil {
                 // Transaction success. Add the amount in the digital wallet
-                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
-                    completion(error)
-                })
+//                DatabaseGateway.sharedInstance.updateWalletBalance(with: amount, completion: { (error) in
+//                    completion(error)
+//                })
             }
         }
     }
