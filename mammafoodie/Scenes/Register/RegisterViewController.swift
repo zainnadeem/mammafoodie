@@ -15,20 +15,15 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     var output: RegisterViewControllerOutput!
     var router: RegisterRouter!
     
-    // MARK: - Object lifecycle
     @IBOutlet weak var passImageView: UIImageView!
     @IBOutlet weak var emailImageView: UIImageView!
     @IBOutlet weak var nameImageView: UIImageView!
-    
     @IBOutlet weak var emailTextFeild: UITextField!
     @IBOutlet weak var passTextFeild: UITextField!
-    
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var viewNameIcon: UIView!
-    
     @IBOutlet weak var viewPasswordIcon: UIView!
     @IBOutlet weak var viewEmailIcon: UIView!
-    
     @IBOutlet weak var nameTextField: UITextField!
     
     lazy var RegisterAdapterTextfeild = RegisterAdapter()
@@ -39,7 +34,6 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     }
     
     // MARK: - View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,24 +46,26 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         self.RegisterAdapterTextfeild.viewNameIcon = self.viewNameIcon
         self.RegisterAdapterTextfeild.viewEmailIcon = self.viewEmailIcon
         self.RegisterAdapterTextfeild.viewPasswordIcon = self.viewPasswordIcon
-        registerBtnSetup()
+        self.registerBtnSetup()
         self.RegisterAdapterTextfeild.setupTextfeildView()
-        output.updateShadow()
+        self.output.updateShadow()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    
-    func registerBtnSetup(){
-        registerBtn.layer.cornerRadius = 23
-        registerBtn.layer.borderWidth = 1
-        registerBtn.layer.borderColor = UIColor.clear.cgColor
-        registerBtn.clipsToBounds = true
+    func registerBtnSetup() {
+        self.registerBtn.layer.cornerRadius = 23
+        self.registerBtn.layer.borderWidth = 1
+        self.registerBtn.layer.borderColor = UIColor.clear.cgColor
+        self.registerBtn.clipsToBounds = true
     }
     
     // MARK: - Event handling
     
     // MARK: - Display logic
-    
     func showAlert(alertController: UIAlertController) {
         self.present(alertController, animated: true, completion: nil)
     }
@@ -86,7 +82,7 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
         self.output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
     }
     
-    func validateCredentials() -> Bool{
+    func validateCredentials() -> Bool {
         guard (emailTextFeild.text != nil && passTextFeild.text != nil && nameTextField.text != ""), !emailTextFeild.text!.isEmpty, !passTextFeild.text!.isEmpty, !nameTextField.text!.isEmpty else {
             let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -119,11 +115,5 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     func navigateHomePage() {
         AppDelegate.shared().setHomeViewController()
     }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //        updateShadow()
-    //    }
-    
     
 }
