@@ -75,13 +75,10 @@ class OtherUsersProfileWorker {
         responseCounterBought = 0
         
         DatabaseGateway.sharedInstance.getBoughtDishesForUser(userID: userID) { (dishDataDictionary) in
-            
             print(dishDataDictionary)
-            
             guard dishDataDictionary != nil else {
                 completion([])
                 return}
-            
             var dishes = [MFDish]()
             
             for dishID in dishDataDictionary!.keys {
@@ -105,49 +102,15 @@ class OtherUsersProfileWorker {
     
     
     func getSavedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void) {
-        
         responseCounterSaved = 0
-        
-        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
-            
-            
-            guard dishDataDictionary != nil else {
-                completion([])
-                return}
-            
-            var dishes = [MFDish]()
-            
-            for dishID in dishDataDictionary!.keys {
-                
-                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
-                    self.responseCounterSaved += 1
-                    
-                    if dish != nil {
-                        dishes.append(dish!)
-                    }
-                    
-                    if self.responseCounterSaved == dishDataDictionary!.keys.count{
-                        self.responseCounterSaved = 0
-                        completion(dishes)
-                    }
-                })
-            }
-            
-            
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishes) in
+            completion(dishes)
         }
-        
     }
     
-    
-    func getSavedDishesCountFor(userID:String, _ completion:@escaping (Int)->()){
-        
+    func getSavedDishesCountFor(userID:String, _ completion:@escaping (Int)->()) {
         DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishDataDictionary) in
-            
-            if dishDataDictionary == nil {
-                completion(0)
-            } else {
-                completion(dishDataDictionary!.keys.count)
-            }
+            completion(dishDataDictionary.count)
         }
         
     }

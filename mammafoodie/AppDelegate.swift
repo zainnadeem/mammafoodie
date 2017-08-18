@@ -59,6 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
                                 self.handleNotification(userInfo, showAlert: false)
                             }
+                        } else {
+                            FirebaseLoginWorker().signOut({ (error) in
+                                
+                            })
                         }
                     }
                 }
@@ -70,6 +74,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
         return true
+    }
+    
+    func saveDishes() {
+        FirebaseReference.savedDishes.classReference.child("sXFOH3QceiPdAbLUflTXrW46yag2").setValue(["-KoirmSdgfzq_00X7wKb" : true,
+                                                                                                     "-KoirsSGrDfo90S1zfcF" :true,
+                                                                                                     "-KojmXFzDHAS_VNQteXZ" :true,
+                                                                                                     "-Kok-iYMp5RnpCYrt1eg" :true,
+                                                                                                     "-Kok0CAF1XEgYy5BW-Gs" :true,
+                                                                                                     "-KokU4k3c9zCjlWeHikE" :true,
+                                                                                                     "-Kol6cpmBzuNfYZMOb2Q" :true,
+                                                                                                     "-Kol6rZGs6PsLysgltkB" :true,
+                                                                                                     "-KopSaap2aOyi6RiXJ0f" :true,
+                                                                                                     "-KorWZ4-FoajaO1BSAr-" :true,
+                                                                                                     "-Kot61HUs5xr1SuGwGbC" :true,
+                                                                                                     "-KoyUD3FBy5ASlrJSo_D" :true,
+                                                                                                     "-Kp0pPFfa4WiMsiv-iRx" :true,
+                                                                                                     "-Kp5fJ161TB2BOT8ZNL9" :true,
+                                                                                                     "-KpLkcU3a2zlP5UgWbwv" :true,
+                                                                                                     "-KpNwjKtxLS0KszaOJiP" :true,
+                                                                                                     "-Kpzg9qivXD4wLrXOUo7" :true,
+                                                                                                     "-KpzmdIcdNp7mgcANX3D" :true,
+                                                                                                     "-Kq-QSl20KKRxD38Nc_7" :true,
+                                                                                                     "-Kq-Qk5NIm8gUkUKtFh-" :true,
+                                                                                                     "-Kq-ROBm_Yerok_xk66O" :true,
+                                                                                                     "-Kq2eEGnacjLY6YDbkER": true])
     }
     
     func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
@@ -208,7 +237,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
         print("filePath: \(destinationPath)")
     }
-   
+    
     func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
         if let _ = self.currentUser,
             let redirectID = userInfo["redirectId"] as? String,
@@ -237,7 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 }
             }
             if showAlert &&
-               appState == .active {
+                appState == .active {
                 if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
                     self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
                         DispatchQueue.main.async {

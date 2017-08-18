@@ -51,8 +51,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     // MARK: - View lifecycle
     override func viewDidLoad() {
         
-        self.txtEmail.text = "akshit.zaveri@gmail.com"
-        self.txtPassword.text = "1111111111"
+//        self.txtEmail.text = "akshit.zaveri@gmail.com"
+//        self.txtPassword.text = "1111111111"
         
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)

@@ -337,7 +337,7 @@ extension DatabaseGateway {
             completion(error?.localizedDescription)
         }
     }
- 
+    
     func updateUserEntity(with model: MFUser, _ completion: @escaping ((String?)->Void)) {
         let rawUserData: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let _ : String = "\(model.id)"
@@ -364,11 +364,11 @@ extension DatabaseGateway {
     
     func getLoggedInUser() -> MFUser? {
         if let currentUser = Auth.auth().currentUser {
-//            let user: MFUser = MFUser()
-//            user.id = currentUser.uid
-//            user.name = currentUser.displayName
+            //            let user: MFUser = MFUser()
+            //            user.id = currentUser.uid
+            //            user.name = currentUser.displayName
             return AppDelegate.shared().currentUser
-//            return user
+            //            return user
         }
         return nil
     }
@@ -632,20 +632,29 @@ extension DatabaseGateway {
         
     }
     
-    
-    func getSavedDishesForUser(userID:String, _ completion:@escaping ([String:AnyObject]?)->()) {
-        
+    func getSavedDishesForUser(userID: String, _ completion:@escaping ([MFDish]) -> ()) {
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-            
-            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-                
-                completion([:])
+            var savedDishes = [MFDish]()
+            guard let dishData = dishSnapshot.value as? [String: Any] else {
+                completion(savedDishes)
                 return
             }
-            
-            completion(dishData)
-            
+            let requestGroup = DispatchGroup.init()
+            for (id, _) in dishData {
+                requestGroup.enter()
+                _ = self.getDishWith(dishID: id, { (dish) in
+                    if let dish = dish {
+                        savedDishes.append(dish)
+                    }
+                    requestGroup.leave()
+                })
+            }
+            requestGroup.notify(queue: .main, execute: {
+                completion(savedDishes)
+            })
+            completion(savedDishes)
         })
+        
     }
     
 }
@@ -891,7 +900,7 @@ extension DatabaseGateway {
         if let rawLocation = rawDish["location"] as? [String : AnyObject] {
             if let lat = rawLocation["latitude"] as? CLLocationDegrees,
                 let lon = rawLocation["longitude"] as? CLLocationDegrees {
-
+                
                 dish.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
                 dish.address = rawLocation["address"] as? String ?? ""
             }

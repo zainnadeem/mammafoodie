@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 protocol VidupDetailPageViewControllerInput {
     func HideandUnhideView()
@@ -77,6 +78,28 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
         self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
+        
+        if let dish = self.dish {
+            if dish.mediaType == .vidup {
+                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                    AnalyticsParameterItemID: dish.id as NSObject,
+                    AnalyticsParameterItemName: "vidup" as NSObject,
+                    AnalyticsParameterContentType: "VidupView" as NSObject
+                    ])
+            } else if dish.mediaType == .picture {
+                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                    AnalyticsParameterItemID: dish.id as NSObject,
+                    AnalyticsParameterItemName: "picture" as NSObject,
+                    AnalyticsParameterContentType: "PictureView" as NSObject
+                    ])
+            } else {
+                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                    AnalyticsParameterItemID: dish.id as NSObject,
+                    AnalyticsParameterItemName: "liveVideo" as NSObject,
+                    AnalyticsParameterContentType: "LiveVideoView" as NSObject
+                    ])
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

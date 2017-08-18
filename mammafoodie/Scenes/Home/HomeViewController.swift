@@ -141,7 +141,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
         let shouldResetContentOffset: Bool = self.tblList.contentOffset.y > self.viewLiveVideoAndVidups.frame.height
         let newContentOffset: CGPoint = CGPoint(x: 0, y: self.viewLiveVideoAndVidups.frame.height)
-        
+        if shouldResetContentOffset {
+            self.tblList.setContentOffset(newContentOffset, animated: false)
+        }
         if self.isLiveVideosViewExpanded || self.isVidupsViewExpanded {
             
         }
@@ -149,10 +151,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             self.switchToMenuMode()
         } else {
             self.switchToActivityMode()
-        }
-        
-        if shouldResetContentOffset {
-            self.tblList.setContentOffset(newContentOffset, animated: false)
         }
     }
     

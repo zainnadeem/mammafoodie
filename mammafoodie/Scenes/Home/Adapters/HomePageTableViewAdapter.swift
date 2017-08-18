@@ -29,35 +29,51 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         
         let name1: String = "ActivityTblCell"
         self.tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
-        
+        self.tableView.backgroundView?.isHidden = true
+        self.tableView.allowsSelection = true
         self.loadActivities()
     }
     
     func loadActivities() {
         DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
                 self.activity = feeds
-                self.tableView.backgroundView?.isHidden = (feeds.count > 0)
                 self.tableView.reloadData()
+            }
         }
     }
     
     func loadMenu() {
-        DummyData.sharedInstance.populateMenu { (dummyMenu) in
-            self.menu = dummyMenu
-            self.tableView.reloadData()
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: self.currentUser.id) { (dishes) in
+            DispatchQueue.main.async {
+                self.menu = dishes
+                self.tableView.reloadData()
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.mode == .activity {
             let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
-            cell.setup(with: self.activity[indexPath.item])
-            cell.openURL = self.openURL
+            if self.activity.count > indexPath.row {
+                cell.setup(with: self.activity[indexPath.item])
+                cell.openURL = self.openURL
+            }
             return cell
         } else {
             let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell
-            cell.setup(with: self.menu[indexPath.item])
+            if self.menu.count > indexPath.row {
+                cell.setup(with: self.menu[indexPath.item])
+            }
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if self.mode == .menu {
+            let dish = self.menu[indexPath.item]
+            self.openURL?(FirebaseReference.dishes.rawValue, dish.id)
         }
     }
     

@@ -1,5 +1,6 @@
 import UIKit
 import MBProgressHUD
+import Firebase
 
 protocol GoCookViewControllerInput {
     
@@ -120,6 +121,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         switch self.selectedOption {
         case .liveVideo:
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: dish.id as NSObject,
+                AnalyticsParameterItemName: "liveVideo" as NSObject,
+                AnalyticsParameterContentType: "LiveVideoCreated" as NSObject
+                ])
             dish.save { (error) in
                 DispatchQueue.main.async {
                     self.selectedOption = .unknown
