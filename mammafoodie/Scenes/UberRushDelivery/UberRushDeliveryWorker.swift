@@ -46,7 +46,7 @@ class UberRushDeliveryWorker:NSObject {
             "email"         : chef.email,
             "first_name"    : chef.firstName,
             "last_name"     : chef.lastName,
-            "phone"         : [ "number" : chef.phone, "sms_enabled" : true]
+            "phone"         : [ "number" : chef.phone.fullString(), "sms_enabled" : true]
         ]
         
         
@@ -67,7 +67,7 @@ class UberRushDeliveryWorker:NSObject {
             "first_name"    : purchasingUser.firstName,
             
             "last_name"     : purchasingUser.lastName,
-            "phone"         : [ "number" : purchasingUser.phone, "sms_enabled" : true]
+            "phone"         : [ "number" : purchasingUser.phone.fullString(), "sms_enabled" : true]
             ] as [String : Any]
         
         

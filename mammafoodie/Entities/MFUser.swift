@@ -1,5 +1,16 @@
 import Foundation
 
+struct MFUserPhone {
+    var countryCode: String = ""
+    var phone: String = ""
+    
+    init() {}
+    
+    func fullString() -> String {
+        return self.countryCode + self.phone
+    }
+}
+
 class MFUser {
     var id: String
     var name: String!
@@ -24,7 +35,7 @@ class MFUser {
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
     
-    var phone: String = ""
+    var phone: MFUserPhone = MFUserPhone()
     
     //
     //    var userActivity: [MFNewsFeed:Date] = [:]
@@ -72,7 +83,11 @@ class MFUser {
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
-        self.phone = Dictionary["phone"] as? String ?? ""
+        
+        if let rawPhoneInfo = Dictionary["phone"] as? [String:String] {
+            self.phone.countryCode = rawPhoneInfo["countryCode"] ?? ""
+            self.phone.phone = rawPhoneInfo["phone"] ?? ""
+        }
         
         //        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
         //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]

@@ -195,7 +195,13 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["profileDescription"] = profileDescription as AnyObject
         }
         
-        userInfo["phone"] = user.phone as AnyObject
+        
+        let phoneInfo: [String:Any] = [
+            "countryCode": user.phone.countryCode,
+            "phone": user.phone.phone
+        ]
+        userInfo["phone"] = phoneInfo as AnyObject
+        
         return userInfo
     }
     
