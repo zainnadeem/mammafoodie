@@ -3,6 +3,11 @@ import UIKit
 import Stripe
 import MBProgressHUD
 
+enum ShippingOption {
+    case pickup
+    case delivery
+}
+
 class PaymentViewController: UIViewController {
     
     @IBOutlet weak var paymentCollectionView: UICollectionView!
@@ -30,11 +35,13 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var btnPickup: UIButton!
     @IBOutlet weak var btnDelivery: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
+    @IBOutlet weak var activityIndicatorForDeliveryQuote: UIActivityIndicatorView!
     
     @IBOutlet weak var addCartTextField: STPPaymentCardTextField!
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var btnAddCard: UIButton!
     
+    var shippingOption: ShippingOption?
     var deliveryMethod: MFDeliveryOption?
     
     var cards: [STPCard] = []
@@ -62,6 +69,9 @@ class PaymentViewController: UIViewController {
         //            return
         //        }
         //        self.dummyData()
+        
+        self.activityIndicatorForDeliveryQuote.stopAnimating()
+        
         self.paymentCollectionView.delegate = self
         self.paymentCollectionView.dataSource = self
         
@@ -107,11 +117,15 @@ class PaymentViewController: UIViewController {
             return
         }
         
+        self.activityIndicatorForDeliveryQuote.startAnimating()
+        
         guard let dropOffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            self.activityIndicatorForDeliveryQuote.stopAnimating()
             return
         }
         
         guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            self.activityIndicatorForDeliveryQuote.stopAnimating()
             return
         }
         
@@ -119,6 +133,7 @@ class PaymentViewController: UIViewController {
             if let dishUser = dishUser {
                 
                 guard let pickupAddress = dishUser.addressDetails else {
+                    self.activityIndicatorForDeliveryQuote.stopAnimating()
                     return
                 }
                 
@@ -131,6 +146,7 @@ class PaymentViewController: UIViewController {
                             let fees: Double = response?["fee"] as? Double ?? 0
                             self.lblDeliveryCharge.text = "Delivery charges: $\(fees)\nDrop-off in \(self.dropoffTimeInMinutes) minutes"
                             self.deliveryCharge = fees
+                            self.activityIndicatorForDeliveryQuote.stopAnimating()
                         })
                     })
                 } else if self.deliveryMethod == MFDeliveryOption.postmates {
@@ -151,10 +167,13 @@ class PaymentViewController: UIViewController {
                             self.deliveryCharge = fees
                             DispatchQueue.main.async {
                                 self.lblDeliveryCharge.text = "Delivery charges: $\(fees)\nDrop-off in \(self.dropoffTimeInMinutes) minutes"
+                                self.activityIndicatorForDeliveryQuote.stopAnimating()
                             }
                         }
                     })
                 }
+            } else {
+                self.activityIndicatorForDeliveryQuote.stopAnimating()
             }
         })
     }
@@ -269,6 +288,8 @@ class PaymentViewController: UIViewController {
     
     @IBAction func pickupAddress(_ sender: Any) {
         
+        self.shippingOption = ShippingOption.pickup
+        
         NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
         NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
         self.view.layoutIfNeeded()
@@ -292,6 +313,8 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func deliveryAddress(_ sender: Any) {
+        
+        self.shippingOption = ShippingOption.delivery
         
         NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
         NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
@@ -339,14 +362,38 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
-        guard let currentUserPhoneNumber = self.txtPhoneNumber.text else {
+        guard self.txtPhoneNumber.text != nil else {
             self.showAlert("Error", message: "Please add your phone number confirming purchase.")
             return
         }
         
+        if self.shippingOption == nil {
+            self.showAlert("Error", message: "Please select shipping option. Pickup/Delivery")
+            return
+        }
+        
+        if self.shippingOption == ShippingOption.delivery {
+            if self.deliveryMethod != MFDeliveryOption.postmates {
+                if self.deliveryMethod != MFDeliveryOption.uberEATS {
+                    self.showAlert("Error", message: "Please select a delivery provider. UberEATS/Postmates")
+                    return
+                }
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.uberEATS && self.uberQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting UberEATS again.")
+                return
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.postmates && self.postmatesQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting Postmates again.")
+                return
+            }
+        }
+        
         if let selectedIndex = self.selectedCardIndex,
             let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-            
+        
             let card = self.cards[selectedIndex.item]
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             
@@ -365,6 +412,9 @@ class PaymentViewController: UIViewController {
                         // Charge was successful. Create a order object here
                         
                         if self.deliveryMethod == MFDeliveryOption.uberEATS {
+                            
+                            self.uberWorker!.updatePurchasingUserPhoneNumber(self.txtPhoneNumber.text!)
+                            
                             // Create uber delivery
                             self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
                                 if let deliveryId = deliveryId {
@@ -467,7 +517,7 @@ class PaymentViewController: UIViewController {
                                                      pickUpPlaceName: dishUser.name,
                                                      pickUpPhone: dishUser.phone.phone,
                                                      dropOffPlaceName: currentUser.name,
-                                                     dropOffPhone: currentUser.phone.phone,
+                                                     dropOffPhone: self.txtPhoneNumber.text!,
                                                      completion: { (deliveryId, errorMessage) in
                                                         
                                                         completion(deliveryId)

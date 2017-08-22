@@ -15,7 +15,12 @@ class UberRushDeliveryWorker:NSObject {
     let uberBaseURL = "https://sandbox-api.uber.com/v1"
     
     var params: [String: Any]!
-    var purchasingUser: MFUser!
+    
+    var pickup: MFUserAddress?
+    var dropoff: MFUserAddress?
+    var chef: MFUser?
+    var purchasingUser: MFUser?
+    var order: [MFDish]!
     
     var headers: HTTPHeaders!
     
@@ -23,65 +28,106 @@ class UberRushDeliveryWorker:NSObject {
     static let uberClientSecret = "2Hkd-O8-cePVfxQgn2ISdku-ztoGJfMzsdcCC1Ug"
     static let uberUrlScheme = "mammafoodie-uber://oauth"
     
-    var order: [MFDish]!
-    
     init(pickup: MFUserAddress, dropoff: MFUserAddress, chef: MFUser, purchasingUser: MFUser, order:[MFDish], accessToken: String) {
         
-        self.purchasingUser = purchasingUser
-        self.order = order
+        super.init()
         
-        let pickupLocation = [
-            "address"       : pickup.address,
-            "address_2"     : pickup.address_2,
-            "city"          : pickup.city,
-            "country"       : "US",
-            "postal_code"   : pickup.postalCode,
-            "state"         : pickup.state,
-            "latitude"      : pickup.latitude,
-            "longitude"     : pickup.longitude
-        ]
+        self.updateParams(pickup: pickup, dropoff: dropoff, chef: chef, purchasingUser: purchasingUser, order: order)
         
-        
-        let pickupContact: [String: Any] = [
-            "email"         : chef.email,
-            "first_name"    : chef.firstName,
-            "last_name"     : chef.lastName,
-            "phone"         : [ "number" : chef.phone.fullString(), "sms_enabled" : true]
-        ]
-        
-        
-        let dropoffLocation = [
-            "address"       : dropoff.address,
-            "address_2"     : dropoff.address_2,
-            "city"          : dropoff.city,
-            "country"       : "US",
-            "postal_code"   : dropoff.postalCode,
-            "state"         : dropoff.state,
-            "latitude"      : pickup.latitude,
-            "longitude"     : pickup.longitude
-        ]
-        
-        
-        let dropoffContact = [
-            "email"         : purchasingUser.email,
-            "first_name"    : purchasingUser.firstName,
-            
-            "last_name"     : purchasingUser.lastName,
-            "phone"         : [ "number" : purchasingUser.phone.fullString(), "sms_enabled" : true]
-            ] as [String : Any]
-        
-        
-        self.params = ["dropoff" : ["location" : dropoffLocation, "contact" : dropoffContact], "pickup" : ["location" : pickupLocation, "contact" : pickupContact]]
-        
-        headers = [
+        self.headers = [
             "Authorization": "Bearer \(accessToken)",
             "Content-Type": "application/json"
         ]
         
     }
     
+    func updateParams(pickup: MFUserAddress?, dropoff: MFUserAddress?, chef: MFUser?, purchasingUser: MFUser?, order:[MFDish]) {
+        
+        self.purchasingUser = purchasingUser
+        self.order = order
+        self.pickup = pickup
+        self.dropoff = dropoff
+        self.chef = chef
+        
+        var pickupLocation: [String: Any] = [:]
+        if let pickup = pickup {
+            pickupLocation = [
+                "address"       : pickup.address,
+                "address_2"     : pickup.address_2,
+                "city"          : pickup.city,
+                "country"       : "US",
+                "postal_code"   : pickup.postalCode,
+                "state"         : pickup.state,
+                "latitude"      : pickup.latitude,
+                "longitude"     : pickup.longitude
+            ]
+        }
+        
+        var pickupContact: [String: Any] = [:]
+        if let chef = chef {
+            pickupContact = [
+                "email"         : chef.email,
+                "first_name"    : chef.firstName,
+                "last_name"     : chef.lastName,
+                "phone"         : [
+                    "number" : chef.phone.fullString(),
+                    "sms_enabled" : true
+                ]
+            ]
+        }
+        
+        var dropoffLocation: [String: Any] = [:]
+        if let dropoff = dropoff {
+            dropoffLocation = [
+                "address"       : dropoff.address,
+                "address_2"     : dropoff.address_2,
+                "city"          : dropoff.city,
+                "country"       : "US",
+                "postal_code"   : dropoff.postalCode,
+                "state"         : dropoff.state,
+                "latitude"      : dropoff.postalCode,
+                "longitude"     : dropoff.postalCode
+            ]
+        }
+        
+        var dropoffContact: [String: Any] = [:]
+        if let purchasingUser = purchasingUser {
+            dropoffContact = [
+                "email"         : purchasingUser.email,
+                "first_name"    : purchasingUser.firstName,
+                
+                "last_name" : purchasingUser.lastName,
+                "phone" : [
+                    "number" : purchasingUser.phone.fullString(),
+                    "sms_enabled" : true
+                ]
+            ]
+        }
+        
+        
+        self.params = [
+            "dropoff" : [
+                "location" : dropoffLocation,
+                "contact" : dropoffContact
+            ],
+            "pickup" : [
+                "location" : pickupLocation,
+                "contact" : pickupContact
+            ]
+        ]
+    }
     
-    
+    func updatePurchasingUserPhoneNumber(_ phoneNumber: String) {
+        var phone: MFUserPhone = MFUserPhone()
+        phone.phone = phoneNumber
+        phone.countryCode = "+1"
+        self.purchasingUser?.phone = phone
+        self.updateParams(pickup: self.pickup,
+                          dropoff: self.dropoff,
+                          chef: self.chef,
+                          purchasingUser: self.purchasingUser,
+                          order: self.order)
+    }
     
     
     func getDeliveryQuote(completion: @escaping ([String : Any]?) -> ()) {
