@@ -721,8 +721,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4a4-gs-maO">
                                             <rect key="frame" x="0.0" y="91" width="375" height="121"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vidups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKz-fR-TKp">
-                                                    <rect key="frame" x="165" y="32" width="45" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKz-fR-TKp">
+                                                    <rect key="frame" x="170" y="32" width="35.5" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="cQT-yd-1e9"/>
                                                     </constraints>
@@ -1623,10 +1623,10 @@
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cLa-Pm-NmI">
-                                                    <rect key="frame" x="8" y="8" width="256" height="16"/>
+                                                    <rect key="frame" x="8" y="8" width="240" height="16"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pOO-Ec-fDc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="128.5" height="16"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120.5" height="16"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaL-Nr-w55">
                                                                     <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -1640,7 +1640,7 @@
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0zc-Rc-S1R">
-                                                                    <rect key="frame" x="16" y="0.0" width="128.5" height="16"/>
+                                                                    <rect key="frame" x="16" y="0.0" width="104.5" height="16"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="11"/>
                                                                     <state key="normal" title="Username">
                                                                         <color key="titleColor" red="0.98158634330000005" green="0.97385956900000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1649,7 +1649,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbE-gI-W97">
-                                                            <rect key="frame" x="120.5" y="0.0" width="171.5" height="16"/>
+                                                            <rect key="frame" x="120.5" y="0.0" width="119.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="12"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="-2" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="1025" image="eye"/>
@@ -1657,16 +1657,16 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="zfg-xn-2l5">
-                                                    <rect key="frame" x="8" y="271.5" width="256" height="22.5"/>
+                                                    <rect key="frame" x="8" y="271.5" width="240" height="22.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2FR-f3-yd2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="22.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="185" height="22.5"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQI-Oh-Zbo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="248" height="22.5"/>
+                                                            <rect key="frame" x="185" y="0.0" width="55" height="22.5"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                                                             <state key="normal" title="7 Mins Left!" image="time">
                                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2587,7 +2587,7 @@
         <image name="user-shape" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dx3-Kh-fhU"/>
+        <segue reference="9wU-c4-oWx"/>
         <segue reference="t5U-NE-x5g"/>
         <segue reference="gUK-Ro-GYG"/>
     </inferredMetricsTieBreakers>

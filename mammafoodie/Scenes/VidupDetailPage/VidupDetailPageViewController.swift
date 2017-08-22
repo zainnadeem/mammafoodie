@@ -45,7 +45,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     @IBOutlet weak var mediaplayerbottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var lbtn_like: UIButton!
     @IBOutlet weak var lbl_UserName: UILabel!
-    @IBOutlet weak var user_image: UIImageView!
+    @IBOutlet weak var user_image: UIImageView! 
     @IBOutlet weak var lbl_dishName: UILabel!
     @IBOutlet weak var lbl_viewCount: UILabel!
     @IBOutlet weak var lbl_slot: UILabel!

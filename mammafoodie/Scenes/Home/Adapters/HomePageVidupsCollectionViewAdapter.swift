@@ -2,9 +2,10 @@ import UIKit
 
 class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    let worker: DealsListWorker = DealsListWorker()
+    
     func loadVidup() {
-        let worker: VidupListWorker = VidupListWorker()
-        worker.getList { (dishes) in
+        self.worker.getList { (dishes) in
             self.list = [self.getFirstCellForCurrentUser()]
             self.list.append(contentsOf: dishes)
             self.collectionView.reloadData()
