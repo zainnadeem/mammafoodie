@@ -38,7 +38,7 @@ class HomeRouter: HomeRouterInput {
             if let nav = segue.destination as? UINavigationController {
                 if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController,
                     let profileData = sender as? (ProfileType, String) {
-                    profileVC.profileType = profileData.0
+//                    profileVC.profileType = profileData.0
                     profileVC.userID = profileData.1
                 }
             }
