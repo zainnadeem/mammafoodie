@@ -20,14 +20,13 @@ enum ProfileType{
     case othersProfile
 }
 
-
 class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewControllerInput {
     
     var output: OtherUsersProfileViewControllerOutput!
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    var profileType: ProfileType = .ownProfile // .othersProfile
+    private var profileType: ProfileType = .ownProfile // .othersProfile
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
     @IBOutlet weak var btnSettings: UIBarButtonItem!
@@ -48,6 +47,12 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.userID == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+            self.profileType = .ownProfile
+        } else {
+            self.profileType = .othersProfile
+        }
         
         self.output.setUpDishCollectionView(self.collectionView, self.profileType)
         if self.profileType == .ownProfile {
@@ -99,7 +104,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         let vc = followerNav.viewControllers.first as! FollowersListViewController
         
-//        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
+        //        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
         
         if followers {
             //show list of followers
@@ -109,7 +114,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             //show list of following
             vc.followers = false
         }
-//        vc.userList = userList
+        //        vc.userList = userList
         
         vc.userID = self.userID!
         
@@ -127,7 +132,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     @IBAction func chatButtonClicked(_ sender: UIButton) {
         
         let chatnav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "ChatListNav") as! UINavigationController
-
+        
         let chatList = chatnav.viewControllers.first as! ChatListViewController
         chatList.currentUser = AppDelegate.shared().currentUser!
         
@@ -135,31 +140,31 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         //To create a new conversation, assing the createChatWithUser property of chatVC with a user with who to create a new chat
         /*
-        let worker = OtherUsersProfileWorker()
-        worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
-            chatList.createChatWithUser = user
-            self.present(chatnav, animated: true, completion: nil)
-        }
-        */
+         let worker = OtherUsersProfileWorker()
+         worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
+         chatList.createChatWithUser = user
+         self.present(chatnav, animated: true, completion: nil)
+         }
+         */
         
     }
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
         
         switch sender.currentTitle!.lowercased(){
-            case "follow":
-                sender.setTitle("UnFollow", for: .normal)
-                output.toggleFollow(userID: self.userID!, shouldFollow: true)
-                
-                
+        case "follow":
+            sender.setTitle("UnFollow", for: .normal)
+            output.toggleFollow(userID: self.userID!, shouldFollow: true)
+            
+            
             break
             
-            case "unfollow":
-                sender.setTitle("Follow", for: .normal)
-                output.toggleFollow(userID: self.userID!, shouldFollow: false)
+        case "unfollow":
+            sender.setTitle("Follow", for: .normal)
+            output.toggleFollow(userID: self.userID!, shouldFollow: false)
             break
             
-            case "go cook":
+        case "go cook":
             break
             
         default:

@@ -4,7 +4,7 @@ import UIKit
 
 extension VidupDetailPageViewController: VidupDetailPagePresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(segue: segue)
+        router.passDataToNextScene(segue: segue, sender: sender)
     }
 }
 

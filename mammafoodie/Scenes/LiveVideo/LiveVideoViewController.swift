@@ -344,4 +344,9 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             }
         }
     }
+    
+    @IBAction func btnUserTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.liveVideo.user.id)
+    }
+
 }

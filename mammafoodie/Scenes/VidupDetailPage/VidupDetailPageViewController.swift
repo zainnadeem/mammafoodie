@@ -224,5 +224,8 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
     }
     
+    @IBAction func btnUserProfileTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.dish!.user.id)
+    }
 }
 
