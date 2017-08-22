@@ -123,6 +123,7 @@ class EditAddressViewController: UIViewController , CLLocationManagerDelegate, H
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         self.hideActivityIndicator()
+        print("Error: \(error)")
         self.showAlert(message: "Could not get your current location. Please try again.")
     }
     

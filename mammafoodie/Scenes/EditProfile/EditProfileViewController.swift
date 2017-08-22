@@ -66,14 +66,14 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
             self.user = user
             self.txfName.text = user?.name
             self.txfEmailID.text = user?.email
-            self.txfMobileNumber.text = user?.phone
+            self.txfMobileNumber.text = user?.phone.phone
             self.txvProfileDescription.text = user?.profileDescription
         }
         
         if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.userID){
             self.profilePicImageView.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie"))
         }
-
+        
         self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
         
@@ -151,30 +151,37 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         
         if let address = address {
             
-            if addingNewAddress { //New address being added
-                
-                worker.createAddressForUser(userID: self.userID, address: address) { (status) in
-                    
-                    //Remove all stackviews except its header
-                    for subview in self.addressStackView.subviews where subview.tag != -1{
-                        self.addressStackView.removeArrangedSubview(subview)
-                        subview.removeFromSuperview()
-                    }
-                    self.getUserAddress()
+            self.user?.phone.phone = address.phone
+            self.user?.phone.countryCode = "+1"
+            self.user?.addressDetails = address
+            
+            DatabaseGateway.sharedInstance.updateUserEntity(with: self.user!, { (error) in
+                for subview in self.addressStackView.subviews where subview.tag != -1 {
+                    self.addressStackView.removeArrangedSubview(subview)
+                    subview.removeFromSuperview()
                 }
-                
-            } else { // edit existing address
-                
-                
-                worker.updateAddress(addressID: address.id, address: address, { (status) in
-                    for subview in self.addressStackView.subviews where subview.tag != -1 {
-                        self.addressStackView.removeArrangedSubview(subview)
-                        subview.removeFromSuperview()
-                    }
-                    self.getUserAddress()
-                })
-                
-            }
+                self.getUserAddress()
+            })
+            
+            //            if addingNewAddress { //New address being added
+            //
+            //                worker.createAddressForUser(userID: self.userID, address: address) { (status) in
+            //
+            //                    //Remove all stackviews except its header
+            //                }
+            //
+            //            } else { // edit existing address
+            //
+            //
+            //                worker.updateAddress(addressID: address.id, address: address, { (status) in
+            //                    for subview in self.addressStackView.subviews where subview.tag != -1 {
+            //                        self.addressStackView.removeArrangedSubview(subview)
+            //                        subview.removeFromSuperview()
+            //                    }
+            //                    self.getUserAddress()
+            //                })
+            //
+            //            }
         }
     }
     
@@ -210,8 +217,6 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
     
     @IBAction func resetPasswordSaveButtonTapped(_ sender: UIButton) {
         
-        
-        
         guard txfNewPassword.text == txfConfirmPassword.text else {
             KLCforgotPasswordPopup?.dismiss(true)
             showAlert(message: "Confirm password did not match with the new password.")
@@ -238,15 +243,14 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
                 self.showAlert(message: errorMessage!)
             }
         }
-        
-        
     }
     
     @IBAction func saveTapped(_ sender: UIButton) {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         self.user?.name = self.txfName.text
         self.user?.email = self.txfEmailID.text
-        self.user?.phone = self.txfMobileNumber.text!
+        self.user?.phone.countryCode = "+1"
+        self.user?.phone.phone = self.txfMobileNumber.text ?? ""
         self.user?.profileDescription = self.txvProfileDescription.text
         self.worker.updateUser(user: self.user!) { (status) in
             hud.hide(animated: true)

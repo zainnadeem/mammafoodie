@@ -3,6 +3,11 @@ import UIKit
 import Stripe
 import MBProgressHUD
 
+enum ShippingOption {
+    case pickup
+    case delivery
+}
+
 class PaymentViewController: UIViewController {
     
     @IBOutlet weak var paymentCollectionView: UICollectionView!
@@ -30,11 +35,13 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var btnPickup: UIButton!
     @IBOutlet weak var btnDelivery: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
+    @IBOutlet weak var activityIndicatorForDeliveryQuote: UIActivityIndicatorView!
     
     @IBOutlet weak var addCartTextField: STPPaymentCardTextField!
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var btnAddCard: UIButton!
     
+    var shippingOption: ShippingOption?
     var deliveryMethod: MFDeliveryOption?
     
     var cards: [STPCard] = []
@@ -43,12 +50,16 @@ class PaymentViewController: UIViewController {
     var slotsToBePurchased : UInt = 0
     var dish : MFDish!
     
+    
     var uberWorker: UberRushDeliveryWorker?
     var uberAccessToken: String?
     var uberQuoteId: String?
     
     var postmatesWorker: PostmatesWorker?
+    var postmatesQuoteId: String?
+    
     var deliveryCharge: Double = 0
+    var dropoffTimeInMinutes: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +69,9 @@ class PaymentViewController: UIViewController {
         //            return
         //        }
         //        self.dummyData()
+        
+        self.activityIndicatorForDeliveryQuote.stopAnimating()
+        
         self.paymentCollectionView.delegate = self
         self.paymentCollectionView.dataSource = self
         
@@ -95,7 +109,7 @@ class PaymentViewController: UIViewController {
         self.getSavedCards()
         //        self.updateUI()
         
-        self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone ?? ""
+        self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone.phone ?? ""
     }
     
     func updateDeliveryCharge() {
@@ -103,11 +117,15 @@ class PaymentViewController: UIViewController {
             return
         }
         
+        self.activityIndicatorForDeliveryQuote.startAnimating()
+        
         guard let dropOffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            self.activityIndicatorForDeliveryQuote.stopAnimating()
             return
         }
         
         guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            self.activityIndicatorForDeliveryQuote.stopAnimating()
             return
         }
         
@@ -115,6 +133,7 @@ class PaymentViewController: UIViewController {
             if let dishUser = dishUser {
                 
                 guard let pickupAddress = dishUser.addressDetails else {
+                    self.activityIndicatorForDeliveryQuote.stopAnimating()
                     return
                 }
                 
@@ -122,21 +141,39 @@ class PaymentViewController: UIViewController {
                     self.loadUberAccessToken({ (token) in
                         self.uberWorker = UberRushDeliveryWorker(pickup: pickupAddress, dropoff: dropOffAddress, chef: dishUser, purchasingUser: currentUser, order: [self.dish], accessToken: token)
                         self.uberWorker!.getDeliveryQuote(completion: { response in
-                            print("Delivery quote response: \(response)")
                             self.uberQuoteId = response?["quote_id"] as? String ?? ""
+                            self.dropoffTimeInMinutes = response?["dropoff_eta"] as? Int ?? 0
                             let fees: Double = response?["fee"] as? Double ?? 0
-                            self.lblDeliveryCharge.text = "Delivery charges: $\(fees)"
+                            self.lblDeliveryCharge.text = "Delivery charges: $\(fees)\nDrop-off in \(self.dropoffTimeInMinutes) minutes"
                             self.deliveryCharge = fees
+                            self.activityIndicatorForDeliveryQuote.stopAnimating()
                         })
                     })
                 } else if self.deliveryMethod == MFDeliveryOption.postmates {
-//                    if self.postmatesWorker == nil {
-//                        self.postmatesWorker = PostmatesWorker()
-//                    }
-//                    self.postmatesWorker?.checkforDeliveryAndQuote(pickupAddress: pickupAddress, dropOffAddress: dropoffAddress, completion: { (status, response, errorMessage) in
-//                        print("")
-//                    })
+                    if self.postmatesWorker == nil {
+                        self.postmatesWorker = PostmatesWorker()
+                    }
+                    self.postmatesWorker?.checkforDeliveryAndQuote(pickupAddress: pickupAddress, dropOffAddress: dropOffAddress, completion: { (status, quote, errorMessage) in
+                        if let quote = quote {
+                            self.postmatesQuoteId = quote.id
+                            
+                            self.dropoffTimeInMinutes = 0
+                            if let dropoffETA = quote.dropoffETA {
+                                let datecomponents: DateComponents = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute], from: Date(), to: dropoffETA)
+                                self.dropoffTimeInMinutes = (datecomponents.hour ?? 0) * 60 + (datecomponents.minute ?? 0)
+                            }
+                            
+                            let fees: Double = quote.fees
+                            self.deliveryCharge = fees
+                            DispatchQueue.main.async {
+                                self.lblDeliveryCharge.text = "Delivery charges: $\(fees)\nDrop-off in \(self.dropoffTimeInMinutes) minutes"
+                                self.activityIndicatorForDeliveryQuote.stopAnimating()
+                            }
+                        }
+                    })
                 }
+            } else {
+                self.activityIndicatorForDeliveryQuote.stopAnimating()
             }
         })
     }
@@ -251,6 +288,8 @@ class PaymentViewController: UIViewController {
     
     @IBAction func pickupAddress(_ sender: Any) {
         
+        self.shippingOption = ShippingOption.pickup
+        
         NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
         NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
         self.view.layoutIfNeeded()
@@ -274,6 +313,8 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func deliveryAddress(_ sender: Any) {
+        
+        self.shippingOption = ShippingOption.delivery
         
         NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
         NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
@@ -321,14 +362,38 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
-        guard let currentUserPhoneNumber = self.txtPhoneNumber.text else {
+        guard self.txtPhoneNumber.text != nil else {
             self.showAlert("Error", message: "Please add your phone number confirming purchase.")
             return
         }
         
+        if self.shippingOption == nil {
+            self.showAlert("Error", message: "Please select shipping option. Pickup/Delivery")
+            return
+        }
+        
+        if self.shippingOption == ShippingOption.delivery {
+            if self.deliveryMethod != MFDeliveryOption.postmates {
+                if self.deliveryMethod != MFDeliveryOption.uberEATS {
+                    self.showAlert("Error", message: "Please select a delivery provider. UberEATS/Postmates")
+                    return
+                }
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.uberEATS && self.uberQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting UberEATS again.")
+                return
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.postmates && self.postmatesQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting Postmates again.")
+                return
+            }
+        }
+        
         if let selectedIndex = self.selectedCardIndex,
             let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-            
+        
             let card = self.cards[selectedIndex.item]
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             
@@ -347,6 +412,9 @@ class PaymentViewController: UIViewController {
                         // Charge was successful. Create a order object here
                         
                         if self.deliveryMethod == MFDeliveryOption.uberEATS {
+                            
+                            self.uberWorker!.updatePurchasingUserPhoneNumber(self.txtPhoneNumber.text!)
+                            
                             // Create uber delivery
                             self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
                                 if let deliveryId = deliveryId {
@@ -356,7 +424,11 @@ class PaymentViewController: UIViewController {
                                 }
                             })
                         } else if self.deliveryMethod == MFDeliveryOption.postmates {
-                            
+                            self.createPostmatesDelivery({ (deliveryId) in
+                                if let deliveryId = deliveryId {
+                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
+                                }
+                            })
                         } else {
                             // Pickup
                             self.addOrderToFirebase(deliveryId: nil, chargeId: chargeId)
@@ -419,6 +491,41 @@ class PaymentViewController: UIViewController {
         
     }
     
+    func createPostmatesDelivery(_ completion: @escaping ((_ deliveryId: String?)->Void)) {
+        
+        guard let dropOffAddress = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails else {
+            return
+        }
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        
+        DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
+            if let dishUser = dishUser {
+                guard let pickupAddress = dishUser.addressDetails else {
+                    return
+                }
+                
+                guard let postmatesQuoteId = self.postmatesQuoteId else {
+                    return
+                }
+                
+                self.postmatesWorker?.createDelivery(pickupAddress: pickupAddress,
+                                                     dropOffAddress: dropOffAddress,
+                                                     delivery_quoteid: postmatesQuoteId,
+                                                     itemDescription: self.dish.name,
+                                                     pickUpPlaceName: dishUser.name,
+                                                     pickUpPhone: dishUser.phone.phone,
+                                                     dropOffPlaceName: currentUser.name,
+                                                     dropOffPhone: self.txtPhoneNumber.text!,
+                                                     completion: { (deliveryId, errorMessage) in
+                                                        
+                                                        completion(deliveryId)
+                })
+            }
+        })
+    }
+    
     @IBAction func onPickupTimeChange(_ sender: UIDatePicker) {
         self.setPickupTime()
     }
@@ -438,6 +545,8 @@ extension PaymentViewController: EditAddressDelegate {
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
             let userAddress = address {
             currentUser.address = userAddress.description
+            currentUser.phone.phone = userAddress.phone
+            currentUser.phone.countryCode = "+1"
             currentUser.addressDetails = userAddress
             DatabaseGateway.sharedInstance.updateUserEntity(with: currentUser, { (errorString) in
                 
