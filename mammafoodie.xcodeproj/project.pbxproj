@@ -391,12 +391,10 @@
 		2CFB9BB71EFA477200C08EB3 /* VidupDetailPagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAC1EFA477200C08EB3 /* VidupDetailPagePresenter.swift */; };
 		2CFB9BB81EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */; };
 		2CFB9BB91EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */; };
-		2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */; };
-		2CFB9BBB1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */; };
+		2CFB9BBA1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAE1EFA477200C08EB3 /* DealDetailViewController.swift */; };
+		2CFB9BBB1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAE1EFA477200C08EB3 /* DealDetailViewController.swift */; };
 		2CFB9BBC1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */; };
 		2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */; };
-		2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */; };
-		2CFB9BC51EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */; };
 		2CFB9BCA1EFA4D0700C08EB3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BC91EFA4D0700C08EB3 /* CoreFoundation.framework */; };
 		2CFB9BCC1EFA4D0E00C08EB3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BCB1EFA4D0E00C08EB3 /* OpenAL.framework */; };
 		2CFB9BCE1EFA4D1400C08EB3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB9BCD1EFA4D1400C08EB3 /* QuartzCore.framework */; };
@@ -798,9 +796,8 @@
 		2CFB9BAB1EFA477200C08EB3 /* VidupDetailPageModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageModels.swift; sourceTree = "<group>"; };
 		2CFB9BAC1EFA477200C08EB3 /* VidupDetailPagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPagePresenter.swift; sourceTree = "<group>"; };
 		2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageRouter.swift; sourceTree = "<group>"; };
-		2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageViewController.swift; sourceTree = "<group>"; };
+		2CFB9BAE1EFA477200C08EB3 /* DealDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealDetailViewController.swift; sourceTree = "<group>"; };
 		2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VidupDetailPageWorker.swift; sourceTree = "<group>"; };
-		2CFB9BC31EFA47B300C08EB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VidupDetails.storyboard; sourceTree = "<group>"; };
 		2CFB9BC91EFA4D0700C08EB3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2CFB9BCB1EFA4D0E00C08EB3 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		2CFB9BCD1EFA4D1400C08EB3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1521,7 +1518,6 @@
 				2CB8BE9D1EF246DB00DA78B3 /* NearbyChefs.storyboard */,
 				1194D6FE1F22652A00EA494C /* Siri.storyboard */,
 				113948D41F052A4900F98E74 /* UserProfile.storyboard */,
-				2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */,
 				BFD80F611EF54ECD00223D21 /* Zain.storyboard */,
 			);
 			name = Storyboards;
@@ -1667,7 +1663,7 @@
 				2CFB9BAB1EFA477200C08EB3 /* VidupDetailPageModels.swift */,
 				2CFB9BAC1EFA477200C08EB3 /* VidupDetailPagePresenter.swift */,
 				2CFB9BAD1EFA477200C08EB3 /* VidupDetailPageRouter.swift */,
-				2CFB9BAE1EFA477200C08EB3 /* VidupDetailPageViewController.swift */,
+				2CFB9BAE1EFA477200C08EB3 /* DealDetailViewController.swift */,
 				2CFB9BAF1EFA477200C08EB3 /* VidupDetailPageWorker.swift */,
 			);
 			path = VidupDetailPage;
@@ -2249,7 +2245,6 @@
 				2C946EB51EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
 				2C6979E21F07C95F00787DCC /* MapStyle.json in Resources */,
 				2C9256CA1F0A1E1C0095E88B /* CommentsView.xib in Resources */,
-				2CFB9BC51EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				2C80012C1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CFB9B741EFA3E0000C08EB3 /* Assets.xcassets in Resources */,
 				57C948101F0373E600DF5674 /* video.mp4 in Resources */,
@@ -2315,7 +2310,6 @@
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
 				5790CC4D1F2CD68D007070C1 /* AddCardClnCell.xib in Resources */,
 				577F103E1F309E150082EBF8 /* InfiniteClnCell.xib in Resources */,
-				2CFB9BC41EFA47B300C08EB3 /* VidupDetails.storyboard in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
 				2C6979DF1F07C95F00787DCC /* GoogleService-Info.plist in Resources */,
@@ -2547,7 +2541,7 @@
 				2CD37DB41F0992790058EFDF /* (null) in Sources */,
 				2C6978F71F07C85700787DCC /* CuisineCollectionViewAdapter.swift in Sources */,
 				2CFB9B8B1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
-				2CFB9BBB1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
+				2CFB9BBB1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */,
 				2C69795A1F07C88E00787DCC /* VidupMainPagePresenter.swift in Sources */,
 				2C69792F1F07C88D00787DCC /* NearbyChefsRouter.swift in Sources */,
 				2C6979021F07C88D00787DCC /* ChatListConfigurator.swift in Sources */,
@@ -2874,7 +2868,7 @@
 				11F5C6561F18F58000F7F45C /* NotificationTableViewCell.swift in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				112E88D01F179E5600150FE8 /* FollowingTableCell.swift in Sources */,
-				2CFB9BBA1EFA477200C08EB3 /* VidupDetailPageViewController.swift in Sources */,
+				2CFB9BBA1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
 				114F341F1F0CCD25007F1D92 /* MosaicCollectionCell.swift in Sources */,
 				57801F6C1EF82FE2002E18EF /* GradientView.swift in Sources */,
@@ -3061,14 +3055,6 @@
 				2CB8BE9E1EF246DB00DA78B3 /* Base */,
 			);
 			name = NearbyChefs.storyboard;
-			sourceTree = "<group>";
-		};
-		2CFB9BC21EFA47B300C08EB3 /* VidupDetails.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CFB9BC31EFA47B300C08EB3 /* Base */,
-			);
-			name = VidupDetails.storyboard;
 			sourceTree = "<group>";
 		};
 		57150C291F25E3310008B7FB /* Wallet.storyboard */ = {

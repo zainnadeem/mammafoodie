@@ -2,13 +2,13 @@ import UIKit
 
 // MARK: - Connect View, Interactor, and Presenter
 
-extension VidupDetailPageViewController: VidupDetailPagePresenterOutput {
+extension DealDetailViewController: VidupDetailPagePresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue, sender: sender)
     }
 }
 
-extension VidupDetailPageInteractor: VidupDetailPageViewControllerOutput {
+extension VidupDetailPageInteractor: DealDetailViewControllerOutput {
 }
 
 extension VidupDetailPagePresenter: VidupDetailPageInteractorOutput {
@@ -24,7 +24,7 @@ class VidupDetailPageConfigurator {
     
     // MARK: - Configuration
     
-    func configure(viewController: VidupDetailPageViewController) {
+    func configure(viewController: DealDetailViewController) {
         let router = VidupDetailPageRouter()
         router.viewController = viewController
         viewController.router = router

@@ -291,9 +291,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         func open(dish: MFDish) {
             if let _ = dish.endTimestamp {
                 //Vidup
-                if let currentVC = self.getCurrentViewController() as? VidupDetailPageViewController {
+                if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
                     currentVC.load(new: dish)
-                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "VidupDetailPageViewController") as? VidupDetailPageViewController {
+                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
                     vidupDetailVC.DishId = dish.id
                     vidupDetailVC.userId = dish.user.id
                     vidupDetailVC.dish = dish

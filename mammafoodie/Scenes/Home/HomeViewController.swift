@@ -423,10 +423,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         dish.accessMode = .owner
         if dish.mediaType == .liveVideo {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-        } else if dish.mediaType == .vidup {
-            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
-        } else if dish.mediaType == .picture {
-            self.performSegue(withIdentifier: "segueShowPictureDetails", sender: dish)
+        } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
         }
     }
     

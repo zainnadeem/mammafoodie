@@ -6,7 +6,7 @@ protocol VidupDetailPageRouterInput {
 
 class VidupDetailPageRouter: VidupDetailPageRouterInput {
     
-    weak var viewController: VidupDetailPageViewController!
+    weak var viewController: DealDetailViewController!
     
     // MARK: - Navigation
     
