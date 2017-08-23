@@ -103,6 +103,11 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.output.stopTimer()
@@ -307,5 +312,17 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.dish!.user.id)
     }
     
+    @IBAction func onSlotsTap(_ sender: UIButton) {
+        if self.dish?.totalSlots ?? 0 > 0 &&
+            self.dish?.availableSlots ?? 0 > 0 {
+            self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: self)
+        } else {
+            self.showAlert("Sorry!", message: "No slots available!")
+        }
+    }
+    
+    func purchase(slots : UInt) {
+        self.performSegue(withIdentifier: "segueShowPaymentViewController", sender: slots)
+    }
 }
 
