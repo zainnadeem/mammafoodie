@@ -100,22 +100,22 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-                //                self.output!.start(self.liveVideo)
+                self.output!.start(self.liveVideo)
             #endif
         }
         
         self.setupViewComments()
         self.viewComments.emojiTapped = { (emojiButton) in
-            if let current = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if DatabaseGateway.sharedInstance.getLoggedInUser() != nil {
                 let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
                 alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 1)
                 }))
                 alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 2)
                 }))
                 alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 3)
                 }))
                 alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
                     
@@ -125,7 +125,19 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 })
             }
         }
+    }
+    
+    func tip(amount: Double) {
+        guard let current = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            print("Current user not found")
+            return
+        }
         
+        SavedCardsVC.presentSavedCards(on: self, amount : amount, to: self.liveVideo.user.id, from: current.id, purpose: PaymentPurpose.tip, success: {
+            print("Success")
+        }, error: {
+            print("Error")
+        })
     }
     
     func loadDish() {

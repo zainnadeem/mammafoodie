@@ -345,7 +345,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
         if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
             if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
-//                profileVC.profileType = type
+                //                profileVC.profileType = type
                 profileVC.userID = userid
                 self.checkAndPresent(vc: nav)
             }

@@ -15,6 +15,9 @@ class SavedCardsVC: UIViewController {
     var cards: [STPCard] = []
     var currentLoggedInUser: String = DatabaseGateway.sharedInstance.getLoggedInUser()?.id ?? "luuN75SiCHMWenXTngLlPLeW48a2"
     var toUser: String = ""
+    var success: (()->Void)?
+    var error: (()->Void)?
+    var paymentPurpose: PaymentPurpose?
     
     var amount : Double = 0
     
@@ -40,11 +43,14 @@ class SavedCardsVC: UIViewController {
         })
     }
     
-    class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String) {
-        let story = UIStoryboard.init(name: "Akshit", bundle: nil)
-        if let savedCards = story.instantiateViewController(withIdentifier: "SavedCardsVC") as? SavedCardsVC {
+    class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String, purpose: PaymentPurpose, success: @escaping (()->Void), error: @escaping (()->Void)) {
+        let story: UIStoryboard = UIStoryboard(name: "Akshit", bundle: nil)
+        if let savedCards: SavedCardsVC = story.instantiateViewController(withIdentifier: "SavedCardsVC") as? SavedCardsVC {
             savedCards.amount = amount
-            savedCards.toUser = "Yf5bvIiNSMTxBYK6zSajlFYoXw42"
+            savedCards.success = success
+            savedCards.paymentPurpose = purpose
+            savedCards.error = error
+            savedCards.toUser = to
             savedCards.currentLoggedInUser = from
             savedCards.modalPresentationStyle = .overFullScreen
             savedCards.modalPresentationCapturesStatusBarAppearance = true
@@ -74,10 +80,16 @@ class SavedCardsVC: UIViewController {
                     self.view.layoutIfNeeded();
                 }
                 if let cardId = cardId {
-                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { (chargeId, error) in
+                    guard let purpose = self.paymentPurpose else {
+                        print("Purpose not found")
+                        return
+                    }
+                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, purpose: purpose, completion: { (chargeId, error) in
                         if let error = error {
+                            self.error?()
                             print(error)
                         } else {
+                            self.success?()
                             print("Charge created")
                         }
                         DispatchQueue.main.async {
@@ -118,10 +130,15 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let card: STPCard = self.cards[indexPath.item]
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, completion: { (chargeId, error) in
+        guard let purpose = self.paymentPurpose else {
+            return
+        }
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, purpose: purpose, completion: { (chargeId, error) in
             if let error = error {
+                self.error?()
                 print(error)
             } else {
+                self.success?()
                 print("Charge created")
             }
             DispatchQueue.main.async {

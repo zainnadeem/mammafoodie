@@ -1306,12 +1306,12 @@ extension DatabaseGateway {
         })
     }
     
-    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, completion: @escaping ((String, Error?)->Void)) {
+    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
         let userId: String = fromUserId
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
         
-        let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId]
+        let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId, "paymentPurpose": purpose.rawValue]
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
             completion(pushId, error)
