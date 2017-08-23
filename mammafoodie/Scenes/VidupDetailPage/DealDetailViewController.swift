@@ -3,9 +3,6 @@ import Firebase
 
 protocol DealDetailViewControllerInput {
     func HideandUnhideView()
-//    func DisplayTime(Time:String)
-//    func DisplayUserInfo(UserInfo:MFUser)
-//    func DisplayDishInfo(DishInfo:MFDish)
     func UpdateLikeStatus(Status:Bool)
 }
 
@@ -50,6 +47,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     @IBOutlet weak var lbl_dishName: UILabel!
     @IBOutlet weak var lbl_viewCount: UILabel!
     @IBOutlet weak var lbl_slot: UILabel!
+    
+    var timerRemainingTime: Timer?
     
     // MARK: - Object lifecycle
     
@@ -162,10 +161,6 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         }
     }
     
-    func DisplayTime(Time:String){
-        lbl_Timer.text = Time
-    }
-    
     func DisplayUserInfo(UserInfo:MFUser) {
         self.lbl_UserName.text = UserInfo.name
         if let imagePath = UserInfo.picture {
@@ -226,6 +221,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         self.DishId = vidup.id
         self.dish = vidup
         
+        self.displayRemainingTimeForDeal()
+        
         DatabaseGateway.sharedInstance.getUserWith(userID: self.userId) { (dishUser) in
             DispatchQueue.main.async {
                 if let dishUser = dishUser {
@@ -248,10 +245,67 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         }
     }
     
+    func displayRemainingTimeForDeal() {
+        
+        guard let endTimestamp = self.dish?.endTimestamp else {
+            return
+        }
+        
+        if self.timerRemainingTime == nil {
+            self.timerRemainingTime = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                let components: Set<Calendar.Component> = [
+                    Calendar.Component.day,
+                    Calendar.Component.hour,
+                    Calendar.Component.minute,
+                    Calendar.Component.second,
+                    ]
+                let datecomponents: DateComponents = Calendar.current.dateComponents(components, from: Date(), to: endTimestamp)
+                
+                var shouldKeepTimerAlive: Bool = false
+                var timerString: [String] =  []
+                
+                if datecomponents.day ?? 0 > 0 {
+                    shouldKeepTimerAlive = true
+                    timerString.append("\(datecomponents.day!) day")
+                }
+                
+                if datecomponents.hour ?? 0 > 0 {
+                    shouldKeepTimerAlive = true
+                    timerString.append(String.init(format: "%02d", datecomponents.hour!))
+                } else {
+                    timerString.append("00")
+                }
+                
+                if datecomponents.minute ?? 0 > 0 {
+                    shouldKeepTimerAlive = true
+                    timerString.append(String.init(format: "%02d", datecomponents.minute!))
+                } else {
+                    timerString.append("00")
+                }
+                
+                if datecomponents.second ?? 0 > 0 {
+                    shouldKeepTimerAlive = true
+                    timerString.append(String.init(format: "%02d", datecomponents.second!))
+                } else {
+                    timerString.append("00")
+                }
+                DispatchQueue.main.async {
+                    if shouldKeepTimerAlive == true {
+                        self.lbl_Timer.text = timerString.joined(separator: ":")
+                    } else {
+                        self.lbl_Timer.text = "00:00:00"
+                        
+                        self.timerRemainingTime?.invalidate()
+                        self.timerRemainingTime = nil
+                    }
+                }
+            })
+        }
+    }
+    
     @IBAction func btnUserProfileTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.dish!.user.id)
     }
     
-    //        output.DisplayTime(Time: self.timeString(time: Time))
 }
 
