@@ -810,6 +810,18 @@ extension DatabaseGateway {
         }
     }
     
+    func getPictures(_ completion: @escaping ((_ pictures: [MFDish])->Void)) -> DatabaseConnectionObserver? {
+        return self.getDishes(type: MFDishMediaType.picture, frequency: .realtime) { (dishes) in
+            let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                    return true
+                }
+                return false
+            })
+            completion(filteredDishes)
+        }
+    }
+    
     func getDishes(type: MFDishMediaType, frequency: DatabaseRetrievalFrequency, _ completion: @escaping ((_ dishes: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
@@ -836,7 +848,7 @@ extension DatabaseGateway {
         case .realtime:
             var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
             observer.databaseReference = databaseReference
-            observer.observerId = observer.databaseReference!.observe(.value, with: successClosure, withCancel: cancelClosure)
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
             return observer
         default:
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)

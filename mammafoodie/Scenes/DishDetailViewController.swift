@@ -100,10 +100,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        self.output.getDish(with: "-Kok-iYMp5RnpCYrt1eg")
-        self.dishID = "-KoirmSdgfzq_00X7wKb"
-        
-        if let dishID = self.dishID{
+        if let dishID = self.dishID {
             self.output.getDish(with: dishID)
             self.output.updateDishViewersCount(dishID:dishID,opened: true)
         }

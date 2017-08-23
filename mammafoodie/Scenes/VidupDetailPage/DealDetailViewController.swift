@@ -1,15 +1,15 @@
 import UIKit
 import Firebase
 
-protocol VidupDetailPageViewControllerInput {
+protocol DealDetailViewControllerInput {
     func HideandUnhideView()
-    func DisplayTime(Time:String)
-    func DisplayUserInfo(UserInfo:MFUser)
-    func DisplayDishInfo(DishInfo:MFDish)
+//    func DisplayTime(Time:String)
+//    func DisplayUserInfo(UserInfo:MFUser)
+//    func DisplayDishInfo(DishInfo:MFDish)
     func UpdateLikeStatus(Status:Bool)
 }
 
-protocol VidupDetailPageViewControllerOutput {
+protocol DealDetailViewControllerOutput {
     func setupMediaPlayer(view: UIView, user_id: String, dish_id: String, dish: MFDish?)
     func resetViewBounds(view:UIView)
     func stopTimer()
@@ -17,9 +17,9 @@ protocol VidupDetailPageViewControllerOutput {
     func dishUnliked(user_id:String,dish_id: String)
 }
 
-class VidupDetailPageViewController: UIViewController, VidupDetailPageViewControllerInput {
+class DealDetailViewController: UIViewController, DealDetailViewControllerInput {
     
-    var output: VidupDetailPageViewControllerOutput!
+    var output: DealDetailViewControllerOutput!
     var router: VidupDetailPageRouter!
     
     var gradientLayerForUserInfo: CAGradientLayer!
@@ -46,6 +46,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     @IBOutlet weak var lbtn_like: UIButton!
     @IBOutlet weak var lbl_UserName: UILabel!
     @IBOutlet weak var user_image: UIImageView!
+    @IBOutlet weak var dealImageView: UIImageView!
     @IBOutlet weak var lbl_dishName: UILabel!
     @IBOutlet weak var lbl_viewCount: UILabel!
     @IBOutlet weak var lbl_slot: UILabel!
@@ -77,28 +78,29 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         
         self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
-        self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
+        if let dish = self.dish {
+            self.load(new: dish)
+        }
         
         if let dish = self.dish {
+            var itemName: String = ""
+            var contentType: String = ""
             if dish.mediaType == .vidup {
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterItemID: dish.id as NSObject,
-                    AnalyticsParameterItemName: "vidup" as NSObject,
-                    AnalyticsParameterContentType: "VidupView" as NSObject
-                    ])
+                itemName = "vidup"
+                contentType = "VidupView"
             } else if dish.mediaType == .picture {
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterItemID: dish.id as NSObject,
-                    AnalyticsParameterItemName: "picture" as NSObject,
-                    AnalyticsParameterContentType: "PictureView" as NSObject
-                    ])
+                itemName = "picture"
+                contentType = "PictureView"
             } else {
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterItemID: dish.id as NSObject,
-                    AnalyticsParameterItemName: "liveVideo" as NSObject,
-                    AnalyticsParameterContentType: "LiveVideoView" as NSObject
-                    ])
+                itemName = "liveVideo"
+                contentType = "LiveVideoView"
             }
+            
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: dish.id as NSObject,
+                AnalyticsParameterItemName: itemName as NSObject,
+                AnalyticsParameterContentType: contentType as NSObject
+                ])
         }
     }
     
@@ -109,7 +111,9 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.output.resetViewBounds(view: lv_Mediaview)
+        if self.dish?.mediaType == MFDishMediaType.vidup {
+            self.output.resetViewBounds(view: lv_Mediaview)
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -163,10 +167,10 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
     }
     
     func DisplayUserInfo(UserInfo:MFUser) {
-        lbl_UserName.text = UserInfo.name
-        if let url = NSURL(string: UserInfo.picture!) {
-            if let data = NSData(contentsOf: url as URL) {
-                user_image.image = UIImage(data: data as Data)
+        self.lbl_UserName.text = UserInfo.name
+        if let imagePath = UserInfo.picture {
+            if let url = URL(string: imagePath) {
+                self.user_image.sd_setImage(with: url)
             }
         }
     }
@@ -193,7 +197,7 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         animation.isRemovedOnCompletion = false
         imageview.layer.add(animation, forKey: "nil")
         
-        UIView.animate(withDuration: 2  , animations: {
+        UIView.animate(withDuration: 2, animations: {
             imageview.alpha = 0
         }) { (finished) in
             imageview.removeFromSuperview()
@@ -221,11 +225,33 @@ class VidupDetailPageViewController: UIViewController, VidupDetailPageViewContro
         self.userId = vidup.user.id
         self.DishId = vidup.id
         self.dish = vidup
-        self.output.setupMediaPlayer(view: lv_Mediaview, user_id: userId , dish_id: DishId, dish: self.dish)
+        
+        DatabaseGateway.sharedInstance.getUserWith(userID: self.userId) { (dishUser) in
+            DispatchQueue.main.async {
+                if let dishUser = dishUser {
+                    self.DisplayUserInfo(UserInfo: dishUser)
+                }
+            }
+        }
+        
+        self.DisplayDishInfo(DishInfo: vidup)
+        
+        if vidup.mediaType == MFDishMediaType.vidup {
+            self.output.setupMediaPlayer(view: lv_Mediaview,
+                                         user_id: userId ,
+                                         dish_id: DishId,
+                                         dish: self.dish)
+        } else if vidup.mediaType == MFDishMediaType.picture {
+            if let url: URL = vidup.mediaURL {
+                self.dealImageView.sd_setImage(with: url)
+            }
+        }
     }
     
     @IBAction func btnUserProfileTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.dish!.user.id)
     }
+    
+    //        output.DisplayTime(Time: self.timeString(time: Time))
 }
 

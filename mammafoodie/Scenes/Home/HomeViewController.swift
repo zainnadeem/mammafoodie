@@ -313,7 +313,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             } else {
                 selectedLiveVideo.accessMode = MFDishMediaAccessMode.viewer
                 self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
-                self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
+                self.openDishDetails(selectedLiveVideo)
             }
         }
         self.liveVideosAdapter.didSelectViewAll = { (cellFrame) in
@@ -335,7 +335,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             } else {
                 selectedVidup.accessMode = MFDishMediaAccessMode.viewer
                 self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
-                self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
+                self.openDishDetails(selectedVidup)
             }
         }
         self.vidupsAdapter.didSelectViewAll = { (cellFrame) in
@@ -349,7 +349,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.tableViewAdapter.setup(with: self.tblList, user: currentUser, { (path, id) in
                 DispatchQueue.main.async {
-                    self.openScreen(for: path, id: id)
+//                    self.openScreen(for: path, id: id)
+                    self.openProfile(id)
                 }
             })
             self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
@@ -357,33 +358,33 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         }
     }
     
-    func openScreen(for path: String, id: String) {
-        switch path {
-        case FirebaseReference.users.rawValue:
-            var type: ProfileType = .othersProfile
-            if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-                if currentUser.id == id {
-                    type = .ownProfile
-                }
+    func openProfile(_ userId: String) {
+        var type: ProfileType = .othersProfile
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if currentUser.id == userId {
+                type = .ownProfile
             }
-            self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, id))
-            
-        case FirebaseReference.dishes.rawValue:
-            self.openDish(with: id)
-            
-        default:
-            break
         }
+        self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, userId))
     }
+    
+//    func openScreen(for path: String, id: String) {
+//        switch path {
+//        case FirebaseReference.users.rawValue:
+//
+//
+//        case FirebaseReference.dishes.rawValue:
+//            self.openDish(with: id)
+//
+//        default:
+//            break
+//        }
+//    }
     
     func openDish(with id: String) {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
-                if let _ = dish.endTimestamp {
-                    self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
-                } else {
-                    self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-                }
+                self.openDishDetails(dish)
             }
         }
     }
@@ -422,8 +423,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         dish.accessMode = .owner
         if dish.mediaType == .liveVideo {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-        } else if dish.mediaType == .vidup {
-            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
+        } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
         }
     }
     
