@@ -95,12 +95,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
             self.lblNumberOfViewers.text = "\(count)"
         }
-
+        
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-//                self.output!.start(self.liveVideo)
+                //                self.output!.start(self.liveVideo)
             #endif
         }
         
@@ -125,7 +125,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 })
             }
         }
-
+        
     }
     
     func loadDish() {
@@ -308,10 +308,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
-        if liveVideo.id != nil {
-            //            self.viewVisualBlurEffect.removeFromSuperview()
-            //            self.imgViewPlaceholder.removeFromSuperview()
-        }
+        //        if liveVideo.id != nil {
+        //            self.viewVisualBlurEffect.removeFromSuperview()
+        //            self.imgViewPlaceholder.removeFromSuperview()
+        //        }
     }
     
     func purchase(slots : UInt) {
@@ -348,5 +348,4 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     @IBAction func btnUserTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.liveVideo.user.id)
     }
-
 }

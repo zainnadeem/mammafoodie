@@ -18,6 +18,25 @@ class VidupDetailPageRouter: VidupDetailPageRouterInput {
                     profileVC.userID = sender as? String
                 }
             }
+        } else if segue.identifier == "seguePresentSlotSelectionViewController" {
+            if let destination = segue.destination as? SlotSelectionViewController,
+                let source = segue.source as? DealDetailViewController {
+                destination.dish = source.dish
+                destination.selectionClosure = { (count) in
+                    if count > 0 {
+                        source.purchase(slots: count)
+                    }
+                    print("Slots to be purchased: \(count)")
+                }
+            }
+        } else if segue.identifier == "segueShowPaymentViewController" {
+            if let destination = segue.destination as? PaymentViewController,
+                let source = segue.source as? DealDetailViewController {
+                if let slots = sender as? UInt {
+                    destination.slotsToBePurchased = slots
+                    destination.dish = source.dish
+                }
+            }
         }
     }
 }
