@@ -37,35 +37,28 @@ class DishCollectionViewCell: UICollectionViewCell {
         
         self.lblDishName.text = dishData.name
         self.lblDishTypeTag.text = dishData.tag
+        DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id) { (media) in
+            guard media != nil else { return }
+            self.lblDishName.text = dishData.name
+            self.lblDishTypeTag.text = dishData.tag
+        }
         
-        if  dishData.dishType != nil {
-            
-            DatabaseGateway.sharedInstance.getMediaWith(mediaID: dishData.id) { (media) in
-                
-                guard media != nil else {return}
-                
-                self.lblDishName.text = dishData.name
-                self.lblDishTypeTag.text = dishData.tag
-                
-            }
-            
-            switch dishData.dishType! {
-                
-            case .NonVeg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Non Veg")
-            case .Veg: self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg")
-            case .Vegan , .None: self.vegIndicatorImageView.image = nil
-                
-            }
-            
-            self.lblDishTypeTag.text = "Healthy"
-            self.lblNumberOfViews.text = dishData.numberOfViewers.description
-            
-            if let picURL = dishData.mediaURL {
-                
-                print(picURL.absoluteString)
-                
-                self.dishImageView.sd_setImage(with: picURL)
-            }
+        switch dishData.dishType {
+        case .NonVeg:
+            self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Nonveg_selected")
+        case .Veg:
+            self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Veg_selected")
+        case .Vegan:
+            self.vegIndicatorImageView.image = #imageLiteral(resourceName: "Vegan_selected")
+        case .None:
+            self.vegIndicatorImageView.image = nil
+        }
+        
+        //        self.lblDishTypeTag.text = ""
+        self.lblNumberOfViews.text = dishData.numberOfViewers.description
+        if let picURL = dishData.mediaURL {
+            //            print(picURL.absoluteString)
+            self.dishImageView.sd_setImage(with: picURL)
         }
     }
 }

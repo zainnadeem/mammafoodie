@@ -25,7 +25,7 @@ class MFDish {
     var id: String
     var name: String
     
-    var dishType : MFDishType!
+    var dishType : MFDishType = .None
     var user: MFUser!
     var username: String!
     
@@ -45,7 +45,7 @@ class MFDish {
     var createTimestamp: Date!
     var endTimestamp: Date?
     
-    var preparationTime : Double!
+    var preparationTime : Double = 0
     var boughtBy: [MFOrder: Date] = [:]
     var cuisine: MFCuisine!
     

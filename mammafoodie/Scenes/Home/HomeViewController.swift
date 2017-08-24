@@ -348,13 +348,49 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         self.tblList.backgroundView = self.viewTableViewBackground
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.tableViewAdapter.setup(with: self.tblList, user: currentUser, { (path, id) in
-                DispatchQueue.main.async {
-//                    self.openScreen(for: path, id: id)
-                    self.openProfile(id)
-                }
+                self.openScreen(for: path, id: id)
+                //                    self.openProfile(id)
             })
             self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
             self.tableViewAdapter.loadMenu()
+            
+            self.tableViewAdapter.onOptions = { (dish) in
+                let alert = UIAlertController.init(title: "Choose reason to report", message: nil, preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction.init(title: "Inappropriate", style: .default, handler: { (action) in
+                    self.removeSavedDish(dish)
+                }))
+                
+                alert.addAction(UIAlertAction.init(title: "Offensive", style: .default, handler: { (action) in
+                    self.removeSavedDish(dish)
+                }))
+                
+                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
+                    
+                }))
+                
+                self.present(alert, animated: true, completion: {
+                    
+                })
+            }
+            
+            self.tableViewAdapter.onBookmark = { (dish) in
+                self.showAlert("Remove \"\(dish.name)\" from Saved Dishes?", message: nil, actionTitles: ["Yes"], cancelTitle: "No", actionhandler: { (action, index) in
+                    self.removeSavedDish(dish)
+                }, cancelActionHandler: { (action) in
+                    
+                })
+            }
+            
+            self.tableViewAdapter.onOrderNow = { (dish) in
+                self.performSegue(withIdentifier: "segueShowDealDetails", sender: (dish, true))
+            }
+        }
+    }
+    
+    func removeSavedDish(_ dish: MFDish) {
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            DatabaseGateway.sharedInstance.toggleDishBookmark(userID: currentUser.id, dishID: dish.id, shouldBookmark: false)
+            self.tableViewAdapter.removeSavedDish(dish)
         }
     }
     
@@ -368,18 +404,18 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, userId))
     }
     
-//    func openScreen(for path: String, id: String) {
-//        switch path {
-//        case FirebaseReference.users.rawValue:
-//
-//
-//        case FirebaseReference.dishes.rawValue:
-//            self.openDish(with: id)
-//
-//        default:
-//            break
-//        }
-//    }
+    func openScreen(for path: String, id: String) {
+        switch path {
+        case FirebaseReference.users.rawValue:
+            self.openProfile(id)
+            
+        case FirebaseReference.dishes.rawValue:
+            self.openDish(with: id)
+            
+        default:
+            break
+        }
+    }
     
     func openDish(with id: String) {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
@@ -420,8 +456,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     func openDishDetails(_ dish: MFDish) {
         self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
-        dish.accessMode = .owner
-        if dish.mediaType == .liveVideo {
+//        dish.accessMode = .owner
+        if dish.mediaType == .liveVideo &&
+            dish.endTimestamp != nil {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
         } else if dish.mediaType == .vidup || dish.mediaType == .picture {
             self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)

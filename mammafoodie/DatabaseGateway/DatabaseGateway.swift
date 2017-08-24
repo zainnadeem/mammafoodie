@@ -416,42 +416,31 @@ extension DatabaseGateway {
         return observer
     }
     
-    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver?{
+    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver? {
         print(dishID)
-        
         let successClosure:FirebaseObserverSuccessClosure = { (userDataSnapshot) in
-            
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
-            let dish:MFDish = self.createDish(from: dishData)
+            let dish: MFDish = self.createDish(from: dishData)
             completion(dish)
         }
-        
         let cancelClosure:FirebaseObserverCancelClosure = { (error) in
             print(error)
             completion(nil)
         }
-        
-        
         let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference
         let databaseQuery: DatabaseQuery = databaseReference.child(dishID)
-        
-        switch frequency{
+        switch frequency {
         case .single:
-            
             databaseReference.child(dishID).observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             
         case .realtime:
-            
             var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
             observer.databaseReference = databaseReference
             observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
-            
             return observer
-            
         }
         
         return nil
@@ -473,15 +462,12 @@ extension DatabaseGateway {
     }
     
     
-    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
-        
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes: [String:AnyObject]?)->Void){
         FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(dishData)
         })
     }
@@ -602,29 +588,24 @@ extension DatabaseGateway {
     //    }
     //
     
-    func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool, _ completion:@escaping (_ success:Bool)->()){
-        
+    func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool) {
         if shouldBookmark {
             FirebaseReference.savedDishes.classReference.child(userID).updateChildValues([dishID:true])
-            
         } else {
             FirebaseReference.savedDishes.classReference.child(userID).child(dishID).removeValue()
         }
         
     }
     
-    func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
+    func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()) {
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-                
                 completion(false)
                 return
             }
-            
             if dishData[dishID] != nil {
                 completion(true)
-            }else{
+            } else {
                 completion(false)
             }
             
@@ -635,19 +616,21 @@ extension DatabaseGateway {
     func getSavedDishesForUser(userID: String, _ completion:@escaping ([MFDish]) -> ()) {
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             var savedDishes = [MFDish]()
-            guard let dishData = dishSnapshot.value as? [String: Any] else {
+            guard let dishData = dishSnapshot.value as? [String: Bool] else {
                 completion(savedDishes)
                 return
             }
             let requestGroup = DispatchGroup.init()
-            for (id, _) in dishData {
-                requestGroup.enter()
-                _ = self.getDishWith(dishID: id, { (dish) in
-                    if let dish = dish {
-                        savedDishes.append(dish)
-                    }
-                    requestGroup.leave()
-                })
+            for (id, bookMarked) in dishData {
+                if bookMarked {
+                    requestGroup.enter()
+                    _ = self.getDishWith(dishID: id, { (dish) in
+                        if let dish = dish {
+                            savedDishes.append(dish)
+                        }
+                        requestGroup.leave()
+                    })
+                }
             }
             requestGroup.notify(queue: .main, execute: {
                 completion(savedDishes)
@@ -1157,7 +1140,7 @@ extension DatabaseGateway {
     
     func getordersWith(_ completion: @escaping ((_ order:MFOrder?) -> Void)){
         FirebaseReference.orders.classReference.observeSingleEvent(of: .value, with: { (ordersDataSnapshot) in
-            guard let ordersData = ordersDataSnapshot.value as? FirebaseDictionary else {
+            guard let _ = ordersDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
