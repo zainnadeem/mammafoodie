@@ -13,6 +13,10 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
     
+    var onOrderNow : ((MFDish) -> Void)?
+    var onBookmark : ((MFDish) -> Void)?
+    var onOptions : ((MFDish) -> Void)?
+    
     private var openURL: ((String, String) -> Void)?
     private var currentUser: MFUser!
     
@@ -32,6 +36,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         self.tableView.backgroundView?.isHidden = true
         self.tableView.allowsSelection = true
         self.loadActivities()
+        
     }
     
     func loadActivities() {
@@ -52,6 +57,34 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         }
     }
     
+    func showOptions(for indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onOptions?(self.menu[indexPath.row])
+        }
+    }
+    
+    func showBookmarkOptions(for indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onBookmark?(self.menu[indexPath.row])
+        }
+    }
+    
+    func orderNow(at indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onOrderNow?(self.menu[indexPath.row])
+        }
+    }
+    
+    func removeSavedDish(_ dish: MFDish) {
+        if let index = self.menu.index(of: dish) {
+            let indexPath = IndexPath.init(row: index, section: 0)
+            self.tableView.beginUpdates()
+            self.menu.remove(at: index)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.mode == .activity {
             let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
@@ -63,7 +96,17 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         } else {
             let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell
             if self.menu.count > indexPath.row {
+                cell.indexPath = indexPath
                 cell.setup(with: self.menu[indexPath.item])
+                cell.onBookmark = { (index) in
+                    self.showBookmarkOptions(for: index)
+                }
+                cell.onOrderNow = { (index) in
+                    self.orderNow(at: index)
+                }
+                cell.onOptions = { (index) in
+                    self.showOptions(for: index)
+                }
             }
             return cell
         }

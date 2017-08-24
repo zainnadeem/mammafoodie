@@ -48,10 +48,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.userID == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
-            self.profileType = .ownProfile
+        if let userid = self.userID {
+            if userid == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                self.profileType = .ownProfile
+            } else {
+                self.profileType = .othersProfile
+            }
         } else {
-            self.profileType = .othersProfile
+            self.profileType = .ownProfile
         }
         
         self.output.setUpDishCollectionView(self.collectionView, self.profileType)

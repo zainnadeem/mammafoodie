@@ -35,7 +35,7 @@ class OtherUsersProfileWorker {
         }
     }
     
-    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish])->Void) {
         
         responseCounterCooked = 0
         
@@ -70,38 +70,31 @@ class OtherUsersProfileWorker {
         }
     }
     
-    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void){
-        
-        responseCounterBought = 0
-        
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish])->Void) {
         DatabaseGateway.sharedInstance.getBoughtDishesForUser(userID: userID) { (dishDataDictionary) in
-            print(dishDataDictionary)
-            guard dishDataDictionary != nil else {
+            guard let dishDataDictionary = dishDataDictionary else {
                 completion([])
-                return}
+                return
+            }
             var dishes = [MFDish]()
-            
-            for dishID in dishDataDictionary!.keys {
-                
-                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
-                    self.responseCounterBought += 1
-                    
-                    if dish != nil {
-                        dishes.append(dish!)
+            let group = DispatchGroup()
+            for dishID in dishDataDictionary.keys {
+                group.enter()
+                _ = DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
+                    if let dish = dish {
+                        dishes.append(dish)
                     }
-                    
-                    if self.responseCounterBought == dishDataDictionary!.keys.count{
-                        self.responseCounterBought = 0
-                        completion(dishes)
-                    }
+                    group.leave()
                 })
             }
+            group.notify(queue: .main, execute: { 
+                completion(dishes)
+            })
             
         }
     }
     
-    
-    func getSavedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish]?)->Void) {
+    func getSavedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[MFDish])->Void) {
         responseCounterSaved = 0
         DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: userID) { (dishes) in
             completion(dishes)
@@ -115,7 +108,7 @@ class OtherUsersProfileWorker {
         
     }
     
-    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+    func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser])->Void){
         
         followersResponseCounter = 0
         
@@ -149,8 +142,7 @@ class OtherUsersProfileWorker {
         }
     }
     
-    
-    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser]?)->Void){
+    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dishes:[MFUser])->Void){
         
         followingResponseCounter = 0
         
@@ -183,7 +175,6 @@ class OtherUsersProfileWorker {
             
         }
     }
-    
     
     func toggleFollow(targetUser:String, currentUser:String, targetUserName:String, currentUserName:String, shouldFollow:Bool, _ completion:@escaping (_ success:Bool)->()){
         

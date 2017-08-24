@@ -48,6 +48,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     @IBOutlet weak var lbl_viewCount: UILabel!
     @IBOutlet weak var lbl_slot: UILabel!
     
+    var shouldShowSlotSelection = false
+    
     var timerRemainingTime: Timer?
     
     // MARK: - Object lifecycle
@@ -106,6 +108,13 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.shouldShowSlotSelection {
+            self.showSlotSelection()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -313,6 +322,11 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     }
     
     @IBAction func onSlotsTap(_ sender: UIButton) {
+        self.showSlotSelection()
+    }
+    
+    func showSlotSelection() {
+        self.shouldShowSlotSelection = false
         if self.dish?.totalSlots ?? 0 > 0 &&
             self.dish?.availableSlots ?? 0 > 0 {
             self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: self)

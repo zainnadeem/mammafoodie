@@ -68,6 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 }
             }
         }
+        
+//        self.saveDishes()
+        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
@@ -77,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func saveDishes() {
-        FirebaseReference.savedDishes.classReference.child("sXFOH3QceiPdAbLUflTXrW46yag2").setValue(["-KoirmSdgfzq_00X7wKb" : true,
+        FirebaseReference.savedDishes.classReference.child("kp5zT0aSdYMW07KQl7saWqHKoTw2").setValue(["-KoirmSdgfzq_00X7wKb" : true,
                                                                                                      "-KoirsSGrDfo90S1zfcF" :true,
                                                                                                      "-KojmXFzDHAS_VNQteXZ" :true,
                                                                                                      "-Kok-iYMp5RnpCYrt1eg" :true,

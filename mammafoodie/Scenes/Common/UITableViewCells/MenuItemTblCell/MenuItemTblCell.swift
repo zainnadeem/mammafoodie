@@ -24,9 +24,17 @@ class MenuItemTblCell: UITableViewCell {
     @IBOutlet weak var btnLikedCount: UIButton!
     @IBOutlet weak var viewSlotsLeftCount: UIView!
     @IBOutlet weak var btnOrderNow: UIButton!
+    @IBOutlet weak var viewTime: UIView!
+    @IBOutlet weak var viewOrdersHistory: UIView!
+    @IBOutlet weak var viewDistance: UIView!
+    @IBOutlet weak var lblSlotsLeft: UILabel!
     
     var shapeLayer: CAShapeLayer!
     var gradientLayer: CAGradientLayer!
+    var indexPath: IndexPath?
+    var onOrderNow : ((IndexPath) -> Void)?
+    var onBookmark : ((IndexPath) -> Void)?
+    var onOptions : ((IndexPath) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,11 +73,33 @@ class MenuItemTblCell: UITableViewCell {
             self.imgViewProfilePicture.image = UIImage(named: "IconMammaFoodie")!
         }
         
+        self.viewDistance.isHidden = true
+        
+        self.lblOrderCounts.text = "\(media.boughtOrders.count) Orders"
+        self.lblSlotsLeft.text = "\(media.availableSlots) left"
+        if media.preparationTime > 60 {
+            self.lblTimeToPrepare.text = "\(Int(media.preparationTime / 60)) mins"
+        } else {
+            self.lblTimeToPrepare.text = "1 min"
+        }
+        self.btnLikedCount.setTitle("\(media.numberOfLikes)", for: .normal)
+        switch media.dishType {
+        case .Veg:
+            self.imgDietIcon.image = #imageLiteral(resourceName: "Veg_selected")
+        case .NonVeg:
+            self.imgDietIcon.image = #imageLiteral(resourceName: "Nonveg_selected")
+            
+        case .Vegan:
+            self.imgDietIcon.image = #imageLiteral(resourceName: "Vegan_selected")
+            
+        default:
+            break
+        }
     }
     
     func cellWillDisplay() {
-//        self.updateDropShadowForViewContainer()
-//        self.updateInnerShadowOnRightEndOfImageview()
+        //        self.updateDropShadowForViewContainer()
+        //        self.updateInnerShadowOnRightEndOfImageview()
         self.addGradientInOrderNowButton()
     }
     
@@ -121,10 +151,20 @@ class MenuItemTblCell: UITableViewCell {
     }
     
     @IBAction func btnOptionsTapped(_ sender: UIButton) {
-        
+        if let index = self.indexPath {
+            self.onOptions?(index)
+        }
     }
     
     @IBAction func btnBookmarkTapped(_ sender: UIButton) {
+        if let index = self.indexPath {
+            self.onBookmark?(index)
+        }
     }
     
+    @IBAction func onOrderNowTap(_ sender: UIButton) {
+        if let index = self.indexPath {
+            self.onOrderNow?(index)
+        }
+    }
 }

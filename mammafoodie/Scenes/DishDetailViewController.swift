@@ -114,7 +114,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let dishID = self.dishID{
+        if let dishID = self.dishID {
             self.output.stopObservingDish()
         }
     }
@@ -141,7 +141,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.lblNumberOfComments.text = "\(Int(data.commentsCount))"
         self.lblNumberOfLikes.text = "\(Int(data.likesCount))"
         self.lblNumberOfTimesOrdered.text = String(describing: data.boughtOrders.count)
-        self.lblPrepTime.text = "\(Int(data.preparationTime! / 60)) mins"
+        self.lblPrepTime.text = "\(Int(data.preparationTime / 60)) mins"
         self.lblDishDescription.text = data.description
         self.lblNumberOfTimesOrdered.text = "\(data.boughtOrders.count) Orders"
 //        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
