@@ -79,9 +79,8 @@ class MFModelsToFirebaseDictionaryConverter {
             "createdAt": comment.createdAt.timeIntervalSinceReferenceDate as AnyObject,
             "refrenceID": comment.refrenceID as AnyObject,
             "user": [
-                "id": comment.user!.id as AnyObject,
-                "name": comment.user!.name as AnyObject
-                ] as AnyObject
+                "id": comment.user.id as AnyObject,
+                "name": comment.user.name as AnyObject ] as AnyObject
         ]
         
         return raw

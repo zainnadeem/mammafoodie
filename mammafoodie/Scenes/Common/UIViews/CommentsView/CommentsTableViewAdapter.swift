@@ -25,10 +25,11 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     //    }
     
     func loadComments() {
-        worker.load(for: self.dish) { (comments) in
-            print(comments.count)
-            self.comments = comments
-            print(comments.count)
+        worker.load(for: self.dish) { (newComments) in
+            let filtered = newComments.filter({ (comment) -> Bool in
+                return !self.comments.contains(comment)
+            })
+            self.comments.append(contentsOf: filtered)
             self.reloadData()
         }
     }

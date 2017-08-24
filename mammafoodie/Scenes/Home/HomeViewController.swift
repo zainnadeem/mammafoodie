@@ -458,7 +458,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
 //        dish.accessMode = .owner
         if dish.mediaType == .liveVideo &&
-            dish.endTimestamp != nil {
+            dish.endTimestamp == nil {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
         } else if dish.mediaType == .vidup || dish.mediaType == .picture {
             self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)

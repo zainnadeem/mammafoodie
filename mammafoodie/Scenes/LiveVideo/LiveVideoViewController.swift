@@ -190,8 +190,11 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func setupViewComments() {
-        self.viewComments.dish = self.liveVideo
-        self.viewComments.load()
+        if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.viewComments.dish = self.liveVideo
+            self.viewComments.user = user
+            self.viewComments.load()
+        }
     }
     
     func updateShadowForButtonCloseLiveVideo() {
