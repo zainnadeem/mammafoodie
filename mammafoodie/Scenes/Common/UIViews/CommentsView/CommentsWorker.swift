@@ -5,8 +5,12 @@ class CommentsWorker {
     var observer: DatabaseConnectionObserver?
     var comments: [MFComment] = []
     func load(for dish: MFDish, _ completion: @escaping (([MFComment])->Void)) {
-        self.observer = DatabaseGateway.sharedInstance.getComments(on: dish, frequency: DatabaseRetrievalFrequency.realtime) { (comments) in
-            self.comments.append(contentsOf: comments)
+        self.observer = DatabaseGateway.sharedInstance.getComments(on: dish, frequency: DatabaseRetrievalFrequency.realtime) { (newComments) in
+            
+            let filtered = newComments.filter({ (comment) -> Bool in
+                return !self.comments.contains(comment)
+            })
+            self.comments.append(contentsOf: filtered)
             completion(self.comments)
         }
     }
@@ -19,15 +23,9 @@ class CommentsWorker {
         //        DatabaseGateway.sharedInstance.postComment(comment, on: dish) {
         //            completion()
         //        }
-        guard let user = comment.user else {
-            return
-        }
-        
+        let user = comment.user
         let urlString = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/commentOnDish"
-        
         let params = "dishId=\(dish.id)&userId=\(comment.user.id)&userFullname=\(comment.user.name ?? "")&comment=\(comment.text)"
-        
-        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { print("Error encoding the url string"); return }
         
         let url = URL(string: encodedString)

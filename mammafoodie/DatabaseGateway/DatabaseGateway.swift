@@ -922,16 +922,7 @@ extension DatabaseGateway {
                 return
             }
             var comments: [MFComment] = []
-            //            for key in rawList.keys {
-            //                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
-            //                    comments.append(self.createComment(from: rawComment))
-            //                }
-            //            }
-            
-            //            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
             comments.append(self.createComment(from: rawList))
-            //            }
-            
             completion(comments)
         }
         
@@ -1134,6 +1125,18 @@ extension DatabaseGateway {
         order.id = FirebaseReference.orders.classReference.childByAutoId().key
         let rawOrder: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: order)
         FirebaseReference.orders.classReference.child(order.id).setValue(rawOrder) { (error, databaseRef) in
+            if error != nil {
+                completion(error)
+            } else {
+                self.updateBoughtDishesRecord(for: order.boughtBy.id, dishid: order.dish.id, completion: { (errorFound) in
+                    completion(error)
+                })
+            }
+        }
+    }
+    
+    func updateBoughtDishesRecord(for userid: String, dishid: String, completion: @escaping ((Error?) -> Void)) {
+        FirebaseReference.boughtDishes.classReference.child(userid).updateChildValues([dishid: true]) { (error, ref) in
             completion(error)
         }
     }

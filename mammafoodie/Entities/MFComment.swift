@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 class MFComment {
-    var id: String!
-    var text: String!
-    var createdAt: Date!
-    var user: MFUser!
-    var refrenceID: String!
+    var id: String
+    var text: String
+    var createdAt: Date
+    var user: MFUser
+    var refrenceID: String
     
     init(with text: String, user: MFUser, refrence: String) {
         self.id = FirebaseReference.newsFeedComments.generateAutoID()
@@ -20,6 +20,8 @@ class MFComment {
         self.id = commentDictionary["id"] as? String ?? ""
         if let userComment = commentDictionary["user"] as? [String: AnyObject] {
             self.user = MFUser.init(from: userComment)
+        } else {
+            self.user = MFUser.init()
         }
         self.refrenceID = commentDictionary["refrenceID"] as? String ?? ""
         self.text = commentDictionary["text"] as? String ?? ""

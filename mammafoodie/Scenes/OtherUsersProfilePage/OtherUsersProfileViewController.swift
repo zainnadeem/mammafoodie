@@ -84,10 +84,8 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     func openDishPageWith(dishID:String) {
         
         //Initiate segue and pass it to router in prepare for segue
-        
         let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
-        
         self.present(dishVC, animated: true, completion: nil)
         
     }
@@ -169,6 +167,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             break
             
         case "go cook":
+            self.performSegue(withIdentifier: "segueGoCook", sender: nil)
             break
             
         default:
@@ -181,14 +180,14 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func btnLogoutTapped(_ sender: UIButton) {
-        AppDelegate.shared().setLoginViewController()
-        let worker = FirebaseLoginWorker()
-        worker.signOut { (errorMessage) in
-            
+    func openDishDetails(_ dish: MFDish) {
+        if dish.mediaType == .liveVideo &&
+            dish.endTimestamp == nil {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
         }
     }
-    
     
     // MARK: - Display logic
     
