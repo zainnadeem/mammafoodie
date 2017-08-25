@@ -5,25 +5,22 @@ class ChatListWorker {
     
     var observer : DatabaseConnectionObserver?
     
-    func getConversations(forUser userID:String, _ completion:@escaping (MFConversation?)->()){
-        
-       observer = DatabaseGateway.sharedInstance.getConversations(forUser: userID, { (conv) in
+    func getConversations(forUser userID: String, _ completion: @escaping (MFConversation?) -> ()) {
+       self.observer = DatabaseGateway.sharedInstance.getConversations(forUser: userID, { (conv) in
             completion(conv)
         })
         
     }
     
     func stopObserving(){
-        observer?.stop()
+        self.observer?.stop()
     }
     
-    func createConversation(createdAt: String, user1: String, user2: String, user1Name:String, user2Name:String, _ completion:@escaping (_ status:Bool)->()){
-        
-        DatabaseGateway.sharedInstance.createConversation(createdAt: createdAt, user1: user1 , user2: user2, user1Name: user1Name, user2Name: user2Name) { (status) in
+    func createConversation(user1: MFUser, user2: MFUser,_ completion: @escaping (Bool) -> ()) {
+        DatabaseGateway.sharedInstance.createConversation(createdAt: "\(Date().timeIntervalSinceReferenceDate)", user1: user1.id , user2: user2.id, user1Name: user1.name, user2Name: user2.name) { (status) in
                 completion(status)
         }
 
     }
    
-
 }

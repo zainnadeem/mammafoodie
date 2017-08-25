@@ -42,6 +42,7 @@ class HomePageVidupClnCell: UICollectionViewCell {
         
         self.stopTimer()
         
+        self.imgView.sd_cancelCurrentImageLoad()
         if vidup.id == "-1" {
             // Option to create new vidup
             self.imgView.layer.borderWidth = 2
@@ -49,40 +50,28 @@ class HomePageVidupClnCell: UICollectionViewCell {
             
             if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
-                    self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-                        if image == nil || error != nil {
-                            self.imgView.image = UIImage(named: "IconMammaFoodie")!
-                        }
-                    })
+                    self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
                 } else {
-                    self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                    self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
                 }
             } else {
-                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
             }
-            
             self.circleView.isHidden = true
             self.circleView.vidup = nil
             self.circleView.currentValue = 0
+            
         } else {
             // Show existing vidup details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
-            
             if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
-                self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-                    if image == nil || error != nil {
-                        self.imgView.image = UIImage(named: "IconMammaFoodie")!
-                    }
-                })
+                self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
             } else {
-                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
             }
-            
             self.circleView.isHidden = false
         }
-
-        
         
         let createTimestamp: TimeInterval = vidup.createTimestamp?.timeIntervalSinceReferenceDate ?? 0
         let endTimestamp: TimeInterval = vidup.endTimestamp?.timeIntervalSinceReferenceDate ?? 0
@@ -108,7 +97,7 @@ class HomePageVidupClnCell: UICollectionViewCell {
                         self.vidupDidEnd?(self.vidup!)
                     }
                     
-//                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
+                    //                    print("Set ID: \(vidup.id), Percentage: \((secondsPassed/totalSeconds)*100)")
                 })
             }
         } else {

@@ -39,33 +39,23 @@ class HomePageLiveVideoClnCell: UICollectionViewCell {
             // Option to create new live video
             self.imgView.layer.borderWidth = 2
             self.imgAddIcon.isHidden = false
-            
             if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
-                    self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-                        if image == nil || error != nil {
-                            self.imgView.image = UIImage(named: "IconMammaFoodie")!
-                        }
-                    })
+                    self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
                 } else {
-                    self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                    self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
                 }
             } else {
-                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
             }
         } else {
             // Show existing live video details
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
-            
-            if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: liveVideo.user.id) {
-                self.imgView.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-                    if image == nil || error != nil {
-                        self.imgView.image = UIImage(named: "IconMammaFoodie")!
-                    }
-                })
+            if  let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: liveVideo.user.id) {
+                self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
             } else {
-                self.imgView.image = UIImage(named: "IconMammaFoodie")!
+                self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
             }
         }
         

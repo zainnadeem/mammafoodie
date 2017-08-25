@@ -18,31 +18,31 @@ protocol DishesCollectionViewAdapterDelegate{
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var collectionView:UICollectionView? {
-        didSet{
-            setUpCollectionView()
+    var collectionView: UICollectionView? {
+        didSet {
+            self.setUpCollectionView()
         }
     }
     
-    var profileType:ProfileType! {
-        didSet{
-            collectionView?.reloadData()
+    var profileType: ProfileType! {
+        didSet {
+            self.collectionView?.reloadData()
         }
     }
     
-    var cellSize:CGSize!
+    var cellSize: CGSize!
     
-    var delegate:DishesCollectionViewAdapterDelegate?
+    var delegate: DishesCollectionViewAdapterDelegate?
     
     var selectedIndexForProfile:SelectedIndexForProfile!
     
-    var userData : MFUser? {
+    var userData: MFUser? {
         didSet {
-            collectionView?.reloadData()
+            self.collectionView?.reloadData()
         }
     }
     
-    var cookedDishData:[MFDish] = [MFDish]() {
+    var cookedDishData: [MFDish] = [MFDish]() {
         didSet {
             self.collectionView?.reloadData()
         }

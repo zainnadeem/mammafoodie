@@ -14,32 +14,20 @@ protocol EditAddressDelegate{
 }
 
 
-class EditAddressViewController: UIViewController , CLLocationManagerDelegate, HUDRenderer{
-    
+class EditAddressViewController: UIViewController , CLLocationManagerDelegate, HUDRenderer {
     
     @IBOutlet weak var txfAddressLine1: UITextField!
-    
     @IBOutlet weak var txfAddressLine2: UITextField!
-    
     @IBOutlet weak var txfCity: UITextField!
-    
     @IBOutlet weak var txfState: UITextField!
-    
     @IBOutlet weak var txfCountry: UITextField!
-    
     @IBOutlet weak var txfPhoneNumber: UITextField!
-    
     @IBOutlet weak var txfLocation: UITextField!
-    
     @IBOutlet weak var txfPostalCode: UITextField!
-    
     @IBOutlet weak var btnDone: UIButton!
     
-    
-    var delegate:EditAddressDelegate!
-    
-    var address:MFUserAddress?
-    
+    var delegate: EditAddressDelegate!
+    var address: MFUserAddress?
     lazy var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -77,8 +65,6 @@ class EditAddressViewController: UIViewController , CLLocationManagerDelegate, H
         
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -92,15 +78,14 @@ class EditAddressViewController: UIViewController , CLLocationManagerDelegate, H
         
     }
     
-    
     @IBAction func doneTapped(_ sender: UIButton) {
-        guard self.txfAddressLine1.text != "" && self.txfAddressLine2.text != "" && self.txfLocation.text != "" && self.txfPhoneNumber.text != "" && self.txfCity.text != "" && self.txfPostalCode.text != "" && self.txfState.text != "" && self.txfAddressLine1.text != nil && self.txfAddressLine2.text != nil && self.txfLocation.text != nil && self.txfPhoneNumber.text != nil && self.txfCity.text != nil && self.txfPostalCode.text != nil && self.txfState.text != nil else {
+        guard self.txfAddressLine1.text != "" && self.txfLocation.text != "" && self.txfPhoneNumber.text != "" && self.txfCity.text != "" && self.txfPostalCode.text != "" && self.txfState.text != "" && self.txfAddressLine1.text != nil && self.txfAddressLine2.text != nil && self.txfLocation.text != nil && self.txfPhoneNumber.text != nil && self.txfCity.text != nil && self.txfPostalCode.text != nil && self.txfState.text != nil else {
             self.showAlert(message: "Please enter all the fields")
             return
         }
         
         self.address?.address = txfAddressLine1.text!
-        self.address?.address_2 = txfAddressLine2.text!
+        self.address?.address_2 = txfAddressLine2.text ?? ""
         self.address?.city = txfCity.text!
         self.address?.state = txfState.text!
         self.address?.phone = txfPhoneNumber.text!

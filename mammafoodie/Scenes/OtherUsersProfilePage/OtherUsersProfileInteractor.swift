@@ -25,39 +25,30 @@ enum SelectedIndexForProfile {
 class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesCollectionViewAdapterDelegate , HUDRenderer {
     
     var output: OtherUsersProfileInteractorOutput!
-    var worker: OtherUsersProfileWorker! = OtherUsersProfileWorker()
-    
-    var dishCollectionViewAdapter:DishesCollectionViewAdapter!
-    
-    var user:MFUser? {
-        didSet{
+    var worker: OtherUsersProfileWorker = OtherUsersProfileWorker()
+    var dishCollectionViewAdapter: DishesCollectionViewAdapter!
+    var user: MFUser? {
+        didSet {
             self.loadDishCollectionViewForIndex(.cooked)
         }
     }
     
-    
-    // MARK: - Business logic
-    
-    
-    
     //MARK: - Input
-    
-    func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType){
-        dishCollectionViewAdapter = DishesCollectionViewAdapter()
-        dishCollectionViewAdapter.delegate = self
-        dishCollectionViewAdapter.profileType = profileType
-        dishCollectionViewAdapter.collectionView = collectionView
-        dishCollectionViewAdapter.selectedIndexForProfile = .cooked
+    func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType) {
+        self.dishCollectionViewAdapter = DishesCollectionViewAdapter()
+        self.dishCollectionViewAdapter.delegate = self
+        self.dishCollectionViewAdapter.profileType = profileType
+        self.dishCollectionViewAdapter.collectionView = collectionView
+        self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
     }
     
     func loadUserProfileData(userID:String) {
         self.showActivityIndicator()
         worker.getUserDataWith(userID: userID) { (user) in
-            
-            self.user = user
-            self.dishCollectionViewAdapter.userData = user
-            self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
             DispatchQueue.main.async {
+                self.user = user
+                self.dishCollectionViewAdapter.userData = user
+                self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
                 self.hideActivityIndicator()
             }
         }
@@ -86,8 +77,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
     }
     
-    
-    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile){
+    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile) {
         guard let user = self.user else {return}
         
         self.showActivityIndicator()
@@ -132,7 +122,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
     }
     
-    func toggleFollow(userID:String, shouldFollow:Bool){
+    func toggleFollow(userID:String, shouldFollow:Bool) {
         
         guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase else {return}
         
@@ -148,17 +138,17 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     //MARK: - DishesCollectionViewAdapterDelegate
     
-    func openDishPageWith(dishID:String){
+    func openDishPageWith(dishID:String) {
         
         output.openDishPageWith(dishID: dishID)
         
     }
     
-    func openFavouriteDishes(){
+    func openFavouriteDishes() {
         output.openFavouriteDishes()
     }
     
-    func openFollowers(followers:Bool, userList:[MFUser]){
+    func openFollowers(followers:Bool, userList:[MFUser]) {
         output.openFollowers(followers: followers, userList:userList)
     }
     
