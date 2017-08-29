@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         if let userId = currentUser?.uid {
             if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
                 let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
-                DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
+                _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
                     DispatchQueue.main.async {
                         self.currentUser = loggedInUser
                         hud.hide(animated: true)

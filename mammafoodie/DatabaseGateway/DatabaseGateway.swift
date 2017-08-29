@@ -378,7 +378,7 @@ extension DatabaseGateway {
     }
     
     func getLoggedInUser() -> MFUser? {
-        if let currentUser = Auth.auth().currentUser {
+        if Auth.auth().currentUser != nil {
             //            let user: MFUser = MFUser()
             //            user.id = currentUser.uid
             //            user.name = currentUser.displayName
@@ -389,7 +389,7 @@ extension DatabaseGateway {
     }
     
     func setDeviceToken(_ token: String, for userId: String, _ completion: @escaping ((Error?)->Void)) {
-        let deviceToken = ["deviceToken":token] as FirebaseDictionary
+        let deviceToken = ["deviceToken": token] as FirebaseDictionary
         FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
             completion(error)
         }
