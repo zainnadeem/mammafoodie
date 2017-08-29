@@ -34,6 +34,14 @@ class SavedCardsVC: UIViewController {
         self.clnCards.delegate = self
         self.clnCards.dataSource = self
         self.getSavedCards()
+        
+        let backButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "BackBtn"), style: .plain, target: self, action: #selector(backButtonTapped(_:)))
+        self.navigationItem.leftBarButtonItem = backButton
+        
+    }
+    
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     func getSavedCards() {
@@ -44,20 +52,22 @@ class SavedCardsVC: UIViewController {
     }
     
     class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String, purpose: PaymentPurpose, success: @escaping (()->Void), error: @escaping (()->Void)) {
-        let story: UIStoryboard = UIStoryboard(name: "Akshit", bundle: nil)
-        if let savedCards: SavedCardsVC = story.instantiateViewController(withIdentifier: "SavedCardsVC") as? SavedCardsVC {
-            savedCards.amount = amount
-            savedCards.success = success
-            savedCards.paymentPurpose = purpose
-            savedCards.error = error
-            savedCards.toUser = to
-            savedCards.currentLoggedInUser = from
-            savedCards.modalPresentationStyle = .overFullScreen
-            savedCards.modalPresentationCapturesStatusBarAppearance = true
-            savedCards.modalTransitionStyle = .crossDissolve
-            vc.present(savedCards, animated: true, completion: {
-                
-            })
+        let story: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        if let navSavedCards: MFNavigationController = story.instantiateViewController(withIdentifier: "navSavedCards") as? MFNavigationController {
+            if let savedCards: SavedCardsVC = navSavedCards.viewControllers.first as? SavedCardsVC {
+                savedCards.amount = amount
+                savedCards.success = success
+                savedCards.paymentPurpose = purpose
+                savedCards.error = error
+                savedCards.toUser = to
+                savedCards.currentLoggedInUser = from
+                savedCards.modalPresentationStyle = .overFullScreen
+                savedCards.modalPresentationCapturesStatusBarAppearance = true
+                savedCards.modalTransitionStyle = .crossDissolve
+                vc.present(navSavedCards, animated: true, completion: {
+                    
+                })
+            }
         }
     }
     
