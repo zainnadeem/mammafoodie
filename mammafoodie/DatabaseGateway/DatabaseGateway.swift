@@ -344,9 +344,10 @@ extension DatabaseGateway {
         }
     }
     
-    func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
-        FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+    func getUserWith(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion: @escaping ((_ user:MFUser?)->Void)) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let userData = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
@@ -354,9 +355,25 @@ extension DatabaseGateway {
             user.id = userID
             
             completion(user)
-        }) { (error) in
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
             print(error)
             completion(nil)
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.users.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
         }
     }
     

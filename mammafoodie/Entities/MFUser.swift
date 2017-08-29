@@ -31,7 +31,11 @@ class MFUser {
     var addressDetails: MFUserAddress?
     var addressLocation: String?
     //    var addressID:String?
-    var picture: String?
+    
+    var picture: URL? {
+        return DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.id)
+    }
+    
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
     
@@ -72,7 +76,7 @@ class MFUser {
         
         self.id = Dictionary["id"] as? String ?? ""
         self.name = Dictionary["name"] as? String ?? ""
-        self.picture = Dictionary["picture"] as? String ?? ""
+//        self.picture = Dictionary["picture"] as? String ?? ""
         self.address = Dictionary["address"] as? String ?? ""
         
         if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
@@ -103,14 +107,14 @@ class MFUser {
     init(id: String, name: String, picture:String, profileDescription: String) {
         self.id = id
         self.name = name
-        self.picture = picture
+//        self.picture = picture
         self.profileDescription = profileDescription
     }
     
     init(id: String, name: String, picture:String, profileDescription: String, email:String) {
         self.id = id
         self.name = name
-        self.picture = picture
+//        self.picture = picture
         self.profileDescription = profileDescription
         self.email = email
     }

@@ -22,7 +22,7 @@ struct CascadingViews {
             
             let imageView = UIImageView()
             
-            if let urlString = user.picture, let url = URL(string: urlString){
+            if let url = user.picture {
                 imageView.sd_setImage(with: url, placeholderImage: UIImage()) //FIXME: -  Set placeholder
             } else {
                 imageView.image = UIImage() //FIXME: - PlaceHolder
