@@ -177,10 +177,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     func DisplayUserInfo(UserInfo:MFUser) {
         self.lbl_UserName.text = UserInfo.name
-        if let imagePath = UserInfo.picture {
-            if let url = URL(string: imagePath) {
-                self.user_image.sd_setImage(with: url)
-            }
+        if let url = UserInfo.picture {
+            self.user_image.sd_setImage(with: url)
         }
     }
     

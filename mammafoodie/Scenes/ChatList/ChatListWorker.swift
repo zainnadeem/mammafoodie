@@ -17,9 +17,9 @@ class ChatListWorker {
     }
     
     func createConversation(user1: MFUser, user2: MFUser,_ completion: @escaping (Bool) -> ()) {
-        DatabaseGateway.sharedInstance.createConversation(createdAt: "\(Date().timeIntervalSinceReferenceDate)", user1: user1.id , user2: user2.id, user1Name: user1.name, user2Name: user2.name) { (status) in
-                completion(status)
-        }
+//        DatabaseGateway.sharedInstance.createConversation(createdAt: "\(Date().timeIntervalSinceReferenceDate)", user1: user1.id , user2: user2.id, user1Name: user1.name, user2Name: user2.name) { (status) in
+//                completion(status)
+//        }
 
     }
    

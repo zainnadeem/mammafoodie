@@ -13,6 +13,7 @@ protocol OtherUsersProfileViewControllerOutput {
     //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
     func toggleFollow(userID:String, shouldFollow:Bool)
+    func deallocDatabaseObserver()
 }
 
 enum ProfileType{
@@ -29,7 +30,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     private var profileType: ProfileType = .ownProfile // .othersProfile
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
-    @IBOutlet weak var btnSettings: UIBarButtonItem!
+//    @IBOutlet weak var btnSettings: UIBarButtonItem!
     @IBOutlet weak var collectionView:UICollectionView!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
@@ -75,6 +76,12 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.loadProfile()
+        self.collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.output.deallocDatabaseObserver()
     }
     
     //MARK: - Input

@@ -4,7 +4,7 @@ protocol OtherUsersProfileInteractorInput {
     func setUpDishCollectionView(_ collectionView:UICollectionView, _ profileType:ProfileType)
     //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
-    
+    func deallocDatabaseObserver()
     func toggleFollow(userID:String, shouldFollow:Bool)
     
 }
@@ -42,6 +42,10 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
     }
     
+    func deallocDatabaseObserver() {
+        self.worker.observer = nil
+    }
+    
     func loadUserProfileData(userID:String) {
         self.showActivityIndicator()
         worker.getUserDataWith(userID: userID) { (user) in
@@ -50,6 +54,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
                 self.dishCollectionViewAdapter.userData = user
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
                 self.hideActivityIndicator()
+                self.dishCollectionViewAdapter.collectionView?.reloadData()
             }
         }
         

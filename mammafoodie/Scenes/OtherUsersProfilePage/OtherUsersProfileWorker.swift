@@ -12,13 +12,14 @@ class OtherUsersProfileWorker {
     
     var responseCounterSaved = 0
     
+    var observer: DatabaseConnectionObserver?
+    
     // MARK: - Business Logic
     
     func getUserDataWith(userID:String, completion: @escaping (MFUser?)->Void){
-        DatabaseGateway.sharedInstance.getUserWith(userID: userID) { (user) in
+        self.observer = DatabaseGateway.sharedInstance.getUserWith(userID: userID, frequency: .realtime) { (user) in
             completion(user)
         }
-        
     }
     
     func getDishWith(dishID:String, completion: @escaping (MFDish?)->Void) {

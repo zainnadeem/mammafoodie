@@ -60,8 +60,9 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         
         DatabaseGateway.sharedInstance.getUserWith(userID: activityData.actionUser.id) { (user) in
             guard let user = user else {return}
-            let picURL = user.picture!
-            self.profilePicImageView.sd_setImage(with: URL(string: picURL)!)
+            if let picture = user.picture {
+                self.profilePicImageView.sd_setImage(with: picture)
+            }
         }
         
 //        self.profilePicImageView.image = UIImage(named: activityData.actionUserID.picture!)!
