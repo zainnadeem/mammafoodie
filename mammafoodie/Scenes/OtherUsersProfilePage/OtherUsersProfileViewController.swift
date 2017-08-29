@@ -57,13 +57,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         } else {
             self.profileType = .ownProfile
         }
-        
-        self.output.setUpDishCollectionView(self.collectionView, self.profileType)
         if self.profileType == .ownProfile {
             if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 self.userID = user.id
             } else {
-                self.navigationController?.dismiss(animated: true, completion: { 
+                self.navigationController?.dismiss(animated: true, completion: {
                     
                 })
             }
@@ -71,6 +69,16 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             self.navigationItem.rightBarButtonItem = settingsBtn
         }
         
+        self.output.setUpDishCollectionView(self.collectionView, self.profileType)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadProfile()
+    }
+    
+    //MARK: - Input
+    func loadProfile() {
         if let user = self.userID {
             self.output.loadUserProfileData(userID: user)
         } else {
@@ -78,8 +86,6 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             })
         }
     }
-    
-    //MARK: - Input
     
     func openDishPageWith(dishID:String) {
         
@@ -119,8 +125,6 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         //        vc.userList = userList
         
         vc.userID = self.userID!
-        
-        
         self.present(followerNav, animated: true, completion: nil)
         
     }

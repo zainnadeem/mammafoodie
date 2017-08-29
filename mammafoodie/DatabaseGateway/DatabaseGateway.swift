@@ -255,16 +255,14 @@ extension DatabaseGateway {
         }
     }
     
-    func createConversation(createdAt:String, user1:String, user2:String, user1Name:String, user2Name:String, _ completion: @escaping ((_ status:Bool)->Void)){
+    func createConversation(user1: MFUser, user2: MFUser, _ completion: @escaping ((Bool)->Void)) {
         let newConversationID = FirebaseReference.conversations.generateAutoID()
-        let metaData = ["id": newConversationID,"createdAt":createdAt, "user1":user1, "user2":user2, "user1Name":user1Name, "user2Name":user2Name]
+        let metaData: [String: Any] = ["id": newConversationID,"createdAt": Date().timeIntervalSinceReferenceDate, "user1": user1.id, "user2": user2.id, "user1Name": user1.name, "user2Name": user2.name]
         let childUpdates = [
             "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
             "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
             "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
-            // "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":["user2":user2,"conversationID":newConversationID]
             ] as [AnyHashable : Any]
-        //        print(childUpdates)
         
         let databaseRef = Database.database().reference()
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
@@ -1004,7 +1002,7 @@ extension DatabaseGateway {
     
     
     func save(image : UIImage, at path : String, completion : @escaping (URL?, Error?) -> Void) {
-        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+        if let imageData = UIImageJPEGRepresentation(image, 0.8) {
             self.save(data: imageData, at: path, completion: completion)
         } else {
             completion(nil, NSError.init(domain: "Image is invalid", code: 401, userInfo: nil))

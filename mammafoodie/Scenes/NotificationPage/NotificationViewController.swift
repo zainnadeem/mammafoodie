@@ -13,18 +13,15 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var notificationTableView: UITableView!
     
     let reuseIdentifier = "NotificationCell"
-    
     var userID: String!
-    
     var notifications = [MFNotification]() {
-        didSet{
+        didSet {
             self.notificationTableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.notificationTableView.delegate = self
         self.notificationTableView.dataSource = self
@@ -33,15 +30,13 @@ class NotificationViewController: UIViewController {
         
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
-            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:userID) { (nots) in
+            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:"fYK04phVGPRpszYixlO2ort6gyF3") { (nots) in
                 DispatchQueue.main.async {
                     self.notifications = nots
                 }
             }
         } else {
-            self.navigationController?.dismiss(animated: true, completion: {
-                
-            })
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -69,6 +64,10 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.00001
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0001
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
