@@ -192,6 +192,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     }
     
     func openDishDetails(_ dish: MFDish) {
+        if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+            dish.accessMode = .owner
+        } else {
+            dish.accessMode = .viewer
+        }
         if dish.mediaType == .liveVideo &&
             dish.endTimestamp == nil {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
