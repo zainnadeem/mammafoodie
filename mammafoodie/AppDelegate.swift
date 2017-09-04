@@ -220,7 +220,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        
+        if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
+            if let liveVideoVC: LiveVideoViewController = navController.topViewController as? LiveVideoViewController {
+                if liveVideoVC.liveVideo.accessMode == MFDishMediaAccessMode.owner {
+                    liveVideoVC.liveVideo.endTimestamp = Date()
+                    let url = URL(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/stopLiveVideo?dishId=\(liveVideoVC.liveVideo.id)")!
+                    do {
+                        let _ = try Data(contentsOf: url, options: Data.ReadingOptions.alwaysMapped)
+                        print("App closed and live video ended")
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
     }
     
     func resizeImage(image: UIImage, imageName: String) {

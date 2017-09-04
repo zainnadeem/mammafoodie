@@ -456,7 +456,11 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     func openDishDetails(_ dish: MFDish) {
         self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
-//        dish.accessMode = .owner
+        if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+            dish.accessMode = .owner
+        } else {
+            dish.accessMode = .viewer
+        }
         if dish.mediaType == .liveVideo &&
             dish.endTimestamp == nil {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)

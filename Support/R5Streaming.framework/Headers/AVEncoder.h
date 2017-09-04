@@ -14,8 +14,6 @@
 #import "global.h"
 
 
-
-
 typedef int (^encoder_handler_t)(NSArray* data, double pts);
 typedef int (^param_handler_t)(NSData* params);
 

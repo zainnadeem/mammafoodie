@@ -4,7 +4,7 @@ protocol GoCookPresenterInput {
     func prepareOptions()
     func selectOption(option : MFDishMediaType)
     func showStep1()
-    func showStep2()
+    func showStep2(_ animated: Bool)
 }
 
 protocol GoCookPresenterOutput: class {
@@ -138,18 +138,18 @@ class GoCookPresenter: GoCookPresenterInput {
         self.viewController?.btnNext.clipsToBounds = true
     }
     
-    func showStep2() {
+    func showStep2(_ animated: Bool) {
         if self.viewController?.selectedOption != MFDishMediaType.unknown {
             self.viewController?.btnStep2.isSelected = true
             self.viewController?.btnStep1.isSelected = false
-            self.moveStep2(true)
+            self.moveStep2(true, animated: false)
         }
     }
     
     func showStep1() {
         self.viewController?.btnStep2.isSelected = false
         self.viewController?.btnStep1.isSelected = true
-        self.moveStep2(false)
+        self.moveStep2(false, animated: true)
     }
     
     func start(_ meidaOption : MFDishMediaType) {
@@ -161,16 +161,16 @@ class GoCookPresenter: GoCookPresenterInput {
     
     
     //MARK: - Private Methods
-    private func moveStep2(_ move : Bool) {
+    private func moveStep2(_ move : Bool, animated: Bool) {
         var distance : CGFloat = 0
         if move {
             if let width = self.viewController?.viewStep1.frame.size.width {
                 distance = width * -1
             }
         }
-        self.animate {
+        UIView.animate(withDuration: animated ? 0.27 : 0, animations: {
             self.viewController?.conLeadingViewStep1.constant = distance
             self.viewController?.view.layoutIfNeeded()
-        }
+        }, completion: nil)
     }
 }

@@ -100,7 +100,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-//                self.output!.start(self.liveVideo)
+                self.output!.start(self.liveVideo)
             #endif
         }
         
@@ -150,11 +150,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
+                    
+                    if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                        dish.accessMode = MFDishMediaAccessMode.owner
+                    } else {
+                        dish.accessMode = MFDishMediaAccessMode.viewer
+                    }
+                    
                     self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
                     self.liveVideo = dish
                     self.lblDishName.text = dish.name
                     self.showUserInfo()
-                    
                     
                     if let location = dish.location {
                         if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
@@ -261,14 +267,6 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.output != nil {
-            #if (arch(i386) || arch(x86_64)) && os(iOS)
-            #else
-                self.output!.stop(self.liveVideo)
-            #endif
-        }
-        self.countObserver?.stop()
-        self.countObserver = nil
     }
     
     // MARK: - Event handling
@@ -285,7 +283,16 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.output?.stop(self.liveVideo)
+        
+        if self.output != nil {
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.stop(self.liveVideo)
+            #endif
+        }
+        self.countObserver?.stop()
+        self.countObserver = nil
+        
         if self.presentingViewController != nil ||
             self.navigationController?.presentingViewController != nil {
             self.dismiss(animated: true, completion: nil)

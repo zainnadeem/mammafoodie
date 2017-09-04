@@ -175,6 +175,7 @@ extension DatabaseGateway {
     func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
+            print("Live stream ended in database")
             completion()
         }
     }

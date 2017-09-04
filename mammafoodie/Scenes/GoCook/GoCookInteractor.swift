@@ -4,14 +4,14 @@ protocol GoCookInteractorInput {
     func prepareOptions()
     func selectOption(option : MFDishMediaType)
     func showStep1()
-    func showStep2()
+    func showStep2(_ animated: Bool)
 }
 
 protocol GoCookInteractorOutput {
     func prepareOptions()
     func selectOption(option : MFDishMediaType)
     func showStep1()
-    func showStep2()
+    func showStep2(_ animated: Bool)
 }
 
 class GoCookInteractor: GoCookInteractorInput {
@@ -32,8 +32,8 @@ class GoCookInteractor: GoCookInteractorInput {
         self.output.showStep1()
     }
     
-    func showStep2() {
-        self.output.showStep2()
+    func showStep2(_ animated: Bool) {
+        self.output.showStep2(animated)
     }
     
 }

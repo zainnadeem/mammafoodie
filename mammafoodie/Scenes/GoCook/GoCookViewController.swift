@@ -10,7 +10,7 @@ protocol GoCookViewControllerOutput {
     func prepareOptions()
     func selectOption(option : MFDishMediaType)
     func showStep1()
-    func showStep2()
+    func showStep2(_ animated: Bool)
 }
 
 typealias GoCookCompletion = (MFDish, UIImage?, URL?) -> Void
@@ -56,7 +56,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     @IBOutlet weak var viewStep1: UIView!
     @IBOutlet weak var conLeadingViewStep1: NSLayoutConstraint!
-    @IBOutlet weak var viewStep2: UIView!
+//    @IBOutlet weak var viewStep2: UIView!
     
     // MARK: - Object lifecycle
     
@@ -80,12 +80,20 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
         }
         self.output.prepareOptions()
+        self.viewStep1.isHidden = true
+//        self.viewStep2.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tmp = self.selectedOption
         self.selectedOption = tmp
+        if self.selectedOption != .unknown {
+            self.step2VC.clearData()
+            self.output.showStep2(false)
+        }
+        self.viewStep1.isHidden = false
+//        self.viewStep2.isHidden = false
     }
     
     // MARK: - Event handling
@@ -110,8 +118,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     @IBAction func onNext(_ sender: UIButton) {
+        self.nextStep()
+    }
+    
+    private func nextStep() {
         self.step2VC.clearData()
-        self.output.showStep2()
+        self.output.showStep2(true)
     }
     
     
