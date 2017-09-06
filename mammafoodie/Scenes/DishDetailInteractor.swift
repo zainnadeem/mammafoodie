@@ -74,7 +74,7 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     func checkLikeStatus(userId: String, dishId: String) {
         likeStatusWorker = CheckLikeStatusWorker()
         likeStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            let response = DishDetail.Like.Response(status: status)
+            let response = DishDetail.Like.Response(status: status ?? false)
             self.output.presentLikeStatus(response)
         }
     }
@@ -84,7 +84,7 @@ class DishDetailInteractor: DishDetailInteractorInput, HUDRenderer {
     func checkFavoritesStatus(userId: String, dishId: String) {
         favoriteStatusWorker = CheckFavoriteStatusWorker()
         favoriteStatusWorker.checkStatus(userId: userId, dishId: dishId) { (status) in
-            let response = DishDetail.Favorite.Response(status: status)
+            let response = DishDetail.Favorite.Response(status: status ?? false)
             self.output.presentFavoriteStatus(response)
         }
         

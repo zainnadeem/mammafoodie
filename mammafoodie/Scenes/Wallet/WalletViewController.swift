@@ -28,13 +28,13 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
-    
+        //        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
+        //        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
+        
         self.viewHeaderWrapper.layer.cornerRadius = 5.0
         self.viewHeaderWrapper.clipsToBounds = true
         self.tblTransactions.rowHeight = 64
-        self.tblTransactions.register(UINib.init(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
+        self.tblTransactions.register(UINib(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
         self.setWalletAmount(0)
         self.btnAddToWallet.isHidden = true
         self.tblTransactions.reloadData()
@@ -63,11 +63,11 @@ class WalletViewController: UIViewController {
      */
     
     func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
-        let formatter = NumberFormatter.init()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.currency
+        formatter.locale = Locale.current
         self.lblWalletBalance.text = formatter.string(from: amount as NSNumber)
-        self.lblPendingBalance.text = "Pending : \(formatter.string(from: amount as NSNumber) ?? "$0")"
+        self.lblPendingBalance.text = "Pending : \(formatter.string(from: pending as NSNumber) ?? "$0")"
     }
     
     func getCurrentBalance() {
@@ -90,12 +90,10 @@ class WalletViewController: UIViewController {
                             let params : Parameters = ["accountId" : accountID]
                             Alamofire.request(url, method: .get, parameters: params).responseJSON(completionHandler: { (response) in
                                 if let jsonResponse = response.result.value as? [String : Any] {
-                                    if let available = jsonResponse["available"] as? Double {
-                                        self.setWalletAmount(available, (jsonResponse["pending"] as? Double) ?? 0)
-                                    }
-                                    print(jsonResponse)
+                                    self.setWalletAmount((jsonResponse["available"] as? Double) ?? 0, (jsonResponse["pending"] as? Double) ?? 0)
+                                    print("Balance: \(jsonResponse)")
                                 } else {
-                                    print(response)
+                                    print("Balance \(response)")
                                 }
                             })
                         }
@@ -120,11 +118,11 @@ class WalletViewController: UIViewController {
                     } else {
                         DispatchQueue.main.async {
                             StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
-//                                DispatchQueue.main.async {
-//                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-//                                        
-//                                    }
-//                                }
+                                //                                DispatchQueue.main.async {
+                                //                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
+                                //
+                                //                                    }
+                                //                                }
                             }
                         }
                     }

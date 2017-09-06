@@ -64,6 +64,9 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "BackBtn"), style: .plain, target: self, action: #selector(backButtonTapped(_:)))
+        self.navigationItem.leftBarButtonItem = backButton
+        
         //        if self.dish == nil {
         //            self.navigationController?.popViewController(animated: true)
         //            return
@@ -95,8 +98,8 @@ class PaymentViewController: UIViewController {
         
         self.addressView.isHidden = true
         self.btnConfirm.isHidden = true
-        self.paymentCollectionView.register(UINib.init(nibName: "SavedCardClnCell", bundle: nil), forCellWithReuseIdentifier: "SavedCardClnCell")
-        self.paymentCollectionView.register(UINib.init(nibName: "AddCardClnCell", bundle: nil), forCellWithReuseIdentifier: "AddCardClnCell")
+        self.paymentCollectionView.register(UINib(nibName: "SavedCardClnCell", bundle: nil), forCellWithReuseIdentifier: "SavedCardClnCell")
+        self.paymentCollectionView.register(UINib(nibName: "AddCardClnCell", bundle: nil), forCellWithReuseIdentifier: "AddCardClnCell")
         
         self.btnAddCard.layer.cornerRadius = 5.0
         self.btnAddCard.clipsToBounds = true
@@ -110,6 +113,10 @@ class PaymentViewController: UIViewController {
         //        self.updateUI()
         
         self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone.phone ?? ""
+    }
+    
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func updateDeliveryCharge() {
@@ -129,7 +136,7 @@ class PaymentViewController: UIViewController {
             return
         }
         
-        DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
             if let dishUser = dishUser {
                 
                 guard let pickupAddress = dishUser.addressDetails else {
@@ -399,7 +406,7 @@ class PaymentViewController: UIViewController {
             
             let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
             
-            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
+            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)
                     if let error = error {

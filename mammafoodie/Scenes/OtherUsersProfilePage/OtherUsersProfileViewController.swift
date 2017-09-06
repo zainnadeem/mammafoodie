@@ -31,7 +31,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
 //    @IBOutlet weak var btnSettings: UIBarButtonItem!
-    @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
@@ -66,7 +66,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
                     
                 })
             }
-            let settingsBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
+            let settingsBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
             self.navigationItem.rightBarButtonItem = settingsBtn
         }
         

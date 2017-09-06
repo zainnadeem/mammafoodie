@@ -26,9 +26,9 @@ enum FirebaseReference: String {
     case users = "Users"
     case stripeCustomers = "stripe_customers"
     case savedDishes = "SavedDishes"
-    case likedDishes = "LikedDishes"
-    case cookedDishes = "CookedDishes"
-    case boughtDishes = "BoughtDishes"
+    case likedDishes = "UserLikedDishes"
+    case cookedDishes = "UserCookedDishes"
+    case boughtDishes = "UserBoughtDishes"
     case followers = "UserFollowers"
     case following = "UserFollowing"
     case userNewsFeed = "UserNewsFeed"
@@ -1308,12 +1308,15 @@ extension DatabaseGateway {
         })
     }
     
-    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
+    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, dishId: String?, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
         let userId: String = fromUserId
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
         
-        let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId, "paymentPurpose": purpose.rawValue]
+        var charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId, "paymentPurpose": purpose.rawValue]
+        if let dishId = dishId {
+            charge["dishId"] = dishId
+        }
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
             completion(pushId, error)

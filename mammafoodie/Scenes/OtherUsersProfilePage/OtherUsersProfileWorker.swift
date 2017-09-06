@@ -45,7 +45,7 @@ class OtherUsersProfileWorker {
             let group = DispatchGroup()
             for dishID in dishDataDictionary!.keys {
                 group.enter()
-                DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
+                _ = DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, { (dish) in
                     if let dish = dish {
                         dishes.append(dish)
                     }

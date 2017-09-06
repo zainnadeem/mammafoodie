@@ -182,21 +182,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     func displayFavoriteStatus(_ response: DishDetail.Favorite.Response) {
-        
-        if response.status == true {
-            self.btnAddToFavorites.isSelected = true
-        }else{
-            self.btnAddToFavorites.isSelected = false
-        }
+        self.btnAddToFavorites.isSelected = response.status
     }
     
     func displayLikeStatus(_ response: DishDetail.Like.Response){
-        
-        if response.status == true {
-            self.btnLikes.isSelected = true
-        }else{
-            self.btnLikes.isSelected = false
-        }
+        self.btnLikes.isSelected = response.status
     }
     
     func getDistanceAway(){
@@ -281,10 +271,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             vc.dish = self.dishForView?.dish
             self.present(vc, animated: true, completion: nil)
         } else { //Buy now -- Open slots page
-            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
-            self.present(vc, animated: true, completion: nil)
+            self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: nil)
+//            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
+//
+//            self.present(vc, animated: true, completion: nil)
         }
         
+    }
+    
+    func purchase(slots : UInt) {
+        self.performSegue(withIdentifier: "segueShowPaymentViewController", sender: slots)
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {

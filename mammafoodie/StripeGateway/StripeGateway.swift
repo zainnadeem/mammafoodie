@@ -11,7 +11,7 @@ import Stripe
 
 enum PaymentPurpose: String {
     case tip = "tip"
-    case purchase = "purpose"
+    case purchase = "purchase"
 }
 
 class StripeGateway {
@@ -46,8 +46,8 @@ class StripeGateway {
         }
     }
     
-    func createCharge(amount: Double, sourceId: String, fromUserId: String, toUserId: String, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
-        DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId, purpose: purpose) { (chargeId, error) in
+    func createCharge(amount: Double, sourceId: String, fromUserId: String, toUserId: String, dishId: String?, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
+        DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId, dishId: dishId, purpose: purpose) { (chargeId, error) in
             print("Charged")
             if error == nil {
                 completion(chargeId, nil)

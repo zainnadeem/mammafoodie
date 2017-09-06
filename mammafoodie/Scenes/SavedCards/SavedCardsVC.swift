@@ -94,7 +94,7 @@ class SavedCardsVC: UIViewController {
                         print("Purpose not found")
                         return
                     }
-                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, purpose: purpose, completion: { (chargeId, error) in
+                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: nil, purpose: purpose, completion: { (chargeId, error) in
                         if let error = error {
                             self.error?()
                             print(error)
@@ -143,7 +143,7 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let purpose = self.paymentPurpose else {
             return
         }
-        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, purpose: purpose, completion: { (chargeId, error) in
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: nil, purpose: purpose, completion: { (chargeId, error) in
             if let error = error {
                 self.error?()
                 print(error)

@@ -49,9 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         if let userId = currentUser?.uid {
             if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
                 let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
+                welcomeVC.collectionViewImages.isHidden = true
+                welcomeVC.viewContainer.isHidden = true
                 _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
                     DispatchQueue.main.async {
                         self.currentUser = loggedInUser
+                        welcomeVC.collectionViewImages.isHidden = false
+                        welcomeVC.viewContainer.isHidden = false
                         hud.hide(animated: true)
                         if self.currentUser != nil {
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -69,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             }
         }
         
-//        self.saveDishes()
+        //        self.saveDishes()
         
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()

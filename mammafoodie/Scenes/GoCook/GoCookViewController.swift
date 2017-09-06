@@ -58,6 +58,8 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     @IBOutlet weak var conLeadingViewStep1: NSLayoutConstraint!
 //    @IBOutlet weak var viewStep2: UIView!
     
+    var step2Shown: Bool = false
+    
     // MARK: - Object lifecycle
     
     override func awakeFromNib() {
@@ -81,19 +83,18 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         }
         self.output.prepareOptions()
         self.viewStep1.isHidden = true
-//        self.viewStep2.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tmp = self.selectedOption
         self.selectedOption = tmp
-        if self.selectedOption != .unknown {
+        if self.selectedOption != .unknown && !self.step2Shown {
+            self.step2Shown = true
             self.step2VC.clearData()
             self.output.showStep2(false)
         }
         self.viewStep1.isHidden = false
-//        self.viewStep2.isHidden = false
     }
     
     // MARK: - Event handling
