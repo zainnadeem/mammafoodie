@@ -19,7 +19,7 @@ struct DishDetail {
         }
     }
     
-    struct Favorite {
+    struct Favourite {
         struct Request {
         }
         struct Response {

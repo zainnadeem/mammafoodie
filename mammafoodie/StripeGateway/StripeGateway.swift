@@ -9,11 +9,6 @@
 import Foundation
 import Stripe
 
-enum PaymentPurpose: String {
-    case tip = "tip"
-    case purchase = "purchase"
-}
-
 class StripeGateway {
     
     static let shared: StripeGateway = StripeGateway()
@@ -46,8 +41,8 @@ class StripeGateway {
         }
     }
     
-    func createCharge(amount: Double, sourceId: String, fromUserId: String, toUserId: String, dishId: String?, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
-        DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId, dishId: dishId, purpose: purpose) { (chargeId, error) in
+    func createCharge(amount: Double, sourceId: String, fromUserId: String, toUserId: String, dishId: String?, dishName: String?, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
+        DatabaseGateway.sharedInstance.createCharge(amount, source: sourceId, fromUserId: fromUserId, toUserId: toUserId, dishId: dishId, dishName: dishName, purpose: purpose) { (chargeId, error) in
             print("Charged")
             if error == nil {
                 completion(chargeId, nil)

@@ -144,7 +144,7 @@ class MFModelsToFirebaseDictionaryConverter {
         //            //                "userActivity"      : user.userActivity as AnyObject,
         //            //                "cookedDishes"      : user.cookedDishes as AnyObject,
         //            //                "boughtDishes"      : user.boughtDishes as AnyObject,
-        //            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+        //            //                "favouriteDishes"   : user.favouriteDishes as AnyObject,
         //            //                "likedDishes"       : user.likedDishes as AnyObject,
         //            //                "followers"         : user.followers as AnyObject,
         //            //                "following"         : user.following as AnyObject,

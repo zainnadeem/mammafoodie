@@ -133,7 +133,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             return
         }
         
-        SavedCardsVC.presentSavedCards(on: self, amount : amount, to: self.liveVideo.user.id, from: current.id, purpose: PaymentPurpose.tip, success: {
+        SavedCardsVC.presentSavedCards(on: self, amount : amount, to: self.liveVideo.user.id, from: current.id, purpose: PaymentPurpose.tip, dishId: self.liveVideo.id, dishName: self.liveVideo.name, success: {
             print("Success")
         }, error: {
             print("Error")

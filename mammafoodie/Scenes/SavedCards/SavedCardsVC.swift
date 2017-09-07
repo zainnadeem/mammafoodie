@@ -21,6 +21,9 @@ class SavedCardsVC: UIViewController {
     
     var amount : Double = 0
     
+    var dishId: String?
+    var dishName: String?
+    
     @IBOutlet weak var clnCards: UICollectionView!
     @IBOutlet weak var conTopViewAddNewCard: NSLayoutConstraint!
     @IBOutlet weak var cardTextField: STPPaymentCardTextField!
@@ -51,7 +54,7 @@ class SavedCardsVC: UIViewController {
         })
     }
     
-    class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String, purpose: PaymentPurpose, success: @escaping (()->Void), error: @escaping (()->Void)) {
+    class func presentSavedCards(on vc : UIViewController, amount : Double, to : String, from : String, purpose: PaymentPurpose, dishId: String, dishName: String, success: @escaping (()->Void), error: @escaping (()->Void)) {
         let story: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         if let navSavedCards: MFNavigationController = story.instantiateViewController(withIdentifier: "navSavedCards") as? MFNavigationController {
             if let savedCards: SavedCardsVC = navSavedCards.viewControllers.first as? SavedCardsVC {
@@ -61,6 +64,8 @@ class SavedCardsVC: UIViewController {
                 savedCards.error = error
                 savedCards.toUser = to
                 savedCards.currentLoggedInUser = from
+                savedCards.dishId = dishId
+                savedCards.dishName = dishName
                 savedCards.modalPresentationStyle = .overFullScreen
                 savedCards.modalPresentationCapturesStatusBarAppearance = true
                 savedCards.modalTransitionStyle = .crossDissolve
@@ -94,7 +99,7 @@ class SavedCardsVC: UIViewController {
                         print("Purpose not found")
                         return
                     }
-                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: nil, purpose: purpose, completion: { (chargeId, error) in
+                    StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
                         if let error = error {
                             self.error?()
                             print(error)
@@ -143,7 +148,7 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let purpose = self.paymentPurpose else {
             return
         }
-        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: nil, purpose: purpose, completion: { (chargeId, error) in
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
             if let error = error {
                 self.error?()
                 print(error)

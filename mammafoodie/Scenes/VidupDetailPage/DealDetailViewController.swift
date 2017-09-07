@@ -51,6 +51,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     var shouldShowSlotSelection = false
     
     var timerRemainingTime: Timer?
+    var observer: DatabaseConnectionObserver?
     
     // MARK: - Object lifecycle
     
@@ -229,13 +230,26 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     }
     
     func load(new vidup: MFDish) {
+        self.displayDishInfo(for: vidup)
+        self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: vidup.id, frequency: .realtime, { (loadedDish) in
+            if let loadedDish = loadedDish {
+                self.displayDishInfo(for: loadedDish)
+            }
+        })
+    }
+    
+    deinit {
+        self.observer = nil
+    }
+    
+    func displayDishInfo(for vidup: MFDish) {
         self.userId = vidup.user.id
         self.DishId = vidup.id
         self.dish = vidup
         
         self.displayRemainingTimeForDeal()
         
-        DatabaseGateway.sharedInstance.getUserWith(userID: self.userId) { (dishUser) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: self.userId) { (dishUser) in
             DispatchQueue.main.async {
                 if let dishUser = dishUser {
                     self.DisplayUserInfo(UserInfo: dishUser)

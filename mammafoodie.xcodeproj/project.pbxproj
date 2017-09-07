@@ -57,6 +57,7 @@
 		11ECCF0D1F21C6DF00ADF481 /* ChatWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ECCF0C1F21C6DF00ADF481 /* ChatWorker.swift */; };
 		11F5C65A1F18F97F00F7F45C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5C6591F18F97F00F7F45C /* NotificationViewController.swift */; };
 		1F627773E6040FB7977171E0 /* Pods_mammafoodie_mammafoodieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */; };
+		2C0068A21F61430900DA3728 /* MFTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0068A11F61430900DA3728 /* MFTransaction.swift */; };
 		2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D8E301F281C4300842ECD /* SavedCardsVC.swift */; };
 		2C0D8E351F281C5B00842ECD /* SavedCardClnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D8E331F281C5B00842ECD /* SavedCardClnCell.swift */; };
 		2C0D8E361F281C5B00842ECD /* SavedCardClnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0D8E341F281C5B00842ECD /* SavedCardClnCell.xib */; };
@@ -641,6 +642,7 @@
 		17B2AC3540E7B1D3DC84F497 /* Pods-mammafoodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.release.xcconfig"; sourceTree = "<group>"; };
 		18DBCC50E7C94C5D9FACFC74 /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		2BA21F5FE8A35CA4523550CD /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C0068A11F61430900DA3728 /* MFTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFTransaction.swift; sourceTree = "<group>"; };
 		2C0D8E301F281C4300842ECD /* SavedCardsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsVC.swift; sourceTree = "<group>"; };
 		2C0D8E331F281C5B00842ECD /* SavedCardClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardClnCell.swift; sourceTree = "<group>"; };
 		2C0D8E341F281C5B00842ECD /* SavedCardClnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedCardClnCell.xib; sourceTree = "<group>"; };
@@ -1545,6 +1547,7 @@
 				2CA2B4A11EF542D30076598C /* MFPaymentDetails.swift */,
 				2CA2B4A21EF542D30076598C /* MFUser.swift */,
 				1194D7021F22728400EA494C /* MFUserAddress.swift */,
+				2C0068A11F61430900DA3728 /* MFTransaction.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2937,6 +2940,7 @@
 				2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */,
 				57DC9DDB1F5071BF004E6100 /* FollowersListViewController.swift in Sources */,
 				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
+				2C0068A21F61430900DA3728 /* MFTransaction.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
 				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,

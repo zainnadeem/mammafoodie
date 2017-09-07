@@ -3,7 +3,7 @@ import UIKit
 protocol DishDetailViewControllerInput {
     func displayDish(_ response: DishDetail.Dish.Response)
     func displayLikeStatus(_ response: DishDetail.Like.Response)
-    func displayFavoriteStatus(_ response: DishDetail.Favorite.Response)
+    func displayFavouriteStatus(_ response: DishDetail.Favourite.Response)
     
 }
 
@@ -13,8 +13,8 @@ protocol DishDetailViewControllerOutput {
     func likeButtonTapped(userId: String, dishId: String, selected: Bool)
     func checkLikeStatus(userId: String, dishId: String)
     
-    func checkFavoritesStatus(userId: String, dishId: String)
-    func favoriteButtonTapped(userId: String, dishId: String, selected: Bool)
+    func checkFavouritesStatus(userId: String, dishId: String)
+    func favouriteButtonTapped(userId: String, dishId: String, selected: Bool)
     func stopObservingDish()
     func updateDishViewersCount(dishID:String, opened:Bool)
 }
@@ -42,7 +42,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     @IBOutlet weak var btnLikes: UIButton!
     @IBOutlet weak var lblNumberOfLikes: UILabel!
     
-    @IBOutlet weak var btnAddToFavorites: UIButton!
+    @IBOutlet weak var btnAddToFavourites: UIButton!
     
     @IBOutlet weak var lblDistanceAway: UILabel!
     @IBOutlet weak var lblNumberOfTimesOrdered: UILabel!
@@ -102,7 +102,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
             
             self.output.checkLikeStatus(userId: currentUser.id, dishId: dishID!)
-            self.output.checkFavoritesStatus(userId: currentUser.id , dishId: dishID!)
+            self.output.checkFavouritesStatus(userId: currentUser.id , dishId: dishID!)
         }
         
     }
@@ -177,12 +177,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         }
         
         self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
-        self.output.checkFavoritesStatus(userId: data.user.id, dishId: data.id)
+        self.output.checkFavouritesStatus(userId: data.user.id, dishId: data.id)
         
     }
     
-    func displayFavoriteStatus(_ response: DishDetail.Favorite.Response) {
-        self.btnAddToFavorites.isSelected = response.status
+    func displayFavouriteStatus(_ response: DishDetail.Favourite.Response) {
+        self.btnAddToFavourites.isSelected = response.status
     }
     
     func displayLikeStatus(_ response: DishDetail.Like.Response){
@@ -239,13 +239,13 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         }
     }
     
-    @IBAction func favoriteButtonTapped(_ sender: Any) {
-        //add to users favorites
+    @IBAction func favouriteButtonTapped(_ sender: Any) {
+        //add to users favourites
         
-        self.btnAddToFavorites.isSelected = !self.btnAddToFavorites.isSelected
+        self.btnAddToFavourites.isSelected = !self.btnAddToFavourites.isSelected
         
         if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
-            self.output.favoriteButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnAddToFavorites.isSelected)
+            self.output.favouriteButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnAddToFavourites.isSelected)
         }
         
     }

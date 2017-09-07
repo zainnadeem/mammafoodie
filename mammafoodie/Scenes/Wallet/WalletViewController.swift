@@ -22,7 +22,7 @@ class WalletViewController: UIViewController {
     
     @IBOutlet weak var tblTransactions: UITableView!
     
-    var transactions : [String] = [String]()
+    var transactions: [MFTransaction] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class WalletViewController: UIViewController {
         
         self.viewHeaderWrapper.layer.cornerRadius = 5.0
         self.viewHeaderWrapper.clipsToBounds = true
-        self.tblTransactions.rowHeight = 64
+        self.tblTransactions.rowHeight = UITableViewAutomaticDimension
         self.tblTransactions.register(UINib(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
         self.setWalletAmount(0)
         self.btnAddToWallet.isHidden = true
@@ -76,9 +76,10 @@ class WalletViewController: UIViewController {
                 if let account = snapshot.value as? [String : Any] {
                     if let charges = account["charges"] as? [String : [String : Any]] {
                         for (_, value) in charges {
-                            if let amount = value["amount"] as? Double {
-                                self.transactions.append("\(amount)")
-                            }
+                            self.transactions.append(self.transaction(from: value))
+//                            if let amount = value["amount"] as? Double {
+//                                self.transactions.append("\(amount)")
+//                            }
                         }
                         DispatchQueue.main.async {
                             self.tblTransactions.reloadData()
@@ -101,6 +102,27 @@ class WalletViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func transaction(from raw: [String: Any]) -> MFTransaction {
+        let transaction: MFTransaction = MFTransaction()
+        
+        transaction.amount = raw["amount"] as? Double ?? 0
+        transaction.currency = "$"
+        
+        let paymentPurpose: PaymentPurpose = PaymentPurpose(rawValue: raw["paymentPurpose"] as? String ?? "unknown") ?? PaymentPurpose.unknown
+        transaction.purpose = paymentPurpose
+        
+        transaction.fromUserId = raw["fromUserId"] as? String ?? ""
+        transaction.fromUsername = raw["fromUsername"] as? String ?? ""
+        
+        transaction.toUserId = raw["toUserId"] as? String ?? ""
+        transaction.toUsername = raw["toUsername"] as? String ?? ""
+        
+        transaction.dishId = raw["dishId"] as? String
+        transaction.dishName = raw["dishName"] as? String
+        
+        return transaction
     }
     
     // MARK: - Actions
@@ -140,8 +162,7 @@ extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : WalletTransactionsTblCell = tableView.dequeueReusableCell(withIdentifier: "WalletTransactionsTblCell", for: indexPath) as! WalletTransactionsTblCell
-        cell.lblAction.text = "Amount : \(self.transactions[indexPath.row])"
-        
+        cell.set(transaction: self.transactions[indexPath.item])
         return cell
     }
     

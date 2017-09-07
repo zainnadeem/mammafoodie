@@ -3,14 +3,14 @@ import UIKit
 protocol DishDetailPresenterInput {
     func presentDish(_ response: DishDetail.Dish.Response)
     func presentLikeStatus(_ response: DishDetail.Like.Response)
-    func presentFavoriteStatus(_ response: DishDetail.Favorite.Response)
+    func presentFavouriteStatus(_ response: DishDetail.Favourite.Response)
     
 }
 
 protocol DishDetailPresenterOutput: class {
     func displayDish(_ response: DishDetail.Dish.Response)
     func displayLikeStatus(_ response: DishDetail.Like.Response)
-    func displayFavoriteStatus(_ response: DishDetail.Favorite.Response)
+    func displayFavouriteStatus(_ response: DishDetail.Favourite.Response)
     
 }
 
@@ -25,8 +25,8 @@ class DishDetailPresenter: DishDetailPresenterInput {
         self.output?.displayLikeStatus(response)
     }
     
-    func presentFavoriteStatus(_ response: DishDetail.Favorite.Response) {
-    self.output?.displayFavoriteStatus(response)
+    func presentFavouriteStatus(_ response: DishDetail.Favourite.Response) {
+    self.output?.displayFavouriteStatus(response)
     }
     // MARK: - Presentation logic
     

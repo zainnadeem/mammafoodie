@@ -45,7 +45,7 @@ class MFUser {
     //    var userActivity: [MFNewsFeed:Date] = [:]
     //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
     //    var boughtDishes: [MFMedia:Date] = [:] // dishId:Date
-    //    var favoriteDishes: [MFMedia:Date] = [:] // dishId:Date
+    //    var favouriteDishes: [MFMedia:Date] = [:] // dishId:Date
     //    var likedDishes: [MFMedia:Date] = [:] // dishId:Date
     //
     //    var followers: [MFUser:Date] = [:] // [userId:Date]
@@ -59,7 +59,7 @@ class MFUser {
     //    var userActivity: [String:Bool] = [:]   //[MFNewsFeed.id : true]
     //    var cookedDishes: [String:Bool] = [:] // dishId:Date
     //    var boughtDishes: [String:Bool] = [:] // dishId:Date
-    //    var favoriteDishes: [String:Bool] = [:] // dishId:Date
+    //    var favouriteDishes: [String:Bool] = [:] // dishId:Date
     //    var likedDishes: [String:Bool] = [:] // dishId:Date
     //
     //    var followers: [String:Bool] = [:] // [userId:Date]
@@ -97,7 +97,7 @@ class MFUser {
         //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
         //        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
         //        self.boughtDishes = Dictionary["boughtDishes"] as? [String:Bool] ?? [:]
-        //        self.favoriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
+        //        self.favouriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
         //        self.likedDishes = Dictionary["likedDished"] as? [String:Bool] ?? [:]
         //        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
         //        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
