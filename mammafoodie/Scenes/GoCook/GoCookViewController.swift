@@ -56,7 +56,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     @IBOutlet weak var viewStep1: UIView!
     @IBOutlet weak var conLeadingViewStep1: NSLayoutConstraint!
-//    @IBOutlet weak var viewStep2: UIView!
+    //    @IBOutlet weak var viewStep2: UIView!
     
     var step2Shown: Bool = false
     
@@ -164,11 +164,15 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
             
         case .vidup:
-            if let video = videoURL {
+            if let video = videoURL,
+                let img = image {
                 DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
-                    DispatchQueue.main.async {
-                        self.saveDish(dish, mediaURL: downloadURL, error: error)
-                    }
+                    DatabaseGateway.sharedInstance.save(image: img, at: dish.getThumbPath(), completion: { (thumbURL, error) in
+                        DispatchQueue.main.async {
+                            dish.coverPicURL = thumbURL
+                            self.saveDish(dish, mediaURL: downloadURL, error: error)
+                        }
+                    })
                 })
             } else {
                 self.hud.hide(animated: true)

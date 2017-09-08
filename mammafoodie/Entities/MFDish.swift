@@ -124,6 +124,7 @@ class MFDish {
         }
         
         self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
+        self.coverPicURL = dishDataDictionary["coverPicURL"] as? URL ?? nil
         
         let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
         self.user = MFUser() ;
@@ -211,6 +212,14 @@ class MFDish {
             }
         }
         return "/dishes/\(urlencodedID!)"
+    }
+    
+    func getThumbPath() -> String {
+        var urlencodedID : String = ""
+        if let idEncoded = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            urlencodedID = "\(idEncoded).jpg"
+        }
+        return "/dishes/thumbs/\(urlencodedID)"
     }
     
     
