@@ -33,7 +33,7 @@ class DishCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setUp(_ dishData:MFDish){
+    func setUp(_ dishData: MFDish){
         
         self.lblDishName.text = dishData.name
         self.lblDishTypeTag.text = dishData.tag
@@ -56,9 +56,12 @@ class DishCollectionViewCell: UICollectionViewCell {
         
         //        self.lblDishTypeTag.text = ""
         self.lblNumberOfViews.text = dishData.numberOfViewers.description
-        if let picURL = dishData.mediaURL {
-            //            print(picURL.absoluteString)
-            self.dishImageView.sd_setImage(with: picURL)
+        var coverImage: URL?
+        if dishData.mediaType == .vidup {
+            coverImage = dishData.coverPicURL
+        } else {
+            coverImage = dishData.mediaURL
         }
+        self.dishImageView.sd_setImage(with: coverImage)
     }
 }

@@ -42,7 +42,6 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var selectedImage : UIImage?
     var selectedVideoPath : URL?
     
-    
     var selectedMediaUploadType : GoCookMediaUploadType = .None {
         didSet {
             self.output.selectMediaUploadType(self.selectedMediaUploadType)
@@ -283,7 +282,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                     self.showAlert("Error!", message: "Image Not Found")
                 } else {
                     //Cancelled
-                    self.selectedMediaUploadType = .None
+                    self.clearPreviews()
                 }
             }
         })
@@ -341,11 +340,11 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     @IBAction func onVideoShoorPreview(_ sender: UIButton) {
         if let videoPath = self.selectedVideoPath {
-            moviePlayer.player = AVPlayer.init(url: videoPath)
-            moviePlayer.player?.play()
-            moviePlayer.allowsPictureInPicturePlayback = false
-            moviePlayer.showsPlaybackControls = true
-            self.present(moviePlayer, animated: true, completion: {
+            self.moviePlayer.player = AVPlayer.init(url: videoPath)
+            self.moviePlayer.player?.play()
+            self.moviePlayer.allowsPictureInPicturePlayback = false
+            self.moviePlayer.showsPlaybackControls = true
+            self.present(self.moviePlayer, animated: true, completion: {
                 
             })
         }
@@ -370,15 +369,16 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
         self.clearPreviews()
     }
     
-    func showPreview(image : UIImage) {
+    func showPreview(image: UIImage) {
         self.btnPicturePreview.isHidden = false
         self.btnClosePicturePreview.isHidden = false
         self.btnPicturePreview.setImage(image, for: .normal)
         self.viewPictureContainer.bringSubview(toFront: self.btnPicturePreview)
     }
     
-    func showPreview(video : URL, for mode : GoCookMediaUploadType) {
+    func showPreview(video: URL, for mode: GoCookMediaUploadType) {
         if let thumb = MediaPicker.createThumbnailOfVideoFromFileURL(video) {
+            self.selectedImage = thumb
             switch mode {
             case .VideoShoot:
                 self.btnVideoShootPreview.setImage(thumb, for: .normal)
@@ -395,7 +395,6 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                 self.btnVideoShootPreview.isHidden = true
                 self.btnCloseVideoShootPreview.isHidden = true
                 self.btnVideoShootPreview.setImage(nil, for: .normal)
-                break
             }
         } else {
             self.clearPreviews()
@@ -403,6 +402,7 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     }
     
     func clearPreviews() {
+        self.selectedImage = nil
         self.selectedMediaUploadType = .None
         self.selectedVideoPath = nil
         self.btnVideoUploadPreview.setImage(nil, for: .normal)

@@ -463,22 +463,17 @@ extension DatabaseGateway {
         
     }
     
-    
-    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
-        
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void) {
         FirebaseReference.cookedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(dishData)
         })
     }
     
-    
-    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes: [String:AnyObject]?)->Void){
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes: [String:AnyObject]?)->Void) {
         FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
@@ -488,9 +483,7 @@ extension DatabaseGateway {
         })
     }
     
-    
-    
-    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
         
         let userProfileData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let _ :String = "\(model.id)"
@@ -502,7 +495,7 @@ extension DatabaseGateway {
     }
     
     
-    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
+    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void) {
         
         FirebaseReference.dishComments.classReference.child(dishID).observeSingleEvent(of: .value, with: {(commentsDataSnapshot) in
             guard let commentsData = commentsDataSnapshot.value as? FirebaseDictionary else {
@@ -525,7 +518,6 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
-    
     
     //    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
     //
@@ -887,6 +879,12 @@ extension DatabaseGateway {
         if let rawDishMediaType = rawDish["mediaType"] as? String {
             if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
                 dish.mediaType = dishMediaType
+            }
+        }
+        
+        if let rawCoverURL: String = rawDish["coverPicURL"] as? String {
+            if let coverURL = URL(string: rawCoverURL) {
+                dish.coverPicURL = coverURL
             }
         }
         

@@ -775,7 +775,7 @@
 		2CE22E8A1F0A421600B6E5B0 /* CommentsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsWorker.swift; sourceTree = "<group>"; };
 		2CE22E8D1F0A46DE00B6E5B0 /* TextViewPlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewPlaceHolder.swift; sourceTree = "<group>"; };
 		2CE479401EF97256003D0F9F /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		2CEEBBF11F141066003DB9AB /* mamma foodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mamma foodie.entitlements"; sourceTree = "<group>"; };
+		2CEEBBF11F141066003DB9AB /* mamma foodie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "mamma foodie.entitlements"; path = "../mammafoodie/mamma foodie.entitlements"; sourceTree = "<group>"; };
 		2CFB9B721EFA3E0000C08EB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CFB9B771EFA475100C08EB3 /* LiveVideoGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoGateway.swift; sourceTree = "<group>"; };
 		2CFB9B781EFA475100C08EB3 /* LiveVideoConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveVideoConfigurator.swift; sourceTree = "<group>"; };
@@ -1440,6 +1440,7 @@
 		2CA886C01EE91CA80012405D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				2CEEBBF11F141066003DB9AB /* mamma foodie.entitlements */,
 				2CD3CA4F1F5D5FA400C38296 /* R5Streaming.framework */,
 				2C6979731F07C95F00787DCC /* GoogleMaps */,
 				113139C01EF7BA1C000050D6 /* Fonts */,
@@ -1777,15 +1778,15 @@
 		572E9A5B1EFAB4AF007DE6D0 /* GoCook */ = {
 			isa = PBXGroup;
 			children = (
-				570ED3EB1F0684F000B41F0E /* ImageEditor */,
-				57DDD0AE1EFC015B00C3BA21 /* GoCookStep2 */,
 				572E9A5C1EFAB4AF007DE6D0 /* GoCookConfigurator.swift */,
 				572E9A5D1EFAB4AF007DE6D0 /* GoCookInteractor.swift */,
 				572E9A691EFAB4AF007DE6D0 /* GoCookModels.swift */,
 				572E9A721EFAB4AF007DE6D0 /* GoCookPresenter.swift */,
 				572E9A731EFAB4AF007DE6D0 /* GoCookRouter.swift */,
+				57DDD0AE1EFC015B00C3BA21 /* GoCookStep2 */,
 				572E9A7C1EFAB4AF007DE6D0 /* GoCookViewController.swift */,
 				572E9A7D1EFAB4AF007DE6D0 /* GoCookWorker.swift */,
+				570ED3EB1F0684F000B41F0E /* ImageEditor */,
 				572E9A7E1EFAB4AF007DE6D0 /* MediaPicker.swift */,
 			);
 			path = GoCook;
@@ -1941,6 +1942,7 @@
 		57DDD0AE1EFC015B00C3BA21 /* GoCookStep2 */ = {
 			isa = PBXGroup;
 			children = (
+				57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */,
 				57DDD0AF1EFC015B00C3BA21 /* GoCookStep2Configurator.swift */,
 				57DDD0B01EFC015B00C3BA21 /* GoCookStep2Interactor.swift */,
 				57DDD0B11EFC015B00C3BA21 /* GoCookStep2Models.swift */,
@@ -1948,7 +1950,6 @@
 				57DDD0B31EFC015B00C3BA21 /* GoCookStep2Router.swift */,
 				57DDD0B41EFC015B00C3BA21 /* GoCookStep2ViewController.swift */,
 				57DDD0B51EFC015B00C3BA21 /* GoCookStep2Worker.swift */,
-				57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */,
 			);
 			path = GoCookStep2;
 			sourceTree = "<group>";
@@ -1999,7 +2000,6 @@
 				2CB8BEA11EF246F800DA78B3 /* Entities */,
 				2CE4793D1EF97256003D0F9F /* Extensions */,
 				113948CA1F05082400F98E74 /* HUDProtocols.swift */,
-				2CEEBBF11F141066003DB9AB /* mamma foodie.entitlements */,
 				2C5E8B001EFD11D8009F24F5 /* MFNavigationController */,
 				2CB528DF1EE9164D00218609 /* Scenes */,
 				2CB8BEA01EF246EA00DA78B3 /* Storyboards */,

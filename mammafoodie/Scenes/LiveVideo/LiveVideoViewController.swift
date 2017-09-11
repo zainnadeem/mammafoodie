@@ -199,7 +199,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.viewComments.dish = self.liveVideo
             self.viewComments.user = user
+            self.viewComments.shouldShowEmoji = true
             self.viewComments.load()
+            
+            self.viewComments.likeButtonTapped = {
+                let btn: UIButton = UIButton()
+                self.btnLikeTapped(btn)
+            }
         }
     }
     

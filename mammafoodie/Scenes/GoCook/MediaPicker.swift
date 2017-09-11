@@ -169,7 +169,6 @@ class MediaPicker: NSObject {
     }
     
     class func createThumbnailOfVideoFromFileURL(_ videoURL: URL) -> UIImage? {
-        
         let asset = AVAsset(url: videoURL)
         let assetImgGenerate = AVAssetImageGenerator(asset: asset)
         assetImgGenerate.appliesPreferredTrackTransform = true

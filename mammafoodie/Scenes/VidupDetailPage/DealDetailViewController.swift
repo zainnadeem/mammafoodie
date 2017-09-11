@@ -21,8 +21,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     var gradientLayerForUserInfo: CAGradientLayer!
     
-    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
-    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
+    //    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    //    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     
     //TODO: - VidUp URL and Expire Time.
     var userId:String = ""
@@ -32,15 +32,13 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     //MARK: - IBOutlet
     
-    @IBOutlet weak var lbl_Comment: UILabel!
-    @IBOutlet weak var lbl_Like: UILabel!
     @IBOutlet weak var lv_Mediaview: UIView!
-    @IBOutlet weak var lv_Comments: UIView!
+    @IBOutlet weak var viewVideo: UIView!
+    @IBOutlet weak var viewComments: CommentsView!
     @IBOutlet weak var lv_ProfileDetails: UIView!
     @IBOutlet weak var lv_slotView: UIView!
     @IBOutlet weak var lbl_Timer: UILabel!
     @IBOutlet weak var mediaplayerbottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lbtn_like: UIButton!
     @IBOutlet weak var lbl_UserName: UILabel!
     @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var dealImageView: UIImageView!
@@ -67,21 +65,19 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        // Adding Tap Gesture for Comments label
-        let commenttap = UITapGestureRecognizer(target: self, action: #selector(commentbtnClicked(_:)))
-        lbl_Comment.addGestureRecognizer(commenttap)
-        lbl_Comment.isUserInteractionEnabled = true
-        
         //add gradient effect to profile view
-        let gradient = CAGradientLayer()
-        gradient.frame = lv_ProfileDetails.bounds
-        gradient.colors = [UIColor.darkGray.cgColor, UIColor.clear.cgColor]
-        self.lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
+        //        let gradient = CAGradientLayer()
+        //        gradient.frame = lv_ProfileDetails.bounds
+        //        gradient.colors = [UIColor.darkGray.cgColor, UIColor.clear.cgColor]
+        //        self.lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
         
-        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
+        //        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         
         if let dish = self.dish {
             self.load(new: dish)
+        } else {
+            self.close(animated: false)
+            self.showAlert("Error", message: "Error downloading the dish. Please try again.")
         }
         
         if let dish = self.dish {
@@ -126,7 +122,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if self.dish?.mediaType == MFDishMediaType.vidup {
-            self.output.resetViewBounds(view: lv_Mediaview)
+            self.output.resetViewBounds(view: self.viewVideo)
         }
     }
     
@@ -138,23 +134,37 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         return UIInterfaceOrientationMask.portrait
     }
     
+    func setupViewComments() {
+        if let user = DatabaseGateway.sharedInstance.getLoggedInUser(),
+            let dish = self.dish {
+            self.viewComments.dish = dish
+            self.viewComments.user = user
+            self.viewComments.shouldShowEmoji = false
+            self.viewComments.load()
+            
+            self.viewComments.likeButtonTapped = {
+                self.likebtnClicked("")
+            }
+        }
+    }
+    
     // MARK: - Event handling
     @IBAction func likebtnClicked(_ sender: Any) {
-        if lbtn_like.isSelected ==  true{
-            lbtn_like.isSelected = false
+        if self.viewComments.btnLike.isSelected ==  true {
+            self.viewComments.btnLike.isSelected = false
             output.dishUnliked(user_id: userId, dish_id: DishId)
         }else{
-            lbtn_like.isSelected = true
+            self.viewComments.btnLike.isSelected = true
             output.dishLiked(user_id: userId, dish_id: DishId)
             animateLike()
         }
     }
     
-    @IBAction func commentbtnClicked(_ sender: Any) {
-        print("Comments Clicked")
+    @IBAction func closebtnClicked(_ sender: Any) {
+        self.close(animated: true)
     }
     
-    @IBAction func closebtnClicked(_ sender: Any) {
+    private func close(animated: Bool) {
         if self.presentingViewController != nil ||
             self.navigationController?.presentingViewController != nil {
             self.dismiss(animated: true, completion: nil)
@@ -165,14 +175,12 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     // MARK: - Display logic
     func HideandUnhideView(){
-        if lv_Comments.isHidden == true {
-            lv_Comments.isHidden = false
-            self.mediaplayerbottomConstraint.constant = self.lv_Comments.frame.height + 1
-            lv_ProfileDetails.isHidden = false
+        if self.viewComments.isHidden == true {
+            self.viewComments.isHidden = false
+            self.lv_ProfileDetails.isHidden = false
         }else{
-            lv_Comments.isHidden = true
-            self.mediaplayerbottomConstraint.constant = 0
-            lv_ProfileDetails.isHidden = true
+            self.viewComments.isHidden = true
+            self.lv_ProfileDetails.isHidden = true
         }
     }
     
@@ -187,11 +195,11 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         lbl_dishName.text = DishInfo.name
         lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
-        lbl_Like.text = "\(Int(DishInfo.likesCount))"
+        self.viewComments.likesCount = Int(DishInfo.likesCount)
     }
     
     func UpdateLikeStatus(Status:Bool) {
-        lbtn_like.isSelected = Status
+        self.viewComments.btnLike.isSelected = Status
     }
     
     func animateLike(){
@@ -232,8 +240,12 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     func load(new vidup: MFDish) {
         self.displayDishInfo(for: vidup)
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: vidup.id, frequency: .realtime, { (loadedDish) in
+            self.setupViewComments()
             if let loadedDish = loadedDish {
                 self.displayDishInfo(for: loadedDish)
+            } else {
+                self.close(animated: true)
+                self.showAlert("Error", message: "Error downloading the dish. Please try again.")
             }
         })
     }
@@ -260,7 +272,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         self.DisplayDishInfo(DishInfo: vidup)
         
         if vidup.mediaType == MFDishMediaType.vidup {
-            self.output.setupMediaPlayer(view: lv_Mediaview,
+            self.output.setupMediaPlayer(view: self.viewVideo,
                                          user_id: userId ,
                                          dish_id: DishId,
                                          dish: self.dish)
