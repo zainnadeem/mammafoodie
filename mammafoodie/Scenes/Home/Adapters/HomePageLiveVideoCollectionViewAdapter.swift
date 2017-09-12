@@ -45,6 +45,9 @@ class HomePageLiveVideoCollectionViewAdapter: HomePageCollectionViewAdapter, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+        self.didSelectViewAll?(theAttributes.frame)
+        return
+        
         if self.isLastItem(indexPath.item) {
             self.didSelectViewAll?(theAttributes.frame)
         } else {

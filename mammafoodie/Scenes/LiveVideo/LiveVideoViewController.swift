@@ -7,14 +7,18 @@ protocol LiveVideoViewControllerInput {
     func showVideoId(_ liveVideo: MFDish)
     func liveVideoClosed()
     func streamUnpublished()
+    func showStreamImage(_ image: UIImage)
 }
 
 protocol LiveVideoViewControllerOutput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
+    func updateStreamImage()
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
+    
+    var timerForThumbnailCapturing: Timer?
     
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
@@ -320,9 +324,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         // align cameraView from the top and bottom
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
-        //        if self.liveVideo.accessMode == .viewer {
-        //            self.viewCamera.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-        //        }
+        if self.liveVideo.accessMode == .owner {
+            self.output?.updateStreamImage()
+            self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+                self.output?.updateStreamImage()
+            })
+        }
     }
     
     func streamUnpublished() {
@@ -375,5 +382,15 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBAction func btnUserTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.liveVideo.user.id)
+    }
+    
+    func showStreamImage(_ image: UIImage) {
+        if let image: UIImage = image.imageRotatedByDegrees(degrees: 90, flip: false) {
+            DatabaseGateway.sharedInstance.upload(image: image, for: self.liveVideo, { (errorMessage) in
+                if let error = errorMessage {
+                    print("Error while uploading live video image: \(error)")
+                }
+            })
+        }
     }
 }

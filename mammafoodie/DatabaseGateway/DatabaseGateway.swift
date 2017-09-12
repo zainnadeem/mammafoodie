@@ -37,6 +37,7 @@ enum FirebaseReference: String {
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
+    case userActivity = "UserActivity"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -494,6 +495,18 @@ extension DatabaseGateway {
         }
     }
     
+    func upload(image: UIImage, for dish: MFDish, _ completion: @escaping ((_ errorMessage: String?)->Void)) {
+        let path = "dishes/\(dish.id).jpg"
+        self.save(image: image, at: path, completion: { (url, error) in
+            if let url = url {
+                let values = [ "coverPicURL": url.absoluteString ]
+                FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(values, withCompletionBlock: { (error, databaseRef) in
+                        print("Done 123")
+                })
+            }
+        })
+    }
+    
     
     func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void) {
         
@@ -698,6 +711,22 @@ extension  DatabaseGateway {
 
 // MARK: - News Feed
 extension DatabaseGateway {
+    
+    func getNewsFeed(by userId: String, _ completion: @escaping ((_ newsFeeds: [MFNewsFeed])->Void)) {
+        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
+                var newsFeedList: [MFNewsFeed] = []
+                for key in rawNewsFeedList.keys {
+                    if let rawNewsFeed: [String:AnyObject] = rawNewsFeedList[key] as? [String:AnyObject] {
+                        newsFeedList.append(self.createNewsFeedModel(from: rawNewsFeed))
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(newsFeedList)
+                }
+            }
+        })
+    }
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in

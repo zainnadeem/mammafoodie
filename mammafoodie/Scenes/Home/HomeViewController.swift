@@ -37,9 +37,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet var viewActivityMenuChooser: UIView!
     @IBOutlet weak var viewActivityIcon: UIView!
     @IBOutlet weak var viewMenuIcon: UIView!
-    @IBOutlet weak var clnCuisineList: UICollectionView!
     @IBOutlet weak var viewSwitchMode: UIView!
-    @IBOutlet weak var conLeadingViewCuisineSelectionIndicator: NSLayoutConstraint!
     @IBOutlet weak var viewOptionActivity: UIView!
     @IBOutlet weak var viewOptionMenu: UIView!
     @IBOutlet weak var conTopViewActivity: NSLayoutConstraint!

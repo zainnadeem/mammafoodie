@@ -29,10 +29,8 @@ class OtherUsersProfileWorker {
         
     }
     
-    func getActivityWith(newsFeedID:String, completion: @escaping (MFNewsFeed?) -> Void) {
-        DatabaseGateway.sharedInstance.getNewsFeed(with: newsFeedID) { (newsFeed) in
-            completion(newsFeed)
-        }
+    func getActivity(for userId:String, completion: @escaping ([MFNewsFeed]) -> Void) {
+        DatabaseGateway.sharedInstance.getNewsFeed(by: userId, completion)
     }
     
     func getCookedDishesForUser(userID:String, _ completion:@escaping ([MFDish])->Void) {

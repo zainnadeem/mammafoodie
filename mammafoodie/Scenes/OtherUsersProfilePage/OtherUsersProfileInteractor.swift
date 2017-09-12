@@ -89,8 +89,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
         switch index {
         case .cooked:
-            
-            worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
+            self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
             })
@@ -98,8 +97,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             
             
         case .bought:
-            
-            worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
+            self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
                 
@@ -107,19 +105,10 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             
             
         case .activity:
-            
-            var activities = [MFNewsFeed]()
-            
-            //            for newsFeedID in user.userActivity.keys{
-            //                worker.getActivityWith(newsFeedID: newsFeedID, completion: { (newsFeed) in
-            //                    if newsFeed != nil {
-            //                        activities.append(newsFeed!)
-            //                    }
-            //                })
-            //            }
-            
-            dishCollectionViewAdapter.selectedIndexForProfile = .activity
-            dishCollectionViewAdapter.activityData = activities
+            self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
+                self.dishCollectionViewAdapter.selectedIndexForProfile = .activity
+                self.dishCollectionViewAdapter.activityData = newsFeedList
+            })
             
         }
         
