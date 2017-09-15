@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-protocol DishesCollectionViewAdapterDelegate{
+protocol DishesCollectionViewAdapterDelegate {
     
     func openDishPageWith(dishID:String)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
@@ -32,7 +33,11 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     var delegate: DishesCollectionViewAdapterDelegate?
     
-    var selectedIndexForProfile:SelectedIndexForProfile!
+    var selectedIndexForProfile: SelectedIndexForProfile! {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
     
     var userData: MFUser? {
         didSet {
@@ -52,7 +57,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         }
     }
     
-    var activityData:[MFNewsFeed] = [MFNewsFeed]() {
+    var activityData: [MFNewsFeed] = [MFNewsFeed]() {
         didSet {
             self.activityCount = self.activityData.count
             self.collectionView?.reloadData()
@@ -83,7 +88,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         }
     }
     
-    func setUpCollectionView(){
+    func setUpCollectionView() {
         
         //Register Dish cell
         self.collectionView!.register(DishCollectionViewCell.self, forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
@@ -95,25 +100,25 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
+        self.collectionView?.emptyDataSetDelegate = self
+        self.collectionView?.emptyDataSetSource = self
     }
     
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.selectedIndexForProfile == .cooked  {
             return self.cookedDishData.count
-            
         } else if self.selectedIndexForProfile == .bought{
             return self.boughtDishData.count
-            
         } else {
             return self.activityData.count
-            
         }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -234,3 +239,18 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
 }
+
+extension DishesCollectionViewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.selectedIndexForProfile == .activity {
+            return NSAttributedString.init(string: "No activity", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+        }
+        return NSAttributedString.init(string: "No dish", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return self.collectionView(self.collectionView!, layout: self.collectionView!.collectionViewLayout, referenceSizeForHeaderInSection: 0).height - 120
+    }
+
+}
+

@@ -23,7 +23,7 @@ class SavedCardClnCell: UICollectionViewCell {
     }
 
     func set(card: STPCard) {
-        self.lblCardNumber.text = "XXXX-XXXX-XXXX-\(card.last4())"
+        self.lblCardNumber.text = "XXXX-XXXX-XXXX-\(card.last4)"
         self.lblCardExpiry.text = "\(card.expMonth) \(card.expYear)"
         self.imgViewBrand.image = STPPaymentCardTextField.brandImage(for: card.brand)
     }

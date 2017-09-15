@@ -1,4 +1,5 @@
 import UIKit
+import DZNEmptyDataSet
 
 enum HomePageTableViewMode {
     case activity
@@ -30,6 +31,8 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         self.openURL = completion
         let name: String = "MenuItemTblCell"
         self.tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
         
         let name1: String = "ActivityTblCell"
         self.tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
@@ -147,4 +150,18 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.sectionHeaderView
     }
+}
+
+extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.mode == .activity {
+            return NSAttributedString.init(string: "No activity", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+        }
+        return NSAttributedString.init(string: "No saved dishes", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return (self.sectionHeaderView?.frame.size.height ?? 0) + self.tableView.sectionHeaderHeight + 20
+    }
+
 }
