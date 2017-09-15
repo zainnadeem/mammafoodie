@@ -236,7 +236,9 @@ class PaymentViewController: UIViewController {
     //    }
     
     func updateUI() {
-        self.imgViewDish.sd_setImage(with: self.dish.generateCoverThumbImageURL())
+        if let url = self.dish.coverPicURL {
+            self.imgViewDish.sd_setImage(with: url)
+        }
         self.lblDishName.text = self.dish.name
         self.lblSlotsCount.text = "\(self.slotsToBePurchased)"
     }
@@ -406,7 +408,7 @@ class PaymentViewController: UIViewController {
             
             let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
             
-            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.cardId!, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, dishName: self.dish.name, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
+            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.stripeID, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, dishName: self.dish.name, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)
                     if let error = error {
@@ -507,7 +509,7 @@ class PaymentViewController: UIViewController {
             return
         }
         
-        DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: self.dish.user.id, { (dishUser) in
             if let dishUser = dishUser {
                 guard let pickupAddress = dishUser.addressDetails else {
                     return

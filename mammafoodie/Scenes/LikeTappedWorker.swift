@@ -2,7 +2,6 @@ import UIKit
 import Alamofire
 
 class LikeTappedWorker {
-    // MARK: - Business Logic
     
     func likeTapped(userId: String, dishID:String, selected: Bool, completion: @escaping ()->Void){
         var requestURL = ""
@@ -14,6 +13,7 @@ class LikeTappedWorker {
         Alamofire.request(requestURL)
             .responseString { response in
                 print(response.result.error ?? "")
+                completion()
         }
     }
 }

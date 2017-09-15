@@ -148,7 +148,7 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let purpose = self.paymentPurpose else {
             return
         }
-        StripeGateway.shared.createCharge(amount: amount, sourceId: card.cardId!, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
+        StripeGateway.shared.createCharge(amount: amount, sourceId: card.stripeID, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
             if let error = error {
                 self.error?()
                 print(error)

@@ -35,27 +35,20 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     @IBOutlet weak var lblDishType: UILabel!
     @IBOutlet weak var lblDishName: UILabel!
-    
     @IBOutlet weak var btnComments: UIButton!
     @IBOutlet weak var lblNumberOfComments: UILabel!
-    
     @IBOutlet weak var btnLikes: UIButton!
     @IBOutlet weak var lblNumberOfLikes: UILabel!
-    
     @IBOutlet weak var btnAddToFavourites: UIButton!
-    
     @IBOutlet weak var lblDistanceAway: UILabel!
     @IBOutlet weak var lblNumberOfTimesOrdered: UILabel!
     @IBOutlet weak var lblPrepTime: UILabel!
     @IBOutlet weak var lblDishDescription: UILabel!
     @IBOutlet weak var lv_contentView: UIView!
-    
     @IBOutlet weak var btnRequest: UIButton!
-    
-    
     @IBOutlet weak var lblCurrentlyCooking: UILabel!
-    
     @IBOutlet weak var lblLeftDishesCount: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     //if only dish ID is passed
@@ -67,7 +60,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     override func awakeFromNib() {
         super.awakeFromNib()
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
-        
     }
     
     //TODO: - Need to be changed
@@ -78,7 +70,15 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let dishID = self.dishID {
+            self.output.getDish(with: dishID)
+            self.output.updateDishViewersCount(dishID:dishID,opened: true)
+        }
+        if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+            self.output.checkLikeStatus(userId: currentUser.id, dishId: dishID!)
+            self.output.checkFavouritesStatus(userId: currentUser.id , dishId: dishID!)
+        }
+        self.lv_contentView.isHidden = true
         lblCurrentlyCooking.layer.cornerRadius = 8
         lblCurrentlyCooking.clipsToBounds = true
         lblLeftDishesCount.layer.cornerRadius = 8
@@ -93,18 +93,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let dishID = self.dishID {
-            self.output.getDish(with: dishID)
-            self.output.updateDishViewersCount(dishID:dishID,opened: true)
-        }
-        
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
-            
             self.output.checkLikeStatus(userId: currentUser.id, dishId: dishID!)
             self.output.checkFavouritesStatus(userId: currentUser.id , dishId: dishID!)
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -147,16 +139,17 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
-        self.dishImageView.sd_setImage(with: data.generateCoverImageURL())
+        if let url = data.coverPicURL {
+            self.dishImageView.sd_setImage(with: url)
+        }
         
         //set profile imageview
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.layer.shadowRadius = 3
-        profileImageView.layer.shadowColor = UIColor.blue.cgColor
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        profileImageView.clipsToBounds = true
-        
+        self.profileImageView.contentMode = .scaleAspectFill
+        self.profileImageView.layer.shadowRadius = 3
+        self.profileImageView.layer.shadowColor = UIColor.blue.cgColor
+        self.profileImageView.layer.masksToBounds = false
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height / 2
+        self.profileImageView.clipsToBounds = true
         
         //set button
         if let endTimeStamp = data.endTimestamp ,Date().timeIntervalSinceReferenceDate > endTimeStamp.timeIntervalSinceReferenceDate {
@@ -169,7 +162,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
-            
             self.getDistanceBetweenUsers(userID1: currentUser.id, userID2: data.user.id, { (distanceInKms) in
                 self.lblDistanceAway.text = distanceInKms
             })
@@ -179,6 +171,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
         self.output.checkFavouritesStatus(userId: data.user.id, dishId: data.id)
         
+        self.lv_contentView.isHidden = false
     }
     
     func displayFavouriteStatus(_ response: DishDetail.Favourite.Response) {
@@ -234,7 +227,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             btnLikes.isSelected = false
         }
         
-        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser {
             self.output.likeButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnLikes.isSelected)
         }
     }
@@ -244,7 +237,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.btnAddToFavourites.isSelected = !self.btnAddToFavourites.isSelected
         
-        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
+        if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser {
             self.output.favouriteButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnAddToFavourites.isSelected)
         }
         
@@ -272,9 +265,9 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             self.present(vc, animated: true, completion: nil)
         } else { //Buy now -- Open slots page
             self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: nil)
-//            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
-//
-//            self.present(vc, animated: true, completion: nil)
+            //            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
+            //
+            //            self.present(vc, animated: true, completion: nil)
         }
         
     }
