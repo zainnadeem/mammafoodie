@@ -446,6 +446,20 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		57474EDB1F6BAAD900FF537E /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */; };
+		57474EDC1F6BAAD900FF537E /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */; };
+		57474EDD1F6BAAD900FF537E /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED51F6BA61C00FF537E /* RequestDishModels.swift */; };
+		57474EDE1F6BAAD900FF537E /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */; };
+		57474EDF1F6BAAD900FF537E /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */; };
+		57474EE01F6BAAD900FF537E /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */; };
+		57474EE11F6BAAD900FF537E /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */; };
+		57474EE21F6BAADB00FF537E /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */; };
+		57474EE31F6BAADB00FF537E /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */; };
+		57474EE41F6BAADB00FF537E /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED51F6BA61C00FF537E /* RequestDishModels.swift */; };
+		57474EE51F6BAADB00FF537E /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */; };
+		57474EE61F6BAADB00FF537E /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */; };
+		57474EE71F6BAADB00FF537E /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */; };
+		57474EE81F6BAADB00FF537E /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */; };
 		577F10351F308F350082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
 		577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
 		577F10381F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */; };
@@ -1815,21 +1829,6 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
-		57474ED01F6B9E6A00FF537E /* EmptyCells */ = {
-			isa = PBXGroup;
-			children = (
-				57474ED11F6B9EEF00FF537E /* ActivityEmptyCell */,
-			);
-			path = EmptyCells;
-			sourceTree = "<group>";
-		};
-		57474ED11F6B9EEF00FF537E /* ActivityEmptyCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ActivityEmptyCell;
-			sourceTree = "<group>";
-		};
 		57474ED21F6BA61C00FF537E /* RequestDish */ = {
 			isa = PBXGroup;
 			children = (
@@ -2090,7 +2089,6 @@
 		BFC9274B1EF00B0700602153 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				57474ED01F6B9E6A00FF537E /* EmptyCells */,
 				57DC9DC31F5023B9004E6100 /* ActivityCollectionViewCell */,
 				5790CC491F2CD67D007070C1 /* AddCardClnCell */,
 				2C946EAF1EFA7B8900FD2FC0 /* CommentTblCell */,
@@ -2590,12 +2588,14 @@
 				2C6979DA1F07C95F00787DCC /* GMUStyle.m in Sources */,
 				2CD37DB41F0992790058EFDF /* (null) in Sources */,
 				2C6978F71F07C85700787DCC /* CuisineCollectionViewAdapter.swift in Sources */,
+				57474EE41F6BAADB00FF537E /* RequestDishModels.swift in Sources */,
 				2CFB9B8B1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
 				2CFB9BBB1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */,
 				2C69795A1F07C88E00787DCC /* VidupMainPagePresenter.swift in Sources */,
 				2C69792F1F07C88D00787DCC /* NearbyChefsRouter.swift in Sources */,
 				2C6979021F07C88D00787DCC /* ChatListConfigurator.swift in Sources */,
 				F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */,
+				57474EE21F6BAADB00FF537E /* RequestDishConfigurator.swift in Sources */,
 				F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */,
 				2C6979361F07C88D00787DCC /* OtherUsersProfileInteractor.swift in Sources */,
 				2C6978F81F07C85700787DCC /* GoCookConfigurator.swift in Sources */,
@@ -2625,6 +2625,7 @@
 				2C69791E1F07C88D00787DCC /* FacebookLoginWorker.swift in Sources */,
 				2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
+				57474EE71F6BAADB00FF537E /* RequestDishViewController.swift in Sources */,
 				2C69793E1F07C88D00787DCC /* EnableLocationWorker.swift in Sources */,
 				2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CE22E8C1F0A421600B6E5B0 /* CommentsWorker.swift in Sources */,
@@ -2633,6 +2634,7 @@
 				2C6979BA1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
 				2C6979231F07C88D00787DCC /* LoginPresenter.swift in Sources */,
 				2C6979461F07C88D00787DCC /* PermissionsAlertViewController.swift in Sources */,
+				57474EE51F6BAADB00FF537E /* RequestDishPresenter.swift in Sources */,
 				2C6979D21F07C95F00787DCC /* GMULineString.m in Sources */,
 				2C6979051F07C88D00787DCC /* ChatListPresenter.swift in Sources */,
 				2C6979201F07C88D00787DCC /* LoginInteractor.swift in Sources */,
@@ -2648,6 +2650,7 @@
 				2C6979371F07C88D00787DCC /* OtherUsersProfileModels.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
 				2C6978FD1F07C85700787DCC /* GoCookViewController.swift in Sources */,
+				57474EE31F6BAADB00FF537E /* RequestDishInteractor.swift in Sources */,
 				2CFB9B911EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
 				2C6979241F07C88D00787DCC /* LoginRouter.swift in Sources */,
 				2C6979CE1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
@@ -2708,6 +2711,7 @@
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C6979341F07C88D00787DCC /* UserProfileCollectionViewHeader.swift in Sources */,
+				57474EE61F6BAADB00FF537E /* RequestDishRouter.swift in Sources */,
 				2C6979DC1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */,
 				577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */,
 				2C6979521F07C88E00787DCC /* SlotSelectionRouter.swift in Sources */,
@@ -2724,6 +2728,7 @@
 				2C6979D41F07C95F00787DCC /* GMUPlacemark.m in Sources */,
 				2C12BCB21EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				2C6979BE1F07C95F00787DCC /* GMUClusterManager.m in Sources */,
+				57474EE81F6BAADB00FF537E /* RequestDishWorker.swift in Sources */,
 				2CFB9B971EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2C6979191F07C88D00787DCC /* LiveVideoMainPageModels.swift in Sources */,
 				2C69794F1F07C88E00787DCC /* SlotSelectionInteractor.swift in Sources */,
@@ -2816,6 +2821,7 @@
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				2C2FB2171F091FDE004EEA0F /* DealsListWorker.swift in Sources */,
 				57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */,
+				57474EE01F6BAAD900FF537E /* RequestDishViewController.swift in Sources */,
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
@@ -2836,6 +2842,7 @@
 				2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */,
 				11ECCF081F1E27EF00ADF481 /* EditProfileworker.swift in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
+				57474EDB1F6BAAD900FF537E /* RequestDishConfigurator.swift in Sources */,
 				2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */,
 				57150C261F25E2DE0008B7FB /* SettingsTableViewCell.swift in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
@@ -2859,6 +2866,7 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				BF5AD5E01F07C8E600827223 /* LoadDishWorker.swift in Sources */,
+				57474EDE1F6BAAD900FF537E /* RequestDishPresenter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				BF5AD5D71F062B4B00827223 /* DishDetailConfigurator.swift in Sources */,
 				2C6979B91F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
@@ -2881,6 +2889,8 @@
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */,
+				57474EDC1F6BAAD900FF537E /* RequestDishInteractor.swift in Sources */,
+				57474EDF1F6BAAD900FF537E /* RequestDishRouter.swift in Sources */,
 				57A7177D1F285ABA00BC6239 /* BankDetailsViewController.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
@@ -3047,10 +3057,12 @@
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
+				57474EDD1F6BAAD900FF537E /* RequestDishModels.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
 				BF5AD5D91F062B4B00827223 /* DishDetailModels.swift in Sources */,
 				2C6979D91F07C95F00787DCC /* GMUStyle.m in Sources */,
 				570ED41A1F0684F000B41F0E /* Extentions.swift in Sources */,
+				57474EE11F6BAAD900FF537E /* RequestDishWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

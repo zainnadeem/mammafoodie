@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class NotificationViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class NotificationViewController: UIViewController {
             self.notificationTableView.reloadData()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
@@ -27,7 +28,10 @@ class NotificationViewController: UIViewController {
         self.notificationTableView.dataSource = self
         self.notificationTableView.rowHeight = UITableViewAutomaticDimension
         self.notificationTableView.estimatedRowHeight = 60
-        
+        self.notificationTableView.emptyDataSetDelegate = self
+        self.notificationTableView.emptyDataSetSource = self
+
+
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
             DatabaseGateway.sharedInstance.getNotificationsForUser(userID:"fYK04phVGPRpszYixlO2ort6gyF3") { (nots) in
@@ -52,7 +56,7 @@ class NotificationViewController: UIViewController {
 }
 
 
-extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
+extension NotificationViewController: UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -77,5 +81,12 @@ extension NotificationViewController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No notification", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 0
+    }
 }

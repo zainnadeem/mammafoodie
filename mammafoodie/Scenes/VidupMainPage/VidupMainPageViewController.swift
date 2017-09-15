@@ -1,5 +1,6 @@
 import UIKit
-import TRMosaicLayout
+//import TRMosaicLayout
+import DZNEmptyDataSet
 
 protocol VidupMainPageViewControllerInput {
     func addVideosToVC(_ response: VidupMainPage.Response)
@@ -34,6 +35,8 @@ class VidupMainPageViewController: UIViewController, VidupMainPageViewController
         self.output.loadVidups()
         self.vidupCollectionView.dataSource = self
         self.vidupCollectionView.delegate = self
+        self.vidupCollectionView.emptyDataSetDelegate = self
+        self.vidupCollectionView.emptyDataSetSource = self
         
 //        let mosaicLayout = TRMosaicLayout()
 //        self.vidupCollectionView.collectionViewLayout = mosaicLayout
@@ -83,7 +86,18 @@ extension VidupMainPageViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.vidups.arrayOfVidups.count ?? 0
+        return self.vidups.arrayOfVidups.count
+    }
+
+}
+
+extension VidupMainPageViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No vidup found", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 20
     }
 
 }
