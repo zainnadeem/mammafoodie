@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import DZNEmptyDataSet
 
 protocol ChatListViewAdapterDelegate{
     
@@ -8,29 +9,28 @@ protocol ChatListViewAdapterDelegate{
 }
 
 
-class ChatListAdapter:NSObject, UITableViewDelegate,UITableViewDataSource {
+class ChatListAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var chatListArray = [MFConversation](){
         didSet{
             chatTableView?.reloadData()
         }
     }
-    var currentUser:String!
+    var currentUser: String!
     
-    var chatTableView:UITableView? {
-        didSet{
-            chatTableView?.delegate = self
-            chatTableView?.dataSource = self
-            
-            
+    var chatTableView: UITableView? {
+        didSet {
+            self.chatTableView?.delegate = self
+            self.chatTableView?.dataSource = self
             //chatTableView?.rowHeight = UITableViewAutomaticDimension
-            chatTableView?.estimatedRowHeight = 44
+            self.chatTableView?.estimatedRowHeight = 44
+            self.chatTableView?.emptyDataSetSource = self
+            self.chatTableView?.emptyDataSetDelegate = self
         }
     }
     
     var delegate:ChatListViewAdapterDelegate?
 
-    
     //TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatListArray.count
@@ -66,8 +66,7 @@ class ChatListAdapter:NSObject, UITableViewDelegate,UITableViewDataSource {
  */
         return cell
     }
-    
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
@@ -86,3 +85,15 @@ class ChatListAdapter:NSObject, UITableViewDelegate,UITableViewDataSource {
         delegate?.chatListPage(conversation:chatListArray[indexPath.row])
     }
 }
+
+extension ChatListAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No conversations", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 0
+    }
+
+}
+

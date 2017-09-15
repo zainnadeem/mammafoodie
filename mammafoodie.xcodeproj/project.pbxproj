@@ -203,13 +203,6 @@
 		2C6979441F07C88D00787DCC /* PermissionsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271D1EF00A7E00602153 /* PermissionsAlertPresenter.swift */; };
 		2C6979451F07C88D00787DCC /* PermissionsAlertRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271E1EF00A7E00602153 /* PermissionsAlertRouter.swift */; };
 		2C6979461F07C88D00787DCC /* PermissionsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9271F1EF00A7E00602153 /* PermissionsAlertViewController.swift */; };
-		2C6979471F07C88D00787DCC /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */; };
-		2C6979481F07C88D00787DCC /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */; };
-		2C6979491F07C88D00787DCC /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */; };
-		2C69794A1F07C88D00787DCC /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A001EF2CB2C000F38B1 /* RequestDishPresenter.swift */; };
-		2C69794B1F07C88E00787DCC /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */; };
-		2C69794C1F07C88E00787DCC /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */; };
-		2C69794D1F07C88E00787DCC /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */; };
 		2C69794E1F07C88E00787DCC /* SlotSelectionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2AF1EEACA1200E5E6E5 /* SlotSelectionConfigurator.swift */; };
 		2C69794F1F07C88E00787DCC /* SlotSelectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B01EEACA1200E5E6E5 /* SlotSelectionInteractor.swift */; };
 		2C6979501F07C88E00787DCC /* SlotSelectionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118FB2B11EEACA1200E5E6E5 /* SlotSelectionModels.swift */; };
@@ -453,6 +446,20 @@
 		5732C0D11EE92A9600E2A61E /* NearbyChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732C0CA1EE92A9600E2A61E /* NearbyChefsViewController.swift */; };
 		5743C3111EEA5DF5006E6BE2 /* CurrentLocationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */; };
 		5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */; };
+		57474EDB1F6BAAD900FF537E /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */; };
+		57474EDC1F6BAAD900FF537E /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */; };
+		57474EDD1F6BAAD900FF537E /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED51F6BA61C00FF537E /* RequestDishModels.swift */; };
+		57474EDE1F6BAAD900FF537E /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */; };
+		57474EDF1F6BAAD900FF537E /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */; };
+		57474EE01F6BAAD900FF537E /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */; };
+		57474EE11F6BAAD900FF537E /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */; };
+		57474EE21F6BAADB00FF537E /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */; };
+		57474EE31F6BAADB00FF537E /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */; };
+		57474EE41F6BAADB00FF537E /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED51F6BA61C00FF537E /* RequestDishModels.swift */; };
+		57474EE51F6BAADB00FF537E /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */; };
+		57474EE61F6BAADB00FF537E /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */; };
+		57474EE71F6BAADB00FF537E /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */; };
+		57474EE81F6BAADB00FF537E /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */; };
 		577F10351F308F350082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
 		577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10341F308F350082EBF8 /* WelcomeViewController.swift */; };
 		577F10381F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */; };
@@ -559,13 +566,6 @@
 		F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */; };
 		F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */; };
 		F02722F21EF847F500A5D6C3 /* LoginNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */; };
-		F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */; };
-		F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */; };
-		F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */; };
-		F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A001EF2CB2C000F38B1 /* RequestDishPresenter.swift */; };
-		F0573A081EF2CB2C000F38B1 /* RequestDishRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */; };
-		F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */; };
-		F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */; };
 		F09720851F0A162200DDA4FA /* DishesSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09720841F0A162200DDA4FA /* DishesSavedViewController.swift */; };
 		F097D8CA1EF3D8BA00FCF967 /* ChatListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C21EF3D8BA00FCF967 /* ChatListConfigurator.swift */; };
 		F097D8CB1EF3D8BA00FCF967 /* ChatListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F097D8C31EF3D8BA00FCF967 /* ChatListInteractor.swift */; };
@@ -867,6 +867,13 @@
 		5743C30F1EEA5DF5006E6BE2 /* CurrentLocationWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationWorker.swift; sourceTree = "<group>"; };
 		5743C3101EEA5DF5006E6BE2 /* NearbyChefsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyChefsWorker.swift; sourceTree = "<group>"; };
 		5743C3C21EEA6A26006E6BE2 /* mammafoodie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mammafoodie-Bridging-Header.h"; sourceTree = "<group>"; };
+		57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishConfigurator.swift; sourceTree = "<group>"; };
+		57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishInteractor.swift; sourceTree = "<group>"; };
+		57474ED51F6BA61C00FF537E /* RequestDishModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishModels.swift; sourceTree = "<group>"; };
+		57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishPresenter.swift; sourceTree = "<group>"; };
+		57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishRouter.swift; sourceTree = "<group>"; };
+		57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishViewController.swift; sourceTree = "<group>"; };
+		57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDishWorker.swift; sourceTree = "<group>"; };
 		577F10341F308F350082EBF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		577F10371F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		577F103B1F309E150082EBF8 /* InfiniteClnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteClnCell.swift; sourceTree = "<group>"; };
@@ -960,13 +967,6 @@
 		F00F52631EF2729D009DDAB1 /* MFConversationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFConversationsModel.swift; sourceTree = "<group>"; };
 		F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMessageModel.swift; sourceTree = "<group>"; };
 		F02722F11EF847F500A5D6C3 /* LoginNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNewViewController.swift; sourceTree = "<group>"; };
-		F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishConfigurator.swift; path = RequestDish/RequestDishConfigurator.swift; sourceTree = "<group>"; };
-		F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishInteractor.swift; path = RequestDish/RequestDishInteractor.swift; sourceTree = "<group>"; };
-		F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishModels.swift; path = RequestDish/RequestDishModels.swift; sourceTree = "<group>"; };
-		F0573A001EF2CB2C000F38B1 /* RequestDishPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishPresenter.swift; path = RequestDish/RequestDishPresenter.swift; sourceTree = "<group>"; };
-		F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishRouter.swift; path = RequestDish/RequestDishRouter.swift; sourceTree = "<group>"; };
-		F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishViewController.swift; path = RequestDish/RequestDishViewController.swift; sourceTree = "<group>"; };
-		F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestDishWorker.swift; path = RequestDish/RequestDishWorker.swift; sourceTree = "<group>"; };
 		F09720841F0A162200DDA4FA /* DishesSavedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesSavedViewController.swift; sourceTree = "<group>"; };
 		F097D8C21EF3D8BA00FCF967 /* ChatListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListConfigurator.swift; sourceTree = "<group>"; };
 		F097D8C31EF3D8BA00FCF967 /* ChatListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListInteractor.swift; sourceTree = "<group>"; };
@@ -1475,7 +1475,7 @@
 				BFC927151EF00A7E00602153 /* PermissionsAlert */,
 				111E445E1F16099900C7A7F7 /* PostmatesDelivery */,
 				2CFEB55B1F13F1F6005EF9DA /* Register */,
-				F0573A0B1EF2CBCA000F38B1 /* RequestDish */,
+				57474ED21F6BA61C00FF537E /* RequestDish */,
 				2C0D8E2F1F281C1E00842ECD /* SavedCards */,
 				57150C221F25E2DE0008B7FB /* Settings */,
 				118FB2AE1EEAC93300E5E6E5 /* SlotSelection */,
@@ -1829,6 +1829,20 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		57474ED21F6BA61C00FF537E /* RequestDish */ = {
+			isa = PBXGroup;
+			children = (
+				57474ED31F6BA61C00FF537E /* RequestDishConfigurator.swift */,
+				57474ED41F6BA61C00FF537E /* RequestDishInteractor.swift */,
+				57474ED51F6BA61C00FF537E /* RequestDishModels.swift */,
+				57474ED61F6BA61C00FF537E /* RequestDishPresenter.swift */,
+				57474ED71F6BA61C00FF537E /* RequestDishRouter.swift */,
+				57474ED81F6BA61C00FF537E /* RequestDishViewController.swift */,
+				57474ED91F6BA61C00FF537E /* RequestDishWorker.swift */,
+			);
+			path = RequestDish;
+			sourceTree = "<group>";
+		};
 		577F10331F308F260082EBF8 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -2100,20 +2114,6 @@
 				F00F52641EF2729D009DDAB1 /* MFMessageModel.swift */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		F0573A0B1EF2CBCA000F38B1 /* RequestDish */ = {
-			isa = PBXGroup;
-			children = (
-				F05739FD1EF2CB2C000F38B1 /* RequestDishConfigurator.swift */,
-				F05739FE1EF2CB2C000F38B1 /* RequestDishInteractor.swift */,
-				F05739FF1EF2CB2C000F38B1 /* RequestDishModels.swift */,
-				F0573A001EF2CB2C000F38B1 /* RequestDishPresenter.swift */,
-				F0573A011EF2CB2C000F38B1 /* RequestDishRouter.swift */,
-				F0573A021EF2CB2C000F38B1 /* RequestDishViewController.swift */,
-				F0573A031EF2CB2C000F38B1 /* RequestDishWorker.swift */,
-			);
-			name = RequestDish;
 			sourceTree = "<group>";
 		};
 		F09720831F0A15D400DDA4FA /* DishesSaved */ = {
@@ -2391,6 +2391,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
@@ -2415,6 +2416,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
@@ -2507,6 +2509,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
@@ -2531,6 +2534,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
@@ -2582,15 +2586,16 @@
 				2C6979C01F07C95F00787DCC /* GMUStaticCluster.m in Sources */,
 				2C6978F91F07C85700787DCC /* GoCookInteractor.swift in Sources */,
 				2C6979DA1F07C95F00787DCC /* GMUStyle.m in Sources */,
-				2C6979481F07C88D00787DCC /* RequestDishInteractor.swift in Sources */,
 				2CD37DB41F0992790058EFDF /* (null) in Sources */,
 				2C6978F71F07C85700787DCC /* CuisineCollectionViewAdapter.swift in Sources */,
+				57474EE41F6BAADB00FF537E /* RequestDishModels.swift in Sources */,
 				2CFB9B8B1EFA475100C08EB3 /* LiveVideoInteractor.swift in Sources */,
 				2CFB9BBB1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */,
 				2C69795A1F07C88E00787DCC /* VidupMainPagePresenter.swift in Sources */,
 				2C69792F1F07C88D00787DCC /* NearbyChefsRouter.swift in Sources */,
 				2C6979021F07C88D00787DCC /* ChatListConfigurator.swift in Sources */,
 				F00F52721EF2780A009DDAB1 /* MFConversationsModel.swift in Sources */,
+				57474EE21F6BAADB00FF537E /* RequestDishConfigurator.swift in Sources */,
 				F00F52731EF2780A009DDAB1 /* MFMessageModel.swift in Sources */,
 				2C6979361F07C88D00787DCC /* OtherUsersProfileInteractor.swift in Sources */,
 				2C6978F81F07C85700787DCC /* GoCookConfigurator.swift in Sources */,
@@ -2615,12 +2620,12 @@
 				2C6979CC1F07C95F00787DCC /* GMUFeature.m in Sources */,
 				2C6978E51F07C84B00787DCC /* FeaturedMenuCollectionCell.swift in Sources */,
 				2CFB9BB91EFA477200C08EB3 /* VidupDetailPageRouter.swift in Sources */,
-				2C69794B1F07C88E00787DCC /* RequestDishRouter.swift in Sources */,
 				2CE22E8F1F0A46DE00B6E5B0 /* TextViewPlaceHolder.swift in Sources */,
 				2C6979411F07C88D00787DCC /* PermissionsAlertConfigurator.swift in Sources */,
 				2C69791E1F07C88D00787DCC /* FacebookLoginWorker.swift in Sources */,
 				2CE479461EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CA2B4AD1EF542D30076598C /* MFDish.swift in Sources */,
+				57474EE71F6BAADB00FF537E /* RequestDishViewController.swift in Sources */,
 				2C69793E1F07C88D00787DCC /* EnableLocationWorker.swift in Sources */,
 				2C12BCD91EF80559007AF994 /* CuisineListCollectionViewAdapter.swift in Sources */,
 				2CE22E8C1F0A421600B6E5B0 /* CommentsWorker.swift in Sources */,
@@ -2629,6 +2634,7 @@
 				2C6979BA1F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
 				2C6979231F07C88D00787DCC /* LoginPresenter.swift in Sources */,
 				2C6979461F07C88D00787DCC /* PermissionsAlertViewController.swift in Sources */,
+				57474EE51F6BAADB00FF537E /* RequestDishPresenter.swift in Sources */,
 				2C6979D21F07C95F00787DCC /* GMULineString.m in Sources */,
 				2C6979051F07C88D00787DCC /* ChatListPresenter.swift in Sources */,
 				2C6979201F07C88D00787DCC /* LoginInteractor.swift in Sources */,
@@ -2641,10 +2647,10 @@
 				2C946EB31EFA7B9200FD2FC0 /* CommentTblCell.swift in Sources */,
 				2C6979BC1F07C95F00787DCC /* GMUWrappingDictionaryKey.m in Sources */,
 				2C6979301F07C88D00787DCC /* NearbyChefsViewController.swift in Sources */,
-				2C69794C1F07C88E00787DCC /* RequestDishViewController.swift in Sources */,
 				2C6979371F07C88D00787DCC /* OtherUsersProfileModels.swift in Sources */,
 				2CA2B4A91EF542D30076598C /* MFComment.swift in Sources */,
 				2C6978FD1F07C85700787DCC /* GoCookViewController.swift in Sources */,
+				57474EE31F6BAADB00FF537E /* RequestDishInteractor.swift in Sources */,
 				2CFB9B911EFA475100C08EB3 /* LiveVideoRouter.swift in Sources */,
 				2C6979241F07C88D00787DCC /* LoginRouter.swift in Sources */,
 				2C6979CE1F07C95F00787DCC /* GMUGeometryCollection.m in Sources */,
@@ -2687,7 +2693,6 @@
 				2CA2B4B31EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
 				2C6978EA1F07C85000787DCC /* StringExtension.swift in Sources */,
 				2CFB9B8D1EFA475100C08EB3 /* LiveVideoModels.swift in Sources */,
-				2C69794A1F07C88D00787DCC /* RequestDishPresenter.swift in Sources */,
 				2CA2B4BB1EF542D30076598C /* MFOrder.swift in Sources */,
 				2C6979431F07C88D00787DCC /* PermissionsAlertModels.swift in Sources */,
 				2C6979001F07C88D00787DCC /* ChatModels.swift in Sources */,
@@ -2706,6 +2711,7 @@
 				2CA2B4B91EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2C12BCB41EF7D237007AF994 /* HomeViewController.swift in Sources */,
 				2C6979341F07C88D00787DCC /* UserProfileCollectionViewHeader.swift in Sources */,
+				57474EE61F6BAADB00FF537E /* RequestDishRouter.swift in Sources */,
 				2C6979DC1F07C95F00787DCC /* GQTPointQuadTree.m in Sources */,
 				577F10361F3093F80082EBF8 /* WelcomeViewController.swift in Sources */,
 				2C6979521F07C88E00787DCC /* SlotSelectionRouter.swift in Sources */,
@@ -2722,6 +2728,7 @@
 				2C6979D41F07C95F00787DCC /* GMUPlacemark.m in Sources */,
 				2C12BCB21EF7D237007AF994 /* HomeRouter.swift in Sources */,
 				2C6979BE1F07C95F00787DCC /* GMUClusterManager.m in Sources */,
+				57474EE81F6BAADB00FF537E /* RequestDishWorker.swift in Sources */,
 				2CFB9B971EFA475100C08EB3 /* LiveVideoPublisherViewController.swift in Sources */,
 				2C6979191F07C88D00787DCC /* LiveVideoMainPageModels.swift in Sources */,
 				2C69794F1F07C88E00787DCC /* SlotSelectionInteractor.swift in Sources */,
@@ -2737,7 +2744,6 @@
 				2CFB9BB31EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */,
 				2C12BCD41EF7F05C007AF994 /* MenuItemTblCell.swift in Sources */,
 				2C6978E21F07C83700787DCC /* LoginViewController.swift in Sources */,
-				2C6979491F07C88D00787DCC /* RequestDishModels.swift in Sources */,
 				2C6979251F07C88D00787DCC /* LoginWorker.swift in Sources */,
 				2C6979E31F07CBF900787DCC /* NearbyChefsModels.swift in Sources */,
 				2C6979B61F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -2749,7 +2755,6 @@
 				2C69793F1F07C88D00787DCC /* EnableMicrophoneWorker.swift in Sources */,
 				2C6978EF1F07C85700787DCC /* MFNavigationBarDelegate.swift in Sources */,
 				2C6978E31F07C84B00787DCC /* CuisineCollectionViewCell.swift in Sources */,
-				2C69794D1F07C88E00787DCC /* RequestDishWorker.swift in Sources */,
 				2CFB9BB11EFA477200C08EB3 /* VidupDetailPageConfigurator.swift in Sources */,
 				2C69793C1F07C88D00787DCC /* DishesCollectionViewAdapter.swift in Sources */,
 				2CFB9B991EFA475100C08EB3 /* LiveVideoPublisherWorker.swift in Sources */,
@@ -2766,7 +2771,6 @@
 				2C878ADA1F022E0300A630DF /* CircleTransitionPresentAnimator.swift in Sources */,
 				2C6978E11F07C82700787DCC /* LoginModels.swift in Sources */,
 				2C6979221F07C88D00787DCC /* LoginConfigurator.swift in Sources */,
-				2C6979471F07C88D00787DCC /* RequestDishConfigurator.swift in Sources */,
 				2CFB9BBD1EFA477200C08EB3 /* VidupDetailPageWorker.swift in Sources */,
 				2C12BCC51EF7EF99007AF994 /* HomePageTableViewAdapter.swift in Sources */,
 				2C6979C61F07C95F00787DCC /* GMUGeoJSONParser.m in Sources */,
@@ -2778,7 +2782,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				118CB2F91EF0124700531AA0 /* VidupMainPageModels.swift in Sources */,
-				F0573A0A1EF2CB2C000F38B1 /* RequestDishWorker.swift in Sources */,
 				F00F52671EF2729D009DDAB1 /* ChatModels.swift in Sources */,
 				572E9A9C1EFAB4AF007DE6D0 /* GoCookWorker.swift in Sources */,
 				570ED4151F0684F000B41F0E /* IC_CGSizeExtensions.swift in Sources */,
@@ -2804,8 +2807,6 @@
 				2CFB9BB21EFA477200C08EB3 /* VidupDetailPageInteractor.swift in Sources */,
 				2C12BCB51EF7D237007AF994 /* HomeWorker.swift in Sources */,
 				F097D8D01EF3D8BA00FCF967 /* ChatListViewController.swift in Sources */,
-				F0573A061EF2CB2C000F38B1 /* RequestDishModels.swift in Sources */,
-				F0573A081EF2CB2C000F38B1 /* RequestDishRouter.swift in Sources */,
 				2CA2B4A61EF542D30076598C /* MFActivity.swift in Sources */,
 				570ED4161F0684F000B41F0E /* IC_UIImageExtensions.swift in Sources */,
 				572E9AA61EFAB515007DE6D0 /* StringExtension.swift in Sources */,
@@ -2820,6 +2821,7 @@
 				5732C0CD1EE92A9600E2A61E /* NearbyChefsInteractor.swift in Sources */,
 				2C2FB2171F091FDE004EEA0F /* DealsListWorker.swift in Sources */,
 				57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */,
+				57474EE01F6BAAD900FF537E /* RequestDishViewController.swift in Sources */,
 				2CFB9B881EFA475100C08EB3 /* LiveVideoConfigurator.swift in Sources */,
 				113948CB1F05082400F98E74 /* HUDProtocols.swift in Sources */,
 				2C12BCA51EF7D237007AF994 /* HomePageLiveVideoCollectionViewAdapter.swift in Sources */,
@@ -2840,6 +2842,7 @@
 				2C6979D11F07C95F00787DCC /* GMULineString.m in Sources */,
 				11ECCF081F1E27EF00ADF481 /* EditProfileworker.swift in Sources */,
 				2C12BCCD1EF7F053007AF994 /* MenuCuisineSelectorClnCell.swift in Sources */,
+				57474EDB1F6BAAD900FF537E /* RequestDishConfigurator.swift in Sources */,
 				2CFEB5641F13F1F6005EF9DA /* RegisterAdapter.swift in Sources */,
 				57150C261F25E2DE0008B7FB /* SettingsTableViewCell.swift in Sources */,
 				57801F7E1EF8308C002E18EF /* FeaturedMenuCollectionCell.swift in Sources */,
@@ -2863,6 +2866,7 @@
 				2CA2B4A81EF542D30076598C /* MFComment.swift in Sources */,
 				2C12BCA71EF7D237007AF994 /* HomePageVidupsCollectionViewAdapter.swift in Sources */,
 				BF5AD5E01F07C8E600827223 /* LoadDishWorker.swift in Sources */,
+				57474EDE1F6BAAD900FF537E /* RequestDishPresenter.swift in Sources */,
 				2CFB9B8E1EFA475100C08EB3 /* LiveVideoPresenter.swift in Sources */,
 				BF5AD5D71F062B4B00827223 /* DishDetailConfigurator.swift in Sources */,
 				2C6979B91F07C95F00787DCC /* GMUSimpleClusterAlgorithm.m in Sources */,
@@ -2885,6 +2889,8 @@
 				110FCE531EEEAEC9008B6F2D /* OtherUsersProfileConfigurator.swift in Sources */,
 				118FB2BB1EEACA1200E5E6E5 /* SlotSelectionViewController.swift in Sources */,
 				572E9A931EFAB4AF007DE6D0 /* GoCookRouter.swift in Sources */,
+				57474EDC1F6BAAD900FF537E /* RequestDishInteractor.swift in Sources */,
+				57474EDF1F6BAAD900FF537E /* RequestDishRouter.swift in Sources */,
 				57A7177D1F285ABA00BC6239 /* BankDetailsViewController.swift in Sources */,
 				57801F681EF823F9002E18EF /* NearByChefsMapAdapter.swift in Sources */,
 				2CB8BF291EF25C1B00DA78B3 /* LoginModels.swift in Sources */,
@@ -2931,7 +2937,6 @@
 				2CFB9B921EFA475100C08EB3 /* LiveVideoViewController.swift in Sources */,
 				572E9AA91EFAB515007DE6D0 /* UITextFieldExtension.swift in Sources */,
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
-				F0573A051EF2CB2C000F38B1 /* RequestDishInteractor.swift in Sources */,
 				57DC9DD01F502990004E6100 /* ChatListTableViewCell.swift in Sources */,
 				111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
@@ -2943,11 +2948,9 @@
 				11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */,
 				2C65170C1F135CDE00717B82 /* DummyData.swift in Sources */,
 				57DC9DDB1F5071BF004E6100 /* FollowersListViewController.swift in Sources */,
-				F0573A071EF2CB2C000F38B1 /* RequestDishPresenter.swift in Sources */,
 				2C0068A21F61430900DA3728 /* MFTransaction.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
-				F0573A041EF2CB2C000F38B1 /* RequestDishConfigurator.swift in Sources */,
 				2C5E8B021EFD11D8009F24F5 /* MFNavigationController.swift in Sources */,
 				2CA2B4B81EF542D30076598C /* MFNewsFeed.swift in Sources */,
 				2CA2B4B21EF542D30076598C /* MFLiveVideoGatewayAccountDetails.swift in Sources */,
@@ -3033,7 +3036,6 @@
 				5743C3121EEA5DF5006E6BE2 /* NearbyChefsWorker.swift in Sources */,
 				57A7177E1F285ABA00BC6239 /* WalletViewController.swift in Sources */,
 				2CB8BE9C1EF2467500DA78B3 /* MFModelsToFirebaseDictionaryConverter.swift in Sources */,
-				F0573A091EF2CB2C000F38B1 /* RequestDishViewController.swift in Sources */,
 				BF5060D91EE81B9E00DB646F /* AppDelegate.swift in Sources */,
 				577F10381F309BBD0082EBF8 /* InfiniteCollectionViewAdapter.swift in Sources */,
 				2CB8BF271EF25C1B00DA78B3 /* LoginConfigurator.swift in Sources */,
@@ -3055,10 +3057,12 @@
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */,
 				2CFB9B941EFA475100C08EB3 /* LiveVideoWorker.swift in Sources */,
+				57474EDD1F6BAAD900FF537E /* RequestDishModels.swift in Sources */,
 				F00F526C1EF2729D009DDAB1 /* MFConversationsModel.swift in Sources */,
 				BF5AD5D91F062B4B00827223 /* DishDetailModels.swift in Sources */,
 				2C6979D91F07C95F00787DCC /* GMUStyle.m in Sources */,
 				570ED41A1F0684F000B41F0E /* Extentions.swift in Sources */,
+				57474EE11F6BAAD900FF537E /* RequestDishWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

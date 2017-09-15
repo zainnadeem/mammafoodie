@@ -36,6 +36,8 @@ target 'mammafoodie' do
 
 	pod 'MBProgressHUD'
 
+    pod 'DZNEmptyDataSet'
+
     target 'mammafoodieTests' do
         pod 'Firebase/Core'
         pod 'Firebase/Database'

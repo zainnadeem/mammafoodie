@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Firebase
+import DZNEmptyDataSet
 
 class WalletViewController: UIViewController {
     
@@ -35,6 +36,8 @@ class WalletViewController: UIViewController {
         self.viewHeaderWrapper.clipsToBounds = true
         self.tblTransactions.rowHeight = UITableViewAutomaticDimension
         self.tblTransactions.register(UINib(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
+        self.tblTransactions.emptyDataSetSource = self
+        self.tblTransactions.emptyDataSetDelegate = self
         self.setWalletAmount(0)
         self.btnAddToWallet.isHidden = true
         self.tblTransactions.reloadData()
@@ -196,3 +199,15 @@ extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
 }
+
+extension WalletViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No transactions", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return self.tblTransactions.sectionHeaderHeight + 10
+    }
+
+}
+

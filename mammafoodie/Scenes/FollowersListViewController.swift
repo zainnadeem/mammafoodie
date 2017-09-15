@@ -1,6 +1,6 @@
-
-
 import UIKit
+import DZNEmptyDataSet
+
 typealias ChatSelectionCompletionBlock = ((MFUser) -> Void)
 
 class FollowersListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -23,7 +23,9 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         self.followersTblView.dataSource = self
         self.followersTblView.rowHeight = UITableViewAutomaticDimension
         self.followersTblView.estimatedRowHeight = 80
-        
+        self.followersTblView.emptyDataSetDelegate = self
+        self.followersTblView.emptyDataSetSource = self
+
         let follower: String = "FollowersTableCell"
         let following = "FollowingTableCell"
         
@@ -113,3 +115,18 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
 }
+
+extension FollowersListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.followers {
+            return NSAttributedString.init(string: "No followers", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+        }
+        return NSAttributedString.init(string: "You are not following anyone", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 0
+    }
+
+}
+

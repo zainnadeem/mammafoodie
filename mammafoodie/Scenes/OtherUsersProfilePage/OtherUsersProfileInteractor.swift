@@ -144,7 +144,6 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     }
     
     //MARK: - DishesCollectionViewAdapterDelegate
-    
     func openDishPageWith(dishID:String) {
         
         output.openDishPageWith(dishID: dishID)

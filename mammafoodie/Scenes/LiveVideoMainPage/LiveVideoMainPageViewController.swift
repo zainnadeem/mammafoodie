@@ -1,4 +1,5 @@
 import UIKit
+import DZNEmptyDataSet
 //import TRMosaicLayout
 
 protocol LiveVideoMainPageViewControllerInput {
@@ -42,11 +43,13 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
 //        _ = dData.getUserForProfilePage()
         
     }
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.liveVideoCollectionView.delegate = self
         self.liveVideoCollectionView.dataSource = self
+        self.liveVideoCollectionView.emptyDataSetDelegate = self
+        self.liveVideoCollectionView.emptyDataSetSource = self
         self.output.loadLiveVideos()
         
 //        let mosaicLayout = TRMosaicLayout()
@@ -118,6 +121,18 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     }
     
 }
+
+extension LiveVideoMainPageViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No live video found", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 20
+    }
+
+}
+
 
 //// Mark: - Mosaic CollectionView Flow Layout
 //extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {
