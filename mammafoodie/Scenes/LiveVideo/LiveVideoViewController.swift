@@ -93,6 +93,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewComments.showLatestComment()
+        self.startUpdatingImage()
     }
     
     func viewWillAppearCode() {
@@ -189,7 +190,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     func showUserInfo() {
         let userId = self.liveVideo.user.id
-        DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
             self.lblUserFullname.text = user?.name ?? ""
             if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
                 self.imgViewProfilePicture.sd_setImage(with: url)
@@ -277,6 +278,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.timerForThumbnailCapturing?.invalidate()
+        self.timerForThumbnailCapturing = nil
     }
     
     // MARK: - Event handling
@@ -326,10 +329,15 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         
         if self.liveVideo.accessMode == .owner {
             self.output?.updateStreamImage()
-            self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
-                self.output?.updateStreamImage()
-            })
         }
+    }
+    
+    func startUpdatingImage() {
+        self.timerForThumbnailCapturing?.invalidate()
+        self.timerForThumbnailCapturing = nil
+        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+            self.output?.updateStreamImage()
+        })
     }
     
     func streamUnpublished() {

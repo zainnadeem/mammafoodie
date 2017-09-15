@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -47,7 +47,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2L-Ao-smh">
-                                                <rect key="frame" x="10" y="15" width="34" height="22"/>
+                                                <rect key="frame" x="10" y="30" width="34" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="uxr-FV-y0r"/>
                                                     <constraint firstAttribute="height" constant="22" id="vSF-77-2Y1"/>
@@ -59,7 +59,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFd-Jq-pRh">
-                                                <rect key="frame" x="335" y="15" width="30" height="30"/>
+                                                <rect key="frame" x="335" y="30" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="CFd-Jq-pRh" secondAttribute="height" multiplier="1:1" id="F4n-eU-do1"/>
                                                     <constraint firstAttribute="height" constant="30" id="VXb-3t-d1h"/>
@@ -305,7 +305,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="65O-FJ-Klp">
-                                                <rect key="frame" x="250" y="22" width="65" height="16"/>
+                                                <rect key="frame" x="250" y="37" width="65" height="16"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="65" id="8nA-CT-96q"/>
@@ -343,7 +343,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="JmR-e9-8Xj" secondAttribute="trailing" id="dSH-Ao-HLx"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Wh2-cV-FO8" secondAttribute="trailing" id="fIf-Ms-a1A"/>
                                             <constraint firstItem="YVP-w4-1hA" firstAttribute="top" secondItem="HIG-0l-gfb" secondAttribute="bottom" id="gaQ-67-rv5"/>
-                                            <constraint firstItem="F2L-Ao-smh" firstAttribute="top" secondItem="sIW-ly-cOO" secondAttribute="top" constant="15" id="kYN-vq-Uwh"/>
+                                            <constraint firstItem="F2L-Ao-smh" firstAttribute="top" secondItem="sIW-ly-cOO" secondAttribute="top" constant="30" id="kYN-vq-Uwh"/>
                                             <constraint firstItem="Qgh-ra-6oT" firstAttribute="top" secondItem="Wh2-cV-FO8" secondAttribute="bottom" id="oYz-mi-vKe"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Qgh-ra-6oT" secondAttribute="trailing" id="oe8-zW-POf"/>
                                             <constraint firstItem="Wh2-cV-FO8" firstAttribute="top" secondItem="JmR-e9-8Xj" secondAttribute="bottom" id="pma-kg-Xbj"/>
@@ -422,6 +422,7 @@
                         <outlet property="lblUsername" destination="myP-6E-vTc" id="2fa-UN-ZNJ"/>
                         <outlet property="lv_contentView" destination="rff-hG-FPl" id="bvh-VZ-z1q"/>
                         <outlet property="profileImageView" destination="px2-8B-zVI" id="5lh-Wc-xcO"/>
+                        <outlet property="scrollView" destination="ntl-rQ-diw" id="tqE-bE-32h"/>
                         <segue destination="IyS-1P-N0R" kind="presentation" identifier="seguePresentSlotSelectionViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UWk-Xu-ZDO"/>
                         <segue destination="drN-dc-HK2" kind="show" identifier="segueShowPaymentViewController" id="ZBZ-2d-msx"/>
                     </connections>
