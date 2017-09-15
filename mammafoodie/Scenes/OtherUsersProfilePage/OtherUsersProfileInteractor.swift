@@ -29,7 +29,8 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     var dishCollectionViewAdapter: DishesCollectionViewAdapter!
     var user: MFUser? {
         didSet {
-            self.loadDishCollectionViewForIndex(.cooked)
+            self.loadCountsForAllSections()
+            self.loadDishCollectionViewForIndex(SelectedIndexForProfile.cooked)
         }
     }
     
@@ -79,7 +80,19 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             print(count)
             self.dishCollectionViewAdapter.savedDishDataCount = count
         }
+    }
+    
+    private func loadCountsForAllSections() {
+        guard let user = self.user else { return }
         
+        self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+        })
+        
+        self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+        })
+        
+        self.worker.getActivity(for: user.id, completion: { (newsFeedList) in                                self.dishCollectionViewAdapter.activityData = newsFeedList
+        })
     }
     
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile) {

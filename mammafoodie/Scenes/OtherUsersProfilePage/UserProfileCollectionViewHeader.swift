@@ -100,7 +100,8 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         menuSelectionHairlineView.applyGradient(colors: [color1, color2], direction: .leftToRight)
     }
     
-    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String, followers:[MFUser]?, following:[MFUser]?, savedDishCount: Int) {
+    func setUp(_ data:MFUser?, followersCount:String,followingCount:String,cookedDishesCount:String,favouriteDishesCount:String, boughtDishesCount:String, followers:[MFUser]?, following:[MFUser]?, savedDishCount: Int, activityCount: Int) {
+        
         self.layoutIfNeeded()
         
         //Load Data
@@ -122,6 +123,7 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         self.lblCookedCount.text = cookedDishesCount
         self.lblFavouriteDishesCount.text = favouriteDishesCount
         self.lblBoughtCount.text = boughtDishesCount
+        self.lblActivityCount.text = "\(activityCount)"
         
         self.profilePicImageView.sd_cancelCurrentImageLoad()
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.id) {
