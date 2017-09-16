@@ -272,7 +272,10 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         self.DisplayDishInfo(DishInfo: vidup)
         
         if vidup.mediaType == MFDishMediaType.vidup {
-            self.dealImageView.removeFromSuperview()
+            if let view = self.dealImageView {
+                print("Image view removed")
+                view.removeFromSuperview()
+            }
             self.output.setupMediaPlayer(view: self.viewVideo,
                                          user_id: userId ,
                                          dish_id: DishId,

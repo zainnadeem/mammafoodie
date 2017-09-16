@@ -29,6 +29,11 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
         LiveVideoMainPageConfigurator.sharedInstance.configure(viewController: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     // MARK: - View lifecycle
     
     @IBAction func populateNewsfeed(_ sender: Any) {
@@ -115,9 +120,13 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    
-        
             return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let dish: MFDish = self.liveVideos.arrayOfLiveVideos[indexPath.item] {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        }
     }
     
 }

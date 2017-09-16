@@ -34,9 +34,11 @@ class MosaicCollectionCell: UICollectionViewCell {
     }
     
     func updateUI(){
-        if let coverURL = self.media.coverPicURL {
+        let url: URL? = self.media.coverPicURL ?? self.media.mediaURL
+        
+        if let coverURL = url {
             self.screenShotImageView.sd_setImage(with: coverURL, completed: { (image, error, cacheType, coverPictureURL) in
-                if coverPictureURL == nil {
+                if image == nil {
                     if let userProfilePictureURL: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
                         self.screenShotImageView.sd_setImage(with: userProfilePictureURL, completed: { (image, error, cacheType, url) in
                             if image == nil || error != nil {
@@ -48,7 +50,7 @@ class MosaicCollectionCell: UICollectionViewCell {
             })
             //        } else {
             //            self.screenShotImageView.image = nil
-        }
+        } 
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
             self.btnProfileImage.imageView?.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
