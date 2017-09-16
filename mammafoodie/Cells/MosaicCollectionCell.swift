@@ -18,13 +18,9 @@ class MosaicCollectionCell: UICollectionViewCell {
     @IBOutlet weak var btnTimeLeft: UIButton!
     @IBOutlet weak var screenShotImageView: UIImageView!
     @IBOutlet weak var btnUsername: UIButton!
-    
     //    @IBOutlet var smallCellConstraints: [NSLayoutConstraint]!
     //    @IBOutlet var largeCellConstraints: [NSLayoutConstraint]!
-    
-    
     @IBOutlet weak var topStackView: UIStackView!
-    
     @IBOutlet weak var bottomStackView: UIStackView!
     
     var media: MFDish! {
@@ -33,13 +29,11 @@ class MosaicCollectionCell: UICollectionViewCell {
         }
     }
     
-    func updateUI(){
-        let url: URL? = self.media.coverPicURL ?? self.media.mediaURL
-        
-        if let coverURL = url {
+    func updateUI() {
+        if let coverURL = self.media.coverPicURL ?? self.media.mediaURL {
             self.screenShotImageView.sd_setImage(with: coverURL, completed: { (image, error, cacheType, coverPictureURL) in
                 if image == nil {
-                    if let userProfilePictureURL: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
+                    if let userProfilePictureURL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
                         self.screenShotImageView.sd_setImage(with: userProfilePictureURL, completed: { (image, error, cacheType, url) in
                             if image == nil || error != nil {
                                 self.screenShotImageView.image = nil
@@ -48,43 +42,45 @@ class MosaicCollectionCell: UICollectionViewCell {
                     }
                 }
             })
-            //        } else {
-            //            self.screenShotImageView.image = nil
         } 
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.media.user.id) {
-            self.btnProfileImage.imageView?.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
+            self.btnProfileImage.sd_setImage(with: url, for: .normal, completed: { (image, error, _, _) in
                 if image == nil || error != nil {
-                    self.btnProfileImage.setImage(UIImage(named: "IconMammaFoodie")!, for: .normal)
+                    self.btnProfileImage.setImage(#imageLiteral(resourceName: "IconMammaFoodie"), for: .normal)
                 }
             })
         } else {
-            self.btnProfileImage.setImage(UIImage(named: "IconMammaFoodie")!, for: .normal)
+            self.btnProfileImage.setImage(#imageLiteral(resourceName: "IconMammaFoodie"), for: .normal)
         }
         
-        btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
-        btnUsername.setTitle(self.media.user.name, for: .normal)
+        self.btnNumberOfViews.setTitle(String(self.media.numberOfViewers), for: .normal)
+        self.btnUsername.setTitle("  " + self.media.user.name, for: .normal)
         self.title.text = self.media.name
         
         if self.media.mediaType == .liveVideo {
-            btnTimeLeft.isHidden = true
-        }else{
-            btnTimeLeft.titleLabel?.text = self.media.endTimestamp?.toStringWithRelativeTime() ?? ""
-            btnTimeLeft.isHidden = false
+            self.btnTimeLeft.isHidden = true
+        } else {
+            if let timeStamp = self.media.endTimestamp {
+                let timeLeft = "  " + timeStamp.toStringWithRelativeTime()
+                self.btnTimeLeft.setTitle(timeLeft, for: .normal)
+                self.btnTimeLeft.isHidden = false
+            } else {
+                self.btnTimeLeft.isHidden = true
+            }
         }
         
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setViewProperties()
+        self.setViewProperties()
     }
     
-    func setViewProperties(){
+    func setViewProperties() {
         //sets properties for buttons inside cell
         let buttons : [UIButton] = [btnNumberOfViews, btnTimeLeft, btnUsername]
-        screenShotImageView.contentMode = .scaleAspectFill
-        
+        self.screenShotImageView.contentMode = .scaleAspectFill
         
         for button in buttons {
             button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -96,29 +92,28 @@ class MosaicCollectionCell: UICollectionViewCell {
             button.imageView?.contentMode = .scaleAspectFit
         }
         
-        btnUsername.titleLabel?.numberOfLines = 2
-        btnUsername.titleLabel?.adjustsFontSizeToFitWidth = false
+        self.btnUsername.titleLabel?.numberOfLines = 2
+        self.btnUsername.titleLabel?.adjustsFontSizeToFitWidth = false
         
-        btnUsername.titleLabel?.lineBreakMode = .byWordWrapping
+        self.btnUsername.titleLabel?.lineBreakMode = .byWordWrapping
         
-        btnProfileImage.imageView?.contentMode = .scaleAspectFill
-        btnProfileImage.layer.shadowRadius = 3
-        btnProfileImage.layer.shadowColor = UIColor.blue.cgColor
-        btnProfileImage.layer.masksToBounds = false
-        btnProfileImage.imageView?.layer.cornerRadius = btnProfileImage.frame.height / 2
-        btnProfileImage.imageView?.clipsToBounds = true
+        self.btnProfileImage.imageView?.contentMode = .scaleAspectFill
+        self.btnProfileImage.layer.shadowRadius = 3
+        self.btnProfileImage.layer.shadowColor = UIColor.blue.cgColor
+        self.btnProfileImage.layer.masksToBounds = false
+        self.btnProfileImage.imageView?.layer.cornerRadius = btnProfileImage.frame.height / 2
+        self.btnProfileImage.imageView?.clipsToBounds = true
         
-        title.layer.shadowRadius = 3
-        title.layer.shadowColor = UIColor.black.cgColor
-        title.layer.shadowOffset = CGSize(width: 0, height: 2)
-        title.layer.shadowOpacity = 0.5
-        title.layer.masksToBounds = false
+        self.title.layer.shadowRadius = 3
+        self.title.layer.shadowColor = UIColor.black.cgColor
+        self.title.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.title.layer.shadowOpacity = 0.5
+        self.title.layer.masksToBounds = false
         
     }
-    
-    
+
     //call these functions based on size of the cell
-    func setLargeCellContraints(){
+    func setLargeCellContraints() {
         //        btnNumberOfViews.isHidden = false
         //        for con in self.smallCellConstraints{
         //            con.isActive = false
@@ -127,16 +122,14 @@ class MosaicCollectionCell: UICollectionViewCell {
         //        for con in self.largeCellConstraints{
         //            con.isActive = true
         //        }
-        
-        topStackView.axis = .horizontal
-        bottomStackView.axis = .horizontal
-        btnNumberOfViews.contentHorizontalAlignment = .right
-        
+        self.topStackView.axis = .horizontal
+        self.bottomStackView.axis = .horizontal
+        self.btnNumberOfViews.contentHorizontalAlignment = .right
     }
     
-    func setSmallCellConstraints(){
+    func setSmallCellConstraints() {
         //        btnNumberOfViews.isHidden = true
-        btnUsername.titleLabel?.adjustsFontForContentSizeCategory = true
+        self.btnUsername.titleLabel?.adjustsFontForContentSizeCategory = true
         //
         //        for con in self.largeCellConstraints{
         //            con.isActive = false
@@ -145,13 +138,9 @@ class MosaicCollectionCell: UICollectionViewCell {
         //        for con in self.smallCellConstraints {
         //            con.isActive = true
         //        }
-        
-        
-        topStackView.axis = .vertical
-        bottomStackView.axis = .vertical
-        btnNumberOfViews.contentHorizontalAlignment = .left
-        
+        self.topStackView.axis = .vertical
+        self.bottomStackView.axis = .vertical
+        self.btnNumberOfViews.contentHorizontalAlignment = .left
     }
-    
     
 }
