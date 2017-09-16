@@ -83,31 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         return true
     }
     
-    func saveDishes() {
-        FirebaseReference.savedDishes.classReference.child("kp5zT0aSdYMW07KQl7saWqHKoTw2").setValue(["-KoirmSdgfzq_00X7wKb" : true,
-                                                                                                     "-KoirsSGrDfo90S1zfcF" :true,
-                                                                                                     "-KojmXFzDHAS_VNQteXZ" :true,
-                                                                                                     "-Kok-iYMp5RnpCYrt1eg" :true,
-                                                                                                     "-Kok0CAF1XEgYy5BW-Gs" :true,
-                                                                                                     "-KokU4k3c9zCjlWeHikE" :true,
-                                                                                                     "-Kol6cpmBzuNfYZMOb2Q" :true,
-                                                                                                     "-Kol6rZGs6PsLysgltkB" :true,
-                                                                                                     "-KopSaap2aOyi6RiXJ0f" :true,
-                                                                                                     "-KorWZ4-FoajaO1BSAr-" :true,
-                                                                                                     "-Kot61HUs5xr1SuGwGbC" :true,
-                                                                                                     "-KoyUD3FBy5ASlrJSo_D" :true,
-                                                                                                     "-Kp0pPFfa4WiMsiv-iRx" :true,
-                                                                                                     "-Kp5fJ161TB2BOT8ZNL9" :true,
-                                                                                                     "-KpLkcU3a2zlP5UgWbwv" :true,
-                                                                                                     "-KpNwjKtxLS0KszaOJiP" :true,
-                                                                                                     "-Kpzg9qivXD4wLrXOUo7" :true,
-                                                                                                     "-KpzmdIcdNp7mgcANX3D" :true,
-                                                                                                     "-Kq-QSl20KKRxD38Nc_7" :true,
-                                                                                                     "-Kq-Qk5NIm8gUkUKtFh-" :true,
-                                                                                                     "-Kq-ROBm_Yerok_xk66O" :true,
-                                                                                                     "-Kq2eEGnacjLY6YDbkER": true])
-    }
-    
     func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
         let newID = FirebaseReference.notifications.generateAutoID()
         FirebaseReference.notifications.classReference.child(id).updateChildValues([
