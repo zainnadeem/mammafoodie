@@ -222,13 +222,14 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                                         dish.location = currentLocation.coordinate
                                                         dish.address = ""
                                                         
-                                                        if dish.mediaType != .liveVideo {
+                                                        if dish.mediaType == .vidup  {
                                                             dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
+                                                        } else if dish.mediaType == .picture {
+                                                            dish.endTimestamp = dish.createTimestamp.addingTimeInterval(60*60*24)
                                                         }
                                                         
                                                         DispatchQueue.main.async {
                                                             self.completion?(dish, self.selectedImage, self.selectedVideoPath)
-                                                            self.clearData()
                                                         }
                                                     } else {
                                                         self.showAlert("User not Found", message: "")

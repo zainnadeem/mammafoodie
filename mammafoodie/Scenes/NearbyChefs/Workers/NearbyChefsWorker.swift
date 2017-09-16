@@ -41,7 +41,6 @@ class NearbyChefsWorker : NSObject {
     }
     
     func prepareMarkers(for location: CLLocationCoordinate2D) -> [Marker] {
-        
         var markers = [Marker]()
         let extent = 10.9
         for index in 1...kClusterItemCount {
