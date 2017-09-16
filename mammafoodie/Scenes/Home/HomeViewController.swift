@@ -155,7 +155,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBAction func logout() {
         let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
         firebaseWorker.signOut(){ errorMessage in
-            if errorMessage != nil {
+            if let errorMessage = errorMessage {
                 print(errorMessage)
             } else {
                 print("Logged out successfully")

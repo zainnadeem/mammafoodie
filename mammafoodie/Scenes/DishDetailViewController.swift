@@ -100,7 +100,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let dishID = self.dishID {
+        if self.dishID != nil {
             self.output.stopObservingDish()
         }
     }
@@ -259,7 +259,46 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         let button = sender as! UIButton
         
-        if button.currentTitle! == "Request"{
+        if button.currentTitle == "Request"{
+            
+            let alertController: UIAlertController = UIAlertController(title: "Request dish", message: "Please enter desired quantity.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addTextField(configurationHandler: { (textField) in
+                textField.keyboardType = UIKeyboardType.numberPad
+            })
+            alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Request", style: UIAlertActionStyle.default, handler: { action in
+                self.showActivityIndicator()
+                let worker: RequestDishWorker = RequestDishWorker()
+                let quantity: Int = Int(alertController.textFields?.first?.text ?? "0") ?? 0
+                if let dish = self.dishForView?.dish {
+                    if quantity > 0 {
+                        worker.requestDish(dish: dish, quantity: quantity, completion: { (success, errorMessage) in
+                            self.hideActivityIndicator()
+                            if let errorMessage = errorMessage {
+                                self.showAlert("Error", message: errorMessage)
+                            } else {
+                                // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
+                                if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
+                                    let user2: MFUser = self.dishForView?.dish?.user {
+                                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: user2, { (success) in
+                                        if success {
+                                            
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                    }
+                }
+            }))
+            self.present(alertController, animated: true, completion: {
+                
+            })
+            
+            
+            
+            
+            
             let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "RequestDishViewController") as! RequestDishViewController
             vc.dish = self.dishForView?.dish
             self.present(vc, animated: true, completion: nil)
@@ -281,8 +320,8 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (String?) -> Void) {
-        DatabaseGateway.sharedInstance.getUserWith(userID: userID1) { (user1) in
-            DatabaseGateway.sharedInstance.getUserWith(userID: userID2, { (user2) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID1) { (user1) in
+            _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID2, { (user2) in
                 let latLong1 = user1?.addressLocation?.components(separatedBy: ",")
                 let latLong2 = user2?.addressLocation?.components(separatedBy: ",")
                 guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {

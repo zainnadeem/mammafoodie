@@ -15,7 +15,7 @@ class EditProfileworker {
     
     func getUserDataWith(userID:String, completion: @escaping (MFUser?)->Void){
         
-        DatabaseGateway.sharedInstance.getUserWith(userID: userID) { (user) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID) { (user) in
             completion(user)
         }
     }

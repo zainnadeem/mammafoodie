@@ -11,6 +11,7 @@ protocol LoginPresenterInput {
 protocol LoginPresenterOutput: class {
     func showHomeScreen()
     func viewControllerToPresent() -> UIViewController
+    func showErrorMessage(_ errorMessage: String)
 }
 
 class LoginPresenter: LoginPresenterInput, HUDRenderer {
@@ -43,9 +44,9 @@ class LoginPresenter: LoginPresenterInput, HUDRenderer {
     
     func loginCompletion(errorMessage:String?) {
         if let errorMessage = errorMessage {
-            self.showAlert(title: "Error!", message: errorMessage, okButtonText: "OK", cancelButtonText: nil, handler: { _ in})
             FirebaseLoginWorker().signOut({ (error) in
             })
+            self.output.showErrorMessage(errorMessage)
         } else {
             self.output.showHomeScreen()
         }

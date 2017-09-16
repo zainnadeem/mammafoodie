@@ -5,7 +5,7 @@ import UIKit
 extension LiveVideoMainPageViewController: LiveVideoMainPagePresenterOutput {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(segue: segue)
+        router.passDataToNextScene(segue: segue, sender: sender)
     }
 }
 

@@ -95,7 +95,7 @@ class OtherUsersProfileWorker {
     }
     
     func getFollowersForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping ([MFUser])->Void) {
-        DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID, frequency: frequency) { (followers) in
+        _ = DatabaseGateway.sharedInstance.getFollowersForUser(userID: userID, frequency: frequency) { (followers) in
             guard followers != nil else {
                 completion([])
                 return
@@ -104,7 +104,7 @@ class OtherUsersProfileWorker {
             let group = DispatchGroup()
             for userID in followers!.keys {
                 group.enter()
-                DatabaseGateway.sharedInstance.getUserWith(userID: userID){ (user) in
+                _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID){ (user) in
                     if user != nil {
                         users.append(user!)
                     }
@@ -119,7 +119,7 @@ class OtherUsersProfileWorker {
     }
     
     func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping ([MFUser])->Void) {
-        DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
+        _ = DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
             guard following != nil else {
                 completion([])
                 return
@@ -128,7 +128,7 @@ class OtherUsersProfileWorker {
             let group = DispatchGroup()
             for userID in following!.keys {
                 group.enter()
-                DatabaseGateway.sharedInstance.getUserWith(userID: userID){ (user) in
+                _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID){ (user) in
                     if user != nil {
                         users.append(user!)
                     }
@@ -171,7 +171,7 @@ class OtherUsersProfileWorker {
             }
             
             if let responseDict = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                if let responseDict = responseDict {
+                if responseDict != nil {
                     completion(true)
                 }
                 else {
