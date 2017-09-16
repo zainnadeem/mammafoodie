@@ -91,7 +91,7 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         self.selectedOption = tmp
         if self.selectedOption != .unknown && !self.step2Shown {
             self.step2Shown = true
-            self.step2VC.clearData()
+//            self.step2VC.clearData()
             self.output.showStep2(false)
         }
         self.viewStep1.isHidden = false
