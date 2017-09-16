@@ -260,15 +260,20 @@ extension DatabaseGateway {
     func createConversation(user1: MFUser, user2: MFUser, _ completion: @escaping ((Bool)->Void)) {
         let newConversationID = FirebaseReference.conversations.generateAutoID()
         let metaData: [String: Any] = ["id": newConversationID,"createdAt": Date().timeIntervalSinceReferenceDate, "user1": user1.id, "user2": user2.id, "user1Name": user1.name, "user2Name": user2.name]
+        
+        let key1: String = "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/"
+        let key2: String = "/\(FirebaseReference.userConversations.rawValue)/\(user1.id)/\(newConversationID)/"
+        let key3: String = "/\(FirebaseReference.userConversations.rawValue)/\(user2.id)/\(newConversationID)/"
+        
         let childUpdates = [
-            "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
-            "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
-            "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
+            key1: metaData,
+            key2: true,
+            key3: true
             ] as [AnyHashable : Any]
         
         let databaseRef = Database.database().reference()
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
-            if error != nil{
+            if error != nil {
                 completion(false)
             } else {
                 completion(true)

@@ -49,13 +49,11 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     
     func showMarkers(markers: [Marker]) {
         print("showing marker at location: \(String(describing: markers.first?.position))")
-        if markers != nil {
-            self.allMarks.removeAll()
-            self.allMarks.append(contentsOf: markers)
-            self.clusterManager.clearItems()
-            self.clusterManager.add(markers)
-            self.clusterManager.cluster()
-        }
+        self.allMarks.removeAll()
+        self.allMarks.append(contentsOf: markers)
+        self.clusterManager.clearItems()
+        self.clusterManager.add(markers)
+        self.clusterManager.cluster()
         print("Total Pins: \(self.clusterManager.algorithm.allItems().count)")
         let bounds = markers.reduce(GMSCoordinateBounds()) {
             $0.includingCoordinate($1.position)

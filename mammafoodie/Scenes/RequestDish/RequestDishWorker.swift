@@ -5,7 +5,7 @@ class RequestDishWorker {
     // MARK: - Business Logic
     func requestDish(dish:MFDish,quantity:Int, completion: @escaping (_ success:Bool, _ errorMessage:String?)->()){
         
-        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser else {return}
+        guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {return}
       
         let requestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/requestDish?dishId=\(dish.id)&dishName=\(dish.name)&userId=\(currentUser.id)&userFullname=\(currentUser.name!)&quantity=\(quantity)"
         

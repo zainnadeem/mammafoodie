@@ -39,7 +39,7 @@ class FirebaseLoginWorker: HUDRenderer {
             } else if let user = user { //Login Success
                 DispatchQueue.main.async {
                     AppDelegate.shared().currentUserFirebase = user
-                    DatabaseGateway.sharedInstance.getUserWith(userID: user.uid, { (user) in
+                    _ = DatabaseGateway.sharedInstance.getUserWith(userID: user.uid, { (user) in
                         AppDelegate.shared().currentUser = user
                         DispatchQueue.main.async {
                             completion(nil)
@@ -61,7 +61,7 @@ class FirebaseLoginWorker: HUDRenderer {
             } else if user != nil { //Login Success
                 DispatchQueue.main.async {
                     AppDelegate.shared().currentUserFirebase = Auth.auth().currentUser
-                    DatabaseGateway.sharedInstance.getUserWith(userID: Auth.auth().currentUser!.uid, { (user) in
+                    _ = DatabaseGateway.sharedInstance.getUserWith(userID: Auth.auth().currentUser!.uid, { (user) in
                         AppDelegate.shared().currentUser = user
                         DispatchQueue.main.async {
                             completion(nil)
