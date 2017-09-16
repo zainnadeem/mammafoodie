@@ -33,6 +33,12 @@ class DishDetailRouter: DishDetailRouterInput {
                     }
                 }
             }
+        } else if segue.identifier == "segueShowConversationDetail" {
+            if let navController = segue.destination as? UINavigationController {
+                if let destination = navController.viewControllers.first as? ChatViewController {
+                    destination.conversation = sender as? MFConversation
+                }
+            }
         }
     }
 }

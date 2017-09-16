@@ -95,12 +95,10 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     }
     
     func openDishPageWith(dishID:String) {
-        
         //Initiate segue and pass it to router in prepare for segue
         let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
         self.present(dishVC, animated: true, completion: nil)
-        
     }
     
     func openFavouriteDishes() {

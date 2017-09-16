@@ -280,9 +280,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                                 // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
                                 if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
                                     let user2: MFUser = self.dishForView?.dish?.user {
-                                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: user2, { (success) in
+                                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: user2, { (success, conversationId) in
                                         if success {
-                                            
+                                            // Open chat view controller
+                                            if let conversationId = conversationId {
+                                                self.openChatVC(conversationId: conversationId)
+                                            }
                                         }
                                     })
                                 }
@@ -294,14 +297,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             self.present(alertController, animated: true, completion: {
                 
             })
-            
-            
-            
-            
-            
-            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "RequestDishViewController") as! RequestDishViewController
-            vc.dish = self.dishForView?.dish
-            self.present(vc, animated: true, completion: nil)
         } else { //Buy now -- Open slots page
             self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: nil)
             //            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
@@ -309,6 +304,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             //            self.present(vc, animated: true, completion: nil)
         }
         
+    }
+    
+    func openChatVC(conversationId: String) {
+        DatabaseGateway.sharedInstance.getConversation(with: conversationId) { (conversationObject) in
+            self.performSegue(withIdentifier: "segueShowConversationDetail", sender: conversationObject)
+        }
     }
     
     func purchase(slots : UInt) {

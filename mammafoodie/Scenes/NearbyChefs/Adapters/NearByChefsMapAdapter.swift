@@ -107,10 +107,21 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
         } else if dish.mediaType == .vidup ||
             dish.mediaType == .picture {
-            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
+            if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
+            } else {
+                self.openDishPageWith(dishID: dish.id)
+            }
         }
     }
 
+    func openDishPageWith(dishID:String) {
+        //Initiate segue and pass it to router in prepare for segue
+        let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        dishVC.dishID = dishID
+        self.present(dishVC, animated: true, completion: nil)
+    }
+    
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
         marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
     }

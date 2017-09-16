@@ -38,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1587"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rff-hG-FPl" userLabel="Content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="607.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sIW-ly-cOO">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="337.5"/>
@@ -94,7 +94,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dish type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-Jy-Mor">
-                                                        <rect key="frame" x="8" y="46" width="44" height="21"/>
+                                                        <rect key="frame" x="8" y="46" width="49" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="org-2Z-1fg"/>
                                                         </constraints>
@@ -103,7 +103,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dish name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4k1-Ug-No3">
-                                                        <rect key="frame" x="8" y="75" width="80" height="22.5"/>
+                                                        <rect key="frame" x="8" y="75" width="90.5" height="22.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="IEZ-hb-viE"/>
                                                         </constraints>
@@ -112,7 +112,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgh-Th-vPn">
-                                                        <rect key="frame" x="215" y="72" width="30" height="30"/>
+                                                        <rect key="frame" x="212" y="72" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dgh-Th-vPn" secondAttribute="height" multiplier="1:1" id="lX4-en-P4v"/>
                                                             <constraint firstAttribute="height" constant="30" id="vhx-cf-diK"/>
@@ -124,7 +124,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uba-ry-b3g">
-                                                        <rect key="frame" x="269" y="72" width="30" height="30"/>
+                                                        <rect key="frame" x="267.5" y="72" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="hTn-Bw-D24"/>
                                                             <constraint firstAttribute="width" secondItem="uba-ry-b3g" secondAttribute="height" multiplier="1:1" id="kNL-Y7-lAi"/>
@@ -137,7 +137,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBX-ae-kvY">
-                                                        <rect key="frame" x="299" y="80" width="14" height="14.5"/>
+                                                        <rect key="frame" x="297.5" y="79" width="15.5" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12.270000457763672"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
                                                         <state key="normal" image="More"/>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fga-WQ-sdb">
-                                                        <rect key="frame" x="245" y="80" width="14" height="14.5"/>
+                                                        <rect key="frame" x="242" y="79" width="15.5" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12.270000457763672"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -298,7 +298,7 @@
                                                 </constraints>
                                             </view>
                                             <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-w4-1hA">
-                                                <rect key="frame" x="16" y="505" width="359" height="82"/>
+                                                <rect key="frame" x="16" y="505" width="359" height="102.5"/>
                                                 <string key="text">Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test </string>
                                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,6 +425,7 @@
                         <outlet property="scrollView" destination="ntl-rQ-diw" id="tqE-bE-32h"/>
                         <segue destination="IyS-1P-N0R" kind="presentation" identifier="seguePresentSlotSelectionViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UWk-Xu-ZDO"/>
                         <segue destination="drN-dc-HK2" kind="show" identifier="segueShowPaymentViewController" id="ZBZ-2d-msx"/>
+                        <segue destination="ItD-Yh-k6a" kind="show" identifier="segueShowConversationDetail" id="7MU-Er-os5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTw-O1-YKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -438,6 +439,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDd-Kc-ybS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1616" y="261"/>
+        </scene>
+        <!--navConversation-->
+        <scene sceneID="hxX-GY-XUp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Siri" referencedIdentifier="navConversation" id="ItD-Yh-k6a" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LcN-Bo-gOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1591" y="342"/>
         </scene>
         <!--NavPayment-->
         <scene sceneID="aOW-mn-CNa">
