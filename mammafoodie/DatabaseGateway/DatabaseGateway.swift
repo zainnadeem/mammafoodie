@@ -257,7 +257,7 @@ extension DatabaseGateway {
         }
     }
     
-    func createConversation(user1: MFUser, user2: MFUser, _ completion: @escaping ((Bool)->Void)) {
+    func createConversation(user1: MFUser, user2: MFUser, _ completion: @escaping ((Bool, String?)->Void)) {
         let newConversationID = FirebaseReference.conversations.generateAutoID()
         let metaData: [String: Any] = ["id": newConversationID,"createdAt": Date().timeIntervalSinceReferenceDate, "user1": user1.id, "user2": user2.id, "user1Name": user1.name, "user2Name": user2.name]
         
@@ -274,9 +274,10 @@ extension DatabaseGateway {
         let databaseRef = Database.database().reference()
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
             if error != nil {
-                completion(false)
+                databaseReference.database.reference()
+                completion(false, nil)
             } else {
-                completion(true)
+                completion(true, newConversationID)
             }
         }
     }
@@ -288,11 +289,8 @@ extension DatabaseGateway {
         observer.observerId =  FirebaseReference.userConversations.classReference.child(userID).observe(.childAdded, with: { (conversationData) in
             //print(messageData)
             print(conversationData.key)
-            self.getConversation(with: conversationData.key, { (conversationDictionary) in
-                if conversationDictionary != nil {
-                    let conversation = MFConversation(from: conversationDictionary!)
-                    completion(conversation)
-                }
+            self.getConversation(with: conversationData.key, { (conversation) in
+                completion(conversation)
             })
         }) { (error) in
             print(error.localizedDescription)
@@ -302,13 +300,13 @@ extension DatabaseGateway {
         
     }
     
-    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()) {
+    func getConversation(with conversationID:String, _ completion:@escaping (MFConversation?)->()) {
         FirebaseReference.conversations.classReference.child(conversationID).observeSingleEvent(of: .value, with: { (conversation) in
             guard let conversationDictionary = conversation.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            completion(conversationDictionary)
+            completion(MFConversation(from: conversationDictionary))
         })
     }
     
