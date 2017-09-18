@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         FirebaseReference.notifications.classReference.child(id).updateChildValues([
             newID : [
                 "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
-                "participantUserId": id,
+                "participantUserID": id,
                 "plainText": "VidUp Test!",
                 "redirectId": "-KrUd41c4lXHO_KRBAx5",
                 //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
@@ -105,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func updateToken() {
         if let token = Messaging.messaging().fcmToken {
             if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                Messaging.messaging().subscribe(toTopic: "TestNotifications")
                 print("Updating user:\(currentUser.id) for Token: \(token)")
                 DatabaseGateway.sharedInstance.setDeviceToken(token, for: currentUser.id, { (error) in
                     print("Token: \(token)\n Updated for user: \(currentUser.id)")
@@ -114,7 +115,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func askPermissionForRemoteNotifications(with application: UIApplication) {
-        Messaging.messaging().shouldEstablishDirectChannel = true
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -128,7 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
         application.registerForRemoteNotifications()
     }
     
@@ -180,6 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("Device Token:" + deviceTokenString)
+        Messaging.messaging().apnsToken = deviceToken
         self.updateToken()
     }
     
