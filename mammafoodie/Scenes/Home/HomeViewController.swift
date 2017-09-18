@@ -48,6 +48,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet weak var viewOptionMenu: UIView!
     @IBOutlet weak var conTopViewActivity: NSLayoutConstraint!
     @IBOutlet weak var btnSwitchMode: UIButton!
+    @IBOutlet weak var navViewLogo: UIView!
     
     // MARK: - Object lifecycle
     override func awakeFromNib() {
@@ -95,6 +96,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navViewLogo.superview?.bringSubview(toFront: self.navViewLogo)
     }
     
     override func viewDidAppear(_ animated: Bool) {
