@@ -69,8 +69,8 @@ class WalletViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.currency
         formatter.locale = Locale.current
-        self.lblWalletBalance.text = formatter.string(from: amount as NSNumber)
-        self.lblPendingBalance.text = "Pending : \(formatter.string(from: pending as NSNumber) ?? "$0")"
+        self.lblWalletBalance.text = formatter.string(from: (amount/100) as NSNumber)
+        self.lblPendingBalance.text = "Pending : \(formatter.string(from: (pending/100) as NSNumber) ?? "$0")"
     }
     
     func getCurrentBalance() {
