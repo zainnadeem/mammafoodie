@@ -88,18 +88,18 @@ class StripeVerificationViewController: UIViewController {
         self.isDocumentUploaded = false
         let headers: HTTPHeaders = ["Authorization" : "Bearer sk_test_ILoBhJpbX4bmuygd0NQs23V5"]
         if let url = URL.init(string: "https://uploads.stripe.com/v1/files"),
-            let imageData = UIImagePNGRepresentation(documentImage),
+            let imageData = UIImageJPEGRepresentation(documentImage, 0.8),
             let purpose = "identity_document".data(using: String.Encoding.utf8) {
             Alamofire.upload(multipartFormData: { (formData) in
                 formData.append(purpose, withName: "purpose")
-                formData.append(imageData, withName: "file", fileName: "image", mimeType: "image/png")
+                formData.append(imageData, withName: "file", fileName: "image", mimeType: "image/jpeg")
             }, to: url, headers : headers) { (result) in
                 DispatchQueue.main.async {
-                    hud.hide(animated: true)
                     switch result {
                     case .success(let upload, _, _):
                         upload.responseJSON { response in
                             print(response.result)
+                            hud.hide(animated: true)
                             if let jsonResponse = response.result.value as? [String : Any] {
                                 completion((jsonResponse["id"] as? String) ?? nil)
                             } else {
@@ -107,6 +107,7 @@ class StripeVerificationViewController: UIViewController {
                             }
                         }
                     case .failure(let encodingError):
+                        hud.hide(animated: true)
                         print(encodingError)
                         completion(nil)
                     }
@@ -118,20 +119,20 @@ class StripeVerificationViewController: UIViewController {
             print("This should not happen")
         }
     }
-    
+
     func finished(_ finished : Bool) {
         self.completion?(finished)
         self.dismiss(animated: true) {
         }
     }
-    
+
     func setDate() {
         let date = self.pickerDOB.date
         let formatter = DateFormatter.init()
         formatter.dateFormat = "MM/dd/yyyy"
         self.txtDOB.text = formatter.string(from: date)
     }
-    
+
     @IBAction func onUploadDocumentTap(_ sender: UIButton) {
         self.imagePicker.allowsEditing = false
         self.imagePicker.mediaTypes = [kUTTypeImage as String]
@@ -142,14 +143,14 @@ class StripeVerificationViewController: UIViewController {
             self.imagePicker.sourceType = .photoLibrary
         }
         self.present(self.imagePicker, animated: true) {
-            
+
         }
     }
-    
+
     @IBAction func onCancelTap(_ sender: UIButton) {
         self.finished(false)
     }
-    
+
     @IBAction func onSubmiTap(_ sender: UIButton) {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         if self.isDocumentUploaded  {
@@ -204,7 +205,7 @@ class StripeVerificationViewController: UIViewController {
             self.showAlert("Upload Document first!", message: "")
         }
     }
-    
+
     @IBAction func onDOBChnage(_ sender: UIDatePicker) {
         self.setDate()
     }
@@ -213,33 +214,38 @@ class StripeVerificationViewController: UIViewController {
 extension StripeVerificationViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true) {
-            
+
         }
     }
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.uploadDocumentToStripe(originalImage, completion: { (fileID) in
                 DispatchQueue.main.async {
-                    self.isDocumentUploaded = (fileID != nil)
-                    self.documentID = fileID
+                    if let fileID = fileID {
+                        self.isDocumentUploaded = true
+                        self.documentID = fileID
+                    } else {
+                        self.isDocumentUploaded = false
+                        self.showAlert("Error!", message: "Document upload failed!")
+                    }
                 }
             })
         }
         picker.dismiss(animated: true) {
-            
+
         }
     }
 }
 
 extension StripeVerificationViewController : UITextFieldDelegate {
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == self.txtDOB {
             self.setDate()
         }
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == self.txtSSN {
             if let text = textField.text {

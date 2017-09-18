@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Firebase
 import DZNEmptyDataSet
+import MBProgressHUD
 
 class WalletViewController: UIViewController {
     
@@ -74,30 +75,31 @@ class WalletViewController: UIViewController {
     }
     
     func getCurrentBalance() {
-        if let currentUser = Auth.auth().currentUser {
-            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            FirebaseReference.stripeCustomers.classReference.child(currentUser.id).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let account = snapshot.value as? [String : Any] {
                     if let charges = account["charges"] as? [String : [String : Any]] {
                         for (_, value) in charges {
                             self.transactions.append(self.transaction(from: value))
-//                            if let amount = value["amount"] as? Double {
-//                                self.transactions.append("\(amount)")
-//                            }
                         }
                         DispatchQueue.main.async {
                             self.tblTransactions.reloadData()
                         }
                     }
-                    
+
                     if let accountID = account["account_id"] as? String {
                         if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/retreiveBalance") {
                             let params : Parameters = ["accountId" : accountID]
+                            let hud = MBProgressHUD.showAdded(to: self.viewHeaderWrapper, animated: true)
                             Alamofire.request(url, method: .get, parameters: params).responseJSON(completionHandler: { (response) in
-                                if let jsonResponse = response.result.value as? [String : Any] {
-                                    self.setWalletAmount((jsonResponse["available"] as? Double) ?? 0, (jsonResponse["pending"] as? Double) ?? 0)
-                                    print("Balance: \(jsonResponse)")
-                                } else {
-                                    print("Balance \(response)")
+                                DispatchQueue.main.async {
+                                    hud.hide(animated: true)
+                                    if let jsonResponse = response.result.value as? [String : Any] {
+                                        self.setWalletAmount((jsonResponse["available"] as? Double) ?? 0, (jsonResponse["pending"] as? Double) ?? 0)
+                                        print("Balance: \(jsonResponse)")
+                                    } else {
+                                        print("Balance \(response)")
+                                    }
                                 }
                             })
                         }
@@ -106,7 +108,7 @@ class WalletViewController: UIViewController {
             })
         }
     }
-    
+
     func transaction(from raw: [String: Any]) -> MFTransaction {
         let transaction: MFTransaction = MFTransaction()
         
@@ -135,19 +137,19 @@ class WalletViewController: UIViewController {
     }
     
     @IBAction func onSendMoneyToBank(_ sender: UIButton) {
-        if let currentUser = Auth.auth().currentUser {
-            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            FirebaseReference.stripeCustomers.classReference.child(currentUser.id).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let stripeAccount = snapshot.value as? [String : Any] {
-                    if let externalAccounts = stripeAccount["externalAccounts"] {
-                        
-                    } else {
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if currentUser.isStripeAccountVerified {
+                            if let externalAccounts = stripeAccount["externalAccounts"] {
+                            } else {
+                                BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
+
+                                }
+                            }
+                        } else {
                             StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
-                                //                                DispatchQueue.main.async {
-                                //                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-                                //
-                                //                                    }
-                                //                                }
                             }
                         }
                     }
@@ -155,7 +157,7 @@ class WalletViewController: UIViewController {
             })
         }
     }
-    
+
 }
 
 extension WalletViewController : UITableViewDataSource, UITableViewDelegate {

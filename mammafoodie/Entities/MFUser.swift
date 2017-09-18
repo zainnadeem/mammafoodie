@@ -38,7 +38,7 @@ class MFUser {
     
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
-    
+    var isStripeAccountVerified: Bool = false
     var phone: MFUserPhone = MFUserPhone()
     
     //
@@ -87,7 +87,11 @@ class MFUser {
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
-        
+
+        if let raw = Dictionary["isStripeAccountVerified"] as? Bool {
+            self.isStripeAccountVerified = raw
+        }
+
         if let rawPhoneInfo = Dictionary["phone"] as? [String:String] {
             self.phone.countryCode = rawPhoneInfo["countryCode"] ?? ""
             self.phone.phone = rawPhoneInfo["phone"] ?? ""
