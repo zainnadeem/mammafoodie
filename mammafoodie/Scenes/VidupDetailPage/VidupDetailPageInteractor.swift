@@ -11,6 +11,8 @@ protocol VidupDetailPageInteractorInput {
     func stopTimer()
     func dishLiked(user_id:String,dish_id: String)
     func dishUnliked(user_id:String,dish_id: String)
+    func stopPlayback()
+    func startPlayback()
 }
 
 protocol VidupDetailPageInteractorOutput {
@@ -28,10 +30,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     var VidupTimerworker: TimerWorker = TimerWorker()
     var mediaPlaying:Bool = false
     
-    
-    
     // MARK: - Business logic
-    
     func setupMediaPlayer(view: UIView, user_id: String, dish_id: String, dish: MFDish?) {
         //Setup the media player
         Vidupworker.delegate = self
@@ -103,8 +102,7 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     func resetViewBounds(view:UIView){
         Vidupworker.resetMediaPlayerViewBounds(view: view)
     }
-    
-    
+
     func HideandUnhideView() {
         output.HideandUnhideViewInteractor()
     }
@@ -112,19 +110,24 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
     func DisplayTime(Time:TimeInterval){
         output.DisplayTimeInteractor(Time: Time)
     }
-    
-    
+
     func stopTimer() {
         VidupTimerworker.stopTimer()
     }
-    
-    
+
     func dishLiked(user_id:String,dish_id: String){
         Vidupworker.likeDish(Id: user_id, DishId: dish_id)
     }
-    
-    
+
     func dishUnliked(user_id:String,dish_id: String){
         Vidupworker.UnlikeDish(Id: user_id, DishId: dish_id)
+    }
+
+    func startPlayback() {
+        self.Vidupworker.avPlayer.play()
+    }
+
+    func stopPlayback() {
+        self.Vidupworker.stopPayback()
     }
 }

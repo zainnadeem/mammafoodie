@@ -116,7 +116,19 @@ class PaymentViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 0 {
+                if viewControllers[0] is PaymentViewController {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func updateDeliveryCharge() {

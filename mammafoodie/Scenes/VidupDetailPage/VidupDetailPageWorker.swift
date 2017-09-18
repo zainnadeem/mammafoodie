@@ -8,11 +8,10 @@ class VidupDetailPageWorker:NSObject {
     
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
-    var delegate:Interactordelegate?
+    var delegate: Interactordelegate?
     let loadingIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     // MARK: - Business Logic
-    
     func SetupMediaPlayer(view:UIView){
         
         view.backgroundColor = UIColor.black
@@ -47,13 +46,11 @@ class VidupDetailPageWorker:NSObject {
         loadingIndicatorView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
     }
     
-    func PlayVideo(MediaURL:URL){
+    func PlayVideo(MediaURL:URL) {
         let playerItem = AVPlayerItem(url: MediaURL)
         avPlayer.replaceCurrentItem(with: playerItem)
         loadingIndicatorView.startAnimating()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.avPlayer.currentItem)
-        
         avPlayer.play()
     }
     
@@ -81,7 +78,7 @@ class VidupDetailPageWorker:NSObject {
     }
     
     func GetUserDetails(Id:String,completion:@escaping(_ UserInfo:MFUser)->()){
-        DatabaseGateway.sharedInstance.getUserWith(userID: Id) { (UserInfo) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: Id) { (UserInfo) in
             if UserInfo != nil{
                 completion(UserInfo!)
             }
@@ -95,8 +92,7 @@ class VidupDetailPageWorker:NSObject {
     }
     
     func GetDishInfo(Id:String,completion:@escaping(_ DishInfo:MFDish?)->()){
-        
-        DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
+        _ = DatabaseGateway.sharedInstance.getDishWith(dishID: Id) { (DishInfo) in
             completion(DishInfo)
         }
     }
@@ -107,28 +103,32 @@ class VidupDetailPageWorker:NSObject {
         }
     }
     
-    func likeDish(Id:String,DishId:String){
+    func likeDish(Id:String,DishId:String) {
         let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/likeDish?dishId=\(DishId)&userId=\(Id)"
-        
         Alamofire.request(RequestURL)
             .responseString { response in
                 print(response.result.error ?? "")
         }
     }
     
-    func UnlikeDish(Id:String,DishId:String){
+    func UnlikeDish(Id:String,DishId:String) {
         let RequestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/unlikeDish?dishId=\(DishId)&userId=\(Id)"
-        
         Alamofire.request(RequestURL)
             .responseString { response in
                 print(response.result.error ?? "")
         }
     }
-    
-    
+
     func getexpireTime(endTimestamp:Date)->Double{
         return endTimestamp.timeIntervalSinceReferenceDate
     }
-    
-    
+
+    func startPlayback() {
+        self.avPlayer.play()
+    }
+
+    func stopPayback() {
+        self.avPlayer.pause()
+    }
+
 }
