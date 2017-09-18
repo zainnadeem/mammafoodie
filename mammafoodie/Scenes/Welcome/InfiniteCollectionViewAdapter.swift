@@ -36,6 +36,12 @@ class InfiniteCollectionViewAdapter: NSObject, UICollectionViewDelegate, UIColle
         if count > (self.totalCount / 2) - 1 {
             count = self.totalCount - 1 - count
         }
+        
+        count = count % 30
+        
+//        if count > 30 {
+//            count = 0
+//        }
         if count < 0 {
             count = 0
         }

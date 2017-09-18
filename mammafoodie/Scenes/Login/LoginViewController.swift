@@ -7,6 +7,7 @@ import KLCPopup
 protocol LoginViewControllerInput {
     func showHomeScreen()
     func viewControllerToPresent() -> UIViewController
+    func showErrorMessage(_ errorMessage: String)
 }
 
 protocol LoginViewControllerOutput {
@@ -51,8 +52,8 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     // MARK: - View lifecycle
     override func viewDidLoad() {
         
-        self.txtEmail.text = "akshit.zaveri@gmail.com"
-        self.txtPassword.text = "1111111111"
+//        self.txtEmail.text = "akshit.zaveri@gmail.com"
+//        self.txtPassword.text = "1111111111"
         
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -120,6 +121,10 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
         KLCforgotPasswordPopup?.dismiss(true)
     }
     
+    func showErrorMessage(_ errorMessage: String) {
+        self.showAlert("Error!", message: errorMessage, actionTitle: "OK", actionStyle: UIAlertActionStyle.default)
+    }
+    
     func updateShadow() {
         if self.shapeLayer == nil {
             self.self.loginButn.superview?.layoutIfNeeded()
@@ -150,8 +155,14 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     
     @IBAction func loginWithFireBase(sender: UIButton) {
         guard validateCredentials() && isValidEmail(emailStr: txtEmail.text!) else {return}
+        self.resignResponders()
         let credentials = Login.Credentials(email: txtEmail.text!, password: txtPassword.text!)
         output.loginWith(credentials: credentials)
+    }
+    
+    func resignResponders() {
+        self.txtEmail.resignFirstResponder()
+        self.txtPassword.resignFirstResponder()
     }
     
     @IBAction func logout(sender: UIButton) {
@@ -159,17 +170,18 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     @IBAction func btnLoginWithFacebookTapped(_ sender: UIButton) {
+        self.resignResponders()
         self.output.loginWithFacebook()
     }
     
     @IBAction func btnLoginWithGoogleTapped(_ sender: UIButton) {
+        self.resignResponders()
         self.output.loginWithGoogle()
     }
     
     //Validations
     func validateCredentials() -> Bool {
         guard (txtEmail.text != nil && txtPassword.text != nil), !txtEmail.text!.isEmpty, !txtPassword.text!.isEmpty else {
-            
             let alertController = UIAlertController(title: "Error" , message: "Please enter the login credentials.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)

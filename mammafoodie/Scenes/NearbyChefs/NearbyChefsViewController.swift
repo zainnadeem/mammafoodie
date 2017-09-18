@@ -120,7 +120,8 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         self.txtSearch.layer.cornerRadius = 18.5
         self.txtSearch.layer.shadowRadius = 5.0
         self.txtSearch.layer.shadowOffset = CGSize(width: 0, height: 5)
-        self.txtSearch.layer.shadowColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.54).cgColor
+        self.txtSearch.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.54).cgColor
+//        init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.54).cgColor
         self.txtSearch.delegate = self
         let tintColor : UIColor = UIColor.init(red: 21.0/255.0, green: 33.0/255.0, blue: 52.0/255.0, alpha: 1)
         self.txtSearch.setLeftImage(#imageLiteral(resourceName: "iconSearch"), withPadding: CGSize.init(width: 10, height: 10), tintColor: tintColor)
@@ -172,7 +173,7 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.dismiss(animated: true) { 
+        self.dismiss(animated: true) {
             
         }
     }

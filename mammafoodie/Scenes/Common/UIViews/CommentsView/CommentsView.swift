@@ -4,6 +4,8 @@ typealias EmojiTappedClosure = ((UIButton) -> Void)
 
 class CommentsView: UIView {
     
+    @IBOutlet weak var conWidthBtnEmoji: NSLayoutConstraint!
+    
     var view: UIView!
     var list: [MFComment] = []
     var tableViewAdapter: CommentsTableViewAdapter = CommentsTableViewAdapter()
@@ -13,8 +15,35 @@ class CommentsView: UIView {
             self.load()
         }
     }
-    
+    var likeButtonTapped: (()->Void)?
     var emojiTapped : EmojiTappedClosure?
+    
+    private var _shouldShowEmoji: Bool = true
+    var shouldShowEmoji: Bool {
+        get {
+            return self._shouldShowEmoji
+        }
+        set {
+            self._shouldShowEmoji = newValue
+            
+            var newWidth: CGFloat = 40
+            if newValue == false {
+                newWidth = 0
+            }
+             self.conWidthBtnEmoji.constant = newWidth
+        }
+    }
+    
+    private var _likesCount: Int = 0
+    var likesCount: Int {
+        get {
+            return self._likesCount
+        }
+        set {
+            self._likesCount = newValue
+            self.btnLike.setTitle("\(newValue)", for: UIControlState.normal)
+        }
+    }
     
     var user: MFUser!
     let maxAllowedHeightOfTextView: CGFloat = 100
@@ -73,8 +102,6 @@ class CommentsView: UIView {
     func xibSetup() {
         self.view = loadViewFromNib()
         
-        
-        
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         self.addSubview(self.view)
         
@@ -100,6 +127,10 @@ class CommentsView: UIView {
         // Assumes UIView is top level and only object in CustomView.xib file
         let view = nib.instantiate(withOwner:self, options: nil)[0] as! UIView
         return view
+    }
+    
+    @IBAction func onBtnLikeTap(_ sender: UIButton) {
+        self.likeButtonTapped?()
     }
 }
 

@@ -11,32 +11,35 @@ class VidupDetailPageWorker:NSObject {
     var delegate:Interactordelegate?
     let loadingIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
-    
-    
     // MARK: - Business Logic
-    
     
     func SetupMediaPlayer(view:UIView){
         
         view.backgroundColor = UIColor.black
-        avPlayerLayer = AVPlayerLayer(player: avPlayer)
-        view.layer.insertSublayer(avPlayerLayer, at: 0)
+        self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        view.layer.insertSublayer(self.avPlayerLayer, at: 0)
         
-        let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
-        playandpauseTap.numberOfTapsRequired = 1
-        view.addGestureRecognizer(playandpauseTap)
+        var frame: CGRect = self.avPlayerLayer.frame
+        frame.size = view.frame.size
+        self.avPlayerLayer.frame = frame
+        
+        //        let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
+        //        view.addGestureRecognizer(playandpauseTap)
         
         let fullscreenTap = UITapGestureRecognizer(target: self, action: #selector(FullScreenVideo(ViewTapped:)))
-        fullscreenTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(fullscreenTap)
         
-        playandpauseTap.require(toFail: fullscreenTap)
+        //        playandpauseTap.require(toFail: fullscreenTap)
         
-        loadingIndicatorView.hidesWhenStopped = true
-        view.addSubview(loadingIndicatorView)
-        avPlayer.addObserver(self, forKeyPath: "currentItem.playbackLikelyToKeepUp",
-                             options: .new, context: &playbackLikelyToKeepUpContext)
-        
+        self.loadingIndicatorView.hidesWhenStopped = true
+        view.addSubview(self.loadingIndicatorView)
+        self.avPlayer.addObserver(self, forKeyPath: "currentItem.playbackLikelyToKeepUp",
+                                  options: .new, context: &playbackLikelyToKeepUpContext)
+    }
+    
+    func playerItemDidPlayToEndTime(_ notification: Notification) {
+        avPlayer.seek(to: kCMTimeZero)
+        avPlayer.play()
     }
     
     func resetMediaPlayerViewBounds(view:UIView){
@@ -48,6 +51,9 @@ class VidupDetailPageWorker:NSObject {
         let playerItem = AVPlayerItem(url: MediaURL)
         avPlayer.replaceCurrentItem(with: playerItem)
         loadingIndicatorView.startAnimating()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.avPlayer.currentItem)
+        
         avPlayer.play()
     }
     

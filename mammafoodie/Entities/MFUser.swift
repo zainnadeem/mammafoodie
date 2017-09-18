@@ -1,5 +1,16 @@
 import Foundation
 
+struct MFUserPhone {
+    var countryCode: String = ""
+    var phone: String = ""
+    
+    init() {}
+    
+    func fullString() -> String {
+        return self.countryCode + self.phone
+    }
+}
+
 class MFUser {
     var id: String
     var name: String!
@@ -20,17 +31,21 @@ class MFUser {
     var addressDetails: MFUserAddress?
     var addressLocation: String?
     //    var addressID:String?
-    var picture: String?
+    
+    var picture: URL? {
+        return DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.id)
+    }
+    
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
     
-    var phone: String = ""
+    var phone: MFUserPhone = MFUserPhone()
     
     //
     //    var userActivity: [MFNewsFeed:Date] = [:]
     //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
     //    var boughtDishes: [MFMedia:Date] = [:] // dishId:Date
-    //    var favoriteDishes: [MFMedia:Date] = [:] // dishId:Date
+    //    var favouriteDishes: [MFMedia:Date] = [:] // dishId:Date
     //    var likedDishes: [MFMedia:Date] = [:] // dishId:Date
     //
     //    var followers: [MFUser:Date] = [:] // [userId:Date]
@@ -44,7 +59,7 @@ class MFUser {
     //    var userActivity: [String:Bool] = [:]   //[MFNewsFeed.id : true]
     //    var cookedDishes: [String:Bool] = [:] // dishId:Date
     //    var boughtDishes: [String:Bool] = [:] // dishId:Date
-    //    var favoriteDishes: [String:Bool] = [:] // dishId:Date
+    //    var favouriteDishes: [String:Bool] = [:] // dishId:Date
     //    var likedDishes: [String:Bool] = [:] // dishId:Date
     //
     //    var followers: [String:Bool] = [:] // [userId:Date]
@@ -61,7 +76,7 @@ class MFUser {
         
         self.id = Dictionary["id"] as? String ?? ""
         self.name = Dictionary["name"] as? String ?? ""
-        self.picture = Dictionary["picture"] as? String ?? ""
+//        self.picture = Dictionary["picture"] as? String ?? ""
         self.address = Dictionary["address"] as? String ?? ""
         
         if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
@@ -72,13 +87,17 @@ class MFUser {
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
-        self.phone = Dictionary["phone"] as? String ?? ""
+        
+        if let rawPhoneInfo = Dictionary["phone"] as? [String:String] {
+            self.phone.countryCode = rawPhoneInfo["countryCode"] ?? ""
+            self.phone.phone = rawPhoneInfo["phone"] ?? ""
+        }
         
         //        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
         //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
         //        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
         //        self.boughtDishes = Dictionary["boughtDishes"] as? [String:Bool] ?? [:]
-        //        self.favoriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
+        //        self.favouriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
         //        self.likedDishes = Dictionary["likedDished"] as? [String:Bool] ?? [:]
         //        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
         //        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
@@ -88,14 +107,14 @@ class MFUser {
     init(id: String, name: String, picture:String, profileDescription: String) {
         self.id = id
         self.name = name
-        self.picture = picture
+//        self.picture = picture
         self.profileDescription = profileDescription
     }
     
     init(id: String, name: String, picture:String, profileDescription: String, email:String) {
         self.id = id
         self.name = name
-        self.picture = picture
+//        self.picture = picture
         self.profileDescription = profileDescription
         self.email = email
     }

@@ -37,9 +37,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet var viewActivityMenuChooser: UIView!
     @IBOutlet weak var viewActivityIcon: UIView!
     @IBOutlet weak var viewMenuIcon: UIView!
-    @IBOutlet weak var clnCuisineList: UICollectionView!
     @IBOutlet weak var viewSwitchMode: UIView!
-    @IBOutlet weak var conLeadingViewCuisineSelectionIndicator: NSLayoutConstraint!
     @IBOutlet weak var viewOptionActivity: UIView!
     @IBOutlet weak var viewOptionMenu: UIView!
     @IBOutlet weak var conTopViewActivity: NSLayoutConstraint!
@@ -141,7 +139,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBAction func btnSwitchModeTapped(_ sender: UIButton) {
         let shouldResetContentOffset: Bool = self.tblList.contentOffset.y > self.viewLiveVideoAndVidups.frame.height
         let newContentOffset: CGPoint = CGPoint(x: 0, y: self.viewLiveVideoAndVidups.frame.height)
-        
+        if shouldResetContentOffset {
+            self.tblList.setContentOffset(newContentOffset, animated: false)
+        }
         if self.isLiveVideosViewExpanded || self.isVidupsViewExpanded {
             
         }
@@ -150,16 +150,12 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         } else {
             self.switchToActivityMode()
         }
-        
-        if shouldResetContentOffset {
-            self.tblList.setContentOffset(newContentOffset, animated: false)
-        }
     }
     
     @IBAction func logout() {
         let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
         firebaseWorker.signOut(){ errorMessage in
-            if errorMessage != nil {
+            if let errorMessage = errorMessage {
                 print(errorMessage)
             } else {
                 print("Logged out successfully")
@@ -315,7 +311,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             } else {
                 selectedLiveVideo.accessMode = MFDishMediaAccessMode.viewer
                 self.startCircleFrame = self.clnLiveVideos.convert(cellFrame, to: self.view)
-                self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: selectedLiveVideo)
+                self.openDishDetails(selectedLiveVideo)
             }
         }
         self.liveVideosAdapter.didSelectViewAll = { (cellFrame) in
@@ -337,7 +333,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
             } else {
                 selectedVidup.accessMode = MFDishMediaAccessMode.viewer
                 self.startCircleFrame = self.clnVidups.convert(cellFrame, to: self.view)
-                self.performSegue(withIdentifier: "segueShowVidupDetails", sender: selectedVidup)
+                self.openDishDetails(selectedVidup)
             }
         }
         self.vidupsAdapter.didSelectViewAll = { (cellFrame) in
@@ -350,25 +346,66 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
         self.tblList.backgroundView = self.viewTableViewBackground
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.tableViewAdapter.setup(with: self.tblList, user: currentUser, { (path, id) in
-                DispatchQueue.main.async {
-                    self.openScreen(for: path, id: id)
-                }
+                self.openScreen(for: path, id: id)
+                //                    self.openProfile(id)
             })
             self.tableViewAdapter.sectionHeaderView = self.viewActivityMenuChooser
             self.tableViewAdapter.loadMenu()
+            
+            self.tableViewAdapter.onOptions = { (dish) in
+                let alert = UIAlertController.init(title: "Choose reason to report", message: nil, preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction.init(title: "Inappropriate", style: .default, handler: { (action) in
+                    self.removeSavedDish(dish)
+                }))
+                
+                alert.addAction(UIAlertAction.init(title: "Offensive", style: .default, handler: { (action) in
+                    self.removeSavedDish(dish)
+                }))
+                
+                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
+                    
+                }))
+                
+                self.present(alert, animated: true, completion: {
+                    
+                })
+            }
+            
+            self.tableViewAdapter.onBookmark = { (dish) in
+                self.showAlert("Remove \"\(dish.name)\" from Saved Dishes?", message: nil, actionTitles: ["Yes"], cancelTitle: "No", actionhandler: { (action, index) in
+                    self.removeSavedDish(dish)
+                }, cancelActionHandler: { (action) in
+                    
+                })
+            }
+            
+            self.tableViewAdapter.onOrderNow = { (dish) in
+                self.performSegue(withIdentifier: "segueShowDealDetails", sender: (dish, true))
+            }
         }
+    }
+    
+    func removeSavedDish(_ dish: MFDish) {
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            DatabaseGateway.sharedInstance.toggleDishBookmark(userID: currentUser.id, dishID: dish.id, shouldBookmark: false)
+            self.tableViewAdapter.removeSavedDish(dish)
+        }
+    }
+    
+    func openProfile(_ userId: String) {
+        var type: ProfileType = .othersProfile
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if currentUser.id == userId {
+                type = .ownProfile
+            }
+        }
+        self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, userId))
     }
     
     func openScreen(for path: String, id: String) {
         switch path {
         case FirebaseReference.users.rawValue:
-            var type: ProfileType = .othersProfile
-            if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-                if currentUser.id == id {
-                    type = .ownProfile
-                }
-            }
-            self.performSegue(withIdentifier: "segueShowUserProfileVC", sender: (type, id))
+            self.openProfile(id)
             
         case FirebaseReference.dishes.rawValue:
             self.openDish(with: id)
@@ -381,11 +418,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     func openDish(with id: String) {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
-                if let _ = dish.endTimestamp {
-                    self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
-                } else {
-                    self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-                }
+                self.openDishDetails(dish)
             }
         }
     }
@@ -421,11 +454,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     func openDishDetails(_ dish: MFDish) {
         self.startCircleFrame = CGRect(origin: self.view.center, size: CGSize(width: 1, height: 1))
-        dish.accessMode = .owner
-        if dish.mediaType == .liveVideo {
+        if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+            dish.accessMode = .owner
+        } else {
+            dish.accessMode = .viewer
+        }
+        if dish.mediaType == .liveVideo &&
+            dish.endTimestamp == nil {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-        } else if dish.mediaType == .vidup {
-            self.performSegue(withIdentifier: "segueShowVidupDetails", sender: dish)
+        } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
         }
     }
     

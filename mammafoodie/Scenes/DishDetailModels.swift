@@ -14,17 +14,16 @@ struct DishDetail {
         struct Request {
         }
         struct Response {
-            var status: Bool?
+            var status: Bool = false
             
         }
     }
     
-    struct Favorite {
+    struct Favourite {
         struct Request {
         }
         struct Response {
-            var status: Bool?
-            
+            var status: Bool = false
         }
     }
     

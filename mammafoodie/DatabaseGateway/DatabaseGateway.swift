@@ -26,9 +26,9 @@ enum FirebaseReference: String {
     case users = "Users"
     case stripeCustomers = "stripe_customers"
     case savedDishes = "SavedDishes"
-    case likedDishes = "LikedDishes"
-    case cookedDishes = "CookedDishes"
-    case boughtDishes = "BoughtDishes"
+    case likedDishes = "UserLikedDishes"
+    case cookedDishes = "UserCookedDishes"
+    case boughtDishes = "UserBoughtDishes"
     case followers = "UserFollowers"
     case following = "UserFollowing"
     case userNewsFeed = "UserNewsFeed"
@@ -37,6 +37,7 @@ enum FirebaseReference: String {
     case userAddress = "UserAddress"
     case address = "Address"
     case userConversations = "UserConversations"
+    case userActivity = "UserActivity"
     
     var classReference: DatabaseReference {
         return Database.database().reference().child(self.rawValue)
@@ -175,6 +176,7 @@ extension DatabaseGateway {
     func endLiveStream(_ liveStream: MFDish, _ completion: @escaping (()->Void)) {
         let rawLiveStream: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: liveStream)
         FirebaseReference.dishes.get(with: liveStream.id).updateChildValues(rawLiveStream) { (error, databaseReference) in
+            print("Live stream ended in database")
             completion()
         }
     }
@@ -255,23 +257,27 @@ extension DatabaseGateway {
         }
     }
     
-    func createConversation(createdAt:String, user1:String, user2:String, user1Name:String, user2Name:String, _ completion: @escaping ((_ status:Bool)->Void)){
+    func createConversation(user1: MFUser, user2: MFUser, _ completion: @escaping ((Bool, String?)->Void)) {
         let newConversationID = FirebaseReference.conversations.generateAutoID()
-        let metaData = ["id": newConversationID,"createdAt":createdAt, "user1":user1, "user2":user2, "user1Name":user1Name, "user2Name":user2Name]
+        let metaData: [String: Any] = ["id": newConversationID,"createdAt": Date().timeIntervalSinceReferenceDate, "user1": user1.id, "user2": user2.id, "user1Name": user1.name, "user2Name": user2.name]
+        
+        let key1: String = "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/"
+        let key2: String = "/\(FirebaseReference.userConversations.rawValue)/\(user1.id)/\(newConversationID)/"
+        let key3: String = "/\(FirebaseReference.userConversations.rawValue)/\(user2.id)/\(newConversationID)/"
+        
         let childUpdates = [
-            "\(FirebaseReference.conversations.rawValue)/\(newConversationID)/":metaData,
-            "/\(FirebaseReference.userConversations.rawValue)/\(user1)/\(newConversationID)/":true,
-            "/\(FirebaseReference.userConversations.rawValue)/\(user2)/\(newConversationID)/":true
-            // "\(FirebaseReference.conversationLookup.rawValue)/\(user1)/":["user2":user2,"conversationID":newConversationID]
+            key1: metaData,
+            key2: true,
+            key3: true
             ] as [AnyHashable : Any]
-        //        print(childUpdates)
         
         let databaseRef = Database.database().reference()
         databaseRef.updateChildValues(childUpdates) { (error, databaseReference) in
-            if error != nil{
-                completion(false)
+            if error != nil {
+                databaseReference.database.reference()
+                completion(false, nil)
             } else {
-                completion(true)
+                completion(true, newConversationID)
             }
         }
     }
@@ -283,11 +289,8 @@ extension DatabaseGateway {
         observer.observerId =  FirebaseReference.userConversations.classReference.child(userID).observe(.childAdded, with: { (conversationData) in
             //print(messageData)
             print(conversationData.key)
-            self.getConversation(with: conversationData.key, { (conversationDictionary) in
-                if conversationDictionary != nil {
-                    let conversation = MFConversation(from: conversationDictionary!)
-                    completion(conversation)
-                }
+            self.getConversation(with: conversationData.key, { (conversation) in
+                completion(conversation)
             })
         }) { (error) in
             print(error.localizedDescription)
@@ -297,13 +300,13 @@ extension DatabaseGateway {
         
     }
     
-    func getConversation(with conversationID:String, _ completion:@escaping (FirebaseDictionary?)->()) {
+    func getConversation(with conversationID:String, _ completion:@escaping (MFConversation?)->()) {
         FirebaseReference.conversations.classReference.child(conversationID).observeSingleEvent(of: .value, with: { (conversation) in
             guard let conversationDictionary = conversation.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            completion(conversationDictionary)
+            completion(MFConversation(from: conversationDictionary))
         })
     }
     
@@ -337,7 +340,7 @@ extension DatabaseGateway {
             completion(error?.localizedDescription)
         }
     }
- 
+    
     func updateUserEntity(with model: MFUser, _ completion: @escaping ((String?)->Void)) {
         let rawUserData: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let _ : String = "\(model.id)"
@@ -346,9 +349,10 @@ extension DatabaseGateway {
         }
     }
     
-    func getUserWith(userID:String, _ completion: @escaping ((_ user:MFUser?)->Void)){
-        FirebaseReference.users.classReference.child(userID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
-            guard let userData = userDataSnapshot.value as? FirebaseDictionary else {
+    func getUserWith(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion: @escaping ((_ user:MFUser?)->Void)) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let userData = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
@@ -356,25 +360,41 @@ extension DatabaseGateway {
             user.id = userID
             
             completion(user)
-        }) { (error) in
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
             print(error)
             completion(nil)
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.users.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
         }
     }
     
     func getLoggedInUser() -> MFUser? {
-        if let currentUser = Auth.auth().currentUser {
-//            let user: MFUser = MFUser()
-//            user.id = currentUser.uid
-//            user.name = currentUser.displayName
+        if Auth.auth().currentUser != nil {
+            //            let user: MFUser = MFUser()
+            //            user.id = currentUser.uid
+            //            user.name = currentUser.displayName
             return AppDelegate.shared().currentUser
-//            return user
+            //            return user
         }
         return nil
     }
     
     func setDeviceToken(_ token: String, for userId: String, _ completion: @escaping ((Error?)->Void)) {
-        let deviceToken = ["deviceToken":token] as FirebaseDictionary
+        let deviceToken = ["deviceToken": token] as FirebaseDictionary
         FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
             completion(error)
         }
@@ -416,79 +436,58 @@ extension DatabaseGateway {
         return observer
     }
     
-    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver?{
+    func getDishWith(dishID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ dish:MFDish?)->Void) -> DatabaseConnectionObserver? {
         print(dishID)
-        
         let successClosure:FirebaseObserverSuccessClosure = { (userDataSnapshot) in
-            
             guard let dishData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
-            let dish:MFDish = self.createDish(from: dishData)
+            let dish: MFDish = self.createDish(from: dishData)
             completion(dish)
         }
-        
         let cancelClosure:FirebaseObserverCancelClosure = { (error) in
             print(error)
             completion(nil)
         }
-        
-        
         let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference
         let databaseQuery: DatabaseQuery = databaseReference.child(dishID)
-        
-        switch frequency{
+        switch frequency {
         case .single:
-            
             databaseReference.child(dishID).observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
             
         case .realtime:
-            
             var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
             observer.databaseReference = databaseReference
             observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
-            
             return observer
-            
         }
         
         return nil
         
     }
     
-    
-    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
-        
+    func getCookedDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void) {
         FirebaseReference.cookedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(dishData)
         })
     }
     
-    
-    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes:[String:AnyObject]?)->Void){
-        
+    func getBoughtDishesForUser(userID:String, _ completion:@escaping (_ dishes: [String:AnyObject]?)->Void) {
         FirebaseReference.boughtDishes.classReference.child(userID).observeSingleEvent(of: .value, with: { (dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(dishData)
         })
     }
     
-    
-    
-    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)){
+    func updateDish(with model:MFDish, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
         
         let userProfileData:FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         let _ :String = "\(model.id)"
@@ -499,8 +498,20 @@ extension DatabaseGateway {
         }
     }
     
+    func upload(image: UIImage, for dish: MFDish, _ completion: @escaping ((_ errorMessage: String?)->Void)) {
+        let path = "dishes/\(dish.id).jpg"
+        self.save(image: image, at: path, completion: { (url, error) in
+            if let url = url {
+                let values = [ "coverPicURL": url.absoluteString ]
+                FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(values, withCompletionBlock: { (error, databaseRef) in
+                        print("Done 123")
+                })
+            }
+        })
+    }
     
-    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void){
+    
+    func getDishComments(dishID: String, _ completion:@escaping (_ comments:[MFComment]?) -> Void) {
         
         FirebaseReference.dishComments.classReference.child(dishID).observeSingleEvent(of: .value, with: {(commentsDataSnapshot) in
             guard let commentsData = commentsDataSnapshot.value as? FirebaseDictionary else {
@@ -523,7 +534,6 @@ extension DatabaseGateway {
             completion(nil)
         }
     }
-    
     
     //    func getUsersWhoBoughtTheDish(dishID:String, _ completion:@escaping (_ users:[String:AnyObject]?) -> Void){
     //
@@ -602,29 +612,24 @@ extension DatabaseGateway {
     //    }
     //
     
-    func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool, _ completion:@escaping (_ success:Bool)->()){
-        
+    func toggleDishBookmark(userID:String, dishID:String, shouldBookmark:Bool) {
         if shouldBookmark {
             FirebaseReference.savedDishes.classReference.child(userID).updateChildValues([dishID:true])
-            
         } else {
             FirebaseReference.savedDishes.classReference.child(userID).child(dishID).removeValue()
         }
         
     }
     
-    func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()){
+    func checkIfDishBookMarked(dishID:String, userID:String, _ completion:@escaping (_ bookmarked:Bool)->()) {
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-            
             guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-                
                 completion(false)
                 return
             }
-            
             if dishData[dishID] != nil {
                 completion(true)
-            }else{
+            } else {
                 completion(false)
             }
             
@@ -632,20 +637,31 @@ extension DatabaseGateway {
         
     }
     
-    
-    func getSavedDishesForUser(userID:String, _ completion:@escaping ([String:AnyObject]?)->()) {
-        
+    func getSavedDishesForUser(userID: String, _ completion:@escaping ([MFDish]) -> ()) {
         FirebaseReference.savedDishes.classReference.child(userID).observeSingleEvent(of: .value, with: {(dishSnapshot) in
-            
-            guard let dishData = dishSnapshot.value as? FirebaseDictionary else {
-                
-                completion([:])
+            var savedDishes = [MFDish]()
+            guard let dishData = dishSnapshot.value as? [String: Bool] else {
+                completion(savedDishes)
                 return
             }
-            
-            completion(dishData)
-            
+            let requestGroup = DispatchGroup.init()
+            for (id, bookMarked) in dishData {
+                if bookMarked {
+                    requestGroup.enter()
+                    _ = self.getDishWith(dishID: id, { (dish) in
+                        if let dish = dish {
+                            savedDishes.append(dish)
+                        }
+                        requestGroup.leave()
+                    })
+                }
+            }
+            requestGroup.notify(queue: .main, execute: {
+                completion(savedDishes)
+            })
+            completion(savedDishes)
         })
+        
     }
     
 }
@@ -698,6 +714,22 @@ extension  DatabaseGateway {
 
 // MARK: - News Feed
 extension DatabaseGateway {
+    
+    func getNewsFeed(by userId: String, _ completion: @escaping ((_ newsFeeds: [MFNewsFeed])->Void)) {
+        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            var newsFeedList: [MFNewsFeed] = []
+            if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
+                for key in rawNewsFeedList.keys {
+                    if let rawNewsFeed: [String:AnyObject] = rawNewsFeedList[key] as? [String:AnyObject] {
+                        newsFeedList.append(self.createNewsFeedModel(from: rawNewsFeed))
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                completion(newsFeedList)
+            }
+        })
+    }
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
@@ -801,6 +833,18 @@ extension DatabaseGateway {
         }
     }
     
+    func getPictures(_ completion: @escaping ((_ pictures: [MFDish])->Void)) -> DatabaseConnectionObserver? {
+        return self.getDishes(type: MFDishMediaType.picture, frequency: .realtime) { (dishes) in
+            let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
+                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                    return true
+                }
+                return false
+            })
+            completion(filteredDishes)
+        }
+    }
+    
     func getDishes(type: MFDishMediaType, frequency: DatabaseRetrievalFrequency, _ completion: @escaping ((_ dishes: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
@@ -827,7 +871,7 @@ extension DatabaseGateway {
         case .realtime:
             var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
             observer.databaseReference = databaseReference
-            observer.observerId = observer.databaseReference!.observe(.value, with: successClosure, withCancel: cancelClosure)
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
             return observer
         default:
             databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
@@ -870,6 +914,12 @@ extension DatabaseGateway {
             }
         }
         
+        if let rawCoverURL: String = rawDish["coverPicURL"] as? String {
+            if let coverURL = URL(string: rawCoverURL) {
+                dish.coverPicURL = coverURL
+            }
+        }
+        
         if let rawMediaURL: String = rawDish["mediaURL"] as? String {
             if let mediaURL: URL = URL(string: rawMediaURL) {
                 dish.mediaURL = mediaURL
@@ -891,7 +941,7 @@ extension DatabaseGateway {
         if let rawLocation = rawDish["location"] as? [String : AnyObject] {
             if let lat = rawLocation["latitude"] as? CLLocationDegrees,
                 let lon = rawLocation["longitude"] as? CLLocationDegrees {
-
+                
                 dish.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
                 dish.address = rawLocation["address"] as? String ?? ""
             }
@@ -918,16 +968,7 @@ extension DatabaseGateway {
                 return
             }
             var comments: [MFComment] = []
-            //            for key in rawList.keys {
-            //                if let rawComment: FirebaseDictionary = rawList[key] as? FirebaseDictionary {
-            //                    comments.append(self.createComment(from: rawComment))
-            //                }
-            //            }
-            
-            //            if let rawComment: FirebaseDictionary =  as? FirebaseDictionary {
             comments.append(self.createComment(from: rawList))
-            //            }
-            
             completion(comments)
         }
         
@@ -1009,7 +1050,7 @@ extension DatabaseGateway {
     
     
     func save(image : UIImage, at path : String, completion : @escaping (URL?, Error?) -> Void) {
-        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+        if let imageData = UIImageJPEGRepresentation(image, 0.8) {
             self.save(data: imageData, at: path, completion: completion)
         } else {
             completion(nil, NSError.init(domain: "Image is invalid", code: 401, userInfo: nil))
@@ -1130,13 +1171,25 @@ extension DatabaseGateway {
         order.id = FirebaseReference.orders.classReference.childByAutoId().key
         let rawOrder: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: order)
         FirebaseReference.orders.classReference.child(order.id).setValue(rawOrder) { (error, databaseRef) in
+            if error != nil {
+                completion(error)
+            } else {
+                self.updateBoughtDishesRecord(for: order.boughtBy.id, dishid: order.dish.id, completion: { (errorFound) in
+                    completion(error)
+                })
+            }
+        }
+    }
+    
+    func updateBoughtDishesRecord(for userid: String, dishid: String, completion: @escaping ((Error?) -> Void)) {
+        FirebaseReference.boughtDishes.classReference.child(userid).updateChildValues([dishid: true]) { (error, ref) in
             completion(error)
         }
     }
     
     func getordersWith(_ completion: @escaping ((_ order:MFOrder?) -> Void)){
         FirebaseReference.orders.classReference.observeSingleEvent(of: .value, with: { (ordersDataSnapshot) in
-            guard let ordersData = ordersDataSnapshot.value as? FirebaseDictionary else {
+            guard let _ = ordersDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
@@ -1285,12 +1338,18 @@ extension DatabaseGateway {
         })
     }
     
-    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, completion: @escaping ((String, Error?)->Void)) {
+    func createCharge(_ amount: Double, source: String, fromUserId: String, toUserId: String, dishId: String?, dishName: String?, purpose: PaymentPurpose, completion: @escaping ((String, Error?)->Void)) {
         let userId: String = fromUserId
         let ref = Database.database().reference().child(FirebaseReference.stripeCustomers.rawValue).child(userId).child("charges")
         let pushId = ref.childByAutoId().key
         
-        let charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId]
+        var charge = [ "amount": amount as Any, "source": source, "toUserId": toUserId, "paymentPurpose": purpose.rawValue]
+        if let dishId = dishId {
+            charge["dishId"] = dishId
+        }
+        if let dishName = dishName {
+            charge["dishName"] = dishName
+        }
         
         ref.child(pushId).updateChildValues(charge) { (error, databaseRef) in
             completion(pushId, error)

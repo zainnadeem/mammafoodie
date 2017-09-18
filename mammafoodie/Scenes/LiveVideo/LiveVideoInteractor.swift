@@ -3,6 +3,7 @@ import UIKit
 protocol LiveVideoInteractorInput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
+    func updateStreamImage()
 }
 
 protocol LiveVideoInteractorOutput {
@@ -11,6 +12,7 @@ protocol LiveVideoInteractorOutput {
     func show(message: String)
     func liveVideoClosed()
     func streamUnpublished()
+    func updateStreamImage(_ image: UIImage)
 }
 
 class LiveVideoInteractor: LiveVideoInteractorInput {
@@ -32,6 +34,10 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     
     func stop(_ liveVideo: MFDish) {
         self.worker.stop(liveVideo)
+    }
+    
+    func updateStreamImage() {
+        self.output?.updateStreamImage(self.worker.getStreamImage())
     }
 }
 

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-protocol DishesCollectionViewAdapterDelegate{
+protocol DishesCollectionViewAdapterDelegate {
     
     func openDishPageWith(dishID:String)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
@@ -18,140 +19,139 @@ protocol DishesCollectionViewAdapterDelegate{
 
 class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var collectionView:UICollectionView? {
-        didSet{
-            setUpCollectionView()
+    var collectionView: UICollectionView? {
+        didSet {
+            self.setUpCollectionView()
         }
     }
     
-    var profileType:ProfileType! {
-        didSet{
+    var profileType: ProfileType! {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var delegate: DishesCollectionViewAdapterDelegate?
+    
+    var selectedIndexForProfile: SelectedIndexForProfile! {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var userData: MFUser? {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var cookedDishData: [MFDish] = [MFDish]() {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var boughtDishData: [MFDish] = [MFDish]() {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var activityData: [MFNewsFeed] = [MFNewsFeed]() {
+        didSet {
+            self.activityCount = self.activityData.count
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var followers: [MFUser] = [MFUser]() {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var following: [MFUser] = [MFUser]() {
+        didSet {
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    var savedDishDataCount:Int = 0 {
+        didSet {
             collectionView?.reloadData()
         }
     }
     
-    var cellSize:CGSize!
-    
-    var delegate:DishesCollectionViewAdapterDelegate?
-    
-    var selectedIndexForProfile:SelectedIndexForProfile!
-    
-    var userData : MFUser? {
-        didSet{
+    var activityCount:Int = 0 {
+        didSet {
             collectionView?.reloadData()
         }
     }
     
-    var cookedDishData:[MFDish]?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    var boughtDishData:[MFDish]?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    var activityData:[MFNewsFeed]?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    var followers:[MFUser]?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    var following:[MFUser]?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    var savedDishDataCount:Int?{
-        didSet{
-            collectionView?.reloadData()
-        }
-    }
-    
-    func setUpCollectionView(){
+    func setUpCollectionView() {
         
         //Register Dish cell
-        collectionView!.register(DishCollectionViewCell.self, forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
-        collectionView!.register(UINib(nibName: "DishCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
+        self.collectionView!.register(DishCollectionViewCell.self, forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
+        self.collectionView!.register(UINib(nibName: "DishCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
         
         //Register Activity cell
-        collectionView!.register(ActivityCollectionViewCell.self, forCellWithReuseIdentifier: ActivityCollectionViewCell.reuseIdentifier)
-        collectionView!.register(UINib(nibName: "ActivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ActivityCollectionViewCell.reuseIdentifier)
+        self.collectionView!.register(ActivityCollectionViewCell.self, forCellWithReuseIdentifier: "ActivityCollectionViewCell")
+        self.collectionView!.register(UINib(nibName: "ActivityCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ActivityCollectionViewCell")
         
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        self.collectionView?.emptyDataSetDelegate = self
+        self.collectionView?.emptyDataSetSource = self
     }
-    
     
     // MARK: UICollectionViewDataSource
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
+
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if selectedIndexForProfile == .cooked  {
-            return cookedDishData?.count ?? 0
-        } else if selectedIndexForProfile == .bought{
-            return boughtDishData?.count ?? 0
+        if self.selectedIndexForProfile == .cooked  {
+            return self.cookedDishData.count
+        } else if self.selectedIndexForProfile == .bought{
+            return self.boughtDishData.count
         } else {
-            return activityData?.count ?? 0
+            return self.activityData.count
         }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         var cell : UICollectionViewCell! = UICollectionViewCell()
         cell.backgroundColor = .red
-        
-        
         if selectedIndexForProfile == .cooked {
-            
-            let dishCell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as! DishCollectionViewCell
-            
-            let dish = cookedDishData![indexPath.item]
-            dishCell.setUp(dish)
-        
+            let dishCell: DishCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as? DishCollectionViewCell
+            let dish = self.cookedDishData[indexPath.item]
+            if let dishCell = dishCell {
+                dishCell.setUp(dish)
+            }
             cell = dishCell
             
         } else if selectedIndexForProfile == .bought{
-            
-            let dishCell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as! DishCollectionViewCell
-            
-            let dish = boughtDishData![indexPath.item]
-            dishCell.setUp(dish)
-            
+            let dishCell: DishCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as? DishCollectionViewCell
+            let dish = self.boughtDishData[indexPath.item]
+            if let dishCell = dishCell {
+                dishCell.setUp(dish)
+            }
             cell = dishCell
             
-            
         } else if selectedIndexForProfile == .activity {
-            
-            let activityCell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCollectionViewCell.reuseIdentifier, for: indexPath) as! ActivityCollectionViewCell
-            
-
-            let activity = activityData![indexPath.item]
-            activityCell.setup(activity)
+            let activityCell: ActivityCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityCollectionViewCell", for: indexPath) as? ActivityCollectionViewCell
+            let activity = self.activityData[indexPath.item]
+            if let activityCell = activityCell {
+                activityCell.setup(with: activity)
+            }
             cell = activityCell
             
         }
-        
-        
         return cell
+        
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -163,7 +163,17 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             view.delegate = self.delegate
             view.profileType = self.profileType
             
-            view.setUp(userData, followersCount: followers?.count.description ?? "0", followingCount: following?.count.description ?? "0", cookedDishesCount: cookedDishData?.count.description ?? "0", favouriteDishesCount: "0", boughtDishesCount: boughtDishData?.count.description ?? "0", followers: self.followers, following:self.following, savedDishCount:savedDishDataCount ?? 0 )
+            view.setUp(
+                userData,
+                followersCount: "\(followers.count)",
+                followingCount: "\(following.count)",
+                cookedDishesCount: "\(cookedDishData.count)",
+                favouriteDishesCount: "0",
+                boughtDishesCount: "\(boughtDishData.count)",
+                followers: self.followers,
+                following:self.following,
+                savedDishCount: savedDishDataCount,
+                activityCount: activityCount)
             
             reusableView = view
             reusableView.sizeToFit()
@@ -175,10 +185,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         
     }
     
-    
     // MARK: UICollectionViewDelegate
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // ofSize should be the same size of the headerView's label size:
         return CGSize(width: collectionView.frame.size.width, height: ((userData?.profileDescription?.calculateHeight(withConstrainedWidth: collectionView.frame.size.width, font: UIFont.MontserratLight(with: 14)!)) ?? 0) + 346)
@@ -186,8 +193,22 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if self.selectedIndexForProfile == .activity{
-            cellSize = CGSize(width: collectionView.frame.size.width, height: 150)
+        var cellSize: CGSize = CGSize.zero
+        if self.selectedIndexForProfile == .activity {
+            let activityCell: ActivityCollectionViewCell? = Bundle.main.loadNibNamed("ActivityCollectionViewCell", owner: self, options: nil)?.first as? ActivityCollectionViewCell
+            if let activityCell = activityCell {
+                let activity = self.activityData[indexPath.item]
+                activityCell.setup(with: activity)
+                let width = UIScreen.main.bounds.width - 16
+                activityCell.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 50))
+                activityCell.layoutIfNeeded()
+                
+                let size: CGSize = activityCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize, withHorizontalFittingPriority: UILayoutPriorityDefaultHigh, verticalFittingPriority: UILayoutPriorityDefaultLow)
+                cellSize.height = size.height
+                print("Size: \(size.height)")
+            }
+            cellSize.width = collectionView.frame.size.width
+            
         } else {
             cellSize = CGSize(width: collectionView.frame.size.width/3 - 2, height: 150)
         }
@@ -197,29 +218,39 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if self.selectedIndexForProfile == .activity{
+        if self.selectedIndexForProfile == .activity {
             return 10
         } else {
             return 2
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if selectedIndexForProfile == .cooked {
-            let dish = cookedDishData![indexPath.item]
-            delegate?.openDishPageWith(dishID: dish.id)
+            let dish = self.cookedDishData[indexPath.item]
+            self.delegate?.openDishPageWith(dishID: dish.id)
+            
         } else if selectedIndexForProfile == .bought {
-            let dish = boughtDishData![indexPath.item]
-            delegate?.openDishPageWith(dishID: dish.id)
+            let dish = self.boughtDishData[indexPath.item]
+            self.delegate?.openDishPageWith(dishID: dish.id)
+            
         }
-        
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+}
 
-        
+extension DishesCollectionViewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.selectedIndexForProfile == .activity {
+            return NSAttributedString.init(string: "No activity", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+        }
+        return NSAttributedString.init(string: "No dish", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return self.collectionView(self.collectionView!, layout: self.collectionView!.collectionViewLayout, referenceSizeForHeaderInSection: 0).height - 120
     }
 
 }
+

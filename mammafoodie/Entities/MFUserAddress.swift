@@ -62,11 +62,11 @@ struct MFUserAddress: CustomStringConvertible {
         if self.city != nil {
             components.append(self.city!)
         }
-        if self.postalCode != nil {
-            components.append(self.postalCode!)
-        }
         if self.state != nil {
             components.append(self.state!)
+        }
+        if self.postalCode != nil {
+            components.append(self.postalCode!)
         }
         if self.country != nil {
             components.append(self.country!)

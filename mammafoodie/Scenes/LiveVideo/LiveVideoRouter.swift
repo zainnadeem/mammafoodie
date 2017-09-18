@@ -31,6 +31,12 @@ class LiveVideoRouter: LiveVideoRouterInput {
                     destination.dish = source.liveVideo
                 }
             }
+        } else if segue.identifier == "segueShowUserProfile" {
+            if let destination: UINavigationController = segue.destination as? UINavigationController {
+                if let profileVC: OtherUsersProfileViewController = destination.viewControllers.first as? OtherUsersProfileViewController {
+                    profileVC.userID = sender as? String
+                }
+            }
         }
     }
 }

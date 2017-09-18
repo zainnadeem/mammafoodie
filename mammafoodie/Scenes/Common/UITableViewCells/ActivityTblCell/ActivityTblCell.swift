@@ -18,12 +18,11 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     @IBOutlet weak var imgProfilePicture: UIImageView!
     @IBOutlet weak var imgCharacterEmoji: UIImageView!
     @IBOutlet weak var conWidthImgCharacterEmoji: NSLayoutConstraint!
-    
     @IBOutlet weak var lblActivity: TTTAttributedLabel!
     @IBOutlet weak var btnTime: UIButton!
     
     var shapeLayer: CAShapeLayer!
-    
+    var likeButtonTapped: (()->Void)?
     var openURL: ((String, String) -> Void)?
     
     override func awakeFromNib() {
@@ -119,6 +118,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     }
     
     @IBAction func btnLikeTapped(_ sender: UIButton) {
+        self.likeButtonTapped?()
         sender.isSelected = !sender.isSelected
     }
     

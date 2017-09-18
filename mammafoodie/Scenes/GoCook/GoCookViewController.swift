@@ -1,5 +1,6 @@
 import UIKit
 import MBProgressHUD
+import Firebase
 
 protocol GoCookViewControllerInput {
     
@@ -9,7 +10,7 @@ protocol GoCookViewControllerOutput {
     func prepareOptions()
     func selectOption(option : MFDishMediaType)
     func showStep1()
-    func showStep2()
+    func showStep2(_ animated: Bool)
 }
 
 typealias GoCookCompletion = (MFDish, UIImage?, URL?) -> Void
@@ -55,7 +56,9 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     
     @IBOutlet weak var viewStep1: UIView!
     @IBOutlet weak var conLeadingViewStep1: NSLayoutConstraint!
-    @IBOutlet weak var viewStep2: UIView!
+    //    @IBOutlet weak var viewStep2: UIView!
+    
+    var step2Shown: Bool = false
     
     // MARK: - Object lifecycle
     
@@ -79,12 +82,19 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
         }
         self.output.prepareOptions()
+        self.viewStep1.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let tmp = self.selectedOption
         self.selectedOption = tmp
+        if self.selectedOption != .unknown && !self.step2Shown {
+            self.step2Shown = true
+//            self.step2VC.clearData()
+            self.output.showStep2(false)
+        }
+        self.viewStep1.isHidden = false
     }
     
     // MARK: - Event handling
@@ -109,8 +119,12 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
     }
     
     @IBAction func onNext(_ sender: UIButton) {
+        self.nextStep()
+    }
+    
+    private func nextStep() {
         self.step2VC.clearData()
-        self.output.showStep2()
+        self.output.showStep2(true)
     }
     
     
@@ -120,6 +134,11 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
         self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         switch self.selectedOption {
         case .liveVideo:
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: dish.id as NSObject,
+                AnalyticsParameterItemName: "liveVideo" as NSObject,
+                AnalyticsParameterContentType: "LiveVideoCreated" as NSObject
+                ])
             dish.save { (error) in
                 DispatchQueue.main.async {
                     self.selectedOption = .unknown
@@ -145,11 +164,15 @@ class GoCookViewController: UIViewController, GoCookViewControllerInput {
             }
             
         case .vidup:
-            if let video = videoURL {
+            if let video = videoURL,
+                let img = image {
                 DatabaseGateway.sharedInstance.save(video: video, at: dish.getStoragePath(), completion: { (downloadURL, error) in
-                    DispatchQueue.main.async {
-                        self.saveDish(dish, mediaURL: downloadURL, error: error)
-                    }
+                    DatabaseGateway.sharedInstance.save(image: img, at: dish.getThumbPath(), completion: { (thumbURL, error) in
+                        DispatchQueue.main.async {
+                            dish.coverPicURL = thumbURL
+                            self.saveDish(dish, mediaURL: downloadURL, error: error)
+                        }
+                    })
                 })
             } else {
                 self.hud.hide(animated: true)

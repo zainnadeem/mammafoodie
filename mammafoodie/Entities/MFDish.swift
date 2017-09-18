@@ -25,7 +25,7 @@ class MFDish {
     var id: String
     var name: String
     
-    var dishType : MFDishType!
+    var dishType : MFDishType = .None
     var user: MFUser!
     var username: String!
     
@@ -45,7 +45,7 @@ class MFDish {
     var createTimestamp: Date!
     var endTimestamp: Date?
     
-    var preparationTime : Double!
+    var preparationTime : Double = 0
     var boughtBy: [MFOrder: Date] = [:]
     var cuisine: MFCuisine!
     
@@ -124,6 +124,7 @@ class MFDish {
         }
         
         self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
+        self.coverPicURL = dishDataDictionary["coverPicURL"] as? URL ?? nil
         
         let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
         self.user = MFUser() ;
@@ -189,17 +190,17 @@ class MFDish {
         }
     }
     
-    func generateCoverImageURL() -> URL {
-        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
-        return URL.init(string: string)!
-    }
-    
-    func generateCoverThumbImageURL() -> URL {
-        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!)).jpg?alt=media"
-        return URL.init(string: string)!
-    }
+//    func generateCoverImageURL() -> URL {
+//        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+//        return URL.init(string: string)!
+//    }
+//    
+//    func generateCoverThumbImageURL() -> URL {
+//        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+//        return URL.init(string: string)!
+//    }
     
     func getStoragePath() -> String {
         var urlencodedID : String! = ""
@@ -211,6 +212,14 @@ class MFDish {
             }
         }
         return "/dishes/\(urlencodedID!)"
+    }
+    
+    func getThumbPath() -> String {
+        var urlencodedID : String = ""
+        if let idEncoded = self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+            urlencodedID = "\(idEncoded).jpg"
+        }
+        return "/dishes/thumbs/\(urlencodedID)"
     }
     
     

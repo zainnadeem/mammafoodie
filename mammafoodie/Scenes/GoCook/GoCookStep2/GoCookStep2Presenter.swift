@@ -220,12 +220,15 @@ class GoCookStep2Presenter: GoCookStep2PresenterInput {
     func showOption(_ option : MFDishMediaType) {
         switch option {
         case .vidup:
+            self.viewController?.btnPostDish.setTitle("Post Dish", for: .normal)
             self.showVidupMode()
             
         case .picture:
+            self.viewController?.btnPostDish.setTitle("Post Dish", for: .normal)
             self.showPictureMode()
             
         default:
+            self.viewController?.btnPostDish.setTitle("Post Dish & Go Live", for: .normal)
             self.showLiveVideoMode()
         }
         self.viewController?.view.layoutIfNeeded()

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="btnEmoji" destination="YPD-ps-dCM" id="pOt-uH-8BT"/>
                 <outlet property="btnLike" destination="W3R-sh-Ok6" id="kiw-Kq-NVG"/>
+                <outlet property="conWidthBtnEmoji" destination="DhW-BM-jZe" id="prc-yX-FfC"/>
                 <outlet property="constraintHeightTextView" destination="3lE-ob-Exa" id="cbq-w8-ypd"/>
                 <outlet property="tableView" destination="FGZ-su-GUj" id="NU6-qE-T6U"/>
                 <outlet property="textView" destination="jND-f7-qod" id="KKk-7J-PB5"/>
@@ -43,7 +44,7 @@
                     <rect key="frame" x="0.0" y="299" width="665" height="51"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jND-f7-qod">
-                            <rect key="frame" x="48" y="8" width="496" height="35"/>
+                            <rect key="frame" x="48" y="8" width="497" height="35"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="3lE-ob-Exa"/>
@@ -63,7 +64,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3R-sh-Ok6">
-                            <rect key="frame" x="552" y="5" width="57" height="40"/>
+                            <rect key="frame" x="553" y="5" width="56" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="13W-cr-Ipb"/>
                             </constraints>
@@ -73,6 +74,9 @@
                                 <color key="titleColor" red="0.50980392159999999" green="0.59215686270000001" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected" image="IconLiked"/>
+                            <connections>
+                                <action selector="onBtnLikeTap:" destination="-1" eventType="touchUpInside" id="AP8-jk-1mz"/>
+                            </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPD-ps-dCM">
                             <rect key="frame" x="617" y="5" width="40" height="40"/>
@@ -105,7 +109,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ILW-BB-EXF" secondAttribute="bottom" id="BgH-Pn-tuL"/>
                 <constraint firstAttribute="trailing" secondItem="FGZ-su-GUj" secondAttribute="trailing" id="Mkj-0d-fbq"/>

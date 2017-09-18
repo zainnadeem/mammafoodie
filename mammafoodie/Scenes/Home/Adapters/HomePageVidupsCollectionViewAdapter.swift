@@ -2,9 +2,10 @@ import UIKit
 
 class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    let worker: DealsListWorker = DealsListWorker()
+    
     func loadVidup() {
-        let worker: VidupListWorker = VidupListWorker()
-        worker.getList { (dishes) in
+        self.worker.getList { (dishes) in
             self.list = [self.getFirstCellForCurrentUser()]
             self.list.append(contentsOf: dishes)
             self.collectionView.reloadData()
@@ -55,6 +56,8 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let theAttributes: UICollectionViewLayoutAttributes! = collectionView.layoutAttributesForItem(at: indexPath)
+        self.didSelectViewAll?(theAttributes.frame)
+        return
         if self.isLastItem(indexPath.item) {
             self.didSelectViewAll?(theAttributes.frame)
         } else {

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Firebase
+import DZNEmptyDataSet
 
 class WalletViewController: UIViewController {
     
@@ -22,19 +23,21 @@ class WalletViewController: UIViewController {
     
     @IBOutlet weak var tblTransactions: UITableView!
     
-    var transactions : [String] = [String]()
+    var transactions: [MFTransaction] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
-    
+        //        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
+        //        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
+        
         self.viewHeaderWrapper.layer.cornerRadius = 5.0
         self.viewHeaderWrapper.clipsToBounds = true
-        self.tblTransactions.rowHeight = 64
-        self.tblTransactions.register(UINib.init(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
+        self.tblTransactions.rowHeight = UITableViewAutomaticDimension
+        self.tblTransactions.register(UINib(nibName: "WalletTransactionsTblCell", bundle: nil), forCellReuseIdentifier: "WalletTransactionsTblCell")
+        self.tblTransactions.emptyDataSetSource = self
+        self.tblTransactions.emptyDataSetDelegate = self
         self.setWalletAmount(0)
         self.btnAddToWallet.isHidden = true
         self.tblTransactions.reloadData()
@@ -63,11 +66,11 @@ class WalletViewController: UIViewController {
      */
     
     func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
-        let formatter = NumberFormatter.init()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
+        let formatter = NumberFormatter()
+        formatter.numberStyle = NumberFormatter.Style.currency
+        formatter.locale = Locale.current
         self.lblWalletBalance.text = formatter.string(from: amount as NSNumber)
-        self.lblPendingBalance.text = "Pending : \(formatter.string(from: amount as NSNumber) ?? "$0")"
+        self.lblPendingBalance.text = "Pending : \(formatter.string(from: pending as NSNumber) ?? "$0")"
     }
     
     func getCurrentBalance() {
@@ -76,9 +79,10 @@ class WalletViewController: UIViewController {
                 if let account = snapshot.value as? [String : Any] {
                     if let charges = account["charges"] as? [String : [String : Any]] {
                         for (_, value) in charges {
-                            if let amount = value["amount"] as? Double {
-                                self.transactions.append("\(amount)")
-                            }
+                            self.transactions.append(self.transaction(from: value))
+//                            if let amount = value["amount"] as? Double {
+//                                self.transactions.append("\(amount)")
+//                            }
                         }
                         DispatchQueue.main.async {
                             self.tblTransactions.reloadData()
@@ -90,12 +94,10 @@ class WalletViewController: UIViewController {
                             let params : Parameters = ["accountId" : accountID]
                             Alamofire.request(url, method: .get, parameters: params).responseJSON(completionHandler: { (response) in
                                 if let jsonResponse = response.result.value as? [String : Any] {
-                                    if let available = jsonResponse["available"] as? Double {
-                                        self.setWalletAmount(available, (jsonResponse["pending"] as? Double) ?? 0)
-                                    }
-                                    print(jsonResponse)
+                                    self.setWalletAmount((jsonResponse["available"] as? Double) ?? 0, (jsonResponse["pending"] as? Double) ?? 0)
+                                    print("Balance: \(jsonResponse)")
                                 } else {
-                                    print(response)
+                                    print("Balance \(response)")
                                 }
                             })
                         }
@@ -103,6 +105,27 @@ class WalletViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func transaction(from raw: [String: Any]) -> MFTransaction {
+        let transaction: MFTransaction = MFTransaction()
+        
+        transaction.amount = raw["amount"] as? Double ?? 0
+        transaction.currency = "$"
+        
+        let paymentPurpose: PaymentPurpose = PaymentPurpose(rawValue: raw["paymentPurpose"] as? String ?? "unknown") ?? PaymentPurpose.unknown
+        transaction.purpose = paymentPurpose
+        
+        transaction.fromUserId = raw["fromUserId"] as? String ?? ""
+        transaction.fromUsername = raw["fromUsername"] as? String ?? ""
+        
+        transaction.toUserId = raw["toUserId"] as? String ?? ""
+        transaction.toUsername = raw["toUsername"] as? String ?? ""
+        
+        transaction.dishId = raw["dishId"] as? String
+        transaction.dishName = raw["dishName"] as? String
+        
+        return transaction
     }
     
     // MARK: - Actions
@@ -120,11 +143,11 @@ class WalletViewController: UIViewController {
                     } else {
                         DispatchQueue.main.async {
                             StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
-//                                DispatchQueue.main.async {
-//                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-//                                        
-//                                    }
-//                                }
+                                //                                DispatchQueue.main.async {
+                                //                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
+                                //
+                                //                                    }
+                                //                                }
                             }
                         }
                     }
@@ -142,8 +165,7 @@ extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : WalletTransactionsTblCell = tableView.dequeueReusableCell(withIdentifier: "WalletTransactionsTblCell", for: indexPath) as! WalletTransactionsTblCell
-        cell.lblAction.text = "Amount : \(self.transactions[indexPath.row])"
-        
+        cell.set(transaction: self.transactions[indexPath.item])
         return cell
     }
     
@@ -177,3 +199,15 @@ extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
 }
+
+extension WalletViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No transactions", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return self.tblTransactions.sectionHeaderHeight + 10
+    }
+
+}
+

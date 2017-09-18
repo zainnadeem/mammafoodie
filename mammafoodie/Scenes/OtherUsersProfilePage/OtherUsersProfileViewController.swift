@@ -13,6 +13,7 @@ protocol OtherUsersProfileViewControllerOutput {
     //    func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func loadUserProfileData(userID:String)
     func toggleFollow(userID:String, shouldFollow:Bool)
+    func deallocDatabaseObserver()
 }
 
 enum ProfileType{
@@ -20,18 +21,17 @@ enum ProfileType{
     case othersProfile
 }
 
-
 class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewControllerInput {
     
     var output: OtherUsersProfileViewControllerOutput!
     var router: OtherUsersProfileRouter!
     var collectionViewAdapter: DishesCollectionViewAdapter!
     
-    var profileType: ProfileType = .ownProfile // .othersProfile
+    private var profileType: ProfileType = .ownProfile // .othersProfile
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
-    @IBOutlet weak var btnSettings: UIBarButtonItem!
-    @IBOutlet weak var collectionView:UICollectionView!
+//    @IBOutlet weak var btnSettings: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
     
@@ -49,19 +49,43 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.output.setUpDishCollectionView(self.collectionView, self.profileType)
+        if let userid = self.userID {
+            if userid == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                self.profileType = .ownProfile
+            } else {
+                self.profileType = .othersProfile
+            }
+        } else {
+            self.profileType = .ownProfile
+        }
         if self.profileType == .ownProfile {
             if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 self.userID = user.id
             } else {
-                self.navigationController?.dismiss(animated: true, completion: { 
+                self.navigationController?.dismiss(animated: true, completion: {
                     
                 })
             }
-            let settingsBtn = UIBarButtonItem.init(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
+            let settingsBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "Settings"), style: .plain, target: self, action: #selector(onSettingsTap(_:)))
             self.navigationItem.rightBarButtonItem = settingsBtn
         }
         
+        self.output.setUpDishCollectionView(self.collectionView, self.profileType)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadProfile()
+        self.collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.output.deallocDatabaseObserver()
+    }
+    
+    //MARK: - Input
+    func loadProfile() {
         if let user = self.userID {
             self.output.loadUserProfileData(userID: user)
         } else {
@@ -70,17 +94,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         }
     }
     
-    //MARK: - Input
-    
     func openDishPageWith(dishID:String) {
-        
         //Initiate segue and pass it to router in prepare for segue
-        
         let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
-        
         self.present(dishVC, animated: true, completion: nil)
-        
     }
     
     func openFavouriteDishes() {
@@ -99,7 +117,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         let vc = followerNav.viewControllers.first as! FollowersListViewController
         
-//        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
+        //        let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FollowersListViewController") as! FollowersListViewController
         
         if followers {
             //show list of followers
@@ -109,11 +127,9 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
             //show list of following
             vc.followers = false
         }
-//        vc.userList = userList
+        //        vc.userList = userList
         
         vc.userID = self.userID!
-        
-        
         self.present(followerNav, animated: true, completion: nil)
         
     }
@@ -127,7 +143,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     @IBAction func chatButtonClicked(_ sender: UIButton) {
         
         let chatnav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "ChatListNav") as! UINavigationController
-
+        
         let chatList = chatnav.viewControllers.first as! ChatListViewController
         chatList.currentUser = AppDelegate.shared().currentUser!
         
@@ -135,31 +151,32 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         
         //To create a new conversation, assing the createChatWithUser property of chatVC with a user with who to create a new chat
         /*
-        let worker = OtherUsersProfileWorker()
-        worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
-            chatList.createChatWithUser = user
-            self.present(chatnav, animated: true, completion: nil)
-        }
-        */
+         let worker = OtherUsersProfileWorker()
+         worker.getUserDataWith(userID: "MW27Zsj1DSSKkP07NAK9VqqRz4I3") { (user) in
+         chatList.createChatWithUser = user
+         self.present(chatnav, animated: true, completion: nil)
+         }
+         */
         
     }
     
     @IBAction func followButtonClicked(_ sender: UIButton) {
         
         switch sender.currentTitle!.lowercased(){
-            case "follow":
-                sender.setTitle("UnFollow", for: .normal)
-                output.toggleFollow(userID: self.userID!, shouldFollow: true)
-                
-                
+        case "follow":
+            sender.setTitle("UnFollow", for: .normal)
+            output.toggleFollow(userID: self.userID!, shouldFollow: true)
+            
+            
             break
             
-            case "unfollow":
-                sender.setTitle("Follow", for: .normal)
-                output.toggleFollow(userID: self.userID!, shouldFollow: false)
+        case "unfollow":
+            sender.setTitle("Follow", for: .normal)
+            output.toggleFollow(userID: self.userID!, shouldFollow: false)
             break
             
-            case "go cook":
+        case "go cook":
+            self.performSegue(withIdentifier: "segueGoCook", sender: nil)
             break
             
         default:
@@ -172,14 +189,19 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func btnLogoutTapped(_ sender: UIButton) {
-        AppDelegate.shared().setLoginViewController()
-        let worker = FirebaseLoginWorker()
-        worker.signOut { (errorMessage) in
-            
+    func openDishDetails(_ dish: MFDish) {
+        if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+            dish.accessMode = .owner
+        } else {
+            dish.accessMode = .viewer
+        }
+        if dish.mediaType == .liveVideo &&
+            dish.endTimestamp == nil {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+            self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
         }
     }
-    
     
     // MARK: - Display logic
     

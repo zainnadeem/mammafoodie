@@ -1,4 +1,5 @@
 import UIKit
+import DZNEmptyDataSet
 //import TRMosaicLayout
 
 protocol LiveVideoMainPageViewControllerInput {
@@ -28,6 +29,11 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
         LiveVideoMainPageConfigurator.sharedInstance.configure(viewController: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     // MARK: - View lifecycle
     
     @IBAction func populateNewsfeed(_ sender: Any) {
@@ -42,11 +48,13 @@ class LiveVideoMainPageViewController: UIViewController,  LiveVideoMainPageViewC
 //        _ = dData.getUserForProfilePage()
         
     }
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.liveVideoCollectionView.delegate = self
         self.liveVideoCollectionView.dataSource = self
+        self.liveVideoCollectionView.emptyDataSetDelegate = self
+        self.liveVideoCollectionView.emptyDataSetSource = self
         self.output.loadLiveVideos()
         
 //        let mosaicLayout = TRMosaicLayout()
@@ -112,12 +120,28 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    
-        
             return UICollectionReusableView()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let dish: MFDish = self.liveVideos.arrayOfLiveVideos[indexPath.item] {
+            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+        }
+    }
+    
 }
+
+extension LiveVideoMainPageViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString.init(string: "No live video found", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 20
+    }
+
+}
+
 
 //// Mark: - Mosaic CollectionView Flow Layout
 //extension LiveVideoMainPageViewController: TRMosaicLayoutDelegate {

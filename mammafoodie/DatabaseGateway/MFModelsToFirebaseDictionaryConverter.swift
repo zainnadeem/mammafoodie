@@ -79,9 +79,8 @@ class MFModelsToFirebaseDictionaryConverter {
             "createdAt": comment.createdAt.timeIntervalSinceReferenceDate as AnyObject,
             "refrenceID": comment.refrenceID as AnyObject,
             "user": [
-                "id": comment.user!.id as AnyObject,
-                "name": comment.user!.name as AnyObject
-                ] as AnyObject
+                "id": comment.user.id as AnyObject,
+                "name": comment.user.name as AnyObject ] as AnyObject
         ]
         
         return raw
@@ -101,7 +100,8 @@ class MFModelsToFirebaseDictionaryConverter {
             "likesCount" : dish.likesCount as AnyObject,
             "commentsCount" : dish.commentsCount as AnyObject,
             "description" : dish.description as AnyObject,
-            "mediaURL" : dish.mediaURL?.absoluteString as? AnyObject ?? "" as AnyObject ,
+            "mediaURL" : (dish.mediaURL?.absoluteString ?? "") as AnyObject,
+            "coverPicURL": (dish.coverPicURL?.absoluteString ?? "") as AnyObject,
             "totalSlots" : dish.totalSlots as AnyObject,
             "pricePerSlot" : dish.pricePerSlot as AnyObject,
             "availableSlots" : dish.totalSlots as AnyObject,
@@ -145,7 +145,7 @@ class MFModelsToFirebaseDictionaryConverter {
         //            //                "userActivity"      : user.userActivity as AnyObject,
         //            //                "cookedDishes"      : user.cookedDishes as AnyObject,
         //            //                "boughtDishes"      : user.boughtDishes as AnyObject,
-        //            //                "favouriteDishes"   : user.favoriteDishes as AnyObject,
+        //            //                "favouriteDishes"   : user.favouriteDishes as AnyObject,
         //            //                "likedDishes"       : user.likedDishes as AnyObject,
         //            //                "followers"         : user.followers as AnyObject,
         //            //                "following"         : user.following as AnyObject,
@@ -185,9 +185,9 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["addressLocation"] = addressLocation as AnyObject
         }
         
-        if let picture = user.picture {
-            userInfo["picture"] = picture as AnyObject
-        }
+//        if let picture = user.picture {
+//            userInfo["picture"] = picture as AnyObject
+//        }
         
         userInfo["dishesSoldCount"] = user.dishesSoldCount as AnyObject
         
@@ -195,7 +195,13 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["profileDescription"] = profileDescription as AnyObject
         }
         
-        userInfo["phone"] = user.phone as AnyObject
+        
+        let phoneInfo: [String:Any] = [
+            "countryCode": user.phone.countryCode,
+            "phone": user.phone.phone
+        ]
+        userInfo["phone"] = phoneInfo as AnyObject
+        
         return userInfo
     }
     

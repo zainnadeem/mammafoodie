@@ -1,4 +1,5 @@
 import UIKit
+import DZNEmptyDataSet
 
 enum HomePageTableViewMode {
     case activity
@@ -13,6 +14,10 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
     
+    var onOrderNow : ((MFDish) -> Void)?
+    var onBookmark : ((MFDish) -> Void)?
+    var onOptions : ((MFDish) -> Void)?
+    
     private var openURL: ((String, String) -> Void)?
     private var currentUser: MFUser!
     
@@ -26,38 +31,95 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         self.openURL = completion
         let name: String = "MenuItemTblCell"
         self.tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
         
         let name1: String = "ActivityTblCell"
         self.tableView.register(UINib(nibName: name1, bundle: nil), forCellReuseIdentifier: name1)
-        
+        self.tableView.backgroundView?.isHidden = true
+        self.tableView.allowsSelection = true
         self.loadActivities()
+        
     }
     
     func loadActivities() {
         DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
                 self.activity = feeds
-                self.tableView.backgroundView?.isHidden = (feeds.count > 0)
                 self.tableView.reloadData()
+            }
         }
     }
     
     func loadMenu() {
-        DummyData.sharedInstance.populateMenu { (dummyMenu) in
-            self.menu = dummyMenu
-            self.tableView.reloadData()
+        DatabaseGateway.sharedInstance.getSavedDishesForUser(userID: self.currentUser.id) { (dishes) in
+            DispatchQueue.main.async {
+                self.menu = dishes
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func showOptions(for indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onOptions?(self.menu[indexPath.row])
+        }
+    }
+    
+    func showBookmarkOptions(for indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onBookmark?(self.menu[indexPath.row])
+        }
+    }
+    
+    func orderNow(at indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onOrderNow?(self.menu[indexPath.row])
+        }
+    }
+    
+    func removeSavedDish(_ dish: MFDish) {
+        if let index = self.menu.index(of: dish) {
+            let indexPath = IndexPath.init(row: index, section: 0)
+            self.tableView.beginUpdates()
+            self.menu.remove(at: index)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.mode == .activity {
             let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
-            cell.setup(with: self.activity[indexPath.item])
-            cell.openURL = self.openURL
+            if self.activity.count > indexPath.row {
+                cell.setup(with: self.activity[indexPath.item])
+                cell.openURL = self.openURL
+            }
             return cell
         } else {
             let cell: MenuItemTblCell = tableView.dequeueReusableCell(withIdentifier: "MenuItemTblCell", for: indexPath) as! MenuItemTblCell
-            cell.setup(with: self.menu[indexPath.item])
+            if self.menu.count > indexPath.row {
+                cell.indexPath = indexPath
+                cell.setup(with: self.menu[indexPath.item])
+                cell.onBookmark = { (index) in
+                    self.showBookmarkOptions(for: index)
+                }
+                cell.onOrderNow = { (index) in
+                    self.orderNow(at: index)
+                }
+                cell.onOptions = { (index) in
+                    self.showOptions(for: index)
+                }
+            }
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if self.mode == .menu {
+            let dish = self.menu[indexPath.item]
+            self.openURL?(FirebaseReference.dishes.rawValue, dish.id)
         }
     }
     
@@ -88,4 +150,18 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.sectionHeaderView
     }
+}
+
+extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.mode == .activity {
+            return NSAttributedString.init(string: "No activity", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+        }
+        return NSAttributedString.init(string: "No saved dishes", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
+    }
+
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return (self.sectionHeaderView?.frame.size.height ?? 0) + self.tableView.sectionHeaderHeight + 20
+    }
+
 }

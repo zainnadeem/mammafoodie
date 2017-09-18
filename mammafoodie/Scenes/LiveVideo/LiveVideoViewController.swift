@@ -7,14 +7,18 @@ protocol LiveVideoViewControllerInput {
     func showVideoId(_ liveVideo: MFDish)
     func liveVideoClosed()
     func streamUnpublished()
+    func showStreamImage(_ image: UIImage)
 }
 
 protocol LiveVideoViewControllerOutput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
+    func updateStreamImage()
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
+    
+    var timerForThumbnailCapturing: Timer?
     
     var output: LiveVideoViewControllerOutput?
     var router: LiveVideoRouter!
@@ -89,33 +93,34 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewComments.showLatestComment()
+        self.startUpdatingImage()
     }
     
     func viewWillAppearCode() {
         self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
             self.lblNumberOfViewers.text = "\(count)"
         }
-
+        
         // This needs to be executed from viewWillAppear or later. Because of the Camera
         if self.output != nil {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-                //                self.output!.start(self.liveVideo)
+                self.output!.start(self.liveVideo)
             #endif
         }
         
         self.setupViewComments()
         self.viewComments.emojiTapped = { (emojiButton) in
-            if let current = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if DatabaseGateway.sharedInstance.getLoggedInUser() != nil {
                 let alert = UIAlertController.init(title: "Choose amount", message: "", preferredStyle: .actionSheet)
                 alert.addAction(UIAlertAction.init(title: "$1", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 1.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 1)
                 }))
                 alert.addAction(UIAlertAction.init(title: "$2", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 2.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 2)
                 }))
                 alert.addAction(UIAlertAction.init(title: "$3", style: .default, handler: { (action) in
-                    SavedCardsVC.presentSavedCards(on : self, amount : 3.0, to : self.liveVideo.user.id, from : current.id)
+                    self.tip(amount: 3)
                 }))
                 alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
                     
@@ -125,18 +130,42 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 })
             }
         }
-
+    }
+    
+    func tip(amount: Double) {
+        guard let current = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            print("Current user not found")
+            return
+        }
+        
+        SavedCardsVC.presentSavedCards(on: self, amount : amount, to: self.liveVideo.user.id, from: current.id, purpose: PaymentPurpose.tip, dishId: self.liveVideo.id, dishName: self.liveVideo.name, success: {
+            print("Success")
+        }, error: {
+            print("Error")
+        })
     }
     
     func loadDish() {
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterItemID: self.liveVideo.id as NSObject,
+            AnalyticsParameterItemName: "liveVideo" as NSObject,
+            AnalyticsParameterContentType: "LiveVideoView" as NSObject
+            ])
+        
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
+                    
+                    if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                        dish.accessMode = MFDishMediaAccessMode.owner
+                    } else {
+                        dish.accessMode = MFDishMediaAccessMode.viewer
+                    }
+                    
                     self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
                     self.liveVideo = dish
                     self.lblDishName.text = dish.name
                     self.showUserInfo()
-                    
                     
                     if let location = dish.location {
                         if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
@@ -161,7 +190,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     func showUserInfo() {
         let userId = self.liveVideo.user.id
-        DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (user) in
             self.lblUserFullname.text = user?.name ?? ""
             if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user!.id) {
                 self.imgViewProfilePicture.sd_setImage(with: url)
@@ -172,8 +201,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func setupViewComments() {
-        self.viewComments.dish = self.liveVideo
-        self.viewComments.load()
+        if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.viewComments.dish = self.liveVideo
+            self.viewComments.user = user
+            self.viewComments.shouldShowEmoji = true
+            self.viewComments.load()
+            
+            self.viewComments.likeButtonTapped = {
+                let btn: UIButton = UIButton()
+                self.btnLikeTapped(btn)
+            }
+        }
     }
     
     func updateShadowForButtonCloseLiveVideo() {
@@ -240,14 +278,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.output != nil {
-            #if (arch(i386) || arch(x86_64)) && os(iOS)
-            #else
-                self.output!.stop(self.liveVideo)
-            #endif
-        }
-        self.countObserver?.stop()
-        self.countObserver = nil
+        self.timerForThumbnailCapturing?.invalidate()
+        self.timerForThumbnailCapturing = nil
     }
     
     // MARK: - Event handling
@@ -264,7 +296,16 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.output?.stop(self.liveVideo)
+        
+        if self.output != nil {
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+            #else
+                self.output!.stop(self.liveVideo)
+            #endif
+        }
+        self.countObserver?.stop()
+        self.countObserver = nil
+        
         if self.presentingViewController != nil ||
             self.navigationController?.presentingViewController != nil {
             self.dismiss(animated: true, completion: nil)
@@ -286,9 +327,17 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         // align cameraView from the top and bottom
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
-        //        if self.liveVideo.accessMode == .viewer {
-        //            self.viewCamera.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-        //        }
+        if self.liveVideo.accessMode == .owner {
+            self.output?.updateStreamImage()
+        }
+    }
+    
+    func startUpdatingImage() {
+        self.timerForThumbnailCapturing?.invalidate()
+        self.timerForThumbnailCapturing = nil
+        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+            self.output?.updateStreamImage()
+        })
     }
     
     func streamUnpublished() {
@@ -302,10 +351,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     func showVideoId(_ liveVideo: MFDish) {
         //        self.lblVideoName.text = liveVideo.id
-        if liveVideo.id != nil {
-            //            self.viewVisualBlurEffect.removeFromSuperview()
-            //            self.imgViewPlaceholder.removeFromSuperview()
-        }
+        //        if liveVideo.id != nil {
+        //            self.viewVisualBlurEffect.removeFromSuperview()
+        //            self.imgViewPlaceholder.removeFromSuperview()
+        //        }
     }
     
     func purchase(slots : UInt) {
@@ -336,6 +385,20 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             if isFinished {
                 print("Animation finished btnShowHideExtrasTapped")
             }
+        }
+    }
+    
+    @IBAction func btnUserTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueShowUserProfile", sender: self.liveVideo.user.id)
+    }
+    
+    func showStreamImage(_ image: UIImage) {
+        if let image: UIImage = image.imageRotatedByDegrees(degrees: 90, flip: false) {
+            DatabaseGateway.sharedInstance.upload(image: image, for: self.liveVideo, { (errorMessage) in
+                if let error = errorMessage {
+                    print("Error while uploading live video image: \(error)")
+                }
+            })
         }
     }
 }

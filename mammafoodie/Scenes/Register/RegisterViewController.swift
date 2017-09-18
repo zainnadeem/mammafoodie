@@ -26,6 +26,8 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     @IBOutlet weak var viewEmailIcon: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     
+    var isGradientApplied: Bool = false
+    
     lazy var RegisterAdapterTextfeild = RegisterAdapter()
     
     override func awakeFromNib() {
@@ -72,13 +74,21 @@ class RegisterViewController: UIViewController, RegisterViewControllerInput , UI
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.registerBtn.applyGradient(colors: [gradientStartColor, gradientEndColor])
+        
+        if self.isGradientApplied == false {
+            self.isGradientApplied = true
+            self.registerBtn.applyGradient(colors: [gradientStartColor, gradientEndColor])
+        }
+        
     }
     
     @IBAction func registerBtn(_ sender: Any) {
         guard validateCredentials() && isValidEmail(emailStr: emailTextFeild.text!) else {
             return
         }
+        self.emailTextFeild.resignFirstResponder()
+        self.passTextFeild.resignFirstResponder()
+        self.nameTextField.resignFirstResponder()
         self.output.register(name: nameTextField.text!, email: emailTextFeild.text!, password:  passTextFeild.text!)
     }
     

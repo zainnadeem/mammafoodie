@@ -6,6 +6,7 @@ protocol LiveVideoPresenterInput {
     func showVideoId(_ liveVideo: MFDish)
     func liveVideoClosed()
     func streamUnpublished()
+    func updateStreamImage(_ image: UIImage)
 }
 
 protocol LiveVideoPresenterOutput: class {
@@ -13,6 +14,7 @@ protocol LiveVideoPresenterOutput: class {
     func showVideoId(_ liveVideo: MFDish)
     func liveVideoClosed()
     func streamUnpublished()
+    func showStreamImage(_ image: UIImage)
 }
 
 class LiveVideoPresenter: LiveVideoPresenterInput {
@@ -20,6 +22,10 @@ class LiveVideoPresenter: LiveVideoPresenterInput {
     weak var output: LiveVideoPresenterOutput?
     
     // MARK: - Presentation logic
+    
+    func updateStreamImage(_ image: UIImage) {
+        self.output?.showStreamImage(image)
+    }
     
     func show(_ cameraView: UIView) {
         if self.output != nil {

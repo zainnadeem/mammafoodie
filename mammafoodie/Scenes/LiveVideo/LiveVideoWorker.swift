@@ -18,7 +18,7 @@ class LiveVideoWorker {
     
     func start(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.delegate = self
-        self.liveVideoGateway!.getConfigurations({ (cameraView) in
+        self.liveVideoGateway!.getConfigurations({ (isConfigDownloaded) in
             if liveVideo.accessMode == .owner {
                 self.publish(liveVideo, completion)
             } else {
@@ -58,6 +58,10 @@ class LiveVideoWorker {
             self.unpublishStreamFromDatabase(liveVideo)
         }
         self.liveVideoGateway!.stop()
+    }
+    
+    func getStreamImage() -> UIImage {
+        return self.liveVideoGateway!.getStreamImage()
     }
 }
 

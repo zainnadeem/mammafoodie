@@ -1,6 +1,6 @@
 import UIKit
 
-class CheckFavoriteStatusWorker {
+class CheckFavouriteStatusWorker {
     // MARK: - Business Logic
     
     func checkStatus(userId: String, dishId:String, completion: @escaping (Bool?)->Void) {

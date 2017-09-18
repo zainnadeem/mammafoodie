@@ -74,6 +74,10 @@ class LiveVideoGateway: NSObject {
         self.delegate?.streamPublished()
     }
     
+    func getStreamImage() -> UIImage {
+        return self.publishViewController.stream.getImage()
+    }
+    
     func stop() {
         self.liveStream?.stop()
         self.liveStream?.delegate = nil

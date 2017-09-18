@@ -49,9 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         if let userId = currentUser?.uid {
             if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
                 let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
-                DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
+                welcomeVC.collectionViewImages.isHidden = true
+                welcomeVC.viewContainer.isHidden = true
+                _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
                     DispatchQueue.main.async {
                         self.currentUser = loggedInUser
+                        welcomeVC.collectionViewImages.isHidden = false
+                        welcomeVC.viewContainer.isHidden = false
                         hud.hide(animated: true)
                         if self.currentUser != nil {
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -59,11 +63,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
                                 self.handleNotification(userInfo, showAlert: false)
                             }
+                        } else {
+                            FirebaseLoginWorker().signOut({ (error) in
+                                
+                            })
                         }
                     }
                 }
             }
         }
+        
+        //        self.saveDishes()
+        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
@@ -188,7 +199,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        
+        if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
+            if let liveVideoVC: LiveVideoViewController = navController.topViewController as? LiveVideoViewController {
+                if liveVideoVC.liveVideo.accessMode == MFDishMediaAccessMode.owner {
+                    liveVideoVC.liveVideo.endTimestamp = Date()
+                    let url = URL(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/stopLiveVideo?dishId=\(liveVideoVC.liveVideo.id)")!
+                    do {
+                        let _ = try Data(contentsOf: url, options: Data.ReadingOptions.alwaysMapped)
+                        print("App closed and live video ended")
+                    } catch {
+                        
+                    }
+                }
+            }
+        }
     }
     
     func resizeImage(image: UIImage, imageName: String) {
@@ -208,7 +232,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
         print("filePath: \(destinationPath)")
     }
-   
+    
     func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
         if let _ = self.currentUser,
             let redirectID = userInfo["redirectId"] as? String,
@@ -237,7 +261,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 }
             }
             if showAlert &&
-               appState == .active {
+                appState == .active {
                 if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
                     self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
                         DispatchQueue.main.async {
@@ -262,9 +286,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         func open(dish: MFDish) {
             if let _ = dish.endTimestamp {
                 //Vidup
-                if let currentVC = self.getCurrentViewController() as? VidupDetailPageViewController {
+                if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
                     currentVC.load(new: dish)
-                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "VidupDetailPageViewController") as? VidupDetailPageViewController {
+                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
                     vidupDetailVC.DishId = dish.id
                     vidupDetailVC.userId = dish.user.id
                     vidupDetailVC.dish = dish
@@ -316,7 +340,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
         if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
             if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
-                profileVC.profileType = type
+                //                profileVC.profileType = type
                 profileVC.userID = userid
                 self.checkAndPresent(vc: nav)
             }

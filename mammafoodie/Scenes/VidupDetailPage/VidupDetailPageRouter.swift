@@ -1,17 +1,42 @@
 import UIKit
 
 protocol VidupDetailPageRouterInput {
-
+    
 }
 
 class VidupDetailPageRouter: VidupDetailPageRouterInput {
-
-    weak var viewController: VidupDetailPageViewController!
+    
+    weak var viewController: DealDetailViewController!
     
     // MARK: - Navigation
     
-    func passDataToNextScene(segue: UIStoryboardSegue) {
+    func passDataToNextScene(segue: UIStoryboardSegue, sender : Any?) {
         // NOTE: Teach the router which scenes it can communicate with
-
+        if segue.identifier == "segueShowUserProfile" {
+            if let destination: UINavigationController = segue.destination as? UINavigationController {
+                if let profileVC: OtherUsersProfileViewController = destination.viewControllers.first as? OtherUsersProfileViewController {
+                    profileVC.userID = sender as? String
+                }
+            }
+        } else if segue.identifier == "seguePresentSlotSelectionViewController" {
+            if let destination = segue.destination as? SlotSelectionViewController,
+                let source = segue.source as? DealDetailViewController {
+                destination.dish = source.dish
+                destination.selectionClosure = { (count) in
+                    if count > 0 {
+                        source.purchase(slots: count)
+                    }
+                    print("Slots to be purchased: \(count)")
+                }
+            }
+        } else if segue.identifier == "segueShowPaymentViewController" {
+            if let destination = segue.destination as? PaymentViewController,
+                let source = segue.source as? DealDetailViewController {
+                if let slots = sender as? UInt {
+                    destination.slotsToBePurchased = slots
+                    destination.dish = source.dish
+                }
+            }
+        }
     }
 }
