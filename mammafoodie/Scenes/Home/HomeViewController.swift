@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = .darkGray
         AppDelegate.shared().updateToken()
         
         self.addArc(to: self.btnExpandLiveVideosView)
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     @IBAction func logout() {
         let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
-        firebaseWorker.signOut(){ errorMessage in
+        firebaseWorker.signOut() { errorMessage in
             if let errorMessage = errorMessage {
                 print(errorMessage)
             } else {
