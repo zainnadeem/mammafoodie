@@ -27,7 +27,7 @@ class TimerWorker {
         self.delegate?.DisplayTime(Time: TimeInterval(seconds))
     }
     
-    func stopTimer(){
+    func stopTimer() {
         if self.timer != nil {
             self.timer!.invalidate()
         }

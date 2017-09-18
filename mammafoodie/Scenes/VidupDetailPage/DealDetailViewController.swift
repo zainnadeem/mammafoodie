@@ -12,6 +12,8 @@ protocol DealDetailViewControllerOutput {
     func stopTimer()
     func dishLiked(user_id:String,dish_id: String)
     func dishUnliked(user_id:String,dish_id: String)
+    func stopPlayback()
+    func startPlayback()
 }
 
 class DealDetailViewController: UIViewController, DealDetailViewControllerInput {
@@ -72,14 +74,13 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         //        self.lv_ProfileDetails.layer.insertSublayer(gradient, at: 0)
         
         //        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
-        
         if let dish = self.dish {
             self.load(new: dish)
         } else {
             self.close(animated: false)
-            self.showAlert("Error", message: "Error downloading the dish. Please try again.")
+            self.showAlert("Error", message: "Error downloading the dish info. Please try again.")
         }
-        
+
         if let dish = self.dish {
             var itemName: String = ""
             var contentType: String = ""
@@ -105,20 +106,24 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        if let dish = self.dish {
+            self.output.startPlayback()
+        }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if self.shouldShowSlotSelection {
             self.showSlotSelection()
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.output.stopTimer()
+        self.output.stopPlayback()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if self.dish?.mediaType == MFDishMediaType.vidup {
@@ -162,9 +167,12 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     @IBAction func closebtnClicked(_ sender: Any) {
         self.close(animated: true)
+
     }
     
     private func close(animated: Bool) {
+        self.output.stopTimer()
+        self.output.stopPlayback()
         if self.presentingViewController != nil ||
             self.navigationController?.presentingViewController != nil {
             self.dismiss(animated: true, completion: nil)
@@ -253,7 +261,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     deinit {
         self.observer = nil
     }
-    
+
     func displayDishInfo(for vidup: MFDish) {
         self.userId = vidup.user.id
         self.DishId = vidup.id

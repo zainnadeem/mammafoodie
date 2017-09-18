@@ -17,8 +17,15 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     var output: HomeViewControllerOutput!
     var router: HomeRouter!
-    
     var startCircleFrame: CGRect = .zero
+    var isLiveVideosViewExpanded: Bool = false
+    var isVidupsViewExpanded: Bool = false
+    let liveVideosAdapter: HomePageLiveVideoCollectionViewAdapter = HomePageLiveVideoCollectionViewAdapter()
+    let vidupsAdapter: HomePageVidupsCollectionViewAdapter = HomePageVidupsCollectionViewAdapter()
+    let tableViewAdapter: HomePageTableviewAdapter = HomePageTableviewAdapter()
+    let cuisineListAdapter: CuisineListCollectionViewAdapter = CuisineListCollectionViewAdapter()
+    var conHeightViewTableViewHeader: NSLayoutConstraint!
+    var screenMode: HomeViewControllerScreenMode = .activity
     
     @IBOutlet weak var viewTableViewBackground: UILabel!
     @IBOutlet weak var tblList: UITableView!
@@ -33,7 +40,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet weak var conHeightClnVidups: NSLayoutConstraint!
     @IBOutlet weak var conHeightClnLiveVideos: NSLayoutConstraint!
     @IBOutlet weak var viewLiveVideoAndVidups: UIView!
-    
     @IBOutlet var viewActivityMenuChooser: UIView!
     @IBOutlet weak var viewActivityIcon: UIView!
     @IBOutlet weak var viewMenuIcon: UIView!
@@ -43,28 +49,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     @IBOutlet weak var conTopViewActivity: NSLayoutConstraint!
     @IBOutlet weak var btnSwitchMode: UIButton!
     
-    var isLiveVideosViewExpanded: Bool = false
-    var isVidupsViewExpanded: Bool = false
-    let liveVideosAdapter: HomePageLiveVideoCollectionViewAdapter = HomePageLiveVideoCollectionViewAdapter()
-    let vidupsAdapter: HomePageVidupsCollectionViewAdapter = HomePageVidupsCollectionViewAdapter()
-    let tableViewAdapter: HomePageTableviewAdapter = HomePageTableviewAdapter()
-    let cuisineListAdapter: CuisineListCollectionViewAdapter = CuisineListCollectionViewAdapter()
-    var conHeightViewTableViewHeader: NSLayoutConstraint!
-    
-    var screenMode: HomeViewControllerScreenMode = .activity
-    
     // MARK: - Object lifecycle
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         HomeConfigurator.sharedInstance.configure(viewController: self)
     }
     
     // MARK: - View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = .darkGray
         AppDelegate.shared().updateToken()
         
         self.addArc(to: self.btnExpandLiveVideosView)
@@ -115,7 +109,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     // MARK: - Event handling
-    
     @IBAction func btnExpandLiveVideosTapped(_ sender: UIButton) {
         if self.isLiveVideosViewExpanded {
             self.collapseLiveVideoView(animated: true)
@@ -154,7 +147,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     @IBAction func logout() {
         let firebaseWorker: FirebaseLoginWorker = FirebaseLoginWorker()
-        firebaseWorker.signOut(){ errorMessage in
+        firebaseWorker.signOut() { errorMessage in
             if let errorMessage = errorMessage {
                 print(errorMessage)
             } else {
@@ -195,7 +188,6 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     }
     
     // MARK: - Display logic
-    
     func addConstraints(to headerView: UIView, in tableView: UITableView) {
         if self.conHeightViewTableViewHeader == nil {
             // align headerView from the left and right

@@ -115,8 +115,20 @@ class PaymentViewController: UIViewController {
         self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone.phone ?? ""
     }
     
-    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem?) {
+        if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 0 {
+                if viewControllers[0] is PaymentViewController {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func updateDeliveryCharge() {
@@ -414,7 +426,7 @@ class PaymentViewController: UIViewController {
                     if let error = error {
                         self.showAlert("Error!", message: error.localizedDescription, actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
                             DispatchQueue.main.async {
-                                self.navigationController?.popViewController(animated: true)
+                                self.backButtonTapped(nil)
                             }
                         })
                     } else {
@@ -494,7 +506,7 @@ class PaymentViewController: UIViewController {
     func orderCompletedMessage() {
         self.showAlert("Done!", message: "", actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
             DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                self.backButtonTapped(nil)
             }
         })
         
