@@ -15,8 +15,8 @@ target 'mammafoodie' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'GoogleMaps'
-    pod 'GooglePlaces'
+#    pod 'GoogleMaps'
+#    pod 'GooglePlaces'
     
     pod 'TTTAttributedLabel'
     

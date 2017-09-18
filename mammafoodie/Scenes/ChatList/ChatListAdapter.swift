@@ -11,6 +11,10 @@ protocol ChatListViewAdapterDelegate{
 
 class ChatListAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     
+    override init() {
+        super.init()
+    }
+    
     var chatListArray = [MFConversation](){
         didSet{
             chatTableView?.reloadData()
@@ -20,9 +24,12 @@ class ChatListAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var chatTableView: UITableView? {
         didSet {
+            
+            let className = "ChatListTableViewCell"
+            self.chatTableView?.register(UINib(nibName: className, bundle: nil), forCellReuseIdentifier: className)
+            
             self.chatTableView?.delegate = self
             self.chatTableView?.dataSource = self
-            //chatTableView?.rowHeight = UITableViewAutomaticDimension
             self.chatTableView?.estimatedRowHeight = 44
             self.chatTableView?.emptyDataSetSource = self
             self.chatTableView?.emptyDataSetDelegate = self
@@ -42,7 +49,7 @@ class ChatListAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListTableViewCell", for: indexPath) as! ChatListTableViewCell
     
         let conversation = chatListArray[indexPath.row]
         
@@ -68,7 +75,7 @@ class ChatListAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 44+8+8
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

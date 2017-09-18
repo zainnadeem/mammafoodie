@@ -11,40 +11,31 @@ import UIKit
 class ChatListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profilePicImageView: UIImageView!
-    
     @IBOutlet weak var lblUserName: UILabel!
-    
+    @IBOutlet weak var lblLastMessage: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        profilePicImageView.layer.cornerRadius = 25
-        profilePicImageView.clipsToBounds = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.profilePicImageView.layer.cornerRadius = 22
+        self.profilePicImageView.clipsToBounds = true
     }
     
-    func setup(conversation:MFConversation, currentUserID:String){
-        
+    func setup(conversation:MFConversation, currentUserID:String) {
+        var user: String!
+        var userName: String!
         if conversation.user1 == currentUserID {
-            self.lblUserName.text = conversation.user2Name
-            let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: conversation.user2)
-            if let url = url{
-                self.profilePicImageView.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie")!)
-            }
+            user = conversation.user2
+            userName = conversation.user2Name
         } else {
-            self.lblUserName.text = conversation.user1Name
-            let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: conversation.user1)
-            if let url = url{
-                self.profilePicImageView.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie")!)
-            }
+            user = conversation.user1
+            userName = conversation.user1Name
         }
-
+        
+        self.lblUserName.text = userName
+        let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user)
+        if let url = url {
+            self.profilePicImageView.sd_setImage(with: url, placeholderImage: UIImage(named:"IconMammaFoodie")!)
+        }
     }
-    
 }

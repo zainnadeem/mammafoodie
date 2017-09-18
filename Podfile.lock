@@ -56,13 +56,6 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.1)
   - GeoFire (2.0.0):
     - Firebase/Database (~> 4.0)
-  - GoogleMaps (2.4.0):
-    - GoogleMaps/Maps (= 2.4.0)
-  - GoogleMaps/Base (2.4.0)
-  - GoogleMaps/Maps (2.4.0):
-    - GoogleMaps/Base
-  - GooglePlaces (2.4.0):
-    - GoogleMaps/Base (= 2.4.0)
   - GoogleSignIn (4.1.0):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -119,8 +112,6 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
-  - GoogleMaps
-  - GooglePlaces
   - GoogleSignIn
   - IQKeyboardManagerSwift (= 4.0.13)
   - JSQMessagesViewController
@@ -156,8 +147,6 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 85af6c27188538b3a6f7dfd0b3b0596358cb0c39
   FirebaseStorage: 661fc1f8d4131891d256b62e82a45ace8b3f0c3b
   GeoFire: 02f02683e09367c2eee073c6b09c794da19833ee
-  GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
-  GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
   GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
@@ -176,6 +165,6 @@ SPEC CHECKSUMS:
   TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: c6cebe9a3faa635eea86bf77c5e26cf176344d87
+PODFILE CHECKSUM: 83be1dd903063ec9ad1a55b449d9028ce6d3f6e1
 
 COCOAPODS: 1.3.1

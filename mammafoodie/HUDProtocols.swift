@@ -51,8 +51,7 @@ extension HUDRenderer {
     }
     
     func hideActivityIndicator() {
-   
-      
+
             let delegate = (UIApplication.shared.delegate as! AppDelegate)
             if delegate.activityIndicatorView != nil {
                 delegate.activityIndicatorView?.removeFromSuperview()

@@ -91,6 +91,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         return .lightContent
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
@@ -278,20 +283,33 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                                 self.showAlert("Error", message: errorMessage)
                             } else {
                                 // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
-                                if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
-                                    let user2: MFUser = self.dishForView?.dish?.user {
-                                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: user2, { (success, conversationId) in
-                                        if success {
-                                            // Open chat view controller
-                                            if let conversationId = conversationId {
-                                                self.openChatVC(conversationId: conversationId)
-                                            }
+                                if let user2Id: String = self.dishForView?.dish?.user.id {
+                                    _ = DatabaseGateway.sharedInstance.getUserWith(userID: user2Id, { (dishUser) in
+                                        if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
+                                            let dishUser = dishUser {
+                                            DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: dishUser, { (success, conversationId) in
+                                                if success {
+                                                    if let conversationId = conversationId {
+                                                        self.sendDishRequestMessage(in: conversationId, quantity: quantity, dishName: dish.name, dish: dish)
+                                                    } else {
+                                                        self.showAlert(message: "Request failed. Please try again.")
+                                                    }
+                                                } else {
+                                                    self.showAlert(message: "Request failed. Please try again.")
+                                                }
+                                            })
+                                        } else {
+                                            self.showAlert(message: "Request failed. Please try again.")
                                         }
                                     })
+                                } else {
+                                    self.showAlert(message: "Request failed. Please try again.")
                                 }
                             }
                         })
                     }
+                } else {
+                    self.showAlert(message: "Request failed. Please try again.")
                 }
             }))
             self.present(alertController, animated: true, completion: {
@@ -303,12 +321,40 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             //
             //            self.present(vc, animated: true, completion: nil)
         }
-        
+    }
+    
+    func sendDishRequestMessage(in conversationId: String, quantity: Int, dishName: String, dish: MFDish) {
+        _ = DatabaseGateway.sharedInstance.getUserWith(userID: dish.user.id) { (dishUser) in
+            if let dishUser = dishUser {
+                self.createMessage(quantity: quantity, dishName: dishName, dishUserName: dishUser.name, dishUserId: dishUser.id, conversationId: conversationId)
+            } else {
+                self.showAlert(message: "Request failed. Please try again.")
+            }
+        }
+    }
+    
+    func createMessage(quantity: Int, dishName: String, dishUserName: String, dishUserId: String, conversationId: String) {
+        let messageString: String = "Request for \(quantity) servings of \(dishName)"
+        let senderDisplayName: String = dishUserName
+        let senderId: String = dishUserId
+        let message: MFMessage = MFMessage(with: senderDisplayName, messagetext: messageString, senderId: senderId)
+        DatabaseGateway.sharedInstance.createMessage(with: message, conversationID: conversationId) { (success) in
+            DispatchQueue.main.async {
+                if success {
+                    // Open chat view controller
+                    self.openChatVC(conversationId: conversationId)
+                } else {
+                    self.showAlert(message: "Request failed. Please try again.")
+                }
+            }
+        }
     }
     
     func openChatVC(conversationId: String) {
         DatabaseGateway.sharedInstance.getConversation(with: conversationId) { (conversationObject) in
-            self.performSegue(withIdentifier: "segueShowConversationDetail", sender: conversationObject)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueShowConversationDetail", sender: conversationObject)
+            }
         }
     }
     

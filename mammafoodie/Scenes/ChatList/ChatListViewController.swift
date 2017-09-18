@@ -73,12 +73,11 @@ class ChatListViewController: UIViewController, ChatListViewControllerInput,Chat
     }
     
     func chatListPage(conversation: MFConversation) {
-        let mainStoryboard:UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
-        let destViewController = mainStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        let storyboard:UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
+        let destViewController = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatViewController
         destViewController.conversation = conversation
         destViewController.currentUser = self.currentUser
         self.navigationController?.pushViewController(destViewController, animated: true)
-        
     }
     
 }

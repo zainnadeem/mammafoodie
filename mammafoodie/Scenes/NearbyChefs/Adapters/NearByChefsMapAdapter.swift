@@ -102,24 +102,26 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             dish.accessMode = .viewer
         }
 
-        if dish.mediaType == .liveVideo &&
-            dish.endTimestamp == nil {
-            self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
-        } else if dish.mediaType == .vidup ||
-            dish.mediaType == .picture {
-            if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+        if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+            if dish.mediaType == .liveVideo &&
+                dish.endTimestamp == nil {
+                self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
+            } else if dish.mediaType == .vidup ||
+                dish.mediaType == .picture {
                 self.performSegue(withIdentifier: "segueShowDealDetails", sender: dish)
-            } else {
-                self.openDishPageWith(dishID: dish.id)
             }
+        } else {
+            self.openDishPageWith(dishID: dish.id)
         }
     }
 
     func openDishPageWith(dishID:String) {
         //Initiate segue and pass it to router in prepare for segue
-        let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
-        self.present(dishVC, animated: true, completion: nil)
+        let navController: MFNavigationController = MFNavigationController(rootViewController: dishVC)
+        navController.navigationBar.tintColor = navigationBarTintColor
+        self.present(navController, animated: true, completion: nil)
     }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {

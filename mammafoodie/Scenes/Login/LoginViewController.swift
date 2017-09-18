@@ -215,7 +215,7 @@ class LoginViewController: UIViewController, LoginViewControllerInput, SFSafariV
     }
     
     func showHomeScreen() {
-        if let currentUser = Auth.auth().currentUser {
+        if Auth.auth().currentUser != nil {
             AppDelegate.shared().setHomeViewController()
             //
             //            let user: MFUser = MFUser()
