@@ -29,7 +29,9 @@ class ChatViewController: JSQMessagesViewController {
     
     var OtherUserProfileImage:UIImage? {
         didSet{
-            collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -213,9 +215,14 @@ extension ChatViewController {
             
         })
         
-        
-        
         getMessages(forConversation: self.conversation.id)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
     }
     
 
@@ -224,10 +231,10 @@ extension ChatViewController {
         
         
         worker.getMessages(forConversation: conversationID, { message in
-            
             if message != nil {
-                self.messages.append(message!)
-
+                DispatchQueue.main.async {
+                    self.messages.append(message!)
+                }
             }
             
         })

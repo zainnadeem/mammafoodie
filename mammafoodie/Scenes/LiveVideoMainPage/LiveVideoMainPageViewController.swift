@@ -124,7 +124,8 @@ extension LiveVideoMainPageViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let dish: MFDish = self.liveVideos.arrayOfLiveVideos[indexPath.item] {
+        let dish: MFDish? = self.liveVideos.arrayOfLiveVideos[indexPath.item]
+        if let dish: MFDish = dish {
             self.performSegue(withIdentifier: "segueShowLiveVideoDetails", sender: dish)
         }
     }

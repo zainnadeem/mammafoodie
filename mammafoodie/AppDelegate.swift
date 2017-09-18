@@ -14,12 +14,14 @@ import UserNotifications
 import FirebaseMessaging
 import MBProgressHUD
 
+var navigationBarTintColor: UIColor!
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
     var activityIndicatorView:UIView?
-    let gcmMessageIDKey = "gcm.message_id"
+//    let gcmMessageIDKey = "gcm.message_id"
     
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
@@ -41,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
+        
+        navigationBarTintColor = navigationController.navigationBar.tintColor
         
         if let _ = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             print("Launch With options")
@@ -99,8 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func updateToken() {
-        if let token = InstanceID.instanceID().token() {
+        if let token = Messaging.messaging().fcmToken {
             if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                print("Updating user:\(currentUser.id) for Token: \(token)")
                 DatabaseGateway.sharedInstance.setDeviceToken(token, for: currentUser.id, { (error) in
                     print("Token: \(token)\n Updated for user: \(currentUser.id)")
                 })
@@ -174,7 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("Deivce Token:" + deviceTokenString)
+        print("Device Token:" + deviceTokenString)
         self.updateToken()
     }
     

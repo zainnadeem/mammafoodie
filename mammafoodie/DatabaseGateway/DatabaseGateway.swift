@@ -265,6 +265,11 @@ extension DatabaseGateway {
         let key2: String = "/\(FirebaseReference.userConversations.rawValue)/\(user1.id)/\(newConversationID)/"
         let key3: String = "/\(FirebaseReference.userConversations.rawValue)/\(user2.id)/\(newConversationID)/"
         
+        if key2 == key3 {
+            print("Requesting dish from his/herself")
+            completion(false, "Requesting dish from his/herself")
+        }
+        
         let childUpdates = [
             key1: metaData,
             key2: true,
