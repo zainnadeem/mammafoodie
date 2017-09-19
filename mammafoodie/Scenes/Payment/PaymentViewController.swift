@@ -66,6 +66,7 @@ class PaymentViewController: UIViewController {
         
         let backButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "BackBtn"), style: .plain, target: self, action: #selector(backButtonTapped(_:)))
         self.navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.navigationBar.tintColor = .darkGray
         
         //        if self.dish == nil {
         //            self.navigationController?.popViewController(animated: true)
@@ -217,7 +218,6 @@ class PaymentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.tintColor = .darkGray
     }
     
     override func didReceiveMemoryWarning() {

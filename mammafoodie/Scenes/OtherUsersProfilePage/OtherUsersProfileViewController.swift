@@ -48,6 +48,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.showsVerticalScrollIndicator = false
         
         if let userid = self.userID {
             if userid == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
