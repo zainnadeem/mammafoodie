@@ -150,6 +150,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.sectionHeaderView
     }
+
 }
 
 extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {

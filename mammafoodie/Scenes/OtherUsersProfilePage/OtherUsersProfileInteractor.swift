@@ -85,13 +85,16 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     private func loadCountsForAllSections() {
         guard let user = self.user else { return }
         
-        self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+        self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
+            self.dishCollectionViewAdapter.cookedDishData = cookedDishes
         })
         
-        self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+        self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
+            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
         })
         
-        self.worker.getActivity(for: user.id, completion: { (newsFeedList) in                                self.dishCollectionViewAdapter.activityData = newsFeedList
+        self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
+            self.dishCollectionViewAdapter.activityData = newsFeedList
         })
     }
     
@@ -106,41 +109,31 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
             })
-            
-            
-            
+
         case .bought:
             self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
                 
             })
-            
-            
+
         case .activity:
             self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .activity
                 self.dishCollectionViewAdapter.activityData = newsFeedList
             })
-            
         }
-        
         self.hideActivityIndicator()
         
     }
     
-    func toggleFollow(userID:String, shouldFollow:Bool) {
-        
-        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase else {return}
-        
-        worker.toggleFollow(targetUser: userID, currentUser: currentUser.uid, targetUserName: self.user!.name, currentUserName: "Current username", shouldFollow: shouldFollow) { (success) in
-            
+    func toggleFollow(userID: String, shouldFollow: Bool) {
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {return}
+        worker.toggleFollow(targetUser: userID, currentUser: currentUser.id, targetUserName: self.user!.name, currentUserName: currentUser.name , shouldFollow: shouldFollow) { (success) in
             if success {
                 print("follow toggled")
             }
-            
         }
-        
     }
     
     //MARK: - DishesCollectionViewAdapterDelegate

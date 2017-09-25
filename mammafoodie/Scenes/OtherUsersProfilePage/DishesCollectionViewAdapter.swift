@@ -10,7 +10,6 @@ import UIKit
 import DZNEmptyDataSet
 
 protocol DishesCollectionViewAdapterDelegate {
-    
     func openDishPageWith(dishID:String)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func openFollowers(followers:Bool, userList:[MFUser])
@@ -132,7 +131,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             }
             cell = dishCell
             
-        } else if selectedIndexForProfile == .bought{
+        } else if selectedIndexForProfile == .bought {
             let dishCell: DishCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as? DishCollectionViewCell
             let dish = self.boughtDishData[indexPath.item]
             if let dishCell = dishCell {
@@ -154,16 +153,12 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         var reusableView = UICollectionReusableView()
-        
         if kind == UICollectionElementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "userHeaderView", for: indexPath) as! UserProfileCollectionViewHeader
-            
             view.delegate = self.delegate
             view.profileType = self.profileType
-            
-            view.setUp(
+            view.setUp (
                 userData,
                 followersCount: "\(followers.count)",
                 followingCount: "\(following.count)",
@@ -173,14 +168,12 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
                 followers: self.followers,
                 following:self.following,
                 savedDishCount: savedDishDataCount,
-                activityCount: activityCount)
-            
+                activityCount: activityCount )
             reusableView = view
             reusableView.sizeToFit()
         } else {
             assert(false, "Unexpected element kind")
         }
-        
         return reusableView
         
     }

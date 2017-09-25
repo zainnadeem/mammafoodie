@@ -721,7 +721,7 @@ extension  DatabaseGateway {
 extension DatabaseGateway {
     
     func getNewsFeed(by userId: String, _ completion: @escaping ((_ newsFeeds: [MFNewsFeed])->Void)) {
-        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        FirebaseReference.newsFeedAll.classReference.queryOrdered(byChild: "actionUserID").queryEqual(toValue: userId).observeSingleEvent(of: .value, with: { (snapshot) in
             var newsFeedList: [MFNewsFeed] = []
             if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
                 for key in rawNewsFeedList.keys {
@@ -734,6 +734,20 @@ extension DatabaseGateway {
                 completion(newsFeedList)
             }
         })
+
+//        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+//            var newsFeedList: [MFNewsFeed] = []
+//            if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
+//                for key in rawNewsFeedList.keys {
+//                    if let rawNewsFeed: [String:AnyObject] = rawNewsFeedList[key] as? [String:AnyObject] {
+//                        newsFeedList.append(self.createNewsFeedModel(from: rawNewsFeed))
+//                    }
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                completion(newsFeedList)
+//            }
+//        })
     }
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
