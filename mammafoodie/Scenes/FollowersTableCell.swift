@@ -43,15 +43,22 @@ class FollowersTableCell: UITableViewCell {
     func addGradient(){
         let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
         let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
-        
-        
-        
+
         followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
     }
     
-    func setUp(user:MFUser){
-        
-        self.userProfile.sd_setImage(with: user.generateProfilePictureURL())
+    func setUp(user:MFUser) {
+        if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+            self.userProfile.sd_setImage(with: url) { (image, error, cacheType, url) in
+                if error != nil {
+                    DispatchQueue.main.async {
+                        self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+                    }
+                }
+            }
+        } else {
+            self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+        }
         self.nameLbl.text = user.name
         self.Lable2.text = user.profileDescription
         self.user = user

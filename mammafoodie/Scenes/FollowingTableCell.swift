@@ -39,7 +39,17 @@ class FollowingTableCell: UITableViewCell {
     
     func setUp(user:MFUser){
         
-        self.userProfile.sd_setImage(with: user.generateProfilePictureURL())
+        if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+            self.userProfile.sd_setImage(with: url) { (image, error, cacheType, url) in
+                if error != nil {
+                    DispatchQueue.main.async {
+                        self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+                    }
+                }
+            }
+        } else {
+            self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+        }
         self.nameLbl.text = user.name
         self.Lable2.text = user.profileDescription
         self.user = user

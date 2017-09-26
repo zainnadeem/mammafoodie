@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Light.otf">
+        <array key="Montserrat-Light.ttf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Medium.otf">
@@ -72,7 +72,13 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmR-e9-8Xj">
                                                 <rect key="frame" x="8" y="337.5" width="359" height="105.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="px2-8B-zVI">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zy-xM-xrT">
+                                                        <rect key="frame" x="8" y="8" width="201" height="30"/>
+                                                        <connections>
+                                                            <action selector="btnUsernameTapped:" destination="fWQ-tx-STI" eventType="touchUpInside" id="ePn-32-q6i"/>
+                                                        </connections>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="px2-8B-zVI">
                                                         <rect key="frame" x="8" y="8" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="cSz-Xu-paH"/>
@@ -84,7 +90,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myP-6E-vTc">
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myP-6E-vTc">
                                                         <rect key="frame" x="43" y="12.5" width="166" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="K38-av-SAB"/>
@@ -188,6 +194,7 @@
                                                     <constraint firstItem="nZC-3K-uQa" firstAttribute="centerY" secondItem="px2-8B-zVI" secondAttribute="centerY" id="1Si-cP-c8G"/>
                                                     <constraint firstAttribute="trailing" secondItem="sPm-pM-YLc" secondAttribute="trailing" constant="8" id="1pa-Db-OfQ"/>
                                                     <constraint firstItem="dBX-ae-kvY" firstAttribute="centerY" secondItem="uba-ry-b3g" secondAttribute="centerY" id="45c-nD-MX9"/>
+                                                    <constraint firstItem="9zy-xM-xrT" firstAttribute="leading" secondItem="px2-8B-zVI" secondAttribute="leading" id="51X-m8-5ys"/>
                                                     <constraint firstItem="sPm-pM-YLc" firstAttribute="leading" secondItem="dBX-ae-kvY" secondAttribute="trailing" constant="8" id="Fpu-Eh-2Cv"/>
                                                     <constraint firstItem="px2-8B-zVI" firstAttribute="top" secondItem="JmR-e9-8Xj" secondAttribute="top" constant="8" id="HPV-dD-3BU"/>
                                                     <constraint firstItem="dQS-Jy-Mor" firstAttribute="top" secondItem="px2-8B-zVI" secondAttribute="bottom" constant="8" id="Iof-JK-xhh"/>
@@ -198,7 +205,9 @@
                                                     <constraint firstItem="uba-ry-b3g" firstAttribute="leading" secondItem="Fga-WQ-sdb" secondAttribute="trailing" constant="10" id="aUc-uD-98R"/>
                                                     <constraint firstItem="4k1-Ug-No3" firstAttribute="top" secondItem="dQS-Jy-Mor" secondAttribute="bottom" constant="8" id="b6K-8j-mzS"/>
                                                     <constraint firstItem="v7a-qV-i9s" firstAttribute="centerY" secondItem="nZC-3K-uQa" secondAttribute="centerY" id="cAU-Kf-pqQ"/>
+                                                    <constraint firstItem="9zy-xM-xrT" firstAttribute="bottom" secondItem="px2-8B-zVI" secondAttribute="bottom" id="eM9-ev-vr4"/>
                                                     <constraint firstItem="px2-8B-zVI" firstAttribute="leading" secondItem="JmR-e9-8Xj" secondAttribute="leading" constant="8" id="fmm-6d-rJ2"/>
+                                                    <constraint firstItem="9zy-xM-xrT" firstAttribute="trailing" secondItem="myP-6E-vTc" secondAttribute="trailing" id="hZC-sD-4ua"/>
                                                     <constraint firstItem="dQS-Jy-Mor" firstAttribute="leading" secondItem="JmR-e9-8Xj" secondAttribute="leading" constant="8" id="ifo-BS-Ijg"/>
                                                     <constraint firstItem="dBX-ae-kvY" firstAttribute="leading" secondItem="uba-ry-b3g" secondAttribute="trailing" id="jjT-HX-dKX"/>
                                                     <constraint firstItem="Fga-WQ-sdb" firstAttribute="leading" secondItem="dgh-Th-vPn" secondAttribute="trailing" id="jsS-d0-gOC"/>
@@ -209,6 +218,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="v7a-qV-i9s" secondAttribute="trailing" id="wYO-AN-OXX"/>
                                                     <constraint firstItem="v7a-qV-i9s" firstAttribute="leading" secondItem="nZC-3K-uQa" secondAttribute="trailing" id="wcX-SP-Kc9"/>
                                                     <constraint firstItem="dgh-Th-vPn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4k1-Ug-No3" secondAttribute="trailing" constant="5" id="xTo-zz-dge"/>
+                                                    <constraint firstItem="9zy-xM-xrT" firstAttribute="top" secondItem="px2-8B-zVI" secondAttribute="top" id="yFB-zH-cOK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wh2-cV-FO8">
@@ -426,6 +436,7 @@
                         <segue destination="IyS-1P-N0R" kind="presentation" identifier="seguePresentSlotSelectionViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UWk-Xu-ZDO"/>
                         <segue destination="drN-dc-HK2" kind="show" identifier="segueShowPaymentViewController" id="ZBZ-2d-msx"/>
                         <segue destination="ItD-Yh-k6a" kind="show" identifier="segueShowConversationDetail" id="7MU-Er-os5"/>
+                        <segue destination="uWa-ZZ-mAb" kind="presentation" identifier="segueShowUserProfile" id="OpZ-jJ-CfW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTw-O1-YKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -447,6 +458,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcN-Bo-gOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1591" y="342"/>
+        </scene>
+        <!--navUserProfile-->
+        <scene sceneID="ML5-BY-dhI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="navUserProfile" id="uWa-ZZ-mAb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGx-0c-feu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1580" y="476"/>
         </scene>
         <!--NavPayment-->
         <scene sceneID="aOW-mn-CNa">

@@ -384,6 +384,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
     }
     
+    @IBAction func btnUsernameTapped(_ sender: UIButton) {
+        if let userId = self.dishForView?.dish?.user.id {
+            self.performSegue(withIdentifier: "segueShowUserProfile", sender: userId)
+        }
+    }
     // MARK: - Display logic
     
 }

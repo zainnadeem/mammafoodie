@@ -106,12 +106,23 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = self.userList[indexPath.row]
         if self.chatMode {
-            let user = self.userList[indexPath.row]
             self.chatSelectionComplete?(user)
             self.navigationController?.dismiss(animated: true, completion: nil)
         } else {
+            self.performSegue(withIdentifier: "segueShowUserProfile", sender: user.id)
             tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueShowUserProfile" {
+            if let destination: UINavigationController = segue.destination as? UINavigationController {
+                if let profileVC: OtherUsersProfileViewController = destination.viewControllers.first as? OtherUsersProfileViewController {
+                    profileVC.userID = sender as? String
+                }
+            }
         }
     }
 }
