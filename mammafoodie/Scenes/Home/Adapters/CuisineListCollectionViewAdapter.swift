@@ -68,7 +68,7 @@ class CuisineListCollectionViewAdapter: NSObject, UICollectionViewDelegate, UICo
     }
     
     func updateSelection(for indexPath: IndexPath) {
-        for (index, var cuisine) in self.cuisines.enumerated() {
+        for (index, cuisine) in self.cuisines.enumerated() {
             if cuisine.isSelected {
                 cuisine.isSelected = false
             }
