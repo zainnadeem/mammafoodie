@@ -7,6 +7,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var followersTblView: UITableView!
     
+    var currentUserFollowings: [MFUser] = []
     var followers: Bool = true
     var userList = [MFUser]() {
         didSet {
@@ -25,7 +26,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         self.followersTblView.estimatedRowHeight = 80
         self.followersTblView.emptyDataSetDelegate = self
         self.followersTblView.emptyDataSetSource = self
-
+        
         let follower: String = "FollowersTableCell"
         let following = "FollowingTableCell"
         
@@ -34,23 +35,40 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         
         //        followersTblView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        let requestGroup = DispatchGroup.init()
+        
         let worker = OtherUsersProfileWorker()
         if followers {
             self.title = "Followers"
+            requestGroup.enter()
             worker.getFollowersForUser(userID: userID, frequency: .realtime ,{ (users) in
                 self.userList = users
+                requestGroup.leave()
             })
         } else {
             self.title = "Following"
+            requestGroup.enter()
             worker.getFollowingForUser(userID: userID, frequency: .realtime ,{ (users) in
                 self.userList = users
+                requestGroup.leave()
             })
         }
+        
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            requestGroup.enter()
+            worker.getFollowingForUser(userID: currentUser.id, { (users) in
+                self.currentUserFollowings = users
+                requestGroup.leave()
+            })
+        }
+        requestGroup.notify(queue: .main, execute: {
+            self.followersTblView.reloadData()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.followersTblView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,14 +93,28 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = userList[indexPath.row]
+        let user = self.userList[indexPath.row]
+        var isCurrentUserFollowingTheUser: Bool = false
+        let tempUsers: [MFUser] = self.currentUserFollowings.filter { (followingUser) -> Bool in
+            if followingUser.id == user.id {
+                return true
+            }
+            return false
+        }
+        if tempUsers.count > 0 {
+            isCurrentUserFollowingTheUser = true
+            print("Current user follows: \(user.name)")
+        }
+        
         if followers {
             let cell: FollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowersTableCell", for: indexPath) as! FollowersTableCell
+            cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
             cell.setUp(user: user)
             return cell
             
         } else {
             let cell: FollowingTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowingTableCell", for: indexPath) as! FollowingTableCell
+            cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
             cell.setUp(user: user)
             return cell
         }
@@ -106,12 +138,23 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = self.userList[indexPath.row]
         if self.chatMode {
-            let user = self.userList[indexPath.row]
             self.chatSelectionComplete?(user)
             self.navigationController?.dismiss(animated: true, completion: nil)
         } else {
+            self.performSegue(withIdentifier: "segueShowUserProfile", sender: user.id)
             tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueShowUserProfile" {
+            if let destination: UINavigationController = segue.destination as? UINavigationController {
+                if let profileVC: OtherUsersProfileViewController = destination.viewControllers.first as? OtherUsersProfileViewController {
+                    profileVC.userID = sender as? String
+                }
+            }
         }
     }
 }
@@ -123,10 +166,10 @@ extension FollowersListViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDel
         }
         return NSAttributedString.init(string: "You are not following anyone", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
     }
-
+    
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return 0
     }
-
+    
 }
 

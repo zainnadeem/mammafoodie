@@ -129,14 +129,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
         self.lblDishType.text = data.dishType.rawValue
-        self.lblNumberOfComments.text = "\(Int(data.commentsCount))"
-        self.lblNumberOfLikes.text = "\(Int(data.likesCount))"
-        self.lblNumberOfTimesOrdered.text = String(describing: data.boughtOrders.count)
+        self.lblNumberOfComments.text = "\(UInt(data.commentsCount))"
+        self.lblNumberOfLikes.text = "\(UInt(data.likesCount))"
+        self.lblNumberOfTimesOrdered.text = "\(UInt(data.totalOrders)) Orders"
         self.lblPrepTime.text = "\(Int(data.preparationTime / 60)) mins"
         self.lblDishDescription.text = data.description
-        self.lblNumberOfTimesOrdered.text = "\(data.boughtOrders.count) Orders"
-        //        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
-        
+//        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
         
         self.lblLeftDishesCount.text = data.availableSlots.description + " Left"
         
@@ -145,6 +143,8 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
         if let url = data.coverPicURL {
+            self.dishImageView.sd_setImage(with: url)
+        } else if let url = data.mediaURL {
             self.dishImageView.sd_setImage(with: url)
         }
         
@@ -168,7 +168,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
             self.getDistanceBetweenUsers(userID1: currentUser.id, userID2: data.user.id, { (distanceInKms) in
-                self.lblDistanceAway.text = distanceInKms
+                if let distance = distanceInKms {
+                    let s: String = self.displayString(from: distance)
+                    self.lblDistanceAway.text = "\(s) KM"
+                } else {
+                    self.lblDistanceAway.text = "N.A"
+                }
             })
             
         }
@@ -177,6 +182,37 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.output.checkFavouritesStatus(userId: data.user.id, dishId: data.id)
         
         self.lv_contentView.isHidden = false
+    }
+    
+    func displayString(from number: Double) -> String {
+        var stringTemp: String = ""
+        
+        let amountFormatter = NumberFormatter()
+        amountFormatter.locale = Locale.current
+        amountFormatter.minimumFractionDigits = 0
+        amountFormatter.maximumFractionDigits = 2
+        
+        var amountInString: String = "\(number)"
+        let amountInNumber: NSNumber? = amountFormatter.number(from: amountInString)
+        if amountInNumber != nil {
+            let stringTemp: String? = amountFormatter.string(from: amountInNumber!)
+            if stringTemp != nil {
+                amountInString = stringTemp!
+            }
+        }
+        stringTemp = stringTemp + amountInString
+        
+        let components = stringTemp.components(separatedBy: ".")
+        if components.count > 1 {
+            // Has decimal part
+            if components[1].characters.count == 1 {
+                stringTemp = components.first!
+                stringTemp.append(".")
+                stringTemp.append(components[1].appending("0"))
+            }
+        }
+        
+        return stringTemp
     }
     
     func displayFavouriteStatus(_ response: DishDetail.Favourite.Response) {
@@ -225,16 +261,23 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     @IBAction func likeBtnTapped(_ sender: Any) {
-        //like the dish
+        var likesCount: Int = 0
+        if let temp = self.dishForView?.dish?.likesCount {
+            likesCount = Int(temp)
+        }
         if btnLikes.isSelected == false {
             btnLikes.isSelected = true
-        }else{
+            likesCount+=1
+        } else {
             btnLikes.isSelected = false
+            likesCount-=1
         }
+        self.lblNumberOfLikes.text = "\(Int(likesCount))"
         
         if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser {
             self.output.likeButtonTapped(userId: currentUser.id, dishId: dish.id, selected: self.btnLikes.isSelected)
         }
+        
     }
     
     @IBAction func favouriteButtonTapped(_ sender: Any) {
@@ -366,24 +409,30 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.dismiss(animated: true, completion: nil)
     }
     
-    func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (String?) -> Void) {
+    func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (Double?) -> Void) {
         _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID1) { (user1) in
+            let lat1: Double = Double(user1?.addressDetails?.latitude ?? "0") ?? 0
+            let long1: Double = Double(user1?.addressDetails?.longitude ?? "0") ?? 0
             _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID2, { (user2) in
-                let latLong1 = user1?.addressLocation?.components(separatedBy: ",")
-                let latLong2 = user2?.addressLocation?.components(separatedBy: ",")
-                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
-                    completion(nil)
-                    return
-                }
-                let cl1 = CLLocation(latitude: Double(lat1) ?? 0, longitude: Double(long1) ?? 0)
-                let cl2 = CLLocation(latitude: Double(lat2) ?? 0, longitude: Double(long2) ?? 0)
-                completion((cl1.distance(from: cl2)/1000).description)
-                
+                let lat2: Double = Double(user2?.addressDetails?.latitude ?? "0") ?? 0
+                let long2: Double = Double(user2?.addressDetails?.longitude ?? "0") ?? 0
+//                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
+//                    completion(nil)
+//                    return
+//                }
+                let cl1 = CLLocation(latitude: Double(lat1), longitude: Double(long1))
+                let cl2 = CLLocation(latitude: Double(lat2), longitude: Double(long2))
+                completion(cl1.distance(from: cl2)/1000)
             })
         }
         
     }
     
+    @IBAction func btnUsernameTapped(_ sender: UIButton) {
+        if let userId = self.dishForView?.dish?.user.id {
+            self.performSegue(withIdentifier: "segueShowUserProfile", sender: userId)
+        }
+    }
     // MARK: - Display logic
     
 }

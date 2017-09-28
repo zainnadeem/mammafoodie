@@ -106,7 +106,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        if let dish = self.dish {
+        if self.dish != nil  {
             self.output.startPlayback()
         }
     }

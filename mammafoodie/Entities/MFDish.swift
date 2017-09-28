@@ -57,6 +57,7 @@ class MFDish {
     
     var likesCount : Double = 0
     var commentsCount : Double = 0
+    var totalOrders: Double = 0
     
     var location : CLLocationCoordinate2D?
     var address : String = ""

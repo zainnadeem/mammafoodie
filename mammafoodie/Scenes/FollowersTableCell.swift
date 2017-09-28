@@ -18,6 +18,7 @@ class FollowersTableCell: UITableViewCell {
     @IBOutlet weak var followButtn: UIButton!
     
     var user:MFUser?
+    var shouldShowFollowButton: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,35 +44,39 @@ class FollowersTableCell: UITableViewCell {
     func addGradient(){
         let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
         let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
-        
-        
-        
         followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
     }
     
-    func setUp(user:MFUser){
+    func setUp(user:MFUser) {
+        if self.shouldShowFollowButton == true {
+            self.followButtn.setTitle("Follow", for: .normal)
+        } else {
+            self.followButtn.setTitle("Unfollow", for: .normal)
+        }
         
-        self.userProfile.sd_setImage(with: user.generateProfilePictureURL())
+        if self.followButtn.currentTitle == "Follow" {
+            self.followButtn.setTitleColor(.orange, for: .normal)
+            self.followButtn.removeGradient()
+        } else {
+            self.followButtn.setTitleColor(.white, for: .normal)
+            self.addGradient()
+        }
+        self.layoutIfNeeded()
+        
+        if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
+            self.userProfile.sd_setImage(with: url) { (image, error, cacheType, url) in
+                if error != nil {
+                    DispatchQueue.main.async {
+                        self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+                    }
+                }
+            }
+        } else {
+            self.userProfile.image = #imageLiteral(resourceName: "IconMammaFoodie")
+        }
         self.nameLbl.text = user.name
         self.Lable2.text = user.profileDescription
         self.user = user
-        
-        if let currentUser = AppDelegate.shared().currentUser {
-            DatabaseGateway.sharedInstance.checkIfUser(withuserID: currentUser.id, isFollowing: user.id, { (following) in
-                
-                if following{
-                    self.followButtn.setTitle("Unfollow", for: .normal)
-                    
-                    self.followButtn.removeGradient()
-                    self.followButtn.setTitleColor(.orange, for: .normal)
-                } else {
-                    self.followButtn.setTitle("Follow", for: .normal)
-                    self.followButtn.setTitleColor(.white, for: .normal)
-                    self.removeGradient()
-                }
-                self.layoutIfNeeded()
-            })
-        }
     }
     
     func follow(sender:UIButton){
