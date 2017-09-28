@@ -29,7 +29,7 @@ class MFUser {
     var email: String!
     var address: String?
     var addressDetails: MFUserAddress?
-    var addressLocation: String?
+//    var addressLocation: String?
     //    var addressID:String?
     
     var picture: URL? {
@@ -83,7 +83,7 @@ class MFUser {
             self.addressDetails = self.getAddressDetails(from: rawAddress)
         }
         
-        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
+//        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""

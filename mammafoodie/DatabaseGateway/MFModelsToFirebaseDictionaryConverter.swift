@@ -181,9 +181,9 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["addressDetails"] = addressDetails as AnyObject
         }
         
-        if let addressLocation = user.addressLocation {
-            userInfo["addressLocation"] = addressLocation as AnyObject
-        }
+//        if let addressLocation = user.addressLocation {
+//            userInfo["addressLocation"] = addressLocation as AnyObject
+//        }
         
 //        if let picture = user.picture {
 //            userInfo["picture"] = picture as AnyObject
