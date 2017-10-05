@@ -35,7 +35,7 @@ class MFTransaction {
     
     func getReadableText() -> String {
         var text: String = ""
-        var amountString: String = "$\(amount/100)"
+        let amountString: String = "$\(amount/100)"
         if self.purpose == .tip {
             text = "\(fromUsername) tipped you \(amountString)"
             if let dishName = dishName {

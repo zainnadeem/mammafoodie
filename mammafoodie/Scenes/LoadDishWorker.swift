@@ -23,7 +23,7 @@ class LoadDishWorker:HUDRenderer {
         
         var params = "dishId=\(dishID)"
         
-        if opened{
+        if opened {
             params += "&opened=1"
         } else {
             params += "&closed=1"

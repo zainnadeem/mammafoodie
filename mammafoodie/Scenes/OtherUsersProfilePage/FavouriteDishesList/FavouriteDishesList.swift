@@ -32,7 +32,7 @@ class FavouriteDishesList : UIViewController, UICollectionViewDataSource, UIColl
         collectionView!.register(UINib(nibName: "DishCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: DishCollectionViewCell.reuseIdentifier)
         
         worker.getSavedDishesForUser(userID: userID) { (dishes) in
-            self.dataSource = dishes ?? []
+            self.dataSource = dishes
         }
         
         

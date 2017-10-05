@@ -966,6 +966,8 @@ extension DatabaseGateway {
             }
         }
         
+        dish.totalOrders = rawDish["totalOrders"] as? Double ?? 0
+        
         return dish
     }
     

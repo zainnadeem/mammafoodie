@@ -29,7 +29,7 @@ class MFUser {
     var email: String!
     var address: String?
     var addressDetails: MFUserAddress?
-    var addressLocation: String?
+//    var addressLocation: String?
     //    var addressID:String?
     
     var picture: URL? {
@@ -83,7 +83,7 @@ class MFUser {
             self.addressDetails = self.getAddressDetails(from: rawAddress)
         }
         
-        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
+//        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
@@ -133,12 +133,6 @@ class MFUser {
         address.country = "US"
         
         return address
-    }
-    
-    func generateProfilePictureURL() -> URL {
-        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/user%2Fprofile%2F\(urlencodedID!).jpg?alt=media"
-        return URL.init(string: string)!
     }
 }
 

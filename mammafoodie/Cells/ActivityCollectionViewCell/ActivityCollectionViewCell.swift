@@ -44,11 +44,11 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
                 if image == nil || error != nil {
-                    self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+                    self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
                 }
             })
         } else {
-            self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+            self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
         }
         
         let actionUserName = NSAttributedString.init(string: newsFeed.actionUser.name + " ", attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])

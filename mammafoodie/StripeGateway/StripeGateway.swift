@@ -75,7 +75,7 @@ class StripeGateway {
     }
     
     private func getStripeCard(from rawSource: [String:AnyObject]) -> STPCard? {
-        guard let objectType = rawSource["object"] as? String else {
+        guard rawSource["object"] as? String != nil else {
             return nil
         }
         
