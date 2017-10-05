@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Light.ttf">
+        <array key="Montserrat-Light.otf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Regular.otf">
@@ -37,14 +37,17 @@
                                     <constraint firstAttribute="width" secondItem="hJx-U0-Z8Q" secondAttribute="height" multiplier="1:1" id="un7-JK-iq7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny8-Cq-nea" customClass="TTTAttributedLabel">
-                                <rect key="frame" x="43" y="16" width="397" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny8-Cq-nea" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="43" y="16" width="397" height="78.5"/>
+                                <string key="text">Label
+aasass
+asasasasas</string>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ij1-W0-D0Q">
-                                <rect key="frame" x="43" y="30.5" width="85" height="21"/>
+                                <rect key="frame" x="43" y="94.5" width="85" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Om3-mr-xmX"/>
                                 </constraints>
@@ -55,10 +58,10 @@
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TempCuisineEmoji" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-9k-KAi" userLabel="Cuisine Emoji">
-                                <rect key="frame" x="43" y="56.5" width="64" height="64"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-9k-KAi" userLabel="Cuisine Emoji">
+                                <rect key="frame" x="43" y="120.5" width="0.0" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="fkq-NL-Hb7"/>
+                                    <constraint firstAttribute="width" id="fkq-NL-Hb7"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyX-YO-qjv" userLabel="View - Separator">
@@ -119,11 +122,12 @@
                             <constraint firstAttribute="trailing" secondItem="ny8-Cq-nea" secondAttribute="trailing" constant="8" id="Vqm-rT-vnl"/>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="leading" secondItem="hJx-U0-Z8Q" secondAttribute="trailing" constant="5" id="Z27-uY-9c4"/>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="bottom" secondItem="Ij1-W0-D0Q" secondAttribute="top" id="b6g-cn-jU5"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nXC-n6-lpY" secondAttribute="bottom" id="bVu-bd-gCs"/>
+                            <constraint firstAttribute="bottom" secondItem="nXC-n6-lpY" secondAttribute="bottom" id="bVu-bd-gCs"/>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="top" secondItem="hJx-U0-Z8Q" secondAttribute="top" id="bfs-6M-xaR"/>
                             <constraint firstItem="Ab8-do-98A" firstAttribute="top" secondItem="tCZ-UE-Ma2" secondAttribute="top" id="iOX-Gc-GIw"/>
                             <constraint firstItem="fDM-9k-KAi" firstAttribute="top" secondItem="Ij1-W0-D0Q" secondAttribute="bottom" constant="5" id="lXh-RC-gib"/>
                             <constraint firstItem="nXC-n6-lpY" firstAttribute="leading" secondItem="gyX-YO-qjv" secondAttribute="leading" constant="-10" id="mEn-ti-uQJ"/>
+                            <constraint firstItem="Ij1-W0-D0Q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hJx-U0-Z8Q" secondAttribute="bottom" priority="750" constant="2" id="qKL-g8-MhM"/>
                             <constraint firstItem="nXC-n6-lpY" firstAttribute="top" secondItem="gyX-YO-qjv" secondAttribute="bottom" id="sKy-Vd-dqp"/>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="leading" secondItem="Ij1-W0-D0Q" secondAttribute="leading" id="vjQ-Pl-Lmm"/>
                             <constraint firstAttribute="trailing" secondItem="gyX-YO-qjv" secondAttribute="trailing" constant="16" id="xNm-Mc-f6L"/>
@@ -158,7 +162,6 @@
         <image name="IconLike" width="42" height="42"/>
         <image name="IconLiked" width="42" height="42"/>
         <image name="IconShare" width="27" height="27"/>
-        <image name="TempCuisineEmoji" width="251" height="251"/>
         <image name="ic_duration_small" width="35" height="35"/>
     </resources>
 </document>

@@ -26,7 +26,6 @@ class LiveVideoPublisherViewController: R5VideoViewController {
     func preview() {
         
         self.showDebugInfo(false)
-        
         let cameras: [Any] = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
         let cameraDevice: AVCaptureDevice? = cameras.last as? AVCaptureDevice
         guard let camera: R5Camera = R5Camera(device: cameraDevice!, andBitRate: 512) else {

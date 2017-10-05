@@ -85,13 +85,16 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     private func loadCountsForAllSections() {
         guard let user = self.user else { return }
         
-        self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+        self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
+            self.dishCollectionViewAdapter.cookedDishData = cookedDishes
         })
         
-        self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+        self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
+            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
         })
         
-        self.worker.getActivity(for: user.id, completion: { (newsFeedList) in                                self.dishCollectionViewAdapter.activityData = newsFeedList
+        self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
+            self.dishCollectionViewAdapter.activityData = newsFeedList
         })
     }
     
