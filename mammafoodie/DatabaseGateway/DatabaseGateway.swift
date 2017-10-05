@@ -676,20 +676,17 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        
-        print(userId)
-        print(dishId)
-        
+        print("User: \(userId)")
+        print("Dish: \(dishId)")
         FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value ?? "")
                 completion(nil)
                 return
             }
-            
             if userData[userId] != nil {
                 completion(true)
-            }else{
+            } else {
                 completion(false)
             }
             
@@ -701,7 +698,6 @@ extension DatabaseGateway {
 extension  DatabaseGateway {
     
     func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFDish?)->Void ){
-        
         FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)

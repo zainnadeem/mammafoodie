@@ -134,11 +134,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             cell = dishCell
             
         } else if selectedIndexForProfile == .bought {
-<<<<<<< HEAD
-            let dishCell: DishCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as? DishCollectionViewCell
-=======
             let dishCell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCollectionViewCell.reuseIdentifier, for: indexPath) as? DishCollectionViewCell
->>>>>>> origin/BugFixes
             let dish = self.boughtDishData[indexPath.item]
             if let dishCell = dishCell {
                 dishCell.setUp(dish)

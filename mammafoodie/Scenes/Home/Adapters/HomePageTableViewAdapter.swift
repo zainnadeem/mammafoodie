@@ -43,10 +43,18 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func loadActivities() {
+        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
+                self.activity = feeds
+                self.tableView.reloadData()
+            }
+        }
+        return;
         DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
             DispatchQueue.main.async {
                 self.activity = feeds
                 self.tableView.reloadData()
+                print("Activity loaded")
             }
         }
     }
@@ -63,6 +71,12 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func showOptions(for indexPath: IndexPath) {
         if indexPath.row < self.menu.count {
             self.onOptions?(self.menu[indexPath.row])
+        }
+    }
+    
+    func likeDish(_ id: String) {
+        DatabaseGateway.sharedInstance.checkLikedDishes(userId: "String", dishId: "") { (like) in
+            
         }
     }
     
