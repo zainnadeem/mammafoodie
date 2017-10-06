@@ -94,6 +94,9 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
         self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
+        
+        let timeString = newsFeed.createdAt.toStringWithRelativeTime(strings: nil)
+        self.btnTime.setTitle(timeString, for: .normal)
     }
     
     func updateShadow() {
