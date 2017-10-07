@@ -38,6 +38,8 @@ class StripeVerificationViewController: UIViewController {
     var imagePicker : UIImagePickerController = UIImagePickerController.init()
     var isDocumentUploaded : Bool = false
     var documentID : String?
+    var documentImage: UIImage? = nil
+    var hud: MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +90,7 @@ class StripeVerificationViewController: UIViewController {
         self.isDocumentUploaded = false
         let headers: HTTPHeaders = ["Authorization" : "Bearer sk_test_ILoBhJpbX4bmuygd0NQs23V5"]
         if let url = URL.init(string: "https://uploads.stripe.com/v1/files"),
-            let imageData = UIImagePNGRepresentation(documentImage),
+            let imageData = UIImageJPEGRepresentation(documentImage, 0.5),
             let purpose = "identity_document".data(using: String.Encoding.utf8) {
             Alamofire.upload(multipartFormData: { (formData) in
                 formData.append(purpose, withName: "purpose")
@@ -151,7 +153,20 @@ class StripeVerificationViewController: UIViewController {
     }
     
     @IBAction func onSubmiTap(_ sender: UIButton) {
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        if let documentImage = self.documentImage {
+            self.uploadDocumentToStripe(documentImage, completion: { (fileID) in
+                DispatchQueue.main.async {
+                    self.isDocumentUploaded = (fileID != nil)
+                    self.documentID = fileID
+                    self.submitVerificationDetails()
+                }
+            })
+        }
+    }
+    
+    func submitVerificationDetails() {
         if self.isDocumentUploaded  {
             if let docID = self.documentID,
                 let currentUser = Auth.auth().currentUser {
@@ -176,7 +191,7 @@ class StripeVerificationViewController: UIViewController {
                         if let responseData = response.data {
                             let resp = String.init(data: responseData, encoding: String.Encoding.utf8)
                             DispatchQueue.main.async {
-                                hud.hide(animated: true)
+                                self.hud?.hide(animated: true)
                                 if resp?.lowercased() == "success" {
                                     self.finished(true)
                                     self.showAlert("Verification successful!", message: "")
@@ -187,20 +202,20 @@ class StripeVerificationViewController: UIViewController {
                             }
                             print(resp ?? "No Response")
                         } else {
-                            hud.hide(animated: true)
+                            self.hud?.hide(animated: true)
                             self.finished(false)
                             self.showAlert("Verification Failed!", message: "")
                         }
                     })
                 } else {
-                    hud.hide(animated: true)
+                    self.hud?.hide(animated: true)
                 }
             } else {
-                hud.hide(animated: true)
+                self.hud?.hide(animated: true)
                 self.showAlert("Error!", message: "File uploading failed!!")
             }
         } else {
-            hud.hide(animated: true)
+            self.hud?.hide(animated: true)
             self.showAlert("Upload Document first!", message: "")
         }
     }
@@ -219,12 +234,14 @@ extension StripeVerificationViewController : UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.uploadDocumentToStripe(originalImage, completion: { (fileID) in
-                DispatchQueue.main.async {
-                    self.isDocumentUploaded = (fileID != nil)
-                    self.documentID = fileID
-                }
-            })
+            self.documentImage = originalImage
+            //            if let data: Data = UIImageJPEGRepresentation(originalImage, 0.5) {
+            //                let bcf = ByteCountFormatter()
+            //                bcf.allowedUnits = [.useMB] // optional: restricts the units to MB only
+            //                bcf.countStyle = .file
+            //                let string = bcf.string(fromByteCount: Int64(data.count))
+            //                print("Length of the image: \(string)")
+            //            }
         }
         picker.dismiss(animated: true) {
             

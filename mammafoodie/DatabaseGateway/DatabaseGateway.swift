@@ -829,7 +829,12 @@ extension DatabaseGateway {
     func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if let endTimestamp = dish.endTimestamp?.timeIntervalSinceReferenceDate {
+                    if endTimestamp > Date().timeIntervalSinceReferenceDate {
+                        return true
+                    }
+                } else {
+                    // No endTimestamp available
                     return true
                 }
                 return false
@@ -841,7 +846,12 @@ extension DatabaseGateway {
     func getPictures(_ completion: @escaping ((_ pictures: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.picture, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if let endTimestamp = dish.endTimestamp?.timeIntervalSinceReferenceDate {
+                    if endTimestamp > Date().timeIntervalSinceReferenceDate {
+                        return true
+                    }
+                } else {
+                    // No endTimestamp available
                     return true
                 }
                 return false

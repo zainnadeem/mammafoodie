@@ -6,9 +6,11 @@ class HomePageVidupsCollectionViewAdapter: HomePageCollectionViewAdapter, UIColl
     
     func loadVidup() {
         self.worker.getList { (dishes) in
-            self.list = [self.getFirstCellForCurrentUser()]
-            self.list.append(contentsOf: dishes)
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.list = [self.getFirstCellForCurrentUser()]
+                self.list.append(contentsOf: dishes)
+                self.collectionView.reloadData()
+            }
         }
     }
     
