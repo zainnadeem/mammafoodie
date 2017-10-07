@@ -13,6 +13,7 @@ protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
+    func openUserprofile(id: String)
 }
 
 ///Defined in OtherUsersProfileInteractor
@@ -109,14 +110,14 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
             })
-
+            
         case .bought:
             self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
                 self.dishCollectionViewAdapter.boughtDishData = boughtDishes
                 
             })
-
+            
         case .activity:
             self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .activity
@@ -138,17 +139,19 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     
     //MARK: - DishesCollectionViewAdapterDelegate
     func openDishPageWith(dishID:String) {
-        
-        output.openDishPageWith(dishID: dishID)
-        
+        self.output.openDishPageWith(dishID: dishID)
     }
     
     func openFavouriteDishes() {
-        output.openFavouriteDishes()
+        self.output.openFavouriteDishes()
+    }
+    
+    func openUserprofile(id: String) {
+        self.output.openUserprofile(id: id)
     }
     
     func openFollowers(followers:Bool, userList:[MFUser]) {
-        output.openFollowers(followers: followers, userList:userList)
+        self.output.openFollowers(followers: followers, userList:userList)
     }
     
 }

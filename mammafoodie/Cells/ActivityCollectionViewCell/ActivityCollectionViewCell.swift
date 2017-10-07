@@ -98,68 +98,6 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
         self.btnTime.setTitle(timeString, for: .normal)
     }
 
-    /*
-     func setup(with newsFeed: MFNewsFeed) {
-     self.lblActivity.delegate = self
-     self.imgCharacterEmoji.image = nil
-     self.conWidthImgCharacterEmoji.constant = 0
-
-     if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
-     self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
-     if image == nil || error != nil {
-     self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
-     }
-     })
-     } else {
-     self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
-     }
-
-     let actionUserName = NSAttributedString.init(string: newsFeed.actionUser.name + " ", attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
-
-     let activityAction = NSAttributedString.init(string: newsFeed.activity.text, attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)!])
-
-     var relevantText: String = ""
-
-     switch newsFeed.activity {
-     case .bought,
-     .liked,
-     .requested,
-     .purchased:
-     relevantText = "a dish."
-
-     case .uploaded:
-     relevantText = "a vidup."
-
-     case .started,
-     .watching:
-     relevantText = "a live video."
-
-     case .followed,
-     .tipped:
-     relevantText = newsFeed.participantUser.name
-
-     case .none:
-     self.lblActivity.setText("")
-     return
-     }
-
-     let relevantItem = NSAttributedString.init(string: " " + relevantText, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
-
-     let wholeText = NSMutableAttributedString.init()
-     wholeText.append(actionUserName)
-     wholeText.append(activityAction)
-     wholeText.append(relevantItem)
-
-     self.lblActivity.attributedText = wholeText
-     let rangeActionUser = (self.lblActivity.attributedText.string as NSString).range(of: actionUserName.string)
-     let rangeRelevantItem = (self.lblActivity.attributedText.string as NSString).range(of: relevantItem.string)
-
-     self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
-     self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
-     }
-
-     */
-
     @IBAction func btnLikeTapped(_ sender: UIButton) {
         self.likeButtonTapped?()
         sender.isSelected = !sender.isSelected

@@ -5,6 +5,7 @@ protocol OtherUsersProfileViewControllerInput {
     func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
+    func openUserprofile(id: String)
 }
 
 protocol OtherUsersProfileViewControllerOutput {
@@ -30,7 +31,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     private var profileType: ProfileType = .ownProfile // .othersProfile
     
     @IBOutlet weak var btnBack: UIBarButtonItem!
-//    @IBOutlet weak var btnSettings: UIBarButtonItem!
+    //    @IBOutlet weak var btnSettings: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
     var selectedIndexForProfile : SelectedIndexForProfile = .cooked
@@ -100,6 +101,23 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         let dishVC = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
         self.present(dishVC, animated: true, completion: nil)
+    }
+    
+    func openUserprofile(id: String) {
+        let story = UIStoryboard.init(name: "Main", bundle: nil)
+        if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
+            if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
+                if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                    profileVC.userID = id
+                    if user.id == id {
+                        profileVC.profileType = .ownProfile
+                    } else {
+                        profileVC.profileType = .othersProfile
+                    }
+                    self.present(nav, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func openFavouriteDishes() {
