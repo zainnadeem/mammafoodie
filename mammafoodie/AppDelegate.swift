@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
+    var currentUserObserver: DatabaseConnectionObserver?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -51,6 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
         
         if let userId = currentUser?.uid {
+            
+            self.currentUserObserver = DatabaseGateway.sharedInstance.getUserWith(userID: userId, frequency: .realtime) { (loggedInUser) in
+                self.currentUser = loggedInUser
+            }
+            
+            
             if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
                 let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
                 welcomeVC.collectionViewImages.isHidden = true

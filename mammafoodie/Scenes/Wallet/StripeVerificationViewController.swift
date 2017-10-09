@@ -122,8 +122,8 @@ class StripeVerificationViewController: UIViewController {
     }
     
     func finished(_ finished : Bool) {
-        self.completion?(finished)
         self.dismiss(animated: true) {
+            self.completion?(finished)
         }
     }
     

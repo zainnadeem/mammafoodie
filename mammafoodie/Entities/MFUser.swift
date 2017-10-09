@@ -41,6 +41,9 @@ class MFUser {
     
     var phone: MFUserPhone = MFUserPhone()
     
+    var isStripeAccountVerified: Bool = false
+    var submittedForStripeVerification: Bool = false
+    
     //
     //    var userActivity: [MFNewsFeed:Date] = [:]
     //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
@@ -102,6 +105,13 @@ class MFUser {
         //        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
         //        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
         //        self.blocked = Dictionary["blocked"] as? [String:Bool] ?? [:]
+        
+        if let isVerified = Dictionary["isStripeAccountVerified"] as? Bool {
+            self.isStripeAccountVerified = isVerified
+        }
+        if let submittedForStripeVerification = Dictionary["submittedForStripeVerification"] as? Bool {
+            self.submittedForStripeVerification = submittedForStripeVerification
+        }
     }
     
     init(id: String, name: String, picture:String, profileDescription: String) {
