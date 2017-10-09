@@ -20,7 +20,7 @@ var navigationBarTintColor: UIColor!
 class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
-    var activityIndicatorView:UIView?
+    var activityIndicatorView: UIView?
 //    let gcmMessageIDKey = "gcm.message_id"
     
     var currentUserFirebase : User? //Populate this when user logs in successfully

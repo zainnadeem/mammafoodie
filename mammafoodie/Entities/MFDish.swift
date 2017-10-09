@@ -53,7 +53,7 @@ class MFDish {
     var mediaURL: URL?
     var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
     
-    var coverPicURL:URL?
+    var coverPicURL: URL?
     
     var likesCount : Double = 0
     var commentsCount : Double = 0
@@ -199,7 +199,7 @@ class MFDish {
 //    
 //    func generateCoverThumbImageURL() -> URL {
 //        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fthumbs%2F\(urlencodedID!).jpg?alt=media"
 //        return URL.init(string: string)!
 //    }
     
