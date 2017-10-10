@@ -268,6 +268,7 @@ extension DatabaseGateway {
         if key2 == key3 {
             print("Requesting dish from his/herself")
             completion(false, "Requesting dish from his/herself")
+            return
         }
         
         let childUpdates = [

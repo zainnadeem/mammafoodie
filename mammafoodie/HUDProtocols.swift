@@ -20,7 +20,15 @@ extension HUDRenderer {
         alertController.addAction(UIAlertAction(title: okButtonText, style: UIAlertActionStyle.default, handler: { finished in
             handler(true)
         }))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+        if let top = UIApplication.shared.keyWindow?.rootViewController {
+            if let nav = top as? UINavigationController {
+                if let topMost = nav.viewControllers.last {
+                    topMost.present(alertController, animated: true, completion: nil)
+                }
+            } else {
+                top.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     func showActivityIndicator() {
