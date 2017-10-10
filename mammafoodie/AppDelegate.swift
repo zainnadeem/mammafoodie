@@ -1,32 +1,33 @@
  //
-//  AppDelegate.swift
-//  mammafoodie
-//
-//  Created by Zain Nadeem on 6/7/17.
-//  Copyright © 2017 Zain Nadeem. All rights reserved.
-//
-
-import UIKit
-import Firebase
-import GoogleMaps
-import IQKeyboardManagerSwift
-import UserNotifications
-import FirebaseMessaging
-import MBProgressHUD
-
-var navigationBarTintColor: UIColor!
-
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate  {
+ //  AppDelegate.swift
+ //  mammafoodie
+ //
+ //  Created by Zain Nadeem on 6/7/17.
+ //  Copyright © 2017 Zain Nadeem. All rights reserved.
+ //
+ 
+ import UIKit
+ import Firebase
+ import GoogleMaps
+ import IQKeyboardManagerSwift
+ import UserNotifications
+ import FirebaseMessaging
+ import MBProgressHUD
+ 
+ var navigationBarTintColor: UIColor!
+ 
+ @UIApplicationMain
+ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
     var activityIndicatorView:UIView?
-//    let gcmMessageIDKey = "gcm.message_id"
+    //    let gcmMessageIDKey = "gcm.message_id"
     
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     var currentUserObserver: DatabaseConnectionObserver?
+    var currentUserStripeVerificationObserver: DatabaseConnectionObserver?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -57,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 self.currentUser = loggedInUser
             }
             
-            
             if let welcomeVC = navigationController.viewControllers.first as? WelcomeViewController {
                 let hud = MBProgressHUD.showAdded(to: welcomeVC.view, animated: true)
                 welcomeVC.collectionViewImages.isHidden = true
@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
                                 self.handleNotification(userInfo, showAlert: false)
                             }
+                            self.stripeVerificationCheck()
                         } else {
                             FirebaseLoginWorker().signOut({ (error) in
                                 
@@ -92,6 +93,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
         return true
+    }
+    
+    func stripeVerificationCheck() {
+        guard let userId = self.currentUserFirebase?.uid else {
+            print("User is not logged in. Can't check payment gateway verification")
+            return
+        }
+        
+        self.currentUserStripeVerificationObserver = DatabaseGateway.sharedInstance.getUserStripeVerificationUpdate(userID: userId, frequency: .realtime, { (stripeVerification) in
+            if let sV = stripeVerification {
+                if sV.dueBy != nil {
+                    // Ask user to enter the details
+                    let alert: UIAlertController = UIAlertController(title: "Account verification", message: "Hey, we need to verify your account. Do you want to start the verification process now?", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { (alertAction) in
+                        // Open verification controller with required fields
+                        self.verifyStripe()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Later", style: UIAlertActionStyle.cancel, handler: { (alertAction) in
+                        // Schedule a local notification after an hour
+                        
+                        let content = UNMutableNotificationContent()
+                        content.title = "Attention"
+                        content.body = "Please verify the account to continue sending/receiving tips."
+                        content.sound = UNNotificationSound.default()
+                        
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: false)
+                        
+                        let request = UNNotificationRequest(identifier: "remindUserToVerifyStripeAccount", content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                            if let error = error {
+                                print("Could not create notification. Error: \(error)")
+                            }
+                        })
+                    }))
+                    if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
+                        navController.topViewController?.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        })
     }
     
     func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
@@ -375,9 +416,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
     }
     
-}
-
-extension AppDelegate : MessagingDelegate {
+    func verifyStripe() {
+        print("Verify stripe. ------------- ")
+        if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
+            if let topViewController: UIViewController = navController.topViewController {
+                StripeVerificationViewController.presentStripeVerification(on: topViewController, completion: { (submitted) in
+                    print("Submitted")
+                })
+            }
+        }
+    }
+ }
+ 
+ extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
@@ -395,24 +446,26 @@ extension AppDelegate : MessagingDelegate {
         print("Received data message: \(remoteMessage.appData)")
     }
     // [END ios_10_data_message]
-}
-
-@available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
+ }
+ 
+ @available(iOS 10, *)
+ extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
         self.handleNotification(notification.request.content.userInfo)
         print("Will Present")
-        completionHandler([])
+        completionHandler([.alert,.sound])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        self.handleNotification(response.notification.request.content.userInfo)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if response.notification.request.identifier == "remindUserToVerifyStripeAccount" {
+            self.verifyStripe()
+        } else {
+            self.handleNotification(response.notification.request.content.userInfo)
+        }
         print("Did Receive")
         completionHandler()
     }
-}
+ }

@@ -400,6 +400,37 @@ extension DatabaseGateway {
             completion(error)
         }
     }
+    
+    func getUserStripeVerificationUpdate(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion: @escaping ((_ user: StripeVerification?)->Void)) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let userData = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let stripeVerification: StripeVerification? = MFUser.stripeVerification(from: userData)
+            completion(stripeVerification)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion(nil)
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.users.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
+        }
+    }
 }
 
 //MARK: - Dish

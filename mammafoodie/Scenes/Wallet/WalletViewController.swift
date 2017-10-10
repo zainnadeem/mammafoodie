@@ -50,9 +50,9 @@ class WalletViewController: UIViewController {
         super.viewWillAppear(animated)
         if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.btnSendMoneyToBank.isSelected = true
-            if currentUser.isStripeAccountVerified == true {
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
                 self.btnSendMoneyToBank.isSelected = false
-            } else if currentUser.submittedForStripeVerification == true {
+            } else if currentUser.stripeVerification?.submittedForStripeVerification == true {
                 self.btnVerificationStatus.isSelected = true
             } else {
                 self.btnVerificationStatus.setTitle("Click to verify", for: .normal)
@@ -61,25 +61,10 @@ class WalletViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.viewHeaderWrapper.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
         let formatter = NumberFormatter()
@@ -152,7 +137,7 @@ class WalletViewController: UIViewController {
     
     @IBAction func onSendMoneyToBank(_ sender: UIButton) {
         if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-            if currentUser.isStripeAccountVerified == true {
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
                 FirebaseReference.stripeCustomers.classReference.child(currentUser.id).observeSingleEvent(of: .value, with: { (snapshot) in
                     DispatchQueue.main.async {
                         if let snapshot = snapshot.value as? [String:Any] {
@@ -168,7 +153,7 @@ class WalletViewController: UIViewController {
                         }
                     }
                 })
-            } else if currentUser.submittedForStripeVerification == true {
+            } else if currentUser.stripeVerification?.submittedForStripeVerification == true {
                 self.showInProgressMessage()
             } else {
                 self.applyForVerification()
@@ -178,11 +163,11 @@ class WalletViewController: UIViewController {
     
     @IBAction func onVerifyAccountTap(_ sender: UIButton) {
         if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-            if currentUser.isStripeAccountVerified == true {
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
                 self.showAlert("Verified", message: "You are already a verified user. No need to do anything!")
-            } else if currentUser.isStripeAccountVerified == false && currentUser.submittedForStripeVerification == false {
+            } else if currentUser.stripeVerification?.isStripeAccountVerified == false && currentUser.stripeVerification?.submittedForStripeVerification == false {
                 self.applyForVerification()
-            } else if currentUser.isStripeAccountVerified == false && currentUser.submittedForStripeVerification == true {
+            } else if currentUser.stripeVerification?.isStripeAccountVerified == false && currentUser.stripeVerification?.submittedForStripeVerification == true {
                 self.showInProgressMessage()
             }
         }
@@ -201,7 +186,7 @@ class WalletViewController: UIViewController {
             if stripeSubmitted == true {
                 BankDetailsViewController.presentAddAccount(on: self) { (bankSubmitted) in
                     if bankSubmitted == true {
-                        if currentUser.isStripeAccountVerified == true {
+                        if currentUser.stripeVerification?.isStripeAccountVerified == true {
                             self.createPayout()
                         } else {
                             self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")

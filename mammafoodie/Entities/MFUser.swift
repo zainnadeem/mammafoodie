@@ -11,6 +11,13 @@ struct MFUserPhone {
     }
 }
 
+struct StripeVerification {
+    var isStripeAccountVerified: Bool = false
+    var submittedForStripeVerification: Bool = false
+    var dueBy: Date?
+    var disabledReason: String?
+}
+
 class MFUser {
     var id: String
     var name: String!
@@ -41,34 +48,7 @@ class MFUser {
     
     var phone: MFUserPhone = MFUserPhone()
     
-    var isStripeAccountVerified: Bool = false
-    var submittedForStripeVerification: Bool = false
-    
-    //
-    //    var userActivity: [MFNewsFeed:Date] = [:]
-    //    var cookedDishes: [MFMedia:Date] = [:] // dishId:Date
-    //    var boughtDishes: [MFMedia:Date] = [:] // dishId:Date
-    //    var favouriteDishes: [MFMedia:Date] = [:] // dishId:Date
-    //    var likedDishes: [MFMedia:Date] = [:] // dishId:Date
-    //
-    //    var followers: [MFUser:Date] = [:] // [userId:Date]
-    //    var following: [MFUser:Date] = [:] // [userId:Date]
-    //    var blocked: [MFUser:Date] = [:] // [userId:Date]
-    //
-    //    var socialAccountIds: [String:String] = [:] // [SocialAccountName:AccountId]
-    
-    
-    
-    //    var userActivity: [String:Bool] = [:]   //[MFNewsFeed.id : true]
-    //    var cookedDishes: [String:Bool] = [:] // dishId:Date
-    //    var boughtDishes: [String:Bool] = [:] // dishId:Date
-    //    var favouriteDishes: [String:Bool] = [:] // dishId:Date
-    //    var likedDishes: [String:Bool] = [:] // dishId:Date
-    //
-    //    var followers: [String:Bool] = [:] // [userId:Date]
-    //    var following: [String:Bool] = [:] // [userId:Date]
-    //    var blocked: [String:Bool] = [:] // [userId:Date]
-    
+    var stripeVerification: StripeVerification?
     
     init() {
         self.id = ""
@@ -96,6 +76,8 @@ class MFUser {
             self.phone.phone = rawPhoneInfo["phone"] ?? ""
         }
         
+        self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
+        
         //        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
         //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
         //        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
@@ -106,12 +88,28 @@ class MFUser {
         //        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
         //        self.blocked = Dictionary["blocked"] as? [String:Bool] ?? [:]
         
-        if let isVerified = Dictionary["isStripeAccountVerified"] as? Bool {
-            self.isStripeAccountVerified = isVerified
+        
+    }
+    
+    class func stripeVerification(from raw: [String:Any]) -> StripeVerification? {
+        if let stripeVerificationDictionary: [String:Any] = raw["stripeVerification"] as? [String:Any] {
+            var stripeVerification: StripeVerification = StripeVerification()
+            
+            if let isVerified: Bool = stripeVerificationDictionary["isStripeAccountVerified"] as? Bool {
+                stripeVerification.isStripeAccountVerified = isVerified
+            }
+            if let submittedForStripeVerification: Bool = stripeVerificationDictionary["submittedForStripeVerification"] as? Bool {
+                stripeVerification.submittedForStripeVerification = submittedForStripeVerification
+            }
+            if let dueByTimestamp: Double = stripeVerificationDictionary["due_by"] as? Double {
+                stripeVerification.dueBy = Date.init(timeIntervalSince1970: dueByTimestamp)
+            }
+            if let disabledReason: String = stripeVerificationDictionary["disabled_reason"] as? String {
+                stripeVerification.disabledReason = disabledReason
+            }
+            return stripeVerification
         }
-        if let submittedForStripeVerification = Dictionary["submittedForStripeVerification"] as? Bool {
-            self.submittedForStripeVerification = submittedForStripeVerification
-        }
+        return nil
     }
     
     init(id: String, name: String, picture:String, profileDescription: String) {
