@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Firebase
 import DZNEmptyDataSet
+import MBProgressHUD
 
 class WalletViewController: UIViewController {
     
@@ -178,27 +179,43 @@ class WalletViewController: UIViewController {
     }
     
     func applyForVerification() {
-        guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
-            return
-        }
-        
         StripeVerificationViewController.presentStripeVerification(on: self) { (stripeSubmitted) in
-            if stripeSubmitted == true {
-                BankDetailsViewController.presentAddAccount(on: self) { (bankSubmitted) in
-                    if bankSubmitted == true {
-                        if currentUser.stripeVerification?.isStripeAccountVerified == true {
-                            self.createPayout()
-                        } else {
-                            self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
-                        }
-                    }
-                }
-            }
+            self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
         }
     }
     
     func createPayout() {
+        if AppDelegate.shared().currentUser?.stripePayoutsEnabled == false {
+            self.showAlert("Error", message: "Payouts are disabled for this account. Please contact support at support@mammafoodie.com")
+            return
+        }
         
+        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/createPayout") {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            let parameters : Parameters = self.getParametersForPayout()
+            Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
+                if let responseData = response.data {
+                    let resp = String(data: responseData, encoding: String.Encoding.utf8)
+                    DispatchQueue.main.async {
+                        hud.hide(animated: true)
+                        if resp?.lowercased() == "success" {
+                            self.showAlert("Congratulations", message: "Payout success.")
+                        } else {
+                            self.showAlert("Sorry", message: "Payout could not be created. Please try again.")
+                        }
+                    }
+                    print(resp ?? "No Response")
+                } else {
+                    hud.hide(animated: true)
+                    self.showAlert("Payout Failed!", message: "")
+                }
+            })
+        }
+    }
+    
+    func getParametersForPayout() -> Parameters {
+        var parameters:Parameters = [:]
+        return parameters
     }
 }
 

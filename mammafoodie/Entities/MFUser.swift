@@ -12,10 +12,31 @@ struct MFUserPhone {
 }
 
 struct StripeVerification {
+    
+    enum VerificationFields: String {
+        case externalAccount = "external_account"
+        case dobDay = "legal_entity.dob.day"
+        case dobMonth = "legal_entity.dob.month"
+        case dobYear = "legal_entity.dob.year"
+        case firstName = "legal_entity.first_name"
+        case lastName = "legal_entity.last_name"
+        case accountType = "legal_entity.type"
+        case tosDate = "tos_acceptance.date"
+        case tosIP = "tos_acceptance.ip"
+        case document = "document"
+        case address = "legal_entity.address.line1"
+        case postal = "legal_entity.address.postal_code"
+        case city = "legal_entity.address.city"
+        case state = "legal_entity.address.state"
+        case ssnLast4 = "legal_entity.ssn_last_4"
+        case ssnFull = "legal_entity.personal_id_number"
+    }
+    
     var isStripeAccountVerified: Bool = false
     var submittedForStripeVerification: Bool = false
     var dueBy: Date?
     var disabledReason: String?
+    var fields_needed: [String] = []
 }
 
 class MFUser {
@@ -48,6 +69,8 @@ class MFUser {
     
     var phone: MFUserPhone = MFUserPhone()
     
+    var stripeChargesEnabled: Bool = false
+    var stripePayoutsEnabled: Bool = false
     var stripeVerification: StripeVerification?
     
     init() {
@@ -74,6 +97,11 @@ class MFUser {
         if let rawPhoneInfo = Dictionary["phone"] as? [String:String] {
             self.phone.countryCode = rawPhoneInfo["countryCode"] ?? ""
             self.phone.phone = rawPhoneInfo["phone"] ?? ""
+        }
+        
+        if let rawStripe = Dictionary["stripe"] as? [String:String] {
+            self.stripeChargesEnabled = Dictionary["charges_enabled"] as? Bool ?? false
+            self.stripePayoutsEnabled = Dictionary["payouts_enabled"] as? Bool ?? false
         }
         
         self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
@@ -106,6 +134,9 @@ class MFUser {
             }
             if let disabledReason: String = stripeVerificationDictionary["disabled_reason"] as? String {
                 stripeVerification.disabledReason = disabledReason
+            }
+            if let fields_needed: [String] = stripeVerificationDictionary["fields_needed"] as? [String] {
+                stripeVerification.fields_needed = fields_needed
             }
             return stripeVerification
         }

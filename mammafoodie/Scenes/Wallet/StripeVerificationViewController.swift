@@ -16,6 +16,8 @@ typealias StripeVerificationCompletion = (Bool) -> Void
 
 class StripeVerificationViewController: UIViewController {
     
+    @IBOutlet weak var stackViewMain: UIStackView!
+    @IBOutlet weak var lblVerificationDueDate: UILabel!
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var txtLastName: UITextField!
     @IBOutlet weak var txtDOB: UITextField!
@@ -26,6 +28,12 @@ class StripeVerificationViewController: UIViewController {
     @IBOutlet weak var txtCountry: UITextField!
     @IBOutlet weak var txtPostalCode: UITextField!
     @IBOutlet weak var txtSSN: UITextField!
+    @IBOutlet weak var txtFullSSN: UITextField!
+    
+    @IBOutlet weak var stackViewBankAccount: UIStackView!
+    @IBOutlet weak var txtAccountHolderName: UITextField!
+    @IBOutlet weak var txtAccountNumber: UITextField!
+    @IBOutlet weak var txtRoutingNumber: UITextField!
     
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var btnUploadDocument: UIButton!
@@ -41,6 +49,20 @@ class StripeVerificationViewController: UIViewController {
     var documentImage: UIImage? = nil
     var hud: MBProgressHUD?
     
+    @IBOutlet weak var viewFirstName: UIView!
+    @IBOutlet weak var viewLastName: UIView!
+    @IBOutlet weak var viewDOB: UIView!
+    @IBOutlet weak var viewAddress1: UIView!
+    @IBOutlet weak var viewAddress2: UIView!
+    @IBOutlet weak var viewCity: UIView!
+    @IBOutlet weak var viewState: UIView!
+    @IBOutlet weak var viewCountry: UIView!
+    @IBOutlet weak var viewPostalCode: UIView!
+    @IBOutlet weak var viewSSN: UIView!
+    @IBOutlet weak var viewSSNFull: UIView!
+    @IBOutlet weak var viewDocument: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +71,64 @@ class StripeVerificationViewController: UIViewController {
         self.txtSSN.delegate = self
         self.btnSubmit.layer.cornerRadius = 5.0
         self.btnSubmit.clipsToBounds = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let stripeVerification: StripeVerification = AppDelegate.shared().currentUser?.stripeVerification {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.stackViewMain.isHidden = true
+            self.isBalanceMoreThanZero({ (isBalanceMoreThanZero) in
+                hud.hide(animated: true)
+                self.lblVerificationDueDate.text = "Verification due by: \(stripeVerification.dueBy?.toString(dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none) ?? "N.A")"
+                
+                let fields_needed: [String] = stripeVerification.fields_needed
+                self.viewFirstName.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.firstName.rawValue)
+                self.viewLastName.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.lastName.rawValue)
+                self.viewDOB.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.dobDay.rawValue)
+                self.viewAddress1.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.address.rawValue)
+                self.viewAddress2.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.address.rawValue)
+                self.viewCity.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.city.rawValue)
+                self.viewState.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.state.rawValue)
+                self.viewCountry.isHidden = true // We have the country fixed as US for now
+                self.viewPostalCode.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.postal.rawValue)
+                self.viewSSN.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.ssnLast4.rawValue)
+                self.viewSSNFull.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.ssnFull.rawValue)
+                self.viewDocument.isHidden = !fields_needed.contains(StripeVerification.VerificationFields.document.rawValue)
+                self.stackViewBankAccount.isHidden = !(isBalanceMoreThanZero == true && fields_needed.contains(StripeVerification.VerificationFields.externalAccount.rawValue))
+                
+                self.stackViewMain.isHidden = false
+            })
+        }
+    }
+    
+    func isBalanceMoreThanZero(_ completion: @escaping (Bool)->Void) {
+        if let currentUser = Auth.auth().currentUser {
+            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let account = snapshot.value as? [String : Any] {
+                    if let accountID = account["account_id"] as? String {
+                        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/retreiveBalance") {
+                            let params : Parameters = ["accountId" : accountID]
+                            Alamofire.request(url, method: .get, parameters: params).responseJSON(completionHandler: { (response) in
+                                DispatchQueue.main.async {
+                                    if let jsonResponse = response.result.value as? [String : Any] {
+                                        let available = jsonResponse["available"] as? Double ?? 0
+                                        let pending = jsonResponse["pending"] as? Double ?? 0
+                                        if available > 0 || pending > 0 {
+                                            completion(true)
+                                        } else {
+                                            completion(false)
+                                        }
+                                    } else {
+                                        completion(false)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,75 +233,223 @@ class StripeVerificationViewController: UIViewController {
     }
     
     @IBAction func onSubmiTap(_ sender: UIButton) {
-        self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        if let documentImage = self.documentImage {
-            self.uploadDocumentToStripe(documentImage, completion: { (fileID) in
-                DispatchQueue.main.async {
-                    self.isDocumentUploaded = (fileID != nil)
-                    self.documentID = fileID
-                    self.submitVerificationDetails()
+
+        let validationResult = self.areFieldsValid()
+        if validationResult.0 == true {
+            self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            if !self.viewDocument.isHidden {
+                if let documentImage = self.documentImage {
+                    self.uploadDocumentToStripe(documentImage, completion: { (fileID) in
+                        DispatchQueue.main.async {
+                            self.isDocumentUploaded = (fileID != nil)
+                            self.documentID = fileID
+                            if self.isDocumentUploaded {
+                                self.submitVerificationDetails()
+                            } else {
+                                self.showAlert("Error", message: "Document upload failed. Please try again.")
+                            }
+                        }
+                    })
                 }
-            })
+            } else {
+                self.submitVerificationDetails()
+            }
+        } else {
+            self.showAlert("Error", message: validationResult.1)
         }
     }
     
+    func areFieldsValid() -> (Bool, String) {
+        
+        if !self.viewFirstName.isHidden {
+            if self.txtFirstName.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter first name.")
+            }
+        }
+        
+        if !self.viewLastName.isHidden {
+            if self.txtLastName.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter last name.")
+            }
+        }
+        
+        if !self.viewDOB.isHidden {
+            if self.txtDOB.text?.characters.count ?? 0 == 0 {
+                return (false, "Please select your birthday.")
+            }
+        }
+        
+        if !self.viewAddress1.isHidden {
+            if self.txtAddressLine1.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter your address.")
+            }
+        }
+        
+        if !self.viewAddress2.isHidden {
+            // Optional
+        }
+        
+        if !self.viewCity.isHidden {
+            if self.txtCity.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter your city.")
+            }
+        }
+        
+        if !self.viewState.isHidden {
+            if self.txtState.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter your state.")
+            }
+        }
+        
+        if !self.viewCountry.isHidden {
+            // Fixed - US
+        }
+        
+        if !self.viewPostalCode.isHidden {
+            if self.txtPostalCode.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter postal code.")
+            }
+        }
+        
+        if !self.viewSSN.isHidden {
+            if self.txtSSN.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter last 4 digits of SSN.")
+            }
+        }
+        
+        if !self.viewSSNFull.isHidden {
+            if self.txtFullSSN.text?.characters.count ?? 0 == 0 {
+                return (false, "Please enter your SSN.")
+            }
+        }
+        
+        if !self.viewDocument.isHidden {
+            return (self.isDocumentUploaded, "Please upload the verification document.")
+        }
+        
+//        if !self.stackViewBankAccount.isHidden {
+//            if self.txtAccountHolderName.text?.characters.count ?? 0 == 0 {
+//                return (false, "Please enter bank account holder name.")
+//            }
+//            if self.txtAccountNumber.text?.characters.count ?? 0 == 0 {
+//                return (false, "Please enter your bank account number.")
+//            }
+//            if self.txtRoutingNumber.text?.characters.count ?? 0 == 0 {
+//                return (false, "Please enter bank routing number.")
+//            }
+//        }
+        
+        if Auth.auth().currentUser == nil {
+           return (false, "You are not logged in.")
+        }
+        
+        return (true, "")
+    }
+    
     func submitVerificationDetails() {
-        if self.isDocumentUploaded  {
-            if let docID = self.documentID,
-                let currentUser = Auth.auth().currentUser {
-                if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/verifyStripeAccount") {
-                    let date = self.pickerDOB.date
-                    let parameters : Parameters = [
-                        "dob_day" : date.component(.day) ?? 0,
-                        "dob_month" : date.component(.month) ?? 0,
-                        "dob_year" : date.component(.year) ?? 0,
-                        "first_name" : self.txtFirstName.text!,
-                        "last_name" : self.txtLastName.text!,
-                        "city" : self.txtCity.text!,
-                        "line1" : self.txtAddressLine1.text!,
-                        "line2" : self.txtAddressLine2.text!,
-                        "postal_code" : self.txtPostalCode.text!,
-                        "state" : self.txtState.text!,
-                        "ssn_last_4" : self.txtSSN.text!,
-                        "userId": currentUser.uid,
-                        "documentId": docID
-                    ]
-                    Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
-                        if let responseData = response.data {
-                            let resp = String.init(data: responseData, encoding: String.Encoding.utf8)
-                            DispatchQueue.main.async {
-                                self.hud?.hide(animated: true)
-                                if resp?.lowercased() == "success" {
-                                    self.finished(true)
-                                    self.showAlert("Verification successful!", message: "")
-                                } else {
-                                    self.finished(false)
-                                    self.showAlert("Verification Failed!", message: "")
-                                }
-                            }
-                            print(resp ?? "No Response")
+        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/verifyStripeAccount") {
+            let parameters : Parameters = self.getParametersToSubmitForVerification()
+            Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
+                if let responseData = response.data {
+                    let resp = String.init(data: responseData, encoding: String.Encoding.utf8)
+                    DispatchQueue.main.async {
+                        self.hud?.hide(animated: true)
+                        if resp?.lowercased() == "success" {
+                            self.finished(true)
+                            self.showAlert("Thank you", message: "Your details are submitted for verification.")
                         } else {
-                            self.hud?.hide(animated: true)
                             self.finished(false)
-                            self.showAlert("Verification Failed!", message: "")
+                            self.showAlert("Sorry", message: "Your request could not be submitted. Please try again.")
                         }
-                    })
+                    }
+                    print(resp ?? "No Response")
                 } else {
                     self.hud?.hide(animated: true)
+                    self.finished(false)
+                    self.showAlert("Verification Failed!", message: "")
                 }
-            } else {
-                self.hud?.hide(animated: true)
-                self.showAlert("Error!", message: "File uploading failed!!")
-            }
+            })
         } else {
             self.hud?.hide(animated: true)
-            self.showAlert("Upload Document first!", message: "")
         }
+    }
+    
+    func getParametersToSubmitForVerification() -> Parameters {
+        
+        var details: [String:Any] = [:]
+
+        if let currentUser = Auth.auth().currentUser {
+            details["userId"] = currentUser.uid
+        }
+        
+        if !self.viewFirstName.isHidden {
+            details["first_name"] = self.txtFirstName.text ?? ""
+        }
+        
+        if !self.viewLastName.isHidden {
+            details["last_name"] = self.txtLastName.text ?? ""
+        }
+        
+        if !self.viewDOB.isHidden {
+            let date = self.pickerDOB.date
+            details["dob_day"] = date.component(.day) ?? 0
+            details["dob_month"] = date.component(.month) ?? 0
+            details["dob_year"] = date.component(.year) ?? 0
+        }
+        
+        if !self.viewAddress1.isHidden {
+            details["line1"] = self.txtAddressLine1.text ?? ""
+        }
+        
+        if !self.viewAddress2.isHidden {
+            details["line2"] = self.txtAddressLine2.text ?? ""
+        }
+        
+        if !self.viewCity.isHidden {
+            details["city"] = self.txtCity.text ?? ""
+        }
+        
+        if !self.viewState.isHidden {
+            details["state"] = self.txtState.text ?? ""
+        }
+        
+        if !self.viewCountry.isHidden {
+            // Fixed from Firebase function - US
+        }
+        
+        if !self.viewPostalCode.isHidden {
+            details["postal_code"] = self.txtPostalCode.text ?? ""
+        }
+        
+        if !self.viewSSN.isHidden {
+            details["ssn_last_4"] = self.txtSSN.text ?? ""
+        }
+        
+        if !self.viewSSNFull.isHidden {
+            details["ssn"] = self.txtFullSSN.text ?? ""
+        }
+        
+        if !self.viewDocument.isHidden {
+            details["documentId"] = self.documentID ?? ""
+        }
+        
+        if !self.stackViewBankAccount.isHidden {
+            if self.txtAccountHolderName.text?.characters.count ?? 0 > 0 && self.txtAccountNumber.text?.characters.count ?? 0 > 0 && self.txtRoutingNumber.text?.characters.count ?? 0 > 0 {
+                details["accountHolderName"] = self.txtAccountHolderName.text!
+                details["accountNumber"] = self.txtAccountNumber.text!
+                details["routingNumber"] = self.txtRoutingNumber.text!
+            }
+        }
+        
+        return details
     }
     
     @IBAction func onDOBChnage(_ sender: UIDatePicker) {
         self.setDate()
+    }
+    
+    @IBAction func onReadTermsOfServiceTap(_ sender: UIButton) {
+        
     }
 }
 

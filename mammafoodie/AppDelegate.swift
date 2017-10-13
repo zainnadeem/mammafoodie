@@ -103,52 +103,70 @@
         
         self.currentUserStripeVerificationObserver = DatabaseGateway.sharedInstance.getUserStripeVerificationUpdate(userID: userId, frequency: .realtime, { (stripeVerification) in
             if let sV = stripeVerification {
+                self.currentUser?.stripeVerification = sV
                 if sV.dueBy != nil {
-                    // Ask user to enter the details
-                    let alert: UIAlertController = UIAlertController(title: "Account verification", message: "Hey, we need to verify your account. Do you want to start the verification process now?", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { (alertAction) in
-                        // Open verification controller with required fields
-                        self.verifyStripe()
-                    }))
-                    alert.addAction(UIAlertAction(title: "Later", style: UIAlertActionStyle.cancel, handler: { (alertAction) in
-                        // Schedule a local notification after an hour
-                        
-                        let content = UNMutableNotificationContent()
-                        content.title = "Attention"
-                        content.body = "Please verify the account to continue sending/receiving tips."
-                        content.sound = UNNotificationSound.default()
-                        
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: false)
-                        
-                        let request = UNNotificationRequest(identifier: "remindUserToVerifyStripeAccount", content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
-                            if let error = error {
-                                print("Could not create notification. Error: \(error)")
+                    
+                    self.isNotificationAlreadyScheduled({ (scheduled) in
+                        if scheduled == false {
+                            // Ask user to enter the details
+                            let alert: UIAlertController = UIAlertController(title: "Account verification", message: "Hey, we need to verify your account. Do you want to start the verification process now?", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { (alertAction) in
+                                // Open verification controller with required fields
+                                self.verifyStripe()
+                            }))
+                            alert.addAction(UIAlertAction(title: "Later", style: UIAlertActionStyle.cancel, handler: { (alertAction) in
+                                // Schedule a local notification after an hour
+                                
+                                let content = UNMutableNotificationContent()
+                                content.title = "Attention"
+                                content.body = "Please verify the account to continue sending/receiving tips."
+                                content.sound = UNNotificationSound.default()
+                                
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: false)
+                                
+                                let request = UNNotificationRequest(identifier: "remindUserToVerifyStripeAccount", content: content, trigger: trigger)
+                                UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                                    if let error = error {
+                                        print("Could not create notification. Error: \(error)")
+                                    }
+                                })
+                            }))
+                            if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
+                                navController.topViewController?.present(alert, animated: true, completion: nil)
                             }
-                        })
-                    }))
-                    if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
-                        navController.topViewController?.present(alert, animated: true, completion: nil)
-                    }
+                        }
+                    })
                 }
             }
         })
     }
     
-    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
-        let newID = FirebaseReference.notifications.generateAutoID()
-        FirebaseReference.notifications.classReference.child(id).updateChildValues([
-            newID : [
-                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
-                "participantUserID": id,
-                "plainText": "VidUp Test!",
-                "redirectId": "-KrUd41c4lXHO_KRBAx5",
-                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
-                "redirectPath": "Dishes",
-                "text": "VidUp Test!",
-                "timestamp": 522861129.399
-            ]])
+    func isNotificationAlreadyScheduled(_ completion: @escaping ((Bool)->Void)) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+            var found: Bool = false
+            for request in requests {
+                if request.identifier == "remindUserToVerifyStripeAccount" {
+                    found = true
+                }
+            }
+            completion(found)
+        }
     }
+    
+//    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
+//        let newID = FirebaseReference.notifications.generateAutoID()
+//        FirebaseReference.notifications.classReference.child(id).updateChildValues([
+//            newID : [
+//                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
+//                "participantUserID": id,
+//                "plainText": "VidUp Test!",
+//                "redirectId": "-KrUd41c4lXHO_KRBAx5",
+//                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
+//                "redirectPath": "Dishes",
+//                "text": "VidUp Test!",
+//                "timestamp": 522861129.399
+//            ]])
+//    }
     
     func updateToken() {
         if let token = Messaging.messaging().fcmToken {
