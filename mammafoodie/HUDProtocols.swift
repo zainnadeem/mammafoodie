@@ -22,13 +22,32 @@ extension HUDRenderer {
         }))
         if let top = UIApplication.shared.keyWindow?.rootViewController {
             if let nav = top as? UINavigationController {
-                if let topMost = nav.viewControllers.last {
+                if let topMost = self.getTopVC(for: nav) {
                     topMost.present(alertController, animated: true, completion: nil)
                 }
             } else {
                 top.present(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    private func getTopVC(for navigation: UINavigationController) -> UIViewController? {
+        if let topMost = navigation.viewControllers.last {
+            if let presented = topMost.presentedViewController as? UINavigationController {
+                return self.getTopVC(for: presented)
+            } else if let presented = topMost.presentedViewController {
+                if let prepresented = presented.presentedViewController {
+                    if let preNav = prepresented.presentedViewController as? UINavigationController {
+                        return self.getTopVC(for: preNav)
+                    } else {
+                        return prepresented
+                    }
+                } else {
+                    return presented
+                }
+            }
+        }
+        return nil
     }
     
     func showActivityIndicator() {
