@@ -390,11 +390,7 @@ extension DatabaseGateway {
     
     func getLoggedInUser() -> MFUser? {
         if Auth.auth().currentUser != nil {
-            //            let user: MFUser = MFUser()
-            //            user.id = currentUser.uid
-            //            user.name = currentUser.displayName
             return AppDelegate.shared().currentUser
-            //            return user
         }
         return nil
     }
@@ -403,6 +399,37 @@ extension DatabaseGateway {
         let deviceToken = ["deviceToken": token] as FirebaseDictionary
         FirebaseReference.users.get(with: userId).updateChildValues(deviceToken) { (error, databaseRef) in
             completion(error)
+        }
+    }
+    
+    func getUserStripeVerificationUpdate(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion: @escaping ((_ user: StripeVerification?)->Void)) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
+            guard let userData = snapshot.value as? FirebaseDictionary else {
+                completion(nil)
+                return
+            }
+            let stripeVerification: StripeVerification? = MFUser.stripeVerification(from: userData)
+            completion(stripeVerification)
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion(nil)
+        }
+        
+        let databaseReference: DatabaseReference = FirebaseReference.users.classReference
+        let databaseQuery: DatabaseQuery = databaseReference.child(userID)
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = databaseReference
+            observer.observerId = databaseQuery.observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        case .single:
+            databaseQuery.observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+            return nil
         }
     }
 }
@@ -840,7 +867,12 @@ extension DatabaseGateway {
     func getVidups(_ completion: @escaping ((_ vidups: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.vidup, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if let endTimestamp = dish.endTimestamp?.timeIntervalSinceReferenceDate {
+                    if endTimestamp > Date().timeIntervalSinceReferenceDate {
+                        return true
+                    }
+                } else {
+                    // No endTimestamp available
                     return true
                 }
                 return false
@@ -852,7 +884,12 @@ extension DatabaseGateway {
     func getPictures(_ completion: @escaping ((_ pictures: [MFDish])->Void)) -> DatabaseConnectionObserver? {
         return self.getDishes(type: MFDishMediaType.picture, frequency: .realtime) { (dishes) in
             let filteredDishes: [MFDish] = dishes.filter({ (dish) -> Bool in
-                if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if let endTimestamp = dish.endTimestamp?.timeIntervalSinceReferenceDate {
+                    if endTimestamp > Date().timeIntervalSinceReferenceDate {
+                        return true
+                    }
+                } else {
+                    // No endTimestamp available
                     return true
                 }
                 return false

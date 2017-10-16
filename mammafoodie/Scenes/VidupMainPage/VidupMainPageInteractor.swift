@@ -16,8 +16,10 @@ class VidupMainPageInteractor: VidupMainPageInteractorInput {
     // MARK: - Business logic
     func loadVidups() {
         self.worker.getList { (dishes) in
-            let response = VidupMainPage.Response(arrayOfVidups: dishes)
-            self.output.presentVidups(response)
+            DispatchQueue.main.async {
+                let response = VidupMainPage.Response(arrayOfVidups: dishes)
+                self.output.presentVidups(response)
+            }
         }
     }
 }

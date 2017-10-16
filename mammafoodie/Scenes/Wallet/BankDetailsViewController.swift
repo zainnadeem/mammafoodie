@@ -82,34 +82,34 @@ class BankDetailsViewController: UIViewController {
                         DispatchQueue.main.async {
                             hud.hide(animated: true)
                             if resp?.lowercased() == "success" {
-                                self.completion?(true)
-                                self.showAlert("Successful!", message: "")
+                                self.close(true)
+//                                self.showAlert("Successful!", message: "")
                             } else {
-                                self.completion?(false)
-                                self.showAlert("Failed!", message: "")
+                                self.close(false)
+                                self.showAlert("Failed", message: "Please try again.")
                             }
                         }
                         print(resp ?? "No Response")
                     } else {
                         hud.hide(animated: true)
-                        self.completion?(false)
-                        self.showAlert("Failed!", message: "")
+                        self.close(false)
+                        self.showAlert("Failed", message: "Please try again.")
                     }
                 })
             }
         } else {
             hud.hide(animated: true)
-            self.completion?(false)
-            self.dismiss(animated: true) {
-                
-            }
+            self.close(false)
+        }
+    }
+    
+    func close(_ a: Bool) {
+        self.dismiss(animated: true) {
+            self.completion?(a)
         }
     }
     
     @IBAction func onCancelTap(_ sender: UIButton) {
-        self.completion?(false)
-        self.dismiss(animated: true) {
-            
-        }
+        self.close(false)
     }
 }

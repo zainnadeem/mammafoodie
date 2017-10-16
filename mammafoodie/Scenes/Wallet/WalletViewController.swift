@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Firebase
 import DZNEmptyDataSet
+import MBProgressHUD
 
 class WalletViewController: UIViewController {
     
@@ -20,6 +21,7 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var lblWalletBalanceTitle: UILabel!
     @IBOutlet weak var lblWalletBalance: UILabel!
     @IBOutlet weak var lblPendingBalance: UILabel!
+    @IBOutlet weak var btnVerificationStatus: UIButton!
     
     @IBOutlet weak var tblTransactions: UITableView!
     
@@ -45,25 +47,25 @@ class WalletViewController: UIViewController {
         self.getCurrentBalance()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.btnSendMoneyToBank.isSelected = true
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
+                self.btnSendMoneyToBank.isSelected = false
+            } else if currentUser.stripeVerification?.submittedForStripeVerification == true {
+                self.btnVerificationStatus.isSelected = true
+            } else {
+                self.btnVerificationStatus.setTitle("Click to verify", for: .normal)
+                self.btnVerificationStatus.setTitleColor(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), for: .normal)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.viewHeaderWrapper.applyGradient(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
         let formatter = NumberFormatter()
@@ -80,9 +82,9 @@ class WalletViewController: UIViewController {
                     if let charges = account["charges"] as? [String : [String : Any]] {
                         for (_, value) in charges {
                             self.transactions.append(self.transaction(from: value))
-//                            if let amount = value["amount"] as? Double {
-//                                self.transactions.append("\(amount)")
-//                            }
+                            //                            if let amount = value["amount"] as? Double {
+                            //                                self.transactions.append("\(amount)")
+                            //                            }
                         }
                         DispatchQueue.main.async {
                             self.tblTransactions.reloadData()
@@ -135,27 +137,86 @@ class WalletViewController: UIViewController {
     }
     
     @IBAction func onSendMoneyToBank(_ sender: UIButton) {
-        if let currentUser = Auth.auth().currentUser {
-            FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let stripeAccount = snapshot.value as? [String : Any] {
-                    if let externalAccounts = stripeAccount["externalAccounts"] {
-                        
-                    } else {
-                        DispatchQueue.main.async {
-                            StripeVerificationViewController.presentStripeVerification(on: self) { (verified) in
-                                //                                DispatchQueue.main.async {
-                                //                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-                                //
-                                //                                    }
-                                //                                }
+        if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
+                FirebaseReference.stripeCustomers.classReference.child(currentUser.id).observeSingleEvent(of: .value, with: { (snapshot) in
+                    DispatchQueue.main.async {
+                        if let snapshot = snapshot.value as? [String:Any] {
+                            if (snapshot["externalAccounts"] as? [String:Any]) != nil {
+                                self.createPayout()
+                            } else {
+                                BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
+                                    self.createPayout()
+                                }
                             }
+                        } else {
+                            self.showAlert("Error", message: "Could not fetch s_customer")
                         }
                     }
+                })
+            } else if currentUser.stripeVerification?.submittedForStripeVerification == true {
+                self.showInProgressMessage()
+            } else {
+                self.applyForVerification()
+            }
+        }
+    }
+    
+    @IBAction func onVerifyAccountTap(_ sender: UIButton) {
+        if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if currentUser.stripeVerification?.isStripeAccountVerified == true {
+                self.showAlert("Verified", message: "You are already a verified user. No need to do anything!")
+            } else if currentUser.stripeVerification?.isStripeAccountVerified == false && currentUser.stripeVerification?.submittedForStripeVerification == false {
+                self.applyForVerification()
+            } else if currentUser.stripeVerification?.isStripeAccountVerified == false && currentUser.stripeVerification?.submittedForStripeVerification == true {
+                self.showInProgressMessage()
+            }
+        }
+    }
+    
+    func showInProgressMessage() {
+        self.showAlert("In progress", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
+    }
+    
+    func applyForVerification() {
+        StripeVerificationViewController.presentStripeVerification(on: self) { (stripeSubmitted) in
+            self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
+        }
+    }
+    
+    func createPayout() {
+        if AppDelegate.shared().currentUser?.stripePayoutsEnabled == false {
+            self.showAlert("Error", message: "Payouts are disabled for this account. Please contact support at support@mammafoodie.com")
+            return
+        }
+        
+        if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/createPayout") {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            let parameters : Parameters = self.getParametersForPayout()
+            Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
+                if let responseData = response.data {
+                    let resp = String(data: responseData, encoding: String.Encoding.utf8)
+                    DispatchQueue.main.async {
+                        hud.hide(animated: true)
+                        if resp?.lowercased() == "success" {
+                            self.showAlert("Congratulations", message: "Payout success.")
+                        } else {
+                            self.showAlert("Sorry", message: "Payout could not be created. Please try again.")
+                        }
+                    }
+                    print(resp ?? "No Response")
+                } else {
+                    hud.hide(animated: true)
+                    self.showAlert("Payout Failed!", message: "")
                 }
             })
         }
     }
     
+    func getParametersForPayout() -> Parameters {
+        var parameters:Parameters = [:]
+        return parameters
+    }
 }
 
 extension WalletViewController : UITableViewDataSource, UITableViewDelegate {
@@ -204,10 +265,10 @@ extension WalletViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString.init(string: "No transactions", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
     }
-
+    
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return self.tblTransactions.sectionHeaderHeight + 10
     }
-
+    
 }
 

@@ -58,7 +58,7 @@ class MFModelsToFirebaseDictionaryConverter {
             "redirectPath": newsFeed.activity.path.rawValue as AnyObject,
             "activity": newsFeed.activity.rawValue as AnyObject,
             "text": "",
-            "mediaURL": newsFeed.mediaURL?.absoluteString as AnyObject ?? "" as AnyObject,
+            "mediaURL": newsFeed.mediaURL?.absoluteString as AnyObject,
             "likes": newsFeed.likes,
             "timestamp": newsFeed.createdAt.timeIntervalSinceReferenceDate
             ] as [String : AnyObject]

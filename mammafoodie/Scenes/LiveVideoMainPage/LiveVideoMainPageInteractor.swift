@@ -27,8 +27,10 @@ class LiveVideoMainPageInteractor: LiveVideoMainPageInteractorInput {
 //        }
         
         liveVideoListWorker.getList { (liveVideos) in
-            let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
-            self.output.presentLiveVideos(response)
+            DispatchQueue.main.async {
+                let response = LiveVideoMainPage.Response(arrayOfLiveVideos: liveVideos)
+                self.output.presentLiveVideos(response)
+            }
         }
     }
     

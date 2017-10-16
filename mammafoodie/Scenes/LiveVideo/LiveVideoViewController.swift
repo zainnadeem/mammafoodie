@@ -84,7 +84,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        self.viewWillAppearCode()
+        self.startLiveVideo()
         
         self.viewSlotDetails.layer.cornerRadius = 15
         self.viewSlotDetails.addGradienBorder(colors: [#colorLiteral(red: 1, green: 0.5490196078, blue: 0.168627451, alpha: 1),#colorLiteral(red: 1, green: 0.3882352941, blue: 0.1333333333, alpha: 1)])
@@ -93,19 +93,18 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewComments.showLatestComment()
-        self.startUpdatingImage()
     }
     
-    func viewWillAppearCode() {
+    func startLiveVideo() {
         self.countObserver = DatabaseGateway.sharedInstance.getDishViewers(id: self.liveVideo.id) { (count) in
             self.lblNumberOfViewers.text = "\(count)"
         }
         
         // This needs to be executed from viewWillAppear or later. Because of the Camera
-        if self.output != nil {
+        if let output = self.output {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
             #else
-                self.output!.start(self.liveVideo)
+                output.start(self.liveVideo)
             #endif
         }
         
@@ -185,7 +184,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.output?.stop(self.liveVideo)
         self.liveVideo = liveVideo
         self.loadDish()
-        self.viewWillAppearCode()
+        self.startLiveVideo()
     }
     
     func showUserInfo() {
@@ -278,8 +277,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.timerForThumbnailCapturing?.invalidate()
-        self.timerForThumbnailCapturing = nil
+//        self.timerForThumbnailCapturing?.invalidate()
+//        self.timerForThumbnailCapturing = nil
     }
     
     // MARK: - Event handling
@@ -303,6 +302,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 self.output!.stop(self.liveVideo)
             #endif
         }
+        
+        self.timerForThumbnailCapturing?.invalidate()
+        self.timerForThumbnailCapturing = nil
+        
         self.countObserver?.stop()
         self.countObserver = nil
         
@@ -328,11 +331,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": cameraView]));
         
         if self.liveVideo.accessMode == .owner {
-            self.output?.updateStreamImage()
+            self.startUpdatingImage()
         }
     }
     
     func startUpdatingImage() {
+        print("Starting the image uploading timer")
         self.timerForThumbnailCapturing?.invalidate()
         self.timerForThumbnailCapturing = nil
         self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
