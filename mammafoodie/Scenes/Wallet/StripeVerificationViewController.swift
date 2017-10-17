@@ -355,6 +355,7 @@ class StripeVerificationViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.hud?.hide(animated: true)
                         if resp?.lowercased() == "success" {
+                            AppDelegate.shared().removeNotificationForStripeVerificationReminder()
                             self.finished(true)
                             self.showAlert("Thank you", message: "Your details are submitted for verification.")
                         } else {

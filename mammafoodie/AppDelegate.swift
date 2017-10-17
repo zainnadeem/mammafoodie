@@ -153,6 +153,10 @@
         }
     }
     
+    func removeNotificationForStripeVerificationReminder() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["remindUserToVerifyStripeAccount"])
+    }
+    
 //    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
 //        let newID = FirebaseReference.notifications.generateAutoID()
 //        FirebaseReference.notifications.classReference.child(id).updateChildValues([
@@ -439,7 +443,11 @@
         if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
             if let topViewController: UIViewController = navController.topViewController {
                 StripeVerificationViewController.presentStripeVerification(on: topViewController, completion: { (submitted) in
-                    print("Submitted")
+                    if submitted {
+                        print("Submitted")
+                    } else {
+                        print("Cancelled")
+                    }
                 })
             }
         }

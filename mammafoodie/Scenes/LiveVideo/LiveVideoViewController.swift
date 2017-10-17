@@ -124,6 +124,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
                     
                 }))
+                
+                alert.popoverPresentationController?.sourceView = emojiButton
+                alert.popoverPresentationController?.sourceRect = emojiButton.bounds
+                
                 self.present(alert, animated: true, completion: {
                     
                 })
@@ -336,12 +340,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func startUpdatingImage() {
-        print("Starting the image uploading timer")
-        self.timerForThumbnailCapturing?.invalidate()
-        self.timerForThumbnailCapturing = nil
-        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
-            self.output?.updateStreamImage()
-        })
+//        print("Starting the image uploading timer")
+//        self.timerForThumbnailCapturing?.invalidate()
+//        self.timerForThumbnailCapturing = nil
+//        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+//            self.output?.updateStreamImage()
+//        })
     }
     
     func streamUnpublished() {

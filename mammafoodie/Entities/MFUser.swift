@@ -99,24 +99,12 @@ class MFUser {
             self.phone.phone = rawPhoneInfo["phone"] ?? ""
         }
         
-        if let rawStripe = Dictionary["stripe"] as? [String:String] {
-            self.stripeChargesEnabled = Dictionary["charges_enabled"] as? Bool ?? false
-            self.stripePayoutsEnabled = Dictionary["payouts_enabled"] as? Bool ?? false
+        if let rawStripe = Dictionary["stripe"] as? [String:Any] {
+            self.stripeChargesEnabled = rawStripe["charges_enabled"] as? Bool ?? false
+            self.stripePayoutsEnabled = rawStripe["payouts_enabled"] as? Bool ?? false
         }
         
         self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
-        
-        //        self.socialAccountIds = Dictionary["socialAccountIds"] as? [String:String] ?? [:]
-        //        self.userActivity = Dictionary["userActivity"] as? [String:Bool] ?? [:]
-        //        self.cookedDishes = Dictionary["cookedDishes"] as? [String:Bool] ?? [:]
-        //        self.boughtDishes = Dictionary["boughtDishes"] as? [String:Bool] ?? [:]
-        //        self.favouriteDishes = Dictionary["favouriteDishes"] as? [String:Bool] ?? [:]
-        //        self.likedDishes = Dictionary["likedDished"] as? [String:Bool] ?? [:]
-        //        self.following = Dictionary["following"] as? [String:Bool] ?? [:]
-        //        self.followers = Dictionary["followers"]  as? [String:Bool] ?? [:]
-        //        self.blocked = Dictionary["blocked"] as? [String:Bool] ?? [:]
-        
-        
     }
     
     class func stripeVerification(from raw: [String:Any]) -> StripeVerification? {

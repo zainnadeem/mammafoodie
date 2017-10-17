@@ -358,6 +358,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
                     
                 }))
                 
+                alert.popoverPresentationController?.sourceView = self.view
+                alert.popoverPresentationController?.sourceRect = self.view.bounds
+                
                 self.present(alert, animated: true, completion: {
                     
                 })

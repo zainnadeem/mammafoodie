@@ -206,6 +206,9 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
         }))
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
+        alert.popoverPresentationController?.sourceView = sender
+        alert.popoverPresentationController?.sourceRect = sender.bounds
+        
         self.present(alert, animated: true, completion: nil)
         
     }
