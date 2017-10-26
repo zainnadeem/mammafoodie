@@ -456,7 +456,7 @@ extension DatabaseGateway {
         var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
         observer.databaseReference = databaseReference
         observer.observerId = databaseReference.observe(DataEventType.childChanged, with: { (snapshot) in
-            if snapshot.key == "numberOfViewers" {
+            if snapshot.key == "currentViewersCount" {
                 let count = snapshot.value as? UInt ?? 0
                 print(count)
                 completion(count)
@@ -927,7 +927,7 @@ extension DatabaseGateway {
         dish.commentsCount = rawDish["commentsCount"] as? Double ?? 0
         dish.createTimestamp = Date(timeIntervalSinceReferenceDate: rawDish["createTimestamp"] as? TimeInterval ?? 0)
         
-        dish.numberOfViewers = rawDish["numberOfViewers"] as? UInt ?? 0
+        dish.numberOfViewers = rawDish["currentViewersCount"] as? UInt ?? 0
         dish.nonUniqueViewersCount = rawDish["nonUniqueViewersCount"] as? UInt ?? 0
         
         if let rawCuisine: FirebaseDictionary = rawDish["cuisine"] as? FirebaseDictionary {

@@ -49,6 +49,9 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     @IBOutlet weak var lblCurrentlyCooking: UILabel!
     @IBOutlet weak var lblLeftDishesCount: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var conHeightBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conBottomBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conTopBtnRequest: NSLayoutConstraint!
     
     
     //if only dish ID is passed
@@ -125,6 +128,14 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         guard let data = response.dish else { return }
         
         self.dishForView = response
+        
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if self.dishForView?.dish?.user.id == currentUser.id {
+                self.conHeightBtnRequest.constant = 0
+                self.conBottomBtnRequest.constant = 0
+                self.conTopBtnRequest.constant = 0
+            }
+        }
         
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
@@ -308,6 +319,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let button = sender as! UIButton
         
         if button.currentTitle == "Request"{
+            
+            guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+                print("User not logged in DishDetailViewController")
+                return
+            }
+            
+            if self.dishForView?.dish?.user.id == currentUser.id {
+                print("Can't request own dish.")
+                return
+            }
             
             let alertController: UIAlertController = UIAlertController(title: "Request dish", message: "Please enter desired quantity.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addTextField(configurationHandler: { (textField) in

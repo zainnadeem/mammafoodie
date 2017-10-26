@@ -7,6 +7,11 @@ class RequestDishWorker {
         
         guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {return}
       
+        if dish.user.id == currentUser.id {
+            print("Can't request own dish!")
+            return
+        }
+        
         let requestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/requestDish?dishId=\(dish.id)&dishName=\(dish.name)&userId=\(currentUser.id)&userFullname=\(currentUser.name!)&quantity=\(quantity)"
         
         Alamofire.request(requestURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)

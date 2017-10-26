@@ -4,6 +4,7 @@ protocol LiveVideoInteractorInput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
     func updateStreamImage()
+    func swapCamera()
 }
 
 protocol LiveVideoInteractorOutput {
@@ -38,6 +39,10 @@ class LiveVideoInteractor: LiveVideoInteractorInput {
     
     func updateStreamImage() {
         self.output?.updateStreamImage(self.worker.getStreamImage())
+    }
+    
+    func swapCamera() {
+        self.worker.swapCamera()
     }
 }
 

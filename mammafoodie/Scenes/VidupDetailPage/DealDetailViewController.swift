@@ -14,6 +14,7 @@ protocol DealDetailViewControllerOutput {
     func dishUnliked(user_id:String,dish_id: String)
     func stopPlayback()
     func startPlayback()
+    func updateViewersCount(for dishID:String, opened:Bool)
 }
 
 class DealDetailViewController: UIViewController, DealDetailViewControllerInput {
@@ -76,6 +77,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         //        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         if let dish = self.dish {
             self.load(new: dish)
+            self.output.updateViewersCount(for: dish.id, opened: true)
         } else {
             self.close(animated: false)
             self.showAlert("Error", message: "Error downloading the dish info. Please try again.")
@@ -167,10 +169,14 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     @IBAction func closebtnClicked(_ sender: Any) {
         self.close(animated: true)
-
+        if let dish = self.dish {
+            self.output.updateViewersCount(for: dish.id, opened: false)
+        }
     }
     
     private func close(animated: Bool) {
+        self.observer?.stop()
+        self.observer = nil
         self.output.stopTimer()
         self.output.stopPlayback()
         if self.presentingViewController != nil ||
@@ -201,7 +207,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     func DisplayDishInfo(DishInfo:MFDish) {
         lbl_dishName.text = DishInfo.name
-        lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
+        lbl_slot.text = "\( DishInfo.totalSlots - DishInfo.availableSlots )/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
         self.viewComments.likesCount = Int(DishInfo.likesCount)
     }

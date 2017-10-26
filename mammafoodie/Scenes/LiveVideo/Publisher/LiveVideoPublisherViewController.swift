@@ -53,6 +53,30 @@ class LiveVideoPublisherViewController: R5VideoViewController {
         self.showPreview(true)
     }
     
+    func swapCamera() {
+        var frontCamera: AVCaptureDevice?
+        var backCamera: AVCaptureDevice?
+        
+        for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo){
+            let device = device as! AVCaptureDevice
+            if frontCamera == nil && device.position == AVCaptureDevicePosition.front {
+                frontCamera = device
+                continue;
+            } else if backCamera == nil && device.position == AVCaptureDevicePosition.back {
+                backCamera = device
+            }
+            
+        }
+        
+        let camera = self.stream.getVideoSource() as! R5Camera
+        
+        if camera.device === frontCamera {
+            camera.device = backCamera
+        } else {
+            camera.device = frontCamera
+        }
+    }
+    
     func startPublishing(with streamName: String) {
         self.showPreview(false)
         self.stream.publish(streamName, type: R5RecordTypeLive)

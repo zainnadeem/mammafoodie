@@ -335,22 +335,23 @@
                     print("\nNot Handled notification: \(userInfo)\n")
                 }
             }
-            if showAlert &&
-                appState == .active {
-                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
-                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
-                        DispatchQueue.main.async {
-                            handleRequest()
-                        }
-                    }, cancelActionHandler: { (action) in
-                        
-                    })
-                } else {
-                    print("Notification text is wrong: \(userInfo)")
-                }
-            } else {
-                handleRequest()
-            }
+            
+            //            if showAlert &&
+            //                appState == .active {
+            //                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
+            //                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
+            //                        DispatchQueue.main.async {
+            //                            handleRequest()
+            //                        }
+            //                    }, cancelActionHandler: { (action) in
+            //
+            //                    })
+            //                } else {
+            //                    print("Notification text is wrong: \(userInfo)")
+            //                }
+            //            } else {
+            handleRequest()
+            //            }
         } else {
             print("\nNot Handled notification: \(userInfo)\n")
         }

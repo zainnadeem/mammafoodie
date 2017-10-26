@@ -14,6 +14,7 @@ protocol LiveVideoViewControllerOutput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
     func updateStreamImage()
+    func swapCamera()
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
@@ -165,7 +166,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                         dish.accessMode = MFDishMediaAccessMode.viewer
                     }
                     
-                    self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
+                    self.lblSlotsCount.text = "\( dish.totalSlots - dish.availableSlots )/\(dish.totalSlots) Slots"
                     self.liveVideo = dish
                     self.lblDishName.text = dish.name
                     self.showUserInfo()
@@ -298,6 +299,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         sender.isSelected = !sender.isSelected
     }
     
+    @IBAction func btnSwitchCameraTapped(_ sender: UIButton) {
+        self.output?.swapCamera()
+    }
+    
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         
         if self.output != nil {
@@ -374,8 +379,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func onSlotsTap(_ sender: UIButton) {
-        if self.liveVideo.totalSlots > 0 &&
-            self.liveVideo.availableSlots > 0 {
+        if self.liveVideo.totalSlots > 0 && self.liveVideo.availableSlots > 0 {
             self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: self)
         } else {
             self.showAlert("Sorry!", message: "No slots available!")
