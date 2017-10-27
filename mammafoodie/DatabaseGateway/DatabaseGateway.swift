@@ -955,7 +955,7 @@ extension DatabaseGateway {
                 dish.mediaType = dishMediaType
             }
         }
-        
+         
         if let rawCoverURL: String = rawDish["coverPicURL"] as? String {
             if let coverURL = URL(string: rawCoverURL) {
                 dish.coverPicURL = coverURL

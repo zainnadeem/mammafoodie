@@ -157,12 +157,15 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     // MARK: - Event handling
     @IBAction func likebtnClicked(_ sender: Any) {
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
         if self.viewComments.btnLike.isSelected ==  true {
             self.viewComments.btnLike.isSelected = false
-            output.dishUnliked(user_id: userId, dish_id: DishId)
+            output.dishUnliked(user_id: currentUser.id, dish_id: DishId)
         }else{
             self.viewComments.btnLike.isSelected = true
-            output.dishLiked(user_id: userId, dish_id: DishId)
+            output.dishLiked(user_id: currentUser.id, dish_id: DishId)
             animateLike()
         }
     }
