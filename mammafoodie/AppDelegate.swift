@@ -74,7 +74,7 @@
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                             welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
-                                self.handleNotification(userInfo, showAlert: false)
+                                self.handleNotification(userInfo, shouldTakeAction: true)
                             }
                             self.stripeVerificationCheck()
                         } else {
@@ -159,20 +159,20 @@
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["remindUserToVerifyStripeAccount"])
     }
     
-//    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
-//        let newID = FirebaseReference.notifications.generateAutoID()
-//        FirebaseReference.notifications.classReference.child(id).updateChildValues([
-//            newID : [
-//                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
-//                "participantUserID": id,
-//                "plainText": "VidUp Test!",
-//                "redirectId": "-KrUd41c4lXHO_KRBAx5",
-//                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
-//                "redirectPath": "Dishes",
-//                "text": "VidUp Test!",
-//                "timestamp": 522861129.399
-//            ]])
-//    }
+    //    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
+    //        let newID = FirebaseReference.notifications.generateAutoID()
+    //        FirebaseReference.notifications.classReference.child(id).updateChildValues([
+    //            newID : [
+    //                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
+    //                "participantUserID": id,
+    //                "plainText": "VidUp Test!",
+    //                "redirectId": "-KrUd41c4lXHO_KRBAx5",
+    //                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
+    //                "redirectPath": "Dishes",
+    //                "text": "VidUp Test!",
+    //                "timestamp": 522861129.399
+    //            ]])
+    //    }
     
     func updateToken() {
         if let token = Messaging.messaging().fcmToken {
@@ -310,7 +310,7 @@
         print("filePath: \(destinationPath)")
     }
     
-    func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
+    func handleNotification(_ userInfo: [AnyHashable : Any], shouldTakeAction: Bool = true) {
         if let _ = self.currentUser,
             let redirectID = userInfo["redirectId"] as? String,
             let redirectPathString = userInfo["redirectPath"] as? String,
@@ -342,6 +342,9 @@
                         print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
                     }
                     
+                case .messages:
+                    self.openConversation(id: redirectID)
+                    
                 default:
                     print("Redirect Path not Handled")
                     print("\nNot Handled notification: \(userInfo)\n")
@@ -362,7 +365,11 @@
             //                    print("Notification text is wrong: \(userInfo)")
             //                }
             //            } else {
-            handleRequest()
+            
+            if shouldTakeAction {
+                handleRequest()
+            }
+            
             //            }
         } else {
             print("\nNot Handled notification: \(userInfo)\n")
@@ -370,38 +377,35 @@
     }
     
     func openDish(with id: String, withCommentId commentId: String? = nil) {
-        let story = UIStoryboard.init(name: "Main", bundle: nil)
-        
         func open(dish: MFDish, commentId: String? = nil) {
-            if let _ = dish.endTimestamp {
-                //Vidup
-                if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
-                    currentVC.commentId = commentId
-                    currentVC.load(new: dish, completion: {
-                        
-                    })
-                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
-                    vidupDetailVC.commentId = commentId
-                    vidupDetailVC.DishId = dish.id
-                    vidupDetailVC.userId = dish.user.id
-                    vidupDetailVC.dish = dish
-                    present(vidupDetailVC)
+            let story = UIStoryboard.init(name: "Main", bundle: nil)
+            if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if dish.mediaType == .liveVideo && dish.endTimestamp == nil {
+                    if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
+                        currentVC.load(new: dish)
+                    } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
+                        liveVideoVC.liveVideo = dish
+                        present(liveVideoVC)
+                    }
+                } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+                    if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
+                        currentVC.commentId = commentId
+                        currentVC.load(new: dish, completion: {
+                            
+                        })
+                    } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
+                        vidupDetailVC.commentId = commentId
+                        vidupDetailVC.DishId = dish.id
+                        vidupDetailVC.userId = dish.user.id
+                        vidupDetailVC.dish = dish
+                        present(vidupDetailVC)
+                    }
                 }
             } else {
-                //Live Video
-                if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
-                    currentVC.load(new: dish)
-                } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
-                    liveVideoVC.liveVideo = dish
-                    present(liveVideoVC)
-                }
+                let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+                dishVC.dishID = dish.id
+                present(dishVC)
             }
-        }
-        
-        func present(_ vc: UIViewController) {
-            let nav = UINavigationController.init(rootViewController: vc)
-            nav.setNavigationBarHidden(true, animated: false)
-            self.checkAndPresent(vc: nav)
         }
         
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
@@ -409,6 +413,24 @@
                 DispatchQueue.main.async {
                     open(dish: dish, commentId: commentId)
                 }
+            }
+        }
+    }
+    
+    func present(_ vc: UIViewController) {
+        let nav = UINavigationController.init(rootViewController: vc)
+        nav.setNavigationBarHidden(true, animated: false)
+        self.checkAndPresent(vc: nav)
+    }
+    
+    func openConversation(id: String) {
+        DatabaseGateway.sharedInstance.getConversation(with: id) { (conversation) in
+            DispatchQueue.main.async {
+                let storyboard:UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
+                let destViewController = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatViewController
+                destViewController.conversation = conversation
+                destViewController.currentUser = self.currentUser
+                self.present(destViewController)
             }
         }
     }
@@ -496,10 +518,9 @@
  extension AppDelegate : UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        self.handleNotification(notification.request.content.userInfo)
-        print("Will Present")
-        completionHandler([.alert,.sound])
+        //        self.handleNotification(notification.request.content.userInfo, shouldTakeAction: true)
+        //        print("Will Present")
+        //        completionHandler([.alert,.sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -507,7 +528,7 @@
         if response.notification.request.identifier == "remindUserToVerifyStripeAccount" {
             self.verifyStripe()
         } else {
-            self.handleNotification(response.notification.request.content.userInfo)
+            self.handleNotification(response.notification.request.content.userInfo, shouldTakeAction: true)
         }
         print("Did Receive")
         completionHandler()

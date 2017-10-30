@@ -220,17 +220,17 @@ extension ChatViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
+        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "BackBtn")
     }
     
 
     func getMessages(forConversation conversationID:String){
-        
-        
-        
-        worker.getMessages(forConversation: conversationID, { message in
+        self.worker.getMessages(forConversation: conversationID, { message in
             if message != nil {
                 DispatchQueue.main.async {
                     self.messages.append(message!)
