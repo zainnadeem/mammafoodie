@@ -132,6 +132,10 @@ class CommentsView: UIView {
     @IBAction func onBtnLikeTap(_ sender: UIButton) {
         self.likeButtonTapped?()
     }
+    
+    func highlightComment(id: String) {
+        self.tableViewAdapter.commentIdToHighlight = id
+    }
 }
 
 extension CommentsView: UITextViewDelegate {

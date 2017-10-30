@@ -31,16 +31,22 @@ class NotificationViewController: UIViewController {
         self.notificationTableView.emptyDataSetDelegate = self
         self.notificationTableView.emptyDataSetSource = self
 
-
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
-            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:"fYK04phVGPRpszYixlO2ort6gyF3") { (nots) in
+            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:self.userID) { (nots) in
                 DispatchQueue.main.async {
                     self.notifications = nots
                 }
             }
         } else {
             self.navigationController?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedRow: IndexPath = self.notificationTableView.indexPathForSelectedRow {
+            self.notificationTableView.deselectRow(at: selectedRow, animated: true)
         }
     }
     
@@ -64,6 +70,19 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         let notif = self.notifications[indexPath.row]
         cell.setUp(notification: notif)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let notif = self.notifications[indexPath.row]
+        guard let dishId: String = notif.dishID else {
+            print("redirectId is not available")
+            return
+        }
+        let rawNotification: [String:Any] = [
+            "redirectId": dishId,
+            "redirectPath": notif.redirectPath
+        ]
+        AppDelegate.shared().handleNotification(rawNotification)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

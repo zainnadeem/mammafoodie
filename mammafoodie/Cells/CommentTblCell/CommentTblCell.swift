@@ -10,6 +10,8 @@ import UIKit
 
 class CommentTblCell: UITableViewCell {
     
+    var comment: MFComment!
+    
     @IBOutlet weak var lblDetails: UILabel!
     
     override func awakeFromNib() {
@@ -18,6 +20,7 @@ class CommentTblCell: UITableViewCell {
     }
     
     func setup(with comment: MFComment) {
+        self.comment = comment
         let username: String = comment.user.name
         let commentText: String = comment.text
         
@@ -34,6 +37,14 @@ class CommentTblCell: UITableViewCell {
         commentAttributedString.append(NSAttributedString(string: " "))
         commentAttributedString.append(formattedComment)
         self.lblDetails.attributedText = commentAttributedString
+    }
+    
+    func highlightCell(for commentId: String?) {
+        if self.comment.id == commentId {
+            self.backgroundColor = UIColor.gray
+        } else {
+            self.backgroundColor = UIColor.clear
+        }
     }
     
 }

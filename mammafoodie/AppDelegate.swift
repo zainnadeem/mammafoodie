@@ -65,6 +65,8 @@
                 _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
                     DispatchQueue.main.async {
                         self.currentUser = loggedInUser
+                        self.updateToken()
+                        print("Currently logged in user: \(loggedInUser!.id)")
                         welcomeVC.collectionViewImages.isHidden = false
                         welcomeVC.viewContainer.isHidden = false
                         hud.hide(animated: true)
@@ -330,6 +332,16 @@
                 case .dishes:
                     self.openDish(with: redirectID)
                     
+                case .dishComments:
+                    let comps: [String] = redirectID.components(separatedBy: CharacterSet.init(charactersIn: "/"))
+                    if comps.count == 3 {
+                        let dishId: String = comps[1]
+                        let commentId: String = comps[2]
+                        self.openDish(with: dishId, withCommentId: commentId)
+                    } else {
+                        print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
+                    }
+                    
                 default:
                     print("Redirect Path not Handled")
                     print("\nNot Handled notification: \(userInfo)\n")
@@ -357,14 +369,19 @@
         }
     }
     
-    func openDish(with id: String) {
+    func openDish(with id: String, withCommentId commentId: String? = nil) {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
-        func open(dish: MFDish) {
+        
+        func open(dish: MFDish, commentId: String? = nil) {
             if let _ = dish.endTimestamp {
                 //Vidup
                 if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
-                    currentVC.load(new: dish)
+                    currentVC.commentId = commentId
+                    currentVC.load(new: dish, completion: {
+                        
+                    })
                 } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
+                    vidupDetailVC.commentId = commentId
                     vidupDetailVC.DishId = dish.id
                     vidupDetailVC.userId = dish.user.id
                     vidupDetailVC.dish = dish
@@ -390,7 +407,7 @@
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
                 DispatchQueue.main.async {
-                    open(dish: dish)
+                    open(dish: dish, commentId: commentId)
                 }
             }
         }

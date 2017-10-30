@@ -32,6 +32,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     var DishId:String = ""
     
     var dish: MFDish?
+    var commentId: String?
     
     //MARK: - IBOutlet
     
@@ -76,7 +77,11 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         
         //        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         if let dish = self.dish {
-            self.load(new: dish)
+            self.load(new: dish, completion: {
+            })
+            if let commentId: String = self.commentId {
+                self.highlightComment(commentId: commentId)
+            }
             self.output.updateViewersCount(for: dish.id, opened: true)
         } else {
             self.close(animated: false)
@@ -195,7 +200,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         if self.viewComments.isHidden == true {
             self.viewComments.isHidden = false
             self.lv_ProfileDetails.isHidden = false
-        }else{
+        } else {
             self.viewComments.isHidden = true
             self.lv_ProfileDetails.isHidden = true
         }
@@ -254,17 +259,22 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         return path
     }
     
-    func load(new vidup: MFDish) {
+    func load(new vidup: MFDish, completion: (()->Void)?) {
         self.displayDishInfo(for: vidup)
+        self.setupViewComments()
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: vidup.id, frequency: .realtime, { (loadedDish) in
-            self.setupViewComments()
             if let loadedDish = loadedDish {
                 self.displayDishInfo(for: loadedDish)
             } else {
                 self.close(animated: true)
                 self.showAlert("Error", message: "Error downloading the dish. Please try again.")
             }
+            completion?()
         })
+    }
+    
+    func highlightComment(commentId: String) {
+        self.viewComments.highlightComment(id: commentId)
     }
     
     deinit {

@@ -18,6 +18,7 @@ struct MFNotification {
     var attributedString: NSMutableAttributedString?
     var liked: [String:Bool] = [:] //MFUser id
     var comments: [String:Bool] = [:] //MFComments id
+    var redirectPath: String = ""
     
     init() {
         
@@ -50,10 +51,11 @@ struct MFNotification {
 
  */
         self.id = dictionary["id"] as? String ?? ""
-        self.participantUserID = dictionary["participantUserId"] as? String ?? ""
-        self.dishID = dictionary["redirectId"] as? String ?? nil
+        self.participantUserID = dictionary["participantUserID"] as? String ?? ""
+        self.dishID = dictionary["redirectID"] as? String ?? nil
         self.activityID = dictionary["activityID"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
+        self.redirectPath = dictionary["redirectPath"] as? String ?? ""
         
         //Parse text and assign to attributed String
         //        self.attributedString =
