@@ -107,6 +107,8 @@ class MFModelsToFirebaseDictionaryConverter {
             "availableSlots" : dish.totalSlots as AnyObject,
             "dishType" : dish.dishType.rawValue as AnyObject,
             "preparationTime" : dish.preparationTime as AnyObject,
+            "searchTags": DatabaseGateway.generateTags(for: dish.name,
+                                                       firebaseRefrence: FirebaseReference.dishes.classReference.child("searchTags")) as AnyObject,
             "cuisine" : [
                 "id" : dish.cuisine.id as AnyObject,
                 "name" : dish.cuisine.name as AnyObject
@@ -201,7 +203,8 @@ class MFModelsToFirebaseDictionaryConverter {
             "phone": user.phone.phone
         ]
         userInfo["phone"] = phoneInfo as AnyObject
-        
+        userInfo[ "searchTags"] = DatabaseGateway.generateTags(for: user.name,
+                                                         firebaseRefrence: FirebaseReference.users.classReference.child("searchTags")) as AnyObject
         return userInfo
     }
     

@@ -141,19 +141,6 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         }
     }
     
-    @IBAction func onHideFeaturedMenu(_ sender: UIButton) {
-        let alert = UIAlertController(title: "No Featured Menu Found!", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            
-        }))
-        self.present(alert, animated: true) {
-            
-        }
-        //        let bottom = self.conBottomFeaturedMenuCollectionView.constant
-        //        let height = self.conHeightFeaturedMenuCollectionView.constant
-        //        self.showFeaturedMenu((bottom == height * -1))
-    }
-    
     func showFeaturedMenu(_ show : Bool) {
         if show {
             UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
@@ -170,6 +157,19 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
             }, completion: { (finished) in
             })
         }
+    }
+    
+    @IBAction func onHideFeaturedMenu(_ sender: UIButton) {
+        let alert = UIAlertController(title: "No Featured Menu Found!", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true) {
+            
+        }
+        //        let bottom = self.conBottomFeaturedMenuCollectionView.constant
+        //        let height = self.conHeightFeaturedMenuCollectionView.constant
+        //        self.showFeaturedMenu((bottom == height * -1))
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {

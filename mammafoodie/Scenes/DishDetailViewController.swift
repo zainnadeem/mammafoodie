@@ -145,7 +145,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.lblNumberOfTimesOrdered.text = "\(UInt(data.totalOrders)) Orders"
         self.lblPrepTime.text = "\(Int(data.preparationTime / 60)) mins"
         self.lblDishDescription.text = data.description
-//        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
+        //        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
         
         self.lblLeftDishesCount.text = data.availableSlots.description + " Left"
         
@@ -437,10 +437,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID2, { (user2) in
                 let lat2: Double = Double(user2?.addressDetails?.latitude ?? "0") ?? 0
                 let long2: Double = Double(user2?.addressDetails?.longitude ?? "0") ?? 0
-//                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
-//                    completion(nil)
-//                    return
-//                }
+                //                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
+                //                    completion(nil)
+                //                    return
+                //                }
                 let cl1 = CLLocation(latitude: Double(lat1), longitude: Double(long1))
                 let cl2 = CLLocation(latitude: Double(lat2), longitude: Double(long2))
                 completion(cl1.distance(from: cl2)/1000)

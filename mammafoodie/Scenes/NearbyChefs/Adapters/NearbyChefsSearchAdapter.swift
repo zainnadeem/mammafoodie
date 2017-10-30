@@ -109,7 +109,7 @@ class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
     }
     
     func searchText(_ text : String!, _ completion : @escaping ([MFDish]?) -> Void ) {
-        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
+        DatabaseGateway.sharedInstance.searchDish(with: text) { (dishes) in
             if let filtered = self.filter(dishes: dishes, by: text) {
                 if let filter = self.cuisineFilter {
                     if let filteredCuisine = self.filter(dishes: filtered, by: filter) {
@@ -124,6 +124,7 @@ class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
                 completion(nil)
             }
         }
+        
     }
     
 }

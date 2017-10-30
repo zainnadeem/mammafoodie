@@ -94,6 +94,14 @@
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
+        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
+            for dish in dishes {
+                dish.save({ (error) in
+                    print("Error while saving: \(dish.id) \n \(error?.localizedDescription ?? "") ")
+                })
+            }
+        }
+        
         return true
     }
     
@@ -159,20 +167,20 @@
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["remindUserToVerifyStripeAccount"])
     }
     
-//    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
-//        let newID = FirebaseReference.notifications.generateAutoID()
-//        FirebaseReference.notifications.classReference.child(id).updateChildValues([
-//            newID : [
-//                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
-//                "participantUserID": id,
-//                "plainText": "VidUp Test!",
-//                "redirectId": "-KrUd41c4lXHO_KRBAx5",
-//                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
-//                "redirectPath": "Dishes",
-//                "text": "VidUp Test!",
-//                "timestamp": 522861129.399
-//            ]])
-//    }
+    //    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
+    //        let newID = FirebaseReference.notifications.generateAutoID()
+    //        FirebaseReference.notifications.classReference.child(id).updateChildValues([
+    //            newID : [
+    //                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
+    //                "participantUserID": id,
+    //                "plainText": "VidUp Test!",
+    //                "redirectId": "-KrUd41c4lXHO_KRBAx5",
+    //                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
+    //                "redirectPath": "Dishes",
+    //                "text": "VidUp Test!",
+    //                "timestamp": 522861129.399
+    //            ]])
+    //    }
     
     func updateToken() {
         if let token = Messaging.messaging().fcmToken {

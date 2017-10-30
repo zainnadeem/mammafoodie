@@ -77,8 +77,6 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             if markerData.dishID != "" {
                 self.openDish(with: markerData.dishID)
             }
-            //            let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude, longitude: marker.position.longitude, zoom: 12)
-            //            self.mapView.animate(to: camera)
         } else {
             let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude, longitude: marker.position.longitude, zoom: 12)
             self.mapView.animate(to: camera)
@@ -115,7 +113,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         }
     }
 
-    func openDishPageWith(dishID:String) {
+    func openDishPageWith(dishID: String) {
         //Initiate segue and pass it to router in prepare for segue
         let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
         dishVC.dishID = dishID
