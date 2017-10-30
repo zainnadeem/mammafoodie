@@ -114,6 +114,16 @@ class MFDish {
             self.user = MFUser(from: userDict)
         }
         
+        if let rawDishMediaType = dishDataDictionary["mediaType"] as? String {
+            if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
+                self.mediaType = dishMediaType
+            } else {
+                print("Dish media type not found: \(self.id)")
+            }
+        } else {
+            print("Dish media type not found: \(self.id)")
+        }
+        
         self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
         self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
         

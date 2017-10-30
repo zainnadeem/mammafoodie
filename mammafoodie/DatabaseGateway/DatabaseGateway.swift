@@ -986,7 +986,11 @@ extension DatabaseGateway {
         if let rawDishMediaType = rawDish["mediaType"] as? String {
             if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
                 dish.mediaType = dishMediaType
+            } else {
+                print("Dish media type not found: \(dish.id)")
             }
+        } else {
+            print("Dish media type not found: \(dish.id)")
         }
         
         if let rawCoverURL: String = rawDish["coverPicURL"] as? String {

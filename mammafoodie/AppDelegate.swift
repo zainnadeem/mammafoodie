@@ -94,13 +94,15 @@
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
-        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
-            for dish in dishes {
-                dish.save({ (error) in
-                    print("Error while saving: \(dish.id) \n \(error?.localizedDescription ?? "") ")
-                })
-            }
-        }
+//        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
+//            for dish in dishes {
+//                let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
+////                print(dishDict["mediaType"])
+//                dish.save({ (error) in
+//                    print("Error while saving: \(dish.id) \n \(error?.localizedDescription ?? "") ")
+//                })
+//            }
+//        }
         
         return true
     }
