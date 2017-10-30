@@ -86,24 +86,26 @@
                 }
             }
         }
-        
-        //        self.saveDishes()
-        
+
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
-//        DatabaseGateway.sharedInstance.getAllDish { (dishes) in
-//            for dish in dishes {
-//                let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
-////                print(dishDict["mediaType"])
-//                dish.save({ (error) in
-//                    print("Error while saving: \(dish.id) \n \(error?.localizedDescription ?? "") ")
-//                })
+//        FirebaseReference.users.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+//            if let users = snapshot.value as? [String: AnyObject] {
+//                for (_, value) in users {
+//                    if let dict = value as? [String: AnyObject] {
+//                        let user = MFUser.init(from: dict)
+//                        if user.id != "" {
+//                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+//                                print("Error: \(error ?? "nil")")
+//                            })
+//                        }
+//                    }
+//                }
 //            }
-//        }
-        
+//        })
         return true
     }
     

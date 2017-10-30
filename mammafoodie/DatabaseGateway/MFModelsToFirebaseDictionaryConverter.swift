@@ -166,10 +166,7 @@ class MFModelsToFirebaseDictionaryConverter {
             userInfo["email"] = email as AnyObject
         }
         
-        if let address = user.address {
-            userInfo["address"] = address as AnyObject
-        }
-        
+        userInfo["address"] = user.address as AnyObject
         if let addressDetailsTemp = user.addressDetails {
             var addressDetails: [String:AnyObject] = [:]
             addressDetails["address"] = addressDetailsTemp.address as AnyObject
