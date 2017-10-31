@@ -8,7 +8,7 @@ class ChatViewController: JSQMessagesViewController {
     let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
     let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
     let defaults = UserDefaults.standard
-
+    
     var conversation:MFConversation!
     
     // MARK: - Object lifecycle
@@ -17,7 +17,7 @@ class ChatViewController: JSQMessagesViewController {
             finishSendingMessage()
         }
     }
-
+    
     var currentUser:MFUser!
     
     lazy var worker = ChatWorker()
@@ -54,23 +54,23 @@ extension ChatViewController {
         
         
         
-
+        
     }
     
     //senderbabbletable
     /*
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-       // print(messages)
-        
-        if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
-            return nil
-        }
-        
-        let message = messages[indexPath.row]
-        let messageUsername = message.senderDisplayName
-        return NSAttributedString(string: messageUsername)
-    }
-*/
+     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+     // print(messages)
+     
+     if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
+     return nil
+     }
+     
+     let message = messages[indexPath.row]
+     let messageUsername = message.senderDisplayName
+     return NSAttributedString(string: messageUsername)
+     }
+     */
     
     //Height of table
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
@@ -100,29 +100,29 @@ extension ChatViewController {
             return nil //No Avatar image for current user
         } else {
             return JSQMessagesAvatarImageFactory.avatarImage(with: self.OtherUserProfileImage ?? UIImage(named: "IconMammaFoodie")!, diameter: 20)
-        
+            
         }
     }
-
+    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
-
+        
         // messages to show
         let msg = messages[indexPath.row]
-            if msg.senderId == senderId {
-                cell.textView.textColor = UIColor.white
-                
-                //cell.messageBubbleImageView.applyGradient(colors: [color1, color2], direction: .leftToRight)
-                
-                
-            }else{
-                cell.textView.textColor = UIColor.black
-            }
-            cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor ?? UIColor.white]
-            cell.textView.font = UIFont(name: "Montserrat", size: 14)
-            cell.textView.textAlignment = .center
-
+        if msg.senderId == senderId {
+            cell.textView.textColor = UIColor.white
+            
+            //cell.messageBubbleImageView.applyGradient(colors: [color1, color2], direction: .leftToRight)
+            
+            
+        }else{
+            cell.textView.textColor = UIColor.black
+        }
+        cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor ?? UIColor.white]
+        cell.textView.font = UIFont(name: "Montserrat", size: 14)
+        cell.textView.textAlignment = .center
+        
         return cell
     }
     
@@ -168,7 +168,7 @@ extension ChatViewController {
         return nil
     }
     
-
+    
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
         if indexPath.item % 3 == 0 {
@@ -176,13 +176,24 @@ extension ChatViewController {
         }
         return 0.0
     }
-   
-  }
+    
+}
 
 extension ChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
+//        self.navigationController?.navigationBar.backIndicatorImage = backImage
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+//        self.navigationItem.backBarButtonItem =
+        
+        let button: UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissView(_:)))
+        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
+        button.image = backImage
+        navigationItem.leftBarButtonItem = button
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         
         if let currentUser = AppDelegate.shared().currentUser {
             self.currentUser = currentUser
@@ -194,7 +205,7 @@ extension ChatViewController {
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
         //Hiding attach Image
-        self.inputToolbar.contentView.leftBarButtonItem = nil
+//        self.inputToolbar.contentView.leftBarButtonItem = nil
         
         var url: URL!
         
@@ -208,10 +219,10 @@ extension ChatViewController {
         
         //download avatar image
         SDWebImageDownloader.shared().downloadImage(with: url, options: SDWebImageDownloaderOptions(rawValue: 0), progress: { (_, _) in }, completed: { (image, _, _, finished) in
-        
-        if finished {
-            self.OtherUserProfileImage = image ?? UIImage(named: "IconMammaFoodie")!
-        }
+            
+            if finished {
+                self.OtherUserProfileImage = image ?? UIImage(named: "IconMammaFoodie")!
+            }
             
         })
         
@@ -220,15 +231,17 @@ extension ChatViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
-        self.navigationController?.navigationBar.backIndicatorImage = backImage
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-
+    @IBAction func dismissView(_ sender: UIBarButtonItem) {
+        if self.navigationController?.viewControllers.first == self {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
     func getMessages(forConversation conversationID:String){
         self.worker.getMessages(forConversation: conversationID, { message in
             if message != nil {
@@ -238,13 +251,6 @@ extension ChatViewController {
             }
             
         })
-
+        
     }
 }
-
-
-
-
-
-
-

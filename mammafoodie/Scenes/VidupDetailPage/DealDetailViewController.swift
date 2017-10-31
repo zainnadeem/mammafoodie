@@ -187,9 +187,13 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         self.observer = nil
         self.output.stopTimer()
         self.output.stopPlayback()
-        if self.presentingViewController != nil ||
-            self.navigationController?.presentingViewController != nil {
-            self.dismiss(animated: true, completion: nil)
+        
+        if self.presentingViewController != nil || self.navigationController?.presentingViewController != nil {
+            if self.navigationController?.viewControllers.first == self {
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         } else {
             self.navigationController?.popViewController(animated: true)
         }
