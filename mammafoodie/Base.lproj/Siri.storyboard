@@ -15,7 +15,7 @@
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
-        <array key="Montserrat-Light.ttf">
+        <array key="Montserrat-Light.otf">
             <string>Montserrat-Light</string>
         </array>
         <array key="Montserrat-Medium.otf">
@@ -352,7 +352,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-vs-xIv">
-                                <rect key="frame" x="187.66666666666666" y="688" width="40" height="31"/>
+                                <rect key="frame" x="188" y="688" width="40" height="31"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="0.52549019610000003" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -822,7 +822,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qsS-WM-Esz">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="652"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -980,7 +980,7 @@
                                                         <rect key="frame" x="8" y="40" width="358" height="64"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ols-Lh-sPA">
-                                                                <rect key="frame" x="8" y="23.333333333333314" width="342" height="19"/>
+                                                                <rect key="frame" x="8" y="23.666666666666686" width="342" height="19"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1024,7 +1024,7 @@
                                                         <rect key="frame" x="8" y="40" width="358" height="64"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mt7-x3-aQ9">
-                                                                <rect key="frame" x="8" y="23.333333333333314" width="342" height="19"/>
+                                                                <rect key="frame" x="8" y="23.666666666666686" width="342" height="19"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1068,7 +1068,7 @@
                                                         <rect key="frame" x="8" y="40" width="358" height="64"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nHR-Be-YhL">
-                                                                <rect key="frame" x="8" y="22.666666666666629" width="342" height="19"/>
+                                                                <rect key="frame" x="8" y="23" width="342" height="19"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1137,7 +1137,7 @@
                                                         <rect key="frame" x="8" y="40" width="358" height="64"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H2q-qV-tew">
-                                                                <rect key="frame" x="8" y="22.666666666666629" width="342" height="19"/>
+                                                                <rect key="frame" x="8" y="23" width="342" height="19"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -1442,7 +1442,7 @@
                                                 <rect key="frame" x="20" y="20" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address Line 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-uy-FXQ">
-                                                        <rect key="frame" x="8" y="20.333333333333336" width="358" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666664" width="358" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1465,7 +1465,7 @@
                                                 <rect key="frame" x="20" y="95" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address Line 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eZ5-A9-7qK">
-                                                        <rect key="frame" x="8" y="20.333333333333329" width="358" height="20.000000000000014"/>
+                                                        <rect key="frame" x="8" y="20.666666666666671" width="358" height="19.999999999999986"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1488,7 +1488,7 @@
                                                 <rect key="frame" x="20" y="170" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AYK-Pi-v3i">
-                                                        <rect key="frame" x="8" y="20.333333333333343" width="358" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666657" width="358" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1511,7 +1511,7 @@
                                                 <rect key="frame" x="20" y="245" width="282" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PFJ-fp-aYC">
-                                                        <rect key="frame" x="8" y="20.333333333333314" width="266" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666686" width="266" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1534,7 +1534,7 @@
                                                 <rect key="frame" x="322" y="245" width="72" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="US" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H0u-g1-O4k">
-                                                        <rect key="frame" x="8" y="20.333333333333314" width="56" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666686" width="56" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1558,7 +1558,7 @@
                                                 <rect key="frame" x="20" y="323" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPz-7q-dHI">
-                                                        <rect key="frame" x="8" y="20.333333333333314" width="358" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666686" width="358" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -1581,7 +1581,7 @@
                                                 <rect key="frame" x="20" y="473" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OFK-Wj-3EG">
-                                                        <rect key="frame" x="8" y="20.333333333333314" width="317" height="20.000000000000057"/>
+                                                        <rect key="frame" x="8" y="20.666666666666686" width="317" height="19.999999999999943"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -1631,7 +1631,7 @@
                                                 <rect key="frame" x="20" y="398" width="374" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Postal Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsB-eK-Pxa">
-                                                        <rect key="frame" x="8" y="20.333333333333314" width="358" height="20"/>
+                                                        <rect key="frame" x="8" y="20.666666666666686" width="358" height="20"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -1849,7 +1849,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="lwz-5y-6k9">
-                                <rect key="frame" x="0.0" y="64" width="320" height="736"/>
+                                <rect key="frame" x="0.0" y="84" width="320" height="716"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybD-ZP-qM8">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
@@ -1903,13 +1903,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veC-5B-UTn">
-                                                <rect key="frame" x="20" y="158" width="82.333333333333329" height="17.666666666666657"/>
+                                                <rect key="frame" x="20" y="158" width="82.333333333333329" height="17.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                 <color key="textColor" red="0.37254901959999998" green="0.36862745099999999" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="p4J-5c-5hF">
-                                                <rect key="frame" x="20" y="191.66666666666669" width="280" height="150.00000000000006"/>
+                                                <rect key="frame" x="20" y="191.66666666666669" width="280" height="150"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="rWf-8a-rVG"/>
@@ -1954,7 +1954,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZe-Vn-9Wh">
-                                                <rect key="frame" x="20" y="410.33333333333331" width="60" height="30"/>
+                                                <rect key="frame" x="20" y="410.33333333333337" width="60" height="30.000000000000057"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="NmC-M0-qvm"/>
                                                     <constraint firstAttribute="height" constant="30" id="SoX-PQ-pM8"/>
@@ -1970,7 +1970,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAX-IU-yYc">
-                                                <rect key="frame" x="96" y="410.33333333333331" width="60" height="30"/>
+                                                <rect key="frame" x="96" y="410.33333333333337" width="60" height="30.000000000000057"/>
                                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <inset key="imageEdgeInsets" minX="4" minY="5" maxX="4" maxY="5"/>

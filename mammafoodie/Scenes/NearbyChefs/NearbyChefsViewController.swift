@@ -23,26 +23,19 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
     
     var output: NearbyChefsViewControllerOutput!
     var router: NearbyChefsRouter!
-    
     var allMarks: [Marker] = [Marker]()
     var locationManager : CLLocationManager = CLLocationManager.init()
     var clusterManager: GMUClusterManager!
-    
     var searchAdapter: NearbyChefsSearchAdapter!
     var featuredMenuAdapter : FeaturedMenuCollectionViewAdapter!
-    
     var cuisineFilters = [MFCuisine]()
-    
-    var searchResults : [MFDish]! = [MFDish]()
-    
-    var swipGesture : UISwipeGestureRecognizer!
+    var searchResults: ([MFDish], [MFUser]) = ([MFDish](), [MFUser]())
+    var swipGesture: UISwipeGestureRecognizer!
     
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var txtSearch: UITextField!
-    
     @IBOutlet weak var cuisineCollectionView: UICollectionView!
-    
     @IBOutlet weak var conBottomFeaturedMenuCollectionView: NSLayoutConstraint!
     @IBOutlet weak var featuredMenuCollectionView: UICollectionView!
     @IBOutlet weak var conHeightFeaturedMenuCollectionView: NSLayoutConstraint!
@@ -86,16 +79,16 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         
         self.searchAdapter = NearbyChefsSearchAdapter()
         self.searchAdapter.prepare(with : self.txtSearch)
-        self.searchAdapter.adapterResult = { (dishes) in
+        self.searchAdapter.adapterResult = { (dishes, users) in
             print("Found Dishes: \(dishes)")
-            DispatchQueue.main.async {
-                if dishes.count < 0 {
-                    self.showAlert("No Results Found", message: nil)
-                }
-                self.searchResults.removeAll()
-                self.searchResults.append(contentsOf: dishes)
-                self.reloadSearchData()
+            print("Found User: \(users)")
+            if dishes.count <= 0 &&
+                users.count <= 0 {
+                self.showAlert("No Results Found", message: nil)
             }
+            self.searchResults.0 = dishes
+            self.searchResults.1 = users
+            self.reloadSearchData()
         }
     }
     
@@ -121,7 +114,7 @@ class NearbyChefsViewController: UIViewController, NearbyChefsViewControllerInpu
         self.txtSearch.layer.shadowRadius = 5.0
         self.txtSearch.layer.shadowOffset = CGSize(width: 0, height: 5)
         self.txtSearch.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.54).cgColor
-//        init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.54).cgColor
+        //        init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.54).cgColor
         self.txtSearch.delegate = self
         let tintColor : UIColor = UIColor.init(red: 21.0/255.0, green: 33.0/255.0, blue: 52.0/255.0, alpha: 1)
         self.txtSearch.setLeftImage(#imageLiteral(resourceName: "iconSearch"), withPadding: CGSize.init(width: 10, height: 10), tintColor: tintColor)

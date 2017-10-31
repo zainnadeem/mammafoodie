@@ -9,7 +9,7 @@
 import Foundation
 
 extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDelegate, GMUClusterRendererDelegate {
-
+    
     func prepareMap() {
         self.mapView.isMultipleTouchEnabled = true
         self.mapView.isMyLocationEnabled = true
@@ -36,15 +36,36 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     
     func reloadSearchData() {
         var markers = [Marker]()
-        for (index, dish) in self.searchResults.enumerated() {
-            //            dish.location = CLLocationCoordinate2D.init(latitude: 40, longitude: 12 + (Double(index) * 0.12))
+        var indexCounter = 0
+        for (_, dish) in self.searchResults.0.enumerated() {
             if let location = dish.location {
-                let marker = Marker.marker(with: dish.address, at: location, with: index)
-                marker.dishID = dish.id
+                let marker = Marker.marker(withTitle: dish.name, atLocation: location, withIndex: indexCounter, withID: dish.id, isDish: true)
                 markers.append(marker)
+                indexCounter += indexCounter
             }
         }
+        let extent = 10.9
+        for (_, user) in self.searchResults.1.enumerated() {
+            if let lattStr = user.addressDetails?.latitude,
+                let longiStr = user.addressDetails?.longitude,
+                let latt = Double(lattStr),
+                let longi = Double(longiStr) {
+                let location = CLLocationCoordinate2D.init(latitude: latt, longitude: longi)
+                let marker = Marker.marker(withTitle: user.name, atLocation: location, withIndex: indexCounter, withID: user.id, isDish: false)
+                markers.append(marker)
+            } else {
+                let location = CLLocationCoordinate2D.init(latitude: kCameraLatitude + extent * randomScale(), longitude: kCameraLongitude + extent * randomScale())
+                let marker = Marker.marker(withTitle: user.name, atLocation: location, withIndex: indexCounter, withID: user.id, isDish: false)
+                markers.append(marker)
+            }
+            indexCounter += indexCounter
+        }
+        
         self.showMarkers(markers: markers)
+    }
+    
+    private func randomScale() -> Double {
+        return Double(arc4random()) / Double(UINT32_MAX) * 2.0 - 1.0
     }
     
     func showMarkers(markers: [Marker]) {
@@ -65,8 +86,15 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         if let currentLocation = location {
             kCameraLatitude = currentLocation.coordinate.latitude
             kCameraLongitude = currentLocation.coordinate.longitude
-            let camera = GMSCameraPosition.camera(withLatitude: kCameraLatitude, longitude: kCameraLongitude, zoom: 12)
-            self.mapView.animate(to: camera)
+            if self.allMarks.count > 0 {
+                let bounds = self.allMarks.reduce(GMSCoordinateBounds()) {
+                    $0.includingCoordinate($1.position)
+                }
+                self.mapView.animate(with: .fit(bounds, withPadding: 50.0))
+            } else {
+                let camera = GMSCameraPosition.camera(withLatitude: kCameraLatitude, longitude: kCameraLongitude, zoom: 12)
+                self.mapView.animate(to: camera)
+            }
         } else {
             print("Location not found")
         }
@@ -74,8 +102,12 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerData = marker.userData as? Marker {
-            if markerData.dishID != "" {
-                self.openDish(with: markerData.dishID)
+            if markerData.refrenceID != "" {
+                if markerData.isDish {
+                    self.openDish(with: markerData.refrenceID)
+                } else {
+                    self.openUser(with: markerData.refrenceID)
+                }
             }
         } else {
             let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude, longitude: marker.position.longitude, zoom: 12)
@@ -84,7 +116,16 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         
         return true
     }
-
+    
+    func openUser(with id: String) {
+        if let navUser: MFNavigationController = UIStoryboard(name:"Main",bundle:nil).instantiateViewController(withIdentifier: "navUserProfile") as? MFNavigationController {
+            if let profileVC = navUser.viewControllers.first as? OtherUsersProfileViewController {
+                profileVC.userID = id
+                self.present(navUser, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func openDish(with id: String) {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
@@ -92,14 +133,14 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             }
         }
     }
-
+    
     func openDishDetails(_ dish: MFDish) {
         if dish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
             dish.accessMode = .owner
         } else {
             dish.accessMode = .viewer
         }
-
+        
         if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
             if dish.mediaType == .liveVideo &&
                 dish.endTimestamp == nil {
@@ -112,18 +153,24 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             self.openDishPageWith(dishID: dish.id)
         }
     }
-
+    
     func openDishPageWith(dishID: String) {
-        //Initiate segue and pass it to router in prepare for segue
-        let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+        if let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as? DishDetailViewController {
         dishVC.dishID = dishID
         let navController: MFNavigationController = MFNavigationController(rootViewController: dishVC)
         navController.navigationBar.tintColor = navigationBarTintColor
         self.present(navController, animated: true, completion: nil)
+        }
     }
     
     func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-        marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
+        if let markerData = marker.userData as? Marker {
+            if markerData.isDish {
+                marker.icon = #imageLiteral(resourceName: "iconMarkerPin")
+            } else {
+                marker.icon = #imageLiteral(resourceName: "iconMarkerPinUser")
+            }
+        }
     }
     
     //    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {

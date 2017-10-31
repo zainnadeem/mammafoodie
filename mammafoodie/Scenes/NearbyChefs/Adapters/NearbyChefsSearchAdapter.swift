@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
-typealias NearbyChefsSearchAdapterResult = ([MFDish]) -> Void
+typealias NearbyChefsSearchAdapterResult = ([MFDish], [MFUser]) -> Void
 
 class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
     
-    var results : [MFDish] = [MFDish]()
-    var cuisineFilter : MFCuisine?
-    var adapterResult : NearbyChefsSearchAdapterResult?
+//    var results: [MFDish] = [MFDish]()
+    var results: ([MFDish], [MFUser]) = ([MFDish](), [MFUser]())
+    var cuisineFilter: MFCuisine?
+    var adapterResult: NearbyChefsSearchAdapterResult?
     var currentLocation : CLLocationCoordinate2D?
     
     var textField : UITextField!
@@ -28,36 +29,39 @@ class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
         self.cuisineFilter = cuisine
         if let searctText = self.textField.text {
             if !searctText.isEmpty {
-                self.searchText(searctText, { (dishes) in
-                    DispatchQueue.main.async {
-                        if let resultFound = dishes {
-                            self.results = resultFound
-                            self.adapterResult?(resultFound)
-                        } else {
-                            self.results.removeAll()
-                            self.adapterResult?(self.results)
-                        }
-                    }
+                self.searchText(searctText, { (foundDishes, foundUsers) in
+                    self.prepareResult(withDishes: foundDishes, users: foundUsers)
                 })
             } else {
                 if let filter = self.cuisineFilter {
-                    DatabaseGateway.sharedInstance.getAllDish { (dishes) in
-                        DispatchQueue.main.async {
-                            if let filtered = self.filter(dishes: dishes, by: filter) {
-                                self.results = filtered
-                                self.adapterResult?(self.results)
-                            } else {
-                                self.results.removeAll()
-                                self.adapterResult?(self.results)
-                            }
+                    DatabaseGateway.sharedInstance.searchDish(withCuisine: filter, { (dishes) in
+                        if let filtered = self.filter(dishes: dishes, by: filter) {
+                            self.prepareResult(withDishes: filtered, users: nil)
                         }
-                    }
+                    })
                 } else {
-                    self.results.removeAll()
-                    self.adapterResult?(self.results)
+                    self.prepareResult(withDishes: nil, users: nil)
                 }
             }
         }
+    }
+    
+    func prepareResult(withDishes dishes: [MFDish]?, users: [MFUser]?) {
+        if let dishes = dishes,
+            dishes.count > 0 {
+            self.results.0 = dishes
+        } else {
+            self.results.0.removeAll()
+        }
+        
+        if let users = users,
+            users.count > 0 {
+            self.results.1 = users
+        } else {
+            self.results.1.removeAll()
+        }
+        
+        self.adapterResult?(self.results.0, self.results.1)
     }
     
     func prepare(with textField : UITextField) {
@@ -73,16 +77,8 @@ class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
         textField.resignFirstResponder()
         if let searchText = textField.text {
             if !searchText.isEmpty {
-                self.searchText(searchText, { (searchResult) in
-                    DispatchQueue.main.async {
-                        if let resultFound = searchResult {
-                            self.results = resultFound
-                            self.adapterResult?(resultFound)
-                        } else {
-                            self.results.removeAll()
-                            self.adapterResult?(self.results)
-                        }
-                    }
+                self.searchText(searchText, { (searchResult, resultUsers) in
+                    self.prepareResult(withDishes: searchResult, users: resultUsers)
                 })
             }
         }
@@ -108,23 +104,31 @@ class NearbyChefsSearchAdapter : NSObject, UITextFieldDelegate {
         return filtered
     }
     
-    func searchText(_ text : String!, _ completion : @escaping ([MFDish]?) -> Void ) {
+    func searchText(_ text : String!, _ completion : @escaping ([MFDish], [MFUser]) -> Void ) {
+        var foundDishes: [MFDish] = [MFDish]()
+        var foundUsers: [MFUser] = [MFUser]()
+        let group = DispatchGroup.init()
+        group.enter()
         DatabaseGateway.sharedInstance.searchDish(with: text) { (dishes) in
-            if let filtered = self.filter(dishes: dishes, by: text) {
-                if let filter = self.cuisineFilter {
-                    if let filteredCuisine = self.filter(dishes: filtered, by: filter) {
-                        completion(filteredCuisine)
-                    } else {
-                        completion(nil)
-                    }
+            if let filter = self.cuisineFilter {
+                if let filteredCuisine = self.filter(dishes: dishes, by: filter) {
+                    foundDishes = filteredCuisine
                 } else {
-                    completion(filtered)
                 }
             } else {
-                completion(nil)
+                foundDishes = dishes
             }
+            group.leave()
         }
         
+        group.enter()
+        DatabaseGateway.sharedInstance.searchUser(with: text) { (users) in
+            foundUsers = users
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            completion(foundDishes, foundUsers)
+        }
     }
-    
 }

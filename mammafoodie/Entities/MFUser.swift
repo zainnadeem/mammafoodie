@@ -66,6 +66,7 @@ class MFUser {
     var stripeChargesEnabled: Bool = false
     var stripePayoutsEnabled: Bool = false
     var stripeVerification: StripeVerification?
+    var searchTags: [String: String] = [String: String]()
     
     init() {
         self.id = ""
@@ -97,6 +98,10 @@ class MFUser {
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
         self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
+        
+        if let rawSearchTags = Dictionary["searchTags"] as? [String: String] {
+            self.searchTags = rawSearchTags
+        }
         
         if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
             var address: MFUserAddress = MFUserAddress()

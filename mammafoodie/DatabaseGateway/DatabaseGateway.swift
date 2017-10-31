@@ -360,6 +360,24 @@ extension DatabaseGateway {
 //MARK: - User
 extension DatabaseGateway {
     
+    func searchUser(with name: String, _ completion: @escaping ([MFUser]) -> Void) {
+        //        let ending = "\(title)\u{f8ff}"
+        FirebaseReference.users.classReference.queryOrdered(byChild: "searchTags").queryStarting(atValue: name).observeSingleEvent(of: .value, with: { (snapshot) in
+            var allUsers = [MFUser]()
+            if let users = snapshot.value as? FirebaseDictionary {
+                for (_, value) in users {
+                    if let dict = value as? FirebaseDictionary {
+                        let user = MFUser.init(from: dict)
+                        if user.searchTags.contains(where: { (key, value) -> Bool in return (value.range(of: name) != nil) }) {
+                            allUsers.append(user)
+                        }
+                    }
+                }
+            }
+            completion(allUsers)
+        })
+    }
+    
     func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
         let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
         FirebaseReference.users.classReference.child(model.id).updateChildValues(rawUsers) { (error, databaseReference) in
@@ -473,8 +491,26 @@ extension DatabaseGateway {
     }
     
     func searchDish(with title: String, _ completion: @escaping ([MFDish]) -> Void) {
-        let ending = "\(title)\u{f8ff}"
+//        let ending = "\(title)\u{f8ff}"
         FirebaseReference.dishes.classReference.queryOrdered(byChild: "searchTags").queryStarting(atValue: title).observeSingleEvent(of: .value, with: { (snapshot) in
+            var allDishes = [MFDish]()
+            if let dishes = snapshot.value as? FirebaseDictionary {
+                for (_, value) in dishes {
+                    if let dict = value as? FirebaseDictionary {
+                        let dish = MFDish.init(from: dict)
+                        if dish.searchTags.contains(where: { (key, value) -> Bool in return (value.range(of: title) != nil) }) {
+                            allDishes.append(dish)
+                        }
+                    }
+                }
+            }
+            completion(allDishes)
+        })
+    }
+    
+    func searchDish(withCuisine cuisine: MFCuisine, _ completion: @escaping ([MFDish]) -> Void) {
+        //        let ending = "\(title)\u{f8ff}"
+        FirebaseReference.dishes.classReference.queryOrdered(byChild: "cuisine/id").queryEqual(toValue: cuisine.id).observeSingleEvent(of: .value, with: { (snapshot) in
             var allDishes = [MFDish]()
             if let dishes = snapshot.value as? FirebaseDictionary {
                 for (_, value) in dishes {
@@ -724,7 +760,7 @@ extension DatabaseGateway {
             requestGroup.notify(queue: .main, execute: {
                 completion(savedDishes)
             })
-            completion(savedDishes)
+//            completion(savedDishes)
         })
         
     }
@@ -974,6 +1010,10 @@ extension DatabaseGateway {
             if let dishType: MFDishType = MFDishType(rawValue: rawDishType) {
                 dish.dishType = dishType
             }
+        }
+        
+        if let rawSearchTags = rawDish["searchTags"] as? [String: String] {
+            dish.searchTags = rawSearchTags
         }
         
         if let timeinterval = rawDish["endTimestamp"] as? TimeInterval {

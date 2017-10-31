@@ -32,7 +32,7 @@ class NearbyChefsWorker : NSObject {
             let lat = kCameraLatitude + extent * randomScale()
             let lng = kCameraLongitude + extent * randomScale()
             let location = CLLocationCoordinate2D.init(latitude:lat, longitude: lng)
-            markers.append(Marker.marker(with: "Marker + \(index)", at: location, with: -1))
+//            markers.append(Marker.marker(with: "Marker + \(index)", at: location, with: -1))
             
         }
         
@@ -47,7 +47,7 @@ class NearbyChefsWorker : NSObject {
             let lat = location.latitude + extent * randomScale()
             let lng = location.longitude + extent * randomScale()
             let location = CLLocationCoordinate2D.init(latitude:lat, longitude: lng)
-            markers.append(Marker.marker(with: "Marker + \(index)", at: location, with: -1))
+//            markers.append(Marker.marker(with: "Marker + \(index)", at: location, with: -1))
         }
         
         print("Preparing Markers")
@@ -70,10 +70,10 @@ class NearbyChefsWorker : NSObject {
         self.queryObserver =  self.geoQuery.observe(.keyEntered) { (key, markerLocation) in
             if let k = key {
                 if let markLoc = markerLocation {
-                    let mark = Marker.marker(with: k, at: markLoc.coordinate, with: -1)
-                    if !self.allMarkers.contains(mark) {
-                        self.allMarkers.append(mark)
-                    }
+//                    let mark = Marker.marker(with: k, at: markLoc.coordinate, with: -1)
+//                    if !self.allMarkers.contains(mark) {
+//                        self.allMarkers.append(mark)
+//                    }
                     self.completion?(self.allMarkers)
                 } else {
                     print("Found Geo Mark without location for Key: \(k)")

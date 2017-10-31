@@ -61,6 +61,7 @@ class MFDish {
     
     var location : CLLocationCoordinate2D?
     var address : String = ""
+    var searchTags: [String: String] = [String: String]()
     
     init() {
         self.id = ""
@@ -122,6 +123,10 @@ class MFDish {
             }
         } else {
             print("Dish media type not found: \(self.id)")
+        }
+        
+        if let rawSearchTags = dishDataDictionary["searchTags"] as? [String: String] {
+            self.searchTags = rawSearchTags
         }
         
         self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
