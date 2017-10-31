@@ -53,6 +53,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var mediaPicker : MediaPicker?
     var completion : GoCookCompletion?
     
+    var editAddressCallback: ((MFUserAddress)->Void)? = nil
+    
     let locationWorker = CurrentLocationWorker()
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -228,15 +230,24 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                                         
                                                         if let address = user.addressDetails {
                                                             dish.address = address.description
+                                                            DispatchQueue.main.async {
+                                                                self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                            }
                                                         } else {
                                                             let addressEditVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "EditAddressViewController") as! EditAddressViewController
                                                             addressEditVC.address = nil
                                                             addressEditVC.delegate = self
                                                             self.navigationController?.pushViewController(addressEditVC, animated: true)
-                                                        }
-                                                        
-                                                        DispatchQueue.main.async {
-                                                            self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                            self.editAddressCallback = { (address) in
+                                                                user.phone.phone = address.phone
+                                                                user.phone.countryCode = "+1"
+                                                                user.addressDetails = address
+                                                                DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+                                                                    DispatchQueue.main.async {
+                                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                                    }
+                                                                })
+                                                            }
                                                         }
                                                     } else {
                                                         self.showAlert("User not Found", message: "")
@@ -411,16 +422,9 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     
     func editedAddress(address:MFUserAddress?) {
         if let address = address {
-            self.user?.phone.phone = address.phone
-            self.user?.phone.countryCode = "+1"
-            self.user?.addressDetails = address
-            DatabaseGateway.sharedInstance.updateUserEntity(with: self.user!, { (error) in
-                for subview in self.addressStackView.subviews where subview.tag != -1 {
-                    self.addressStackView.removeArrangedSubview(subview)
-                    subview.removeFromSuperview()
-                }
-                self.getUserAddress()
-            })
+            self.editAddressCallback?(address)
+        } else {
+            self.showAlert("Error!", message: "Please enter valid address details")
         }
     }
     

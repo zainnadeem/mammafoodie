@@ -20,13 +20,8 @@
  class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
-<<<<<<< HEAD
     var activityIndicatorView: UIView?
 //    let gcmMessageIDKey = "gcm.message_id"
-=======
-    var activityIndicatorView:UIView?
-    //    let gcmMessageIDKey = "gcm.message_id"
->>>>>>> origin/BugFixes
     
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
