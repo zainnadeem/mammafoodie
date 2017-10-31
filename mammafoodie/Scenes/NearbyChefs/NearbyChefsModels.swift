@@ -4,7 +4,7 @@ import GoogleMaps
 
 class Marker : GMSMarker, GMUClusterItem {
     
-    var isSelected = false
+//    var isSelected = false
     var index : Int = -1
     var isDish: Bool = true
     var refrenceID : String = ""

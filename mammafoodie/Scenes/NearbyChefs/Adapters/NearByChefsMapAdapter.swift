@@ -40,6 +40,8 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
         for (_, dish) in self.searchResults.0.enumerated() {
             if let location = dish.location {
                 let marker = Marker.marker(withTitle: dish.name, atLocation: location, withIndex: indexCounter, withID: dish.id, isDish: true)
+                marker.title = dish.name
+                marker.snippet = dish.description
                 markers.append(marker)
                 indexCounter += indexCounter
             }
@@ -52,10 +54,14 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
                 let longi = Double(longiStr) {
                 let location = CLLocationCoordinate2D.init(latitude: latt, longitude: longi)
                 let marker = Marker.marker(withTitle: user.name, atLocation: location, withIndex: indexCounter, withID: user.id, isDish: false)
+                marker.title = user.name
+                marker.snippet = user.profileDescription
                 markers.append(marker)
             } else {
                 let location = CLLocationCoordinate2D.init(latitude: kCameraLatitude + extent * randomScale(), longitude: kCameraLongitude + extent * randomScale())
                 let marker = Marker.marker(withTitle: user.name, atLocation: location, withIndex: indexCounter, withID: user.id, isDish: false)
+                marker.title = user.name
+                marker.snippet = user.profileDescription
                 markers.append(marker)
             }
             indexCounter += indexCounter
@@ -87,10 +93,10 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             kCameraLatitude = currentLocation.coordinate.latitude
             kCameraLongitude = currentLocation.coordinate.longitude
             if self.allMarks.count > 0 {
-                let bounds = self.allMarks.reduce(GMSCoordinateBounds()) {
-                    $0.includingCoordinate($1.position)
-                }
-                self.mapView.animate(with: .fit(bounds, withPadding: 50.0))
+//                let bounds = self.allMarks.reduce(GMSCoordinateBounds()) {
+//                    $0.includingCoordinate($1.position)
+//                }
+//                self.mapView.animate(with: .fit(bounds, withPadding: 50.0))
             } else {
                 let camera = GMSCameraPosition.camera(withLatitude: kCameraLatitude, longitude: kCameraLongitude, zoom: 12)
                 self.mapView.animate(to: camera)
@@ -101,6 +107,8 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+//        mapView.selectedMarker = marker
+//        return false
         if let markerData = marker.userData as? Marker {
             if markerData.refrenceID != "" {
                 if markerData.isDish {
@@ -113,7 +121,7 @@ extension NearbyChefsViewController : GMUClusterManagerDelegate, GMSMapViewDeleg
             let camera = GMSCameraPosition.camera(withLatitude: marker.position.latitude, longitude: marker.position.longitude, zoom: 12)
             self.mapView.animate(to: camera)
         }
-        
+
         return true
     }
     
