@@ -48,6 +48,7 @@ class NotificationViewController: UIViewController {
         if let selectedRow: IndexPath = self.notificationTableView.indexPathForSelectedRow {
             self.notificationTableView.deselectRow(at: selectedRow, animated: true)
         }
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,15 +75,15 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notif = self.notifications[indexPath.row]
-        guard let dishId: String = notif.dishID else {
+        guard let redirectId: String = notif.redirectId else {
             print("redirectId is not available")
             return
         }
         let rawNotification: [String:Any] = [
-            "redirectId": dishId,
+            "redirectId": redirectId,
             "redirectPath": notif.redirectPath
         ]
-        AppDelegate.shared().handleNotification(rawNotification)
+        AppDelegate.shared().handleNotification(rawNotification, shouldTakeAction: true, topViewController: self, pushNewViewController: true)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

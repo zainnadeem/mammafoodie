@@ -74,7 +74,7 @@
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                             welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
-                                self.handleNotification(userInfo, showAlert: false)
+                                self.handleNotification(userInfo, shouldTakeAction: true, topViewController: nil, pushNewViewController: false)
                             }
                             self.stripeVerificationCheck()
                         } else {
@@ -322,7 +322,7 @@
         print("filePath: \(destinationPath)")
     }
     
-    func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
+    func handleNotification(_ userInfo: [AnyHashable : Any], shouldTakeAction: Bool = true, topViewController: UIViewController?, pushNewViewController: Bool) {
         if let _ = self.currentUser,
             let redirectID = userInfo["redirectId"] as? String,
             let redirectPathString = userInfo["redirectPath"] as? String,
@@ -339,20 +339,23 @@
                             type = .ownProfile
                         }
                     }
-                    self.showUserProfile(with: type, userid: redirectID)
+                    self.showUserProfile(with: type, userid: redirectID, topViewController: topViewController)
                     
                 case .dishes:
-                    self.openDish(with: redirectID)
+                    self.openDish(with: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
                     
                 case .dishComments:
                     let comps: [String] = redirectID.components(separatedBy: CharacterSet.init(charactersIn: "/"))
                     if comps.count == 3 {
                         let dishId: String = comps[1]
                         let commentId: String = comps[2]
-                        self.openDish(with: dishId, withCommentId: commentId)
+                        self.openDish(with: dishId, withCommentId: commentId, topViewController: topViewController, pushNewViewController: pushNewViewController)
                     } else {
                         print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
                     }
+                    
+                case .messages:
+                    self.openConversation(id: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
                     
                 default:
                     print("Redirect Path not Handled")
@@ -374,52 +377,73 @@
             //                    print("Notification text is wrong: \(userInfo)")
             //                }
             //            } else {
-            handleRequest()
+            
+            if shouldTakeAction {
+                handleRequest()
+            }
+            
             //            }
         } else {
             print("\nNot Handled notification: \(userInfo)\n")
         }
     }
     
-    func openDish(with id: String, withCommentId commentId: String? = nil) {
-        let story = UIStoryboard.init(name: "Main", bundle: nil)
-        
+    func openDish(with id: String, withCommentId commentId: String? = nil, topViewController: UIViewController?, pushNewViewController: Bool) {
         func open(dish: MFDish, commentId: String? = nil) {
-            if let _ = dish.endTimestamp {
-                //Vidup
-                if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
-                    currentVC.commentId = commentId
-                    currentVC.load(new: dish, completion: {
-                        
-                    })
-                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
-                    vidupDetailVC.commentId = commentId
-                    vidupDetailVC.DishId = dish.id
-                    vidupDetailVC.userId = dish.user.id
-                    vidupDetailVC.dish = dish
-                    present(vidupDetailVC)
+            let story = UIStoryboard.init(name: "Main", bundle: nil)
+            if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if dish.mediaType == .liveVideo && dish.endTimestamp == nil {
+                    if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
+                        currentVC.load(new: dish)
+                    } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
+                        liveVideoVC.liveVideo = dish
+                        self.checkAndPresent(vc: liveVideoVC, topViewController: topViewController, pushNewViewController: true)
+                    }
+                } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+                    if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
+                        currentVC.commentId = commentId
+                        currentVC.load(new: dish, completion: {
+                            
+                        })
+                    } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
+                        vidupDetailVC.commentId = commentId
+                        vidupDetailVC.DishId = dish.id
+                        vidupDetailVC.userId = dish.user.id
+                        vidupDetailVC.dish = dish
+                        self.checkAndPresent(vc: vidupDetailVC, topViewController: topViewController, pushNewViewController: true)
+                    }
                 }
             } else {
-                //Live Video
-                if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
-                    currentVC.load(new: dish)
-                } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
-                    liveVideoVC.liveVideo = dish
-                    present(liveVideoVC)
-                }
+                let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+                dishVC.dishID = dish.id
+                self.checkAndPresent(vc: dishVC, topViewController: topViewController, pushNewViewController: true)
             }
-        }
-        
-        func present(_ vc: UIViewController) {
-            let nav = UINavigationController.init(rootViewController: vc)
-            nav.setNavigationBarHidden(true, animated: false)
-            self.checkAndPresent(vc: nav)
         }
         
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
                 DispatchQueue.main.async {
                     open(dish: dish, commentId: commentId)
+                }
+            }
+        }
+    }
+    
+//    func present(_ vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
+//        let nav = MFNavigationController(rootViewController: vc)
+//        nav.setNavigationBarHidden(true, animated: false)
+//        self.checkAndPresent(vc: nav, topViewController: topViewController, pushNewViewController: pushNewViewController)
+//    }
+    
+    func openConversation(id: String, topViewController: UIViewController?, pushNewViewController: Bool) {
+        DatabaseGateway.sharedInstance.getConversation(with: id) { (conversation) in
+            if conversation != nil {
+                DispatchQueue.main.async {
+                    let storyboard: UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
+                    let destViewController: ChatViewController = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatViewController
+                    destViewController.conversation = conversation
+                    destViewController.currentUser = self.currentUser
+                    self.checkAndPresent(vc: destViewController, topViewController: topViewController, pushNewViewController: pushNewViewController)
                 }
             }
         }
@@ -441,30 +465,49 @@
         return self.window!.rootViewController!
     }
     
-    func showUserProfile(with type: ProfileType, userid: String) {
+    func showUserProfile(with type: ProfileType, userid: String, topViewController: UIViewController?) {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
         if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
             if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
                 //                profileVC.profileType = type
                 profileVC.userID = userid
-                self.checkAndPresent(vc: nav)
+                
+                if topViewController != nil {
+                    self.checkAndPresent(vc: profileVC, topViewController: topViewController, pushNewViewController: true)
+                } else {
+                    self.checkAndPresent(vc: nav, topViewController: nil, pushNewViewController: false)
+                }
             }
         }
     }
     
-    func checkAndPresent(vc: UIViewController) {
-        if let presented = self.window?.rootViewController?.presentedViewController {
-            if presented is UIAlertController {
-                print("Presenting Alert!!")
+    func checkAndPresent(vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
+        
+        if let topVC: UIViewController = topViewController {
+            if pushNewViewController == true {
+                topVC.navigationController?.pushViewController(vc, animated: true)
             } else {
-                presented.present(vc, animated: true, completion: {
-                    
+                let navController: MFNavigationController = MFNavigationController(rootViewController: vc)
+                navController.setNavigationBarHidden(true, animated: false)
+                topVC.navigationController?.present(navController, animated: true, completion: {
                 })
             }
         } else {
-            self.window?.rootViewController?.present(vc, animated: true, completion: {
-                
-            })
+            if let presented = self.window?.rootViewController?.presentedViewController {
+                if presented is UIAlertController {
+                    print("Presenting Alert!!")
+                } else {
+                    presented.present(vc, animated: true, completion: {
+                        
+                    })
+                }
+            } else {
+                let navController: MFNavigationController = MFNavigationController(rootViewController: vc)
+                navController.setNavigationBarHidden(true, animated: false)
+                self.window?.rootViewController?.present(navController, animated: true, completion: {
+                    
+                })
+            }
         }
     }
     
@@ -508,10 +551,9 @@
  extension AppDelegate : UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        self.handleNotification(notification.request.content.userInfo)
-        print("Will Present")
-        completionHandler([.alert,.sound])
+        //        self.handleNotification(notification.request.content.userInfo, shouldTakeAction: true)
+        //        print("Will Present")
+        //        completionHandler([.alert,.sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -519,7 +561,7 @@
         if response.notification.request.identifier == "remindUserToVerifyStripeAccount" {
             self.verifyStripe()
         } else {
-            self.handleNotification(response.notification.request.content.userInfo)
+            self.handleNotification(response.notification.request.content.userInfo, shouldTakeAction: true, topViewController: nil, pushNewViewController: false)
         }
         print("Did Receive")
         completionHandler()

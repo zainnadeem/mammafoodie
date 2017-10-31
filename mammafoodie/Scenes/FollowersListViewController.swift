@@ -17,6 +17,9 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     var userID:String!
     private var chatMode: Bool = false
     private var chatSelectionComplete: ChatSelectionCompletionBlock?
+    private var observerForFollowers: DatabaseConnectionObserver?
+    private var observerForFollowing: DatabaseConnectionObserver?
+    private var observerForCurrentUserFollowing: DatabaseConnectionObserver?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,21 +38,23 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         
         //        followersTblView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = false
-        
+    }
+    
+    func loadData() {
         let requestGroup = DispatchGroup.init()
         
         let worker = OtherUsersProfileWorker()
         if followers {
             self.title = "Followers"
             requestGroup.enter()
-            worker.getFollowersForUser(userID: userID, frequency: .realtime ,{ (users) in
+            self.observerForFollowers = worker.getFollowersForUser(userID: userID, frequency: .realtime ,{ (users) in
                 self.userList = users
                 requestGroup.leave()
             })
         } else {
             self.title = "Following"
             requestGroup.enter()
-            worker.getFollowingForUser(userID: userID, frequency: .realtime ,{ (users) in
+            self.observerForFollowing = worker.getFollowingForUser(userID: userID, frequency: .realtime ,{ (users) in
                 self.userList = users
                 requestGroup.leave()
             })
@@ -57,7 +62,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         
         if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
             requestGroup.enter()
-            worker.getFollowingForUser(userID: currentUser.id, { (users) in
+            self.observerForCurrentUserFollowing = worker.getFollowingForUser(userID: currentUser.id, { (users) in
                 self.currentUserFollowings = users
                 requestGroup.leave()
             })
@@ -69,6 +74,14 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.observerForFollowers?.stop()
+        self.observerForFollowing?.stop()
+        self.observerForCurrentUserFollowing?.stop()
     }
     
     override func didReceiveMemoryWarning() {

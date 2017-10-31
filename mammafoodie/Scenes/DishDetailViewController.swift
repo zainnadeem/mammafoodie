@@ -65,10 +65,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
     }
     
-    //TODO: - Need to be changed
-    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
-    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
-    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -189,8 +185,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             
         }
         
-        self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
-        self.output.checkFavouritesStatus(userId: data.user.id, dishId: data.id)
+        if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.output.checkLikeStatus(userId: currentUser.id, dishId: data.id)
+            self.output.checkFavouritesStatus(userId: currentUser.id, dishId: data.id)
+        }
         
         self.lv_contentView.isHidden = false
     }
@@ -234,7 +232,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.btnLikes.isSelected = response.status
     }
     
-    func getDistanceAway(){
+    func getDistanceAway() {
         
     }
     
@@ -277,12 +275,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             likesCount = Int(temp)
         }
         if btnLikes.isSelected == false {
-            btnLikes.isSelected = true
             likesCount+=1
         } else {
-            btnLikes.isSelected = false
             likesCount-=1
         }
+        btnLikes.isSelected = !btnLikes.isSelected
         self.lblNumberOfLikes.text = "\(Int(likesCount))"
         
         if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser {
@@ -341,35 +338,17 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                 let quantity: Int = Int(alertController.textFields?.first?.text ?? "0") ?? 0
                 if let dish = self.dishForView?.dish {
                     if quantity > 0 {
-                        worker.requestDish(dish: dish, quantity: quantity, completion: { (success, errorMessage) in
-                            self.hideActivityIndicator()
-                            if let errorMessage = errorMessage {
-                                self.showAlert("Error", message: errorMessage)
-                            } else {
-                                // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
-                                if let user2Id: String = self.dishForView?.dish?.user.id {
-                                    _ = DatabaseGateway.sharedInstance.getUserWith(userID: user2Id, { (dishUser) in
-                                        if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
-                                            let dishUser = dishUser {
-                                            DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: dishUser, { (success, conversationId) in
-                                                if success {
-                                                    if let conversationId = conversationId {
-                                                        self.sendDishRequestMessage(in: conversationId, quantity: quantity, dishName: dish.name, dish: dish)
-                                                    } else {
-                                                        self.showAlert(message: "Request failed. Please try again.")
-                                                    }
-                                                } else {
-                                                    self.showAlert(message: "Request failed. Please try again.")
-                                                }
-                                            })
-                                        } else {
-                                            self.showAlert(message: "Request failed. Please try again.")
-                                        }
-                                    })
+                        self.createConversation({ (conversationId) in
+                            self.sendDishRequestMessage(in: conversationId, quantity: quantity, dishName: dish.name, dish: dish)
+                            
+                            worker.requestDish(dish: dish, quantity: quantity, conversationId: conversationId, completion: { (success, errorMessage) in
+                                self.hideActivityIndicator()
+                                if let errorMessage = errorMessage {
+                                    self.showAlert("Error", message: errorMessage)
                                 } else {
-                                    self.showAlert(message: "Request failed. Please try again.")
+                                    // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
                                 }
-                            }
+                            })
                         })
                     }
                 } else {
@@ -384,6 +363,31 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             //            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
             //
             //            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func createConversation(_ completion: @escaping ((_ conversationId: String)->Void)) {
+        if let user2Id: String = self.dishForView?.dish?.user.id {
+            _ = DatabaseGateway.sharedInstance.getUserWith(userID: user2Id, { (dishUser) in
+                if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
+                    let dishUser = dishUser {
+                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: dishUser, { (success, conversationId) in
+                        if success {
+                            if let conversationId = conversationId {
+                                completion(conversationId)
+                            } else {
+                                self.showAlert(message: "Request failed. Please try again.")
+                            }
+                        } else {
+                            self.showAlert(message: "Request failed. Please try again.")
+                        }
+                    })
+                } else {
+                    self.showAlert(message: "Request failed. Please try again.")
+                }
+            })
+        } else {
+            self.showAlert(message: "Request failed. Please try again.")
         }
     }
     
@@ -427,7 +431,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        if self.navigationController?.viewControllers.first == self {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (Double?) -> Void) {

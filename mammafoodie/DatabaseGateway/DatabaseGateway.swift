@@ -1329,7 +1329,7 @@ extension DatabaseGateway {
 extension DatabaseGateway{
     
     func getNotificationsForUser(userID:String, completion:@escaping ([MFNotification]) -> Void) {
-        FirebaseReference.notifications.classReference.child(userID).observeSingleEvent(of: .value, with: { (dataSnapshot) in
+        FirebaseReference.notifications.classReference.child(userID).queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: { (dataSnapshot) in
             var notifications = [MFNotification]()
             guard let notificationData = dataSnapshot.value as? [String: [String: AnyObject]] else {
                 completion(notifications)
@@ -1339,6 +1339,20 @@ extension DatabaseGateway{
             for (_, notDict) in notificationData {
                 notifications.append(MFNotification(from: notDict))
             }
+            
+            notifications.sort(by: { (notification1, notification2) -> Bool in
+                if notification1.date == nil {
+                    return false
+                }
+                if notification2.date == nil {
+                    return false
+                }
+                if notification1.date!.compare(notification2.date!) == ComparisonResult.orderedDescending {
+                    return true
+                }
+                return false
+            })
+            
             completion(notifications)
         })
     }

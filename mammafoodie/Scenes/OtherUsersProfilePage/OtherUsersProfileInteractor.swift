@@ -136,7 +136,7 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         
         guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase else {return}
         
-        worker.toggleFollow(targetUser: userID, currentUser: currentUser.uid, targetUserName: self.user!.name, currentUserName: "Current username", shouldFollow: shouldFollow) { (success) in
+        worker.toggleFollow(targetUser: userID, currentUser: currentUser.uid, targetUserName: self.user!.name, currentUserName: currentUser.displayName ?? "", shouldFollow: shouldFollow) { (success) in
             
             if success {
                 print("follow toggled")

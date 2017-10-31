@@ -186,7 +186,11 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     }
     
     @IBAction func onBackTap(_ sender: UIBarButtonItem) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        if self.navigationController?.viewControllers.first == self {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func openDishDetails(_ dish: MFDish) {
