@@ -289,6 +289,7 @@ extension DatabaseGateway {
         if key2 == key3 {
             print("Requesting dish from his/herself")
             completion(false, "Requesting dish from his/herself")
+            return
         }
         
         let childUpdates = [
@@ -772,20 +773,17 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        
-        print(userId)
-        print(dishId)
-        
+        print("User: \(userId)")
+        print("Dish: \(dishId)")
         FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value ?? "")
                 completion(nil)
                 return
             }
-            
             if userData[userId] != nil {
                 completion(true)
-            }else{
+            } else {
                 completion(false)
             }
             
@@ -797,7 +795,6 @@ extension DatabaseGateway {
 extension  DatabaseGateway {
     
     func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFDish?)->Void ){
-        
         FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
@@ -817,7 +814,7 @@ extension  DatabaseGateway {
 extension DatabaseGateway {
     
     func getNewsFeed(by userId: String, _ completion: @escaping ((_ newsFeeds: [MFNewsFeed])->Void)) {
-        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        FirebaseReference.newsFeedAll.classReference.queryOrdered(byChild: "actionUserID").queryEqual(toValue: userId).observeSingleEvent(of: .value, with: { (snapshot) in
             var newsFeedList: [MFNewsFeed] = []
             if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
                 for key in rawNewsFeedList.keys {
@@ -830,6 +827,20 @@ extension DatabaseGateway {
                 completion(newsFeedList)
             }
         })
+
+//        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+//            var newsFeedList: [MFNewsFeed] = []
+//            if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
+//                for key in rawNewsFeedList.keys {
+//                    if let rawNewsFeed: [String:AnyObject] = rawNewsFeedList[key] as? [String:AnyObject] {
+//                        newsFeedList.append(self.createNewsFeedModel(from: rawNewsFeed))
+//                    }
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                completion(newsFeedList)
+//            }
+//        })
     }
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {

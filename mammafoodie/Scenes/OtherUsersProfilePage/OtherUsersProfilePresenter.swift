@@ -4,13 +4,14 @@ protocol OtherUsersProfilePresenterInput {
     func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
+    func openUserprofile(id: String)
 }
 
 protocol OtherUsersProfilePresenterOutput: class {
     func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
-    
+    func openUserprofile(id: String)
 }
 
 class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
@@ -21,14 +22,18 @@ class OtherUsersProfilePresenter: OtherUsersProfilePresenterInput {
     
     //MARK: - Input
     func openDishPageWith(dishID:String){
-        output.openDishPageWith(dishID: dishID)
+        self.output.openDishPageWith(dishID: dishID)
     }
     
     func openFollowers(followers: Bool, userList:[MFUser]) {
-        output.openFollowers(followers: followers, userList:userList)
+        self.output.openFollowers(followers: followers, userList:userList)
     }
     
     func openFavouriteDishes(){
-        output.openFavouriteDishes()
+        self.output.openFavouriteDishes()
+    }
+    
+    func openUserprofile(id: String) {
+        self.output.openUserprofile(id: id)
     }
 }

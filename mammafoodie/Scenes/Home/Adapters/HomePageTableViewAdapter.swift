@@ -9,7 +9,11 @@ enum HomePageTableViewMode {
 class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
-    var mode: HomePageTableViewMode = .activity
+    var mode: HomePageTableViewMode = .activity {
+        didSet {
+            
+        }
+    }
     var sectionHeaderView: UIView?
     var activity: [MFNewsFeed] = []
     var menu: [MFDish] = []
@@ -17,6 +21,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     var onOrderNow : ((MFDish) -> Void)?
     var onBookmark : ((MFDish) -> Void)?
     var onOptions : ((MFDish) -> Void)?
+    var onAvtivityOptions : ((MFNewsFeed) -> Void)?
     
     private var openURL: ((String, String) -> Void)?
     private var currentUser: MFUser!
@@ -24,6 +29,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func setup(with tableView: UITableView, user: MFUser, _ completion: ((String, String) -> Void)?) {
         self.currentUser = user
         self.tableView = tableView
+        self.tableView.allowsSelection = true
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,10 +49,19 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func loadActivities() {
+        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
+                self.activity = feeds
+                self.activity.sort(by: { $0.createdAt > $1.createdAt })
+                self.tableView.reloadData()
+            }
+        }
+        return;
         DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
             DispatchQueue.main.async {
                 self.activity = feeds
                 self.tableView.reloadData()
+                print("Activity loaded")
             }
         }
     }
@@ -63,6 +78,18 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func showOptions(for indexPath: IndexPath) {
         if indexPath.row < self.menu.count {
             self.onOptions?(self.menu[indexPath.row])
+        }
+    }
+    
+    func showActivitiesOptions(for indexPath: IndexPath) {
+        if indexPath.row < self.menu.count {
+            self.onOptions?(self.menu[indexPath.row])
+        }
+    }
+    
+    func likeDish(_ id: String) {
+        DatabaseGateway.sharedInstance.checkLikedDishes(userId: "String", dishId: "") { (like) in
+            
         }
     }
     
@@ -120,6 +147,9 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         if self.mode == .menu {
             let dish = self.menu[indexPath.item]
             self.openURL?(FirebaseReference.dishes.rawValue, dish.id)
+        } else {
+            let newsFeed = self.activity[indexPath.item]
+            self.openURL?(newsFeed.activity.path.rawValue, newsFeed.redirectID)
         }
     }
     
@@ -150,6 +180,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.sectionHeaderView
     }
+
 }
 
 extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {

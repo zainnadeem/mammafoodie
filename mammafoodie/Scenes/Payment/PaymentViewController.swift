@@ -41,6 +41,9 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var viewAddCard: UIView!
     @IBOutlet weak var btnAddCard: UIButton!
     
+    @IBOutlet weak var conBottomLabelDeliveryCharge: NSLayoutConstraint!
+    @IBOutlet weak var conBottomTextPickupTime: NSLayoutConstraint!
+    
     var shippingOption: ShippingOption?
     var deliveryMethod: MFDeliveryOption?
     
@@ -66,6 +69,7 @@ class PaymentViewController: UIViewController {
         
         let backButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "BackBtn"), style: .plain, target: self, action: #selector(backButtonTapped(_:)))
         self.navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.navigationBar.tintColor = .darkGray
         
         //        if self.dish == nil {
         //            self.navigationController?.popViewController(animated: true)
@@ -110,25 +114,9 @@ class PaymentViewController: UIViewController {
         self.txtPickupTime.delegate = self
         self.pickerPickupTime.maximumDate = Date.init().dateFor(.tomorrow)
         self.getSavedCards()
-        //        self.updateUI()
+        self.updateUI()
         
         self.txtPhoneNumber.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.phone.phone ?? ""
-    }
-    
-    @IBAction func backButtonTapped(_ sender: UIBarButtonItem?) {
-        if let viewControllers = self.navigationController?.viewControllers {
-            if viewControllers.count > 0 {
-                if viewControllers[0] is PaymentViewController {
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                self.dismiss(animated: true, completion: nil)
-            }
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
     }
     
     func updateDeliveryCharge() {
@@ -217,7 +205,6 @@ class PaymentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.tintColor = .darkGray
     }
     
     override func didReceiveMemoryWarning() {
@@ -248,11 +235,15 @@ class PaymentViewController: UIViewController {
     //    }
     
     func updateUI() {
-        if let url = self.dish.coverPicURL {
+        if let url = self.dish.mediaURL {
             self.imgViewDish.sd_setImage(with: url)
+        } else {
+            if let url = URL.init(string: self.dish.getThumbPath()) {
+                self.imgViewDish.sd_setImage(with: url)
+            }
         }
         self.lblDishName.text = self.dish.name
-        self.lblSlotsCount.text = "\(self.slotsToBePurchased)"
+        self.lblSlotsCount.text = "Slots: \(self.slotsToBePurchased)"
     }
     
     func getSavedCards() {
@@ -280,186 +271,6 @@ class PaymentViewController: UIViewController {
     
     func setPickupTime() {
         self.txtPickupTime.text = self.pickerPickupTime.date.toString(format: .custom("hh:mm aa"))
-    }
-    
-    @IBAction func onAddCardTap(_ sender: UIButton) {
-        self.showAddCardView(false)
-        guard let cardNumber: String = self.addCartTextField.cardNumber else {
-            return
-        }
-        
-        guard let cvc = self.addCartTextField.cvc else {
-            return
-        }
-        
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        StripeGateway.shared.addPaymentMethod(number: cardNumber,expMonth: self.addCartTextField.expirationMonth, expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
-            DispatchQueue.main.async {
-                self.addCartTextField.clear()
-                hud.hide(animated: true)
-                if let error = error {
-                    self.showAlert(error.localizedDescription, message: "")
-                } else {
-                    self.showAlert("Success!", message: "Card saved.")
-                    self.getSavedCards()
-                }
-            }
-        }
-    }
-    
-    @IBAction func pickupAddress(_ sender: Any) {
-        
-        self.shippingOption = ShippingOption.pickup
-        
-        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
-        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
-        self.view.layoutIfNeeded()
-        
-        self.deliveryMethod = nil
-        self.lblDeliveryCharge.isHidden = true
-        self.pickButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        self.deliveryButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
-        self.addressView.isHidden = false
-        self.btnConfirm.isHidden = false
-        self.deliveryText.text! = "Chefs Address"
-        self.delveryaddTextField.text = self.dish.address
-        self.choosedeliveryText.text! = "Pick up time"
-        self.delveryaddTextField.layer.backgroundColor = UIColor.clear.cgColor
-        self.delveryaddTextField.isEnabled = false
-        self.txtPickupTime.isHidden = false
-        self.uberButton.isHidden = true
-        self.postmateButton.isHidden = true
-        self.txtPhoneNumber.isHidden = true
-        self.lblPhoneNumber.isHidden = true
-    }
-    
-    @IBAction func deliveryAddress(_ sender: Any) {
-        
-        self.shippingOption = ShippingOption.delivery
-        
-        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToDeliveryAddress])
-        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToPhoneNumber])
-        self.view.layoutIfNeeded()
-        
-        self.lblPhoneNumber.isHidden = false
-        self.txtPhoneNumber.isHidden = false
-        self.lblDeliveryCharge.isHidden = false
-        self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
-        self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        self.txtPickupTime.isHidden = true
-        self.uberButton.isHidden = false
-        self.postmateButton.isHidden = false
-        self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails?.description ?? ""
-        self.addressView.isHidden = false
-        self.btnConfirm.isHidden = false
-        self.deliveryText.text! = "Delivery Address"
-        self.choosedeliveryText.text! = "Choose Delivery Address"
-        self.delveryaddTextField.isUserInteractionEnabled = true
-        self.delveryaddTextField.layer.cornerRadius = 5
-        self.delveryaddTextField.layer.borderColor = UIColor.clear.cgColor
-        self.delveryaddTextField.layer.backgroundColor = #colorLiteral(red: 0.9782952666, green: 0.9755677581, blue: 0.9876046777, alpha: 1).cgColor
-    }
-    
-    @IBAction func uberButnActn(_ sender: Any) {
-        self.deliveryMethod = MFDeliveryOption.uberEATS
-        self.updateDeliveryCharge()
-        self.uberButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        self.postmateButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
-    }
-    
-    @IBAction func postButnActn(_ sender: Any) {
-        self.deliveryMethod = MFDeliveryOption.postmates
-        self.updateDeliveryCharge()
-        self.postmateButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
-        self.uberButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
-    }
-    
-    @IBAction func onAddAnotherAddress(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "segueShowEditAddressVC", sender: self)
-    }
-    
-    @IBAction func onCancelTap(_ sender: UIButton) {
-        self.showAddCardView(false)
-    }
-    
-    @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
-        guard self.txtPhoneNumber.text != nil else {
-            self.showAlert("Error", message: "Please add your phone number confirming purchase.")
-            return
-        }
-        
-        if self.shippingOption == nil {
-            self.showAlert("Error", message: "Please select shipping option. Pickup/Delivery")
-            return
-        }
-        
-        if self.shippingOption == ShippingOption.delivery {
-            if self.deliveryMethod != MFDeliveryOption.postmates {
-                if self.deliveryMethod != MFDeliveryOption.uberEATS {
-                    self.showAlert("Error", message: "Please select a delivery provider. UberEATS/Postmates")
-                    return
-                }
-            }
-            
-            if self.deliveryMethod == MFDeliveryOption.uberEATS && self.uberQuoteId == nil {
-                self.showAlert("Error", message: "Please try selecting UberEATS again.")
-                return
-            }
-            
-            if self.deliveryMethod == MFDeliveryOption.postmates && self.postmatesQuoteId == nil {
-                self.showAlert("Error", message: "Please try selecting Postmates again.")
-                return
-            }
-        }
-        
-        if let selectedIndex = self.selectedCardIndex,
-            let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-        
-            let card = self.cards[selectedIndex.item]
-            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            
-            let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
-            
-            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.stripeID, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, dishName: self.dish.name, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
-                DispatchQueue.main.async {
-                    hud.hide(animated: true)
-                    if let error = error {
-                        self.showAlert("Error!", message: error.localizedDescription, actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
-                            DispatchQueue.main.async {
-                                self.backButtonTapped(nil)
-                            }
-                        })
-                    } else {
-                        // Charge was successful. Create a order object here
-                        
-                        if self.deliveryMethod == MFDeliveryOption.uberEATS {
-                            
-                            self.uberWorker!.updatePurchasingUserPhoneNumber(self.txtPhoneNumber.text!)
-                            
-                            // Create uber delivery
-                            self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
-                                if let deliveryId = deliveryId {
-                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
-                                } else {
-                                    // Failed
-                                }
-                            })
-                        } else if self.deliveryMethod == MFDeliveryOption.postmates {
-                            self.createPostmatesDelivery({ (deliveryId) in
-                                if let deliveryId = deliveryId {
-                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
-                                }
-                            })
-                        } else {
-                            // Pickup
-                            self.addOrderToFirebase(deliveryId: nil, chargeId: chargeId)
-                        }
-                    }
-                }
-            })
-        } else {
-            self.showAlert("No Card Found!", message: "Please add credit card before confirming purchase.")
-        }
     }
     
     func addOrderToFirebase(deliveryId: String?, chargeId: String) {
@@ -547,6 +358,201 @@ class PaymentViewController: UIViewController {
         })
     }
     
+    
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem?) {
+        if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 0 {
+                if viewControllers[0] is PaymentViewController {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func onAddCardTap(_ sender: UIButton) {
+        self.showAddCardView(false)
+        guard let cardNumber: String = self.addCartTextField.cardNumber else {
+            return
+        }
+        
+        guard let cvc = self.addCartTextField.cvc else {
+            return
+        }
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        StripeGateway.shared.addPaymentMethod(number: cardNumber,expMonth: self.addCartTextField.expirationMonth, expYear: self.addCartTextField.expirationYear, cvc: cvc) { (cardId, error) in
+            DispatchQueue.main.async {
+                self.addCartTextField.clear()
+                hud.hide(animated: true)
+                if let error = error {
+                    self.showAlert(error.localizedDescription, message: "")
+                } else {
+                    self.showAlert("Success!", message: "Card saved.")
+                    self.getSavedCards()
+                }
+            }
+        }
+    }
+    
+    @IBAction func pickupAddress(_ sender: Any) {
+        self.shippingOption = ShippingOption.pickup
+        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToPhoneNumber, self.conBottomLabelDeliveryCharge])
+        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToDeliveryAddress, self.conBottomTextPickupTime])
+        self.view.layoutIfNeeded()
+        
+        self.deliveryMethod = nil
+        self.lblDeliveryCharge.isHidden = true
+        self.pickButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
+        self.deliveryButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
+        self.addressView.isHidden = false
+        self.btnConfirm.isHidden = false
+        self.deliveryText.text! = "Chefs Address"
+        self.delveryaddTextField.text = self.dish.address
+        self.choosedeliveryText.text! = "Pick up time"
+        self.delveryaddTextField.layer.backgroundColor = UIColor.clear.cgColor
+        self.delveryaddTextField.isEnabled = false
+        self.txtPickupTime.isHidden = false
+        self.uberButton.isHidden = true
+        self.postmateButton.isHidden = true
+        self.txtPhoneNumber.isHidden = true
+        self.lblPhoneNumber.isHidden = true
+        self.btnAddAnotherAddress.isHidden = true
+    }
+    
+    @IBAction func deliveryAddress(_ sender: Any) {
+        self.shippingOption = ShippingOption.delivery
+        NSLayoutConstraint.deactivate([self.conTopLblChooseDeliveryTypeToDeliveryAddress, self.conBottomTextPickupTime])
+        NSLayoutConstraint.activate([self.conTopLblChooseDeliveryTypeToPhoneNumber, self.conBottomLabelDeliveryCharge])
+        self.view.layoutIfNeeded()
+        
+        self.lblPhoneNumber.isHidden = false
+        self.txtPhoneNumber.isHidden = false
+        self.lblDeliveryCharge.isHidden = false
+        self.pickButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
+        self.deliveryButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
+        self.txtPickupTime.isHidden = true
+        self.uberButton.isHidden = false
+        self.postmateButton.isHidden = false
+        self.delveryaddTextField.text = DatabaseGateway.sharedInstance.getLoggedInUser()?.addressDetails?.description ?? ""
+        self.addressView.isHidden = false
+        self.btnConfirm.isHidden = false
+        self.deliveryText.text! = "Delivery Address"
+        self.choosedeliveryText.text! = "Choose Delivery Address"
+        self.delveryaddTextField.isUserInteractionEnabled = true
+        self.delveryaddTextField.layer.cornerRadius = 5
+        self.delveryaddTextField.layer.borderColor = UIColor.clear.cgColor
+        self.delveryaddTextField.layer.backgroundColor = #colorLiteral(red: 0.9782952666, green: 0.9755677581, blue: 0.9876046777, alpha: 1).cgColor
+        self.btnAddAnotherAddress.isHidden = false
+    }
+    
+    @IBAction func uberButnActn(_ sender: Any) {
+        self.deliveryMethod = MFDeliveryOption.uberEATS
+        self.updateDeliveryCharge()
+        self.uberButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
+        self.postmateButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
+    }
+    
+    @IBAction func postButnActn(_ sender: Any) {
+        self.deliveryMethod = MFDeliveryOption.postmates
+        self.updateDeliveryCharge()
+        self.postmateButton.layer.borderColor =  #colorLiteral(red: 1, green: 0.4620534182, blue: 0.1706305146, alpha: 1).cgColor
+        self.uberButton.layer.borderColor =  #colorLiteral(red: 0.4588235294, green: 0.5333333333, blue: 0.6196078431, alpha: 1).cgColor
+    }
+    
+    @IBAction func onAddAnotherAddress(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segueShowEditAddressVC", sender: self)
+    }
+    
+    @IBAction func onCancelTap(_ sender: UIButton) {
+        self.showAddCardView(false)
+    }
+    
+    @IBAction func onConfirmPurchaseTap(_ sender: UIButton) {
+        guard self.txtPhoneNumber.text != nil else {
+            self.showAlert("Error", message: "Please add your phone number confirming purchase.")
+            return
+        }
+        
+        if self.shippingOption == nil {
+            self.showAlert("Error", message: "Please select shipping option. Pickup/Delivery")
+            return
+        }
+        
+        if self.shippingOption == ShippingOption.delivery {
+            if self.deliveryMethod != MFDeliveryOption.postmates {
+                if self.deliveryMethod != MFDeliveryOption.uberEATS {
+                    self.showAlert("Error", message: "Please select a delivery provider. UberEATS/Postmates")
+                    return
+                }
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.uberEATS && self.uberQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting UberEATS again.")
+                return
+            }
+            
+            if self.deliveryMethod == MFDeliveryOption.postmates && self.postmatesQuoteId == nil {
+                self.showAlert("Error", message: "Please try selecting Postmates again.")
+                return
+            }
+        }
+        
+        if let selectedIndex = self.selectedCardIndex,
+            let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            
+            let card = self.cards[selectedIndex.item]
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+            let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
+            
+            StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.stripeID, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, dishName: self.dish.name, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
+                DispatchQueue.main.async {
+                    hud.hide(animated: true)
+                    if let error = error {
+                        self.showAlert("Error!", message: error.localizedDescription, actionTitle: "OK", actionStyle: .default, actionhandler: { (action) in
+                            DispatchQueue.main.async {
+                                self.backButtonTapped(nil)
+                            }
+                        })
+                    } else {
+                        // Charge was successful. Create a order object here
+                        
+                        if self.deliveryMethod == MFDeliveryOption.uberEATS {
+                            
+                            self.uberWorker!.updatePurchasingUserPhoneNumber(self.txtPhoneNumber.text!)
+                            
+                            // Create uber delivery
+                            self.uberWorker!.createDelivery(with: self.uberQuoteId!, completion: { deliveryId in
+                                if let deliveryId = deliveryId {
+                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
+                                } else {
+                                    // Failed
+                                }
+                            })
+                        } else if self.deliveryMethod == MFDeliveryOption.postmates {
+                            self.createPostmatesDelivery({ (deliveryId) in
+                                if let deliveryId = deliveryId {
+                                    self.addOrderToFirebase(deliveryId: deliveryId, chargeId: chargeId)
+                                }
+                            })
+                        } else {
+                            // Pickup
+                            self.addOrderToFirebase(deliveryId: nil, chargeId: chargeId)
+                        }
+                    }
+                }
+            })
+        } else {
+            self.showAlert("No Card Found!", message: "Please add credit card before confirming purchase.")
+        }
+    }
+  
     @IBAction func onPickupTimeChange(_ sender: UIDatePicker) {
         self.setPickupTime()
     }

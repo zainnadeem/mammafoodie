@@ -46,6 +46,7 @@ class ChatListViewController: UIViewController, ChatListViewControllerInput,Chat
         let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        self.navigationController?.navigationBar.tintColor = .darkGray
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
     }

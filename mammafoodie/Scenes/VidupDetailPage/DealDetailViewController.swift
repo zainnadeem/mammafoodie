@@ -108,11 +108,12 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
                 AnalyticsParameterContentType: contentType as NSObject
                 ])
         }
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         if self.dish != nil  {
             self.output.startPlayback()
         }

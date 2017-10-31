@@ -12,17 +12,17 @@ class CommentsViewController: UIViewController {
 
     @IBOutlet weak var commentsView: CommentsView!
     
-    var dish:MFDish?
+    var dish: MFDish?
     
-    var user:MFUser?
+    var user: MFUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        commentsView.dish = self.dish
-        commentsView.user = self.user
-        commentsView.btnEmoji.isHidden = true
-        commentsView.btnLike.isHidden = true
+        self.commentsView.dish = self.dish
+        self.commentsView.user = self.user
+        self.commentsView.btnEmoji.isHidden = true
+        self.commentsView.btnLike.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,12 +30,8 @@ class CommentsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     @IBAction func dismissTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-   
 
 }
