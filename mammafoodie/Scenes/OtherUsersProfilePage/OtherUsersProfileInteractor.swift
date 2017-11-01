@@ -13,6 +13,7 @@ protocol OtherUsersProfileInteractorOutput {
     func openDishPageWith(dishID:String)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
+    func openUserprofile(id: String)
 }
 
 ///Defined in OtherUsersProfileInteractor
@@ -110,8 +111,6 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
                 self.dishCollectionViewAdapter.cookedDishData = cookedDishes
             })
             
-            
-            
         case .bought:
             self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
@@ -119,46 +118,40 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
                 
             })
             
-            
         case .activity:
             self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .activity
                 self.dishCollectionViewAdapter.activityData = newsFeedList
             })
-            
         }
-        
         self.hideActivityIndicator()
         
     }
     
-    func toggleFollow(userID:String, shouldFollow:Bool) {
-        
-        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUserFirebase else {return}
-        
-        worker.toggleFollow(targetUser: userID, currentUser: currentUser.uid, targetUserName: self.user!.name, currentUserName: currentUser.displayName ?? "", shouldFollow: shouldFollow) { (success) in
-            
+    func toggleFollow(userID: String, shouldFollow: Bool) {
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {return}
+        worker.toggleFollow(targetUser: userID, currentUser: currentUser.id, targetUserName: self.user!.name, currentUserName: currentUser.name , shouldFollow: shouldFollow) { (success) in
             if success {
                 print("follow toggled")
             }
-            
         }
-        
     }
     
     //MARK: - DishesCollectionViewAdapterDelegate
     func openDishPageWith(dishID:String) {
-        
-        output.openDishPageWith(dishID: dishID)
-        
+        self.output.openDishPageWith(dishID: dishID)
     }
     
     func openFavouriteDishes() {
-        output.openFavouriteDishes()
+        self.output.openFavouriteDishes()
+    }
+    
+    func openUserprofile(id: String) {
+        self.output.openUserprofile(id: id)
     }
     
     func openFollowers(followers:Bool, userList:[MFUser]) {
-        output.openFollowers(followers: followers, userList:userList)
+        self.output.openFollowers(followers: followers, userList:userList)
     }
     
 }

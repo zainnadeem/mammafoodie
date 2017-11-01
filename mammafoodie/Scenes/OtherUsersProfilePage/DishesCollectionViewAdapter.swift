@@ -10,14 +10,14 @@ import UIKit
 import DZNEmptyDataSet
 
 protocol DishesCollectionViewAdapterDelegate {
-    
     func openDishPageWith(dishID:String)
     func loadDishCollectionViewForIndex(_ index:SelectedIndexForProfile)
     func openFollowers(followers:Bool, userList:[MFUser])
     func openFavouriteDishes()
+    func openUserprofile(id: String)
 }
 
-class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class DishesCollectionViewAdapter: NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView? {
         didSet {
@@ -88,7 +88,14 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
         }
     }
     
-    var openURL: ((String, String) -> Void)?
+    func openURL(path: String, id: String) {
+        if path == FirebaseReference.dishes.rawValue {
+            self.delegate?.openDishPageWith(dishID: id)
+        } else if path == FirebaseReference.users.rawValue {
+            self.delegate?.openUserprofile(id: id)
+        }
+    }
+//    var openURL: ((String, String) -> Void)?
     
     func setUpCollectionView() {
         
@@ -147,6 +154,9 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
             let activity = self.activityData[indexPath.item]
             if let activityCell = activityCell {
                 activityCell.setup(with: activity)
+                activityCell.openURL = { (path, id) in
+                    self.openURL(path: path, id: id)
+                }
             }
             cell = activityCell
             
@@ -156,16 +166,12 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         var reusableView = UICollectionReusableView()
-        
         if kind == UICollectionElementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "userHeaderView", for: indexPath) as! UserProfileCollectionViewHeader
-            
             view.delegate = self.delegate
             view.profileType = self.profileType
-            
-            view.setUp(
+            view.setUp (
                 userData,
                 followersCount: "\(followers.count)",
                 followingCount: "\(following.count)",
@@ -175,14 +181,12 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
                 followers: self.followers,
                 following:self.following,
                 savedDishCount: savedDishDataCount,
-                activityCount: activityCount)
-            
+                activityCount: activityCount )
             reusableView = view
             reusableView.sizeToFit()
         } else {
             assert(false, "Unexpected element kind")
         }
-        
         return reusableView
         
     }
@@ -209,7 +213,7 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
                                                                         withHorizontalFittingPriority: UILayoutPriorityDefaultHigh,
                                                                         verticalFittingPriority: UILayoutPriorityDefaultHigh)
                 cellSize.height = size.height
-                print("Size: \(size.height)")
+//                print("Size: \(size.height)")
             }
             cellSize.width = collectionView.frame.size.width
             
@@ -230,16 +234,18 @@ class DishesCollectionViewAdapter:NSObject,UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedIndexForProfile == .cooked {
+        if self.selectedIndexForProfile == .cooked {
             let dish = self.cookedDishData[indexPath.item]
             self.delegate?.openDishPageWith(dishID: dish.id)
             
-        } else if selectedIndexForProfile == .bought {
+        } else if self.selectedIndexForProfile == .bought {
             let dish = self.boughtDishData[indexPath.item]
             self.delegate?.openDishPageWith(dishID: dish.id)
             
+        } else if self.selectedIndexForProfile == .activity {
+            let newsFeed = self.activityData[indexPath.item]
+            self.openURL(path: newsFeed.activity.path.rawValue, id: newsFeed.redirectID)
         }
-        
     }
     
 }

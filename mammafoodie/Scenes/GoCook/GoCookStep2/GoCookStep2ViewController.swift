@@ -20,7 +20,7 @@ enum GoCookMediaUploadType {
     case VideoUpload, VideoShoot, PictureUpload, None
 }
 
-class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInput {
+class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInput, EditAddressDelegate {
     
     var output: GoCookStep2ViewControllerOutput!
     var router: GoCookStep2Router!
@@ -52,6 +52,8 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
     var numberOfServings : UInt = 0
     var mediaPicker : MediaPicker?
     var completion : GoCookCompletion?
+    
+    var editAddressCallback: ((MFUserAddress)->Void)? = nil
     
     let locationWorker = CurrentLocationWorker()
     
@@ -220,16 +222,32 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
                                                         dish.user = user
                                                         dish.createTimestamp = Date.init()
                                                         dish.location = currentLocation.coordinate
-                                                        dish.address = ""
-                                                        
                                                         if dish.mediaType == .vidup  {
                                                             dish.endTimestamp = dish.createTimestamp.addingTimeInterval(countDown)
                                                         } else if dish.mediaType == .picture {
-                                                            dish.endTimestamp = dish.createTimestamp.addingTimeInterval(60*60*24)
+                                                            dish.endTimestamp = dish.createTimestamp.addingTimeInterval(60 * 60 * 24)
                                                         }
                                                         
-                                                        DispatchQueue.main.async {
-                                                            self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                        if let address = user.addressDetails {
+                                                            dish.address = address.description
+                                                            DispatchQueue.main.async {
+                                                                self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                            }
+                                                        } else {
+                                                            let addressEditVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "EditAddressViewController") as! EditAddressViewController
+                                                            addressEditVC.address = nil
+                                                            addressEditVC.delegate = self
+                                                            self.navigationController?.pushViewController(addressEditVC, animated: true)
+                                                            self.editAddressCallback = { (address) in
+                                                                user.phone.phone = address.phone
+                                                                user.phone.countryCode = "+1"
+                                                                user.addressDetails = address
+                                                                DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+                                                                    DispatchQueue.main.async {
+                                                                        self.completion?(dish, self.selectedImage, self.selectedVideoPath)
+                                                                    }
+                                                                })
+                                                            }
                                                         }
                                                     } else {
                                                         self.showAlert("User not Found", message: "")
@@ -399,6 +417,14 @@ class GoCookStep2ViewController: UIViewController, GoCookStep2ViewControllerInpu
             }
         } else {
             self.clearPreviews()
+        }
+    }
+    
+    func editedAddress(address:MFUserAddress?) {
+        if let address = address {
+            self.editAddressCallback?(address)
+        } else {
+            self.showAlert("Error!", message: "Please enter valid address details")
         }
     }
     

@@ -22,7 +22,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     @IBOutlet weak var btnTime: UIButton!
     
     var shapeLayer: CAShapeLayer!
-    var likeButtonTapped: (()->Void)?
+    var likeButtonTapped: ((String, String)->Void)?
     var openURL: ((String, String) -> Void)?
     
     override func awakeFromNib() {
@@ -33,8 +33,8 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         self.viewContainer.layer.cornerRadius = 8
         self.btnTime.imageView?.contentMode = .scaleAspectFit
         self.lblActivity.linkAttributes = [NSForegroundColorAttributeName: UIColor.black,
-                                           NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleNone.rawValue as Int) ]
-        self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+                                           NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleNone.rawValue) ]
+        self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
     }
     
     func setup(with newsFeed: MFNewsFeed) {
@@ -45,11 +45,11 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
                 if image == nil || error != nil {
-                    self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+                    self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
                 }
             })
         } else {
-            self.imgProfilePicture.image = UIImage(named: "IconMammaFoodie")
+            self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
         }
         
         let actionUserName = NSAttributedString.init(string: newsFeed.actionUser.name + " ", attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
@@ -94,6 +94,9 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
         self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
+        
+        let timeString = newsFeed.createdAt.toStringWithRelativeTime(strings: nil)
+        self.btnTime.setTitle(timeString, for: .normal)
     }
     
     func updateShadow() {
@@ -103,22 +106,20 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
             self.shapeLayer.shadowColor = #colorLiteral(red: 0.01568627451, green: 0.0431372549, blue: 0.3137254902, alpha: 1).cgColor
             self.shapeLayer.shadowOpacity = 0.1
             self.shapeLayer.shadowRadius = 7
-            
             var shadowFrame: CGRect = self.viewContainer.frame
             shadowFrame.origin.x -= 2
             shadowFrame.origin.y += 8
             shadowFrame.size.width += 2
             shadowFrame.size.height -= 8
-            
             self.shapeLayer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: self.viewContainer.layer.cornerRadius).cgPath
             self.shapeLayer.shadowOffset = CGSize(width: 0, height: 1)
-            
             self.viewContainer.superview?.layer.insertSublayer(self.shapeLayer, at: 0)
         }
+
     }
     
     @IBAction func btnLikeTapped(_ sender: UIButton) {
-        self.likeButtonTapped?()
+        self.likeButtonTapped?("", "")
         sender.isSelected = !sender.isSelected
     }
     

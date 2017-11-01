@@ -42,7 +42,6 @@ struct StripeVerification {
 class MFUser {
     var id: String
     var name: String!
-    
     var firstName: String {
         return self.name.components(separatedBy: " ").first ?? ""
     }
@@ -53,47 +52,70 @@ class MFUser {
         }
         return ""
     }
-    
     var email: String!
-    var address: String?
+    var address: String = ""
     var addressDetails: MFUserAddress?
-//    var addressLocation: String?
+    //    var addressLocation: String?
     //    var addressID:String?
-    
     var picture: URL? {
         return DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.id)
     }
-    
     var dishesSoldCount: UInt = 0
     var profileDescription: String?
-    
     var phone: MFUserPhone = MFUserPhone()
-    
     var stripeChargesEnabled: Bool = false
     var stripePayoutsEnabled: Bool = false
     var stripeVerification: StripeVerification?
+    var searchTags: [String: String] = [String: String]()
     
     init() {
         self.id = ""
+        self.email = ""
+        self.dishesSoldCount = 0
+        self.profileDescription = ""
     }
     
     
     init(from Dictionary:[String:AnyObject]) {
         
-        self.id = Dictionary["id"] as? String ?? ""
-        self.name = Dictionary["name"] as? String ?? ""
-//        self.picture = Dictionary["picture"] as? String ?? ""
-        self.address = Dictionary["address"] as? String ?? ""
-        
-        if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
-            self.addressDetails = self.getAddressDetails(from: rawAddress)
+        if let userid = Dictionary["id"] as? String {
+            self.id = userid
+        } else {
+            if let userid = Dictionary["uid"] as? String {
+                self.id = userid
+            } else {
+                self.id = ""
+                print("Error in User ID")
+            }
+            
         }
         
-//        self.addressLocation = Dictionary["addressLocation"] as? String ?? ""
+        self.name = Dictionary["name"] as? String ?? ""
+        if  let add = Dictionary["address"] as? String {
+            self.address = add
+        }
         self.email = Dictionary["email"] as? String ?? ""
         self.dishesSoldCount = Dictionary["dishesSoldCount"] as? UInt ?? 0
         self.profileDescription = Dictionary["profileDescription"] as? String ?? ""
+        self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
         
+        if let rawSearchTags = Dictionary["searchTags"] as? [String: String] {
+            self.searchTags = rawSearchTags
+        }
+        
+        if let rawAddress: [String:AnyObject] = Dictionary["addressDetails"] as? [String:AnyObject] {
+            var address: MFUserAddress = MFUserAddress()
+            address.id = rawAddress["id"] as? String ?? ""
+            address.address = rawAddress["address"] as? String ?? ""
+            address.address_2 = rawAddress["address_2"] as? String ?? ""
+            address.city = rawAddress["city"]  as? String ?? ""
+            address.state = rawAddress["state"] as? String ?? ""
+            address.postalCode = rawAddress["postalCode"] as? String ?? ""
+            address.latitude = rawAddress["latitude"] as? String ?? ""
+            address.longitude = rawAddress["longitude"] as? String ?? ""
+            address.country = "US"
+            self.addressDetails = address
+        }
         if let rawPhoneInfo = Dictionary["phone"] as? [String:String] {
             self.phone.countryCode = rawPhoneInfo["countryCode"] ?? ""
             self.phone.phone = rawPhoneInfo["phone"] ?? ""
@@ -103,8 +125,6 @@ class MFUser {
             self.stripeChargesEnabled = rawStripe["charges_enabled"] as? Bool ?? false
             self.stripePayoutsEnabled = rawStripe["payouts_enabled"] as? Bool ?? false
         }
-        
-        self.stripeVerification = MFUser.stripeVerification(from: Dictionary)
     }
     
     class func stripeVerification(from raw: [String:Any]) -> StripeVerification? {
@@ -134,14 +154,14 @@ class MFUser {
     init(id: String, name: String, picture:String, profileDescription: String) {
         self.id = id
         self.name = name
-//        self.picture = picture
+        //        self.picture = picture
         self.profileDescription = profileDescription
     }
     
     init(id: String, name: String, picture:String, profileDescription: String, email:String) {
         self.id = id
         self.name = name
-//        self.picture = picture
+        //        self.picture = picture
         self.profileDescription = profileDescription
         self.email = email
     }

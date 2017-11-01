@@ -98,6 +98,27 @@ class DatabaseGateway {
         FirebaseApp.configure()
         print("Configuring FirebaseApp ----------------------- END")
     }
+    
+    class func generateTags(for text: String, firebaseRefrence: DatabaseReference) -> [String: String] {
+        var tags: [String: String] = [:]
+        for tag in DatabaseGateway.generateTags(for: text) {
+            tags[firebaseRefrence.childByAutoId().key] = tag
+        }
+        return tags
+    }
+    
+    fileprivate class func generateTags(for text: String) -> [String] {
+        var tags: Set<String> = Set.init()
+        let specialCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789").inverted.union(CharacterSet.whitespacesAndNewlines)
+        let staticComps = text.components(separatedBy: specialCharacters)
+        for comp in staticComps {
+            if comp == "" { continue }
+            tags.insert(comp)
+            tags.insert(comp.lowercased())
+            tags.insert(comp.uppercased())
+        }
+        return Array.init(tags)
+    }
 }
 
 // MARK: - Live streams
@@ -268,6 +289,7 @@ extension DatabaseGateway {
         if key2 == key3 {
             print("Requesting dish from his/herself")
             completion(false, "Requesting dish from his/herself")
+            return
         }
         
         let childUpdates = [
@@ -338,6 +360,24 @@ extension DatabaseGateway {
 
 //MARK: - User
 extension DatabaseGateway {
+    
+    func searchUser(with name: String, _ completion: @escaping ([MFUser]) -> Void) {
+        //        let ending = "\(title)\u{f8ff}"
+        FirebaseReference.users.classReference.queryOrdered(byChild: "searchTags").queryStarting(atValue: name).observeSingleEvent(of: .value, with: { (snapshot) in
+            var allUsers = [MFUser]()
+            if let users = snapshot.value as? FirebaseDictionary {
+                for (_, value) in users {
+                    if let dict = value as? FirebaseDictionary {
+                        let user = MFUser.init(from: dict)
+                        if user.searchTags.contains(where: { (key, value) -> Bool in return (value.range(of: name) != nil) }) {
+                            allUsers.append(user)
+                        }
+                    }
+                }
+            }
+            completion(allUsers)
+        })
+    }
     
     func createUserEntity(with model: MFUser, _ completion: @escaping ((_ errorMessage:String?)->Void)) {
         let rawUsers: FirebaseDictionary = MFModelsToFirebaseDictionaryConverter.dictionary(from: model)
@@ -451,6 +491,40 @@ extension DatabaseGateway {
         })
     }
     
+    func searchDish(with title: String, _ completion: @escaping ([MFDish]) -> Void) {
+//        let ending = "\(title)\u{f8ff}"
+        FirebaseReference.dishes.classReference.queryOrdered(byChild: "searchTags").queryStarting(atValue: title).observeSingleEvent(of: .value, with: { (snapshot) in
+            var allDishes = [MFDish]()
+            if let dishes = snapshot.value as? FirebaseDictionary {
+                for (_, value) in dishes {
+                    if let dict = value as? FirebaseDictionary {
+                        let dish = MFDish.init(from: dict)
+                        if dish.searchTags.contains(where: { (key, value) -> Bool in return (value.range(of: title) != nil) }) {
+                            allDishes.append(dish)
+                        }
+                    }
+                }
+            }
+            completion(allDishes)
+        })
+    }
+    
+    func searchDish(withCuisine cuisine: MFCuisine, _ completion: @escaping ([MFDish]) -> Void) {
+        //        let ending = "\(title)\u{f8ff}"
+        FirebaseReference.dishes.classReference.queryOrdered(byChild: "cuisine/id").queryEqual(toValue: cuisine.id).observeSingleEvent(of: .value, with: { (snapshot) in
+            var allDishes = [MFDish]()
+            if let dishes = snapshot.value as? FirebaseDictionary {
+                for (_, value) in dishes {
+                    if let dict = value as? FirebaseDictionary {
+                        let dish = MFDish.init(from: dict)
+                        allDishes.append(dish)
+                    }
+                }
+            }
+            completion(allDishes)
+        })
+    }
+    
     func getDishViewers(id: String, _ completion: @escaping (_ numberOfViewers: UInt)->Void) -> DatabaseConnectionObserver {
         let databaseReference: DatabaseReference = FirebaseReference.dishes.classReference.child(id)
         var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
@@ -536,7 +610,7 @@ extension DatabaseGateway {
             if let url = url {
                 let values = [ "coverPicURL": url.absoluteString ]
                 FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(values, withCompletionBlock: { (error, databaseRef) in
-                        print("Done 123")
+                    print("Done 123")
                 })
             }
         })
@@ -547,18 +621,14 @@ extension DatabaseGateway {
         
         FirebaseReference.dishComments.classReference.child(dishID).observeSingleEvent(of: .value, with: {(commentsDataSnapshot) in
             guard let commentsData = commentsDataSnapshot.value as? FirebaseDictionary else {
-                
                 completion(nil)
                 return
-                
             }
             var comments: [MFComment] = []
-            
             for rawComment in commentsData {
                 let newComment = MFComment(from: rawComment.value as! [String : AnyObject])
                 comments.append(newComment)
             }
-            
             completion(comments)
             
         }) {(error) in
@@ -691,7 +761,7 @@ extension DatabaseGateway {
             requestGroup.notify(queue: .main, execute: {
                 completion(savedDishes)
             })
-            completion(savedDishes)
+//            completion(savedDishes)
         })
         
     }
@@ -703,20 +773,17 @@ extension DatabaseGateway {
 extension DatabaseGateway {
     
     func checkLikedDishes(userId: String, dishId: String, _ completion: @escaping (_ status:Bool?) -> Void){
-        
-        print(userId)
-        print(dishId)
-        
+        print("User: \(userId)")
+        print("Dish: \(dishId)")
         FirebaseReference.dishLikes.classReference.child(dishId).observeSingleEvent(of: .value, with: {(dishSnapshot) in
             guard let userData = dishSnapshot.value as? FirebaseDictionary else {
                 print(dishSnapshot.value ?? "")
                 completion(nil)
                 return
             }
-            
             if userData[userId] != nil {
                 completion(true)
-            }else{
+            } else {
                 completion(false)
             }
             
@@ -728,7 +795,6 @@ extension DatabaseGateway {
 extension  DatabaseGateway {
     
     func getMediaWith(mediaID:String, _ completion:@escaping (_ dish:MFDish?)->Void ){
-        
         FirebaseReference.media.classReference.child(mediaID).observeSingleEvent(of: .value, with: { (userDataSnapshot) in
             guard let mediaData = userDataSnapshot.value as? FirebaseDictionary else {
                 completion(nil)
@@ -748,7 +814,7 @@ extension  DatabaseGateway {
 extension DatabaseGateway {
     
     func getNewsFeed(by userId: String, _ completion: @escaping ((_ newsFeeds: [MFNewsFeed])->Void)) {
-        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        FirebaseReference.newsFeedAll.classReference.queryOrdered(byChild: "actionUserID").queryEqual(toValue: userId).observeSingleEvent(of: .value, with: { (snapshot) in
             var newsFeedList: [MFNewsFeed] = []
             if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
                 for key in rawNewsFeedList.keys {
@@ -761,6 +827,20 @@ extension DatabaseGateway {
                 completion(newsFeedList)
             }
         })
+
+//        FirebaseReference.userActivity.classReference.child(userId).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+//            var newsFeedList: [MFNewsFeed] = []
+//            if let rawNewsFeedList = snapshot.value as? [String:AnyObject] {
+//                for key in rawNewsFeedList.keys {
+//                    if let rawNewsFeed: [String:AnyObject] = rawNewsFeedList[key] as? [String:AnyObject] {
+//                        newsFeedList.append(self.createNewsFeedModel(from: rawNewsFeed))
+//                    }
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                completion(newsFeedList)
+//            }
+//        })
     }
     
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
@@ -943,6 +1023,10 @@ extension DatabaseGateway {
             }
         }
         
+        if let rawSearchTags = rawDish["searchTags"] as? [String: String] {
+            dish.searchTags = rawSearchTags
+        }
+        
         if let timeinterval = rawDish["endTimestamp"] as? TimeInterval {
             dish.endTimestamp = Date(timeIntervalSinceReferenceDate: timeinterval)
         }
@@ -953,9 +1037,13 @@ extension DatabaseGateway {
         if let rawDishMediaType = rawDish["mediaType"] as? String {
             if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
                 dish.mediaType = dishMediaType
+            } else {
+                print("Dish media type not found: \(dish.id)")
             }
+        } else {
+            print("Dish media type not found: \(dish.id)")
         }
-         
+        
         if let rawCoverURL: String = rawDish["coverPicURL"] as? String {
             if let coverURL = URL(string: rawCoverURL) {
                 dish.coverPicURL = coverURL

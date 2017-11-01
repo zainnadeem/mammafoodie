@@ -53,7 +53,7 @@ class MFDish {
     var mediaURL: URL?
     var accessMode: MFDishMediaAccessMode = MFDishMediaAccessMode.viewer
     
-    var coverPicURL:URL?
+    var coverPicURL: URL?
     
     var likesCount : Double = 0
     var commentsCount : Double = 0
@@ -61,6 +61,7 @@ class MFDish {
     
     var location : CLLocationCoordinate2D?
     var address : String = ""
+    var searchTags: [String: String] = [String: String]()
     
     init() {
         self.id = ""
@@ -112,6 +113,20 @@ class MFDish {
         
         if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
             self.user = MFUser(from: userDict)
+        }
+        
+        if let rawDishMediaType = dishDataDictionary["mediaType"] as? String {
+            if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
+                self.mediaType = dishMediaType
+            } else {
+                print("Dish media type not found: \(self.id)")
+            }
+        } else {
+            print("Dish media type not found: \(self.id)")
+        }
+        
+        if let rawSearchTags = dishDataDictionary["searchTags"] as? [String: String] {
+            self.searchTags = rawSearchTags
         }
         
         self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
@@ -199,7 +214,7 @@ class MFDish {
 //    
 //    func generateCoverThumbImageURL() -> URL {
 //        let urlencodedID : String! = (self.id.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fcover%2F\(urlencodedID!).jpg?alt=media"
+//        let string = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/dishes%2Fthumbs%2F\(urlencodedID!).jpg?alt=media"
 //        return URL.init(string: string)!
 //    }
     

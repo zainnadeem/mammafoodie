@@ -37,17 +37,14 @@
                                     <constraint firstAttribute="width" secondItem="hJx-U0-Z8Q" secondAttribute="height" multiplier="1:1" id="un7-JK-iq7"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny8-Cq-nea" customClass="TTTAttributedLabel">
-                                <rect key="frame" x="43" y="16" width="397" height="78.5"/>
-                                <string key="text">Label
-aasass
-asasasasas</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ny8-Cq-nea" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="43" y="16" width="397" height="118.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ij1-W0-D0Q">
-                                <rect key="frame" x="43" y="94.5" width="85" height="21"/>
+                                <rect key="frame" x="43" y="134.5" width="85" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Om3-mr-xmX"/>
                                 </constraints>
@@ -59,23 +56,20 @@ asasasasas</string>
                                 </state>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-9k-KAi" userLabel="Cuisine Emoji">
-                                <rect key="frame" x="43" y="120.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="43" y="160.5" width="0.0" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" id="fkq-NL-Hb7"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyX-YO-qjv" userLabel="View - Separator">
-                                <rect key="frame" x="16" y="125" width="416" height="1"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyX-YO-qjv" userLabel="View - Separator">
+                                <rect key="frame" x="16" y="165" width="416" height="1"/>
                                 <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gtS-U6-jQh"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXC-n6-lpY">
-                                <rect key="frame" x="6" y="126" width="56" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Lab-do-tYo"/>
-                                </constraints>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXC-n6-lpY">
+                                <rect key="frame" x="6" y="166" width="56" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="9" maxX="0.0" maxY="9"/>
                                 <state key="normal" title="12" image="IconLike">
@@ -86,10 +80,10 @@ asasasasas</string>
                                     <action selector="btnLikeTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Ulp-rj-77N"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCZ-UE-Ma2">
-                                <rect key="frame" x="70" y="126" width="62" height="40"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCZ-UE-Ma2">
+                                <rect key="frame" x="70" y="166" width="62" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="cAX-5t-rj8"/>
+                                    <constraint firstAttribute="height" id="cAX-5t-rj8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="9" maxX="0.0" maxY="9"/>
@@ -97,11 +91,8 @@ asasasasas</string>
                                     <color key="titleColor" red="0.50980392159999999" green="0.59215686270000001" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab8-do-98A">
-                                <rect key="frame" x="140" y="125.5" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="jnr-nL-1UW"/>
-                                </constraints>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab8-do-98A">
+                                <rect key="frame" x="140" y="165.5" width="40" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="9" maxX="0.0" maxY="9"/>
                                 <state key="normal" title="1k" image="IconShare">
@@ -117,6 +108,7 @@ asasasasas</string>
                             <constraint firstItem="hJx-U0-Z8Q" firstAttribute="leading" secondItem="7yx-tz-3P4" secondAttribute="leading" constant="8" id="EIi-7X-Dk0"/>
                             <constraint firstItem="fDM-9k-KAi" firstAttribute="leading" secondItem="Ij1-W0-D0Q" secondAttribute="leading" id="HQZ-Ed-Qy7"/>
                             <constraint firstItem="hJx-U0-Z8Q" firstAttribute="top" secondItem="7yx-tz-3P4" secondAttribute="top" constant="16" id="JL6-W9-UvM"/>
+                            <constraint firstItem="Ab8-do-98A" firstAttribute="height" secondItem="tCZ-UE-Ma2" secondAttribute="height" id="JNk-zg-l3l"/>
                             <constraint firstItem="gyX-YO-qjv" firstAttribute="leading" secondItem="7yx-tz-3P4" secondAttribute="leading" constant="16" id="UA9-LO-6uW"/>
                             <constraint firstItem="Ab8-do-98A" firstAttribute="leading" secondItem="tCZ-UE-Ma2" secondAttribute="trailing" constant="8" id="UNE-qV-75F"/>
                             <constraint firstAttribute="trailing" secondItem="ny8-Cq-nea" secondAttribute="trailing" constant="8" id="Vqm-rT-vnl"/>
@@ -124,6 +116,7 @@ asasasasas</string>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="bottom" secondItem="Ij1-W0-D0Q" secondAttribute="top" id="b6g-cn-jU5"/>
                             <constraint firstAttribute="bottom" secondItem="nXC-n6-lpY" secondAttribute="bottom" id="bVu-bd-gCs"/>
                             <constraint firstItem="ny8-Cq-nea" firstAttribute="top" secondItem="hJx-U0-Z8Q" secondAttribute="top" id="bfs-6M-xaR"/>
+                            <constraint firstItem="nXC-n6-lpY" firstAttribute="height" secondItem="tCZ-UE-Ma2" secondAttribute="height" id="dRR-6A-kyy"/>
                             <constraint firstItem="Ab8-do-98A" firstAttribute="top" secondItem="tCZ-UE-Ma2" secondAttribute="top" id="iOX-Gc-GIw"/>
                             <constraint firstItem="fDM-9k-KAi" firstAttribute="top" secondItem="Ij1-W0-D0Q" secondAttribute="bottom" constant="5" id="lXh-RC-gib"/>
                             <constraint firstItem="nXC-n6-lpY" firstAttribute="leading" secondItem="gyX-YO-qjv" secondAttribute="leading" constant="-10" id="mEn-ti-uQJ"/>

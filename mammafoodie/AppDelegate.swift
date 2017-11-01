@@ -20,8 +20,8 @@
  class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     var window: UIWindow?
-    var activityIndicatorView:UIView?
-    //    let gcmMessageIDKey = "gcm.message_id"
+    var activityIndicatorView: UIView?
+//    let gcmMessageIDKey = "gcm.message_id"
     
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
@@ -86,14 +86,26 @@
                 }
             }
         }
-        
-        //        self.saveDishes()
-        
+
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
+//        FirebaseReference.users.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+//            if let users = snapshot.value as? [String: AnyObject] {
+//                for (_, value) in users {
+//                    if let dict = value as? [String: AnyObject] {
+//                        let user = MFUser.init(from: dict)
+//                        if user.id != "" {
+//                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+//                                print("Error: \(error ?? "nil")")
+//                            })
+//                        }
+//                    }
+//                }
+//            }
+//        })
         return true
     }
     
