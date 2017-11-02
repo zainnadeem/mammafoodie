@@ -262,25 +262,25 @@ class StripeVerificationViewController: UIViewController {
     func areFieldsValid() -> (Bool, String) {
         
         if !self.viewFirstName.isHidden {
-            if self.txtFirstName.text?.characters.count ?? 0 == 0 {
+            if self.txtFirstName.text?.count ?? 0 == 0 {
                 return (false, "Please enter first name.")
             }
         }
         
         if !self.viewLastName.isHidden {
-            if self.txtLastName.text?.characters.count ?? 0 == 0 {
+            if self.txtLastName.text?.count ?? 0 == 0 {
                 return (false, "Please enter last name.")
             }
         }
         
         if !self.viewDOB.isHidden {
-            if self.txtDOB.text?.characters.count ?? 0 == 0 {
+            if self.txtDOB.text?.count ?? 0 == 0 {
                 return (false, "Please select your birthday.")
             }
         }
         
         if !self.viewAddress1.isHidden {
-            if self.txtAddressLine1.text?.characters.count ?? 0 == 0 {
+            if self.txtAddressLine1.text?.count ?? 0 == 0 {
                 return (false, "Please enter your address.")
             }
         }
@@ -290,13 +290,13 @@ class StripeVerificationViewController: UIViewController {
         }
         
         if !self.viewCity.isHidden {
-            if self.txtCity.text?.characters.count ?? 0 == 0 {
+            if self.txtCity.text?.count ?? 0 == 0 {
                 return (false, "Please enter your city.")
             }
         }
         
         if !self.viewState.isHidden {
-            if self.txtState.text?.characters.count ?? 0 == 0 {
+            if self.txtState.text?.count ?? 0 == 0 {
                 return (false, "Please enter your state.")
             }
         }
@@ -306,19 +306,19 @@ class StripeVerificationViewController: UIViewController {
         }
         
         if !self.viewPostalCode.isHidden {
-            if self.txtPostalCode.text?.characters.count ?? 0 == 0 {
+            if self.txtPostalCode.text?.count ?? 0 == 0 {
                 return (false, "Please enter postal code.")
             }
         }
         
         if !self.viewSSN.isHidden {
-            if self.txtSSN.text?.characters.count ?? 0 == 0 {
+            if self.txtSSN.text?.count ?? 0 == 0 {
                 return (false, "Please enter last 4 digits of SSN.")
             }
         }
         
         if !self.viewSSNFull.isHidden {
-            if self.txtFullSSN.text?.characters.count ?? 0 == 0 {
+            if self.txtFullSSN.text?.count ?? 0 == 0 {
                 return (false, "Please enter your SSN.")
             }
         }
@@ -328,13 +328,13 @@ class StripeVerificationViewController: UIViewController {
         }
         
 //        if !self.stackViewBankAccount.isHidden {
-//            if self.txtAccountHolderName.text?.characters.count ?? 0 == 0 {
+//            if self.txtAccountHolderName.text?.count ?? 0 == 0 {
 //                return (false, "Please enter bank account holder name.")
 //            }
-//            if self.txtAccountNumber.text?.characters.count ?? 0 == 0 {
+//            if self.txtAccountNumber.text?.count ?? 0 == 0 {
 //                return (false, "Please enter your bank account number.")
 //            }
-//            if self.txtRoutingNumber.text?.characters.count ?? 0 == 0 {
+//            if self.txtRoutingNumber.text?.count ?? 0 == 0 {
 //                return (false, "Please enter bank routing number.")
 //            }
 //        }
@@ -435,7 +435,7 @@ class StripeVerificationViewController: UIViewController {
         }
         
         if !self.stackViewBankAccount.isHidden {
-            if self.txtAccountHolderName.text?.characters.count ?? 0 > 0 && self.txtAccountNumber.text?.characters.count ?? 0 > 0 && self.txtRoutingNumber.text?.characters.count ?? 0 > 0 {
+            if self.txtAccountHolderName.text?.count ?? 0 > 0 && self.txtAccountNumber.text?.count ?? 0 > 0 && self.txtRoutingNumber.text?.count ?? 0 > 0 {
                 details["accountHolderName"] = self.txtAccountHolderName.text!
                 details["accountNumber"] = self.txtAccountNumber.text!
                 details["routingNumber"] = self.txtRoutingNumber.text!
@@ -490,7 +490,7 @@ extension StripeVerificationViewController : UITextFieldDelegate {
         if textField == self.txtSSN {
             if let text = textField.text {
                 let final = (text as NSString).replacingCharacters(in: range, with: string)
-                if final.characters.count > 4 {
+                if final.count > 4 {
                     return false
                 }
             }

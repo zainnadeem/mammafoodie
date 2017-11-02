@@ -214,7 +214,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let components = stringTemp.components(separatedBy: ".")
         if components.count > 1 {
             // Has decimal part
-            if components[1].characters.count == 1 {
+            if components[1].count == 1 {
                 stringTemp = components.first!
                 stringTemp.append(".")
                 stringTemp.append(components[1].appending("0"))

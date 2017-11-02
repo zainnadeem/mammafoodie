@@ -56,14 +56,6 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
                 self.tableView.reloadData()
             }
         }
-        return;
-        DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
-            DispatchQueue.main.async {
-                self.activity = feeds
-                self.tableView.reloadData()
-                print("Activity loaded")
-            }
-        }
     }
     
     func loadMenu() {

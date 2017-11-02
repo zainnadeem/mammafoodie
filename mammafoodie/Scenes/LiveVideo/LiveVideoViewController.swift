@@ -172,7 +172,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                     self.showUserInfo()
                     
                     if let location = dish.location {
-                        if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
+                        if (dish.address.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
                             self.viewSlotDetails.isHidden = true
                         }
                     } else {

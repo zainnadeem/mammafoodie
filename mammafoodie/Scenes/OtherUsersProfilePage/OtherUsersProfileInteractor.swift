@@ -60,11 +60,11 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             }
         }
         
-        worker.getFollowersForUser(userID: userID) { (followers) in
+        _ = worker.getFollowersForUser(userID: userID) { (followers) in
             self.dishCollectionViewAdapter.followers = followers
         }
         
-        worker.getFollowingForUser(userID: userID) { (following) in
+        _ = worker.getFollowingForUser(userID: userID) { (following) in
             self.dishCollectionViewAdapter.following = following
         }
         

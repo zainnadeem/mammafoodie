@@ -153,7 +153,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
             self.showAlert(message: "Confirm password did not match with the new password.")
             return
         }
-        guard txfConfirmPassword.text!.characters.count >= 6  else {
+        guard txfConfirmPassword.text!.count >= 6  else {
             KLCforgotPasswordPopup?.dismiss(true)
             self.showAlert(message: "A minimum of 6 characters is required for the password.")
             return

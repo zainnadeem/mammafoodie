@@ -1339,8 +1339,9 @@ extension DatabaseGateway {
 
 extension DatabaseGateway{
     
-    func getNotificationsForUser(userID:String, completion:@escaping ([MFNotification]) -> Void) {
-        FirebaseReference.notifications.classReference.child(userID).queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: { (dataSnapshot) in
+    func getNotificationsForUser(userID:String, frequency: DatabaseRetrievalFrequency = DatabaseRetrievalFrequency.single, completion:@escaping ([MFNotification]) -> Void) -> DatabaseConnectionObserver? {
+        
+        let successClosure: FirebaseObserverSuccessClosure  = { (dataSnapshot) in
             var notifications = [MFNotification]()
             guard let notificationData = dataSnapshot.value as? [String: [String: AnyObject]] else {
                 completion(notifications)
@@ -1365,7 +1366,23 @@ extension DatabaseGateway{
             })
             
             completion(notifications)
-        })
+        }
+        
+        let cancelClosure: FirebaseObserverCancelClosure = { (error) in
+            print(error)
+            completion([])
+        }
+        
+        switch frequency {
+        case .realtime:
+            var observer: DatabaseConnectionObserver = DatabaseConnectionObserver()
+            observer.databaseReference = FirebaseReference.notifications.classReference.child(userID)
+            observer.observerId = observer.databaseReference!.queryOrdered(byChild: "timestamp").observe(.value, with: successClosure, withCancel: cancelClosure)
+            return observer
+        default:
+            FirebaseReference.notifications.classReference.child(userID).queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: successClosure, withCancel: cancelClosure)
+        }
+        return nil
     }
     
     func getNotification(notificationID:String, completion:@escaping (MFNotification?)->()) {

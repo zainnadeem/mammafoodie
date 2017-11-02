@@ -18,7 +18,7 @@ class RequestDishInteractor: RequestDishInteractorInput {
 
     // MARK: - Business logic
     func RequestDishes(dish:MFDish,quantity:String) {
-        let quantity = Int(quantity)!
+//        let quantity = Int(quantity)!
 //        requestDishWorker.requestDish(dish: dish, quantity: quantity) { (success, errorMessage) in
 //            if errorMessage != nil {
 //                self.output.dishRequestCompletion(success: false, message: "Something went wrong! Please try again.")
