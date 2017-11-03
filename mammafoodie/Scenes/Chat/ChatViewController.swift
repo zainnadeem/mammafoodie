@@ -210,11 +210,7 @@ extension ChatViewController {
     }
     
     @IBAction func dismissView(_ sender: UIBarButtonItem) {
-        if self.navigationController?.viewControllers.first == self {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        AppDelegate.close(vc: self)
     }
     
     

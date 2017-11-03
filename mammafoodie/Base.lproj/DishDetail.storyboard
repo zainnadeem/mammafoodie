@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -243,19 +243,19 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5v-7Y-Wn5">
-                                                        <rect key="frame" x="46.5" y="30" width="25" height="13"/>
+                                                        <rect key="frame" x="47" y="30" width="24.5" height="12.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10.350000381469727"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2A-fZ-XVv">
-                                                        <rect key="frame" x="158" y="30" width="44" height="13"/>
+                                                        <rect key="frame" x="158" y="30" width="44" height="12.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10.350000381469727"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKA-SE-utm">
-                                                        <rect key="frame" x="283" y="30" width="36.5" height="13"/>
+                                                        <rect key="frame" x="283" y="30" width="36.5" height="12.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10.350000381469727"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -426,8 +426,8 @@
                         <outlet property="scrollView" destination="ntl-rQ-diw" id="tqE-bE-32h"/>
                         <segue destination="IyS-1P-N0R" kind="presentation" identifier="seguePresentSlotSelectionViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="UWk-Xu-ZDO"/>
                         <segue destination="drN-dc-HK2" kind="show" identifier="segueShowPaymentViewController" id="ZBZ-2d-msx"/>
-                        <segue destination="ItD-Yh-k6a" kind="show" identifier="segueShowConversationDetail" id="7MU-Er-os5"/>
                         <segue destination="uWa-ZZ-mAb" kind="presentation" identifier="segueShowUserProfile" id="OpZ-jJ-CfW"/>
+                        <segue destination="9EV-PB-xfa" kind="presentation" identifier="segueShowConversationDetail" id="Boj-k4-sjh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTw-O1-YKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -445,10 +445,12 @@
         <!--ChatVC-->
         <scene sceneID="hxX-GY-XUp">
             <objects>
-                <viewControllerPlaceholder storyboardName="Siri" referencedIdentifier="ChatVC" id="ItD-Yh-k6a" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Siri" referencedIdentifier="ChatVC" id="ItD-Yh-k6a" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="yAP-cl-nuc"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcN-Bo-gOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="342"/>
+            <point key="canvasLocation" x="2303" y="501"/>
         </scene>
         <!--navUserProfile-->
         <scene sceneID="ML5-BY-dhI">
@@ -457,6 +459,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGx-0c-feu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1580" y="476"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aYc-El-tps">
+            <objects>
+                <navigationController id="9EV-PB-xfa" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pSF-bO-Edm">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ItD-Yh-k6a" kind="relationship" relationship="rootViewController" id="vsz-XQ-lT5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cFl-kR-3tl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1975" y="502"/>
         </scene>
         <!--NavPayment-->
         <scene sceneID="aOW-mn-CNa">

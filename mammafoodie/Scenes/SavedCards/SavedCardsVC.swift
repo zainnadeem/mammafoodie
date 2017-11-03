@@ -99,6 +99,17 @@ class SavedCardsVC: UIViewController {
                         print("Purpose not found")
                         return
                     }
+                    
+                    guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+                        print("User not found")
+                        return
+                    }
+                    
+                    if currentUser.stripeChargesEnabled == false {
+                        self.showAlert("Error", message: AppDelegate.shared().getPaymentNowAllowedMessage())
+                        return
+                    }
+                    
                     StripeGateway.shared.createCharge(amount: self.amount, sourceId: cardId, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
                         if let error = error {
                             self.error?()
@@ -148,6 +159,17 @@ extension SavedCardsVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
         guard let purpose = self.paymentPurpose else {
             return
         }
+        
+        guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            print("User not found")
+            return
+        }
+        
+        if currentUser.stripeChargesEnabled == false {
+            self.showAlert("Error", message: AppDelegate.shared().getPaymentNowAllowedMessage())
+            return
+        }
+        
         StripeGateway.shared.createCharge(amount: amount, sourceId: card.stripeID, fromUserId: self.currentLoggedInUser, toUserId: self.toUser, dishId: self.dishId, dishName: self.dishName, purpose: purpose, completion: { (chargeId, error) in
             if let error = error {
                 self.error?()

@@ -562,6 +562,23 @@
         }
     }
     
+    func getPaymentNowAllowedMessage() -> String {
+        return "You are not allowed to make payments. Please contact us. contact@mammafoodie.com"
+    }
+    
+    class func close(vc: UIViewController) {
+        if let navigationController: UINavigationController = vc.navigationController {
+            if navigationController.viewControllers.first == vc {
+                navigationController.dismiss(animated: true, completion: nil)
+            } else {
+                navigationController.popViewController(animated: true)
+            }
+        } else {
+            vc.dismiss(animated: true, completion: {
+            })
+        }
+    }
+    
  }
  
  extension AppDelegate : MessagingDelegate {
