@@ -281,10 +281,6 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     func highlightComment(commentId: String) {
         self.viewComments.highlightComment(id: commentId)
     }
-    
-    deinit {
-        self.observer = nil
-    }
 
     func displayDishInfo(for vidup: MFDish) {
         self.userId = vidup.user.id

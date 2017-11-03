@@ -233,6 +233,7 @@
         worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
             self.currentUser = user
         }
+        worker.stopObserver()
         
     }
     

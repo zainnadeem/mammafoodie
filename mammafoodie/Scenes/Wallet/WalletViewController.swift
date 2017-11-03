@@ -134,7 +134,32 @@ class WalletViewController: UIViewController {
         transaction.dishId = raw["dishId"] as? String
         transaction.dishName = raw["dishName"] as? String
         
+        transaction.timestamp = raw["createTimestamp"] as? TimeInterval
+        transaction.date = Date(timeIntervalSinceReferenceDate: transaction.timestamp ?? 0)
+        
+        let status: String = raw["status"] as? String ?? ""
+        if status == "succeeded" {
+            transaction.status = MFTransactionStatus.success
+        } else {
+            transaction.status = MFTransactionStatus.failure
+        }
+        
         return transaction
+    }
+    
+    func sortTransactions() {
+        self.transactions.sort { (t1, t2) -> Bool in
+            if t1.date == nil {
+                return false
+            }
+            if t2.date == nil {
+                return false
+            }
+            if t1.date!.compare(t2.date!) == ComparisonResult.orderedDescending {
+                return true
+            }
+            return false
+        }
     }
     
     // MARK: - Actions

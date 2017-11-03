@@ -22,6 +22,11 @@ class OtherUsersProfileWorker {
         }
     }
     
+    func stopObserver() {
+        self.observer?.stop()
+        self.observer = nil
+    }
+    
     func getDishWith(dishID:String, completion: @escaping (MFDish?)->Void) {
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: dishID) { (dish) in
             completion(dish)

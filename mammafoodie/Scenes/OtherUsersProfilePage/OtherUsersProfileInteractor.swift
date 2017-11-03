@@ -45,12 +45,13 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
     }
     
     func deallocDatabaseObserver() {
+        self.worker.observer?.stop()
         self.worker.observer = nil
     }
     
     func loadUserProfileData(userID:String) {
         self.showActivityIndicator()
-        worker.getUserDataWith(userID: userID) { (user) in
+        self.worker.getUserDataWith(userID: userID) { (user) in
             DispatchQueue.main.async {
                 self.user = user
                 self.dishCollectionViewAdapter.userData = user
@@ -60,24 +61,24 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
             }
         }
         
-        _ = worker.getFollowersForUser(userID: userID) { (followers) in
+        _ = self.worker.getFollowersForUser(userID: userID) { (followers) in
             self.dishCollectionViewAdapter.followers = followers
         }
         
-        _ = worker.getFollowingForUser(userID: userID) { (following) in
+        _ = self.worker.getFollowingForUser(userID: userID) { (following) in
             self.dishCollectionViewAdapter.following = following
         }
         
-        worker.getCookedDishesForUser(userID: userID, { (cookedDishes) in
+        self.worker.getCookedDishesForUser(userID: userID, { (cookedDishes) in
             self.dishCollectionViewAdapter.cookedDishData = cookedDishes
         })
         
-        worker.getBoughtDishesForUser(userID: userID, { (boughtDishes) in
+        self.worker.getBoughtDishesForUser(userID: userID, { (boughtDishes) in
             self.dishCollectionViewAdapter.boughtDishData = boughtDishes
             
         })
         
-        worker.getSavedDishesCountFor(userID: userID) { (count) in
+        self.worker.getSavedDishesCountFor(userID: userID) { (count) in
             print(count)
             self.dishCollectionViewAdapter.savedDishDataCount = count
         }

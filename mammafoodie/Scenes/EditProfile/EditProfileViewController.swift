@@ -48,7 +48,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
             self.txfMobileNumber.text = user?.phone.phone
             self.txvProfileDescription.text = user?.profileDescription
         }
-        
+
         self.profilePicImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: self.userID), placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"))
         
         self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "BackBtn")
