@@ -843,6 +843,40 @@ extension DatabaseGateway {
 //        })
     }
     
+    func getActivityFeed(for userId: String, _ completion: @escaping (([MFNewsFeed])->Void)) {
+        let initialTimeStamp: Double = Date.init().timeIntervalSinceReferenceDate - (604800 * 2)
+        FirebaseReference.newsFeed.classReference.child(userId).observe(.value, with: { (snapshot) in
+            if let feedIds = snapshot.value as? [String: Double] {
+                var newsFeedList: [MFNewsFeed] = []
+                let dispatchGroup = DispatchGroup.init()
+                for (feedId, timeStamp) in feedIds {
+                    if timeStamp >= initialTimeStamp {
+                        dispatchGroup.enter()
+                        self.getNewsFeed(with: feedId, { (feed) in
+                            if let feed = feed {
+                                newsFeedList.append(feed)
+                            }
+                            dispatchGroup.leave()
+                        })
+                    } else {
+                        print("Old feeds are fetched: \(feedId)")
+                    }
+                }
+                dispatchGroup.notify(queue: .main, execute: {
+                    completion(newsFeedList)
+                })
+            } else {
+                DispatchQueue.main.async {
+                    completion([MFNewsFeed]())
+                }
+            }
+        })
+//            .observeSingleEvent(of: .value, with: { (snapshot) in
+//        })
+
+    }
+    
+    
     func getNewsFeed(for userId: String, _ completion: @escaping (([MFNewsFeed]) -> Void)) {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
             guard let rawNewsFeed = snapshot.value as? [String: Double] else {
@@ -1232,8 +1266,6 @@ extension DatabaseGateway{
     }
     
     func getFollowingForUser(userID:String,frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ following:[String:AnyObject]?)->Void)-> DatabaseConnectionObserver?{
-        
-        
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
             guard let followers = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
