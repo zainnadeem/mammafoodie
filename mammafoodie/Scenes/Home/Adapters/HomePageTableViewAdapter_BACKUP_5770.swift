@@ -54,6 +54,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
                 self.activity = feeds
                 self.activity.sort(by: { $0.createdAt > $1.createdAt })
                 self.tableView.reloadData()
+<<<<<<< HEAD
         }
         //        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
         //            DispatchQueue.main.async {
@@ -70,6 +71,10 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         //                print("Activity loaded")
         //            }
         //        }
+=======
+            }
+        }
+>>>>>>> origin/BugFixes
     }
     
     func loadMenu() {

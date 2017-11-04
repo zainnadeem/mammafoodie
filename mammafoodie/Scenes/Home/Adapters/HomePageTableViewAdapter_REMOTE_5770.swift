@@ -49,27 +49,13 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func loadActivities() {
-        print("Current user: \(self.currentUser.id)")
-        DatabaseGateway.sharedInstance.getActivityFeed(for: self.currentUser.id) { (feeds) in
+        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
+            DispatchQueue.main.async {
                 self.activity = feeds
                 self.activity.sort(by: { $0.createdAt > $1.createdAt })
                 self.tableView.reloadData()
+            }
         }
-        //        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
-        //            DispatchQueue.main.async {
-        //                self.activity = feeds
-        //                self.activity.sort(by: { $0.createdAt > $1.createdAt })
-        //                self.tableView.reloadData()
-        //            }
-        //        }
-        //        return;
-        //        DatabaseGateway.sharedInstance.getNewsFeed(for: self.currentUser.id) { (feeds) in
-        //            DispatchQueue.main.async {
-        //                self.activity = feeds
-        //                self.tableView.reloadData()
-        //                print("Activity loaded")
-        //            }
-        //        }
     }
     
     func loadMenu() {
@@ -125,8 +111,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
         if self.mode == .activity {
             let cell: ActivityTblCell = tableView.dequeueReusableCell(withIdentifier: "ActivityTblCell", for: indexPath) as! ActivityTblCell
             if self.activity.count > indexPath.row {
-                let feed = self.activity[indexPath.item]
-                cell.setup(with: feed, withUser: self.currentUser)
+                cell.setup(with: self.activity[indexPath.item])
                 cell.openURL = self.openURL
             }
             return cell
@@ -187,7 +172,7 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.sectionHeaderView
     }
-    
+
 }
 
 extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -197,9 +182,9 @@ extension HomePageTableviewAdapter: DZNEmptyDataSetSource, DZNEmptyDataSetDelega
         }
         return NSAttributedString.init(string: "No saved dishes", attributes: [NSFontAttributeName: UIFont.MontserratLight(with: 15)!])
     }
-    
+
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return (self.sectionHeaderView?.frame.size.height ?? 0) + self.tableView.sectionHeaderHeight + 20
     }
-    
+
 }
