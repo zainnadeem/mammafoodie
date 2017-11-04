@@ -33,9 +33,13 @@ class NotificationViewController: UIViewController {
 
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
-            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:self.userID) { (nots) in
+            _ = DatabaseGateway.sharedInstance.getNotificationsForUser(userID:self.userID, frequency: .realtime) { (nots) in
                 DispatchQueue.main.async {
                     self.notifications = nots
+                    unreadNotificationCount = 0
+                    
+                    UserDefaults.standard.set(self.notifications.count, forKey: kNotificationReadCount)
+                    UserDefaults.standard.synchronize()
                 }
             }
         } else {

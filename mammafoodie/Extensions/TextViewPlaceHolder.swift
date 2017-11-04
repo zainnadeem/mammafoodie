@@ -81,7 +81,7 @@ extension UITextView   {
         placeholderLabel.textColor = UIColor.lightGray
         placeholderLabel.tag = 100
         
-        placeholderLabel.isHidden = self.text.characters.count > 0
+        placeholderLabel.isHidden = self.text.count > 0
         
         self.addSubview(placeholderLabel)
         self.resizePlaceholder()
@@ -121,7 +121,7 @@ extension UITextView{
     
     func textFieldValidation(string:String,maxLen: Int)-> Bool{
         
-        if (self.text?.characters.count)! < maxLen {
+        if (self.text?.count)! < maxLen {
             var allowedCharacters = CharacterSet.alphanumerics
             var characterSet = CharacterSet(charactersIn: string)
             
@@ -136,7 +136,7 @@ extension UITextView{
                     //allowedSpaces = CharacterSet.whitespaces
                     characterSet = CharacterSet(charactersIn: string)
                     
-                    if allowedCharacters.isSuperset(of: characterSet) && self.text.characters.count > 0 {
+                    if allowedCharacters.isSuperset(of: characterSet) && self.text.count > 0 {
                         return true
                     }
                     else{
@@ -161,7 +161,7 @@ extension UITextView{
     
     func textFieldlengthValidation(string:String,maxLen: Int)-> Bool{
         
-        if (self.text?.characters.count)! < maxLen {
+        if (self.text?.count)! < maxLen {
             return true
         }
         else{

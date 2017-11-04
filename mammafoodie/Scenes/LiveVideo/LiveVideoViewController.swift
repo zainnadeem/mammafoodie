@@ -47,7 +47,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBOutlet weak var lblSlotsCount: UILabel!
     
-    var observer: DatabaseConnectionObserver?
+    var dishObserver: DatabaseConnectionObserver?
     
     // MARK: - Object lifecycle
     
@@ -156,7 +156,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             AnalyticsParameterContentType: "LiveVideoView" as NSObject
             ])
         
-        self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
+        self.dishObserver = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
                     
@@ -172,7 +172,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                     self.showUserInfo()
                     
                     if let location = dish.location {
-                        if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
+                        if (dish.address.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
                             self.viewSlotDetails.isHidden = true
                         }
                     } else {
@@ -188,6 +188,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     func load(new liveVideo: MFDish) {
         self.output?.stop(self.liveVideo)
         self.liveVideo = liveVideo
+        self.dishObserver?.stop()
         self.loadDish()
         self.startLiveVideo()
     }
@@ -316,6 +317,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.timerForThumbnailCapturing = nil
         
         self.countObserver?.stop()
+        self.dishObserver?.stop()
+        self.dishObserver = nil
         self.countObserver = nil
         
         if self.presentingViewController != nil ||

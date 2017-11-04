@@ -7,7 +7,7 @@ class LoadDishWorker: HUDRenderer {
     func getDish(with dishID:String, completion: @escaping (MFDish?)->Void) {
         
         showActivityIndicator()
-        observer =  DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, frequency: .realtime) { (dish) in
+        self.observer =  DatabaseGateway.sharedInstance.getDishWith(dishID: dishID, frequency: .realtime) { (dish) in
             //            self.hideActivityIndicator()
             completion(dish)
             

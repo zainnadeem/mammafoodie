@@ -19,6 +19,7 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
     var following = [MFUser]()
     
     //MARK: - IBOutlets
+    @IBOutlet weak var btnConversationsList: UIButton!
     @IBOutlet weak var lblUserName:UILabel!
     @IBOutlet weak var lblProfileDescription:UILabel!
     @IBOutlet weak var lblDishesSold:UILabel!
@@ -113,6 +114,16 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         self.lblFavouriteDishesCount.text = savedDishCount.description
         
         guard let data = data else {return}
+        
+        guard let loggedInUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        
+        if data.id == loggedInUser.id {
+            self.btnConversationsList.isHidden = false
+        } else {
+            self.btnConversationsList.isHidden = true
+        }
         
         self.lblUserName.text = data.name
         self.lblFollowers.text = followersCount

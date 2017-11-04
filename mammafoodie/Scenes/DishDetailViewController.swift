@@ -214,7 +214,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let components = stringTemp.components(separatedBy: ".")
         if components.count > 1 {
             // Has decimal part
-            if components[1].characters.count == 1 {
+            if components[1].count == 1 {
                 stringTemp = components.first!
                 stringTemp.append(".")
                 stringTemp.append(components[1].appending("0"))
@@ -431,11 +431,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
-        if self.navigationController?.viewControllers.first == self {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        AppDelegate.close(vc: self)
     }
     
     func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (Double?) -> Void) {

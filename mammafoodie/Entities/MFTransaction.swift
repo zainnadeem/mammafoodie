@@ -14,6 +14,11 @@ enum PaymentPurpose: String {
     case unknown = "unknown"
 }
 
+enum MFTransactionStatus: String {
+    case success = "succeeded"
+    case failure = ""
+}
+
 class MFTransaction {
     
     var amount: Double = 0
@@ -28,6 +33,11 @@ class MFTransaction {
     
     var dishId: String?
     var dishName: String?
+    
+    var timestamp: TimeInterval?
+    var date: Date?
+    
+    var status: MFTransactionStatus?
     
     init() {
         

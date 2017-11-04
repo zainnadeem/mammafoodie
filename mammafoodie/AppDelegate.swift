@@ -15,6 +15,8 @@
  import MBProgressHUD
  
  var navigationBarTintColor: UIColor!
+ var unreadNotificationCount: Int = 0
+ let kNotificationReadCount: String = "kNotificationReadCount"
  
  @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -28,6 +30,8 @@
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     var currentUserObserver: DatabaseConnectionObserver?
     var currentUserStripeVerificationObserver: DatabaseConnectionObserver?
+    
+    private var notificationObserver: DatabaseConnectionObserver?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -71,6 +75,7 @@
                         welcomeVC.viewContainer.isHidden = false
                         hud.hide(animated: true)
                         if self.currentUser != nil {
+                            self.updateNotificationCount()
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                             welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
@@ -228,6 +233,7 @@
         worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
             self.currentUser = user
         }
+        worker.stopObserver()
         
     }
     
@@ -320,6 +326,17 @@
             print(error)
         }
         print("filePath: \(destinationPath)")
+    }
+    
+    func resizeImage(image: UIImage, width: Double) -> UIImage? {
+        let newWidth: CGFloat = CGFloat(width)
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize.init(width: newWidth, height: newHeight))
+        image.draw(in: CGRect.init(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
     func handleNotification(_ userInfo: [AnyHashable : Any], shouldTakeAction: Bool = true, topViewController: UIViewController?, pushNewViewController: Bool) {
@@ -525,6 +542,43 @@
             }
         }
     }
+ 
+    func updateNotificationCount() {
+        guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        self.notificationObserver = DatabaseGateway.sharedInstance.getNotificationsForUser(userID:currentUser.id, frequency: .realtime) { (nots) in
+            var readCount: Int = 0
+            if let value: Any = UserDefaults.standard.value(forKey: kNotificationReadCount) {
+                readCount = value as! Int
+            }
+            unreadNotificationCount = (nots.count - readCount)
+            DispatchQueue.main.async {
+                if self.getCurrentViewController().isKind(of: HomeViewController.self) {
+                    let homeVC: HomeViewController = self.getCurrentViewController() as! HomeViewController
+                    homeVC.updateNotificationBadgeCount()
+                }
+            }
+        }
+    }
+    
+    func getPaymentNowAllowedMessage() -> String {
+        return "You are not allowed to make payments. Please contact us. contact@mammafoodie.com"
+    }
+    
+    class func close(vc: UIViewController) {
+        if let navigationController: UINavigationController = vc.navigationController {
+            if navigationController.viewControllers.first == vc {
+                navigationController.dismiss(animated: true, completion: nil)
+            } else {
+                navigationController.popViewController(animated: true)
+            }
+        } else {
+            vc.dismiss(animated: true, completion: {
+            })
+        }
+    }
+    
  }
  
  extension AppDelegate : MessagingDelegate {

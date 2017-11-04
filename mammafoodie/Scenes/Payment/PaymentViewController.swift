@@ -511,6 +511,11 @@ class PaymentViewController: UIViewController {
             
             let totalAmount = (self.dish.pricePerSlot * Double(self.slotsToBePurchased)) + self.deliveryCharge
             
+            if currentUser.stripeChargesEnabled == false {
+                self.showAlert("Error", message: AppDelegate.shared().getPaymentNowAllowedMessage())
+                return
+            }
+            
             StripeGateway.shared.createCharge(amount: totalAmount, sourceId: card.stripeID, fromUserId: currentUser.id, toUserId: self.dish.user.id, dishId: self.dish.id, dishName: self.dish.name, purpose: PaymentPurpose.purchase, completion: { (chargeId, error) in
                 DispatchQueue.main.async {
                     hud.hide(animated: true)

@@ -5,30 +5,30 @@ import SDWebImage
 
 class ChatViewController: JSQMessagesViewController {
     
-    let gradientStartColor : UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
-    let gradientEndColor : UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
-    let defaults = UserDefaults.standard
+    let gradientStartColor: UIColor = UIColor.init(red: 1.0, green: 0.39, blue: 0.13, alpha: 1.0)
+    let gradientEndColor: UIColor = UIColor.init(red: 1.0, green: 0.55, blue: 0.17, alpha: 1.0)
+    let defaults: UserDefaults = UserDefaults.standard
     
-    var conversation:MFConversation!
+    var conversation: MFConversation!
     
     // MARK: - Object lifecycle
     var messages = [MFMessage]() {
         didSet{
-            finishSendingMessage()
+            self.finishSendingMessage()
         }
     }
     
     var currentUser:MFUser!
     
-    lazy var worker = ChatWorker()
+    lazy var worker: ChatWorker = ChatWorker()
     
-    let bubbleFactory = JSQMessagesBubbleImageFactory(bubble: UIImage(named:"Bubble"), capInsets:UIEdgeInsetsMake(0, 0, 0, 0))
+    let bubbleFactory: JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory(bubble: UIImage(named:"Bubble"), capInsets:UIEdgeInsetsMake(0, 0, 0, 0))
     
-    let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
-    let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
+    let color1: UIColor = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
+    let color2: UIColor = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
     
-    var OtherUserProfileImage:UIImage? {
-        didSet{
+    var OtherUserProfileImage: UIImage? {
+        didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -37,24 +37,14 @@ class ChatViewController: JSQMessagesViewController {
     
 }
 
-
-
 extension ChatViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         
-        //Call api
-        
-        let message = MFMessage(with: senderDisplayName, messagetext: text, senderId: senderId)
-        
-        
-        worker.createMessage(with: message, conversationID: self.conversation.id, { status in
+        let message: MFMessage = MFMessage(with: senderDisplayName, messagetext: text, senderId: senderId)
+        self.worker.createMessage(with: message, conversationID: self.conversation.id, { status in
             print(status)
         })
-        
-        
-        
-        
     }
     
     //senderbabbletable
@@ -74,6 +64,7 @@ extension ChatViewController {
     
     //Height of table
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        
         if defaults.bool(forKey: Setting.removeSenderDisplayName.rawValue) {
             return 0.0
         }
@@ -96,11 +87,10 @@ extension ChatViewController {
     //ImageData
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         
-        if messages[indexPath.item].senderId == self.senderId{
+        if self.messages[indexPath.item].senderId == self.senderId{
             return nil //No Avatar image for current user
         } else {
-            return JSQMessagesAvatarImageFactory.avatarImage(with: self.OtherUserProfileImage ?? UIImage(named: "IconMammaFoodie")!, diameter: 20)
-            
+            return JSQMessagesAvatarImageFactory.avatarImage(with: self.OtherUserProfileImage ?? UIImage(named: "IconMammaFoodie")!, diameter: 44)
         }
     }
     
@@ -109,14 +99,11 @@ extension ChatViewController {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         // messages to show
-        let msg = messages[indexPath.row]
+        let msg = self.messages[indexPath.row]
         if msg.senderId == senderId {
             cell.textView.textColor = UIColor.white
-            
             //cell.messageBubbleImageView.applyGradient(colors: [color1, color2], direction: .leftToRight)
-            
-            
-        }else{
+        } else {
             cell.textView.textColor = UIColor.black
         }
         cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor ?? UIColor.white]
@@ -128,53 +115,39 @@ extension ChatViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         
-        
-        let message = messages[indexPath.row]
-        
+        let message: MFMessage = self.messages[indexPath.row]
         if self.senderId == message.senderId {
-            return bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor(red: 255/255, green: 99/255, blue: 34/255, alpha: 1.0))
-            
+            return self.bubbleFactory.outgoingMessagesBubbleImage(with: UIColor(red: 1, green: 99/255, blue: 34/255, alpha: 1.0))
         } else {
-            return bubbleFactory?.incomingMessagesBubbleImage(with: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0))
+            return self.bubbleFactory.incomingMessagesBubbleImage(with: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0))
             
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
+        return self.messages.count
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         
-        let mfMessageData = messages[indexPath.row]
-        
-        let jsqMessageData = JSQMessage(senderId: mfMessageData.senderId, displayName: mfMessageData.senderDisplayName, text: mfMessageData.messageText )
-        
+        let mfMessageData: MFMessage = self.messages[indexPath.row]
+        let jsqMessageData: JSQMessage = JSQMessage(senderId: mfMessageData.senderId, displayName: mfMessageData.senderDisplayName, text: mfMessageData.messageText )
         return jsqMessageData
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAt indexPath: IndexPath) -> NSAttributedString? {
-        if (indexPath.item % 3 == 0) {
-            let messageDate = messages[indexPath.item].dateTime
-            
-            if let interval = Double(messageDate){
-                let currentDate = Date(timeIntervalSinceReferenceDate: interval)
-                return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: currentDate)
-            } else {
-                return nil
-            }
-            
+        
+        let messageDate: String = messages[indexPath.item].dateTime
+        if let interval: Double = Double(messageDate){
+            let currentDate: Date = Date(timeIntervalSinceReferenceDate: interval)
+            return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: currentDate)
+        } else {
+            return nil
         }
-        return nil
     }
     
-    
-    
     override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.item % 3 == 0 {
-            return kJSQMessagesCollectionViewCellLabelHeightDefault
-        }
-        return 0.0
+        return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
 }
@@ -183,10 +156,10 @@ extension ChatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
-//        self.navigationController?.navigationBar.backIndicatorImage = backImage
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-//        self.navigationItem.backBarButtonItem =
+        //        let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
+        //        self.navigationController?.navigationBar.backIndicatorImage = backImage
+        //        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        //        self.navigationItem.backBarButtonItem =
         
         let button: UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissView(_:)))
         let backImage = #imageLiteral(resourceName: "BackBtn").withRenderingMode(.alwaysOriginal)
@@ -205,11 +178,11 @@ extension ChatViewController {
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
         //Hiding attach Image
-//        self.inputToolbar.contentView.leftBarButtonItem = nil
+        //        self.inputToolbar.contentView.leftBarButtonItem = nil
         
         var url: URL!
         
-        if conversation.user1 == self.currentUser.id{
+        if conversation.user1 == self.currentUser.id {
             url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: conversation.user2)
             self.title = conversation.user2Name
         } else {
@@ -218,15 +191,18 @@ extension ChatViewController {
         }
         
         //download avatar image
-        SDWebImageDownloader.shared().downloadImage(with: url, options: SDWebImageDownloaderOptions(rawValue: 0), progress: { (_, _) in }, completed: { (image, _, _, finished) in
+        SDWebImageDownloader.shared().downloadImage(with: url, options: SDWebImageDownloaderOptions.progressiveDownload, progress: { (_, _) in }, completed: { (image, _, _, finished) in
             
             if finished {
-                self.OtherUserProfileImage = image ?? UIImage(named: "IconMammaFoodie")!
+                DispatchQueue.main.async {
+                    self.OtherUserProfileImage = image ?? UIImage(named: "IconMammaFoodie")!
+                    self.OtherUserProfileImage = AppDelegate.shared().resizeImage(image: self.OtherUserProfileImage!, width: 128)
+                }
             }
             
         })
         
-        getMessages(forConversation: self.conversation.id)
+        self.getMessages(forConversation: self.conversation.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -234,11 +210,7 @@ extension ChatViewController {
     }
     
     @IBAction func dismissView(_ sender: UIBarButtonItem) {
-        if self.navigationController?.viewControllers.first == self {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        } else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        AppDelegate.close(vc: self)
     }
     
     
