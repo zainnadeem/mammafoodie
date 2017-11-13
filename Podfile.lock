@@ -86,6 +86,7 @@ PODS:
   - KLCPopup (1.0)
   - leveldb-library (1.18.3)
   - MBProgressHUD (1.0.0)
+  - MIBadgeButton-Swift (0.5)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -116,6 +117,7 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - KLCPopup
   - MBProgressHUD
+  - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - NextGrowingTextView
   - SDWebImage (~> 3.8)
   - Stripe
@@ -125,11 +127,17 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   GeoFire:
     :git: https://github.com/firebase/geofire-objc.git
+  MIBadgeButton-Swift:
+    :branch: master
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
 
 CHECKOUT OPTIONS:
   GeoFire:
     :commit: 96d6463f59016785f9c5ae9b669019c44786a23f
     :git: https://github.com/firebase/geofire-objc.git
+  MIBadgeButton-Swift:
+    :commit: 3c2638d2e6e46ec2e6dd978d8ada8863df3df5e6
+    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -156,6 +164,7 @@ SPEC CHECKSUMS:
   KLCPopup: 76c5a19227977f1e53d85236f9ef42257c168d98
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NextGrowingTextView: 547575c639c41a938ccdb58bc10e53a86ef2d956
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
@@ -164,6 +173,6 @@ SPEC CHECKSUMS:
   TRMosaicLayout: 1875505c48dd2877afd69a8bea7b4c1c63afa5b5
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 83be1dd903063ec9ad1a55b449d9028ce6d3f6e1
+PODFILE CHECKSUM: 20592c6280e096aa61664293930d3fe677b68a4c
 
 COCOAPODS: 1.3.1
