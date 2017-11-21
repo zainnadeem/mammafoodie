@@ -32,7 +32,7 @@ class NotificationTableViewCell: UITableViewCell {
     func setUp(notification: MFNotification) {
         self.profileImageView.sd_cancelCurrentImageLoad()
         if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: notification.actionUserId) {
-            self.profileImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: { (image, error, cacheType, url) in
+            self.profileImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options:.refreshCached, completed: { (image, error, cacheType, url) in
 //                if image == nil {
 //                    DispatchQueue.main.async {
 //                        self.conWidthDishImageView.constant = 0

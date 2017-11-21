@@ -70,11 +70,11 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         }
         
         self.worker.getCookedDishesForUser(userID: userID, { (cookedDishes) in
-            self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+            self.dishCollectionViewAdapter.cookedDishData = self.sortDishList(cookedDishes)
         })
         
         self.worker.getBoughtDishesForUser(userID: userID, { (boughtDishes) in
-            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+            self.dishCollectionViewAdapter.boughtDishData = self.sortDishList(boughtDishes)
             
         })
         
@@ -84,15 +84,29 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         }
     }
     
+    private func sortDishList(_ list: [MFDish]) -> [MFDish] {
+        let filteredList: [MFDish] = list.filter { (dish) -> Bool in
+            return dish.visible
+        }
+        let sortedList: [MFDish] = filteredList.sorted(by: { (dish1, dish2) -> Bool in
+            if dish1.createTimestamp.timeIntervalSinceReferenceDate > dish2.createTimestamp.timeIntervalSinceReferenceDate {
+                return true
+            }
+            return false
+        })
+        
+        return sortedList
+    }
+    
     private func loadCountsForAllSections() {
         guard let user = self.user else { return }
         
         self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
-            self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+            self.dishCollectionViewAdapter.cookedDishData = self.sortDishList(cookedDishes)
         })
         
         self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
-            self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+            self.dishCollectionViewAdapter.boughtDishData = self.sortDishList(boughtDishes)
         })
         
         self.worker.getActivity(for: user.id, completion: { (newsFeedList) in
@@ -109,13 +123,13 @@ class OtherUsersProfileInteractor: OtherUsersProfileInteractorInput, DishesColle
         case .cooked:
             self.worker.getCookedDishesForUser(userID: user.id, { (cookedDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .cooked
-                self.dishCollectionViewAdapter.cookedDishData = cookedDishes
+                self.dishCollectionViewAdapter.cookedDishData = self.sortDishList(cookedDishes)
             })
             
         case .bought:
             self.worker.getBoughtDishesForUser(userID: user.id, { (boughtDishes) in
                 self.dishCollectionViewAdapter.selectedIndexForProfile = .bought
-                self.dishCollectionViewAdapter.boughtDishData = boughtDishes
+                self.dishCollectionViewAdapter.boughtDishData = self.sortDishList(boughtDishes)
                 
             })
             

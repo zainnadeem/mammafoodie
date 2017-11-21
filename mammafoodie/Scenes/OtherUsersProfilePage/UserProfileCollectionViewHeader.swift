@@ -138,7 +138,9 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         
         self.profilePicImageView.sd_cancelCurrentImageLoad()
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.id) {
-            self.profilePicImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
+            self.profilePicImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: { (image, error, cacheType, url) in
+                print("user profile collection view header. picture refreshed")
+            })
         } else {
             self.profilePicImageView.image = #imageLiteral(resourceName: "IconMammaFoodie")
         }

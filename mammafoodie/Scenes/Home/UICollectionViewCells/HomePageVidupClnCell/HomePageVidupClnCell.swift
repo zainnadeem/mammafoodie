@@ -50,7 +50,9 @@ class HomePageVidupClnCell: UICollectionViewCell {
             
             if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
                 if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
-                    self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
+                    self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options:.refreshCached, completed: { (image, error, cacheType, url) in
+                        print("new Vidup picture refreshed")
+                    })
                 } else {
                     self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
                 }
@@ -66,7 +68,9 @@ class HomePageVidupClnCell: UICollectionViewCell {
             self.imgView.layer.borderWidth = 0
             self.imgAddIcon.isHidden = true
             if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: vidup.user.id) {
-                self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
+                self.imgView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options:.refreshCached, completed: { (image, error, cacheType, url) in
+                    print("Vidup picture refreshed")
+                })
             } else {
                 self.imgView.image = #imageLiteral(resourceName: "IconMammaFoodie")
             }

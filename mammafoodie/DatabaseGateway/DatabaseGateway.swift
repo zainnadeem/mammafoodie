@@ -482,7 +482,7 @@ extension DatabaseGateway {
             if let dishes = snapshot.value as? FirebaseDictionary {
                 for (_, value) in dishes {
                     if let dict = value as? FirebaseDictionary {
-                        let dish = MFDish.init(from: dict)
+                        let dish = self.createDish(from: dict)
                         allDishes.append(dish)
                     }
                 }
@@ -498,7 +498,7 @@ extension DatabaseGateway {
             if let dishes = snapshot.value as? FirebaseDictionary {
                 for (_, value) in dishes {
                     if let dict = value as? FirebaseDictionary {
-                        let dish = MFDish.init(from: dict)
+                        let dish = self.createDish(from: dict)
                         if dish.searchTags.contains(where: { (key, value) -> Bool in return (value.range(of: title) != nil) }) {
                             allDishes.append(dish)
                         }
@@ -516,7 +516,7 @@ extension DatabaseGateway {
             if let dishes = snapshot.value as? FirebaseDictionary {
                 for (_, value) in dishes {
                     if let dict = value as? FirebaseDictionary {
-                        let dish = MFDish.init(from: dict)
+                        let dish = self.createDish(from: dict)
                         allDishes.append(dish)
                     }
                 }
@@ -550,7 +550,12 @@ extension DatabaseGateway {
                 return
             }
             let dish: MFDish = self.createDish(from: dishData)
-            completion(dish)
+            
+            if dish.visible == false {
+                completion(nil)
+            } else {
+                completion(dish)
+            }
         }
         let cancelClosure:FirebaseObserverCancelClosure = { (error) in
             print(error)
@@ -800,12 +805,14 @@ extension  DatabaseGateway {
                 completion(nil)
                 return
             }
-            let media:MFDish = MFDish(from: mediaData)
-            
+            let media:MFDish = self.createDish(from: mediaData)
             completion(media)
+            
         }) { (error) in
+            
             print(error)
             completion(nil)
+            
         }
     }
 }
@@ -1112,12 +1119,28 @@ extension DatabaseGateway {
         }
         
         dish.totalOrders = rawDish["totalOrders"] as? Double ?? 0
+        dish.boughtOrders = rawDish["boughtOrders"]  as? [String:Date] ?? [:]
+        dish.tag = rawDish["tag"] as? String ?? ""
+        dish.numberOfViewers = rawDish["numberOfViews"] as? UInt ?? 0
+        
+        if let visible: Bool = (rawDish["visible"] as? Bool) {
+            dish.visible = visible
+        } else {
+            dish.visible = true
+        }
         
         return dish
     }
     
     func saveDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
         let dishDict = MFModelsToFirebaseDictionaryConverter.dictionary(from: dish)
+        FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(dishDict) { (error, ref) in
+            completion(error)
+        }
+    }
+    
+    func deleteDish(_ dish : MFDish, completion : @escaping (Error?) -> Void) {
+        let dishDict = [ "visible": false ]
         FirebaseReference.dishes.classReference.child(dish.id).updateChildValues(dishDict) { (error, ref) in
             completion(error)
         }

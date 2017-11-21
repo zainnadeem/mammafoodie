@@ -15,6 +15,7 @@
  import MBProgressHUD
  
  var navigationBarTintColor: UIColor!
+ var navigationBarBackgroundColor: UIColor!
  var unreadNotificationCount: Int = 0
  let kNotificationReadCount: String = "kNotificationReadCount"
  
@@ -51,6 +52,7 @@
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
         navigationBarTintColor = navigationController.navigationBar.tintColor
+        navigationBarBackgroundColor = navigationController.navigationBar.backgroundColor
         
         if let _ = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             print("Launch With options")
@@ -340,68 +342,70 @@
     }
     
     func handleNotification(_ userInfo: [AnyHashable : Any], shouldTakeAction: Bool = true, topViewController: UIViewController?, pushNewViewController: Bool) {
-        if let _ = self.currentUser,
-            let redirectID = userInfo["redirectId"] as? String,
-            let redirectPathString = userInfo["redirectPath"] as? String,
-            let redirectpath = FirebaseReference(rawValue: redirectPathString) {
-            let appState = UIApplication.shared.applicationState
-            print("App State: \(appState.rawValue)")
-            
-            func handleRequest() {
-                switch redirectpath {
-                case .users:
-                    var type: ProfileType = .othersProfile
-                    if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-                        if currentUser.id == redirectID {
-                            type = .ownProfile
+        DispatchQueue.main.async {
+            if let _ = self.currentUser,
+                let redirectID = userInfo["redirectId"] as? String,
+                let redirectPathString = userInfo["redirectPath"] as? String,
+                let redirectpath = FirebaseReference(rawValue: redirectPathString) {
+                let appState = UIApplication.shared.applicationState
+                print("App State: \(appState.rawValue)")
+                
+                func handleRequest() {
+                    switch redirectpath {
+                    case .users:
+                        var type: ProfileType = .othersProfile
+                        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                            if currentUser.id == redirectID {
+                                type = .ownProfile
+                            }
                         }
+                        self.showUserProfile(with: type, userid: redirectID, topViewController: topViewController)
+                        
+                    case .dishes:
+                        self.openDish(with: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        
+                    case .dishComments:
+                        let comps: [String] = redirectID.components(separatedBy: CharacterSet.init(charactersIn: "/"))
+                        if comps.count == 3 {
+                            let dishId: String = comps[1]
+                            let commentId: String = comps[2]
+                            self.openDish(with: dishId, withCommentId: commentId, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        } else {
+                            print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
+                        }
+                        
+                    case .messages:
+                        self.openConversation(id: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        
+                    default:
+                        print("Redirect Path not Handled")
+                        print("\nNot Handled notification: \(userInfo)\n")
                     }
-                    self.showUserProfile(with: type, userid: redirectID, topViewController: topViewController)
-                    
-                case .dishes:
-                    self.openDish(with: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
-                    
-                case .dishComments:
-                    let comps: [String] = redirectID.components(separatedBy: CharacterSet.init(charactersIn: "/"))
-                    if comps.count == 3 {
-                        let dishId: String = comps[1]
-                        let commentId: String = comps[2]
-                        self.openDish(with: dishId, withCommentId: commentId, topViewController: topViewController, pushNewViewController: pushNewViewController)
-                    } else {
-                        print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
-                    }
-                    
-                case .messages:
-                    self.openConversation(id: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
-                    
-                default:
-                    print("Redirect Path not Handled")
-                    print("\nNot Handled notification: \(userInfo)\n")
                 }
+                
+                //            if showAlert &&
+                //                appState == .active {
+                //                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
+                //                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
+                //                        DispatchQueue.main.async {
+                //                            handleRequest()
+                //                        }
+                //                    }, cancelActionHandler: { (action) in
+                //
+                //                    })
+                //                } else {
+                //                    print("Notification text is wrong: \(userInfo)")
+                //                }
+                //            } else {
+                
+                if shouldTakeAction {
+                    handleRequest()
+                }
+                
+                //            }
+            } else {
+                print("\nNot Handled notification: \(userInfo)\n")
             }
-            
-            //            if showAlert &&
-            //                appState == .active {
-            //                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
-            //                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
-            //                        DispatchQueue.main.async {
-            //                            handleRequest()
-            //                        }
-            //                    }, cancelActionHandler: { (action) in
-            //
-            //                    })
-            //                } else {
-            //                    print("Notification text is wrong: \(userInfo)")
-            //                }
-            //            } else {
-            
-            if shouldTakeAction {
-                handleRequest()
-            }
-            
-            //            }
-        } else {
-            print("\nNot Handled notification: \(userInfo)\n")
         }
     }
     

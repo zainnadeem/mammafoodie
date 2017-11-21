@@ -52,6 +52,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     @IBOutlet weak var conHeightBtnRequest: NSLayoutConstraint!
     @IBOutlet weak var conBottomBtnRequest: NSLayoutConstraint!
     @IBOutlet weak var conTopBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conAspectRatioImgView: NSLayoutConstraint!
+    @IBOutlet weak var conHeightImgView: NSLayoutConstraint!
+    @IBOutlet weak var viewHeader: UIView!
+    @IBOutlet weak var btnDeleteDish: UIButton!
+    @IBOutlet weak var conMaarginBtnBookmarkToBtnDelete: NSLayoutConstraint!
+    @IBOutlet weak var conTrailingBtnDelete: NSLayoutConstraint!
     
     
     //if only dish ID is passed
@@ -121,7 +127,17 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.hideActivityIndicator()
         
-        guard let data = response.dish else { return }
+        guard let data = response.dish else {
+            AppDelegate.close(vc: self)
+            if let deletedDish: MFDish = self.dishForView?.dish {
+                if deletedDish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                    // The user just deleted the dish. Take him back.
+                }
+            } else {
+                self.showAlert(message: "Dish not found. Maybe it was deleted.")
+            }
+            return
+        }
         
         self.dishForView = response
         
@@ -131,6 +147,8 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                 self.conBottomBtnRequest.constant = 0
                 self.conTopBtnRequest.constant = 0
             }
+        } else {
+            self.conTrailingBtnDelete.constant = -1 * (30 + 4)
         }
         
         self.lblDishName.text = data.name
@@ -149,10 +167,22 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
+        var dishImageUrl: URL? = nil
         if let url = data.coverPicURL {
-            self.dishImageView.sd_setImage(with: url)
+            dishImageUrl = url
         } else if let url = data.mediaURL {
-            self.dishImageView.sd_setImage(with: url)
+            dishImageUrl = url
+        }
+        if let url = dishImageUrl {
+            self.dishImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: { (image, error, cacheType, url) in
+                if error != nil || image == nil {
+                    // Update view for no image
+                    self.updateUIForNoDishImage()
+                }
+            })
+        } else {
+            // Update view for no image
+            self.updateUIForNoDishImage()
         }
         
         //set profile imageview
@@ -191,6 +221,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         }
         
         self.lv_contentView.isHidden = false
+    }
+    
+    func updateUIForNoDishImage() {
+        if (self.conAspectRatioImgView) != nil {
+            self.btnBack.tintColor = #colorLiteral(red: 0.3843137255, green: 0.3843137255, blue: 0.3764705882, alpha: 1)
+            self.btnShare.tintColor = #colorLiteral(red: 0.3843137255, green: 0.3843137255, blue: 0.3764705882, alpha: 1)
+            NSLayoutConstraint.deactivate([self.conAspectRatioImgView])
+            NSLayoutConstraint.activate([self.conHeightImgView])
+            self.conHeightImgView.constant = 64
+        }
     }
     
     func displayString(from number: Double) -> String {
@@ -460,4 +500,18 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     // MARK: - Display logic
     
+    @IBAction func btnDeleteDishTapped(_ sender: UIButton) {
+        let alert: UIAlertController = UIAlertController(title: "Delete", message: "Do you really want to delete the dish?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { (action) in
+//            self.output.stopObservingDish()
+            DatabaseGateway.sharedInstance.deleteDish(self.dishForView!.dish!, completion: { (error) in
+                print("Dish deleted")
+                DispatchQueue.main.async {
+//                    self.backButtonTapped(self.btnBack)
+                }
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
