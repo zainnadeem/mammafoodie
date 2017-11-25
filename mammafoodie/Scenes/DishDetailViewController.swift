@@ -146,10 +146,13 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                 self.conHeightBtnRequest.constant = 0
                 self.conBottomBtnRequest.constant = 0
                 self.conTopBtnRequest.constant = 0
+            } else {
+                self.conTrailingBtnDelete.constant = -1 * (30 + 4)
             }
         } else {
             self.conTrailingBtnDelete.constant = -1 * (30 + 4)
         }
+//        self.view.layoutIfNeeded()
         
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name

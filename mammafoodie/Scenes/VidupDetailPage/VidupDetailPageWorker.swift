@@ -16,19 +16,20 @@ class VidupDetailPageWorker:NSObject {
         
         view.backgroundColor = UIColor.black
         self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        self.avPlayerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.insertSublayer(self.avPlayerLayer, at: 0)
         
         var frame: CGRect = self.avPlayerLayer.frame
         frame.size = view.frame.size
         self.avPlayerLayer.frame = frame
         
-        //        let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
-        //        view.addGestureRecognizer(playandpauseTap)
+//        let playandpauseTap = UITapGestureRecognizer(target: self, action: #selector(PlayandPauseVideo(ViewTapped:)))
+//        view.addGestureRecognizer(playandpauseTap)
         
         let fullscreenTap = UITapGestureRecognizer(target: self, action: #selector(FullScreenVideo(ViewTapped:)))
         view.addGestureRecognizer(fullscreenTap)
         
-        //        playandpauseTap.require(toFail: fullscreenTap)
+//        playandpauseTap.require(toFail: fullscreenTap)
         
         self.loadingIndicatorView.hidesWhenStopped = true
         view.addSubview(self.loadingIndicatorView)

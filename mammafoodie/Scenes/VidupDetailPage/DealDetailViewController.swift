@@ -124,6 +124,39 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         if self.shouldShowSlotSelection {
             self.showSlotSelection()
         }
+        
+        self.addGradientForUserProfileInfoView()
+        self.addGradientForCommentsView()
+    }
+    
+    private func addGradientForUserProfileInfoView() {
+        let colors: [UIColor] = [
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        ]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.lv_ProfileDetails.bounds
+        gradientLayer.colors = colors.map { $0.cgColor }
+        
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.lv_ProfileDetails.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    private func addGradientForCommentsView() {
+        let colors: [UIColor] = [
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+        ]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.lv_ProfileDetails.bounds
+        gradientLayer.colors = colors.map { $0.cgColor }
+        
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.viewComments.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -304,10 +337,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
                 print("Image view removed")
                 view.removeFromSuperview()
             }
-            self.output.setupMediaPlayer(view: self.viewVideo,
-                                         user_id: userId ,
-                                         dish_id: DishId,
-                                         dish: self.dish)
+            self.output.setupMediaPlayer(view: self.viewVideo, user_id: userId, dish_id: DishId, dish: self.dish)
+//            self.viewVideo.isHidden = true
         } else if vidup.mediaType == MFDishMediaType.picture {
             if let view = self.viewVideo {
                 print("Video view removed")

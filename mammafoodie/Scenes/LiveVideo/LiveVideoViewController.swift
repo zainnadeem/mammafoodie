@@ -101,13 +101,15 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             self.lblNumberOfViewers.text = "\(count)"
         }
         
-        // This needs to be executed from viewWillAppear or later. Because of the Camera
-        if let output = self.output {
-            #if (arch(i386) || arch(x86_64)) && os(iOS)
-            #else
-                output.start(self.liveVideo)
-            #endif
-        }
+        self.output!.start(self.liveVideo)
+        
+//        // This needs to be executed from viewWillAppear or later. Because of the Camera
+//        if let output = self.output {
+//            #if (arch(i386) || arch(x86_64)) && os(iOS)
+//            #else
+//                output.start(self.liveVideo)
+//            #endif
+//        }
         
         self.setupViewComments()
         self.viewComments.emojiTapped = { (emojiButton) in
