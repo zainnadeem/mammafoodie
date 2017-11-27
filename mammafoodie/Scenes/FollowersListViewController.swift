@@ -2,6 +2,7 @@ import UIKit
 import DZNEmptyDataSet
 
 typealias ChatSelectionCompletionBlock = ((MFUser) -> Void)
+typealias FollowActionHandler = ((IndexPath, Bool) -> Void)
 
 class FollowersListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

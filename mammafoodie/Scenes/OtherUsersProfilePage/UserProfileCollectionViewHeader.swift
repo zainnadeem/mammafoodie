@@ -58,6 +58,8 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         self.boughtSegmentStackView.restorationIdentifier = "bought"
         self.activitySegmentStackView.restorationIdentifier = "activity"
         
+        self.lblUserName.text = ""
+        
         self.cookedSegmentStackView.addGestureRecognizer(tapCooked)
         self.boughtSegmentStackView.addGestureRecognizer(tapBought)
         self.activitySegmentStackView.addGestureRecognizer(tapActivity)

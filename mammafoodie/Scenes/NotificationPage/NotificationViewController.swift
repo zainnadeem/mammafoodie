@@ -30,7 +30,9 @@ class NotificationViewController: UIViewController {
         self.notificationTableView.estimatedRowHeight = 60
         self.notificationTableView.emptyDataSetDelegate = self
         self.notificationTableView.emptyDataSetSource = self
-
+        
+        self.navigationController?.navigationBar.tintColor = .darkGray
+        
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
             _ = DatabaseGateway.sharedInstance.getNotificationsForUser(userID:self.userID, frequency: .realtime) { (nots) in

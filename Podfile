@@ -10,14 +10,14 @@ target 'mammafoodie' do
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
     
+    pod 'Fabric', '~> 1.7.2'
+    pod 'Crashlytics', '~> 3.9.3'
+    
     pod 'GoogleSignIn'
     
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
-    
-#    pod 'GoogleMaps'
-#    pod 'GooglePlaces'
-    
+
     pod 'TTTAttributedLabel'
     
     pod 'JSQMessagesViewController'
@@ -40,11 +40,11 @@ target 'mammafoodie' do
     
     pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
 
-    target 'mammafoodieTests' do
-        pod 'Firebase/Core'
-        pod 'Firebase/Database'
-        pod 'Firebase/Auth'
-        pod 'Firebase/Storage'
-    end
+#    target 'mammafoodieTests' do
+ #       pod 'Firebase/Core'
+  #      pod 'Firebase/Database'
+   #     pod 'Firebase/Auth'
+    #    pod 'Firebase/Storage'
+    #end
 
 end

@@ -51,9 +51,11 @@ class HomePageTableviewAdapter: NSObject, UITableViewDataSource, UITableViewDele
     func loadActivities() {
         print("Current user: \(self.currentUser.id)")
         DatabaseGateway.sharedInstance.getActivityFeed(for: self.currentUser.id) { (feeds) in
-                self.activity = feeds
-                self.activity.sort(by: { $0.createdAt > $1.createdAt })
+            self.activity = feeds
+            self.activity.sort(by: { $0.createdAt > $1.createdAt })
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
         }
         //        DatabaseGateway.sharedInstance.getNewsFeed(by: self.currentUser.id) { (feeds) in
         //            DispatchQueue.main.async {

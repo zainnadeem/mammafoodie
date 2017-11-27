@@ -30,9 +30,8 @@ class FollowersTableCell: UITableViewCell {
         self.followButtn.layer.borderColor = #colorLiteral(red: 1, green: 0.5998461843, blue: 0.206497252, alpha: 1).cgColor
         self.followButtn.clipsToBounds = true
         
-        addGradient()
-        
-        followButtn.addTarget(self, action: #selector(follow(sender:)), for: .touchUpInside)
+//        self.makeUnfollowButton()
+        self.followButtn.addTarget(self, action: #selector(follow(sender:)), for: .touchUpInside)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,26 +40,27 @@ class FollowersTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func addGradient(){
-        let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
-        let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
-        followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
+    func makeFollowButton() {
+        self.followButtn.setTitle("follow", for: .normal)
+        self.followButtn.setTitleColor(.orange, for: .normal)
+        self.followButtn.removeGradient()
     }
     
-    func setUp(user:MFUser) {
+    func makeUnfollowButton() {
+        let color1 = UIColor(red: 1, green: 0.55, blue: 0.17, alpha: 1)
+        let color2 = UIColor(red: 1, green: 0.39, blue: 0.13, alpha: 1)
+        self.followButtn.applyGradient(colors: [color1, color2], direction: .leftToRight)
+        self.followButtn.setTitleColor(.white, for: .normal)
+        self.followButtn.setTitle("unfollow", for: .normal)
+    }
+    
+    func setUp(user: MFUser) {
         if self.shouldShowFollowButton == true {
-            self.followButtn.setTitle("Follow", for: .normal)
+            self.makeFollowButton()
         } else {
-            self.followButtn.setTitle("Unfollow", for: .normal)
+            self.makeUnfollowButton()
         }
         
-        if self.followButtn.currentTitle == "Follow" {
-            self.followButtn.setTitleColor(.orange, for: .normal)
-            self.followButtn.removeGradient()
-        } else {
-            self.followButtn.setTitleColor(.white, for: .normal)
-            self.addGradient()
-        }
         self.layoutIfNeeded()
         
         if let url = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: user.id) {
@@ -79,27 +79,29 @@ class FollowersTableCell: UITableViewCell {
         self.user = user
     }
     
-    func follow(sender:UIButton){
+    func follow(sender:UIButton) {
         let worker = OtherUsersProfileWorker()
         let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
         
-        var shouldFollow:Bool
-        
-        if sender.currentTitle == "Follow"{
-            sender.setTitle("Unfollow", for: .normal)
-            sender.setTitleColor(.orange, for: .normal)
-            sender.removeGradient()
+        var shouldFollow: Bool = false
+        if sender.currentTitle == "follow" {
+            self.makeUnfollowButton()
             self.layoutIfNeeded()
             shouldFollow = true
         } else {
-            sender.setTitle("Follow", for: .normal)
-            sender.setTitleColor(.white, for: .normal)
-            addGradient()
+            self.makeFollowButton()
             shouldFollow = false
         }
         
+        let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        self.followButtn.addSubview(activity)
+        self.followButtn.isEnabled = false
         worker.toggleFollow(targetUser: self.user!.id, currentUser: currentUser!.id, targetUserName: user!.name, currentUserName: currentUser!.name, shouldFollow: shouldFollow) { (status) in
-            print(status)
+            DispatchQueue.main.async {
+                self.followButtn.isEnabled = true
+                activity.removeFromSuperview()
+                print("Following: \(status)")
+            }
         }
     }
     

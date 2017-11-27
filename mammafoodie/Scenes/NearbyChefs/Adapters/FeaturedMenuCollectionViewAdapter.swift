@@ -33,9 +33,9 @@ class FeaturedMenuCollectionViewAdapter : NSObject, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedMenuCollectionCell", for: indexPath) as! FeaturedMenuCollectionCell
         
-        cell.imgViewItem.image = #imageLiteral(resourceName: "Minestrone Soup")
-        cell.lblUserName.text = "Douglas Keller"
-        cell.lblMenuItemName.text = "Pumpkin Soup"
+        cell.imgViewItem.image = #imageLiteral(resourceName: "IconMammaFoodie")
+        cell.lblUserName.text = ""
+        cell.lblMenuItemName.text = ""
         
         return cell
     }

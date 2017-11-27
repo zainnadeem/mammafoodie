@@ -101,7 +101,7 @@ struct MFNewsFeed {
         self.participantUser.name = dictionary["participantUserName"] as? String ?? ""
         
         self.text = dictionary["text"] as? String ?? ""
-        
+        self.mediaURL = URL.init(string: (dictionary["mediaURL"] as? String ?? ""))
         self.createdAt = Date.init(timeIntervalSinceReferenceDate: (dictionary["timestamp"] as? Double) ?? 0)
         self.redirectID = dictionary["redirectID"] as? String ?? ""
         

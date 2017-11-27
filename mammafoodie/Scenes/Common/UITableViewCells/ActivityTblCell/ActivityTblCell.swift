@@ -39,8 +39,8 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     
     func setup(with newsFeed: MFNewsFeed, withUser currentUser: MFUser) {
         self.lblActivity.delegate = self
-        self.imgCharacterEmoji.image = nil
-        self.conWidthImgCharacterEmoji.constant = 0
+//        self.imgCharacterEmoji.image = nil
+//        self.conWidthImgCharacterEmoji.constant = 0
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
@@ -57,15 +57,16 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         let activityAction = NSAttributedString.init(string: newsFeed.activity.text, attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)!])
         
         var relevantText: String = ""
-        if newsFeed.actionUser.id == "HRRbB0XJqAcnqwdRYqKc3TpGRi52" {
-            print("Wrong feed")
-        }
+        
+        var imagePath: String = "https://firebasestorage.googleapis.com/v0/b/mammafoodie-baf82.appspot.com/o/"
+
         switch newsFeed.activity {
         case .bought,
              .liked,
              .requested,
              .purchased:
             relevantText = "a dish."
+            imagePath.append("dishes")
             
         case .uploaded:
             relevantText = "a vidup."
@@ -73,6 +74,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         case .started,
              .watching:
             relevantText = "a live video."
+            imagePath.append("dishes")
             
         case .followed,
              .tipped:
@@ -81,12 +83,14 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
             } else {
                 relevantText = newsFeed.participantUser.name
             }
+            imagePath.append("users")
             
         case .none:
             self.lblActivity.setText("")
             return
         }
         
+       
         let relevantItem = NSAttributedString.init(string: " " + relevantText, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
         
         let wholeText = NSMutableAttributedString.init()
@@ -101,8 +105,16 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
         if newsFeed.activity.path == .users {
             self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.participantUser.id)")!, with: rangeRelevantItem)
+            imagePath.append("%2F\(newsFeed.participantUser.id).jpg?alt=media")
         } else {
             self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
+            imagePath.append("%2F\(newsFeed.redirectID).jpg?alt=media")
+        }
+        
+        if let imageURL = newsFeed.mediaURL {
+            self.imgCharacterEmoji.sd_setImage(with: imageURL, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .allowInvalidSSLCertificates)
+        } else {
+            print("invalid imageurl: \(newsFeed.mediaURL?.absoluteString ?? "")")
         }
         
         let timeString = newsFeed.createdAt.toStringWithRelativeTime(strings: nil)

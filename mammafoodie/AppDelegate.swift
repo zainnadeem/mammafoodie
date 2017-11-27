@@ -492,7 +492,7 @@
             if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
                 //                profileVC.profileType = type
                 profileVC.userID = userid
-                
+                nav.navigationBar.tintColor = .darkGray
                 if topViewController != nil {
                     self.checkAndPresent(vc: profileVC, topViewController: topViewController, pushNewViewController: true)
                 } else {
