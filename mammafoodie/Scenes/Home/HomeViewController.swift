@@ -1,4 +1,5 @@
 import UIKit
+import MIBadgeButton_Swift
 
 protocol HomeViewControllerInput {
     
@@ -27,6 +28,8 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     var conHeightViewTableViewHeader: NSLayoutConstraint!
     var screenMode: HomeViewControllerScreenMode = .activity
     
+    @IBOutlet weak var barButtonNotification: UIBarButtonItem!
+    @IBOutlet weak var btnNotifications: MIBadgeButton!
     @IBOutlet weak var viewTableViewBackground: UILabel!
     @IBOutlet weak var tblList: UITableView!
     @IBOutlet weak var viewLiveVideos: UIView!
@@ -95,6 +98,7 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.updateNotificationBadgeCount()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,6 +110,16 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    func updateNotificationBadgeCount() {
+        if unreadNotificationCount == 0 {
+            self.btnNotifications.badgeString = ""
+        } else if unreadNotificationCount > 99 {
+            self.btnNotifications.badgeString = "99+"
+        } else {
+            self.btnNotifications.badgeString = "\(unreadNotificationCount)"
+        }
     }
     
     // MARK: - Event handling
@@ -357,6 +371,9 @@ class HomeViewController: UIViewController, HomeViewControllerInput, CircleTrans
                 alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
                     
                 }))
+                
+                alert.popoverPresentationController?.sourceView = self.view
+                alert.popoverPresentationController?.sourceRect = self.view.bounds
                 
                 self.present(alert, animated: true, completion: {
                     

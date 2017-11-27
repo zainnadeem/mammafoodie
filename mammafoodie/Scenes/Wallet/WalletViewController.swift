@@ -22,10 +22,11 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var lblWalletBalance: UILabel!
     @IBOutlet weak var lblPendingBalance: UILabel!
     @IBOutlet weak var btnVerificationStatus: UIButton!
-    
     @IBOutlet weak var tblTransactions: UITableView!
     
     var transactions: [MFTransaction] = []
+    var available_balance_cents: Double = 0.0
+    var pending_balance_cents: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +69,18 @@ class WalletViewController: UIViewController {
     }
     
     func setWalletAmount(_ amount : Double, _ pending : Double = 0 ) {
+        self.available_balance_cents = amount
+        self.pending_balance_cents = pending
         let formatter = NumberFormatter()
         formatter.numberStyle = NumberFormatter.Style.currency
-        formatter.locale = Locale.current
+        formatter.locale = Locale(identifier: "es_US")
         self.lblWalletBalance.text = formatter.string(from: (amount/100) as NSNumber)
         self.lblPendingBalance.text = "Pending : \(formatter.string(from: (pending/100) as NSNumber) ?? "$0")"
     }
     
     func getCurrentBalance() {
         if let currentUser = Auth.auth().currentUser {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             FirebaseReference.stripeCustomers.classReference.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let account = snapshot.value as? [String : Any] {
                     if let charges = account["charges"] as? [String : [String : Any]] {
@@ -101,8 +105,11 @@ class WalletViewController: UIViewController {
                                 } else {
                                     print("Balance \(response)")
                                 }
+                                hud.hide(animated: true)
                             })
                         }
+                    } else {
+                        hud.hide(animated: true)
                     }
                 }
             })
@@ -127,7 +134,32 @@ class WalletViewController: UIViewController {
         transaction.dishId = raw["dishId"] as? String
         transaction.dishName = raw["dishName"] as? String
         
+        transaction.timestamp = raw["createTimestamp"] as? TimeInterval
+        transaction.date = Date(timeIntervalSinceReferenceDate: transaction.timestamp ?? 0)
+        
+        let status: String = raw["status"] as? String ?? ""
+        if status == "succeeded" {
+            transaction.status = MFTransactionStatus.success
+        } else {
+            transaction.status = MFTransactionStatus.failure
+        }
+        
         return transaction
+    }
+    
+    func sortTransactions() {
+        self.transactions.sort { (t1, t2) -> Bool in
+            if t1.date == nil {
+                return false
+            }
+            if t2.date == nil {
+                return false
+            }
+            if t1.date!.compare(t2.date!) == ComparisonResult.orderedDescending {
+                return true
+            }
+            return false
+        }
     }
     
     // MARK: - Actions
@@ -142,12 +174,18 @@ class WalletViewController: UIViewController {
                 FirebaseReference.stripeCustomers.classReference.child(currentUser.id).observeSingleEvent(of: .value, with: { (snapshot) in
                     DispatchQueue.main.async {
                         if let snapshot = snapshot.value as? [String:Any] {
-                            if (snapshot["externalAccounts"] as? [String:Any]) != nil {
-                                self.createPayout()
-                            } else {
-                                BankDetailsViewController.presentAddAccount(on: self) { (bankDetails) in
-                                    self.createPayout()
+                            if let accountId: String = snapshot["account_id"] as? String {
+                                if (snapshot["externalAccounts"] as? [String:Any]) != nil {
+                                    self.createPayout(accountId: accountId)
+                                } else {
+                                    BankDetailsViewController.presentAddAccount(on: self) { (bankDetailsAdded) in
+                                        if bankDetailsAdded == true {
+                                            self.createPayout(accountId: accountId)
+                                        }
+                                    }
                                 }
+                            } else {
+                                self.showAlert("Error", message: "This user account is not connected with payment gateway. Please contact administrator immediately.")
                             }
                         } else {
                             self.showAlert("Error", message: "Could not fetch s_customer")
@@ -180,19 +218,26 @@ class WalletViewController: UIViewController {
     
     func applyForVerification() {
         StripeVerificationViewController.presentStripeVerification(on: self) { (stripeSubmitted) in
-            self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
+            if stripeSubmitted {
+                self.showAlert("Success", message: "Your account verification is in progress. We will inform you when the process is completed. Thank you for your patience.")
+            }
         }
     }
     
-    func createPayout() {
+    func createPayout(accountId: String) {
         if AppDelegate.shared().currentUser?.stripePayoutsEnabled == false {
             self.showAlert("Error", message: "Payouts are disabled for this account. Please contact support at support@mammafoodie.com")
             return
         }
         
+        if self.available_balance_cents <= 0 {
+            self.showAlert("Error", message: "Insufficient balance.")
+            return
+        }
+        
         if let url = URL.init(string: "https://us-central1-mammafoodie-baf82.cloudfunctions.net/createPayout") {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            let parameters : Parameters = self.getParametersForPayout()
+            let parameters : Parameters = self.getParametersForPayout(accountId: accountId, amount: self.available_balance_cents)
             Alamofire.request(url, method: .post, parameters: parameters).response(completionHandler: { (response) in
                 if let responseData = response.data {
                     let resp = String(data: responseData, encoding: String.Encoding.utf8)
@@ -200,11 +245,11 @@ class WalletViewController: UIViewController {
                         hud.hide(animated: true)
                         if resp?.lowercased() == "success" {
                             self.showAlert("Congratulations", message: "Payout success.")
+                            self.getCurrentBalance()
                         } else {
                             self.showAlert("Sorry", message: "Payout could not be created. Please try again.")
                         }
                     }
-                    print(resp ?? "No Response")
                 } else {
                     hud.hide(animated: true)
                     self.showAlert("Payout Failed!", message: "")
@@ -213,8 +258,10 @@ class WalletViewController: UIViewController {
         }
     }
     
-    func getParametersForPayout() -> Parameters {
+    func getParametersForPayout(accountId: String, amount: Double) -> Parameters {
         var parameters:Parameters = [:]
+        parameters["accountId"] = accountId
+        parameters["amount"] = amount
         return parameters
     }
 }

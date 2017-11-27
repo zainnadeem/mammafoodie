@@ -11,13 +11,16 @@ import Foundation
 
 struct MFNotification {
     var id: String!
+    var actionUserId: String!
     var participantUserID: String!
-    var dishID:String?
+    var redirectId:String?
     var activityID: String!
     var text: String!
     var attributedString: NSMutableAttributedString?
     var liked: [String:Bool] = [:] //MFUser id
     var comments: [String:Bool] = [:] //MFComments id
+    var redirectPath: String = ""
+    var date: Date?
     
     init() {
         
@@ -32,28 +35,14 @@ struct MFNotification {
     }
     
     init(from dictionary:[String:AnyObject]){
-        /*
-         actionUserId:
-         "luuN75SiCHMWenXTngLlPLeW48a2"
-         participantUserId:
-         "Yf5bvIiNSMTxBYK6zSajlFYoXw42"
-         plainText:
-         "VidUp Test!"
-         redirectId:
-         "-KrUd41c4lXHO_KRBAx5"
-         redirectPath:
-         "Dishes"
-         text: 
-         "VidUp Test!"
-         timestamp: 
-         522861129.399
-
- */
         self.id = dictionary["id"] as? String ?? ""
-        self.participantUserID = dictionary["participantUserId"] as? String ?? ""
-        self.dishID = dictionary["redirectId"] as? String ?? nil
+        self.participantUserID = dictionary["participantUserID"] as? String ?? ""
+        self.actionUserId = dictionary["actionUserID"] as? String ?? ""
+        self.redirectId = dictionary["redirectID"] as? String ?? nil
         self.activityID = dictionary["activityID"] as? String ?? ""
         self.text = dictionary["text"] as? String ?? ""
+        self.redirectPath = dictionary["redirectPath"] as? String ?? ""
+        self.date = Date(timeIntervalSinceReferenceDate: dictionary["timestamp"] as? TimeInterval ?? 0)
         
         //Parse text and assign to attributed String
         //        self.attributedString =

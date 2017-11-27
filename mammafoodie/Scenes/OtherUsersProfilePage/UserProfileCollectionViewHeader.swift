@@ -19,6 +19,7 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
     var following = [MFUser]()
     
     //MARK: - IBOutlets
+    @IBOutlet weak var btnConversationsList: UIButton!
     @IBOutlet weak var lblUserName:UILabel!
     @IBOutlet weak var lblProfileDescription:UILabel!
     @IBOutlet weak var lblDishesSold:UILabel!
@@ -114,6 +115,16 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         
         guard let data = data else {return}
         
+        guard let loggedInUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        
+        if data.id == loggedInUser.id {
+            self.btnConversationsList.isHidden = false
+        } else {
+            self.btnConversationsList.isHidden = true
+        }
+        
         self.lblUserName.text = data.name
         self.lblFollowers.text = followersCount
         self.lblFollowing.text = followingCount
@@ -127,7 +138,9 @@ class UserProfileCollectionViewHeader : UICollectionReusableView {
         
         self.profilePicImageView.sd_cancelCurrentImageLoad()
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.id) {
-            self.profilePicImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: nil)
+            self.profilePicImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: { (image, error, cacheType, url) in
+                print("user profile collection view header. picture refreshed")
+            })
         } else {
             self.profilePicImageView.image = #imageLiteral(resourceName: "IconMammaFoodie")
         }

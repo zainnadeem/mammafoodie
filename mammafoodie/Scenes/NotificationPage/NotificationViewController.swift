@@ -31,17 +31,28 @@ class NotificationViewController: UIViewController {
         self.notificationTableView.emptyDataSetDelegate = self
         self.notificationTableView.emptyDataSetSource = self
 
-
         if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
             self.userID = user.id
-            DatabaseGateway.sharedInstance.getNotificationsForUser(userID:"fYK04phVGPRpszYixlO2ort6gyF3") { (nots) in
+            _ = DatabaseGateway.sharedInstance.getNotificationsForUser(userID:self.userID, frequency: .realtime) { (nots) in
                 DispatchQueue.main.async {
                     self.notifications = nots
+                    unreadNotificationCount = 0
+                    
+                    UserDefaults.standard.set(self.notifications.count, forKey: kNotificationReadCount)
+                    UserDefaults.standard.synchronize()
                 }
             }
         } else {
             self.navigationController?.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedRow: IndexPath = self.notificationTableView.indexPathForSelectedRow {
+            self.notificationTableView.deselectRow(at: selectedRow, animated: true)
+        }
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +75,19 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         let notif = self.notifications[indexPath.row]
         cell.setUp(notification: notif)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let notif = self.notifications[indexPath.row]
+        guard let redirectId: String = notif.redirectId else {
+            print("redirectId is not available")
+            return
+        }
+        let rawNotification: [String:Any] = [
+            "redirectId": redirectId,
+            "redirectPath": notif.redirectPath
+        ]
+        AppDelegate.shared().handleNotification(rawNotification, shouldTakeAction: true, topViewController: self, pushNewViewController: true)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

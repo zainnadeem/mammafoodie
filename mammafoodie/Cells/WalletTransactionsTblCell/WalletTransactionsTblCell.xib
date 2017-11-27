@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
         <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
@@ -16,31 +19,41 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletTransactionsTblCell" rowHeight="44" id="KGk-i7-Jjw" customClass="WalletTransactionsTblCell" customModule="mamma_foodie" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="467" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletTransactionsTblCell" rowHeight="121" id="KGk-i7-Jjw" customClass="WalletTransactionsTblCell" customModule="mamma_foodie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="467" height="121"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="467" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="467" height="120.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnl-8t-4xS">
-                        <rect key="frame" x="8" y="4" width="451" height="35.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnl-8t-4xS">
+                        <rect key="frame" x="8" y="4" width="451" height="95"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jQ-Ys-aal">
+                        <rect key="frame" x="8" y="103" width="451" height="13.5"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="hnl-8t-4xS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="2EJ-R1-DTi"/>
+                    <constraint firstItem="4jQ-Ys-aal" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8V2-sv-r5y"/>
                     <constraint firstAttribute="trailing" secondItem="hnl-8t-4xS" secondAttribute="trailing" constant="8" id="9oQ-ZR-qmD"/>
                     <constraint firstItem="hnl-8t-4xS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ZBv-Wq-CKz"/>
-                    <constraint firstAttribute="bottom" secondItem="hnl-8t-4xS" secondAttribute="bottom" constant="4" id="yhk-dq-Ooa"/>
+                    <constraint firstItem="4jQ-Ys-aal" firstAttribute="top" secondItem="hnl-8t-4xS" secondAttribute="bottom" constant="4" id="aNn-Rk-8Li"/>
+                    <constraint firstAttribute="trailing" secondItem="4jQ-Ys-aal" secondAttribute="trailing" constant="8" id="ntr-PM-RKD"/>
+                    <constraint firstAttribute="bottom" secondItem="4jQ-Ys-aal" secondAttribute="bottom" constant="4" id="pHq-P7-VCv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="lblAction" destination="hnl-8t-4xS" id="lAp-X1-mVM"/>
+                <outlet property="lblDate" destination="4jQ-Ys-aal" id="3Zj-zY-14T"/>
             </connections>
-            <point key="canvasLocation" x="-164.5" y="-119.5"/>
+            <point key="canvasLocation" x="-154" y="-183"/>
         </tableViewCell>
     </objects>
 </document>

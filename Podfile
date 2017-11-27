@@ -37,6 +37,8 @@ target 'mammafoodie' do
 	pod 'MBProgressHUD'
 
     pod 'DZNEmptyDataSet'
+    
+    pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
 
     target 'mammafoodieTests' do
         pod 'Firebase/Core'

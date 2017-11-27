@@ -49,6 +49,15 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     @IBOutlet weak var lblCurrentlyCooking: UILabel!
     @IBOutlet weak var lblLeftDishesCount: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var conHeightBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conBottomBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conTopBtnRequest: NSLayoutConstraint!
+    @IBOutlet weak var conAspectRatioImgView: NSLayoutConstraint!
+    @IBOutlet weak var conHeightImgView: NSLayoutConstraint!
+    @IBOutlet weak var viewHeader: UIView!
+    @IBOutlet weak var btnDeleteDish: UIButton!
+    @IBOutlet weak var conMaarginBtnBookmarkToBtnDelete: NSLayoutConstraint!
+    @IBOutlet weak var conTrailingBtnDelete: NSLayoutConstraint!
     
     
     //if only dish ID is passed
@@ -61,10 +70,6 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         super.awakeFromNib()
         DishDetailConfigurator.sharedInstance.configure(viewController: self)
     }
-    
-    //TODO: - Need to be changed
-    let coordinate0 = CLLocation(latitude: 12.97991, longitude: 77.72482)
-    let coordinate1 = CLLocation(latitude: 12.8421, longitude: 77.6631)
     
     // MARK: - View lifecycle
     
@@ -122,9 +127,32 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.hideActivityIndicator()
         
-        guard let data = response.dish else { return }
+        guard let data = response.dish else {
+            AppDelegate.close(vc: self)
+            if let deletedDish: MFDish = self.dishForView?.dish {
+                if deletedDish.user.id == DatabaseGateway.sharedInstance.getLoggedInUser()?.id {
+                    // The user just deleted the dish. Take him back.
+                }
+            } else {
+                self.showAlert(message: "Dish not found. Maybe it was deleted.")
+            }
+            return
+        }
         
         self.dishForView = response
+        
+        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            if self.dishForView?.dish?.user.id == currentUser.id {
+                self.conHeightBtnRequest.constant = 0
+                self.conBottomBtnRequest.constant = 0
+                self.conTopBtnRequest.constant = 0
+            } else {
+                self.conTrailingBtnDelete.constant = -1 * (30 + 4)
+            }
+        } else {
+            self.conTrailingBtnDelete.constant = -1 * (30 + 4)
+        }
+//        self.view.layoutIfNeeded()
         
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
@@ -134,7 +162,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.lblNumberOfTimesOrdered.text = "\(UInt(data.totalOrders)) Orders"
         self.lblPrepTime.text = "\(Int(data.preparationTime / 60)) mins"
         self.lblDishDescription.text = data.description
-//        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
+        //        self.lblDistanceAway.text = "\(String(format: "%.2f",(coordinate0.distance(from: coordinate1))/1000)) Kms"
         
         self.lblLeftDishesCount.text = data.availableSlots.description + " Left"
         
@@ -142,10 +170,22 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         self.profileImageView.sd_setImage(with: DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: data.user.id))
         
+        var dishImageUrl: URL? = nil
         if let url = data.coverPicURL {
-            self.dishImageView.sd_setImage(with: url)
+            dishImageUrl = url
         } else if let url = data.mediaURL {
-            self.dishImageView.sd_setImage(with: url)
+            dishImageUrl = url
+        }
+        if let url = dishImageUrl {
+            self.dishImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .refreshCached, completed: { (image, error, cacheType, url) in
+                if error != nil || image == nil {
+                    // Update view for no image
+                    self.updateUIForNoDishImage()
+                }
+            })
+        } else {
+            // Update view for no image
+            self.updateUIForNoDishImage()
         }
         
         //set profile imageview
@@ -178,10 +218,22 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             
         }
         
-        self.output.checkLikeStatus(userId: data.user.id, dishId: data.id)
-        self.output.checkFavouritesStatus(userId: data.user.id, dishId: data.id)
+        if let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+            self.output.checkLikeStatus(userId: currentUser.id, dishId: data.id)
+            self.output.checkFavouritesStatus(userId: currentUser.id, dishId: data.id)
+        }
         
         self.lv_contentView.isHidden = false
+    }
+    
+    func updateUIForNoDishImage() {
+        if (self.conAspectRatioImgView) != nil {
+            self.btnBack.tintColor = #colorLiteral(red: 0.3843137255, green: 0.3843137255, blue: 0.3764705882, alpha: 1)
+            self.btnShare.tintColor = #colorLiteral(red: 0.3843137255, green: 0.3843137255, blue: 0.3764705882, alpha: 1)
+            NSLayoutConstraint.deactivate([self.conAspectRatioImgView])
+            NSLayoutConstraint.activate([self.conHeightImgView])
+            self.conHeightImgView.constant = 64
+        }
     }
     
     func displayString(from number: Double) -> String {
@@ -205,7 +257,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         let components = stringTemp.components(separatedBy: ".")
         if components.count > 1 {
             // Has decimal part
-            if components[1].characters.count == 1 {
+            if components[1].count == 1 {
                 stringTemp = components.first!
                 stringTemp.append(".")
                 stringTemp.append(components[1].appending("0"))
@@ -223,7 +275,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         self.btnLikes.isSelected = response.status
     }
     
-    func getDistanceAway(){
+    func getDistanceAway() {
         
     }
     
@@ -266,12 +318,11 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             likesCount = Int(temp)
         }
         if btnLikes.isSelected == false {
-            btnLikes.isSelected = true
             likesCount+=1
         } else {
-            btnLikes.isSelected = false
             likesCount-=1
         }
+        btnLikes.isSelected = !btnLikes.isSelected
         self.lblNumberOfLikes.text = "\(Int(likesCount))"
         
         if let dish = self.dishForView?.dish, let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser {
@@ -309,6 +360,16 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
         if button.currentTitle == "Request"{
             
+            guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+                print("User not logged in DishDetailViewController")
+                return
+            }
+            
+            if self.dishForView?.dish?.user.id == currentUser.id {
+                print("Can't request own dish.")
+                return
+            }
+            
             let alertController: UIAlertController = UIAlertController(title: "Request dish", message: "Please enter desired quantity.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addTextField(configurationHandler: { (textField) in
                 textField.keyboardType = UIKeyboardType.numberPad
@@ -320,35 +381,17 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
                 let quantity: Int = Int(alertController.textFields?.first?.text ?? "0") ?? 0
                 if let dish = self.dishForView?.dish {
                     if quantity > 0 {
-                        worker.requestDish(dish: dish, quantity: quantity, completion: { (success, errorMessage) in
-                            self.hideActivityIndicator()
-                            if let errorMessage = errorMessage {
-                                self.showAlert("Error", message: errorMessage)
-                            } else {
-                                // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
-                                if let user2Id: String = self.dishForView?.dish?.user.id {
-                                    _ = DatabaseGateway.sharedInstance.getUserWith(userID: user2Id, { (dishUser) in
-                                        if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
-                                            let dishUser = dishUser {
-                                            DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: dishUser, { (success, conversationId) in
-                                                if success {
-                                                    if let conversationId = conversationId {
-                                                        self.sendDishRequestMessage(in: conversationId, quantity: quantity, dishName: dish.name, dish: dish)
-                                                    } else {
-                                                        self.showAlert(message: "Request failed. Please try again.")
-                                                    }
-                                                } else {
-                                                    self.showAlert(message: "Request failed. Please try again.")
-                                                }
-                                            })
-                                        } else {
-                                            self.showAlert(message: "Request failed. Please try again.")
-                                        }
-                                    })
+                        self.createConversation({ (conversationId) in
+                            self.sendDishRequestMessage(in: conversationId, quantity: quantity, dishName: dish.name, dish: dish)
+                            
+                            worker.requestDish(dish: dish, quantity: quantity, conversationId: conversationId, completion: { (success, errorMessage) in
+                                self.hideActivityIndicator()
+                                if let errorMessage = errorMessage {
+                                    self.showAlert("Error", message: errorMessage)
                                 } else {
-                                    self.showAlert(message: "Request failed. Please try again.")
+                                    // self.showAlert("Success", message: "Dish requested to the Chef. Now you can contact the chef via chat.")
                                 }
-                            }
+                            })
                         })
                     }
                 } else {
@@ -363,6 +406,31 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             //            let vc = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "SlotSelectionViewController")
             //
             //            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func createConversation(_ completion: @escaping ((_ conversationId: String)->Void)) {
+        if let user2Id: String = self.dishForView?.dish?.user.id {
+            _ = DatabaseGateway.sharedInstance.getUserWith(userID: user2Id, { (dishUser) in
+                if let user1: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser(),
+                    let dishUser = dishUser {
+                    DatabaseGateway.sharedInstance.createConversation(user1: user1, user2: dishUser, { (success, conversationId) in
+                        if success {
+                            if let conversationId = conversationId {
+                                completion(conversationId)
+                            } else {
+                                self.showAlert(message: "Request failed. Please try again.")
+                            }
+                        } else {
+                            self.showAlert(message: "Request failed. Please try again.")
+                        }
+                    })
+                } else {
+                    self.showAlert(message: "Request failed. Please try again.")
+                }
+            })
+        } else {
+            self.showAlert(message: "Request failed. Please try again.")
         }
     }
     
@@ -406,7 +474,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        AppDelegate.close(vc: self)
     }
     
     func getDistanceBetweenUsers(userID1:String, userID2:String, _ completion : @escaping (Double?) -> Void) {
@@ -416,10 +484,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
             _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID2, { (user2) in
                 let lat2: Double = Double(user2?.addressDetails?.latitude ?? "0") ?? 0
                 let long2: Double = Double(user2?.addressDetails?.longitude ?? "0") ?? 0
-//                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
-//                    completion(nil)
-//                    return
-//                }
+                //                guard let lat1 = latLong1?.first, let lat2 = latLong2?.first, let long1 = latLong1?.last, let long2 = latLong2?.last  else {
+                //                    completion(nil)
+                //                    return
+                //                }
                 let cl1 = CLLocation(latitude: Double(lat1), longitude: Double(long1))
                 let cl2 = CLLocation(latitude: Double(lat2), longitude: Double(long2))
                 completion(cl1.distance(from: cl2)/1000)
@@ -435,4 +503,18 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     // MARK: - Display logic
     
+    @IBAction func btnDeleteDishTapped(_ sender: UIButton) {
+        let alert: UIAlertController = UIAlertController(title: "Delete", message: "Do you really want to delete the dish?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { (action) in
+//            self.output.stopObservingDish()
+            DatabaseGateway.sharedInstance.deleteDish(self.dishForView!.dish!, completion: { (error) in
+                print("Dish deleted")
+                DispatchQueue.main.async {
+//                    self.backButtonTapped(self.btnBack)
+                }
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

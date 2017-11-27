@@ -74,6 +74,10 @@ class LiveVideoGateway: NSObject {
         self.delegate?.streamPublished()
     }
     
+    func swapCamera() {
+        self.publishViewController.swapCamera()
+    }
+    
     func getStreamImage() -> UIImage {
         return self.publishViewController.stream.getImage()
     }

@@ -14,6 +14,7 @@ protocol DealDetailViewControllerOutput {
     func dishUnliked(user_id:String,dish_id: String)
     func stopPlayback()
     func startPlayback()
+    func updateViewersCount(for dishID:String, opened:Bool)
 }
 
 class DealDetailViewController: UIViewController, DealDetailViewControllerInput {
@@ -31,6 +32,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     var DishId:String = ""
     
     var dish: MFDish?
+    var commentId: String?
     
     //MARK: - IBOutlet
     
@@ -75,7 +77,12 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         
         //        self.lv_slotView.addGradienBorder(colors: [gradientStartColor, gradientEndColor], direction: .leftToRight,borderWidth: 3.0, animated: false)
         if let dish = self.dish {
-            self.load(new: dish)
+            self.load(new: dish, completion: {
+            })
+            if let commentId: String = self.commentId {
+                self.highlightComment(commentId: commentId)
+            }
+            self.output.updateViewersCount(for: dish.id, opened: true)
         } else {
             self.close(animated: false)
             self.showAlert("Error", message: "Error downloading the dish info. Please try again.")
@@ -117,6 +124,39 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         if self.shouldShowSlotSelection {
             self.showSlotSelection()
         }
+        
+        self.addGradientForUserProfileInfoView()
+        self.addGradientForCommentsView()
+    }
+    
+    private func addGradientForUserProfileInfoView() {
+        let colors: [UIColor] = [
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        ]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.lv_ProfileDetails.bounds
+        gradientLayer.colors = colors.map { $0.cgColor }
+        
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.lv_ProfileDetails.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    private func addGradientForCommentsView() {
+        let colors: [UIColor] = [
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
+            #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+        ]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.lv_ProfileDetails.bounds
+        gradientLayer.colors = colors.map { $0.cgColor }
+        
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        self.viewComments.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,27 +196,38 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     // MARK: - Event handling
     @IBAction func likebtnClicked(_ sender: Any) {
+        guard let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
         if self.viewComments.btnLike.isSelected ==  true {
             self.viewComments.btnLike.isSelected = false
-            output.dishUnliked(user_id: userId, dish_id: DishId)
+            output.dishUnliked(user_id: currentUser.id, dish_id: DishId)
         }else{
             self.viewComments.btnLike.isSelected = true
-            output.dishLiked(user_id: userId, dish_id: DishId)
+            output.dishLiked(user_id: currentUser.id, dish_id: DishId)
             animateLike()
         }
     }
     
     @IBAction func closebtnClicked(_ sender: Any) {
         self.close(animated: true)
-
+        if let dish = self.dish {
+            self.output.updateViewersCount(for: dish.id, opened: false)
+        }
     }
     
     private func close(animated: Bool) {
+        self.observer?.stop()
+        self.observer = nil
         self.output.stopTimer()
         self.output.stopPlayback()
-        if self.presentingViewController != nil ||
-            self.navigationController?.presentingViewController != nil {
-            self.dismiss(animated: true, completion: nil)
+        
+        if self.presentingViewController != nil || self.navigationController?.presentingViewController != nil {
+            if self.navigationController?.viewControllers.first == self {
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         } else {
             self.navigationController?.popViewController(animated: true)
         }
@@ -187,7 +238,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         if self.viewComments.isHidden == true {
             self.viewComments.isHidden = false
             self.lv_ProfileDetails.isHidden = false
-        }else{
+        } else {
             self.viewComments.isHidden = true
             self.lv_ProfileDetails.isHidden = true
         }
@@ -202,7 +253,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     
     func DisplayDishInfo(DishInfo:MFDish) {
         lbl_dishName.text = DishInfo.name
-        lbl_slot.text = "\(DishInfo.availableSlots)/\(DishInfo.totalSlots) Slots"
+        lbl_slot.text = "\( DishInfo.totalSlots - DishInfo.availableSlots )/\(DishInfo.totalSlots) Slots"
         lbl_viewCount.text = "\(DishInfo.numberOfViewers)"
         self.viewComments.likesCount = Int(DishInfo.likesCount)
     }
@@ -246,21 +297,22 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         return path
     }
     
-    func load(new vidup: MFDish) {
+    func load(new vidup: MFDish, completion: (()->Void)?) {
         self.displayDishInfo(for: vidup)
+        self.setupViewComments()
         self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: vidup.id, frequency: .realtime, { (loadedDish) in
-            self.setupViewComments()
             if let loadedDish = loadedDish {
                 self.displayDishInfo(for: loadedDish)
             } else {
                 self.close(animated: true)
                 self.showAlert("Error", message: "Error downloading the dish. Please try again.")
             }
+            completion?()
         })
     }
     
-    deinit {
-        self.observer = nil
+    func highlightComment(commentId: String) {
+        self.viewComments.highlightComment(id: commentId)
     }
 
     func displayDishInfo(for vidup: MFDish) {
@@ -285,10 +337,8 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
                 print("Image view removed")
                 view.removeFromSuperview()
             }
-            self.output.setupMediaPlayer(view: self.viewVideo,
-                                         user_id: userId ,
-                                         dish_id: DishId,
-                                         dish: self.dish)
+            self.output.setupMediaPlayer(view: self.viewVideo, user_id: userId, dish_id: DishId, dish: self.dish)
+//            self.viewVideo.isHidden = true
         } else if vidup.mediaType == MFDishMediaType.picture {
             if let view = self.viewVideo {
                 print("Video view removed")

@@ -20,6 +20,15 @@ class DealsListWorker {
     }
     
     private func getCombinedList() -> [MFDish] {
-        return vidups + pictures
+        
+        let filteredVidups: [MFDish] = vidups.filter { (dish) -> Bool in
+            return dish.visible
+        }
+        
+        let filteredPictures: [MFDish] = pictures.filter { (dish) -> Bool in
+            return dish.visible
+        }
+        
+        return filteredVidups + filteredPictures
     }
 }

@@ -13,6 +13,7 @@ protocol VidupDetailPageInteractorInput {
     func dishUnliked(user_id:String,dish_id: String)
     func stopPlayback()
     func startPlayback()
+    func updateViewersCount(for dishID:String, opened:Bool)
 }
 
 protocol VidupDetailPageInteractorOutput {
@@ -129,5 +130,9 @@ class VidupDetailPageInteractor: VidupDetailPageInteractorInput,Interactordelega
 
     func stopPlayback() {
         self.Vidupworker.stopPayback()
+    }
+    
+    func updateViewersCount(for dishID:String, opened:Bool) {
+        self.Vidupworker.updateViewersCount(for: dishID, opened: opened)
     }
 }

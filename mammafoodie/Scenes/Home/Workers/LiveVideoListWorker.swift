@@ -6,7 +6,10 @@ class LiveVideoListWorker {
     
     func getList(_ completion: @escaping (([MFDish])->Void)) {
         self.observer = DatabaseGateway.sharedInstance.getLiveVideos { (dishes) in
-            completion(dishes)
+            let filteredDishes: [MFDish] = dishes.filter { (dish) -> Bool in
+                return dish.visible
+            }
+            completion(filteredDishes)
         }
     }
 }

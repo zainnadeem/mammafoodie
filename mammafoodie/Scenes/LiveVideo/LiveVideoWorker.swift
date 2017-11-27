@@ -27,6 +27,10 @@ class LiveVideoWorker {
         })
     }
     
+    func swapCamera() {
+        self.liveVideoGateway!.swapCamera()
+    }
+    
     func publish(_ liveVideo: MFDish, _ completion: @escaping LiveVideoViewClosure) {
         self.liveVideoGateway!.publish(with: liveVideo.id, { (newCameraView) in
             completion(newCameraView)

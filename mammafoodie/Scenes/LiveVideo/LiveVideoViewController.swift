@@ -14,6 +14,7 @@ protocol LiveVideoViewControllerOutput {
     func start(_ liveVideo: MFDish)
     func stop(_ liveVideo: MFDish)
     func updateStreamImage()
+    func swapCamera()
 }
 
 class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
@@ -46,7 +47,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     
     @IBOutlet weak var lblSlotsCount: UILabel!
     
-    var observer: DatabaseConnectionObserver?
+    var dishObserver: DatabaseConnectionObserver?
     
     // MARK: - Object lifecycle
     
@@ -100,13 +101,15 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             self.lblNumberOfViewers.text = "\(count)"
         }
         
-        // This needs to be executed from viewWillAppear or later. Because of the Camera
-        if let output = self.output {
-            #if (arch(i386) || arch(x86_64)) && os(iOS)
-            #else
-                output.start(self.liveVideo)
-            #endif
-        }
+        self.output!.start(self.liveVideo)
+        
+//        // This needs to be executed from viewWillAppear or later. Because of the Camera
+//        if let output = self.output {
+//            #if (arch(i386) || arch(x86_64)) && os(iOS)
+//            #else
+//                output.start(self.liveVideo)
+//            #endif
+//        }
         
         self.setupViewComments()
         self.viewComments.emojiTapped = { (emojiButton) in
@@ -124,6 +127,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (action) in
                     
                 }))
+                
+                alert.popoverPresentationController?.sourceView = emojiButton
+                alert.popoverPresentationController?.sourceRect = emojiButton.bounds
+                
                 self.present(alert, animated: true, completion: {
                     
                 })
@@ -151,7 +158,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
             AnalyticsParameterContentType: "LiveVideoView" as NSObject
             ])
         
-        self.observer = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
+        self.dishObserver = DatabaseGateway.sharedInstance.getDishWith(dishID: self.liveVideo.id, frequency: .realtime) { (dish) in
             DispatchQueue.main.async {
                 if let dish = dish {
                     
@@ -161,13 +168,13 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                         dish.accessMode = MFDishMediaAccessMode.viewer
                     }
                     
-                    self.lblSlotsCount.text = "\(dish.availableSlots)/\(dish.totalSlots) Slots"
+                    self.lblSlotsCount.text = "\( dish.totalSlots - dish.availableSlots )/\(dish.totalSlots) Slots"
                     self.liveVideo = dish
                     self.lblDishName.text = dish.name
                     self.showUserInfo()
                     
                     if let location = dish.location {
-                        if (dish.address.characters.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
+                        if (dish.address.count == 0) || CLLocationCoordinate2DIsValid(location) == false {
                             self.viewSlotDetails.isHidden = true
                         }
                     } else {
@@ -183,6 +190,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     func load(new liveVideo: MFDish) {
         self.output?.stop(self.liveVideo)
         self.liveVideo = liveVideo
+        self.dishObserver?.stop()
         self.loadDish()
         self.startLiveVideo()
     }
@@ -294,6 +302,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         sender.isSelected = !sender.isSelected
     }
     
+    @IBAction func btnSwitchCameraTapped(_ sender: UIButton) {
+        self.output?.swapCamera()
+    }
+    
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         
         if self.output != nil {
@@ -307,6 +319,8 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
         self.timerForThumbnailCapturing = nil
         
         self.countObserver?.stop()
+        self.dishObserver?.stop()
+        self.dishObserver = nil
         self.countObserver = nil
         
         if self.presentingViewController != nil ||
@@ -336,12 +350,12 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     func startUpdatingImage() {
-        print("Starting the image uploading timer")
-        self.timerForThumbnailCapturing?.invalidate()
-        self.timerForThumbnailCapturing = nil
-        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
-            self.output?.updateStreamImage()
-        })
+//        print("Starting the image uploading timer")
+//        self.timerForThumbnailCapturing?.invalidate()
+//        self.timerForThumbnailCapturing = nil
+//        self.timerForThumbnailCapturing = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block: { (timer) in
+//            self.output?.updateStreamImage()
+//        })
     }
     
     func streamUnpublished() {
@@ -370,8 +384,7 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
     }
     
     @IBAction func onSlotsTap(_ sender: UIButton) {
-        if self.liveVideo.totalSlots > 0 &&
-            self.liveVideo.availableSlots > 0 {
+        if self.liveVideo.totalSlots > 0 && self.liveVideo.availableSlots > 0 {
             self.performSegue(withIdentifier: "seguePresentSlotSelectionViewController", sender: self)
         } else {
             self.showAlert("Sorry!", message: "No slots available!")

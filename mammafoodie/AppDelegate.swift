@@ -15,6 +15,9 @@
  import MBProgressHUD
  
  var navigationBarTintColor: UIColor!
+ var navigationBarBackgroundColor: UIColor!
+ var unreadNotificationCount: Int = 0
+ let kNotificationReadCount: String = "kNotificationReadCount"
  
  @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -28,6 +31,8 @@
     var uberAccessTokenHandler: ((_ accessToken:String?)->())?
     var currentUserObserver: DatabaseConnectionObserver?
     var currentUserStripeVerificationObserver: DatabaseConnectionObserver?
+    
+    private var notificationObserver: DatabaseConnectionObserver?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -47,6 +52,7 @@
         let navigationController = storyBoard.instantiateInitialViewController() as! MFNavigationController
         
         navigationBarTintColor = navigationController.navigationBar.tintColor
+        navigationBarBackgroundColor = navigationController.navigationBar.backgroundColor
         
         if let _ = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
             print("Launch With options")
@@ -65,14 +71,17 @@
                 _ = DatabaseGateway.sharedInstance.getUserWith(userID: userId) { (loggedInUser) in
                     DispatchQueue.main.async {
                         self.currentUser = loggedInUser
+                        self.updateToken()
+                        print("Currently logged in user: \(loggedInUser!.id)")
                         welcomeVC.collectionViewImages.isHidden = false
                         welcomeVC.viewContainer.isHidden = false
                         hud.hide(animated: true)
                         if self.currentUser != nil {
+                            self.updateNotificationCount()
                             let homeVC = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                             welcomeVC.navigationController?.pushViewController(homeVC, animated: false)
                             if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
-                                self.handleNotification(userInfo, showAlert: false)
+                                self.handleNotification(userInfo, shouldTakeAction: true, topViewController: nil, pushNewViewController: false)
                             }
                             self.stripeVerificationCheck()
                         } else {
@@ -84,14 +93,26 @@
                 }
             }
         }
-        
-        //        self.saveDishes()
-        
+
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
+//        FirebaseReference.users.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+//            if let users = snapshot.value as? [String: AnyObject] {
+//                for (_, value) in users {
+//                    if let dict = value as? [String: AnyObject] {
+//                        let user = MFUser.init(from: dict)
+//                        if user.id != "" {
+//                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+//                                print("Error: \(error ?? "nil")")
+//                            })
+//                        }
+//                    }
+//                }
+//            }
+//        })
         return true
     }
     
@@ -153,20 +174,24 @@
         }
     }
     
-//    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
-//        let newID = FirebaseReference.notifications.generateAutoID()
-//        FirebaseReference.notifications.classReference.child(id).updateChildValues([
-//            newID : [
-//                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
-//                "participantUserID": id,
-//                "plainText": "VidUp Test!",
-//                "redirectId": "-KrUd41c4lXHO_KRBAx5",
-//                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
-//                "redirectPath": "Dishes",
-//                "text": "VidUp Test!",
-//                "timestamp": 522861129.399
-//            ]])
-//    }
+    func removeNotificationForStripeVerificationReminder() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["remindUserToVerifyStripeAccount"])
+    }
+    
+    //    func sendTestNotification(id: String = "Yf5bvIiNSMTxBYK6zSajlFYoXw42") {
+    //        let newID = FirebaseReference.notifications.generateAutoID()
+    //        FirebaseReference.notifications.classReference.child(id).updateChildValues([
+    //            newID : [
+    //                "actionUserId": "luuN75SiCHMWenXTngLlPLeW48a2",
+    //                "participantUserID": id,
+    //                "plainText": "VidUp Test!",
+    //                "redirectId": "-KrUd41c4lXHO_KRBAx5",
+    //                //                "redirectId": "-KrUfiLgyJT-N9DVxGOw", Live Video
+    //                "redirectPath": "Dishes",
+    //                "text": "VidUp Test!",
+    //                "timestamp": 522861129.399
+    //            ]])
+    //    }
     
     func updateToken() {
         if let token = Messaging.messaging().fcmToken {
@@ -210,6 +235,7 @@
         worker.getUserDataWith(userID: currentUserFirebase!.uid) { (user) in
             self.currentUser = user
         }
+        worker.stopObserver()
         
     }
     
@@ -304,88 +330,141 @@
         print("filePath: \(destinationPath)")
     }
     
-    func handleNotification(_ userInfo: [AnyHashable : Any], showAlert: Bool = true) {
-        if let _ = self.currentUser,
-            let redirectID = userInfo["redirectId"] as? String,
-            let redirectPathString = userInfo["redirectPath"] as? String,
-            let redirectpath = FirebaseReference(rawValue: redirectPathString) {
-            let appState = UIApplication.shared.applicationState
-            print("App State: \(appState.rawValue)")
-            
-            func handleRequest() {
-                switch redirectpath {
-                case .users:
-                    var type: ProfileType = .othersProfile
-                    if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
-                        if currentUser.id == redirectID {
-                            type = .ownProfile
+    func resizeImage(image: UIImage, width: Double) -> UIImage? {
+        let newWidth: CGFloat = CGFloat(width)
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize.init(width: newWidth, height: newHeight))
+        image.draw(in: CGRect.init(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
+    func handleNotification(_ userInfo: [AnyHashable : Any], shouldTakeAction: Bool = true, topViewController: UIViewController?, pushNewViewController: Bool) {
+        DispatchQueue.main.async {
+            if let _ = self.currentUser,
+                let redirectID = userInfo["redirectId"] as? String,
+                let redirectPathString = userInfo["redirectPath"] as? String,
+                let redirectpath = FirebaseReference(rawValue: redirectPathString) {
+                let appState = UIApplication.shared.applicationState
+                print("App State: \(appState.rawValue)")
+                
+                func handleRequest() {
+                    switch redirectpath {
+                    case .users:
+                        var type: ProfileType = .othersProfile
+                        if let currentUser = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                            if currentUser.id == redirectID {
+                                type = .ownProfile
+                            }
                         }
-                    }
-                    self.showUserProfile(with: type, userid: redirectID)
-                    
-                case .dishes:
-                    self.openDish(with: redirectID)
-                    
-                default:
-                    print("Redirect Path not Handled")
-                    print("\nNot Handled notification: \(userInfo)\n")
-                }
-            }
-            if showAlert &&
-                appState == .active {
-                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
-                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
-                        DispatchQueue.main.async {
-                            handleRequest()
-                        }
-                    }, cancelActionHandler: { (action) in
+                        self.showUserProfile(with: type, userid: redirectID, topViewController: topViewController)
                         
-                    })
-                } else {
-                    print("Notification text is wrong: \(userInfo)")
+                    case .dishes:
+                        self.openDish(with: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        
+                    case .dishComments:
+                        let comps: [String] = redirectID.components(separatedBy: CharacterSet.init(charactersIn: "/"))
+                        if comps.count == 3 {
+                            let dishId: String = comps[1]
+                            let commentId: String = comps[2]
+                            self.openDish(with: dishId, withCommentId: commentId, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        } else {
+                            print("Could not find dishId and commentId. Please debug for \(redirectID) in Notifications.")
+                        }
+                        
+                    case .messages:
+                        self.openConversation(id: redirectID, topViewController: topViewController, pushNewViewController: pushNewViewController)
+                        
+                    default:
+                        print("Redirect Path not Handled")
+                        print("\nNot Handled notification: \(userInfo)\n")
+                    }
                 }
+                
+                //            if showAlert &&
+                //                appState == .active {
+                //                if let text = ((userInfo["aps"] as? [String: AnyHashable])?["alert"] as? [String: String])?["body"] {
+                //                    self.getCurrentViewController().showAlert("Notification Received", message: text, actionTitles: ["View"], cancelTitle: "Ignore", actionhandler: { (actionhandler, index) in
+                //                        DispatchQueue.main.async {
+                //                            handleRequest()
+                //                        }
+                //                    }, cancelActionHandler: { (action) in
+                //
+                //                    })
+                //                } else {
+                //                    print("Notification text is wrong: \(userInfo)")
+                //                }
+                //            } else {
+                
+                if shouldTakeAction {
+                    handleRequest()
+                }
+                
+                //            }
             } else {
-                handleRequest()
+                print("\nNot Handled notification: \(userInfo)\n")
             }
-        } else {
-            print("\nNot Handled notification: \(userInfo)\n")
         }
     }
     
-    func openDish(with id: String) {
-        let story = UIStoryboard.init(name: "Main", bundle: nil)
-        func open(dish: MFDish) {
-            if let _ = dish.endTimestamp {
-                //Vidup
-                if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
-                    currentVC.load(new: dish)
-                } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
-                    vidupDetailVC.DishId = dish.id
-                    vidupDetailVC.userId = dish.user.id
-                    vidupDetailVC.dish = dish
-                    present(vidupDetailVC)
+    func openDish(with id: String, withCommentId commentId: String? = nil, topViewController: UIViewController?, pushNewViewController: Bool) {
+        func open(dish: MFDish, commentId: String? = nil) {
+            let story = UIStoryboard.init(name: "Main", bundle: nil)
+            if dish.endTimestamp?.timeIntervalSinceReferenceDate ?? 0 > Date().timeIntervalSinceReferenceDate {
+                if dish.mediaType == .liveVideo && dish.endTimestamp == nil {
+                    if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
+                        currentVC.load(new: dish)
+                    } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
+                        liveVideoVC.liveVideo = dish
+                        self.checkAndPresent(vc: liveVideoVC, topViewController: topViewController, pushNewViewController: true)
+                    }
+                } else if dish.mediaType == .vidup || dish.mediaType == .picture {
+                    if let currentVC = self.getCurrentViewController() as? DealDetailViewController {
+                        currentVC.commentId = commentId
+                        currentVC.load(new: dish, completion: {
+                            
+                        })
+                    } else if let vidupDetailVC = story.instantiateViewController(withIdentifier: "DealDetailViewController") as? DealDetailViewController {
+                        vidupDetailVC.commentId = commentId
+                        vidupDetailVC.DishId = dish.id
+                        vidupDetailVC.userId = dish.user.id
+                        vidupDetailVC.dish = dish
+                        self.checkAndPresent(vc: vidupDetailVC, topViewController: topViewController, pushNewViewController: true)
+                    }
                 }
             } else {
-                //Live Video
-                if let currentVC = self.getCurrentViewController() as? LiveVideoViewController {
-                    currentVC.load(new: dish)
-                } else if let liveVideoVC = story.instantiateViewController(withIdentifier: "LiveVideoViewController") as? LiveVideoViewController {
-                    liveVideoVC.liveVideo = dish
-                    present(liveVideoVC)
-                }
+                let dishVC: DishDetailViewController = UIStoryboard(name:"DishDetail",bundle:nil).instantiateViewController(withIdentifier: "DishDetailViewController") as! DishDetailViewController
+                dishVC.dishID = dish.id
+                self.checkAndPresent(vc: dishVC, topViewController: topViewController, pushNewViewController: true)
             }
-        }
-        
-        func present(_ vc: UIViewController) {
-            let nav = UINavigationController.init(rootViewController: vc)
-            nav.setNavigationBarHidden(true, animated: false)
-            self.checkAndPresent(vc: nav)
         }
         
         _ = DatabaseGateway.sharedInstance.getDishWith(dishID: id) { (dish) in
             if let dish = dish {
                 DispatchQueue.main.async {
-                    open(dish: dish)
+                    open(dish: dish, commentId: commentId)
+                }
+            }
+        }
+    }
+    
+//    func present(_ vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
+//        let nav = MFNavigationController(rootViewController: vc)
+//        nav.setNavigationBarHidden(true, animated: false)
+//        self.checkAndPresent(vc: nav, topViewController: topViewController, pushNewViewController: pushNewViewController)
+//    }
+    
+    func openConversation(id: String, topViewController: UIViewController?, pushNewViewController: Bool) {
+        DatabaseGateway.sharedInstance.getConversation(with: id) { (conversation) in
+            if conversation != nil {
+                DispatchQueue.main.async {
+                    let storyboard: UIStoryboard = UIStoryboard(name: "Siri",bundle: nil)
+                    let destViewController: ChatViewController = storyboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatViewController
+                    destViewController.conversation = conversation
+                    destViewController.currentUser = self.currentUser
+                    self.checkAndPresent(vc: destViewController, topViewController: topViewController, pushNewViewController: pushNewViewController)
                 }
             }
         }
@@ -407,30 +486,49 @@
         return self.window!.rootViewController!
     }
     
-    func showUserProfile(with type: ProfileType, userid: String) {
+    func showUserProfile(with type: ProfileType, userid: String, topViewController: UIViewController?) {
         let story = UIStoryboard.init(name: "Main", bundle: nil)
         if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
             if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
                 //                profileVC.profileType = type
                 profileVC.userID = userid
-                self.checkAndPresent(vc: nav)
+                
+                if topViewController != nil {
+                    self.checkAndPresent(vc: profileVC, topViewController: topViewController, pushNewViewController: true)
+                } else {
+                    self.checkAndPresent(vc: nav, topViewController: nil, pushNewViewController: false)
+                }
             }
         }
     }
     
-    func checkAndPresent(vc: UIViewController) {
-        if let presented = self.window?.rootViewController?.presentedViewController {
-            if presented is UIAlertController {
-                print("Presenting Alert!!")
+    func checkAndPresent(vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
+        
+        if let topVC: UIViewController = topViewController {
+            if pushNewViewController == true {
+                topVC.navigationController?.pushViewController(vc, animated: true)
             } else {
-                presented.present(vc, animated: true, completion: {
-                    
+                let navController: MFNavigationController = MFNavigationController(rootViewController: vc)
+                navController.setNavigationBarHidden(true, animated: false)
+                topVC.navigationController?.present(navController, animated: true, completion: {
                 })
             }
         } else {
-            self.window?.rootViewController?.present(vc, animated: true, completion: {
-                
-            })
+            if let presented = self.window?.rootViewController?.presentedViewController {
+                if presented is UIAlertController {
+                    print("Presenting Alert!!")
+                } else {
+                    presented.present(vc, animated: true, completion: {
+                        
+                    })
+                }
+            } else {
+                let navController: MFNavigationController = MFNavigationController(rootViewController: vc)
+                navController.setNavigationBarHidden(true, animated: false)
+                self.window?.rootViewController?.present(navController, animated: true, completion: {
+                    
+                })
+            }
         }
     }
     
@@ -439,11 +537,52 @@
         if let navController: UINavigationController = self.window?.rootViewController as? UINavigationController {
             if let topViewController: UIViewController = navController.topViewController {
                 StripeVerificationViewController.presentStripeVerification(on: topViewController, completion: { (submitted) in
-                    print("Submitted")
+                    if submitted {
+                        print("Submitted")
+                    } else {
+                        print("Cancelled")
+                    }
                 })
             }
         }
     }
+ 
+    func updateNotificationCount() {
+        guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
+            return
+        }
+        self.notificationObserver = DatabaseGateway.sharedInstance.getNotificationsForUser(userID:currentUser.id, frequency: .realtime) { (nots) in
+            var readCount: Int = 0
+            if let value: Any = UserDefaults.standard.value(forKey: kNotificationReadCount) {
+                readCount = value as! Int
+            }
+            unreadNotificationCount = (nots.count - readCount)
+            DispatchQueue.main.async {
+                if self.getCurrentViewController().isKind(of: HomeViewController.self) {
+                    let homeVC: HomeViewController = self.getCurrentViewController() as! HomeViewController
+                    homeVC.updateNotificationBadgeCount()
+                }
+            }
+        }
+    }
+    
+    func getPaymentNowAllowedMessage() -> String {
+        return "You are not allowed to make payments. Please contact us. contact@mammafoodie.com"
+    }
+    
+    class func close(vc: UIViewController) {
+        if let navigationController: UINavigationController = vc.navigationController {
+            if navigationController.viewControllers.first == vc {
+                navigationController.dismiss(animated: true, completion: nil)
+            } else {
+                navigationController.popViewController(animated: true)
+            }
+        } else {
+            vc.dismiss(animated: true, completion: {
+            })
+        }
+    }
+    
  }
  
  extension AppDelegate : MessagingDelegate {
@@ -470,10 +609,9 @@
  extension AppDelegate : UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        self.handleNotification(notification.request.content.userInfo)
-        print("Will Present")
-        completionHandler([.alert,.sound])
+        //        self.handleNotification(notification.request.content.userInfo, shouldTakeAction: true)
+        //        print("Will Present")
+        //        completionHandler([.alert,.sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -481,7 +619,7 @@
         if response.notification.request.identifier == "remindUserToVerifyStripeAccount" {
             self.verifyStripe()
         } else {
-            self.handleNotification(response.notification.request.content.userInfo)
+            self.handleNotification(response.notification.request.content.userInfo, shouldTakeAction: true, topViewController: nil, pushNewViewController: false)
         }
         print("Did Receive")
         completionHandler()

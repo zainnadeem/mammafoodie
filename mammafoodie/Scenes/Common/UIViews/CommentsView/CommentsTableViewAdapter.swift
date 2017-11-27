@@ -4,25 +4,9 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     
     var tableView: UITableView!
     var dish: MFDish!
+    var commentIdToHighlight: String?
     var comments: [MFComment] = []
     let worker: CommentsWorker = CommentsWorker()
-    
-    //    func createStaticData() {
-    //        self.comments.append(MFComment(text: "Bravo!", username: "Zain", userId: "1"))
-    //        self.comments.append(MFComment(text: "That looks delicious!!!", username: "Ram", userId: "2"))
-    //        self.comments.append(MFComment(text: "You are amazing", username: "Nithin", userId: "3"))
-    //        self.comments.append(MFComment(text: "This is amazing... I just love the way you speak.", username: "Joseph", userId: "5"))
-    //        self.comments.append(MFComment(text: "Yummy!", username: "Zain", userId: "7"))
-    //        self.comments.append(MFComment(text: "Wow! mouth watering!!", username: "Aishwarya", userId: "0"))
-    //        self.comments.append(MFComment(text: "That looks delecious!!!", username: "Seerisha", userId: "13"))
-    //        self.comments.append(MFComment(text: "Bravo!", username: "Zain", userId: "1"))
-    //        self.comments.append(MFComment(text: "That looks delicious!!!", username: "Ram", userId: "2"))
-    //        self.comments.append(MFComment(text: "You are amazing", username: "Nithin", userId: "3"))
-    //        self.comments.append(MFComment(text: "This is amazing... I just love the way you speak.", username: "Joseph", userId: "5"))
-    //        self.comments.append(MFComment(text: "Yummy!", username: "Zain", userId: "7"))
-    //        self.comments.append(MFComment(text: "Wow! mouth watering!!", username: "Aishwarya", userId: "0"))
-    //        self.comments.append(MFComment(text: "That looks delecious!!!", username: "Seerisha", userId: "13"))
-    //    }
     
     func loadComments() {
         worker.load(for: self.dish) { (newComments) in
@@ -30,9 +14,31 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
                 return !self.comments.contains(comment)
             })
             self.comments.append(contentsOf: filtered)
+            print("Number of comments (for dish \(self.dish.id): \(self.comments.count)")
+            
             self.reloadData()
+            
+//            if let commentIdToHighlight: String = self.commentIdToHighlight {
+//                self.highlightComment(id: commentIdToHighlight)
+//            }
         }
     }
+    
+//    private func highlightComment(id: String) {
+//        var indexToHighlight: Int?
+//        for (index, comment) in self.comments.enumerated() {
+//            if comment.id == id {
+//                indexToHighlight = index
+//                break
+//            }
+//        }
+//        if let indexToHighlight = indexToHighlight {
+//            let indexPath: IndexPath = IndexPath(item: indexToHighlight, section: 0)
+//            self.reloadData()
+//        } else {
+//            print("Comment not found in the list \(id)")
+//        }
+//    }
     
     func setup(with tableView: UITableView) {
         self.tableView = tableView
@@ -61,6 +67,7 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CommentTblCell = tableView.dequeueReusableCell(withIdentifier: "CommentTblCell", for: indexPath) as! CommentTblCell
         cell.setup(with: self.comments[indexPath.item])
+        cell.highlightCell(for: self.commentIdToHighlight)
         return cell
     }
     

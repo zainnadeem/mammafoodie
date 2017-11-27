@@ -37,7 +37,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         self.imgProfilePicture.image = #imageLiteral(resourceName: "IconMammaFoodie")
     }
     
-    func setup(with newsFeed: MFNewsFeed) {
+    func setup(with newsFeed: MFNewsFeed, withUser currentUser: MFUser) {
         self.lblActivity.delegate = self
         self.imgCharacterEmoji.image = nil
         self.conWidthImgCharacterEmoji.constant = 0
@@ -57,7 +57,9 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         let activityAction = NSAttributedString.init(string: newsFeed.activity.text, attributes: [NSFontAttributeName: UIFont.MontserratRegular(with: 13)!])
         
         var relevantText: String = ""
-        
+        if newsFeed.actionUser.id == "HRRbB0XJqAcnqwdRYqKc3TpGRi52" {
+            print("Wrong feed")
+        }
         switch newsFeed.activity {
         case .bought,
              .liked,
@@ -74,7 +76,11 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
             
         case .followed,
              .tipped:
-            relevantText = newsFeed.participantUser.name
+            if newsFeed.participantUser == currentUser {
+                relevantText = "You"
+            } else {
+                relevantText = newsFeed.participantUser.name
+            }
             
         case .none:
             self.lblActivity.setText("")
@@ -93,7 +99,11 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         let rangeRelevantItem = (self.lblActivity.attributedText.string as NSString).range(of: relevantItem.string)
         
         self.lblActivity.addLink(to: URL.init(string: "\(MFActivityType.followed.path.rawValue)://\(newsFeed.actionUser.id)")!, with: rangeActionUser)
-        self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
+        if newsFeed.activity.path == .users {
+            self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.participantUser.id)")!, with: rangeRelevantItem)
+        } else {
+            self.lblActivity.addLink(to: URL.init(string: "\(newsFeed.activity.path.rawValue)://\(newsFeed.redirectID)")!, with: rangeRelevantItem)
+        }
         
         let timeString = newsFeed.createdAt.toStringWithRelativeTime(strings: nil)
         self.btnTime.setTitle(timeString, for: .normal)
@@ -127,6 +137,7 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
         if let path = url.scheme,
             let id = url.host {
             self.openURL?(path, id)
+             print("Opening URL: \(url.absoluteString)")
         } else {
             print("Incorrect URL: \(url.absoluteString)")
         }

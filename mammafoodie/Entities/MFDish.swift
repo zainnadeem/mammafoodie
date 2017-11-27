@@ -61,6 +61,9 @@ class MFDish {
     
     var location : CLLocationCoordinate2D?
     var address : String = ""
+    var searchTags: [String: String] = [String: String]()
+    var visible: Bool = true
+    
     
     init() {
         self.id = ""
@@ -106,73 +109,91 @@ class MFDish {
         self.mediaType = mediaType
     }
     
-    init(from dishDataDictionary:[String:AnyObject]) {
-        self.id = dishDataDictionary["id"] as? String ?? ""
-        self.name = dishDataDictionary["name"] as? String ?? ""
-        
-        if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
-            self.user = MFUser(from: userDict)
-        }
-        
-        self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
-        self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
-        
-        let creationTimestamp: TimeInterval = dishDataDictionary["createTimestamp"] as! TimeInterval
-        self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
-        
-        if let endingTimestamp: TimeInterval = dishDataDictionary["endTimestamp"] as? TimeInterval {
-            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
-        }
-        
-        self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
-        self.coverPicURL = dishDataDictionary["coverPicURL"] as? URL ?? nil
-        
-        let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
-        self.user = MFUser() ;
-        
-        self.user.id = user["id"] as? String ?? ""
-        self.user.name = user["name"] as? String ?? ""
-        
-        if let endTime = dishDataDictionary["endTimestamp"] as? Double {
-            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endTime)
-        }
-        
-        self.description = dishDataDictionary["description"]  as? String ?? ""
-        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
-        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
-        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
-        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
-        
-        self.tag = dishDataDictionary["tag"] as? String ?? ""
-        self.tag = dishDataDictionary["tag"] as? String ?? ""
-        
-        let dishType = dishDataDictionary["dishType"] as? String ?? ""
-        
-        if let dishType = MFDishType(rawValue: dishType){
-            self.dishType = dishType
-        } else {
-            self.dishType = .None
-        }
-        
-        let urlString = dishDataDictionary["mediaURL"] as? String ?? ""
-        if let url = URL(string: urlString){
-            self.mediaURL = url
-        }
-        
-        self.numberOfViewers = dishDataDictionary["numberOfViews"] as? UInt ?? 0
-        
-        if let rawCuisine = dishDataDictionary["cuisine"] as? [String : AnyObject] {
-            self.cuisine = MFCuisine.init(with: rawCuisine)
-        }
-        
-        if let rawLocation = dishDataDictionary["location"] as? [String : AnyObject] {
-            let lat = rawLocation["latitude"] as! CLLocationDegrees
-            let lon = rawLocation["longitude"] as! CLLocationDegrees
-            self.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
-            self.address = rawLocation["address"] as? String ?? ""
-        }
-        
-    }
+//    init(from dishDataDictionary:[String:AnyObject]) {
+//        self.id = dishDataDictionary["id"] as? String ?? ""
+//        self.name = dishDataDictionary["name"] as? String ?? ""
+//        
+//        if let userDict = dishDataDictionary["user"] as? [String: AnyObject] {
+//            self.user = MFUser(from: userDict)
+//        }
+//        
+//        if let rawDishMediaType = dishDataDictionary["mediaType"] as? String {
+//            if let dishMediaType: MFDishMediaType = MFDishMediaType(rawValue: rawDishMediaType) {
+//                self.mediaType = dishMediaType
+//            } else {
+//                print("Dish media type not found: \(self.id)")
+//            }
+//        } else {
+//            print("Dish media type not found: \(self.id)")
+//        }
+//        
+//        if let rawSearchTags = dishDataDictionary["searchTags"] as? [String: String] {
+//            self.searchTags = rawSearchTags
+//        }
+//        
+//        self.numberOfComments = dishDataDictionary["commentsCount"] as? UInt ?? 0
+//        self.numberOfLikes = dishDataDictionary["likesCount"] as? UInt ?? 0
+//        
+//        let creationTimestamp: TimeInterval = dishDataDictionary["createTimestamp"] as! TimeInterval
+//        self.createTimestamp = Date.init(timeIntervalSinceReferenceDate: creationTimestamp)
+//        
+//        if let endingTimestamp: TimeInterval = dishDataDictionary["endTimestamp"] as? TimeInterval {
+//            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endingTimestamp)
+//        }
+//        
+//        self.mediaURL = dishDataDictionary["mediaURL"] as? URL ?? nil
+//        self.coverPicURL = dishDataDictionary["coverPicURL"] as? URL ?? nil
+//        
+//        let user = dishDataDictionary["user"]   as? [String:AnyObject] ?? [:]
+//        self.user = MFUser() ;
+//        
+//        self.user.id = user["id"] as? String ?? ""
+//        self.user.name = user["name"] as? String ?? ""
+//        
+//        if let endTime = dishDataDictionary["endTimestamp"] as? Double {
+//            self.endTimestamp = Date.init(timeIntervalSinceReferenceDate: endTime)
+//        }
+//        
+//        self.description = dishDataDictionary["description"]  as? String ?? ""
+//        self.totalSlots = dishDataDictionary["totalSlots"] as? UInt ?? 0
+//        self.availableSlots = dishDataDictionary["availableSlots"] as? UInt ?? 0
+//        self.pricePerSlot = dishDataDictionary["pricePerSlot"]  as? Double ?? 0
+//        self.boughtOrders = dishDataDictionary["boughtOrders"]  as? [String:Date] ?? [:]
+//        
+//        self.tag = dishDataDictionary["tag"] as? String ?? ""
+//        self.tag = dishDataDictionary["tag"] as? String ?? ""
+//        
+//        let dishType = dishDataDictionary["dishType"] as? String ?? ""
+//        
+//        if let dishType = MFDishType(rawValue: dishType){
+//            self.dishType = dishType
+//        } else {
+//            self.dishType = .None
+//        }
+//        
+//        let urlString = dishDataDictionary["mediaURL"] as? String ?? ""
+//        if let url = URL(string: urlString){
+//            self.mediaURL = url
+//        }
+//        
+//        self.numberOfViewers = dishDataDictionary["numberOfViews"] as? UInt ?? 0
+//        
+//        if let rawCuisine = dishDataDictionary["cuisine"] as? [String : AnyObject] {
+//            self.cuisine = MFCuisine.init(with: rawCuisine)
+//        }
+//        
+//        if let rawLocation = dishDataDictionary["location"] as? [String : AnyObject] {
+//            let lat = rawLocation["latitude"] as! CLLocationDegrees
+//            let lon = rawLocation["longitude"] as! CLLocationDegrees
+//            self.location = CLLocationCoordinate2D.init(latitude: lat, longitude: lon)
+//            self.address = rawLocation["address"] as? String ?? ""
+//        }
+//        
+//        if let visible: Bool = (dishDataDictionary["visible"] as? Bool) {
+//            self.visible = visible
+//        }
+//        
+//    }
     
     init(name : String!, description : String?, cuisine : MFCuisine, preparationTime : Double, totalSlots : UInt, withPrice perSlot : Double, dishType : MFDishType) {
         self.id = FirebaseReference.dishes.generateAutoID()

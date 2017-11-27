@@ -205,7 +205,7 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
     }
     
     @IBAction func onBackTap(_ sender: UIBarButtonItem) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        AppDelegate.close(vc: self)
     }
     
     func openDishDetails(_ dish: MFDish) {
