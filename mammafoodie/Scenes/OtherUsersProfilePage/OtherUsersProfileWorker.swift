@@ -123,25 +123,26 @@ class OtherUsersProfileWorker {
         
     }
     
-    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping ([MFUser])->Void) -> DatabaseConnectionObserver? {
+    func getFollowingForUser(userID:String, frequency:DatabaseRetrievalFrequency = .single, _ completion: (([MFUser])->Void)?) -> DatabaseConnectionObserver? {
         return DatabaseGateway.sharedInstance.getFollowingForUser(userID: userID, frequency:  frequency) { (following) in
+            var users = [MFUser]()
             guard following != nil else {
-                completion([])
+                completion?(users)
                 return
             }
-            var users = [MFUser]()
             let group = DispatchGroup()
             for userID in following!.keys {
                 group.enter()
                 _ = DatabaseGateway.sharedInstance.getUserWith(userID: userID){ (user) in
-                    if user != nil {
-                        users.append(user!)
+                    if let user = user {
+                        users.append(user)
                     }
                     group.leave()
                 }
             }
             group.notify(queue: .main, execute: {
-                completion(users)
+                completion?(users)
+                return
             })
         }
         

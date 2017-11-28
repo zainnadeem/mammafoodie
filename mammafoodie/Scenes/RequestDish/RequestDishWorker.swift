@@ -12,7 +12,7 @@ class RequestDishWorker {
             return
         }
         
-        let requestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/requestDish?dishId=\(dish.id)&dishName=\(dish.name)&userId=\(currentUser.id)&userFullname=\(currentUser.name!)&quantity=\(quantity)&conversationId=\(conversationId)"
+        let requestURL = "https://us-central1-mammafoodie-baf82.cloudfunctions.net/requestDish?dishId=\(dish.id)&dishName=\(dish.name)&userId=\(currentUser.id)&userFullname=\(currentUser.name)&quantity=\(quantity)&conversationId=\(conversationId)"
         
         Alamofire.request(requestURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
             .responseString { response in

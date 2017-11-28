@@ -10,12 +10,8 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
     
     var currentUserFollowings: [MFUser] = []
     var followers: Bool = true
-    var userList = [MFUser]() {
-        didSet {
-            self.followersTblView.reloadData()
-        }
-    }
-    var userID:String!
+    var userList = [MFUser]()
+    var userID: String!
     private var chatMode: Bool = false
     private var chatSelectionComplete: ChatSelectionCompletionBlock?
     private var observerForFollowers: DatabaseConnectionObserver?
@@ -37,7 +33,6 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         self.followersTblView.register(UINib(nibName: follower, bundle: nil), forCellReuseIdentifier: follower)
         self.followersTblView.register(UINib(nibName: following, bundle: nil), forCellReuseIdentifier: following)
         
-        //        followersTblView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
@@ -45,7 +40,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         let requestGroup = DispatchGroup.init()
         
         let worker = OtherUsersProfileWorker()
-        if followers {
+        if self.followers {
             self.title = "Followers"
             requestGroup.enter()
             self.observerForFollowers = worker.getFollowersForUser(userID: userID, frequency: .realtime ,{ (users) in
@@ -69,8 +64,15 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
             })
         }
         requestGroup.notify(queue: .main, execute: {
-            self.followersTblView.reloadData()
+            self.reloadData()
         })
+    }
+    
+    func reloadData() {
+        self.userList.sort { (user1, user2) -> Bool in
+            return user1.name < user2.name
+        }
+        self.followersTblView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +100,7 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
         let story = UIStoryboard.init(name: "Siri", bundle: nil)
         if let followerVC = story.instantiateViewController(withIdentifier: "FollowersListViewController") as? FollowersListViewController {
             let nav = UINavigationController.init(rootViewController: followerVC)
+            nav.navigationBar.tintColor = .darkGray
             followerVC.chatSelectionComplete = completion
             let backButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "BackBtn"), style: .plain, target: followerVC, action: #selector(backButtonTapped(_:)))
             followerVC.navigationItem.leftBarButtonItem = backButton
@@ -120,19 +123,20 @@ class FollowersListViewController: UIViewController, UITableViewDelegate, UITabl
             print("Current user follows: \(user.name)")
         }
         
-        if followers {
-            let cell: FollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowersTableCell", for: indexPath) as! FollowersTableCell
-            cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
-            cell.setUp(user: user)
-            return cell
-            
-        } else {
-            let cell: FollowingTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowingTableCell", for: indexPath) as! FollowingTableCell
-            cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
-            cell.setUp(user: user)
-            return cell
-        }
+        let cell: FollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowersTableCell", for: indexPath) as! FollowersTableCell
+        cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
+        cell.setUp(user: user)
+        return cell
         
+//        if followers {
+//
+//        } else {
+//            let cell: FollowingTableCell = tableView.dequeueReusableCell(withIdentifier: "FollowingTableCell", for: indexPath) as! FollowingTableCell
+//            cell.shouldShowFollowButton = !isCurrentUserFollowingTheUser
+//            cell.setUp(user: user)
+//            return cell
+//        }
+//
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

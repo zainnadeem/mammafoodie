@@ -38,8 +38,8 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblActivity.delegate = self
-        self.imgCharacterEmoji.image = nil
-        self.conWidthImgCharacterEmoji.constant = 0
+        self.imgCharacterEmoji.image = #imageLiteral(resourceName: "IconMammaFoodie")
+//        self.conWidthImgCharacterEmoji.constant = 0
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in

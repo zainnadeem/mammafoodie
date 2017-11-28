@@ -293,11 +293,6 @@
 		57DC9DCC1F5023B9004E6100 /* DishCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57DC9DC81F5023B9004E6100 /* DishCollectionViewCell.xib */; };
 		57DC9DD01F502990004E6100 /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC9DCE1F502990004E6100 /* ChatListTableViewCell.swift */; };
 		57DC9DD11F502990004E6100 /* ChatListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57DC9DCF1F502990004E6100 /* ChatListTableViewCell.xib */; };
-		57DC9DD71F5071BB004E6100 /* FollowersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */; };
-		57DC9DD81F5071BB004E6100 /* FollowersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */; };
-		57DC9DD91F5071BB004E6100 /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */; };
-		57DC9DDA1F5071BB004E6100 /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */; };
-		57DC9DDB1F5071BF004E6100 /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A980F61F0A859400772BAA /* FollowersListViewController.swift */; };
 		57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0AF1EFC015B00C3BA21 /* GoCookStep2Configurator.swift */; };
 		57DDD0B71EFC015B00C3BA21 /* GoCookStep2Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B01EFC015B00C3BA21 /* GoCookStep2Interactor.swift */; };
 		57DDD0B81EFC015B00C3BA21 /* GoCookStep2Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DDD0B11EFC015B00C3BA21 /* GoCookStep2Models.swift */; };
@@ -308,6 +303,11 @@
 		57EC4ADF1F28827D00BD736D /* StripeVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EC4ADE1F28827D00BD736D /* StripeVerificationViewController.swift */; };
 		57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */; };
 		57FDAF8F1F39FDFD0049B7A5 /* UIlabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */; };
+		5905A19F1FCD8B3F0011DDF9 /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5905A19A1FCD8B3E0011DDF9 /* FollowingTableCell.xib */; };
+		5905A1A01FCD8B3F0011DDF9 /* FollowersTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5905A19B1FCD8B3E0011DDF9 /* FollowersTableCell.xib */; };
+		5905A1A11FCD8B3F0011DDF9 /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5905A19C1FCD8B3E0011DDF9 /* FollowersListViewController.swift */; };
+		5905A1A21FCD8B3F0011DDF9 /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5905A19D1FCD8B3E0011DDF9 /* FollowingTableCell.swift */; };
+		5905A1A31FCD8B3F0011DDF9 /* FollowersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5905A19E1FCD8B3E0011DDF9 /* FollowersTableCell.swift */; };
 		88493A103BE4CAC23A050EC8 /* Pods_mammafoodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C7E0C56FA9FD6B745D90E7 /* Pods_mammafoodie.framework */; };
 		B6E81E621F0A9513000D2F06 /* orderCountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E81E611F0A9513000D2F06 /* orderCountWorker.swift */; };
 		BF4800A81F09237F005E47B1 /* CheckLikeStatusWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4800A71F09237F005E47B1 /* CheckLikeStatusWorker.swift */; };
@@ -381,8 +381,6 @@
 		110FCE5A1EEEBA67008B6F2D /* DishesCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		111E445B1F14DDC300C7A7F7 /* UberRushDeliveryWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UberRushDeliveryWorker.swift; sourceTree = "<group>"; };
 		111E445F1F1609A400C7A7F7 /* PostmatesWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostmatesWorker.swift; sourceTree = "<group>"; };
-		112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableCell.swift; sourceTree = "<group>"; };
-		112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableCell.xib; sourceTree = "<group>"; };
 		113139C11EF7BA2D000050D6 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
 		113139C21EF7BA2D000050D6 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		113139C31EF7BA2D000050D6 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -704,6 +702,11 @@
 		57EC4ADE1F28827D00BD736D /* StripeVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeVerificationViewController.swift; sourceTree = "<group>"; };
 		57F7C97F1EFE23F000724129 /* CuisineCollectionViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		57FDAF8E1F39FDFD0049B7A5 /* UIlabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIlabelExtension.swift; sourceTree = "<group>"; };
+		5905A19A1FCD8B3E0011DDF9 /* FollowingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableCell.xib; sourceTree = "<group>"; };
+		5905A19B1FCD8B3E0011DDF9 /* FollowersTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowersTableCell.xib; sourceTree = "<group>"; };
+		5905A19C1FCD8B3E0011DDF9 /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		5905A19D1FCD8B3E0011DDF9 /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableCell.swift; sourceTree = "<group>"; };
+		5905A19E1FCD8B3E0011DDF9 /* FollowersTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableCell.swift; sourceTree = "<group>"; };
 		6AAF26B7B2ADD0B90230D57E /* Pods-mammafoodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie/Pods-mammafoodie.debug.xcconfig"; sourceTree = "<group>"; };
 		810D47AB8123F8EE314C0DD2 /* Pods_mammafoodie_mammafoodieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mammafoodie_mammafoodieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6832E041F052E4200ECE835 /* TimerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerWorker.swift; sourceTree = "<group>"; };
@@ -767,9 +770,6 @@
 		F097D8C91EF3D8BA00FCF967 /* ChatListWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListWorker.swift; sourceTree = "<group>"; };
 		F097D8D21EF3D91A00FCF967 /* ChatListAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListAdapter.swift; sourceTree = "<group>"; };
 		F0A980EF1F0A3BAC00772BAA /* PagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingViewController.swift; sourceTree = "<group>"; };
-		F0A980F61F0A859400772BAA /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
-		F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableCell.swift; sourceTree = "<group>"; };
-		F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowersTableCell.xib; sourceTree = "<group>"; };
 		F0F6B65E1F0D2BBE00A74CB5 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		FA9CF1A0D479D0160DE7DF97 /* Pods-mammafoodie-mammafoodieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mammafoodie-mammafoodieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mammafoodie-mammafoodieTests/Pods-mammafoodie-mammafoodieTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1250,7 +1250,7 @@
 				BF5AD5DE1F062B5700827223 /* DishDetail */,
 				F09720831F0A15D400DDA4FA /* DishesSaved */,
 				11ECCEFC1F1E0B0200ADF481 /* EditProfile */,
-				F0A980F51F0A850F00772BAA /* Followers */,
+				5905A1991FCD8B3E0011DDF9 /* Followers */,
 				572E9A5B1EFAB4AF007DE6D0 /* GoCook */,
 				2C12BC901EF7D237007AF994 /* Home */,
 				2CFB9B751EFA475100C08EB3 /* LiveVideo */,
@@ -1771,6 +1771,18 @@
 			path = GoCookStep2;
 			sourceTree = "<group>";
 		};
+		5905A1991FCD8B3E0011DDF9 /* Followers */ = {
+			isa = PBXGroup;
+			children = (
+				5905A19A1FCD8B3E0011DDF9 /* FollowingTableCell.xib */,
+				5905A19B1FCD8B3E0011DDF9 /* FollowersTableCell.xib */,
+				5905A19C1FCD8B3E0011DDF9 /* FollowersListViewController.swift */,
+				5905A19D1FCD8B3E0011DDF9 /* FollowingTableCell.swift */,
+				5905A19E1FCD8B3E0011DDF9 /* FollowersTableCell.swift */,
+			);
+			path = Followers;
+			sourceTree = "<group>";
+		};
 		BF4800AB1F0923AD005E47B1 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1946,18 +1958,6 @@
 			name = OnBoarding;
 			sourceTree = "<group>";
 		};
-		F0A980F51F0A850F00772BAA /* Followers */ = {
-			isa = PBXGroup;
-			children = (
-				F0A980F61F0A859400772BAA /* FollowersListViewController.swift */,
-				F0A980FC1F0A89CD00772BAA /* FollowersTableCell.swift */,
-				F0A980FD1F0A89CD00772BAA /* FollowersTableCell.xib */,
-				112E88CE1F179E5600150FE8 /* FollowingTableCell.swift */,
-				112E88CF1F179E5600150FE8 /* FollowingTableCell.xib */,
-			);
-			name = Followers;
-			sourceTree = "<group>";
-		};
 		F0F6B65D1F0D2BBE00A74CB5 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -2082,14 +2082,13 @@
 				2C80012B1EF9094E005026CE /* ActivityTblCell.xib in Resources */,
 				2CD37DB11F0992790058EFDF /* (null) in Resources */,
 				11ECCF001F1E111C00ADF481 /* AddressDisplayView.xib in Resources */,
+				5905A1A01FCD8B3F0011DDF9 /* FollowersTableCell.xib in Resources */,
 				2C12BCD51EF7F05C007AF994 /* MenuItemTblCell.xib in Resources */,
 				57150C271F25E2DE0008B7FB /* SettingsTableViewCell.xib in Resources */,
 				570ED41E1F0684F000B41F0E /* ImageCollectionCell.xib in Resources */,
 				57DC9DC21F5023A8004E6100 /* NotificationTableViewCell.xib in Resources */,
-				57DC9DD81F5071BB004E6100 /* FollowersTableCell.xib in Resources */,
 				113139D01EF7BA2D000050D6 /* Montserrat-Regular.otf in Resources */,
 				57DC9DCA1F5023B9004E6100 /* ActivityCollectionViewCell.xib in Resources */,
-				57DC9DDA1F5071BB004E6100 /* FollowingTableCell.xib in Resources */,
 				113139CA1EF7BA2D000050D6 /* Montserrat-Black.otf in Resources */,
 				114F34181F0BD5CA007F1D92 /* SlotSelectionCollectionViewCell.xib in Resources */,
 				2C6979E11F07C95F00787DCC /* MapStyle.json in Resources */,
@@ -2113,6 +2112,7 @@
 				57DC9DCC1F5023B9004E6100 /* DishCollectionViewCell.xib in Resources */,
 				57C948131F03781000DF5674 /* image.jpg in Resources */,
 				5790CC4D1F2CD68D007070C1 /* AddCardClnCell.xib in Resources */,
+				5905A19F1FCD8B3F0011DDF9 /* FollowingTableCell.xib in Resources */,
 				577F103E1F309E150082EBF8 /* InfiniteClnCell.xib in Resources */,
 				113139CE1EF7BA2D000050D6 /* Montserrat-Light.otf in Resources */,
 				2C946EB41EFA7B9200FD2FC0 /* CommentTblCell.xib in Resources */,
@@ -2258,6 +2258,7 @@
 				2C6979B51F07C95F00787DCC /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				572E9A7F1EFAB4AF007DE6D0 /* GoCookConfigurator.swift in Sources */,
 				BF4800AD1F092810005E47B1 /* LikeTappedWorker.swift in Sources */,
+				5905A1A11FCD8B3F0011DDF9 /* FollowersListViewController.swift in Sources */,
 				110FCE571EEEAEC9008B6F2D /* OtherUsersProfileRouter.swift in Sources */,
 				2CFB9B9A1EFA475100C08EB3 /* LiveVideoSubscriberViewController.swift in Sources */,
 				BF5AD5DC1F062B4B00827223 /* DishDetailViewController.swift in Sources */,
@@ -2294,6 +2295,7 @@
 				570ED41D1F0684F000B41F0E /* ImageCollectionCell.swift in Sources */,
 				572E9A9D1EFAB4AF007DE6D0 /* MediaPicker.swift in Sources */,
 				57150C281F25E2DE0008B7FB /* SettingsViewController.swift in Sources */,
+				5905A1A21FCD8B3F0011DDF9 /* FollowingTableCell.swift in Sources */,
 				5732C0CC1EE92A9600E2A61E /* NearbyChefsConfigurator.swift in Sources */,
 				2CD37DB01F0992790058EFDF /* (null) in Sources */,
 				2C6979C31F07C95F00787DCC /* GMUDefaultClusterRenderer.m in Sources */,
@@ -2376,7 +2378,6 @@
 				57DDD0B61EFC015B00C3BA21 /* GoCookStep2Configurator.swift in Sources */,
 				BFC927381EF00A7E00602153 /* LiveVideoMainPageViewController.swift in Sources */,
 				F097D8CE1EF3D8BA00FCF967 /* ChatListRouter.swift in Sources */,
-				57DC9DD91F5071BB004E6100 /* FollowingTableCell.swift in Sources */,
 				2CE479451EF97256003D0F9F /* UIViewExtension.swift in Sources */,
 				2CFB9BBA1EFA477200C08EB3 /* DealDetailViewController.swift in Sources */,
 				57801F691EF823F9002E18EF /* NearbyChefsSearchAdapter.swift in Sources */,
@@ -2400,6 +2401,7 @@
 				57F7C9801EFE23F000724129 /* CuisineCollectionViewAdapter.swift in Sources */,
 				57DC9DD01F502990004E6100 /* ChatListTableViewCell.swift in Sources */,
 				111E44601F1609A400C7A7F7 /* PostmatesWorker.swift in Sources */,
+				5905A1A31FCD8B3F0011DDF9 /* FollowersTableCell.swift in Sources */,
 				570ED41B1F0684F000B41F0E /* FilterVC.swift in Sources */,
 				F0A980F01F0A3BAC00772BAA /* PagingViewController.swift in Sources */,
 				2C8290941F027CF000BB7ECA /* CircleView.swift in Sources */,
@@ -2407,7 +2409,6 @@
 				570ED40A1F0684F000B41F0E /* AKImageCropperOverlayView.swift in Sources */,
 				577F103D1F309E150082EBF8 /* InfiniteClnCell.swift in Sources */,
 				11AE87671F1CD86100B788BA /* FavouriteDishesList.swift in Sources */,
-				57DC9DDB1F5071BF004E6100 /* FollowersListViewController.swift in Sources */,
 				2C0068A21F61430900DA3728 /* MFTransaction.swift in Sources */,
 				2CB8BF2D1EF25C1B00DA78B3 /* LoginWorker.swift in Sources */,
 				BFC9274A1EF00A7E00602153 /* VidupMainPageViewController.swift in Sources */,
@@ -2512,7 +2513,6 @@
 				2CB8BF2B1EF25C1B00DA78B3 /* LoginRouter.swift in Sources */,
 				2C12BCDB1EF8060E007AF994 /* MFCuisine.swift in Sources */,
 				2C252E311F023E1900AC914F /* CircleTransitionDismissAnimator.swift in Sources */,
-				57DC9DD71F5071BB004E6100 /* FollowersTableCell.swift in Sources */,
 				572E9A9B1EFAB4AF007DE6D0 /* GoCookViewController.swift in Sources */,
 				57801F751EF8305E002E18EF /* CuisineFiltreWorker.swift in Sources */,
 				2C0D8E311F281C4300842ECD /* SavedCardsVC.swift in Sources */,

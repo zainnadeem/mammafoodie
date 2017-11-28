@@ -1288,13 +1288,12 @@ extension DatabaseGateway{
         
     }
     
-    func getFollowingForUser(userID:String,frequency:DatabaseRetrievalFrequency = .single, _ completion:@escaping (_ following:[String:AnyObject]?)->Void)-> DatabaseConnectionObserver?{
+    func getFollowingForUser(userID: String, frequency: DatabaseRetrievalFrequency = .single, _ completion: @escaping ([String: AnyObject]?) -> Void) -> DatabaseConnectionObserver? {
         let successClosure: FirebaseObserverSuccessClosure  = { (snapshot) in
             guard let followers = snapshot.value as? FirebaseDictionary else {
                 completion(nil)
                 return
             }
-            
             completion(followers)
         }
         

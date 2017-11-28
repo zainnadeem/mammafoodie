@@ -157,10 +157,7 @@ class MFModelsToFirebaseDictionaryConverter {
         var userInfo = FirebaseDictionary()
         
         userInfo["id"] = user.id as AnyObject
-        
-        if let name = user.name {
-            userInfo["name"] = name as AnyObject
-        }
+        userInfo["name"] = user.name as AnyObject
         
         if let email = user.email {
             userInfo["email"] = email as AnyObject

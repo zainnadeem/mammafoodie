@@ -38,12 +38,12 @@ class FollowingTableCell: UITableViewCell {
     
     func setUp(user:MFUser) {
         if self.shouldShowFollowButton == true {
-            self.followButtn.setTitle("Follow", for: .normal)
+            self.followButtn.setTitle("follow", for: .normal)
         } else {
-            self.followButtn.setTitle("Unfollow", for: .normal)
+            self.followButtn.setTitle("unfollow", for: .normal)
         }
         
-        if self.followButtn.currentTitle == "Follow" {
+        if self.followButtn.currentTitle == "follow" {
             self.followButtn.setTitleColor(.orange, for: .normal)
             self.followButtn.removeGradient()
         } else {

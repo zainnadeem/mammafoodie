@@ -175,7 +175,7 @@ class EditProfileViewController: UIViewController, EditAddressDelegate, HUDRende
     
     @IBAction func saveTapped(_ sender: UIButton) {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.user?.name = self.txfName.text
+        self.user?.name = self.txfName.text ?? ""
         self.user?.email = self.txfEmailID.text
         self.user?.phone.countryCode = "+1"
         self.user?.phone.phone = self.txfMobileNumber.text ?? ""

@@ -41,7 +41,7 @@ struct StripeVerification {
 
 class MFUser {
     var id: String
-    var name: String!
+    var name: String = ""
     var firstName: String {
         return self.name.components(separatedBy: " ").first ?? ""
     }
