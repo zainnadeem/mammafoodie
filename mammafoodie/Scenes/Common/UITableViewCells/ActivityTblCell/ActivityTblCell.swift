@@ -40,7 +40,6 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     func setup(with newsFeed: MFNewsFeed, withUser currentUser: MFUser) {
         self.lblActivity.delegate = self
 //        self.imgCharacterEmoji.image = nil
-//        self.conWidthImgCharacterEmoji.constant = 0
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
             self.imgProfilePicture.sd_setImage(with: url, completed: { (image, error, cacheType, url) in
@@ -115,6 +114,9 @@ class ActivityTblCell: UITableViewCell, TTTAttributedLabelDelegate {
             self.imgCharacterEmoji.sd_setImage(with: imageURL, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .allowInvalidSSLCertificates)
         } else {
             print("invalid imageurl: \(newsFeed.mediaURL?.absoluteString ?? "")")
+            self.imgCharacterEmoji.image = #imageLiteral(resourceName: "IconMammaFoodie")
+            self.conWidthImgCharacterEmoji.constant = 0
+            self.layoutIfNeeded()
         }
         
         let timeString = newsFeed.createdAt.toStringWithRelativeTime(strings: nil)

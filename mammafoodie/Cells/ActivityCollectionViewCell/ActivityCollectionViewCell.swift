@@ -38,7 +38,6 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
     
     func setup(with newsFeed: MFNewsFeed) {
         self.lblActivity.delegate = self
-        self.imgCharacterEmoji.image = #imageLiteral(resourceName: "IconMammaFoodie")
 //        self.conWidthImgCharacterEmoji.constant = 0
         
         if let url: URL = DatabaseGateway.sharedInstance.getUserProfilePicturePath(for: newsFeed.actionUser.id) {
@@ -78,6 +77,15 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
         case .none:
             self.lblActivity.setText("")
             return
+        }
+        
+        if let imageURL = newsFeed.mediaURL {
+            self.imgCharacterEmoji.sd_setImage(with: imageURL, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .allowInvalidSSLCertificates)
+        } else {
+            print("invalid imageurl: \(newsFeed.mediaURL?.absoluteString ?? "")")
+            self.imgCharacterEmoji.image = #imageLiteral(resourceName: "IconMammaFoodie")
+            self.conWidthImgCharacterEmoji.constant = 0
+            self.layoutIfNeeded()
         }
         
         let relevantItem = NSAttributedString.init(string: " " + relevantText, attributes: [NSFontAttributeName: UIFont.MontserratSemiBold(with: 14)!])
