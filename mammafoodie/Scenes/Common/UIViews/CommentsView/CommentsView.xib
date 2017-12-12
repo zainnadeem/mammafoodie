@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,18 +34,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="665" height="298"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-1C-LmA">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-1C-LmA" userLabel="View - Sep">
                     <rect key="frame" x="0.0" y="298" width="665" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Pfk-hk-ZHZ"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILW-BB-EXF">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILW-BB-EXF" userLabel="View - Bottom">
                     <rect key="frame" x="0.0" y="299" width="665" height="51"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jND-f7-qod">
-                            <rect key="frame" x="48" y="8" width="497" height="35"/>
+                            <rect key="frame" x="61" y="8" width="478" height="35"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="3lE-ob-Exa"/>
@@ -57,17 +58,13 @@
                             </userDefinedRuntimeAttributes>
                         </textView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comments" translatesAutoresizingMaskIntoConstraints="NO" id="qNW-68-Cts">
-                            <rect key="frame" x="16" y="13.5" width="24" height="24"/>
+                            <rect key="frame" x="8" y="3" width="45" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="5eT-gR-8nT"/>
                                 <constraint firstAttribute="width" secondItem="qNW-68-Cts" secondAttribute="height" id="tKZ-Wl-gs2"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3R-sh-Ok6">
-                            <rect key="frame" x="553" y="5" width="56" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="13W-cr-Ipb"/>
-                            </constraints>
+                            <rect key="frame" x="547" y="2.5" width="57" height="45"/>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="9" maxX="0.0" maxY="9"/>
                             <state key="normal" title="12" image="IconLike">
@@ -79,9 +76,9 @@
                             </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPD-ps-dCM">
-                            <rect key="frame" x="617" y="5" width="40" height="40"/>
+                            <rect key="frame" x="612" y="2.5" width="45" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="DhW-BM-jZe"/>
+                                <constraint firstAttribute="height" constant="45" id="DhW-BM-jZe"/>
                                 <constraint firstAttribute="width" secondItem="YPD-ps-dCM" secondAttribute="height" id="ypn-SA-Kq1"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
@@ -96,8 +93,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="qNW-68-Cts" firstAttribute="leading" secondItem="ILW-BB-EXF" secondAttribute="leading" constant="16" id="2Tg-bh-LOq"/>
+                        <constraint firstItem="qNW-68-Cts" firstAttribute="width" secondItem="YPD-ps-dCM" secondAttribute="width" id="1oN-As-8GM"/>
+                        <constraint firstItem="qNW-68-Cts" firstAttribute="leading" secondItem="ILW-BB-EXF" secondAttribute="leading" constant="8" id="2Tg-bh-LOq"/>
+                        <constraint firstItem="W3R-sh-Ok6" firstAttribute="height" secondItem="YPD-ps-dCM" secondAttribute="height" id="8Oj-SO-meA"/>
                         <constraint firstItem="jND-f7-qod" firstAttribute="top" secondItem="ILW-BB-EXF" secondAttribute="top" constant="8" id="CMo-Ev-PCt"/>
+                        <constraint firstItem="qNW-68-Cts" firstAttribute="height" secondItem="YPD-ps-dCM" secondAttribute="height" id="GRJ-Ej-PL9"/>
                         <constraint firstAttribute="bottom" secondItem="jND-f7-qod" secondAttribute="bottom" constant="8" id="Nqs-QS-QTU"/>
                         <constraint firstItem="W3R-sh-Ok6" firstAttribute="centerY" secondItem="ILW-BB-EXF" secondAttribute="centerY" id="fiY-i4-Yjf"/>
                         <constraint firstItem="YPD-ps-dCM" firstAttribute="centerY" secondItem="ILW-BB-EXF" secondAttribute="centerY" id="iBZ-xl-805"/>

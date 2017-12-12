@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class CommentTblCell: UITableViewCell {
+typealias OpenUserProfile = (String)->Void
+
+class CommentTblCell: UITableViewCell, TTTAttributedLabelDelegate {
     
     var comment: MFComment!
+    var openLink: OpenUserProfile?
     
-    @IBOutlet weak var lblDetails: UILabel!
+    @IBOutlet weak var lblDetails: TTTAttributedLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.lblDetails.delegate = self
     }
     
     func setup(with comment: MFComment) {
@@ -37,6 +42,9 @@ class CommentTblCell: UITableViewCell {
         commentAttributedString.append(NSAttributedString(string: " "))
         commentAttributedString.append(formattedComment)
         self.lblDetails.attributedText = commentAttributedString
+        
+        let rangeUsername = (self.lblDetails.attributedText.string as NSString).range(of: formattedUsername.string)
+        self.lblDetails.addLink(to: URL.init(string: "\(FirebaseReference.users.rawValue)://\(comment.user.id)")!, with: rangeUsername)
     }
     
     func highlightCell(for commentId: String?) {
@@ -47,4 +55,11 @@ class CommentTblCell: UITableViewCell {
         }
     }
     
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if let id = url.host {
+            self.openLink?(id)
+        } else {
+            print("Incorrect URL: \(url.absoluteString)")
+        }
+    }
 }

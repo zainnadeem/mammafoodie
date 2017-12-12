@@ -17,6 +17,7 @@ class CommentsView: UIView {
     }
     var likeButtonTapped: (()->Void)?
     var emojiTapped : EmojiTappedClosure?
+    var openProfile: OpenUserProfile?
     
     private var _shouldShowEmoji: Bool = true
     var shouldShowEmoji: Bool {
@@ -76,6 +77,7 @@ class CommentsView: UIView {
     func load() {
         self.tableViewAdapter.dish = self.dish
         //        self.tableViewAdapter.comments = self.list
+        self.tableViewAdapter.openUserProfile = self.openProfile
         self.tableViewAdapter.setup(with: self.tableView)
     }
     

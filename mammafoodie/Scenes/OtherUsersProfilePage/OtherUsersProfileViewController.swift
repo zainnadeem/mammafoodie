@@ -120,6 +120,23 @@ class OtherUsersProfileViewController: UIViewController, OtherUsersProfileViewCo
         }
     }
     
+    class func openUserProfileVC(with id: String, on vc: UIViewController) {
+        let story = UIStoryboard.init(name: "Main", bundle: nil)
+        if let nav = story.instantiateViewController(withIdentifier: "navUserProfile") as? UINavigationController {
+            if let profileVC = nav.viewControllers.first as? OtherUsersProfileViewController {
+                if let user = DatabaseGateway.sharedInstance.getLoggedInUser() {
+                    profileVC.userID = id
+                    if user.id == id {
+                        profileVC.profileType = .ownProfile
+                    } else {
+                        profileVC.profileType = .othersProfile
+                    }
+                    vc.present(nav, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
     func openFavouriteDishes() {
         let favouriteNav = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "FavouriteDishNav") as! UINavigationController
         

@@ -152,7 +152,7 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         } else {
             self.conTrailingBtnDelete.constant = -1 * (30 + 4)
         }
-//        self.view.layoutIfNeeded()
+        //        self.view.layoutIfNeeded()
         
         self.lblDishName.text = data.name
         self.lblUsername.text = data.user.name
@@ -280,17 +280,12 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
     }
     
     @IBAction func commentsBtnTapped(_ sender: Any) {
-        
         let commentsVC = UIStoryboard(name: "Siri", bundle: nil).instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
         commentsVC.dish = self.dishForView?.dish
-        
         if let currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser{
             commentsVC.user = currentUser
-            
             self.present(commentsVC, animated: true, completion: nil)
-            
         }
-        
     }
     
     @IBAction func shareButtonTapped(_ sender: UIButton) {
@@ -469,6 +464,10 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         }
     }
     
+    func openUserProfile(with id: String) {
+        OtherUsersProfileViewController.openUserProfileVC(with: id, on: self)
+    }
+    
     func purchase(slots : UInt) {
         self.performSegue(withIdentifier: "segueShowPaymentViewController", sender: slots)
     }
@@ -496,22 +495,24 @@ class DishDetailViewController: UIViewController, DishDetailViewControllerInput,
         
     }
     
+    // MARK: - Display logic
+    
     @IBAction func btnUsernameTapped(_ sender: UIButton) {
         if let userId = self.dishForView?.dish?.user.id {
             self.performSegue(withIdentifier: "segueShowUserProfile", sender: userId)
         }
     }
-    // MARK: - Display logic
+    
     
     @IBAction func btnDeleteDishTapped(_ sender: UIButton) {
         let alert: UIAlertController = UIAlertController(title: "Delete", message: "Do you really want to delete the dish?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { (action) in
-//            self.output.stopObservingDish()
+            //            self.output.stopObservingDish()
             DatabaseGateway.sharedInstance.deleteDish(self.dishForView!.dish!, completion: { (error) in
                 print("Dish deleted")
                 DispatchQueue.main.async {
-//                    self.backButtonTapped(self.btnBack)
+                    //                    self.backButtonTapped(self.btnBack)
                 }
             })
         }))

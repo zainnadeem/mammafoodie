@@ -82,7 +82,7 @@ class ActivityCollectionViewCell: UICollectionViewCell, TTTAttributedLabelDelega
         if let imageURL = newsFeed.mediaURL {
             self.imgCharacterEmoji.sd_setImage(with: imageURL, placeholderImage: #imageLiteral(resourceName: "IconMammaFoodie"), options: .allowInvalidSSLCertificates)
         } else {
-            print("invalid imageurl: \(newsFeed.mediaURL?.absoluteString ?? "")")
+            print("invalid imageurl: \(newsFeed.mediaURL?.absoluteString ?? "") for \(newsFeed.activity.path)\\(\(newsFeed.redirectID)")
             self.imgCharacterEmoji.image = #imageLiteral(resourceName: "IconMammaFoodie")
             self.conWidthImgCharacterEmoji.constant = 0
             self.layoutIfNeeded()

@@ -24,7 +24,7 @@
     
     var window: UIWindow?
     var activityIndicatorView: UIView?
-//    let gcmMessageIDKey = "gcm.message_id"
+    //    let gcmMessageIDKey = "gcm.message_id"
     
     var currentUserFirebase : User? //Populate this when user logs in successfully
     var currentUser : MFUser? //Populate this when user logs in successfully and after signup
@@ -93,26 +93,26 @@
                 }
             }
         }
-
+        
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
         self.askPermissionForRemoteNotifications(with: UIApplication.shared)
         
-//        FirebaseReference.users.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
-//            if let users = snapshot.value as? [String: AnyObject] {
-//                for (_, value) in users {
-//                    if let dict = value as? [String: AnyObject] {
-//                        let user = MFUser.init(from: dict)
-//                        if user.id != "" {
-//                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
-//                                print("Error: \(error ?? "nil")")
-//                            })
-//                        }
-//                    }
-//                }
-//            }
-//        })
+        //        FirebaseReference.users.classReference.observeSingleEvent(of: .value, with: { (snapshot) in
+        //            if let users = snapshot.value as? [String: AnyObject] {
+        //                for (_, value) in users {
+        //                    if let dict = value as? [String: AnyObject] {
+        //                        let user = MFUser.init(from: dict)
+        //                        if user.id != "" {
+        //                            DatabaseGateway.sharedInstance.updateUserEntity(with: user, { (error) in
+        //                                print("Error: \(error ?? "nil")")
+        //                            })
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        })
         return true
     }
     
@@ -450,11 +450,11 @@
         }
     }
     
-//    func present(_ vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
-//        let nav = MFNavigationController(rootViewController: vc)
-//        nav.setNavigationBarHidden(true, animated: false)
-//        self.checkAndPresent(vc: nav, topViewController: topViewController, pushNewViewController: pushNewViewController)
-//    }
+    //    func present(_ vc: UIViewController, topViewController: UIViewController?, pushNewViewController: Bool) {
+    //        let nav = MFNavigationController(rootViewController: vc)
+    //        nav.setNavigationBarHidden(true, animated: false)
+    //        self.checkAndPresent(vc: nav, topViewController: topViewController, pushNewViewController: pushNewViewController)
+    //    }
     
     func openConversation(id: String, topViewController: UIViewController?, pushNewViewController: Bool) {
         DatabaseGateway.sharedInstance.getConversation(with: id) { (conversation) in
@@ -546,7 +546,7 @@
             }
         }
     }
- 
+    
     func updateNotificationCount() {
         guard let currentUser: MFUser = DatabaseGateway.sharedInstance.getLoggedInUser() else {
             return

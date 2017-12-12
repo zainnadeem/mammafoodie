@@ -87,7 +87,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
             self.close(animated: false)
             self.showAlert("Error", message: "Error downloading the dish info. Please try again.")
         }
-
+        
         if let dish = self.dish {
             var itemName: String = ""
             var contentType: String = ""
@@ -108,7 +108,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
                 AnalyticsParameterContentType: contentType as NSObject
                 ])
         }
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +118,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
             self.output.startPlayback()
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if self.shouldShowSlotSelection {
@@ -148,7 +148,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         let colors: [UIColor] = [
             #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0),
             #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-        ]
+            ]
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.frame = self.lv_ProfileDetails.bounds
         gradientLayer.colors = colors.map { $0.cgColor }
@@ -158,13 +158,13 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
         
         self.viewComments.layer.insertSublayer(gradientLayer, at: 0)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.output.stopTimer()
         self.output.stopPlayback()
     }
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if self.dish?.mediaType == MFDishMediaType.vidup {
@@ -187,6 +187,10 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
             self.viewComments.user = user
             self.viewComments.shouldShowEmoji = false
             self.viewComments.load()
+            
+            self.viewComments.openProfile = { (userID) in
+                OtherUsersProfileViewController.openUserProfileVC(with: userID, on: self)
+            }
             
             self.viewComments.likeButtonTapped = {
                 self.likebtnClicked("")
@@ -314,7 +318,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
     func highlightComment(commentId: String) {
         self.viewComments.highlightComment(id: commentId)
     }
-
+    
     func displayDishInfo(for vidup: MFDish) {
         self.userId = vidup.user.id
         self.DishId = vidup.id
@@ -338,7 +342,7 @@ class DealDetailViewController: UIViewController, DealDetailViewControllerInput 
                 view.removeFromSuperview()
             }
             self.output.setupMediaPlayer(view: self.viewVideo, user_id: userId, dish_id: DishId, dish: self.dish)
-//            self.viewVideo.isHidden = true
+            //            self.viewVideo.isHidden = true
         } else if vidup.mediaType == MFDishMediaType.picture {
             if let view = self.viewVideo {
                 print("Video view removed")

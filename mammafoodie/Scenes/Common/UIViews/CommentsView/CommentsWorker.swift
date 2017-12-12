@@ -52,6 +52,5 @@ class CommentsWorker {
                 else { print("error") }
             }
             }.resume()
-        
     }
 }

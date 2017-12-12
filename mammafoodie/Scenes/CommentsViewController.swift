@@ -13,7 +13,6 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var commentsView: CommentsView!
     
     var dish: MFDish?
-    
     var user: MFUser?
     
     override func viewDidLoad() {
@@ -23,6 +22,9 @@ class CommentsViewController: UIViewController {
         self.commentsView.user = self.user
         self.commentsView.btnEmoji.isHidden = true
         self.commentsView.btnLike.isHidden = true
+        self.commentsView.openProfile = { (userID) in
+            OtherUsersProfileViewController.openUserProfileVC(with: userID, on: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {

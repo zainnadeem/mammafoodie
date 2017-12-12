@@ -218,6 +218,10 @@ class LiveVideoViewController: UIViewController, LiveVideoViewControllerInput {
                 let btn: UIButton = UIButton()
                 self.btnLikeTapped(btn)
             }
+            
+            self.viewComments.openProfile = { (userID) in
+                OtherUsersProfileViewController.openUserProfileVC(with: userID, on: self)
+            }
         }
     }
     

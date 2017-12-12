@@ -7,6 +7,7 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
     var commentIdToHighlight: String?
     var comments: [MFComment] = []
     let worker: CommentsWorker = CommentsWorker()
+    var openUserProfile: OpenUserProfile?
     
     func loadComments() {
         worker.load(for: self.dish) { (newComments) in
@@ -49,7 +50,6 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
         
         let name: String = "CommentTblCell"
         self.tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
-        
         self.loadComments()
     }
     
@@ -68,6 +68,7 @@ class CommentsTableViewAdapter: NSObject, UITableViewDelegate, UITableViewDataSo
         let cell: CommentTblCell = tableView.dequeueReusableCell(withIdentifier: "CommentTblCell", for: indexPath) as! CommentTblCell
         cell.setup(with: self.comments[indexPath.item])
         cell.highlightCell(for: self.commentIdToHighlight)
+        cell.openLink = self.openUserProfile
         return cell
     }
     
